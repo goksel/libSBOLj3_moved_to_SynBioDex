@@ -1,2 +1,2 @@
-# goksel
-libSBOLj3
+# libSBOLj
+
