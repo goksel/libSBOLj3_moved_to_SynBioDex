@@ -1,5 +1,5 @@
 # libSBOLj
-
+```
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:sbol="http://sbols.org/v3#">
@@ -23,3 +23,4 @@
         sbol:elements     "aaaatttggg" ;
         sbol:encoding     sbol:iupacNucleicAcid ;
         sbol:name         "pTetR" .
+```
