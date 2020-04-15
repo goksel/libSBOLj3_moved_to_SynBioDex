@@ -1,4 +1,5 @@
 # libSBOLj
+XML
 ```
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -11,7 +12,10 @@
       <sbol:displayId>pTetR</sbol:displayId>
    </sbol:Sequence>
 </rdf:RDF>
+```
 
+Turtle:
+```
 
 @base          <http://testbase.org> .
 @prefix sbol:  <http://sbols.org/v3#> .
