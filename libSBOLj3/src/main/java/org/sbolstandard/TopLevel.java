@@ -2,11 +2,23 @@ package org.sbolstandard;
 
 import java.net.URI;
 
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Resource;
+
 public abstract class TopLevel extends Identified {
 
-	public TopLevel(URI uri)
+	protected TopLevel(Model model, URI uri)
 	{
-		super(uri);
+		super(model, uri);
+	}
+	protected TopLevel() 
+	{
+		
+	}
+	
+	protected TopLevel (Resource resource)
+	{
+		super(resource);
 	}
 	
 }
