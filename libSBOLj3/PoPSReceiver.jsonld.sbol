@@ -5,9 +5,9 @@
     "description" : "Transcriptional terminator consisting of a 64 bp stem-loop",
     "displayId" : "BBa_B0010",
     "name" : "BBa_B0010",
-    "role" : "so:0000141",
+    "role" : "SO:0000141",
     "sequence" : "BBa_B0010/seq",
-    "type" : "sbo:0000251"
+    "type" : "SBO:0000251"
   }, {
     "@id" : "BBa_B0010/seq",
     "@type" : "sbol:Sequence",
@@ -22,9 +22,9 @@
     "description" : "Double terminator consisting of BBa_B0010 and BBa_B0012",
     "displayId" : "BBa_B0012",
     "name" : "BBa_B0012",
-    "role" : "so:0000141",
+    "role" : "SO:0000141",
     "sequence" : "BBa_B0012/seq",
-    "type" : "sbo:0000251"
+    "type" : "SBO:0000251"
   }, {
     "@id" : "BBa_B0012/seq",
     "@type" : "sbol:Sequence",
@@ -40,9 +40,9 @@
     "displayId" : "BBa_B0015",
     "hasFeature" : [ "BBa_B0015/subComponent_1", "BBa_B0015/subComponent_2" ],
     "name" : "BBa_B0015",
-    "role" : "so:0000141",
+    "role" : "SO:0000141",
     "sequence" : "BBa_B0015/seq",
-    "type" : "sbo:0000251"
+    "type" : "SBO:0000251"
   }, {
     "@id" : "BBa_B0015/seq",
     "@type" : "sbol:Sequence",
@@ -79,9 +79,9 @@
     "description" : "RBS based on Elowitz repressilator",
     "displayId" : "BBa_B0034",
     "name" : "BBa_B0034",
-    "role" : "so:0000139",
+    "role" : "SO:0000139",
     "sequence" : "BBa_B0034/seq",
-    "type" : "sbo:0000251"
+    "type" : "SBO:0000251"
   }, {
     "@id" : "BBa_B0034/seq",
     "@type" : "sbol:Sequence",
@@ -96,9 +96,9 @@
     "description" : "luxR repressor/activator,  (no LVA?)",
     "displayId" : "BBa_C0062",
     "name" : "luxR",
-    "role" : "so:0000316",
+    "role" : "SO:0000316",
     "sequence" : "BBa_C0062/seq",
-    "type" : "sbo:0000251"
+    "type" : "SBO:0000251"
   }, {
     "@id" : "BBa_C0062/seq",
     "@type" : "sbol:Sequence",
@@ -108,15 +108,86 @@
     "encoding" : "sbol:iupacNucleicAcid",
     "name" : "luxR sequence"
   }, {
+    "@id" : "BBa_C0062_protein",
+    "@type" : "sbol:Component",
+    "description" : "LuxR protein",
+    "displayId" : "BBa_C0062_protein",
+    "name" : "LuxR",
+    "role" : "GO:0003700",
+    "sequence" : "BBa_C0062_protein/seq",
+    "type" : "SBO:SBO:0000252"
+  }, {
+    "@id" : "BBa_C0062_protein/seq",
+    "@type" : "sbol:Sequence",
+    "description" : "LuxR sequence",
+    "displayId" : "BBa_C0062_protein_seq",
+    "elements" : "NNNNNNNNNNN",
+    "encoding" : "sbol:iupacAminoAcid",
+    "name" : "LuxR sequence"
+  }, {
     "@id" : "BBa_F2620",
     "@type" : "sbol:Component",
     "description" : "PoPS Receiver",
     "displayId" : "BBa_F2620",
-    "hasFeature" : [ "BBa_F2620/subComponent_2", "BBa_F2620/subComponent_1", "BBa_F2620/subComponent_4", "BBa_F2620/subComponent_3", "BBa_F2620/subComponent_5" ],
+    "hasFeature" : [ "BBa_F2620/subComponent_4", "BBa_F2620/subComponent_7", "BBa_F2620/BBa_C0062_protein", "BBa_F2620/subComponent_3", "BBa_F2620/subComponent_6", "BBa_F2620/subComponent_5", "BBa_F2620/TetR_protein" ],
+    "hasInteraction" : [ "BBa_F2620/interaction3", "BBa_F2620/interaction2", "BBa_F2620/interaction1" ],
     "name" : "BBa_F2620",
-    "role" : "so:0000704",
+    "role" : "SO:0000704",
     "sequence" : "BBa_F2620/seq",
-    "type" : "sbo:0000251"
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "BBa_F2620/BBa_C0062_protein",
+    "@type" : "sbol:SubComponent",
+    "instanceOf" : "BBa_C0062_protein"
+  }, {
+    "@id" : "BBa_F2620/TetR_protein",
+    "@type" : "sbol:SubComponent",
+    "instanceOf" : "TetR_protein"
+  }, {
+    "@id" : "BBa_F2620/interaction1",
+    "@type" : "sbol:Interaction",
+    "hasParticipation" : [ "BBa_F2620/interaction1/participant1", "BBa_F2620/interaction1/participant2" ],
+    "type" : "SBO:0000589"
+  }, {
+    "@id" : "BBa_F2620/interaction1/participant1",
+    "@type" : "sbol:Participation",
+    "participant" : "BBa_F2620/subComponent_5",
+    "role" : "SBO:0000645"
+  }, {
+    "@id" : "BBa_F2620/interaction1/participant2",
+    "@type" : "sbol:Participation",
+    "participant" : "BBa_F2620/BBa_C0062_protein",
+    "role" : "SBO:0000011"
+  }, {
+    "@id" : "BBa_F2620/interaction2",
+    "@type" : "sbol:Interaction",
+    "hasParticipation" : [ "BBa_F2620/interaction2/participant1", "BBa_F2620/interaction2/participant2" ],
+    "type" : "SBO:0000170"
+  }, {
+    "@id" : "BBa_F2620/interaction2/participant1",
+    "@type" : "sbol:Participation",
+    "participant" : "BBa_F2620/subComponent_7",
+    "role" : "SBO:0000643"
+  }, {
+    "@id" : "BBa_F2620/interaction2/participant2",
+    "@type" : "sbol:Participation",
+    "participant" : "BBa_F2620/BBa_C0062_protein",
+    "role" : "SBO:0000459"
+  }, {
+    "@id" : "BBa_F2620/interaction3",
+    "@type" : "sbol:Interaction",
+    "hasParticipation" : [ "BBa_F2620/interaction3/participant1", "BBa_F2620/interaction3/participant2" ],
+    "type" : "SBO:0000170"
+  }, {
+    "@id" : "BBa_F2620/interaction3/participant1",
+    "@type" : "sbol:Participation",
+    "participant" : "BBa_F2620/subComponent_3",
+    "role" : "SBO:0000643"
+  }, {
+    "@id" : "BBa_F2620/interaction3/participant2",
+    "@type" : "sbol:Participation",
+    "participant" : "BBa_F2620/TetR_protein",
+    "role" : "SBO:0000459"
   }, {
     "@id" : "BBa_F2620/seq",
     "@type" : "sbol:Sequence",
@@ -126,57 +197,57 @@
     "encoding" : "sbol:iupacNucleicAcid",
     "name" : "BBa_F2620 sequence"
   }, {
-    "@id" : "BBa_F2620/subComponent_1",
-    "@type" : "sbol:SubComponent",
-    "hasLocation" : "BBa_F2620/subComponent_1/location_1",
-    "instanceOf" : "BBa_R0040",
-    "orientation" : "sbol:inline"
-  }, {
-    "@id" : "BBa_F2620/subComponent_1/location_1",
-    "@type" : "sbol:Range",
-    "end" : "108",
-    "start" : "55"
-  }, {
-    "@id" : "BBa_F2620/subComponent_2",
-    "@type" : "sbol:SubComponent",
-    "hasLocation" : "BBa_F2620/subComponent_2/location_1",
-    "instanceOf" : "BBa_B0034",
-    "orientation" : "sbol:inline"
-  }, {
-    "@id" : "BBa_F2620/subComponent_2/location_1",
-    "@type" : "sbol:Range",
-    "end" : "78",
-    "start" : "67"
-  }, {
     "@id" : "BBa_F2620/subComponent_3",
     "@type" : "sbol:SubComponent",
     "hasLocation" : "BBa_F2620/subComponent_3/location_1",
-    "instanceOf" : "BBa_C0062",
+    "instanceOf" : "BBa_R0040",
     "orientation" : "sbol:inline"
   }, {
     "@id" : "BBa_F2620/subComponent_3/location_1",
     "@type" : "sbol:Range",
-    "end" : "1628",
-    "start" : "848"
+    "end" : "108",
+    "start" : "55"
   }, {
     "@id" : "BBa_F2620/subComponent_4",
     "@type" : "sbol:SubComponent",
     "hasLocation" : "BBa_F2620/subComponent_4/location_1",
-    "instanceOf" : "BBa_B0015",
+    "instanceOf" : "BBa_B0034",
     "orientation" : "sbol:inline"
   }, {
     "@id" : "BBa_F2620/subComponent_4/location_1",
     "@type" : "sbol:Range",
-    "end" : "1089",
-    "start" : "969"
+    "end" : "78",
+    "start" : "67"
   }, {
     "@id" : "BBa_F2620/subComponent_5",
     "@type" : "sbol:SubComponent",
     "hasLocation" : "BBa_F2620/subComponent_5/location_1",
-    "instanceOf" : "BBa_R0062",
+    "instanceOf" : "BBa_C0062",
     "orientation" : "sbol:inline"
   }, {
     "@id" : "BBa_F2620/subComponent_5/location_1",
+    "@type" : "sbol:Range",
+    "end" : "1628",
+    "start" : "848"
+  }, {
+    "@id" : "BBa_F2620/subComponent_6",
+    "@type" : "sbol:SubComponent",
+    "hasLocation" : "BBa_F2620/subComponent_6/location_1",
+    "instanceOf" : "BBa_B0015",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "BBa_F2620/subComponent_6/location_1",
+    "@type" : "sbol:Range",
+    "end" : "1089",
+    "start" : "969"
+  }, {
+    "@id" : "BBa_F2620/subComponent_7",
+    "@type" : "sbol:SubComponent",
+    "hasLocation" : "BBa_F2620/subComponent_7/location_1",
+    "instanceOf" : "BBa_R0062",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "BBa_F2620/subComponent_7/location_1",
     "@type" : "sbol:Range",
     "end" : "1078",
     "start" : "1024"
@@ -186,9 +257,9 @@
     "description" : "TetR repressible promoter",
     "displayId" : "BBa_R0040",
     "name" : "pTetR",
-    "role" : "so:0000167",
+    "role" : "SO:0000167",
     "sequence" : "BBa_R0040/seq",
-    "type" : "sbo:0000251"
+    "type" : "SBO:0000251"
   }, {
     "@id" : "BBa_R0040/seq",
     "@type" : "sbol:Sequence",
@@ -203,9 +274,9 @@
     "description" : "Promoter (luxR &amp; HSL regulated -- lux pR)",
     "displayId" : "BBa_R0062",
     "name" : "lux pR",
-    "role" : "so:0000167",
+    "role" : "SO:0000167",
     "sequence" : "BBa_R0062/seq",
-    "type" : "sbo:0000251"
+    "type" : "SBO:0000251"
   }, {
     "@id" : "BBa_R0062/seq",
     "@type" : "sbol:Sequence",
@@ -214,6 +285,23 @@
     "elements" : "acctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa",
     "encoding" : "sbol:iupacNucleicAcid",
     "name" : "lux pR sequence"
+  }, {
+    "@id" : "TetR_protein",
+    "@type" : "sbol:Component",
+    "description" : "TetR protein",
+    "displayId" : "TetR_protein",
+    "name" : "TetR",
+    "role" : "GO:0003700",
+    "sequence" : "TetR_protein/seq",
+    "type" : "SBO:SBO:0000252"
+  }, {
+    "@id" : "TetR_protein/seq",
+    "@type" : "sbol:Sequence",
+    "description" : "TetR sequence",
+    "displayId" : "TetR_protein_seq",
+    "elements" : "NNNNNNNNNNN",
+    "encoding" : "sbol:iupacAminoAcid",
+    "name" : "TetR sequence"
   } ],
   "@context" : {
     "orientation" : {
@@ -228,15 +316,16 @@
       "@id" : "http://sbols.org/v3#hasLocation",
       "@type" : "@id"
     },
-    "hasFeature" : {
-      "@id" : "http://sbols.org/v3#hasFeature",
-      "@type" : "@id"
-    },
-    "displayId" : {
-      "@id" : "http://sbols.org/v3#displayId"
-    },
     "role" : {
       "@id" : "http://sbols.org/v3#role",
+      "@type" : "@id"
+    },
+    "participant" : {
+      "@id" : "http://sbols.org/v3#participant",
+      "@type" : "@id"
+    },
+    "type" : {
+      "@id" : "http://sbols.org/v3#type",
       "@type" : "@id"
     },
     "sequence" : {
@@ -246,11 +335,20 @@
     "name" : {
       "@id" : "http://sbols.org/v3#name"
     },
+    "displayId" : {
+      "@id" : "http://sbols.org/v3#displayId"
+    },
     "description" : {
       "@id" : "http://sbols.org/v3#description"
     },
-    "type" : {
-      "@id" : "http://sbols.org/v3#type",
+    "start" : {
+      "@id" : "http://sbols.org/v3#start"
+    },
+    "end" : {
+      "@id" : "http://sbols.org/v3#end"
+    },
+    "hasParticipation" : {
+      "@id" : "http://sbols.org/v3#hasParticipation",
       "@type" : "@id"
     },
     "encoding" : {
@@ -260,17 +358,19 @@
     "elements" : {
       "@id" : "http://sbols.org/v3#elements"
     },
-    "start" : {
-      "@id" : "http://sbols.org/v3#start"
+    "hasFeature" : {
+      "@id" : "http://sbols.org/v3#hasFeature",
+      "@type" : "@id"
     },
-    "end" : {
-      "@id" : "http://sbols.org/v3#end"
+    "hasInteraction" : {
+      "@id" : "http://sbols.org/v3#hasInteraction",
+      "@type" : "@id"
     },
     "@vocab" : "https://synbiohub.org/public/igem/",
-    "sbo" : "https://identifiers.org/SBO:",
-    "chebi" : "https://identifiers.org/CHEBI:",
-    "go" : "https://identifiers.org/GO:",
+    "SBO" : "https://identifiers.org/SBO:",
+    "CHEBI" : "https://identifiers.org/CHEBI:",
+    "GO" : "https://identifiers.org/GO:",
     "sbol" : "http://sbols.org/v3#",
-    "so" : "https://identifiers.org/SO:"
+    "SO" : "https://identifiers.org/SO:"
   }
 }

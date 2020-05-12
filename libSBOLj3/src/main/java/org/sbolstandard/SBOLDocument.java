@@ -22,11 +22,11 @@ public class SBOLDocument {
 	
 	private void setNameSpacePrefixes()
 	{
-		this.model.setNsPrefix("sbol", "http://sbols.org/v3#");
-		this.model.setNsPrefix("so", Role.SO_Namespace);
-		this.model.setNsPrefix("sbo", Role.SBO_Namespace);
-		this.model.setNsPrefix("go", Role.GO_Namespace);
-		this.model.setNsPrefix("chebi", Role.CHEBI_Namespace);
+		this.model.setNsPrefix(NameSpace.SBOL.getPrefix(), NameSpace.SBOL.getUri().toString());
+		this.model.setNsPrefix(NameSpace.SO.getPrefix(), NameSpace.SO.getUri().toString());
+		this.model.setNsPrefix(NameSpace.SBO.getPrefix(), NameSpace.SBO.getUri().toString());
+		this.model.setNsPrefix(NameSpace.GO.getPrefix(), NameSpace.GO.getUri().toString());
+		this.model.setNsPrefix(NameSpace.CHEBI.getPrefix(), NameSpace.CHEBI.getUri().toString());
 	}
 
 	public SBOLDocument() {
@@ -57,35 +57,30 @@ public class SBOLDocument {
 		}
 	}
 	
-	List<Component> components;
+	private List<Component> components;
+	private List<Sequence> sequences;
 
-	public List<Component> getComponents() {
+
+	public List<Component> getComponents() throws SBOLException, SBOLGraphException {
+		this.components=addToList(model, this.components, URI.create("http://sbols.org/v3#Component"),Component.class);
 		return components;
 	}
+	
+	public Component createComponent(URI uri, List<URI> types) {
 
-	public void setComponents(List<Component> components) {
-		this.components = components;
-	}
-	private <T extends Identified>  void addToList(Model model, List<T> items, URI entityType) throws SBOLException
-	{
-		List<Resource> resources=RDFUtil.getResourcesOfType(model, entityType);
-		for (Resource resource:resources)
-		{
-			Identified sequence=SBOLEntityFactory.create(resource, entityType) ;
-			items.add((T)sequence);
+		Component component = new Component(this.model, uri);
+		component.setTypes(types);
+		if (components == null) {
+			components = new ArrayList<Component>();
 		}
+		components.add(component);
+		return component;
 	}
 	
-	public List<Sequence> getSequences() throws SBOLException {
-		if (sequences==null)
-		{
-			sequences = new ArrayList<Sequence>();
-			addToList(model, sequences, URI.create("http://sbols.org/v3#Sequence"));	
-		}
+	public List<Sequence> getSequences() throws SBOLException, SBOLGraphException {
+		this.sequences=addToList(model, this.sequences, URI.create("http://sbols.org/v3#Sequence"),Sequence.class);
 		return sequences;
 	}
-
-	List<Sequence> sequences;
 
 	public Sequence createSequence(URI uri) {
 		Sequence sequence = new Sequence(this.model, uri);
@@ -96,25 +91,14 @@ public class SBOLDocument {
 		return sequence;
 	}
 	
-	public Component createComponent(URI uri, URI type) {
-
-		Component component = new Component(this.model, uri);
-		List<URI> types=new ArrayList<URI>();
-		types.add(type);
-		component.setTypes(types);
-		if (components == null) {
-			components = new ArrayList<Component>();
-		}
-		components.add(component);
-		return component;
-	}
+	
 	
 	public <T extends Identified>Identified getIdentified(URI uri, Class<T> identified) throws SBOLGraphException
 	{
 		Resource res=this.model.getResource(uri.toString());
 		try
 		{
-			Constructor constructor = identified.getDeclaredConstructor( new Class[] {Resource.class});
+			Constructor<T> constructor = identified.getDeclaredConstructor( new Class[] {Resource.class});
 			Identified entity= (Identified)constructor.newInstance(new Object[]{res});
 			return entity;
 		}
@@ -123,5 +107,34 @@ public class SBOLDocument {
 			throw new SBOLGraphException(ex.getMessage());
 		}
 
+	}
+	
+	protected <T extends Identified> Identified createIdentified(Resource res, Class<T> identified) throws SBOLGraphException
+	{
+		try
+		{
+			Constructor<T> constructor = identified.getDeclaredConstructor( new Class[] {Resource.class});
+			Identified entity= (Identified)constructor.newInstance(new Object[]{res});
+			return entity;
+		}
+		catch (Exception ex)
+		{
+			throw new SBOLGraphException(ex.getMessage());
+		}
+	}
+
+	private <T extends Identified>  List<T> addToList(Model model, List<T> items, URI entityType, Class<T> identifiedClass) throws SBOLException, SBOLGraphException
+	{
+		List<Resource> resources=RDFUtil.getResourcesOfType(model, entityType);
+		if (resources!=null && resources.size()>0)
+		{
+			items=new ArrayList<T>();
+		}
+		for (Resource resource:resources)
+		{
+			Identified identified=createIdentified(resource, identifiedClass) ;
+			items.add((T)identified);
+		}
+		return items;
 	}
 }

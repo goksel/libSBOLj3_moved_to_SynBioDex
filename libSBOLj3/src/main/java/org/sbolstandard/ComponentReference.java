@@ -57,7 +57,7 @@ public class ComponentReference extends Feature{
 
 	@Override
 	public URI getResourceType() {
-		return DataModel.Entity.ComponentReference;
+		return DataModel.ComponentReference.uri;
 	}
 	
 	

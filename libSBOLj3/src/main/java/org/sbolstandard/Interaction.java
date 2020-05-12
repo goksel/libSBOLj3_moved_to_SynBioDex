@@ -40,18 +40,9 @@ public class Interaction extends Feature{
 	}
 	
 	
-	public List<Participation> getParticipations() throws SBOLGraphException {
-		if (participations==null)
-		{
-			List<Resource> resources=RDFUtil.getResourcesWithProperty (resource, DataModel.Interaction.participation);
-			for (Resource res:resources)
-			{
-				Participation participation= new Participation(res);
-				participations.add(participation);			
-			}
-				
-		}
-		return participations;
+	public List<Participation> getParticipations() throws SBOLGraphException, SBOLException {
+		this.participations=addToList(this.participations, DataModel.Interaction.participation, Participation.class);
+		return this.participations;
 	}
 
 
@@ -59,14 +50,7 @@ public class Interaction extends Feature{
 		Participation participation=new Participation(this.resource.getModel(),uri);
 		participation.setRoles(roles);
 		participation.setParticipant(feature);
-		
-		RDFUtil.setProperty(resource, DataModel.Interaction.participation, uri);
-		
-		if (participations==null)
-		{	
-			participations=new ArrayList<Participation>();
-			participations.add(participation);
-		}
+		this.participations=addToList(this.participations, participation, DataModel.Interaction.participation);
 		return participation;
 	}
 	

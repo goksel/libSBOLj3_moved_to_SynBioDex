@@ -12,7 +12,9 @@ import org.sbolstandard.Location.CutLocationBuilder;
 import org.sbolstandard.Location.LocationBuilder;
 import org.sbolstandard.vocabulary.ComponentType;
 import org.sbolstandard.vocabulary.Encoding;
+import org.sbolstandard.vocabulary.InteractionType;
 import org.sbolstandard.vocabulary.Orientation;
+import org.sbolstandard.vocabulary.ParticipationRole;
 import org.sbolstandard.vocabulary.Role;
 
 /**
@@ -25,31 +27,40 @@ public class App2
     {
        SBOLDocument doc=new SBOLDocument(URI.create("https://synbiohub.org/public/igem/"));
        //SBOLDocument doc=new SBOLDocument();
-        Component popsReceiver=createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_F2620"), "BBa_F2620", "BBa_F2620", "PoPS Receiver", Role.EngineeredGene, null); 
-       Component pTetR=createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_R0040"), "pTetR", "BBa_R0040", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
-       Component rbs=createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_B0034"), "BBa_B0034", "BBa_B0034", "RBS based on Elowitz repressilator", Role.RBS, "aaagaggagaaa");
-       Component luxR=createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_C0062"), "luxR", "BBa_C0062", "luxR repressor/activator,  (no LVA?)", Role.CDS, "atgaaaaacataaatgccgacgacacatacagaataattaataaaattaaagcttgtagaagcaataatgatattaatcaatgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcac");
-       Component doubleTerminator=createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_B0015"), "BBa_B0015", "BBa_B0015", "Double terminator consisting of BBa_B0010 and BBa_B0012", Role.Terminator, null);
+        Component popsReceiver=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_F2620"), "BBa_F2620", "BBa_F2620", "PoPS Receiver", Role.EngineeredGene, null); 
+       Component pTetR=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_R0040"), "pTetR", "BBa_R0040", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
+       Component rbs=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_B0034"), "BBa_B0034", "BBa_B0034", "RBS based on Elowitz repressilator", Role.RBS, "aaagaggagaaa");
+       Component luxR=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_C0062"), "luxR", "BBa_C0062", "luxR repressor/activator,  (no LVA?)", Role.CDS, "atgaaaaacataaatgccgacgacacatacagaataattaataaaattaaagcttgtagaagcaataatgatattaatcaatgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcac");
+       Component doubleTerminator=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_B0015"), "BBa_B0015", "BBa_B0015", "Double terminator consisting of BBa_B0010 and BBa_B0012", Role.Terminator, null);
        //Component doubleTerminator=createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_B0015"), "BBa_B0015", "BBa_B0015", "Double terminator consisting of BBa_B0010 and BBa_B0012", Role.Terminator, "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctactagagtcacactggctcaccttcgggtgggcctttctgcgtttata");
-       Component pLuxR=createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_R0062"), "lux pR", "BBa_R0062", "Promoter (luxR &amp; HSL regulated -- lux pR)", Role.Promoter, "acctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa");
-       Component BBa_B0010=createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_B0010"), "BBa_B0010", "BBa_B0010", "Transcriptional terminator consisting of a 64 bp stem-loop", Role.Terminator, "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc");
-       Component BBa_B0012=createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_B0012"), "BBa_B0012", "BBa_B0012", "Double terminator consisting of BBa_B0010 and BBa_B0012", Role.Terminator, "tcacactggctcaccttcgggtgggcctttctgcgtttata");
+       Component pLuxR=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_R0062"), "lux pR", "BBa_R0062", "Promoter (luxR &amp; HSL regulated -- lux pR)", Role.Promoter, "acctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa");
+       Component BBa_B0010=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_B0010"), "BBa_B0010", "BBa_B0010", "Transcriptional terminator consisting of a 64 bp stem-loop", Role.Terminator, "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc");
+       Component BBa_B0012=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_B0012"), "BBa_B0012", "BBa_B0012", "Double terminator consisting of BBa_B0010 and BBa_B0012", Role.Terminator, "tcacactggctcaccttcgggtgggcctttctgcgtttata");
      
-       appendComponent(doc, doubleTerminator,BBa_B0010);
-       appendComponent(doc, doubleTerminator,BBa_B0012);
        
-       appendComponent(doc, popsReceiver,pTetR);
-       appendComponent(doc, popsReceiver,rbs);
-       appendComponent(doc, popsReceiver,luxR);
-       appendComponent(doc, popsReceiver,doubleTerminator);
-       appendComponent(doc, popsReceiver,pLuxR);
+       Component LuxR_protein=SBOLAPI.createProteinComponent(doc,popsReceiver, URI.create("https://synbiohub.org/public/igem/BBa_C0062_protein"), "LuxR", "BBa_C0062_protein", "LuxR protein", Role.TF, "NNNNNNNNNNN");
+       Component TetR_protein=SBOLAPI.createProteinComponent(doc,popsReceiver, URI.create("https://synbiohub.org/public/igem/TetR_protein"), "TetR", "TetR_protein", "TetR protein", Role.TF, "NNNNNNNNNNN");
+         
+       SBOLAPI.appendComponent(doc, doubleTerminator,BBa_B0010);
+       SBOLAPI.appendComponent(doc, doubleTerminator,BBa_B0012);
        
+       SBOLAPI.appendComponent(doc, popsReceiver,pTetR);
+       SBOLAPI.appendComponent(doc, popsReceiver,rbs);
+       SBOLAPI.appendComponent(doc, popsReceiver,luxR);
+       SBOLAPI.appendComponent(doc, popsReceiver,doubleTerminator);
+       SBOLAPI.appendComponent(doc, popsReceiver,pLuxR);
+       
+       
+       SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),popsReceiver, luxR, Arrays.asList(ParticipationRole.Template), LuxR_protein, Arrays.asList(ParticipationRole.Product));  
+       SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation),popsReceiver, pLuxR, Arrays.asList(ParticipationRole.Stimulated), LuxR_protein, Arrays.asList(ParticipationRole.Stimulator));
+       SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation),popsReceiver, pTetR, Arrays.asList(ParticipationRole.Stimulated), TetR_protein, Arrays.asList(ParticipationRole.Stimulator));
        
        String output=SBOLWriter.write(doc, "Turtle");
        System.out.print(output);
        
        SBOLDocument doc2=SBOLWriter.read(output, "Turtle"); 
        output=SBOLWriter.write(doc2, "RDF/XML-ABBREV");
+       
        System.out.print(output);
        
        SBOLWriter.write(doc2, new File("PoPSReceiver.turtle.sbol"), "Turtle");
@@ -62,103 +73,6 @@ public class App2
        System.out.println("done");   
    }
     
-    private static void appendComponent(SBOLDocument document, Component parent, Component child) throws SBOLGraphException 
-    {
-    	int index=1;
-    	if (parent.getSubComponents()!=null)
-    	{
-    		index=parent.getSubComponents().size()+1;
-    	}
-    	
-    	SubComponent subComponent=parent.createSubComponent(URI.create(parent.getUri() + "/subComponent_" +  index), child.getUri());
-    	subComponent.setOrientation(Orientation.inline);
-    	
-    	List<URI> sequences= parent.getSequences();
-    	Sequence sequence=null;
-    	if (sequences!=null && sequences.size()>0)
-    	{
-    		 sequence=(Sequence)document.getIdentified(sequences.get(0),Sequence.class);
-    	}
-    	else
-    	{
-    		sequence=createSequence(document, parent, Encoding.NucleicAcid, "");	
-    	}
-    	
-    		URI childSequenceUri=child.getSequences().get(0);
-    		Sequence childSequence=(Sequence)document.getIdentified(childSequenceUri, Sequence.class);
-    		sequence.setElements(sequence.getElements() + childSequence.getElements());
-    		int locationIndex=1;
-    		if (subComponent.getLocations()!=null)
-    		{
-    			locationIndex=subComponent.getLocations().size() + 1;
-    		}
-    		String locationUri=String.format("%s/location_%s", subComponent.getUri().toString(), locationIndex);
-        	int start=sequence.getElements().length() + 1;
-        	int end=start + childSequence.getElements().length()-1;
-        	
-        	LocationBuilder builder=new Location.RangeLocationBuilder(URI.create(locationUri), start, end);
-        	subComponent.createLocation(builder);
-        	
-    	
-    	
-    	
-    }
     
-    private static Component createDnaComponent(SBOLDocument doc, URI uri, String name, String displayId, String description, URI role, String sequence)
-    {
-    	Component dna=createComponent(doc, uri, ComponentType.DNA.getUrl(), name, displayId, description, role);
-    	if (sequence!=null && sequence.length()>0)
-    	{
-    		createSequence(doc, dna, Encoding.NucleicAcid, sequence);
-    	}
-    	return dna;
-    }
-    
-    private static Sequence createSequence(SBOLDocument doc, Component component, Encoding encoding, String elements)
-    {
- 		Sequence seq=createSequence(doc, append(component.getUri(),"seq"), component.getName() + " sequence", component.getDisplayId() + "_seq", component.getName() + " sequence" , elements, encoding);
- 		component.setSequences(Arrays.asList(seq.getUri())); 
- 		return seq;
-    }
-   
-    
-    private static Component createComponent(SBOLDocument doc, URI uri, URI type, String name, String displayId, String description, URI role)
-    {
-    	Component component=doc.createComponent(uri, type); 
-        setCommonProperties(component, name, displayId, description);
-        component.setRoles(Arrays.asList(role));
-        
-        return component;   
-    }
-    
-    private static URI append(URI uri, String id)
-    {
-    	return URI.create(String.format("%s/%s", uri,id));
-    }
-    
-    private static URI append(String text, String add)
-    {
-    	return URI.create(String.format("%s %s", text,add));
-    }
-    
-    
-    private static Sequence createSequence(SBOLDocument doc, URI uri, String name, String displayId, String description, String sequence, Encoding encoding)
-    {
-        Sequence sequenceEntity=doc.createSequence(uri);
-        setCommonProperties(sequenceEntity, name, displayId, description);
-        if (sequence!=null)
-        {
-        	sequenceEntity.setElements(sequence);
-        }
-        sequenceEntity.setEncoding(encoding);
-        return sequenceEntity;
-        
-    }
-    
-    private static void setCommonProperties(Identified identified, String name, String displayId, String description)
-    {
-    	identified.setName(name);
-    	identified.setDisplayId(displayId);
-    	identified.setDescription(description);
-    }
+  
 }

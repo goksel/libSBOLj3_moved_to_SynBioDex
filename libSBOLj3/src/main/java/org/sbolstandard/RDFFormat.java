@@ -10,7 +10,6 @@ public enum RDFFormat
 	 N3,
 	 NT,
 	 RDFXML;
-	 
 	   
 }
 

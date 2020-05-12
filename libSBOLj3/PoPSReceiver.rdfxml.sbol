@@ -1,11 +1,31 @@
 <rdf:RDF
-    xmlns:so="https://identifiers.org/SO:"
+    xmlns:SO="https://identifiers.org/SO:"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:sbol="http://sbols.org/v3#"
-    xmlns:chebi="https://identifiers.org/CHEBI:"
-    xmlns:sbo="https://identifiers.org/SBO:"
-    xmlns:go="https://identifiers.org/GO:"
+    xmlns:CHEBI="https://identifiers.org/CHEBI:"
+    xmlns:SBO="https://identifiers.org/SBO:"
+    xmlns:GO="https://identifiers.org/GO:"
     xmlns="https://synbiohub.org/public/igem/">
+   <sbol:Component rdf:about="TetR_protein">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:SBO:0000252"/>
+      <sbol:sequence>
+         <sbol:Sequence rdf:about="TetR_protein/seq"/>
+      </sbol:sequence>
+      <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
+      <sbol:name>TetR</sbol:name>
+      <sbol:displayId>TetR_protein</sbol:displayId>
+      <sbol:description>TetR protein</sbol:description>
+   </sbol:Component>
+   <sbol:Component rdf:about="BBa_C0062_protein">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:SBO:0000252"/>
+      <sbol:sequence>
+         <sbol:Sequence rdf:about="BBa_C0062_protein/seq"/>
+      </sbol:sequence>
+      <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
+      <sbol:name>LuxR</sbol:name>
+      <sbol:displayId>BBa_C0062_protein</sbol:displayId>
+      <sbol:description>LuxR protein</sbol:description>
+   </sbol:Component>
    <sbol:Component rdf:about="BBa_R0040">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:sequence>
@@ -28,63 +48,104 @@
    </sbol:Component>
    <sbol:Component rdf:about="BBa_F2620">
       <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="BBa_F2620/subComponent_2">
+         <sbol:SubComponent rdf:about="BBa_F2620/subComponent_4">
             <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
             <sbol:instanceOf>
                <sbol:Component rdf:about="BBa_B0034"/>
             </sbol:instanceOf>
             <sbol:hasLocation>
-               <sbol:Range rdf:about="BBa_F2620/subComponent_2/location_1">
+               <sbol:Range rdf:about="BBa_F2620/subComponent_4/location_1">
                   <sbol:start>67</sbol:start>
                   <sbol:end>78</sbol:end>
                </sbol:Range>
             </sbol:hasLocation>
          </sbol:SubComponent>
       </sbol:hasFeature>
-      <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="BBa_F2620/subComponent_1">
-            <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
-            <sbol:instanceOf rdf:resource="BBa_R0040"/>
-            <sbol:hasLocation>
-               <sbol:Range rdf:about="BBa_F2620/subComponent_1/location_1">
-                  <sbol:start>55</sbol:start>
-                  <sbol:end>108</sbol:end>
-               </sbol:Range>
-            </sbol:hasLocation>
-         </sbol:SubComponent>
-      </sbol:hasFeature>
-      <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="BBa_F2620/subComponent_4">
-            <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
-            <sbol:instanceOf>
-               <sbol:Component rdf:about="BBa_B0015"/>
-            </sbol:instanceOf>
-            <sbol:hasLocation>
-               <sbol:Range rdf:about="BBa_F2620/subComponent_4/location_1">
-                  <sbol:start>969</sbol:start>
-                  <sbol:end>1089</sbol:end>
-               </sbol:Range>
-            </sbol:hasLocation>
-         </sbol:SubComponent>
-      </sbol:hasFeature>
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="BBa_F2620/interaction3">
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000170"/>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="BBa_F2620/interaction3/participant1">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000643"/>
+                  <sbol:participant>
+                     <sbol:SubComponent rdf:about="BBa_F2620/subComponent_3">
+                        <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+                        <sbol:instanceOf rdf:resource="BBa_R0040"/>
+                        <sbol:hasLocation>
+                           <sbol:Range rdf:about="BBa_F2620/subComponent_3/location_1">
+                              <sbol:start>55</sbol:start>
+                              <sbol:end>108</sbol:end>
+                           </sbol:Range>
+                        </sbol:hasLocation>
+                     </sbol:SubComponent>
+                  </sbol:participant>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="BBa_F2620/interaction3/participant2">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000459"/>
+                  <sbol:participant>
+                     <sbol:SubComponent rdf:about="BBa_F2620/TetR_protein">
+                        <sbol:instanceOf rdf:resource="TetR_protein"/>
+                     </sbol:SubComponent>
+                  </sbol:participant>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
       <sbol:displayId>BBa_F2620</sbol:displayId>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:sequence>
          <sbol:Sequence rdf:about="BBa_F2620/seq"/>
       </sbol:sequence>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="BBa_F2620/subComponent_7">
+            <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+            <sbol:instanceOf rdf:resource="BBa_R0062"/>
+            <sbol:hasLocation>
+               <sbol:Range rdf:about="BBa_F2620/subComponent_7/location_1">
+                  <sbol:start>1024</sbol:start>
+                  <sbol:end>1078</sbol:end>
+               </sbol:Range>
+            </sbol:hasLocation>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="BBa_F2620/BBa_C0062_protein">
+            <sbol:instanceOf rdf:resource="BBa_C0062_protein"/>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="BBa_F2620/interaction2">
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000170"/>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="BBa_F2620/interaction2/participant1">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000643"/>
+                  <sbol:participant rdf:resource="BBa_F2620/subComponent_7"/>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="BBa_F2620/interaction2/participant2">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000459"/>
+                  <sbol:participant rdf:resource="BBa_F2620/BBa_C0062_protein"/>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
       <sbol:name>BBa_F2620</sbol:name>
       <sbol:description>PoPS Receiver</sbol:description>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:hasFeature rdf:resource="BBa_F2620/subComponent_3"/>
       <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="BBa_F2620/subComponent_3">
+         <sbol:SubComponent rdf:about="BBa_F2620/subComponent_6">
             <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
             <sbol:instanceOf>
-               <sbol:Component rdf:about="BBa_C0062"/>
+               <sbol:Component rdf:about="BBa_B0015"/>
             </sbol:instanceOf>
             <sbol:hasLocation>
-               <sbol:Range rdf:about="BBa_F2620/subComponent_3/location_1">
-                  <sbol:start>848</sbol:start>
-                  <sbol:end>1628</sbol:end>
+               <sbol:Range rdf:about="BBa_F2620/subComponent_6/location_1">
+                  <sbol:start>969</sbol:start>
+                  <sbol:end>1089</sbol:end>
                </sbol:Range>
             </sbol:hasLocation>
          </sbol:SubComponent>
@@ -92,15 +153,35 @@
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="BBa_F2620/subComponent_5">
             <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
-            <sbol:instanceOf rdf:resource="BBa_R0062"/>
+            <sbol:instanceOf>
+               <sbol:Component rdf:about="BBa_C0062"/>
+            </sbol:instanceOf>
             <sbol:hasLocation>
                <sbol:Range rdf:about="BBa_F2620/subComponent_5/location_1">
-                  <sbol:start>1024</sbol:start>
-                  <sbol:end>1078</sbol:end>
+                  <sbol:start>848</sbol:start>
+                  <sbol:end>1628</sbol:end>
                </sbol:Range>
             </sbol:hasLocation>
          </sbol:SubComponent>
       </sbol:hasFeature>
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="BBa_F2620/interaction1">
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000589"/>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="BBa_F2620/interaction1/participant1">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000645"/>
+                  <sbol:participant rdf:resource="BBa_F2620/subComponent_5"/>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="BBa_F2620/interaction1/participant2">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
+                  <sbol:participant rdf:resource="BBa_F2620/BBa_C0062_protein"/>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
+      <sbol:hasFeature rdf:resource="BBa_F2620/TetR_protein"/>
    </sbol:Component>
    <sbol:Component rdf:about="BBa_B0010">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
@@ -112,16 +193,6 @@
       <sbol:displayId>BBa_B0010</sbol:displayId>
       <sbol:description>Transcriptional terminator consisting of a 64 bp stem-loop</sbol:description>
    </sbol:Component>
-   <sbol:Component rdf:about="BBa_B0034">
-      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
-      <sbol:sequence>
-         <sbol:Sequence rdf:about="BBa_B0034/seq"/>
-      </sbol:sequence>
-      <sbol:role rdf:resource="https://identifiers.org/SO:0000139"/>
-      <sbol:name>BBa_B0034</sbol:name>
-      <sbol:displayId>BBa_B0034</sbol:displayId>
-      <sbol:description>RBS based on Elowitz repressilator</sbol:description>
-   </sbol:Component>
    <sbol:Component rdf:about="BBa_B0012">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:sequence>
@@ -131,6 +202,16 @@
       <sbol:name>BBa_B0012</sbol:name>
       <sbol:displayId>BBa_B0012</sbol:displayId>
       <sbol:description>Double terminator consisting of BBa_B0010 and BBa_B0012</sbol:description>
+   </sbol:Component>
+   <sbol:Component rdf:about="BBa_B0034">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:sequence>
+         <sbol:Sequence rdf:about="BBa_B0034/seq"/>
+      </sbol:sequence>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000139"/>
+      <sbol:name>BBa_B0034</sbol:name>
+      <sbol:displayId>BBa_B0034</sbol:displayId>
+      <sbol:description>RBS based on Elowitz repressilator</sbol:description>
    </sbol:Component>
    <sbol:Component rdf:about="BBa_B0015">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
@@ -218,12 +299,26 @@
       <sbol:displayId>BBa_B0015_seq</sbol:displayId>
       <sbol:description>BBa_B0015 sequence</sbol:description>
    </sbol:Sequence>
+   <sbol:Sequence rdf:about="TetR_protein/seq">
+      <sbol:name>TetR sequence</sbol:name>
+      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacAminoAcid"/>
+      <sbol:elements>NNNNNNNNNNN</sbol:elements>
+      <sbol:displayId>TetR_protein_seq</sbol:displayId>
+      <sbol:description>TetR sequence</sbol:description>
+   </sbol:Sequence>
    <sbol:Sequence rdf:about="BBa_B0012/seq">
       <sbol:name>BBa_B0012 sequence</sbol:name>
       <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
       <sbol:elements>tcacactggctcaccttcgggtgggcctttctgcgtttata</sbol:elements>
       <sbol:displayId>BBa_B0012_seq</sbol:displayId>
       <sbol:description>BBa_B0012 sequence</sbol:description>
+   </sbol:Sequence>
+   <sbol:Sequence rdf:about="BBa_C0062_protein/seq">
+      <sbol:name>LuxR sequence</sbol:name>
+      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacAminoAcid"/>
+      <sbol:elements>NNNNNNNNNNN</sbol:elements>
+      <sbol:displayId>BBa_C0062_protein_seq</sbol:displayId>
+      <sbol:description>LuxR sequence</sbol:description>
    </sbol:Sequence>
    <sbol:Sequence rdf:about="BBa_R0040/seq">
       <sbol:name>pTetR sequence</sbol:name>

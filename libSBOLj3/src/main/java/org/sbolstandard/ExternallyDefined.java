@@ -56,7 +56,7 @@ public class ExternallyDefined extends Feature{
 	
 	@Override
 	public URI getResourceType() {
-		return DataModel.Entity.ExternallyDefined;
+		return DataModel.ExternalyDefined.uri;
 	}
 	
 	

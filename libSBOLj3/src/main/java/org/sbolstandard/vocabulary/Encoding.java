@@ -1,9 +1,10 @@
 package org.sbolstandard.vocabulary;
 import java.net.URI;
+import org.sbolstandard.NameSpace;
 public enum Encoding
 {
-	 NucleicAcid(URI.create("http://sbols.org/v3#iupacNucleicAcid")), 
-	    AminoAcid(URI.create("http://sbols.org/v3#iupacAminoAcid")),
+	 	NucleicAcid(NameSpace.SBOL.local("iupacNucleicAcid")), 
+	    AminoAcid(NameSpace.SBOL.local("iupacAminoAcid")),
 	    SMILES(URI.create("http://www.opensmiles.org/opensmiles.html"));
 	 
 	    private URI url;

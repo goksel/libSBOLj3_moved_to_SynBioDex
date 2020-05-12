@@ -1,18 +1,19 @@
 package org.sbolstandard.vocabulary;
-import java.net.URI;
-public enum Orientation
-{
-	 inline(URI.create("http://sbols.org/v3#inline")), 
-	    reverseComplement(URI.create("http://sbols.org/v3#reverseComplement"));
-	  
-	    private URI url;
-	 
-	    Orientation(URI envUrl) {
-	        this.url = envUrl;
-	    }
-	 
-	    public URI getUrl() {
-	        return url;
-	    }
-}
 
+import java.net.URI;
+import org.sbolstandard.NameSpace;
+
+public enum Orientation {
+	inline(NameSpace.SBOL.local("inline")), 
+	reverseComplement(NameSpace.SBOL.local("reverseComplement"));
+
+	private URI url;
+
+	Orientation(URI envUrl) {
+		this.url = envUrl;
+	}
+
+	public URI getUrl() {
+		return url;
+	}
+}

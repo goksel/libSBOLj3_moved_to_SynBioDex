@@ -45,7 +45,7 @@ public class CutLocation extends Location {
 	
 	public URI getResourceType()
 	{
-		return DataModel.Entity.Cut;
+		return DataModel.Cut.uri;
 	}
 	
 	

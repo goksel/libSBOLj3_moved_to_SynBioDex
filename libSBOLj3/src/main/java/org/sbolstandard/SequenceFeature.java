@@ -43,20 +43,14 @@ public class SequenceFeature extends Feature{
 
 	public Location createLocation(LocationBuilder builder ) {
 		Location location=builder.build(this.resource.getModel());
-		RDFUtil.setProperty(resource, DataModel.SubComponent.location, location.getUri());
-		
-		if (locations==null)
-		{	
-			locations=new ArrayList<Location>();
-			locations.add(location);
-		}
+		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
 		return location;
 	}
 	
 	
 	@Override
 	public URI getResourceType() {
-		return DataModel.Entity.SequenceFeature;
+		return DataModel.SequenceFeature.uri;
 	}
 	
 	

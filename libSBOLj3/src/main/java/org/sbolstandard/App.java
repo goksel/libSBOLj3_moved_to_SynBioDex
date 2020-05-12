@@ -80,7 +80,7 @@ public class App
     
     private static Component createComponent(SBOLDocument doc, URI uri, URI type, String name, String displayId, String description, URI role)
     {
-    	Component component=doc.createComponent(uri, type); 
+    	Component component=doc.createComponent(uri, Arrays.asList(type)); 
         setCommonProperties(component, name, displayId, description);
         component.setRoles(Arrays.asList(role));
         

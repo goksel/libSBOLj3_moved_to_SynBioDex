@@ -1,6 +1,8 @@
 package org.sbolstandard;
 
+import java.lang.reflect.Constructor;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
@@ -94,7 +96,7 @@ public abstract class Identified {
 	}
 	*/
 	
-	protected Identified get(Resource res, URI property, URI entityType) throws SBOLGraphException, SBOLException
+	/*protected Identified get_del(Resource res, URI property, URI entityType) throws SBOLGraphException, SBOLException
 	{
 		Identified identified=null;
 		List<Resource> resources=RDFUtil.getResourcesWithProperty(res, property);
@@ -108,7 +110,72 @@ public abstract class Identified {
 			identified=SBOLEntityFactory.create(resources.get(0), entityType) ;
 		}
 		return identified;
-	}
+	}*/
 
+	
+	protected <T extends Identified> Identified createIdentified(Resource res, Class<T> identified) throws SBOLGraphException
+	{
+		try
+		{
+			Constructor<T> constructor = identified.getDeclaredConstructor( new Class[] {Resource.class});
+			Identified entity= (Identified)constructor.newInstance(new Object[]{res});
+			return entity;
+		}
+		catch (Exception ex)
+		{
+			throw new SBOLGraphException(ex.getMessage());
+		}
+	}
+	
+	protected <T extends Identified>  List<T> addToList(List<T> items, URI property, Class<T> identifiedClass) throws SBOLException, SBOLGraphException
+	{
+		if (items==null)
+		{
+			List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property);
+			if (resources!=null && resources.size()>0)
+			{
+				items=new ArrayList<T>();
+			}
+			for (Resource res:resources)
+			{
+				Identified identified=createIdentified(res, identifiedClass);
+				items.add((T)identified);
+			}
+		}
+		return items;
+	}
+	
+	protected <T extends Identified> List<T> addToList(List<T> items, Identified identified, URI property)
+	{
+		RDFUtil.addProperty(this.resource,property, identified.getUri());
+		
+		if (items==null)
+		{
+			items=new ArrayList<T>();
+		}
+		items.add((T)identified);
+		return items;
+	}
+	
+	
+	protected <T extends Identified> List<T> addToList(List<T> items, URI property, Class<T> identifiedClass, URI identifiedResourceType) throws SBOLGraphException
+	{
+		if (items==null)
+		{
+			List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property, identifiedResourceType);
+			if (resources!=null && resources.size()>0)
+			{
+				items=new ArrayList<T>();
+			}
+			for (Resource res:resources)
+			{
+				Identified identified=createIdentified(res, identifiedClass);
+				items.add((T)identified);
+			}
+		}
+		return items;
+
+	}
+	
 	
 }

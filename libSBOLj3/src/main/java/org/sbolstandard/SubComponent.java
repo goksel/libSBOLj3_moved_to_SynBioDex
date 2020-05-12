@@ -74,13 +74,7 @@ public class SubComponent extends Feature{
 
 	public Location createLocation(LocationBuilder builder ) {
 		Location location=builder.build(this.resource.getModel());
-		RDFUtil.setProperty(resource, DataModel.SubComponent.location, location.getUri());
-		
-		if (locations==null)
-		{	
-			locations=new ArrayList<Location>();
-			locations.add(location);
-		}
+		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
 		return location;
 	}
 	
@@ -115,7 +109,7 @@ public class SubComponent extends Feature{
 	
 	@Override
 	public URI getResourceType() {
-		return DataModel.Entity.SubComponent;
+		return DataModel.SubComponent.uri;
 	}
 	
 	

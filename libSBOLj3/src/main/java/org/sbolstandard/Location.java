@@ -68,14 +68,14 @@ public abstract class  Location extends Identified {
 
 	public URI getResourceType()
 	{
-		return DataModel.Entity.Location;
+		return DataModel.Location.uri;
 	}
 	
 	public static class LocationFactory
 	{
 		public static Location create(Resource resource)
 		{
-			if (RDFUtil.hasType(resource.getModel(), resource, DataModel.Entity.Cut))
+			if (RDFUtil.hasType(resource.getModel(), resource, DataModel.Cut.uri))
 			{
 				return new CutLocation(resource);
 			}

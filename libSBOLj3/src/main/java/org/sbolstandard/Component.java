@@ -1,8 +1,11 @@
 package org.sbolstandard;
 
+import java.lang.reflect.Constructor;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
@@ -22,11 +25,8 @@ public class Component extends TopLevel {
 	private List<LocalSubComponent> localSubComponents=null;
 	private List<ExternallyDefined> externallyDefineds=null;
 	private List<SequenceFeature> sequenceFatures=null;
-	
-	
-	
-	
-	
+	private List<Interaction> interactions=null;
+	//private Set<Interaction> interactions2=null;
 	
 	protected Component(Model model, URI uri)
 	{
@@ -101,7 +101,23 @@ public class Component extends TopLevel {
 	}
 	*/
 	
+	public List<Feature> getFeatures() throws SBOLGraphException{
+		if (features==null)
+		{
+			features = new ArrayList<Feature>();
+			features.addAll(this.getSubComponents());
+			features.addAll(this.getComponentReferences());
+			features.addAll(this.getLocalSubComponents());
+			features.addAll(this.getExternallyDefineds());
+			features.addAll(this.getSequenceFeatures());	
+		}
+		return features;
+	}
+	
 	public List<SubComponent> getSubComponents() throws SBOLGraphException {
+		this.subComponents=addToList(this.subComponents, DataModel.Component.feature, SubComponent.class, DataModel.SubComponent.uri);
+		return this.subComponents;
+		/*
 		if (subComponents==null)
 		{
 			List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, DataModel.Component.feature, DataModel.Entity.SubComponent);
@@ -111,116 +127,64 @@ public class Component extends TopLevel {
 				subComponents.add(subComponent);			
 			}
 		}
-		return subComponents;
+		return subComponents;*/
 	}
 	
 	public SubComponent createSubComponent(URI uri, URI isInstanceOf) {
 		SubComponent feature = new SubComponent(this.resource.getModel(), uri);
-		RDFUtil.addProperty(resource, DataModel.Component.feature, feature.getUri());
 		feature.setIsInstanceOf(isInstanceOf);
-		if (subComponents==null)
-		{
-			subComponents=new ArrayList<SubComponent>();
-		}
-		subComponents.add(feature);
+		this.subComponents=addToList(this.subComponents, feature, DataModel.Component.feature);
 		return feature;	
 	}
-	
-	
+		
 	public List<ComponentReference> getComponentReferences() throws SBOLGraphException {
-		if (this.componentReferences==null)
-		{
-			List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, DataModel.Component.feature, DataModel.Entity.ComponentReference);
-			for (Resource res:resources)
-			{
-				ComponentReference componentReference=new ComponentReference(res);
-				this.componentReferences.add(componentReference);			
-			}
-		}
+		this.componentReferences=addToList(this.componentReferences, DataModel.Component.feature, ComponentReference.class, DataModel.ComponentReference.uri);
 		return this.componentReferences;
 	}
 	
 	public ComponentReference createComponentReference(URI uri, URI feature, URI inChildOf) {
 		ComponentReference componentReference= new ComponentReference(this.resource.getModel(), uri);
-		RDFUtil.addProperty(resource, DataModel.Component.feature, componentReference.getUri());
 		componentReference.setFeature(feature);
 		componentReference.setInChildOf(inChildOf);
-		if (componentReferences==null)
-		{
-			componentReferences=new ArrayList<ComponentReference>();
-		}
-		componentReferences.add(componentReference);
+		this.componentReferences=addToList(this.componentReferences, componentReference, DataModel.Component.feature);
 		return componentReference;	
 	}	
-	
-	public List<LocalSubComponent> getLocalSubComponent() throws SBOLGraphException {
-		if (this.localSubComponents==null)
-		{
-			List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, DataModel.Component.feature, DataModel.Entity.LocalSubComponent);
-			for (Resource res:resources)
-			{
-				LocalSubComponent localSubComponent=new LocalSubComponent(res);
-				this.localSubComponents.add(localSubComponent);			
-			}
-		}
+
+	public List<LocalSubComponent> getLocalSubComponents() throws SBOLGraphException {
+		this.localSubComponents=addToList(this.localSubComponents, DataModel.Component.feature, LocalSubComponent.class, DataModel.LocalSubComponent.uri);
 		return this.localSubComponents;
 	}
 	
 	public LocalSubComponent createLocalSubComponent(URI uri, List<URI> types) {
 		LocalSubComponent localSubComponent= new LocalSubComponent(this.resource.getModel(), uri);
-		RDFUtil.addProperty(resource, DataModel.Component.feature, localSubComponent.getUri());
 		localSubComponent.setTypes(types);
-		if (this.localSubComponents==null)
-		{
-			localSubComponents=new ArrayList<LocalSubComponent>();
-		}
-		localSubComponents.add(localSubComponent);
+		this.localSubComponents=addToList(this.localSubComponents, localSubComponent, DataModel.Component.feature);
 		return localSubComponent;	
 	}	
 	
 	
-	public List<ExternallyDefined> getExternallyDefined() throws SBOLGraphException {
-		if (this.externallyDefineds==null)
-		{
-			List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, DataModel.Component.feature, DataModel.Entity.ExternallyDefined);
-			for (Resource res:resources)
-			{
-				ExternallyDefined externallyDefined=new ExternallyDefined(res);
-				this.externallyDefineds.add(externallyDefined);			
-			}
-		}
+	public List<ExternallyDefined> getExternallyDefineds() throws SBOLGraphException {
+		this.externallyDefineds=addToList(this.externallyDefineds, DataModel.Component.feature, ExternallyDefined.class, DataModel.ExternalyDefined.uri);
 		return this.externallyDefineds;
 	}
 	
 	public ExternallyDefined createExternallyDefined(URI uri, List<URI> types, URI definition) {
 		ExternallyDefined externallyDefined= new ExternallyDefined(this.resource.getModel(), uri);
-		RDFUtil.addProperty(resource, DataModel.Component.feature, externallyDefined.getUri());
 		externallyDefined.setTypes(types);
 		externallyDefined.setDefinition(definition);
-		if (this.externallyDefineds==null)
-		{
-			externallyDefineds=new ArrayList<ExternallyDefined>();
-		}
-		externallyDefineds.add(externallyDefined);
+		this.externallyDefineds=addToList(this.externallyDefineds, externallyDefined, DataModel.Component.feature);
 		return externallyDefined;	
 	}	
 	
 	
 	public List<SequenceFeature> getSequenceFeatures() throws SBOLGraphException {
-		if (this.sequenceFatures==null)
-		{
-			List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, DataModel.Component.feature, DataModel.Entity.SequenceFeature);
-			for (Resource res:resources)
-			{
-				SequenceFeature sequenceFeature=new SequenceFeature(res);
-				this.sequenceFatures.add(sequenceFeature);			
-			}
-		}
+		this.sequenceFatures=addToList(this.sequenceFatures, DataModel.Component.feature, SequenceFeature.class, DataModel.SequenceFeature.uri);
 		return this.sequenceFatures;
 	}
 	
 	public SequenceFeature createSequenceFeature(URI uri, List<LocationBuilder> locations) {
 		SequenceFeature sequenceFeature= new SequenceFeature(this.resource.getModel(), uri);
+		
 		RDFUtil.addProperty(resource, DataModel.Component.feature, sequenceFeature.getUri());
 		if (locations!=null && locations.size()>0)
 		{
@@ -231,9 +195,19 @@ public class Component extends TopLevel {
 		}
 		return sequenceFeature;	
 	}	
+
+	public Interaction createInteraction(URI uri, List<URI> types) {
+		Interaction interaction= new Interaction(this.resource.getModel(), uri);
+		interaction.setTypes(types);
+		this.interactions=addToList(this.interactions, interaction, DataModel.Component.interaction);
+		return interaction;
+	}
 	
-	
-	
+	public List<Interaction> getInteractions() throws SBOLGraphException, SBOLException {
+		this.interactions=addToList(this.interactions, DataModel.Component.interaction, Interaction.class);
+		return this.interactions;
+	}
+
 	public URI getResourceType()
 	{
 		return URI.create("http://sbols.org/v3#Component");
@@ -242,3 +216,68 @@ public class Component extends TopLevel {
 	
 
 }
+
+
+
+/*public Interaction createInteractionDel(URI uri, List<URI> types ) {
+Interaction interaction= new Interaction(this.resource.getModel(), uri);
+interaction.setTypes(types);
+RDFUtil.addProperty(resource, DataModel.Component.interaction, interaction.getUri());
+if (this.interactions==null)
+{
+	interactions=new ArrayList<Interaction>();
+}
+interactions.add(interaction);
+return interaction;	
+}
+
+
+public Interaction createInteractionDel2(URI uri, List<URI> types ) {
+Interaction interaction= new Interaction(this.resource.getModel(), uri);
+interaction.setTypes(types);
+RDFUtil.addProperty(resource, DataModel.Component.interaction, interaction.getUri());
+if (this.interactions2==null)
+{
+	interactions2=new HashSet<Interaction>();
+}
+interactions2.add(interaction);
+return interaction;	
+}
+*/
+
+/*
+public List<Interaction> getInteractionsDel() throws SBOLGraphException {
+	if (interactions==null)
+	{
+		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, DataModel.Component.interaction);
+		if (resources!=null && resources.size()>0)
+		{
+			interactions=new ArrayList<Interaction>();
+		}
+		for (Resource res:resources)
+		{
+			Interaction interaction=new Interaction(res);
+			interactions.add(interaction);			
+		}
+	}
+	return interactions;
+}
+
+public Set<Interaction> getInteractionsDel2() throws SBOLGraphException {
+	if (interactions2==null)
+	{
+		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, DataModel.Component.interaction);
+		if (resources!=null && resources.size()>0)
+		{
+			interactions2=new HashSet<Interaction>();
+		}
+		for (Resource res:resources)
+		{
+			Interaction interaction=new Interaction(res);
+			interactions2.add(interaction);			
+		}
+	}
+	return interactions2;
+}
+*/
+

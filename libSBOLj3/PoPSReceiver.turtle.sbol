@@ -1,33 +1,72 @@
 @base          <https://synbiohub.org/public/igem/> .
 @prefix :      <https://synbiohub.org/public/igem/> .
-@prefix sbo:   <https://identifiers.org/SBO:> .
-@prefix chebi: <https://identifiers.org/CHEBI:> .
-@prefix go:    <https://identifiers.org/GO:> .
+@prefix SBO:   <https://identifiers.org/SBO:> .
+@prefix CHEBI: <https://identifiers.org/CHEBI:> .
+@prefix GO:    <https://identifiers.org/GO:> .
 @prefix sbol:  <http://sbols.org/v3#> .
-@prefix so:    <https://identifiers.org/SO:> .
+@prefix SO:    <https://identifiers.org/SO:> .
 
-<BBa_F2620/subComponent_5>
+<BBa_B0015/subComponent_2>
         a                 sbol:SubComponent ;
-        sbol:hasLocation  <BBa_F2620/subComponent_5/location_1> ;
-        sbol:instanceOf   :BBa_R0062 ;
+        sbol:hasLocation  <BBa_B0015/subComponent_2/location_1> ;
+        sbol:instanceOf   :BBa_B0012 ;
         sbol:orientation  sbol:inline .
 
-:BBa_F2620  a             sbol:Component ;
-        sbol:description  "PoPS Receiver" ;
-        sbol:displayId    "BBa_F2620" ;
-        sbol:hasFeature   <BBa_F2620/subComponent_2> , <BBa_F2620/subComponent_1> , <BBa_F2620/subComponent_4> , <BBa_F2620/subComponent_3> , <BBa_F2620/subComponent_5> ;
-        sbol:name         "BBa_F2620" ;
-        sbol:role         so:0000704 ;
-        sbol:sequence     <BBa_F2620/seq> ;
-        sbol:type         sbo:0000251 .
+<BBa_F2620/interaction1/participant1>
+        a                 sbol:Participation ;
+        sbol:participant  <BBa_F2620/subComponent_5> ;
+        sbol:role         SBO:0000645 .
 
-:BBa_B0010  a             sbol:Component ;
-        sbol:description  "Transcriptional terminator consisting of a 64 bp stem-loop" ;
-        sbol:displayId    "BBa_B0010" ;
-        sbol:name         "BBa_B0010" ;
-        sbol:role         so:0000141 ;
-        sbol:sequence     <BBa_B0010/seq> ;
-        sbol:type         sbo:0000251 .
+:BBa_C0062_protein  a     sbol:Component ;
+        sbol:description  "LuxR protein" ;
+        sbol:displayId    "BBa_C0062_protein" ;
+        sbol:name         "LuxR" ;
+        sbol:role         GO:0003700 ;
+        sbol:sequence     <BBa_C0062_protein/seq> ;
+        sbol:type         SBO:SBO:0000252 .
+
+<BBa_F2620/subComponent_4>
+        a                 sbol:SubComponent ;
+        sbol:hasLocation  <BBa_F2620/subComponent_4/location_1> ;
+        sbol:instanceOf   :BBa_B0034 ;
+        sbol:orientation  sbol:inline .
+
+<BBa_F2620/subComponent_5/location_1>
+        a           sbol:Range ;
+        sbol:end    "1628" ;
+        sbol:start  "848" .
+
+<BBa_F2620/interaction3>
+        a                      sbol:Interaction ;
+        sbol:hasParticipation  <BBa_F2620/interaction3/participant1> , <BBa_F2620/interaction3/participant2> ;
+        sbol:type              SBO:0000170 .
+
+:BBa_B0012  a             sbol:Component ;
+        sbol:description  "Double terminator consisting of BBa_B0010 and BBa_B0012" ;
+        sbol:displayId    "BBa_B0012" ;
+        sbol:name         "BBa_B0012" ;
+        sbol:role         SO:0000141 ;
+        sbol:sequence     <BBa_B0012/seq> ;
+        sbol:type         SBO:0000251 .
+
+<BBa_B0015/subComponent_1/location_1>
+        a           sbol:Range ;
+        sbol:end    "160" ;
+        sbol:start  "81" .
+
+:BBa_R0040  a             sbol:Component ;
+        sbol:description  "TetR repressible promoter" ;
+        sbol:displayId    "BBa_R0040" ;
+        sbol:name         "pTetR" ;
+        sbol:role         SO:0000167 ;
+        sbol:sequence     <BBa_R0040/seq> ;
+        sbol:type         SBO:0000251 .
+
+<BBa_B0015/subComponent_1>
+        a                 sbol:SubComponent ;
+        sbol:hasLocation  <BBa_B0015/subComponent_1/location_1> ;
+        sbol:instanceOf   :BBa_B0010 ;
+        sbol:orientation  sbol:inline .
 
 <BBa_B0010/seq>  a        sbol:Sequence ;
         sbol:description  "BBa_B0010 sequence" ;
@@ -36,12 +75,16 @@
         sbol:encoding     sbol:iupacNucleicAcid ;
         sbol:name         "BBa_B0010 sequence" .
 
-<BBa_B0034/seq>  a        sbol:Sequence ;
-        sbol:description  "BBa_B0034 sequence" ;
-        sbol:displayId    "BBa_B0034_seq" ;
-        sbol:elements     "aaagaggagaaa" ;
-        sbol:encoding     sbol:iupacNucleicAcid ;
-        sbol:name         "BBa_B0034 sequence" .
+<BBa_F2620/subComponent_3>
+        a                 sbol:SubComponent ;
+        sbol:hasLocation  <BBa_F2620/subComponent_3/location_1> ;
+        sbol:instanceOf   :BBa_R0040 ;
+        sbol:orientation  sbol:inline .
+
+<BBa_F2620/interaction2>
+        a                      sbol:Interaction ;
+        sbol:hasParticipation  <BBa_F2620/interaction2/participant1> , <BBa_F2620/interaction2/participant2> ;
+        sbol:type              SBO:0000170 .
 
 <BBa_B0015/seq>  a        sbol:Sequence ;
         sbol:description  "BBa_B0015 sequence" ;
@@ -57,85 +100,15 @@
         sbol:encoding     sbol:iupacNucleicAcid ;
         sbol:name         "BBa_B0012 sequence" .
 
-:BBa_B0034  a             sbol:Component ;
-        sbol:description  "RBS based on Elowitz repressilator" ;
-        sbol:displayId    "BBa_B0034" ;
-        sbol:name         "BBa_B0034" ;
-        sbol:role         so:0000139 ;
-        sbol:sequence     <BBa_B0034/seq> ;
-        sbol:type         sbo:0000251 .
+<BBa_F2620/interaction3/participant2>
+        a                 sbol:Participation ;
+        sbol:participant  <BBa_F2620/TetR_protein> ;
+        sbol:role         SBO:0000459 .
 
-<BBa_F2620/subComponent_4>
-        a                 sbol:SubComponent ;
-        sbol:hasLocation  <BBa_F2620/subComponent_4/location_1> ;
-        sbol:instanceOf   :BBa_B0015 ;
-        sbol:orientation  sbol:inline .
-
-:BBa_B0015  a             sbol:Component ;
-        sbol:description  "Double terminator consisting of BBa_B0010 and BBa_B0012" ;
-        sbol:displayId    "BBa_B0015" ;
-        sbol:hasFeature   <BBa_B0015/subComponent_1> , <BBa_B0015/subComponent_2> ;
-        sbol:name         "BBa_B0015" ;
-        sbol:role         so:0000141 ;
-        sbol:sequence     <BBa_B0015/seq> ;
-        sbol:type         sbo:0000251 .
-
-<BBa_B0015/subComponent_2>
-        a                 sbol:SubComponent ;
-        sbol:hasLocation  <BBa_B0015/subComponent_2/location_1> ;
-        sbol:instanceOf   :BBa_B0012 ;
-        sbol:orientation  sbol:inline .
-
-:BBa_R0040  a             sbol:Component ;
-        sbol:description  "TetR repressible promoter" ;
-        sbol:displayId    "BBa_R0040" ;
-        sbol:name         "pTetR" ;
-        sbol:role         so:0000167 ;
-        sbol:sequence     <BBa_R0040/seq> ;
-        sbol:type         sbo:0000251 .
-
-<BBa_B0015/subComponent_2/location_1>
+<BBa_F2620/subComponent_6/location_1>
         a           sbol:Range ;
-        sbol:end    "162" ;
-        sbol:start  "122" .
-
-<BBa_B0015/subComponent_1/location_1>
-        a           sbol:Range ;
-        sbol:end    "160" ;
-        sbol:start  "81" .
-
-<BBa_F2620/subComponent_3>
-        a                 sbol:SubComponent ;
-        sbol:hasLocation  <BBa_F2620/subComponent_3/location_1> ;
-        sbol:instanceOf   :BBa_C0062 ;
-        sbol:orientation  sbol:inline .
-
-<BBa_F2620/seq>  a        sbol:Sequence ;
-        sbol:description  "BBa_F2620 sequence" ;
-        sbol:displayId    "BBa_F2620_seq" ;
-        sbol:elements     "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcacaaagaggagaaaatgaaaaacataaatgccgacgacacatacagaataattaataaaattaaagcttgtagaagcaataatgatattaatcaatgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcacccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctcacactggctcaccttcgggtgggcctttctgcgtttataacctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa" ;
-        sbol:encoding     sbol:iupacNucleicAcid ;
-        sbol:name         "BBa_F2620 sequence" .
-
-<BBa_B0015/subComponent_1>
-        a                 sbol:SubComponent ;
-        sbol:hasLocation  <BBa_B0015/subComponent_1/location_1> ;
-        sbol:instanceOf   :BBa_B0010 ;
-        sbol:orientation  sbol:inline .
-
-<BBa_R0062/seq>  a        sbol:Sequence ;
-        sbol:description  "lux pR sequence" ;
-        sbol:displayId    "BBa_R0062_seq" ;
-        sbol:elements     "acctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa" ;
-        sbol:encoding     sbol:iupacNucleicAcid ;
-        sbol:name         "lux pR sequence" .
-
-<BBa_R0040/seq>  a        sbol:Sequence ;
-        sbol:description  "pTetR sequence" ;
-        sbol:displayId    "BBa_R0040_seq" ;
-        sbol:elements     "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac" ;
-        sbol:encoding     sbol:iupacNucleicAcid ;
-        sbol:name         "pTetR sequence" .
+        sbol:end    "1089" ;
+        sbol:start  "969" .
 
 <BBa_C0062/seq>  a        sbol:Sequence ;
         sbol:description  "luxR sequence" ;
@@ -144,63 +117,175 @@
         sbol:encoding     sbol:iupacNucleicAcid ;
         sbol:name         "luxR sequence" .
 
-<BBa_F2620/subComponent_2>
+<BBa_B0034/seq>  a        sbol:Sequence ;
+        sbol:description  "BBa_B0034 sequence" ;
+        sbol:displayId    "BBa_B0034_seq" ;
+        sbol:elements     "aaagaggagaaa" ;
+        sbol:encoding     sbol:iupacNucleicAcid ;
+        sbol:name         "BBa_B0034 sequence" .
+
+<BBa_B0015/subComponent_2/location_1>
+        a           sbol:Range ;
+        sbol:end    "162" ;
+        sbol:start  "122" .
+
+<BBa_F2620/interaction1>
+        a                      sbol:Interaction ;
+        sbol:hasParticipation  <BBa_F2620/interaction1/participant1> , <BBa_F2620/interaction1/participant2> ;
+        sbol:type              SBO:0000589 .
+
+<BBa_F2620/subComponent_7/location_1>
+        a           sbol:Range ;
+        sbol:end    "1078" ;
+        sbol:start  "1024" .
+
+:BBa_B0010  a             sbol:Component ;
+        sbol:description  "Transcriptional terminator consisting of a 64 bp stem-loop" ;
+        sbol:displayId    "BBa_B0010" ;
+        sbol:name         "BBa_B0010" ;
+        sbol:role         SO:0000141 ;
+        sbol:sequence     <BBa_B0010/seq> ;
+        sbol:type         SBO:0000251 .
+
+:TetR_protein  a          sbol:Component ;
+        sbol:description  "TetR protein" ;
+        sbol:displayId    "TetR_protein" ;
+        sbol:name         "TetR" ;
+        sbol:role         GO:0003700 ;
+        sbol:sequence     <TetR_protein/seq> ;
+        sbol:type         SBO:SBO:0000252 .
+
+<BBa_F2620/subComponent_7>
         a                 sbol:SubComponent ;
-        sbol:hasLocation  <BBa_F2620/subComponent_2/location_1> ;
-        sbol:instanceOf   :BBa_B0034 ;
+        sbol:hasLocation  <BBa_F2620/subComponent_7/location_1> ;
+        sbol:instanceOf   :BBa_R0062 ;
         sbol:orientation  sbol:inline .
+
+<BBa_F2620/interaction3/participant1>
+        a                 sbol:Participation ;
+        sbol:participant  <BBa_F2620/subComponent_3> ;
+        sbol:role         SBO:0000643 .
+
+<BBa_F2620/seq>  a        sbol:Sequence ;
+        sbol:description  "BBa_F2620 sequence" ;
+        sbol:displayId    "BBa_F2620_seq" ;
+        sbol:elements     "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcacaaagaggagaaaatgaaaaacataaatgccgacgacacatacagaataattaataaaattaaagcttgtagaagcaataatgatattaatcaatgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcacccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctcacactggctcaccttcgggtgggcctttctgcgtttataacctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa" ;
+        sbol:encoding     sbol:iupacNucleicAcid ;
+        sbol:name         "BBa_F2620 sequence" .
+
+:BBa_B0015  a             sbol:Component ;
+        sbol:description  "Double terminator consisting of BBa_B0010 and BBa_B0012" ;
+        sbol:displayId    "BBa_B0015" ;
+        sbol:hasFeature   <BBa_B0015/subComponent_1> , <BBa_B0015/subComponent_2> ;
+        sbol:name         "BBa_B0015" ;
+        sbol:role         SO:0000141 ;
+        sbol:sequence     <BBa_B0015/seq> ;
+        sbol:type         SBO:0000251 .
+
+<BBa_F2620/interaction2/participant2>
+        a                 sbol:Participation ;
+        sbol:participant  <BBa_F2620/BBa_C0062_protein> ;
+        sbol:role         SBO:0000459 .
+
+<BBa_F2620/BBa_C0062_protein>
+        a                sbol:SubComponent ;
+        sbol:instanceOf  :BBa_C0062_protein .
+
+:BBa_F2620  a                sbol:Component ;
+        sbol:description     "PoPS Receiver" ;
+        sbol:displayId       "BBa_F2620" ;
+        sbol:hasFeature      <BBa_F2620/subComponent_4> , <BBa_F2620/subComponent_7> , <BBa_F2620/BBa_C0062_protein> , <BBa_F2620/subComponent_3> , <BBa_F2620/subComponent_6> , <BBa_F2620/subComponent_5> , <BBa_F2620/TetR_protein> ;
+        sbol:hasInteraction  <BBa_F2620/interaction3> , <BBa_F2620/interaction2> , <BBa_F2620/interaction1> ;
+        sbol:name            "BBa_F2620" ;
+        sbol:role            SO:0000704 ;
+        sbol:sequence        <BBa_F2620/seq> ;
+        sbol:type            SBO:0000251 .
 
 <BBa_F2620/subComponent_3/location_1>
         a           sbol:Range ;
-        sbol:end    "1628" ;
-        sbol:start  "848" .
+        sbol:end    "108" ;
+        sbol:start  "55" .
 
-<BBa_F2620/subComponent_2/location_1>
+<BBa_F2620/TetR_protein>
+        a                sbol:SubComponent ;
+        sbol:instanceOf  :TetR_protein .
+
+<BBa_R0040/seq>  a        sbol:Sequence ;
+        sbol:description  "pTetR sequence" ;
+        sbol:displayId    "BBa_R0040_seq" ;
+        sbol:elements     "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac" ;
+        sbol:encoding     sbol:iupacNucleicAcid ;
+        sbol:name         "pTetR sequence" .
+
+<BBa_F2620/subComponent_6>
+        a                 sbol:SubComponent ;
+        sbol:hasLocation  <BBa_F2620/subComponent_6/location_1> ;
+        sbol:instanceOf   :BBa_B0015 ;
+        sbol:orientation  sbol:inline .
+
+<BBa_F2620/subComponent_4/location_1>
         a           sbol:Range ;
         sbol:end    "78" ;
         sbol:start  "67" .
 
-:BBa_B0012  a             sbol:Component ;
-        sbol:description  "Double terminator consisting of BBa_B0010 and BBa_B0012" ;
-        sbol:displayId    "BBa_B0012" ;
-        sbol:name         "BBa_B0012" ;
-        sbol:role         so:0000141 ;
-        sbol:sequence     <BBa_B0012/seq> ;
-        sbol:type         sbo:0000251 .
+<BBa_R0062/seq>  a        sbol:Sequence ;
+        sbol:description  "lux pR sequence" ;
+        sbol:displayId    "BBa_R0062_seq" ;
+        sbol:elements     "acctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa" ;
+        sbol:encoding     sbol:iupacNucleicAcid ;
+        sbol:name         "lux pR sequence" .
 
-<BBa_F2620/subComponent_1>
-        a                 sbol:SubComponent ;
-        sbol:hasLocation  <BBa_F2620/subComponent_1/location_1> ;
-        sbol:instanceOf   :BBa_R0040 ;
-        sbol:orientation  sbol:inline .
+<BBa_F2620/interaction2/participant1>
+        a                 sbol:Participation ;
+        sbol:participant  <BBa_F2620/subComponent_7> ;
+        sbol:role         SBO:0000643 .
+
+<BBa_F2620/interaction1/participant2>
+        a                 sbol:Participation ;
+        sbol:participant  <BBa_F2620/BBa_C0062_protein> ;
+        sbol:role         SBO:0000011 .
+
+<BBa_C0062_protein/seq>
+        a                 sbol:Sequence ;
+        sbol:description  "LuxR sequence" ;
+        sbol:displayId    "BBa_C0062_protein_seq" ;
+        sbol:elements     "NNNNNNNNNNN" ;
+        sbol:encoding     sbol:iupacAminoAcid ;
+        sbol:name         "LuxR sequence" .
+
+:BBa_B0034  a             sbol:Component ;
+        sbol:description  "RBS based on Elowitz repressilator" ;
+        sbol:displayId    "BBa_B0034" ;
+        sbol:name         "BBa_B0034" ;
+        sbol:role         SO:0000139 ;
+        sbol:sequence     <BBa_B0034/seq> ;
+        sbol:type         SBO:0000251 .
+
+<TetR_protein/seq>  a     sbol:Sequence ;
+        sbol:description  "TetR sequence" ;
+        sbol:displayId    "TetR_protein_seq" ;
+        sbol:elements     "NNNNNNNNNNN" ;
+        sbol:encoding     sbol:iupacAminoAcid ;
+        sbol:name         "TetR sequence" .
 
 :BBa_R0062  a             sbol:Component ;
         sbol:description  "Promoter (luxR &amp; HSL regulated -- lux pR)" ;
         sbol:displayId    "BBa_R0062" ;
         sbol:name         "lux pR" ;
-        sbol:role         so:0000167 ;
+        sbol:role         SO:0000167 ;
         sbol:sequence     <BBa_R0062/seq> ;
-        sbol:type         sbo:0000251 .
+        sbol:type         SBO:0000251 .
 
-<BBa_F2620/subComponent_5/location_1>
-        a           sbol:Range ;
-        sbol:end    "1078" ;
-        sbol:start  "1024" .
-
-<BBa_F2620/subComponent_1/location_1>
-        a           sbol:Range ;
-        sbol:end    "108" ;
-        sbol:start  "55" .
+<BBa_F2620/subComponent_5>
+        a                 sbol:SubComponent ;
+        sbol:hasLocation  <BBa_F2620/subComponent_5/location_1> ;
+        sbol:instanceOf   :BBa_C0062 ;
+        sbol:orientation  sbol:inline .
 
 :BBa_C0062  a             sbol:Component ;
         sbol:description  "luxR repressor/activator,  (no LVA?)" ;
         sbol:displayId    "BBa_C0062" ;
         sbol:name         "luxR" ;
-        sbol:role         so:0000316 ;
+        sbol:role         SO:0000316 ;
         sbol:sequence     <BBa_C0062/seq> ;
-        sbol:type         sbo:0000251 .
-
-<BBa_F2620/subComponent_4/location_1>
-        a           sbol:Range ;
-        sbol:end    "1089" ;
-        sbol:start  "969" .
+        sbol:type         SBO:0000251 .
