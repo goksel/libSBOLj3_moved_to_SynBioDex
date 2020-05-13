@@ -9,7 +9,6 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
@@ -17,11 +16,9 @@ import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.RDFWriter;
 import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.vocabulary.RDF;
-import org.sbolstandard.SBOLGraphException;
 
 public class RDFUtil {
 	
@@ -90,7 +87,6 @@ public class RDFUtil {
 	
 	public static void addProperty(Resource resource, URI property, List<URI> values)
 	{
-		Property p=resource.getModel().createProperty(property.toString());
 		if (values!=null && values.size()>0)
 		{
 			for (URI uri:values)
@@ -255,8 +251,7 @@ public class RDFUtil {
 			writer.write(model, stream, base);
 	    }
 	    
-	    public static String write(Model model, String format, Resource[] topLevelResources,URI baseUri)
-				throws Exception {
+	    public static String write(Model model, String format, Resource[] topLevelResources,URI baseUri) throws IOException {
 			if (format == null || format.length() == 0) {
 				format = "RDF/XML-ABBREV";
 			}

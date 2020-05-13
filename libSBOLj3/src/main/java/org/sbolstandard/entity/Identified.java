@@ -1,4 +1,4 @@
-package org.sbolstandard;
+package org.sbolstandard.entity;
 
 import java.lang.reflect.Constructor;
 import java.net.URI;
@@ -7,9 +7,9 @@ import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.ResourceFactory;
+import org.sbolstandard.util.RDFHandler;
 import org.sbolstandard.util.RDFUtil;
-import org.sbolstandard.vocabulary.DataModel;
+import org.sbolstandard.util.SBOLGraphException;
 
 public abstract class Identified {
 	protected Resource resource=null;
@@ -85,34 +85,6 @@ public abstract class Identified {
 	
 	abstract public URI getResourceType();
 	
-	/*protected <T extends Identified>  void addToList(Resource res, List<T> items, URI property, URI entityType) throws SBOLException, SBOLGraphException
-	{
-		List<Resource> resources=RDFUtil.getResourcesWithProperty(res, property);
-		for (Resource subResource:resources)
-		{
-			Identified identified=SBOLEntityFactory.create(subResource, entityType) ;
-			items.add((T)identified);
-		}
-	}
-	*/
-	
-	/*protected Identified get_del(Resource res, URI property, URI entityType) throws SBOLGraphException, SBOLException
-	{
-		Identified identified=null;
-		List<Resource> resources=RDFUtil.getResourcesWithProperty(res, property);
-		if (resources!=null && resources.size()>1)
-		{
-			String message=String.format("Found multiple versiond of %s entity", entityType.toString());
-			throw new SBOLGraphException(message);
-		}
-		else
-		{
-			identified=SBOLEntityFactory.create(resources.get(0), entityType) ;
-		}
-		return identified;
-	}*/
-
-	
 	protected <T extends Identified> Identified createIdentified(Resource res, Class<T> identified) throws SBOLGraphException
 	{
 		try
@@ -127,7 +99,7 @@ public abstract class Identified {
 		}
 	}
 	
-	protected <T extends Identified>  List<T> addToList(List<T> items, URI property, Class<T> identifiedClass) throws SBOLException, SBOLGraphException
+	protected <T extends Identified>  List<T> addToList(List<T> items, URI property, Class<T> identifiedClass) throws SBOLGraphException
 	{
 		if (items==null)
 		{
@@ -177,5 +149,52 @@ public abstract class Identified {
 
 	}
 	
-	
 }
+
+/*protected <T extends Identified>  void addToList(Resource res, List<T> items, URI property, URI entityType) throws SBOLException, SBOLGraphException
+{
+	List<Resource> resources=RDFUtil.getResourcesWithProperty(res, property);
+	for (Resource subResource:resources)
+	{
+		Identified identified=SBOLEntityFactory.create(subResource, entityType) ;
+		items.add((T)identified);
+	}
+}
+*/
+
+/*protected Identified get_del(Resource res, URI property, URI entityType) throws SBOLGraphException, SBOLException
+{
+	Identified identified=null;
+	List<Resource> resources=RDFUtil.getResourcesWithProperty(res, property);
+	if (resources!=null && resources.size()>1)
+	{
+		String message=String.format("Found multiple versiond of %s entity", entityType.toString());
+		throw new SBOLGraphException(message);
+	}
+	else
+	{
+		identified=SBOLEntityFactory.create(resources.get(0), entityType) ;
+	}
+	return identified;
+}
+
+public Resource toResource(Model model)
+	{
+		URI resourceType=this.getResourceType();
+		
+		Resource resource=RDFHandler.createResource(model, this.getUri(), resourceType);
+		
+		RDFHandler.addProperty(model, resource, URI.create("http://sbols.org/v3#displayId"), this.displayId);
+		RDFHandler.addProperty(model, resource, URI.create("http://sbols.org/v3#name"), this.name);
+		RDFHandler.addProperty(model, resource, URI.create("http://sbols.org/v3#description"), this.description);		
+		RDFHandler.addProperty(model, resource, URI.create("https://www.w3.org/TR/prov-o/wasGeneratedBy"), this.wasGeneratedBy);
+		RDFHandler.addProperty(model, resource, URI.create("https://www.w3.org/TR/prov-o/wasDerivedFrom"), this.wasDerivedFrom);
+		
+		this.addEntitySpecificProperties(model, resource);
+		
+		return resource;
+	}
+	
+*
+*/
+

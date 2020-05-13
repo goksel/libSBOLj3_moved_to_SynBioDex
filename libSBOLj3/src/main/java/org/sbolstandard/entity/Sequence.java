@@ -1,10 +1,9 @@
-package org.sbolstandard;
+package org.sbolstandard.entity;
 
 import java.net.URI;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.sbolstandard.util.RDFHandler;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.vocabulary.Encoding;
 

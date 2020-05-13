@@ -2,7 +2,7 @@ package org.sbolstandard.vocabulary;
 
 import java.net.URI;
 
-import org.sbolstandard.NameSpace;
+import org.sbolstandard.util.NameSpace;
 
 public class DataModel {
 	

@@ -1,6 +1,4 @@
-package org.sbolstandard;
-import java.io.File;
-import java.net.URI;
+package org.sbolstandard.io;
 public enum RDFFormat
 {
 	 Turtle,

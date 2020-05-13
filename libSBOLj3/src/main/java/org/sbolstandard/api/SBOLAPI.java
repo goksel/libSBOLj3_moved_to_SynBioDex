@@ -1,4 +1,4 @@
-package org.sbolstandard;
+package org.sbolstandard.api;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -7,14 +7,24 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.sbolstandard.Location.LocationBuilder;
+import org.sbolstandard.entity.Component;
+import org.sbolstandard.entity.Feature;
+import org.sbolstandard.entity.Identified;
+import org.sbolstandard.entity.Interaction;
+import org.sbolstandard.entity.Location;
+import org.sbolstandard.entity.Participation;
+import org.sbolstandard.entity.SBOLDocument;
+import org.sbolstandard.entity.Sequence;
+import org.sbolstandard.entity.SubComponent;
+import org.sbolstandard.entity.Location.LocationBuilder;
+import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ComponentType;
 import org.sbolstandard.vocabulary.Encoding;
 import org.sbolstandard.vocabulary.Orientation;
 
 public class SBOLAPI {
 
-	  public static List<Interaction> createInteraction(List<URI> interactionTypes, Component parent, Component participant1, List<URI> participant1Roles, Component participant2, List<URI> participant2Roles) throws SBOLGraphException, SBOLException
+	  public static List<Interaction> createInteraction(List<URI> interactionTypes, Component parent, Component participant1, List<URI> participant1Roles, Component participant2, List<URI> participant2Roles) throws SBOLGraphException
 	    {
 	    	List<Interaction> interactions=new ArrayList<Interaction>();
 	    	List<SubComponent> features1=getSubComponents(parent, participant1);
@@ -48,7 +58,7 @@ public class SBOLAPI {
 	    }
 	    
 	    
-	    public static  Interaction createInteraction(List<URI> interactionTypes, Component container, Feature participant1, List<URI> participant1Roles, Feature participant2, List<URI> participant2Roles) throws SBOLGraphException, SBOLException
+	    public static  Interaction createInteraction(List<URI> interactionTypes, Component container, Feature participant1, List<URI> participant1Roles, Feature participant2, List<URI> participant2Roles) throws SBOLGraphException
 	    {
 	    	int index=getIndex(container.getInteractions());
 	    	Interaction interaction= container.createInteraction(append(container.getUri(), "interaction" + index), interactionTypes);
@@ -58,7 +68,7 @@ public class SBOLAPI {
 	    }
 	    
 	   
-	    public static  Participation createParticipation(Interaction interaction, List<URI> roles, Feature feature) throws SBOLGraphException, SBOLException
+	    public static  Participation createParticipation(Interaction interaction, List<URI> roles, Feature feature) throws SBOLGraphException
 	    {
 	    	int index=getIndex(interaction.getParticipations());
 	    	URI uri=append(interaction.getUri(), "participant" + index);

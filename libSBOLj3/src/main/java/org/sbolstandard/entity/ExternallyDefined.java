@@ -1,4 +1,4 @@
-package org.sbolstandard;
+package org.sbolstandard.entity;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.sbolstandard.Location.LocationBuilder;
-import org.sbolstandard.Location.LocationFactory;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.vocabulary.DataModel;
 

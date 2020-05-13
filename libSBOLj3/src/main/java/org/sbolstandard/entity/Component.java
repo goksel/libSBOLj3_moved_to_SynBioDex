@@ -1,17 +1,14 @@
-package org.sbolstandard;
+package org.sbolstandard.entity;
 
-import java.lang.reflect.Constructor;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.sbolstandard.Location.LocationBuilder;
-import org.sbolstandard.util.RDFHandler;
+import org.sbolstandard.entity.Location.LocationBuilder;
 import org.sbolstandard.util.RDFUtil;
+import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
 
 public class Component extends TopLevel {
@@ -203,7 +200,7 @@ public class Component extends TopLevel {
 		return interaction;
 	}
 	
-	public List<Interaction> getInteractions() throws SBOLGraphException, SBOLException {
+	public List<Interaction> getInteractions() throws SBOLGraphException {
 		this.interactions=addToList(this.interactions, DataModel.Component.interaction, Interaction.class);
 		return this.interactions;
 	}

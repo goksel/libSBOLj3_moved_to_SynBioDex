@@ -1,4 +1,4 @@
-package org.sbolstandard;
+package org.sbolstandard.entity;
 
 import java.lang.reflect.Constructor;
 import java.net.URI;
@@ -8,9 +8,9 @@ import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.util.NameSpace;
 import org.sbolstandard.util.RDFUtil;
-import org.sbolstandard.vocabulary.ComponentType;
-import org.sbolstandard.vocabulary.Role;
+import org.sbolstandard.util.SBOLGraphException;
 
 public class SBOLDocument {
 	protected Model model = null;
@@ -39,7 +39,7 @@ public class SBOLDocument {
 		RDFUtil.setBaseURI(this.model, base);
 	}
 	
-	protected SBOLDocument(Model model) {
+	public SBOLDocument(Model model) {
 		this.model = model;
 		setNameSpacePrefixes();
 	}
@@ -61,7 +61,7 @@ public class SBOLDocument {
 	private List<Sequence> sequences;
 
 
-	public List<Component> getComponents() throws SBOLException, SBOLGraphException {
+	public List<Component> getComponents() throws SBOLGraphException {
 		this.components=addToList(model, this.components, URI.create("http://sbols.org/v3#Component"),Component.class);
 		return components;
 	}
@@ -77,7 +77,7 @@ public class SBOLDocument {
 		return component;
 	}
 	
-	public List<Sequence> getSequences() throws SBOLException, SBOLGraphException {
+	public List<Sequence> getSequences() throws SBOLGraphException {
 		this.sequences=addToList(model, this.sequences, URI.create("http://sbols.org/v3#Sequence"),Sequence.class);
 		return sequences;
 	}
@@ -123,7 +123,7 @@ public class SBOLDocument {
 		}
 	}
 
-	private <T extends Identified>  List<T> addToList(Model model, List<T> items, URI entityType, Class<T> identifiedClass) throws SBOLException, SBOLGraphException
+	private <T extends Identified>  List<T> addToList(Model model, List<T> items, URI entityType, Class<T> identifiedClass) throws SBOLGraphException
 	{
 		List<Resource> resources=RDFUtil.getResourcesOfType(model, entityType);
 		if (resources!=null && resources.size()>0)

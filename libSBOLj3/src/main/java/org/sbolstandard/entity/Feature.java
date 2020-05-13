@@ -1,4 +1,4 @@
-package org.sbolstandard;
+package org.sbolstandard.entity;
 
 import java.net.URI;
 import java.util.List;
@@ -7,7 +7,6 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.vocabulary.DataModel;
-import org.sbolstandard.vocabulary.Encoding;
 import org.sbolstandard.vocabulary.Orientation;
 
 public abstract class Feature extends Identified{

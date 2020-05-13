@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.sbolstandard.Location.CutLocationBuilder;
-import org.sbolstandard.Location.LocationBuilder;
+import org.sbolstandard.entity.Component;
+import org.sbolstandard.entity.Identified;
+import org.sbolstandard.entity.SBOLDocument;
+import org.sbolstandard.entity.Sequence;
+import org.sbolstandard.entity.Location.CutLocationBuilder;
+import org.sbolstandard.entity.Location.LocationBuilder;
 import org.sbolstandard.vocabulary.ComponentType;
 import org.sbolstandard.vocabulary.Encoding;
 import org.sbolstandard.vocabulary.Orientation;

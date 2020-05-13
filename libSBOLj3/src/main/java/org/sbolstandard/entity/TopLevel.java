@@ -1,4 +1,4 @@
-package org.sbolstandard;
+package org.sbolstandard.entity;
 
 import java.net.URI;
 

@@ -1,8 +1,6 @@
-package org.sbolstandard;
+package org.sbolstandard.util;
 
 import java.net.URI;
-
-import org.sbolstandard.vocabulary.Role;
 
 public abstract class NameSpace {
 

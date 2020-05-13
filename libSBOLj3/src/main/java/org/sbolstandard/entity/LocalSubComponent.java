@@ -1,4 +1,4 @@
-package org.sbolstandard;
+package org.sbolstandard.entity;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -6,27 +6,42 @@ import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.sbolstandard.Location.LocationBuilder;
-import org.sbolstandard.Location.LocationFactory;
+import org.sbolstandard.entity.Location.LocationBuilder;
+import org.sbolstandard.entity.Location.LocationFactory;
 import org.sbolstandard.util.RDFUtil;
+import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
 
-public class SequenceFeature extends Feature{
+public class LocalSubComponent extends Feature{
+	private List<URI> types=new ArrayList<URI>();
 	private List<Location> locations=null;
 
-	protected  SequenceFeature(Model model,URI uri)
+	protected  LocalSubComponent(Model model,URI uri)
 	{
 		super(model, uri);
 	}
 	
-	protected  SequenceFeature(Resource resource)
+	protected  LocalSubComponent(Resource resource)
 	{
 		super(resource);
 	}
 
 	
+	public List<URI> getTypes() {
+		if (types==null)
+		{
+			types=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.type);
+		}
+		return types;
+	}
 	
-	public List<Location> getLocations() throws SBOLGraphException {
+	public void setTypes(List<URI> types) {
+		this.types = types;
+		RDFUtil.setProperty(resource, DataModel.type, types);
+	}
+	
+	
+	public List<Location> getLocations() throws SBOLGraphException {		
 		if (locations==null)
 		{
 			List<Resource> resources=RDFUtil.getResourcesWithProperty (resource, DataModel.SubComponent.location);
@@ -50,7 +65,7 @@ public class SequenceFeature extends Feature{
 	
 	@Override
 	public URI getResourceType() {
-		return DataModel.SequenceFeature.uri;
+		return DataModel.LocalSubComponent.uri;
 	}
 	
 	

@@ -3,6 +3,10 @@ package org.sbolstandard;
 import java.net.URI;
 import java.util.Arrays;
 
+import org.sbolstandard.api.SBOLAPI;
+import org.sbolstandard.entity.Component;
+import org.sbolstandard.entity.SBOLDocument;
+import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.InteractionType;
 import org.sbolstandard.vocabulary.ParticipationRole;
 import org.sbolstandard.vocabulary.Role;
@@ -43,7 +47,7 @@ public class AppTest
         assertTrue( true );
     }
     
-    public void testReflection() throws SBOLGraphException, SBOLException
+    public void testReflection() throws SBOLGraphException
     {
         SBOLDocument doc=new SBOLDocument(URI.create("https://synbiohub.org/public/igem/"));
         //SBOLDocument doc=new SBOLDocument();
