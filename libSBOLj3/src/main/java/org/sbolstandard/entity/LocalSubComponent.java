@@ -16,7 +16,7 @@ public class LocalSubComponent extends Feature{
 	private List<URI> types=new ArrayList<URI>();
 	private List<Location> locations=null;
 
-	protected  LocalSubComponent(Model model,URI uri)
+	protected  LocalSubComponent(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
 	}
@@ -56,7 +56,7 @@ public class LocalSubComponent extends Feature{
 	}
 
 
-	public Location createLocation(LocationBuilder builder ) {
+	public Location createLocation(LocationBuilder builder ) throws SBOLGraphException {
 		Location location=builder.build(this.resource.getModel());
 		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
 		return location;

@@ -14,7 +14,7 @@ public class Interaction extends Feature{
 	private List<URI> types=new ArrayList<URI>();
 	private List<Participation> participations=null;
 
-	protected  Interaction(Model model,URI uri)
+	protected  Interaction(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
 	}
@@ -45,7 +45,8 @@ public class Interaction extends Feature{
 	}
 
 
-	public Participation createParticipation(URI uri, List<URI> roles, URI feature) {
+	public Participation createParticipation(URI uri, List<URI> roles, URI feature) throws SBOLGraphException
+	{
 		Participation participation=new Participation(this.resource.getModel(),uri);
 		participation.setRoles(roles);
 		participation.setParticipant(feature);

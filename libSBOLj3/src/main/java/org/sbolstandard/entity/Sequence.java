@@ -5,13 +5,14 @@ import java.net.URI;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.util.RDFUtil;
+import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.Encoding;
 
 public class Sequence extends TopLevel {
 	private String elements;
 	private Encoding encoding;
 
-	protected  Sequence(Model model,URI uri)
+	protected  Sequence(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
 	}

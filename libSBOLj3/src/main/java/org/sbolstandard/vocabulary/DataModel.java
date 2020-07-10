@@ -21,6 +21,8 @@ public class DataModel {
 			public static URI interacton=NameSpace.SBOL.local("hasInteraction");
 			public static URI feature=NameSpace.SBOL.local("hasFeature");	
 			public static URI interaction=NameSpace.SBOL.local("hasInteraction");	
+			public static URI constraint=NameSpace.SBOL.local("hasConstraint");	
+			
 		}
 		
 		public static final class Sequence
@@ -87,6 +89,15 @@ public class DataModel {
 			public static URI uri=NameSpace.SBOL.local("Range");
 			public static URI start=NameSpace.SBOL.local("start");
 			public static URI end=NameSpace.SBOL.local("end");
+		}
+		
+		public static final class Constraint
+		{
+			public static URI uri=NameSpace.SBOL.local("Constraint");
+			public static URI restriction=NameSpace.SBOL.local("restriction");
+			public static URI subject=NameSpace.SBOL.local("subject");
+			public static URI object=NameSpace.SBOL.local("object");
+			
 		}
 
 }

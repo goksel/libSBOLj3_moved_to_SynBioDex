@@ -16,6 +16,7 @@ import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.RDFWriter;
 import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.vocabulary.RDF;
@@ -28,10 +29,20 @@ public class RDFUtil {
 			model.setNsPrefix("", uri.toString());
 		}
 	}
-	public static Resource createResource(Model model, URI resourceUri, URI type) {
-		Resource resource = model.createResource(resourceUri.toString());
-		Resource typeResource=model.createResource(type.toString());	
-		resource.addProperty(RDF.type, typeResource);	
+	public static Resource createResource(Model model, URI resourceUri, URI type) throws SBOLGraphException {
+		String resourceUriString=resourceUri.toString();
+		Resource resource=null;
+		boolean exists=model.containsResource(ResourceFactory.createResource(resourceUriString));				
+		if (!exists)
+		{
+			resource = model.createResource(resourceUriString);
+			Resource typeResource=model.createResource(type.toString());	
+			resource.addProperty(RDF.type, typeResource);	
+		}
+		else
+		{
+			throw new SBOLGraphException(String.format("Resource with the URI already exists! URI:%s", resourceUriString));
+		}
 		return resource;
 	}
 	private static void removeIfExists(Resource resource, Property p)
@@ -144,11 +155,11 @@ public class RDFUtil {
 			  {
 				  resources.add(object.asResource());
 			  }
-			  else
+			  /*else
 			  {
-				  String message=String.format("The property %s has literal value!", propertyURI.toString());
+				  String message=String.format("The property %s has literal value! Resource: %s", propertyURI.toString(), resource.getURI().toString());
 				  throw new SBOLGraphException(message);
-			  }
+			  }*/
 		  }
 	      return resources;
 	   }

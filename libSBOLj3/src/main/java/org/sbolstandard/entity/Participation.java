@@ -14,7 +14,7 @@ public class Participation extends Feature{
 	private List<URI> roles=new ArrayList<URI>();
 	private URI participant=null;
 
-	protected  Participation(Model model,URI uri)
+	protected  Participation(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
 	}

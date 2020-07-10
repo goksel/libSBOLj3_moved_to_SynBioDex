@@ -9,6 +9,7 @@ import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.Identified;
 import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.entity.Sequence;
+import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.entity.Location.CutLocationBuilder;
 import org.sbolstandard.entity.Location.LocationBuilder;
 import org.sbolstandard.vocabulary.ComponentType;
@@ -73,7 +74,7 @@ public class App
 //       System.out.println("done");   
    }
     
-    private static Component createDnaComponent(SBOLDocument doc, URI uri, URI type, String name, String displayId, String description, URI role, String sequence)
+    private static Component createDnaComponent(SBOLDocument doc, URI uri, URI type, String name, String displayId, String description, URI role, String sequence) throws SBOLGraphException
     {
     	Component dna=createComponent(doc, uri, type, name, displayId, description, role);
     	Sequence seq=createSequence(doc, append(uri,"seq"), name + " sequence", displayId + "_seq", description + "" , sequence, Encoding.NucleicAcid);
@@ -82,7 +83,7 @@ public class App
     }
     
     
-    private static Component createComponent(SBOLDocument doc, URI uri, URI type, String name, String displayId, String description, URI role)
+    private static Component createComponent(SBOLDocument doc, URI uri, URI type, String name, String displayId, String description, URI role) throws SBOLGraphException
     {
     	Component component=doc.createComponent(uri, Arrays.asList(type)); 
         setCommonProperties(component, name, displayId, description);
@@ -96,7 +97,7 @@ public class App
     	return URI.create(String.format("%s/%s", uri,id));
     }
     
-    private static Sequence createSequence(SBOLDocument doc, URI uri, String name, String displayId, String description, String sequence, Encoding encoding)
+    private static Sequence createSequence(SBOLDocument doc, URI uri, String name, String displayId, String description, String sequence, Encoding encoding) throws SBOLGraphException
     {
         Sequence sequenceEntity=doc.createSequence(uri);
         setCommonProperties(sequenceEntity, name, displayId, description);

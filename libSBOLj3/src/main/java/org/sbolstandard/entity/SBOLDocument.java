@@ -66,7 +66,7 @@ public class SBOLDocument {
 		return components;
 	}
 	
-	public Component createComponent(URI uri, List<URI> types) {
+	public Component createComponent(URI uri, List<URI> types) throws SBOLGraphException {
 
 		Component component = new Component(this.model, uri);
 		component.setTypes(types);
@@ -82,7 +82,7 @@ public class SBOLDocument {
 		return sequences;
 	}
 
-	public Sequence createSequence(URI uri) {
+	public Sequence createSequence(URI uri) throws SBOLGraphException {
 		Sequence sequence = new Sequence(this.model, uri);
 		if (sequences == null) {
 			sequences = new ArrayList<Sequence>();

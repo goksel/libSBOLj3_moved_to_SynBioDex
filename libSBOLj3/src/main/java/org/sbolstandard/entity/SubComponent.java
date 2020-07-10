@@ -19,7 +19,7 @@ public class SubComponent extends Feature{
 	private List<Location> sourceLocations=null;
 	
 
-	protected  SubComponent(Model model,URI uri)
+	protected  SubComponent(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
 	}
@@ -73,7 +73,8 @@ public class SubComponent extends Feature{
 	}
 
 
-	public Location createLocation(LocationBuilder builder ) {
+	public Location createLocation(LocationBuilder builder ) throws SBOLGraphException
+	{
 		Location location=builder.build(this.resource.getModel());
 		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
 		return location;
@@ -95,7 +96,8 @@ public class SubComponent extends Feature{
 	}
 
 
-	public Location createSourceLocation(LocationBuilder builder ) {
+	public Location createSourceLocation(LocationBuilder builder ) throws SBOLGraphException
+	{
 		Location sourceLocation=builder.build(this.resource.getModel());
 		RDFUtil.setProperty(resource, DataModel.SubComponent.sourceLocation, sourceLocation.getUri());
 		

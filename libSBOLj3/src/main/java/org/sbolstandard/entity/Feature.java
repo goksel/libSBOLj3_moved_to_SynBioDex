@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.util.RDFUtil;
+import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.Orientation;
 
@@ -14,7 +15,7 @@ public abstract class Feature extends Identified{
 	private Orientation orientation=null;
 	
 	
-	protected  Feature(Model model,URI uri)
+	protected  Feature(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
 	}

@@ -5,6 +5,7 @@ import java.net.URI;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.util.RDFUtil;
+import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.Orientation;
 
@@ -12,7 +13,7 @@ public abstract class  Location extends Identified {
 	private Orientation orientation;
 	private int order=Integer.MIN_VALUE;
 
-	protected Location(Model model,URI uri)
+	protected Location(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
 	}
@@ -91,7 +92,7 @@ public abstract class  Location extends Identified {
 		{
 			this.uri=uri;
 		}
-		abstract public Location build(Model model);
+		abstract public Location build(Model model) throws SBOLGraphException;
 		
 	}
 	
@@ -104,7 +105,7 @@ public abstract class  Location extends Identified {
 			this.at=at;
 		}
 		
-		public CutLocation build(Model model)
+		public CutLocation build(Model model) throws SBOLGraphException 
 		{
 			CutLocation location= new CutLocation(model, this.uri);
 			location.setAt(at);
@@ -125,7 +126,7 @@ public abstract class  Location extends Identified {
 			
 		}
 		
-		public RangeLocation build(Model model)
+		public RangeLocation build(Model model) throws SBOLGraphException
 		{
 			RangeLocation location= new RangeLocation(model, this.uri);
 			location.setStart(start);

@@ -16,7 +16,7 @@ public abstract class Identified {
 	protected Identified()
 	{}
 	
-	protected Identified(Model model, URI uri)
+	protected Identified(Model model, URI uri) throws SBOLGraphException
 	{
 		this.uri=uri;
 		this.resource=RDFUtil.createResource(model, this.uri,this.getResourceType());

@@ -14,7 +14,7 @@ import org.sbolstandard.vocabulary.DataModel;
 public class SequenceFeature extends Feature{
 	private List<Location> locations=null;
 
-	protected  SequenceFeature(Model model,URI uri)
+	protected  SequenceFeature(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
 	}
@@ -37,7 +37,8 @@ public class SequenceFeature extends Feature{
 		return locations;
 	}
 
-	public Location createLocation(LocationBuilder builder ) {
+	public Location createLocation(LocationBuilder builder ) throws SBOLGraphException
+	{
 		Location location=builder.build(this.resource.getModel());
 		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
 		return location;

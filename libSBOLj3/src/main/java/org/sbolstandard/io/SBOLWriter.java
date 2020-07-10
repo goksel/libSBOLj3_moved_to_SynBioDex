@@ -23,7 +23,6 @@ public class SBOLWriter{
 		return output;
 	}
 	
-	
 	private static Resource[] getTopLevelResources()
 	{
 		Model model = ModelFactory.createDefaultModel();
