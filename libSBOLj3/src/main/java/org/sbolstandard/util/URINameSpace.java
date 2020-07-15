@@ -2,7 +2,7 @@ package org.sbolstandard.util;
 
 import java.net.URI;
 
-public abstract class NameSpace {
+public abstract class URINameSpace {
 
 	protected  URI uri;
 	protected String prefix;
@@ -11,6 +11,8 @@ public abstract class NameSpace {
 	protected static final String CHEBI_Namespace="https://identifiers.org/CHEBI:";
 	protected static final String GO_Namespace="https://identifiers.org/GO:";
 	protected static final String SBOL_Namespace="http://sbols.org/v3#";
+	protected static final String EDAM_Namespace="https://identifiers.org/edam:";
+	
 	
 	public URI getUri() {
 		return uri;
@@ -20,8 +22,8 @@ public abstract class NameSpace {
 		return prefix;
 	}
 	
-	private NameSpace() {}
-	private NameSpace(URI uriParam, String prefixParam)
+	private URINameSpace() {}
+	private URINameSpace(URI uriParam, String prefixParam)
 	{
 		this.uri=uriParam;
 		this.prefix=prefixParam;	
@@ -32,23 +34,24 @@ public abstract class NameSpace {
 		return URI.create(uri.toString() + name);
 	}
 	
-	public static NameSpace SO=SONameSpace.getInstance();
-	public static NameSpace SBO=SBONameSpace.getInstance();
-	public static NameSpace SBOL=SBOLNameSpace.getInstance();
-	public static NameSpace CHEBI=CHEBINameSpace.getInstance();
-	public static NameSpace GO=GONameSpace.getInstance();
+	public static URINameSpace SO=SONameSpace.getInstance();
+	public static URINameSpace SBO=SBONameSpace.getInstance();
+	public static URINameSpace SBOL=SBOLNameSpace.getInstance();
+	public static URINameSpace CHEBI=CHEBINameSpace.getInstance();
+	public static URINameSpace GO=GONameSpace.getInstance();
+	public static URINameSpace EDAM=EDAMNameSpace.getInstance();
 	
 	
 	
 	//protected abstract NameSpace getInstance();
 	
-	public static class SONameSpace extends NameSpace
+	public static class SONameSpace extends URINameSpace
 	{
 		private static SONameSpace instance=null;
 		private SONameSpace () {}
 		
 		
-		protected static NameSpace getInstance()
+		protected static URINameSpace getInstance()
 		{
 			if (instance == null)     
 			{
@@ -61,7 +64,7 @@ public abstract class NameSpace {
 		}
 	}
 	
-	protected static class SBONameSpace extends NameSpace
+	protected static class SBONameSpace extends URINameSpace
 	{
 		private static SBONameSpace instance=null;
 		
@@ -69,7 +72,7 @@ public abstract class NameSpace {
 		{
 			
 		}
-		protected static NameSpace getInstance()
+		protected static URINameSpace getInstance()
 		{
 			if (instance == null)     
 			{
@@ -82,14 +85,14 @@ public abstract class NameSpace {
 		}
 	}
 	
-	protected static class SBOLNameSpace extends NameSpace
+	protected static class SBOLNameSpace extends URINameSpace
 	{
 		private static SBOLNameSpace instance=null;
 		
 		private SBOLNameSpace()
 		{
 		}
-		protected static NameSpace getInstance()
+		protected static URINameSpace getInstance()
 		{
 			if (instance == null)     
 			{
@@ -102,14 +105,14 @@ public abstract class NameSpace {
 		}
 	}
 	
-	protected static class CHEBINameSpace extends NameSpace
+	protected static class CHEBINameSpace extends URINameSpace
 	{
 		private static CHEBINameSpace instance=null;
 		
 		private CHEBINameSpace()
 		{
 		}
-		protected static NameSpace getInstance()
+		protected static URINameSpace getInstance()
 		{
 			if (instance == null)     
 			{
@@ -122,14 +125,14 @@ public abstract class NameSpace {
 		}
 	}
 	
-	protected static class GONameSpace extends NameSpace
+	protected static class GONameSpace extends URINameSpace
 	{
 		private static GONameSpace instance=null;
 		
 		private GONameSpace()
 		{
 		}
-		protected static NameSpace getInstance()
+		protected static URINameSpace getInstance()
 		{
 			if (instance == null)     
 			{
@@ -139,6 +142,25 @@ public abstract class NameSpace {
 			}
 			return instance;
 			
+		}
+	}
+	
+	protected static class EDAMNameSpace extends URINameSpace
+	{
+		private static EDAMNameSpace instance=null;
+		
+		private EDAMNameSpace()
+		{
+		}
+		protected static URINameSpace getInstance()
+		{
+			if (instance == null)     
+			{
+				instance = new EDAMNameSpace ();
+				instance.uri=URI.create(EDAM_Namespace);
+				instance.prefix="EDAM";
+			}
+			return instance;
 		}
 	}
 	

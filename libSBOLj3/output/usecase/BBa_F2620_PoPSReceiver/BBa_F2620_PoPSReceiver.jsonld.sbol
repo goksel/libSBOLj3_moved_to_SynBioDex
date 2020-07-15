@@ -115,7 +115,7 @@
     "hasSequence" : "BBa_C0062_protein/sequence_1",
     "name" : "LuxR",
     "role" : "GO:0003700",
-    "type" : "SBO:SBO:0000252"
+    "type" : "SBO:0000252"
   }, {
     "@id" : "BBa_C0062_protein/sequence_1",
     "@type" : "sbol:Sequence",
@@ -293,7 +293,7 @@
     "hasSequence" : "TetR_protein/sequence_1",
     "name" : "TetR",
     "role" : "GO:0003700",
-    "type" : "SBO:SBO:0000252"
+    "type" : "SBO:0000252"
   }, {
     "@id" : "TetR_protein/sequence_1",
     "@type" : "sbol:Sequence",
@@ -371,6 +371,7 @@
     "CHEBI" : "https://identifiers.org/CHEBI:",
     "GO" : "https://identifiers.org/GO:",
     "sbol" : "http://sbols.org/v3#",
+    "EDAM" : "https://identifiers.org/edam:",
     "SO" : "https://identifiers.org/SO:"
   }
 }

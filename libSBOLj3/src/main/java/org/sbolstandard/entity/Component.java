@@ -24,6 +24,8 @@ public class Component extends TopLevel {
 	private List<SequenceFeature> sequenceFatures=null;
 	private List<Interaction> interactions=null;
 	private List<Constraint> constraints=null;
+	private Interface componentInterface=null;
+	private List<URI> models=null;
 	
 	//private Set<Interaction> interactions2=null;
 	
@@ -223,10 +225,38 @@ public class Component extends TopLevel {
 		this.constraints=addToList(this.constraints, DataModel.Component.constraint, Constraint.class);
 		return this.constraints;
 	}
+	
+	public Interface createInterface(URI uri) throws SBOLGraphException {
+		this.componentInterface = new Interface(this.resource.getModel(), uri);
+		RDFUtil.setProperty(resource, DataModel.Component.hasInterface, uri);
+		return componentInterface;
+	}
+	
+	public Interface getInterface() throws SBOLGraphException {
+		if (this.componentInterface==null)
+		{
+			this.componentInterface=contsructIdentified(DataModel.Component.hasInterface, Interface.class);
+		}
+		return this.componentInterface;
+	}
+	
+	public List<URI> getModels() {
+		if (models==null)
+		{
+			models=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Component.model);
+		}
+		return models;
+	}
+	
+	public void setModels(List<URI> models) {
+		this.models = models;
+		RDFUtil.setProperty(resource, DataModel.Component.model, models);
+	}
+	
 
 	public URI getResourceType()
 	{
-		return URI.create("http://sbols.org/v3#Component");
+		return DataModel.Component.uri;
 	}
 	
 	

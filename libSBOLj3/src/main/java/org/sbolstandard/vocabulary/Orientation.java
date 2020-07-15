@@ -2,11 +2,11 @@ package org.sbolstandard.vocabulary;
 
 import java.net.URI;
 
-import org.sbolstandard.util.NameSpace;
+import org.sbolstandard.util.URINameSpace;
 
 public enum Orientation {
-	inline(NameSpace.SBOL.local("inline")), 
-	reverseComplement(NameSpace.SBOL.local("reverseComplement"));
+	inline(URINameSpace.SBOL.local("inline")), 
+	reverseComplement(URINameSpace.SBOL.local("reverseComplement"));
 
 	private URI url;
 

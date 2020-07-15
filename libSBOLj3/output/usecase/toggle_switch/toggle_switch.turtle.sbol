@@ -4,6 +4,7 @@
 @prefix CHEBI: <https://identifiers.org/CHEBI:> .
 @prefix GO:    <https://identifiers.org/GO:> .
 @prefix sbol:  <http://sbols.org/v3#> .
+@prefix EDAM:  <https://identifiers.org/edam:> .
 @prefix SO:    <https://identifiers.org/SO:> .
 
 :lacI   a                 sbol:Component ;
@@ -62,7 +63,7 @@
         sbol:displayId    "LacI_protein" ;
         sbol:name         "LacI" ;
         sbol:role         GO:0003700 ;
-        sbol:type         SBO:SBO:0000252 .
+        sbol:type         SBO:0000252 .
 
 <LacI_producer/subcomponent_1>
         a                 sbol:SubComponent ;
@@ -99,7 +100,7 @@
         sbol:displayId    "TetR_protein" ;
         sbol:name         "TetR" ;
         sbol:role         GO:0003700 ;
-        sbol:type         SBO:SBO:0000252 .
+        sbol:type         SBO:0000252 .
 
 <toggle_switch/constraint_3>
         a                 sbol:Constraint ;
@@ -113,7 +114,7 @@
         sbol:hasConstraint  <toggle_switch/constraint_3> , <toggle_switch/constraint_4> , <toggle_switch/constraint_2> , <toggle_switch/constraint_1> ;
         sbol:hasFeature     <toggle_switch/componentreference_4> , <toggle_switch/componentreference_3> , <toggle_switch/componentreference_2> , <toggle_switch/LacI_protein> , <toggle_switch/componentreference_1> , <toggle_switch/TetR_protein> ;
         sbol:name           "Toggle Switch" ;
-        sbol:type           SBO:SBO:0000241 .
+        sbol:type           SBO:0000241 .
 
 <TetR_producer/interaction_1/participation_2>
         a                 sbol:Participation ;

@@ -263,6 +263,8 @@ public class SBOLAPI {
 	        return component;   
 	    }
 	    
+	   
+	    
 	    public static URI append(URI uri, String id)
 	    {
 	    	return append(uri.toString(),id);   	
@@ -314,7 +316,7 @@ public class SBOLAPI {
 				 for (ComponentReference compRef: childReferences)
 				 {
 					 String localName=SBOLAPI.createLocalName(DataModel.Constraint.uri, container.getConstraints());
-					 container.createConstraint(SBOLAPI.append(container.getUri(), localName), RestrictionType.verifyIdentical, subComponentInContainer.getUri(), compRef.getUri());
+					 container.createConstraint(SBOLAPI.append(container.getUri(), localName), RestrictionType.Identity.verifyIdentical, subComponentInContainer.getUri(), compRef.getUri());
 				 } 
 			 }
 		}

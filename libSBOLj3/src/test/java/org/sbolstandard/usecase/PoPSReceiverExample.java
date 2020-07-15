@@ -1,10 +1,11 @@
-package org.sbolstandard;
+package org.sbolstandard.usecase;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 
+import org.sbolstandard.TestUtil;
 import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.SBOLDocument;
@@ -58,11 +59,9 @@ public class PoPSReceiverExample extends TestCase {
         
         System.out.print(output);
         
-        SBOLWriter.write(doc2, new File("PoPSReceiver.turtle.sbol"), "Turtle");
-        SBOLWriter.write(doc2, new File("PoPSReceiver.rdfxml.sbol"), "RDF/XML-ABBREV");
-        SBOLWriter.write(doc2, new File("PoPSReceiver.jsonld.sbol"),"JSON-LD");
-        SBOLWriter.write(doc2, new File("PoPSReceiver.rdfjson.sbol"), "RDF/JSON");
-        SBOLWriter.write(doc2, new File("PoPSReceiver.ntriples.sbol"), "N-TRIPLES");
+        TestUtil.serialise(doc2, "usecase/BBa_F2620_PoPSReceiver", "BBa_F2620_PoPSReceiver");     
+        
+
             
         System.out.println("done");   
     }

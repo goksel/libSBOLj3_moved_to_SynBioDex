@@ -164,6 +164,26 @@ public class RDFUtil {
 	      return resources;
 	   }
 	  
+	  private static Object getLiteralValue(Resource resource, URI propertyURI)
+	  {
+		    Object value=null;
+			Property property=resource.getModel().getProperty(propertyURI.toString());   
+			Statement stmt = resource.getProperty(property);
+			if (stmt!=null && stmt.getObject()!=null){
+				value=stmt.getObject().asLiteral().getValue();
+			}
+			return value;
+	  }
+	  
+	  public static Long getPropertyAsLong(Resource resource, URI propertyURI) {
+			long result=Long.MIN_VALUE;
+			Object value=getLiteralValue(resource, propertyURI);
+			if (value!=null)
+			{
+			 result=(long) value;
+			}
+		    return result;  	
+		}
 	  
 	  public static String getPropertyAsString(Resource resource, URI propertyURI) {
 			Property property=resource.getModel().getProperty(propertyURI.toString());   

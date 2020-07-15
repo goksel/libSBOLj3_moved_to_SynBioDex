@@ -17,7 +17,7 @@
 <https://synbiohub.org/public/igem/BBa_F2620/subcomponent_7> <http://sbols.org/v3#instanceOf> <https://synbiohub.org/public/igem/BBa_R0062> .
 <https://synbiohub.org/public/igem/BBa_F2620/subcomponent_7> <http://sbols.org/v3#hasLocation> <https://synbiohub.org/public/igem/BBa_F2620/subcomponent_7/location_1> .
 <https://synbiohub.org/public/igem/BBa_F2620/subcomponent_7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#SubComponent> .
-<https://synbiohub.org/public/igem/BBa_C0062_protein> <http://sbols.org/v3#type> <https://identifiers.org/SBO:SBO:0000252> .
+<https://synbiohub.org/public/igem/BBa_C0062_protein> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000252> .
 <https://synbiohub.org/public/igem/BBa_C0062_protein> <http://sbols.org/v3#role> <https://identifiers.org/GO:0003700> .
 <https://synbiohub.org/public/igem/BBa_C0062_protein> <http://sbols.org/v3#name> "LuxR" .
 <https://synbiohub.org/public/igem/BBa_C0062_protein> <http://sbols.org/v3#hasSequence> <https://synbiohub.org/public/igem/BBa_C0062_protein/sequence_1> .
@@ -110,7 +110,7 @@
 <https://synbiohub.org/public/igem/BBa_B0010> <http://sbols.org/v3#displayId> "BBa_B0010" .
 <https://synbiohub.org/public/igem/BBa_B0010> <http://sbols.org/v3#description> "Transcriptional terminator consisting of a 64 bp stem-loop" .
 <https://synbiohub.org/public/igem/BBa_B0010> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Component> .
-<https://synbiohub.org/public/igem/TetR_protein> <http://sbols.org/v3#type> <https://identifiers.org/SBO:SBO:0000252> .
+<https://synbiohub.org/public/igem/TetR_protein> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000252> .
 <https://synbiohub.org/public/igem/TetR_protein> <http://sbols.org/v3#role> <https://identifiers.org/GO:0003700> .
 <https://synbiohub.org/public/igem/TetR_protein> <http://sbols.org/v3#name> "TetR" .
 <https://synbiohub.org/public/igem/TetR_protein> <http://sbols.org/v3#hasSequence> <https://synbiohub.org/public/igem/TetR_protein/sequence_1> .

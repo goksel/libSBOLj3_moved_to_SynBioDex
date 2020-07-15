@@ -32,7 +32,7 @@
      ] ,
     "http://sbols.org/v3#type" : [ { 
       "type" : "uri" ,
-      "value" : "https://identifiers.org/SBO:SBO:0000252"
+      "value" : "https://identifiers.org/SBO:0000252"
     }
      ]
   }
@@ -346,7 +346,7 @@
      ] ,
     "http://sbols.org/v3#type" : [ { 
       "type" : "uri" ,
-      "value" : "https://identifiers.org/SBO:SBO:0000252"
+      "value" : "https://identifiers.org/SBO:0000252"
     }
      ]
   }

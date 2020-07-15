@@ -4,6 +4,7 @@
 @prefix CHEBI: <https://identifiers.org/CHEBI:> .
 @prefix GO:    <https://identifiers.org/GO:> .
 @prefix sbol:  <http://sbols.org/v3#> .
+@prefix EDAM:  <https://identifiers.org/edam:> .
 @prefix SO:    <https://identifiers.org/SO:> .
 
 <BBa_B0010/sequence_1>
@@ -39,7 +40,7 @@
         sbol:hasSequence  <BBa_C0062_protein/sequence_1> ;
         sbol:name         "LuxR" ;
         sbol:role         GO:0003700 ;
-        sbol:type         SBO:SBO:0000252 .
+        sbol:type         SBO:0000252 .
 
 <BBa_B0015/sequence_1>
         a                 sbol:Sequence ;
@@ -165,7 +166,7 @@
         sbol:hasSequence  <TetR_protein/sequence_1> ;
         sbol:name         "TetR" ;
         sbol:role         GO:0003700 ;
-        sbol:type         SBO:SBO:0000252 .
+        sbol:type         SBO:0000252 .
 
 <TetR_protein/sequence_1>
         a                 sbol:Sequence ;

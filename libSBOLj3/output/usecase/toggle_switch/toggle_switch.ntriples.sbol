@@ -36,7 +36,7 @@
 <https://sbolstandard.org/examples/pTetR> <http://sbols.org/v3#displayId> "pTetR" .
 <https://sbolstandard.org/examples/pTetR> <http://sbols.org/v3#description> "TetR repressible promoter" .
 <https://sbolstandard.org/examples/pTetR> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Component> .
-<https://sbolstandard.org/examples/LacI_protein> <http://sbols.org/v3#type> <https://identifiers.org/SBO:SBO:0000252> .
+<https://sbolstandard.org/examples/LacI_protein> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000252> .
 <https://sbolstandard.org/examples/LacI_protein> <http://sbols.org/v3#role> <https://identifiers.org/GO:0003700> .
 <https://sbolstandard.org/examples/LacI_protein> <http://sbols.org/v3#name> "LacI" .
 <https://sbolstandard.org/examples/LacI_protein> <http://sbols.org/v3#displayId> "LacI_protein" .
@@ -60,7 +60,7 @@
 <https://sbolstandard.org/examples/TetR_producer/subcomponent_4> <http://sbols.org/v3#orientation> <http://sbols.org/v3#inline> .
 <https://sbolstandard.org/examples/TetR_producer/subcomponent_4> <http://sbols.org/v3#instanceOf> <https://sbolstandard.org/examples/ter_tetR> .
 <https://sbolstandard.org/examples/TetR_producer/subcomponent_4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#SubComponent> .
-<https://sbolstandard.org/examples/TetR_protein> <http://sbols.org/v3#type> <https://identifiers.org/SBO:SBO:0000252> .
+<https://sbolstandard.org/examples/TetR_protein> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000252> .
 <https://sbolstandard.org/examples/TetR_protein> <http://sbols.org/v3#role> <https://identifiers.org/GO:0003700> .
 <https://sbolstandard.org/examples/TetR_protein> <http://sbols.org/v3#name> "TetR" .
 <https://sbolstandard.org/examples/TetR_protein> <http://sbols.org/v3#displayId> "TetR_protein" .
@@ -80,10 +80,10 @@
 <https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#displayId> "toggle_switch" .
 <https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#hasConstraint> <https://sbolstandard.org/examples/toggle_switch/constraint_2> .
 <https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#description> "Toggle Switch genetic circuit" .
-<https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#type> <https://identifiers.org/SBO:SBO:0000241> .
 <https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#hasConstraint> <https://sbolstandard.org/examples/toggle_switch/constraint_1> .
 <https://sbolstandard.org/examples/toggle_switch> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Component> .
 <https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#name> "Toggle Switch" .
+<https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000241> .
 <https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#hasFeature> <https://sbolstandard.org/examples/toggle_switch/TetR_protein> .
 <https://sbolstandard.org/examples/TetR_producer/interaction_1/participation_2> <http://sbols.org/v3#role> <https://identifiers.org/SBO:0000011> .
 <https://sbolstandard.org/examples/TetR_producer/interaction_1/participation_2> <http://sbols.org/v3#participant> <https://sbolstandard.org/examples/TetR_producer/TetR_protein> .

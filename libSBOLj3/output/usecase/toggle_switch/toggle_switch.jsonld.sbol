@@ -83,7 +83,7 @@
     "displayId" : "LacI_protein",
     "name" : "LacI",
     "role" : "GO:0003700",
-    "type" : "SBO:SBO:0000252"
+    "type" : "SBO:0000252"
   }, {
     "@id" : "TetR_producer",
     "@type" : "sbol:Component",
@@ -168,7 +168,7 @@
     "displayId" : "TetR_protein",
     "name" : "TetR",
     "role" : "GO:0003700",
-    "type" : "SBO:SBO:0000252"
+    "type" : "SBO:0000252"
   }, {
     "@id" : "lacI",
     "@type" : "sbol:Component",
@@ -241,7 +241,7 @@
     "hasConstraint" : [ "toggle_switch/constraint_3", "toggle_switch/constraint_4", "toggle_switch/constraint_2", "toggle_switch/constraint_1" ],
     "hasFeature" : [ "toggle_switch/componentreference_4", "toggle_switch/componentreference_3", "toggle_switch/componentreference_2", "toggle_switch/LacI_protein", "toggle_switch/componentreference_1", "toggle_switch/TetR_protein" ],
     "name" : "Toggle Switch",
-    "type" : "SBO:SBO:0000241"
+    "type" : "SBO:0000241"
   }, {
     "@id" : "toggle_switch/LacI_protein",
     "@type" : "sbol:SubComponent",
@@ -377,6 +377,7 @@
     "CHEBI" : "https://identifiers.org/CHEBI:",
     "GO" : "https://identifiers.org/GO:",
     "sbol" : "http://sbols.org/v3#",
+    "EDAM" : "https://identifiers.org/edam:",
     "SO" : "https://identifiers.org/SO:"
   }
 }

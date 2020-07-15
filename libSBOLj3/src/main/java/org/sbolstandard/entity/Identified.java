@@ -99,6 +99,14 @@ public abstract class Identified {
 		}
 	}
 	
+	/***
+	 * Deserialises an array of objects from RDF resources
+	 * @param items
+	 * @param property
+	 * @param identifiedClass
+	 * @return
+	 * @throws SBOLGraphException
+	 */
 	protected <T extends Identified>  List<T> addToList(List<T> items, URI property, Class<T> identifiedClass) throws SBOLGraphException
 	{
 		if (items==null)
@@ -117,6 +125,33 @@ public abstract class Identified {
 		return items;
 	}
 	
+	protected <T extends Identified>  T contsructIdentified(URI property, Class<T> identifiedClass) throws SBOLGraphException
+	{
+		T identified=null;
+		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property);
+		if (resources!=null)
+		{
+			if (resources.size()==1)
+			{
+				 identified=(T)createIdentified(resources.get(0), identifiedClass);
+			}
+			else
+			{
+				String message=String.format("Multiple property values exist for the property %s. The entity URI:%s", property.toString(),this.resource.getURI());
+				throw new SBOLGraphException(message);
+			}
+		}		
+		return identified;
+	}
+	
+	
+	/***
+	 * Serialises an array of objects into RDF resources.
+	 * @param items
+	 * @param identified
+	 * @param property
+	 * @return
+	 */
 	protected <T extends Identified> List<T> addToList(List<T> items, Identified identified, URI property)
 	{
 		RDFUtil.addProperty(this.resource,property, identified.getUri());
@@ -146,8 +181,9 @@ public abstract class Identified {
 			}
 		}
 		return items;
-
 	}
+	
+	
 	
 }
 

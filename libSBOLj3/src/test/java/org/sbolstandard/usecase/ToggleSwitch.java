@@ -1,4 +1,4 @@
-package org.sbolstandard;
+package org.sbolstandard.usecase;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.sbolstandard.TestUtil;
 import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.ComponentReference;
@@ -94,7 +95,7 @@ public class ToggleSwitch extends TestCase {
         output=SBOLWriter.write(doc2, "RDF/XML-ABBREV");
         System.out.print(output);
         
-        serialise(doc2, "toggle_switch", "toggle_switch");     
+        TestUtil.serialise(doc2, "usecase/toggle_switch", "toggle_switch");     
         System.out.println("done");   
     }
 	 
@@ -102,20 +103,6 @@ public class ToggleSwitch extends TestCase {
 	
 	
 	
-	private void serialise(SBOLDocument doc, String directory, String file) throws FileNotFoundException, IOException
-	{
-		String baseOutput="output";
-		File outputDir=new File(baseOutput +  "/" + directory);
-        if (!outputDir.exists())
-        {
-        	boolean result=outputDir.mkdirs();
-        }
-        
-        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.turtle.sbol", baseOutput,directory, file)), "Turtle");
-        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.rdfxml.sbol", baseOutput,directory, file)), "RDF/XML-ABBREV");
-        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.jsonld.sbol", baseOutput,directory, file)), "JSON-LD");
-        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.rdfjson.sbol", baseOutput,directory, file)), "rdfjson");
-        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.ntriples.sbol", baseOutput,directory, file)), "N-TRIPLES");
-	}
+	
     
 }

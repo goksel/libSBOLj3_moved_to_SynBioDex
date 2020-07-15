@@ -1,6 +1,7 @@
 <rdf:RDF
     xmlns:SO="https://identifiers.org/SO:"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:EDAM="https://identifiers.org/edam:"
     xmlns:sbol="http://sbols.org/v3#"
     xmlns:CHEBI="https://identifiers.org/CHEBI:"
     xmlns:SBO="https://identifiers.org/SBO:"
@@ -114,7 +115,7 @@
       <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
    </sbol:Component>
    <sbol:Component rdf:about="LacI_protein">
-      <sbol:type rdf:resource="https://identifiers.org/SBO:SBO:0000252"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
       <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
       <sbol:name>LacI</sbol:name>
       <sbol:displayId>LacI_protein</sbol:displayId>
@@ -200,7 +201,6 @@
          </sbol:Constraint>
       </sbol:hasConstraint>
       <sbol:description>Toggle Switch genetic circuit</sbol:description>
-      <sbol:type rdf:resource="https://identifiers.org/SBO:SBO:0000241"/>
       <sbol:hasConstraint>
          <sbol:Constraint rdf:about="toggle_switch/constraint_1">
             <sbol:subject rdf:resource="toggle_switch/LacI_protein"/>
@@ -209,6 +209,7 @@
          </sbol:Constraint>
       </sbol:hasConstraint>
       <sbol:name>Toggle Switch</sbol:name>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
       <sbol:hasFeature rdf:resource="toggle_switch/TetR_protein"/>
    </sbol:Component>
    <sbol:Component rdf:about="ter_tetR">
@@ -240,7 +241,7 @@
       <sbol:description>LacI repressible promoter</sbol:description>
    </sbol:Component>
    <sbol:Component rdf:about="TetR_protein">
-      <sbol:type rdf:resource="https://identifiers.org/SBO:SBO:0000252"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
       <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
       <sbol:name>TetR</sbol:name>
       <sbol:displayId>TetR_protein</sbol:displayId>
