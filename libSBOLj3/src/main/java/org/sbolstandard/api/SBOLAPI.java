@@ -11,6 +11,7 @@ import javax.annotation.Generated;
 
 import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.ComponentReference;
+import org.sbolstandard.entity.Constraint;
 import org.sbolstandard.entity.Feature;
 import org.sbolstandard.entity.Identified;
 import org.sbolstandard.entity.Interaction;
@@ -24,6 +25,7 @@ import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ComponentType;
 import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.Encoding;
+import org.sbolstandard.vocabulary.InteractionType;
 import org.sbolstandard.vocabulary.Orientation;
 import org.sbolstandard.vocabulary.RestrictionType;
 
@@ -45,15 +47,39 @@ public class SBOLAPI {
 	    	}
 	    	return interactions;
 	    }
+	
+	 /* public static List<Interaction> createNonCovalentBindingInteraction(Component container, List<Component> reactants, List<Component> products)
+	  {
+		  	List<SubComponent> reactantSubComponents=new ArrayList<SubComponent>();
+		  	if (reactants!=null)
+		  	{
+		  		for (Component component:reactants)
+		  		{
+		  			
+		  		}
+		  	}
+		  	String localName=createLocalName(DataModel.Interaction.uri, container.getInteractions()); 
+	    	Interaction interaction= container.createInteraction(append(container.getUri(), localName), Arrays.asList(InteractionType.NonCovalentBinding));
+	    	
+	    	createParticipation(interaction, participant1Roles, participant1);
+	    	createParticipation(interaction, participant2Roles, participant2);
+	    	return interaction;
+		  
+	  }*/
+      
 	  
 	  	private static List<SubComponent> createSubComponents (Component parent, Component child) throws SBOLGraphException 
 	  	{
 	    	List<SubComponent> subComponents=getSubComponents(parent, child);
 	    	//If not DNA and there is no subComponent yet, add a subcomponent for the child
-	    	if (subComponents.size()==0 && !child.getTypes().contains(ComponentType.DNA.getUrl()))
+	    	if ((subComponents==null || subComponents.size()==0) && !child.getTypes().contains(ComponentType.DNA.getUrl()))
 	    	{
 	    		String localName=createLocalName(DataModel.SubComponent.uri, parent.getSubComponents());
 		    	SubComponent subComponent=parent.createSubComponent(append(parent.getUri(), localName), child.getUri());
+		    	if (subComponents==null)
+		    	{
+		    		subComponents=new ArrayList<SubComponent>();
+		    	}
 		    	subComponents.add(subComponent);
 	    	}
 	    	return subComponents;
@@ -61,14 +87,21 @@ public class SBOLAPI {
 	    
 	    public static List<SubComponent> getSubComponents(Component parent, Component child) throws SBOLGraphException
 	    {
-	    	List<SubComponent> found= new ArrayList<SubComponent>();
+	    	List<SubComponent> found= null;
 	    	List<SubComponent> features=parent.getSubComponents();
-	    	for (SubComponent feature: features)
-	    	{
-	    		if (feature.getIsInstanceOf().equals(child.getUri()))
-	    		{
-	    			found.add(feature);
-	    		}
+	    	if (features!=null)
+		    {
+		    	for (SubComponent feature: features)
+		    	{
+		    		if (feature.getIsInstanceOf().equals(child.getUri()))
+		    		{
+		    			if (found==null)
+		    			{
+		    				found= new ArrayList<SubComponent>();
+		    			}
+		    			found.add(feature);
+		    		}
+		    	}
 	    	}
 	    	return found;
 	    }
@@ -235,7 +268,7 @@ public class SBOLAPI {
 	    	return identified.getDisplayId();
 	    }
 	    
-	    public static SubComponent addSubComponent(SBOLDocument doc, Component parent, Component child) throws SBOLGraphException
+	    public static SubComponent addSubComponent(Component parent, Component child) throws SBOLGraphException
 	    {
 	    	SubComponent subComponent=parent.createSubComponent(append(parent.getUri(), getDisplayId(child)),  child.getUri());
 	    	return subComponent;
@@ -308,7 +341,7 @@ public class SBOLAPI {
 	    	identified.setDescription(description);
 	    }
 	    
-	    public static void mapTo(SubComponent subComponentInContainer,Component container, Component parent, Component child) throws SBOLGraphException
+	    /*public static void mapTo(SubComponent subComponentInContainer,Component container, Component parent, Component child) throws SBOLGraphException
 		{
 			 List<ComponentReference> childReferences=createComponentReference(container, parent, child);
 			 if (childReferences!=null)
@@ -319,9 +352,61 @@ public class SBOLAPI {
 					 container.createConstraint(SBOLAPI.append(container.getUri(), localName), RestrictionType.Identity.verifyIdentical, subComponentInContainer.getUri(), compRef.getUri());
 				 } 
 			 }
-		}
+		}*/
+	    
+	    public static void mapTo(Component container, Component parent1, Component child1, Component parent2, Component child2) throws SBOLGraphException
+	    {
+	    	 List<ComponentReference> childReferences1=createComponentReference(container, parent1, child1);
+	    	 List<ComponentReference> childReferences2=createComponentReference(container, parent2, child2);
+	    	 if (childReferences1!=null && childReferences2!=null)
+			 {
+				 for (ComponentReference compRef1: childReferences1)
+				 {
+					 for (ComponentReference compRef2: childReferences2)
+					 {
+						 String localName=SBOLAPI.createLocalName(DataModel.Constraint.uri, container.getConstraints());
+						 container.createConstraint(SBOLAPI.append(container.getUri(), localName), RestrictionType.Identity.verifyIdentical, compRef1.getUri(), compRef2.getUri());
+					 }
+				 } 
+			 }	 
+				
+	    }
+	    
+	   /* private static <T extends Feature> void createConstraint(Component container, List<T> subjects, List<T> objects) throws SBOLGraphException
+	    {
+	    	if (subjects!=null && objects!=null){
+		    	for (Feature compRef1: subjects)
+				 {
+					 for (Feature compRef2: objects)
+					 {
+						 String localName=SBOLAPI.createLocalName(DataModel.Constraint.uri, container.getConstraints());
+						 container.createConstraint(SBOLAPI.append(container.getUri(), localName), RestrictionType.Identity.verifyIdentical, compRef1.getUri(), compRef2.getUri());
+					 }
+				 } 
+			 }
+	    }*/
+	    
+	    public static void mapTo(Component container, Component parent1, Component child1, Component containerChild) throws SBOLGraphException
+	    {
+	    	 List<ComponentReference> childReferences1=createComponentReference(container, parent1, child1);
+	    	 List<SubComponent> childReferences2=getSubComponents(container, containerChild);
+	    	 //createConstraint(containerChild, childReferences1, childReferences2);
+	    	 if (childReferences1!=null && childReferences2!=null)
+			 {
+				 for (ComponentReference compRef1: childReferences1)
+				 {
+					 for (SubComponent compRef2: childReferences2)
+					 {
+						 String localName=SBOLAPI.createLocalName(DataModel.Constraint.uri, container.getConstraints());
+						 container.createConstraint(SBOLAPI.append(container.getUri(), localName), RestrictionType.Identity.verifyIdentical, compRef1.getUri(), compRef2.getUri());
+					 }
+				 } 
+			 }	 
+				
+	    }
+	      
 		
-	    public static  List<ComponentReference> createComponentReference(Component container, Component parent, Component child) throws SBOLGraphException
+	    public static  List<ComponentReference> createComponentReference2(Component container, Component parent, Component child) throws SBOLGraphException
 		{
 			List<ComponentReference> componentReferences=null;
 			List<SubComponent> subComponents=getSubComponents(parent, child);
@@ -330,7 +415,7 @@ public class SBOLAPI {
 				for (SubComponent subComponent:subComponents)
 				{
 					String localName=SBOLAPI.createLocalName(DataModel.ComponentReference.uri, container.getComponentReferences());
-					ComponentReference compRef=container.createComponentReference(SBOLAPI.append(container.getUri(),localName), subComponent.getUri(), child.getUri());
+					ComponentReference compRef=container.createComponentReference(SBOLAPI.append(container.getUri(),localName), child.getUri(), subComponent.getUri());
 			        if (componentReferences==null)
 			        {
 			        	componentReferences=new ArrayList<ComponentReference>();
@@ -340,7 +425,57 @@ public class SBOLAPI {
 			}
 			return componentReferences;
 		}
+	    
+	    public static  List<ComponentReference> createComponentReference(Component container, Component parent, Component child) throws SBOLGraphException
+	  		{
+	  			List<ComponentReference> componentReferences=null;
+	  			List<SubComponent> subComponentsInContainer=getSubComponents(container, parent);
+	  			List<SubComponent> subComponentsInParent=getSubComponents(parent, child);
+	  				  			
+	  			if (subComponentsInContainer!=null && subComponentsInParent!=null)
+	  			{
+	  				for (SubComponent subComponentInContainer:subComponentsInContainer)
+	  				{
+	  					for (SubComponent subComponentInParent:subComponentsInParent)
+	  					{	
+		  					String localName=SBOLAPI.createLocalName(DataModel.ComponentReference.uri, container.getComponentReferences());
+		  					ComponentReference compRef=container.createComponentReference(SBOLAPI.append(container.getUri(),localName), subComponentInParent.getUri(), subComponentInContainer.getUri());
+		  			        if (componentReferences==null)
+		  			        {
+		  			        	componentReferences=new ArrayList<ComponentReference>();
+		  			        }
+		  			        componentReferences.add(compRef);
+	  					}
+	  				}
+	  			}
+	  			return componentReferences;
+	  		}
 		
+	    public static List<Constraint> createConstraint(Component container, Component component1, Component component2, URI restriction) throws SBOLGraphException
+	    {
+	    	List<Constraint> result=null;
+	    	List<SubComponent> subComponents1=createSubComponents(container, component1);
+	    	List<SubComponent> subComponents2=createSubComponents(container, component2);
+	    	
+	    	if (subComponents1!=null && subComponents2!=null)
+	    	{
+	    		for (SubComponent subComponent1:subComponents1)
+	    		{
+	    			for (SubComponent subComponent2:subComponents2)
+		    		{	
+	    				String localName=SBOLAPI.createLocalName(DataModel.Constraint.uri, container.getConstraints());
+	    		        Constraint constraint=container.createConstraint(SBOLAPI.append(container.getUri(), localName), RestrictionType.Topology.contains, subComponent1.getUri(), subComponent2.getUri());
+	    		        if (result==null)
+	    		        {
+	    		        	result=new ArrayList<Constraint>();
+	    		        }
+	    		        result.add(constraint);
+		    		}
+	    		}
+	    	}
+	    	return result;
+	    }
+	    
 		/*private static List<URI> getSubComponent(Component parent, Component child) throws SBOLGraphException
 		{
 			List<URI> result=null;

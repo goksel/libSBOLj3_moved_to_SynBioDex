@@ -9,7 +9,9 @@ public enum ComponentType
 	 	Protein(URINameSpace.SBO.local("0000252")),
 	 	SimpleChemical(URINameSpace.SBO.local("0000247")),
 	 	NoncovalentComplex(URINameSpace.SBO.local("0000253")),
-	 	FunctionalEntity(URINameSpace.SBO.local("0000241"));
+	 	FunctionalEntity(URINameSpace.SBO.local("0000241")),
+		Cell(URINameSpace.GO.local("0005623"));
+	
 	 
 	    private URI url;
 	 

@@ -18,6 +18,10 @@ public class Role {
 		public static URI mRNA = URINameSpace.SO.local("0000234");
 		public static URI Effector = URINameSpace.CHEBI.local("35224");
 		public static URI TF = URINameSpace.GO.local("0003700");
+		public static URI FunctionalCompartment = URINameSpace.SBO.local("0000289");
+		public static URI PhysicalCompartment = URINameSpace.SBO.local("0000290");
+		
+		
 		
 }
 

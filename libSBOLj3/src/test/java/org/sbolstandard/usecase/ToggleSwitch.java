@@ -48,12 +48,12 @@ public class ToggleSwitch extends TestCase {
         SBOLAPI.appendComponent(doc, TetRProducer,rbs_tetR);
         SBOLAPI.appendComponent(doc, TetRProducer,tetR);
         SBOLAPI.appendComponent(doc, TetRProducer,ter_tetR);
-        SBOLAPI.addSubComponent(doc, TetRProducer, TetR_protein);
-        SBOLAPI.addSubComponent(doc, TetRProducer, LacI_protein);
+        SBOLAPI.addSubComponent(TetRProducer, TetR_protein);
+        SBOLAPI.addSubComponent(TetRProducer, LacI_protein);
         
         
         SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),TetRProducer, tetR, Arrays.asList(ParticipationRole.Template), TetR_protein, Arrays.asList(ParticipationRole.Product));  
-        SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation),TetRProducer, pLacI, Arrays.asList(ParticipationRole.Stimulated), LacI_protein, Arrays.asList(ParticipationRole.Stimulator));
+        SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation),TetRProducer, pLacI, Arrays.asList(ParticipationRole.Inhibited), LacI_protein, Arrays.asList(ParticipationRole.Modifier));
         
        
         //LacI producer
@@ -68,25 +68,33 @@ public class ToggleSwitch extends TestCase {
         SBOLAPI.appendComponent(doc, LacIProducer,rbs_lacI);
         SBOLAPI.appendComponent(doc, LacIProducer,lacI);
         SBOLAPI.appendComponent(doc, LacIProducer,ter_lacI);
-        SBOLAPI.addSubComponent(doc, LacIProducer, LacI_protein);
-        SBOLAPI.addSubComponent(doc, LacIProducer, TetR_protein);
+        SBOLAPI.addSubComponent (LacIProducer, LacI_protein);
+        SBOLAPI.addSubComponent(LacIProducer, TetR_protein);
         
         
         SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),LacIProducer, lacI, Arrays.asList(ParticipationRole.Template), LacI_protein, Arrays.asList(ParticipationRole.Product));  
-        SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation),LacIProducer, pTetR, Arrays.asList(ParticipationRole.Stimulated), TetR_protein, Arrays.asList(ParticipationRole.Stimulator));
+        SBOLAPI.createInteraction(Arrays.asList(InteractionType.Inhibition),LacIProducer, pTetR, Arrays.asList(ParticipationRole.Inhibited), TetR_protein, Arrays.asList(ParticipationRole.Modifier));
         
         
         //Toggle Switch
         Component toggleSwitch=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "toggle_switch"), ComponentType.FunctionalEntity.getUrl(), "Toggle Switch", "toggle_switch", "Toggle Switch genetic circuit", null);
-        SubComponent TetRSubComponent=SBOLAPI.addSubComponent(doc, toggleSwitch, TetR_protein);
-        SubComponent LacISubComponent=SBOLAPI.addSubComponent(doc, toggleSwitch, LacI_protein);
+       
+        /*SubComponent TetRSubComponent=SBOLAPI.addSubComponent(toggleSwitch, TetR_protein);
+        SubComponent LacISubComponent=SBOLAPI.addSubComponent(toggleSwitch, LacI_protein);
         
         
         SBOLAPI.mapTo(LacISubComponent, toggleSwitch, LacIProducer, LacI_protein);
         SBOLAPI.mapTo(LacISubComponent, toggleSwitch, TetRProducer, LacI_protein);
         SBOLAPI.mapTo(TetRSubComponent, toggleSwitch, LacIProducer, TetR_protein);
         SBOLAPI.mapTo(TetRSubComponent, toggleSwitch, TetRProducer, TetR_protein);
+        */
+        SBOLAPI.addSubComponent(toggleSwitch, LacIProducer);
+        SBOLAPI.addSubComponent(toggleSwitch, TetRProducer);
         
+        SBOLAPI.mapTo(toggleSwitch, LacIProducer, LacI_protein, TetRProducer,LacI_protein);
+        SBOLAPI.mapTo(toggleSwitch, LacIProducer, TetR_protein, TetRProducer,TetR_protein);
+        
+      
         
         String output=SBOLWriter.write(doc, "Turtle");
         System.out.print(output);
@@ -95,7 +103,7 @@ public class ToggleSwitch extends TestCase {
         output=SBOLWriter.write(doc2, "RDF/XML-ABBREV");
         System.out.print(output);
         
-        TestUtil.serialise(doc2, "usecase/toggle_switch", "toggle_switch");     
+        TestUtil.serialise(doc2, "toggle_switch", "toggle_switch");     
         System.out.println("done");   
     }
 	 

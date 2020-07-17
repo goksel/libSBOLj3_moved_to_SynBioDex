@@ -238,62 +238,50 @@
     "@type" : "sbol:Component",
     "description" : "Toggle Switch genetic circuit",
     "displayId" : "toggle_switch",
-    "hasConstraint" : [ "toggle_switch/constraint_3", "toggle_switch/constraint_4", "toggle_switch/constraint_2", "toggle_switch/constraint_1" ],
-    "hasFeature" : [ "toggle_switch/componentreference_4", "toggle_switch/componentreference_3", "toggle_switch/componentreference_2", "toggle_switch/LacI_protein", "toggle_switch/componentreference_1", "toggle_switch/TetR_protein" ],
+    "hasConstraint" : [ "toggle_switch/constraint_2", "toggle_switch/constraint_1" ],
+    "hasFeature" : [ "toggle_switch/componentreference_4", "toggle_switch/componentreference_3", "toggle_switch/LacI_producer", "toggle_switch/componentreference_2", "toggle_switch/componentreference_1", "toggle_switch/TetR_producer" ],
     "name" : "Toggle Switch",
     "type" : "SBO:0000241"
   }, {
-    "@id" : "toggle_switch/LacI_protein",
+    "@id" : "toggle_switch/LacI_producer",
     "@type" : "sbol:SubComponent",
-    "instanceOf" : "LacI_protein"
+    "instanceOf" : "LacI_producer"
   }, {
-    "@id" : "toggle_switch/TetR_protein",
+    "@id" : "toggle_switch/TetR_producer",
     "@type" : "sbol:SubComponent",
-    "instanceOf" : "TetR_protein"
+    "instanceOf" : "TetR_producer"
   }, {
     "@id" : "toggle_switch/componentreference_1",
     "@type" : "sbol:ComponentReference",
-    "feature" : "LacI_producer/LacI_protein",
-    "inChildOf" : "LacI_protein"
+    "hasFeature" : "LacI_producer/LacI_protein",
+    "inChildOf" : "toggle_switch/LacI_producer"
   }, {
     "@id" : "toggle_switch/componentreference_2",
     "@type" : "sbol:ComponentReference",
-    "feature" : "TetR_producer/LacI_protein",
-    "inChildOf" : "LacI_protein"
+    "hasFeature" : "TetR_producer/LacI_protein",
+    "inChildOf" : "toggle_switch/TetR_producer"
   }, {
     "@id" : "toggle_switch/componentreference_3",
     "@type" : "sbol:ComponentReference",
-    "feature" : "LacI_producer/TetR_protein",
-    "inChildOf" : "TetR_protein"
+    "hasFeature" : "LacI_producer/TetR_protein",
+    "inChildOf" : "toggle_switch/LacI_producer"
   }, {
     "@id" : "toggle_switch/componentreference_4",
     "@type" : "sbol:ComponentReference",
-    "feature" : "TetR_producer/TetR_protein",
-    "inChildOf" : "TetR_protein"
+    "hasFeature" : "TetR_producer/TetR_protein",
+    "inChildOf" : "toggle_switch/TetR_producer"
   }, {
     "@id" : "toggle_switch/constraint_1",
     "@type" : "sbol:Constraint",
-    "object" : "toggle_switch/componentreference_1",
+    "object" : "toggle_switch/componentreference_2",
     "restriction" : "sbol:verifyIdentical",
-    "subject" : "toggle_switch/LacI_protein"
+    "subject" : "toggle_switch/componentreference_1"
   }, {
     "@id" : "toggle_switch/constraint_2",
     "@type" : "sbol:Constraint",
-    "object" : "toggle_switch/componentreference_2",
-    "restriction" : "sbol:verifyIdentical",
-    "subject" : "toggle_switch/LacI_protein"
-  }, {
-    "@id" : "toggle_switch/constraint_3",
-    "@type" : "sbol:Constraint",
-    "object" : "toggle_switch/componentreference_3",
-    "restriction" : "sbol:verifyIdentical",
-    "subject" : "toggle_switch/TetR_protein"
-  }, {
-    "@id" : "toggle_switch/constraint_4",
-    "@type" : "sbol:Constraint",
     "object" : "toggle_switch/componentreference_4",
     "restriction" : "sbol:verifyIdentical",
-    "subject" : "toggle_switch/TetR_protein"
+    "subject" : "toggle_switch/componentreference_3"
   } ],
   "@context" : {
     "type" : {
@@ -329,28 +317,12 @@
       "@id" : "http://sbols.org/v3#inChildOf",
       "@type" : "@id"
     },
-    "feature" : {
-      "@id" : "http://sbols.org/v3#feature",
-      "@type" : "@id"
-    },
-    "subject" : {
-      "@id" : "http://sbols.org/v3#subject",
-      "@type" : "@id"
-    },
-    "restriction" : {
-      "@id" : "http://sbols.org/v3#restriction",
-      "@type" : "@id"
-    },
-    "object" : {
-      "@id" : "http://sbols.org/v3#object",
+    "hasFeature" : {
+      "@id" : "http://sbols.org/v3#hasFeature",
       "@type" : "@id"
     },
     "participant" : {
       "@id" : "http://sbols.org/v3#participant",
-      "@type" : "@id"
-    },
-    "hasFeature" : {
-      "@id" : "http://sbols.org/v3#hasFeature",
       "@type" : "@id"
     },
     "hasConstraint" : {
@@ -371,6 +343,18 @@
     },
     "elements" : {
       "@id" : "http://sbols.org/v3#elements"
+    },
+    "subject" : {
+      "@id" : "http://sbols.org/v3#subject",
+      "@type" : "@id"
+    },
+    "restriction" : {
+      "@id" : "http://sbols.org/v3#restriction",
+      "@type" : "@id"
+    },
+    "object" : {
+      "@id" : "http://sbols.org/v3#object",
+      "@type" : "@id"
     },
     "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",

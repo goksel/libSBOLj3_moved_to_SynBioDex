@@ -132,85 +132,67 @@
       <sbol:hasFeature>
          <sbol:ComponentReference rdf:about="toggle_switch/componentreference_4">
             <sbol:inChildOf>
-               <sbol:Component rdf:about="TetR_protein"/>
+               <sbol:SubComponent rdf:about="toggle_switch/TetR_producer">
+                  <sbol:instanceOf rdf:resource="TetR_producer"/>
+               </sbol:SubComponent>
             </sbol:inChildOf>
-            <sbol:feature rdf:resource="TetR_producer/TetR_protein"/>
+            <sbol:hasFeature rdf:resource="TetR_producer/TetR_protein"/>
          </sbol:ComponentReference>
       </sbol:hasFeature>
-      <sbol:hasConstraint>
-         <sbol:Constraint rdf:about="toggle_switch/constraint_3">
-            <sbol:subject>
-               <sbol:SubComponent rdf:about="toggle_switch/TetR_protein">
+      <sbol:hasFeature>
+         <sbol:ComponentReference rdf:about="toggle_switch/componentreference_3">
+            <sbol:inChildOf>
+               <sbol:SubComponent rdf:about="toggle_switch/LacI_producer">
+                  <sbol:instanceOf>
+                     <sbol:Component rdf:about="LacI_producer"/>
+                  </sbol:instanceOf>
+               </sbol:SubComponent>
+            </sbol:inChildOf>
+            <sbol:hasFeature>
+               <sbol:SubComponent rdf:about="LacI_producer/TetR_protein">
                   <sbol:instanceOf>
                      <sbol:Component rdf:about="TetR_protein"/>
                   </sbol:instanceOf>
                </sbol:SubComponent>
-            </sbol:subject>
-            <sbol:restriction rdf:resource="http://sbols.org/v3#verifyIdentical"/>
-            <sbol:object>
-               <sbol:ComponentReference rdf:about="toggle_switch/componentreference_3">
-                  <sbol:inChildOf>
-                     <sbol:Component rdf:about="TetR_protein"/>
-                  </sbol:inChildOf>
-                  <sbol:feature>
-                     <sbol:SubComponent rdf:about="LacI_producer/TetR_protein">
-                        <sbol:instanceOf>
-                           <sbol:Component rdf:about="TetR_protein"/>
-                        </sbol:instanceOf>
-                     </sbol:SubComponent>
-                  </sbol:feature>
-               </sbol:ComponentReference>
-            </sbol:object>
-         </sbol:Constraint>
-      </sbol:hasConstraint>
-      <sbol:hasFeature rdf:resource="toggle_switch/componentreference_3"/>
-      <sbol:hasFeature>
-         <sbol:ComponentReference rdf:about="toggle_switch/componentreference_2">
-            <sbol:inChildOf rdf:resource="LacI_protein"/>
-            <sbol:feature rdf:resource="TetR_producer/LacI_protein"/>
+            </sbol:hasFeature>
          </sbol:ComponentReference>
       </sbol:hasFeature>
-      <sbol:hasConstraint>
-         <sbol:Constraint rdf:about="toggle_switch/constraint_4">
-            <sbol:subject rdf:resource="toggle_switch/TetR_protein"/>
-            <sbol:restriction rdf:resource="http://sbols.org/v3#verifyIdentical"/>
-            <sbol:object rdf:resource="toggle_switch/componentreference_4"/>
-         </sbol:Constraint>
-      </sbol:hasConstraint>
+      <sbol:hasFeature rdf:resource="toggle_switch/LacI_producer"/>
       <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="toggle_switch/LacI_protein">
-            <sbol:instanceOf rdf:resource="LacI_protein"/>
-         </sbol:SubComponent>
+         <sbol:ComponentReference rdf:about="toggle_switch/componentreference_2">
+            <sbol:inChildOf rdf:resource="toggle_switch/TetR_producer"/>
+            <sbol:hasFeature rdf:resource="TetR_producer/LacI_protein"/>
+         </sbol:ComponentReference>
       </sbol:hasFeature>
       <sbol:hasFeature>
          <sbol:ComponentReference rdf:about="toggle_switch/componentreference_1">
-            <sbol:inChildOf rdf:resource="LacI_protein"/>
-            <sbol:feature>
+            <sbol:inChildOf rdf:resource="toggle_switch/LacI_producer"/>
+            <sbol:hasFeature>
                <sbol:SubComponent rdf:about="LacI_producer/LacI_protein">
                   <sbol:instanceOf rdf:resource="LacI_protein"/>
                </sbol:SubComponent>
-            </sbol:feature>
+            </sbol:hasFeature>
          </sbol:ComponentReference>
       </sbol:hasFeature>
       <sbol:displayId>toggle_switch</sbol:displayId>
       <sbol:hasConstraint>
          <sbol:Constraint rdf:about="toggle_switch/constraint_2">
-            <sbol:subject rdf:resource="toggle_switch/LacI_protein"/>
+            <sbol:subject rdf:resource="toggle_switch/componentreference_3"/>
             <sbol:restriction rdf:resource="http://sbols.org/v3#verifyIdentical"/>
-            <sbol:object rdf:resource="toggle_switch/componentreference_2"/>
+            <sbol:object rdf:resource="toggle_switch/componentreference_4"/>
          </sbol:Constraint>
       </sbol:hasConstraint>
       <sbol:description>Toggle Switch genetic circuit</sbol:description>
       <sbol:hasConstraint>
          <sbol:Constraint rdf:about="toggle_switch/constraint_1">
-            <sbol:subject rdf:resource="toggle_switch/LacI_protein"/>
+            <sbol:subject rdf:resource="toggle_switch/componentreference_1"/>
             <sbol:restriction rdf:resource="http://sbols.org/v3#verifyIdentical"/>
-            <sbol:object rdf:resource="toggle_switch/componentreference_1"/>
+            <sbol:object rdf:resource="toggle_switch/componentreference_2"/>
          </sbol:Constraint>
       </sbol:hasConstraint>
       <sbol:name>Toggle Switch</sbol:name>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
-      <sbol:hasFeature rdf:resource="toggle_switch/TetR_protein"/>
+      <sbol:hasFeature rdf:resource="toggle_switch/TetR_producer"/>
    </sbol:Component>
    <sbol:Component rdf:about="ter_tetR">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>

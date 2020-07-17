@@ -27,14 +27,14 @@ public class ComponentReference extends Feature{
 	public URI getFeature() {
 		if (this.feature==null)
 		{
-			this.feature=RDFUtil.getPropertyAsURI(this.resource, DataModel.ComponentReference.hasFeature);
+			this.feature=RDFUtil.getPropertyAsURI(this.resource, DataModel.ComponentReference.feature);
 		}
 		return this.feature;
 	}
 	
 	public void setFeature(URI feature) {
 		this.feature = feature;
-		RDFUtil.setProperty(this.resource, DataModel.ComponentReference.hasFeature, this.feature);
+		RDFUtil.setProperty(this.resource, DataModel.ComponentReference.feature, this.feature);
 	}
 
 	

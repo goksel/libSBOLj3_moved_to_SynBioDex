@@ -29,9 +29,9 @@ public class InterfaceTest extends TestCase {
         Component LacIProducer=SBOLAPI.createDnaComponent(doc, "LacI_producer", "LacI producer", Role.EngineeredGene, null); 
         
         
-        SubComponent lacISubComponent=SBOLAPI.addSubComponent(doc, LacIProducer, LacI_protein);
-        SubComponent tetRSubComponent=SBOLAPI.addSubComponent(doc, LacIProducer, TetR_protein);
-        SubComponent aTCSubComponent=SBOLAPI.addSubComponent(doc, LacIProducer, aTC);
+        SubComponent lacISubComponent=SBOLAPI.addSubComponent(LacIProducer, LacI_protein);
+        SubComponent tetRSubComponent=SBOLAPI.addSubComponent(LacIProducer, TetR_protein);
+        SubComponent aTCSubComponent=SBOLAPI.addSubComponent(LacIProducer, aTC);
         
         URI uri=SBOLAPI.append(LacIProducer.getUri(),"interface");
         Interface compInterface=LacIProducer.createInterface(uri);
