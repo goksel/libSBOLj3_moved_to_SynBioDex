@@ -36,14 +36,16 @@ public class SBOLAPI {
 	    	List<Interaction> interactions=new ArrayList<Interaction>();
 	    	List<SubComponent> features1=createSubComponents(parent, participant1);
 	    	List<SubComponent> features2=createSubComponents(parent, participant2);
-	    	
-	    	for (Feature feature1: features1)
+	    	if (features1!=null && features2!=null)
 	    	{
-	    		for (Feature feature2: features2)
-	    		{
-	    			Interaction interaction=createInteraction(interactionTypes, parent, feature1, participant1Roles, feature2, participant2Roles);	
-	    			interactions.add(interaction);
-	    		}
+		    	for (Feature feature1: features1)
+		    	{
+		    		for (Feature feature2: features2)
+		    		{
+		    			Interaction interaction=createInteraction(interactionTypes, parent, feature1, participant1Roles, feature2, participant2Roles);	
+		    			interactions.add(interaction);
+		    		}
+		    	}
 	    	}
 	    	return interactions;
 	    }

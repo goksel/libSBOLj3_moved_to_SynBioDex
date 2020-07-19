@@ -146,17 +146,17 @@
     "@id" : "AHL_receiver/interaction_4/participation_1",
     "@type" : "sbol:Participation",
     "participant" : "AHL_receiver/LuxR_protein",
-    "role" : "SBO:0000011"
+    "role" : "SBO:0000010"
   }, {
     "@id" : "AHL_receiver/interaction_4/participation_2",
     "@type" : "sbol:Participation",
     "participant" : "AHL_receiver/AHL",
-    "role" : "SBO:0000011"
+    "role" : "SBO:0000010"
   }, {
     "@id" : "AHL_receiver/interaction_4/participation_3",
     "@type" : "sbol:Participation",
     "participant" : "AHL_receiver/LuxR_AHL",
-    "role" : "SBO:0000010"
+    "role" : "SBO:0000011"
   }, {
     "@id" : "AHL_receiver/sequence_1",
     "@type" : "sbol:Sequence",

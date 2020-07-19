@@ -21,6 +21,19 @@
       <sbol:displayId>tetR</sbol:displayId>
       <sbol:description>tetR coding sequence</sbol:description>
    </sbol:Component>
+   <sbol:Component rdf:about="IPTG">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000247"/>
+      <sbol:role rdf:resource="https://identifiers.org/CHEBI:35224"/>
+      <sbol:name>IPTG</sbol:name>
+      <sbol:displayId>IPTG</sbol:displayId>
+      <sbol:description>IPTG</sbol:description>
+   </sbol:Component>
+   <sbol:Component rdf:about="GFP_protein">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
+      <sbol:name>GFP</sbol:name>
+      <sbol:displayId>GFP</sbol:displayId>
+      <sbol:description>GFP</sbol:description>
+   </sbol:Component>
    <sbol:Component rdf:about="ter_lacI">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000141"/>
@@ -29,12 +42,52 @@
       <sbol:description>Terminator</sbol:description>
    </sbol:Component>
    <sbol:Component rdf:about="TetR_producer">
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="TetR_producer/interaction_3">
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000177"/>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="TetR_producer/interaction_3/participation_1">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000010"/>
+                  <sbol:participant>
+                     <sbol:SubComponent rdf:about="TetR_producer/LacI_protein">
+                        <sbol:instanceOf>
+                           <sbol:Component rdf:about="LacI_protein"/>
+                        </sbol:instanceOf>
+                     </sbol:SubComponent>
+                  </sbol:participant>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="TetR_producer/interaction_3/participation_2">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000010"/>
+                  <sbol:participant>
+                     <sbol:SubComponent rdf:about="TetR_producer/IPTG">
+                        <sbol:instanceOf rdf:resource="IPTG"/>
+                     </sbol:SubComponent>
+                  </sbol:participant>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="TetR_producer/interaction_3/participation_3">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
+                  <sbol:participant>
+                     <sbol:SubComponent rdf:about="TetR_producer/IPTG_LacI">
+                        <sbol:instanceOf>
+                           <sbol:Component rdf:about="IPTG_LacI"/>
+                        </sbol:instanceOf>
+                     </sbol:SubComponent>
+                  </sbol:participant>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="TetR_producer/subcomponent_3">
             <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
             <sbol:instanceOf rdf:resource="tetR"/>
          </sbol:SubComponent>
       </sbol:hasFeature>
+      <sbol:hasFeature rdf:resource="TetR_producer/IPTG"/>
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="TetR_producer/subcomponent_1">
             <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
@@ -48,6 +101,13 @@
          <sbol:Sequence rdf:about="TetR_producer/sequence_1"/>
       </sbol:hasSequence>
       <sbol:displayId>TetR_producer</sbol:displayId>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="TetR_producer/atC_TetR">
+            <sbol:instanceOf>
+               <sbol:Component rdf:about="atC_TetR"/>
+            </sbol:instanceOf>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="TetR_producer/subcomponent_4">
             <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
@@ -85,25 +145,19 @@
             <sbol:instanceOf rdf:resource="rbs_tetR"/>
          </sbol:SubComponent>
       </sbol:hasFeature>
-      <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="TetR_producer/LacI_protein">
-            <sbol:instanceOf>
-               <sbol:Component rdf:about="LacI_protein"/>
-            </sbol:instanceOf>
-         </sbol:SubComponent>
-      </sbol:hasFeature>
+      <sbol:hasFeature rdf:resource="TetR_producer/LacI_protein"/>
       <sbol:hasInteraction>
          <sbol:Interaction rdf:about="TetR_producer/interaction_2">
-            <sbol:type rdf:resource="https://identifiers.org/SBO:0000170"/>
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000169"/>
             <sbol:hasParticipation>
                <sbol:Participation rdf:about="TetR_producer/interaction_2/participation_1">
-                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000643"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000642"/>
                   <sbol:participant rdf:resource="TetR_producer/subcomponent_1"/>
                </sbol:Participation>
             </sbol:hasParticipation>
             <sbol:hasParticipation>
                <sbol:Participation rdf:about="TetR_producer/interaction_2/participation_2">
-                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000459"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000019"/>
                   <sbol:participant rdf:resource="TetR_producer/LacI_protein"/>
                </sbol:Participation>
             </sbol:hasParticipation>
@@ -111,8 +165,16 @@
       </sbol:hasInteraction>
       <sbol:description>TetR producer</sbol:description>
       <sbol:hasFeature rdf:resource="TetR_producer/TetR_protein"/>
+      <sbol:hasFeature rdf:resource="TetR_producer/IPTG_LacI"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
+   </sbol:Component>
+   <sbol:Component rdf:about="rbs_gfp">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000139"/>
+      <sbol:name>rbs_gfp</sbol:name>
+      <sbol:displayId>rbs_gfp</sbol:displayId>
+      <sbol:description>RBS</sbol:description>
    </sbol:Component>
    <sbol:Component rdf:about="LacI_protein">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
@@ -120,6 +182,19 @@
       <sbol:name>LacI</sbol:name>
       <sbol:displayId>LacI_protein</sbol:displayId>
       <sbol:description>LacI protein</sbol:description>
+   </sbol:Component>
+   <sbol:Component rdf:about="atC_TetR">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000253"/>
+      <sbol:name>atC_TetR</sbol:name>
+      <sbol:displayId>atC_TetR</sbol:displayId>
+      <sbol:description>atC_TetR complex</sbol:description>
+   </sbol:Component>
+   <sbol:Component rdf:about="aTC">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000247"/>
+      <sbol:role rdf:resource="https://identifiers.org/CHEBI:35224"/>
+      <sbol:name>aTC</sbol:name>
+      <sbol:displayId>aTC</sbol:displayId>
+      <sbol:description>aTC</sbol:description>
    </sbol:Component>
    <sbol:Component rdf:about="pTetR">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
@@ -237,8 +312,41 @@
          </sbol:SubComponent>
       </sbol:hasFeature>
       <sbol:hasFeature rdf:resource="LacI_producer/TetR_protein"/>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="LacI_producer/subcomponent_6">
+            <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+            <sbol:instanceOf rdf:resource="ter_lacI"/>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
       <sbol:name>LacI_producer</sbol:name>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="LacI_producer/GFP">
+            <sbol:instanceOf rdf:resource="GFP_protein"/>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
       <sbol:description>LacI producer</sbol:description>
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="LacI_producer/interaction_3">
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000169"/>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="LacI_producer/interaction_3/participation_1">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000642"/>
+                  <sbol:participant>
+                     <sbol:SubComponent rdf:about="LacI_producer/subcomponent_1">
+                        <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+                        <sbol:instanceOf rdf:resource="pTetR"/>
+                     </sbol:SubComponent>
+                  </sbol:participant>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="LacI_producer/interaction_3/participation_2">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000019"/>
+                  <sbol:participant rdf:resource="LacI_producer/TetR_protein"/>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="LacI_producer/subcomponent_2">
             <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
@@ -249,24 +357,54 @@
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="LacI_producer/sequence_1"/>
       </sbol:hasSequence>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="LacI_producer/subcomponent_5">
+            <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+            <sbol:instanceOf>
+               <sbol:Component rdf:about="gfp"/>
+            </sbol:instanceOf>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
       <sbol:hasInteraction>
-         <sbol:Interaction rdf:about="LacI_producer/interaction_2">
-            <sbol:type rdf:resource="https://identifiers.org/SBO:0000170"/>
+         <sbol:Interaction rdf:about="LacI_producer/interaction_4">
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000177"/>
             <sbol:hasParticipation>
-               <sbol:Participation rdf:about="LacI_producer/interaction_2/participation_1">
-                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000643"/>
+               <sbol:Participation rdf:about="LacI_producer/interaction_4/participation_1">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000010"/>
+                  <sbol:participant rdf:resource="LacI_producer/TetR_protein"/>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="LacI_producer/interaction_4/participation_2">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000010"/>
                   <sbol:participant>
-                     <sbol:SubComponent rdf:about="LacI_producer/subcomponent_1">
-                        <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
-                        <sbol:instanceOf rdf:resource="pTetR"/>
+                     <sbol:SubComponent rdf:about="LacI_producer/aTC">
+                        <sbol:instanceOf rdf:resource="aTC"/>
                      </sbol:SubComponent>
                   </sbol:participant>
                </sbol:Participation>
             </sbol:hasParticipation>
             <sbol:hasParticipation>
+               <sbol:Participation rdf:about="LacI_producer/interaction_4/participation_3">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
+                  <sbol:participant rdf:resource="TetR_producer/atC_TetR"/>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="LacI_producer/interaction_2">
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000589"/>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="LacI_producer/interaction_2/participation_1">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000645"/>
+                  <sbol:participant rdf:resource="LacI_producer/subcomponent_5"/>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
                <sbol:Participation rdf:about="LacI_producer/interaction_2/participation_2">
-                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000459"/>
-                  <sbol:participant rdf:resource="LacI_producer/TetR_protein"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
+                  <sbol:participant rdf:resource="LacI_producer/GFP"/>
                </sbol:Participation>
             </sbol:hasParticipation>
          </sbol:Interaction>
@@ -274,11 +412,12 @@
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="LacI_producer/subcomponent_4">
             <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
-            <sbol:instanceOf rdf:resource="ter_lacI"/>
+            <sbol:instanceOf rdf:resource="rbs_gfp"/>
          </sbol:SubComponent>
       </sbol:hasFeature>
-      <sbol:hasFeature rdf:resource="LacI_producer/LacI_protein"/>
       <sbol:hasFeature rdf:resource="LacI_producer/subcomponent_1"/>
+      <sbol:hasFeature rdf:resource="LacI_producer/LacI_protein"/>
+      <sbol:hasFeature rdf:resource="LacI_producer/aTC"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:hasInteraction>
@@ -298,6 +437,19 @@
             </sbol:hasParticipation>
          </sbol:Interaction>
       </sbol:hasInteraction>
+   </sbol:Component>
+   <sbol:Component rdf:about="gfp">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000316"/>
+      <sbol:name>gfp</sbol:name>
+      <sbol:displayId>gfp</sbol:displayId>
+      <sbol:description>gfp coding sequence</sbol:description>
+   </sbol:Component>
+   <sbol:Component rdf:about="IPTG_LacI">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000253"/>
+      <sbol:name>IPTG_LacI</sbol:name>
+      <sbol:displayId>IPTG_LacI</sbol:displayId>
+      <sbol:description>IPTG_LacI complex</sbol:description>
    </sbol:Component>
    <sbol:Sequence rdf:about="LacI_producer/sequence_1">
       <sbol:name>LacI_producer</sbol:name>

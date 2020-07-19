@@ -216,19 +216,19 @@
             <sbol:type rdf:resource="https://identifiers.org/SBO:0000177"/>
             <sbol:hasParticipation>
                <sbol:Participation rdf:about="AHL_receiver/interaction_4/participation_1">
-                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000010"/>
                   <sbol:participant rdf:resource="AHL_receiver/LuxR_protein"/>
                </sbol:Participation>
             </sbol:hasParticipation>
             <sbol:hasParticipation>
                <sbol:Participation rdf:about="AHL_receiver/interaction_4/participation_2">
-                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000010"/>
                   <sbol:participant rdf:resource="AHL_receiver/AHL"/>
                </sbol:Participation>
             </sbol:hasParticipation>
             <sbol:hasParticipation>
                <sbol:Participation rdf:about="AHL_receiver/interaction_4/participation_3">
-                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000010"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
                   <sbol:participant rdf:resource="AHL_receiver/LuxR_AHL"/>
                </sbol:Participation>
             </sbol:hasParticipation>

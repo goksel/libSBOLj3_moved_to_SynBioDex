@@ -182,7 +182,7 @@
 <AHL_receiver/interaction_4/participation_3>
         a                 sbol:Participation ;
         sbol:participant  <AHL_receiver/LuxR_AHL> ;
-        sbol:role         SBO:0000010 .
+        sbol:role         SBO:0000011 .
 
 <AHL_receiver/interaction_1/participation_1>
         a                 sbol:Participation ;
@@ -281,7 +281,7 @@
 <AHL_receiver/interaction_4/participation_2>
         a                 sbol:Participation ;
         sbol:participant  <AHL_receiver/AHL> ;
-        sbol:role         SBO:0000011 .
+        sbol:role         SBO:0000010 .
 
 :pLuxR  a                 sbol:Component ;
         sbol:description  "LuxR inducible promoter" ;
@@ -379,7 +379,7 @@
 <AHL_receiver/interaction_4/participation_1>
         a                 sbol:Participation ;
         sbol:participant  <AHL_receiver/LuxR_protein> ;
-        sbol:role         SBO:0000011 .
+        sbol:role         SBO:0000010 .
 
 :pConstLuxI  a            sbol:Component ;
         sbol:description  "Constituve promoter" ;

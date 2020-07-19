@@ -100,9 +100,9 @@ public class Multicellular extends TestCase {
     	//LuxR AHL binding
         String localName=SBOLAPI.createLocalName(DataModel.Interaction.uri, AHLReceiver.getInteractions()); 
     	Interaction interaction= AHLReceiver.createInteraction(SBOLAPI.append(AHLReceiver.getUri(), localName), Arrays.asList(InteractionType.NonCovalentBinding));
-    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Product), LuxRProteinSubComponent);
-    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Product), AHLSubComponent);
-    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Reactant), LuxRAHLSubComponent);
+    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Reactant), LuxRProteinSubComponent);
+    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Reactant), AHLSubComponent);
+    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Product), LuxRAHLSubComponent);
        
         
     	SBOLAPI.addSubComponent(senderSystem, AHLProducer);

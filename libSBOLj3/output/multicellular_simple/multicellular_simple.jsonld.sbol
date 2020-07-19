@@ -1,0 +1,163 @@
+{
+  "@graph" : [ {
+    "@id" : "AHL",
+    "@type" : "sbol:Component",
+    "description" : "AHL",
+    "displayId" : "AHL",
+    "name" : "AHL",
+    "role" : "CHEBI:35224",
+    "type" : "SBO:0000247"
+  }, {
+    "@id" : "MulticellularSystem",
+    "@type" : "sbol:Component",
+    "description" : "Multicellular System",
+    "displayId" : "MulticellularSystem",
+    "hasConstraint" : "MulticellularSystem/constraint_1",
+    "hasFeature" : [ "MulticellularSystem/ReceiverSystem", "MulticellularSystem/componentreference_1", "MulticellularSystem/SenderSystem", "MulticellularSystem/componentreference_2" ],
+    "name" : "MulticellularSystem",
+    "role" : "SBO:0000289",
+    "type" : "SBO:0000241"
+  }, {
+    "@id" : "MulticellularSystem/ReceiverSystem",
+    "@type" : "sbol:SubComponent",
+    "instanceOf" : "ReceiverSystem"
+  }, {
+    "@id" : "MulticellularSystem/SenderSystem",
+    "@type" : "sbol:SubComponent",
+    "instanceOf" : "SenderSystem"
+  }, {
+    "@id" : "MulticellularSystem/componentreference_1",
+    "@type" : "sbol:ComponentReference",
+    "hasFeature" : "SenderSystem/subcomponent_2",
+    "inChildOf" : "MulticellularSystem/SenderSystem"
+  }, {
+    "@id" : "MulticellularSystem/componentreference_2",
+    "@type" : "sbol:ComponentReference",
+    "hasFeature" : "ReceiverSystem/subcomponent_2",
+    "inChildOf" : "MulticellularSystem/ReceiverSystem"
+  }, {
+    "@id" : "MulticellularSystem/constraint_1",
+    "@type" : "sbol:Constraint",
+    "object" : "MulticellularSystem/componentreference_2",
+    "restriction" : "sbol:verifyIdentical",
+    "subject" : "MulticellularSystem/componentreference_1"
+  }, {
+    "@id" : "OrganismA",
+    "@type" : "sbol:Component",
+    "description" : "Organism A",
+    "displayId" : "OrganismA",
+    "name" : "OrganismA",
+    "role" : "SBO:0000290",
+    "type" : "GO:0005623"
+  }, {
+    "@id" : "OrganismB",
+    "@type" : "sbol:Component",
+    "description" : "Organism B",
+    "displayId" : "OrganismB",
+    "name" : "OrganismB",
+    "role" : "SBO:0000290",
+    "type" : "GO:0005623"
+  }, {
+    "@id" : "ReceiverSystem",
+    "@type" : "sbol:Component",
+    "description" : "Receiver System",
+    "displayId" : "ReceiverSystem",
+    "hasConstraint" : "ReceiverSystem/constraint_1",
+    "hasFeature" : [ "ReceiverSystem/subcomponent_1", "ReceiverSystem/subcomponent_2" ],
+    "name" : "ReceiverSystem",
+    "role" : "SBO:0000289",
+    "type" : "SBO:0000241"
+  }, {
+    "@id" : "ReceiverSystem/constraint_1",
+    "@type" : "sbol:Constraint",
+    "object" : "ReceiverSystem/subcomponent_2",
+    "restriction" : "sbol:contains",
+    "subject" : "ReceiverSystem/subcomponent_1"
+  }, {
+    "@id" : "ReceiverSystem/subcomponent_1",
+    "@type" : "sbol:SubComponent",
+    "instanceOf" : "OrganismB"
+  }, {
+    "@id" : "ReceiverSystem/subcomponent_2",
+    "@type" : "sbol:SubComponent",
+    "instanceOf" : "AHL"
+  }, {
+    "@id" : "SenderSystem",
+    "@type" : "sbol:Component",
+    "description" : "Sender System",
+    "displayId" : "SenderSystem",
+    "hasConstraint" : "SenderSystem/constraint_1",
+    "hasFeature" : [ "SenderSystem/subcomponent_1", "SenderSystem/subcomponent_2" ],
+    "name" : "SenderSystem",
+    "role" : "SBO:0000289",
+    "type" : "SBO:0000241"
+  }, {
+    "@id" : "SenderSystem/constraint_1",
+    "@type" : "sbol:Constraint",
+    "object" : "SenderSystem/subcomponent_2",
+    "restriction" : "sbol:contains",
+    "subject" : "SenderSystem/subcomponent_1"
+  }, {
+    "@id" : "SenderSystem/subcomponent_1",
+    "@type" : "sbol:SubComponent",
+    "instanceOf" : "OrganismA"
+  }, {
+    "@id" : "SenderSystem/subcomponent_2",
+    "@type" : "sbol:SubComponent",
+    "instanceOf" : "AHL"
+  } ],
+  "@context" : {
+    "type" : {
+      "@id" : "http://sbols.org/v3#type",
+      "@type" : "@id"
+    },
+    "role" : {
+      "@id" : "http://sbols.org/v3#role",
+      "@type" : "@id"
+    },
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
+    },
+    "hasFeature" : {
+      "@id" : "http://sbols.org/v3#hasFeature",
+      "@type" : "@id"
+    },
+    "hasConstraint" : {
+      "@id" : "http://sbols.org/v3#hasConstraint",
+      "@type" : "@id"
+    },
+    "displayId" : {
+      "@id" : "http://sbols.org/v3#displayId"
+    },
+    "description" : {
+      "@id" : "http://sbols.org/v3#description"
+    },
+    "subject" : {
+      "@id" : "http://sbols.org/v3#subject",
+      "@type" : "@id"
+    },
+    "restriction" : {
+      "@id" : "http://sbols.org/v3#restriction",
+      "@type" : "@id"
+    },
+    "object" : {
+      "@id" : "http://sbols.org/v3#object",
+      "@type" : "@id"
+    },
+    "instanceOf" : {
+      "@id" : "http://sbols.org/v3#instanceOf",
+      "@type" : "@id"
+    },
+    "inChildOf" : {
+      "@id" : "http://sbols.org/v3#inChildOf",
+      "@type" : "@id"
+    },
+    "@vocab" : "https://sbolstandard.org/examples/",
+    "SBO" : "https://identifiers.org/SBO:",
+    "CHEBI" : "https://identifiers.org/CHEBI:",
+    "GO" : "https://identifiers.org/GO:",
+    "sbol" : "http://sbols.org/v3#",
+    "EDAM" : "https://identifiers.org/edam:",
+    "SO" : "https://identifiers.org/SO:"
+  }
+}
