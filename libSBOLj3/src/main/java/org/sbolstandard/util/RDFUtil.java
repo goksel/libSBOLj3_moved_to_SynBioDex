@@ -23,6 +23,8 @@ import org.apache.jena.vocabulary.RDF;
 
 public class RDFUtil {
 	
+    private static String RDFXMLABBREV = "RDF/XML-ABBREV";
+    
 	public static void setBaseURI(Model model, URI uri)
 	{
 		if (uri != null && uri.toString().length() > 0) {
@@ -266,7 +268,7 @@ public class RDFUtil {
 		}
 	    
 	   
-	    private static void writeToStream(Model model, OutputStream stream, String format, Resource[] topLevelResources, URI baseUri)
+	    private static void writeToStreamORG(Model model, OutputStream stream, String format, Resource[] topLevelResources, URI baseUri)
 	    {
 	    	RDFWriter writer = model.getWriter(format);
 			writer.setProperty("tab", "3");
@@ -278,6 +280,30 @@ public class RDFUtil {
 			if (baseUri!=null)
 			{
 				base=baseUri.toString();
+				if (format.startsWith("RDF"))
+				{
+					writer.setProperty("xmlbase",base);
+				}
+			}
+			writer.write(model, stream, base);
+	    }
+	    
+	    private static void writeToStream(Model model, OutputStream stream, String format, Resource[] topLevelResources, URI baseUri)
+	    {
+	    	RDFWriter writer = model.getWriter(format);
+			writer.setProperty("tab", "3");
+			if (topLevelResources != null && topLevelResources.length > 0) {
+				writer.setProperty("prettyTypes", topLevelResources);
+				//writer.setProperty("relativeURIs","same-document,relative");
+			}
+			String base=null;
+			if (baseUri!=null)
+			{
+				base=baseUri.toString();
+				if (format.startsWith("RDF"))
+				{
+					writer.setProperty("xmlbase",base);
+				}
 			}
 			writer.write(model, stream, base);
 	    }
@@ -300,6 +326,7 @@ public class RDFUtil {
 			return rdfData;
 		}
 	    
+
 	    public static String getRdfString_Del(Model model, String format, Resource[] topLevelResources,URI baseUri)
 				throws Exception {
 			String rdfData = null;

@@ -6,18 +6,20 @@
     xmlns:CHEBI="https://identifiers.org/CHEBI:"
     xmlns:SBO="https://identifiers.org/SBO:"
     xmlns:GO="https://identifiers.org/GO:"
-    xmlns="https://sbolstandard.org/examples/">
+    xmlns="https://sbolstandard.org/examples/"
+   xml:base="https://sbolstandard.org/examples/">
    <sbol:Component rdf:about="toggle_switch">
       <sbol:hasModel>
-         <sbol:Model rdf:about="model1">
-            <sbol:language rdf:resource="https://identifiers.org/edam:format_2585"/>
-            <sbol:framework rdf:resource="https://identifiers.org/SBO:0000062"/>
-            <sbol:source rdf:resource="http://virtualparts.org"/>
-         </sbol:Model>
+         <sbol:Model rdf:about="model1"/>
       </sbol:hasModel>
       <sbol:description>Toggle Switch genetic circuit</sbol:description>
       <sbol:displayId>toggle_switch</sbol:displayId>
       <sbol:name>Toggle Switch</sbol:name>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
    </sbol:Component>
+   <sbol:Model rdf:about="model1">
+      <sbol:language rdf:resource="https://identifiers.org/edam:format_2585"/>
+      <sbol:framework rdf:resource="https://identifiers.org/SBO:0000062"/>
+      <sbol:source rdf:resource="http://virtualparts.org"/>
+   </sbol:Model>
 </rdf:RDF>

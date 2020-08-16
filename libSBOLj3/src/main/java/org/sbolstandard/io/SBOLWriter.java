@@ -29,6 +29,20 @@ public class SBOLWriter{
 		ArrayList<Resource> resources=new ArrayList<Resource>();
 		resources.add(RDFHandler.createResource(model, DataModel.Component.uri));
 		resources.add(RDFHandler.createResource(model,  DataModel.Sequence.uri));
+		resources.add(RDFHandler.createResource(model,  DataModel.Model.uri));
+		resources.add(RDFHandler.createResource(model,  DataModel.Implementation.uri));
+		resources.add(RDFHandler.createResource(model,  DataModel.ExperimentalData.uri));
+		resources.add(RDFHandler.createResource(model,  DataModel.Attachment.uri));
+		resources.add(RDFHandler.createResource(model,  DataModel.Collection.uri));
+		resources.add(RDFHandler.createResource(model,  DataModel.Namespace.uri));
+		resources.add(RDFHandler.createResource(model,  DataModel.CombinatorialDerivation.uri));
+		resources.add(RDFHandler.createResource(model,  DataModel.Namespace.uri));
+		
+		
+		
+		
+		
+		
 		Resource[] topLevelResources=resources.toArray(new Resource[resources.size()]);
 		return topLevelResources;
 	}
