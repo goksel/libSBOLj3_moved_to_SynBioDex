@@ -16,6 +16,16 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
    </sbol:Component>
    <sbol:Implementation rdf:about="impl1">
+      <sbol:hasAttachment>
+         <sbol:Attachment rdf:about="attachment1"/>
+      </sbol:hasAttachment>
       <sbol:built rdf:resource="TetR_protein"/>
    </sbol:Implementation>
+   <sbol:Attachment rdf:about="attachment1">
+      <sbol:hashAlgorithm>Alg1</sbol:hashAlgorithm>
+      <sbol:hash>aaa</sbol:hash>
+      <sbol:size>1000</sbol:size>
+      <sbol:format rdf:resource="https://identifiers.org/edam:format_2585"/>
+      <sbol:source rdf:resource="/attachment1"/>
+   </sbol:Attachment>
 </rdf:RDF>

@@ -10,9 +10,20 @@ public class DataModel {
 		public static URI role=URINameSpace.SBOL.local("role");
 		public static URI orientation=URINameSpace.SBOL.local("orientation");
 		
+		public static final class Identified
+		{
+			public static URI uri=URINameSpace.SBOL.local("Identified");	
+			public static URI name=URINameSpace.SBOL.local("name");	
+			public static URI description=URINameSpace.SBOL.local("description");	
+			public static URI displayId=URINameSpace.SBOL.local("displayId");	
+			public static URI wasDerivedFrom=URINameSpace.PROV.local("wasDerivedFrom");	
+			public static URI wasGeneratedBy=URINameSpace.PROV.local("wasGeneratedBy");	
+		}
+		
 		public static final class TopLevel
 		{
-			public static URI attachment=URINameSpace.SBOL.local("hasAttachment");
+			public static URI uri=URINameSpace.SBOL.local("TopLevel");
+			public static URI attachment=URINameSpace.SBOL.local("hasAttachment");	
 		}
 		
 		public static final class Feature

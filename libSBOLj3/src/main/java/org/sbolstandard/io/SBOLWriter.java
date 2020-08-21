@@ -4,8 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -19,11 +22,11 @@ public class SBOLWriter{
 
 	public static String write(SBOLDocument doc, String format) throws IOException
 	{
-		String output=RDFUtil.write(doc.getModel(), format, getTopLevelResources(), doc.getBaseURI());				
+		String output=RDFUtil.write(doc.getModel(), format, getTopLevelResources(doc), doc.getBaseURI());				
 		return output;
 	}
 	
-	private static Resource[] getTopLevelResources()
+	/*private static Resource[] getTopLevelResources()
 	{
 		Model model = ModelFactory.createDefaultModel();
 		ArrayList<Resource> resources=new ArrayList<Resource>();
@@ -37,18 +40,27 @@ public class SBOLWriter{
 		resources.add(RDFHandler.createResource(model,  DataModel.Namespace.uri));
 		resources.add(RDFHandler.createResource(model,  DataModel.CombinatorialDerivation.uri));
 		resources.add(RDFHandler.createResource(model,  DataModel.Namespace.uri));
+		Resource[] topLevelResources=resources.toArray(new Resource[resources.size()]);
+		return topLevelResources;
+	}*/
+	
+	private static Resource[] getTopLevelResources(SBOLDocument doc)
+	{
+		Model model = ModelFactory.createDefaultModel();
+		ArrayList<Resource> resources=new ArrayList<Resource>();
+		Iterator<URI> it=doc.getTopLevelResourceTypes().iterator();
 		
-		
-		
-		
-		
-		
+		while (it.hasNext())
+		{
+			resources.add(RDFHandler.createResource(model, it.next()));	
+		}
 		Resource[] topLevelResources=resources.toArray(new Resource[resources.size()]);
 		return topLevelResources;
 	}
+	
 	public static void write(SBOLDocument doc, File file, String format) throws FileNotFoundException, IOException
 	{
-		RDFUtil.write(doc.getModel(), file, format, getTopLevelResources(), doc.getBaseURI());				
+		RDFUtil.write(doc.getModel(), file, format, getTopLevelResources(doc), doc.getBaseURI());				
 	}
 	
 	public static SBOLDocument read(String sbolData, String format)

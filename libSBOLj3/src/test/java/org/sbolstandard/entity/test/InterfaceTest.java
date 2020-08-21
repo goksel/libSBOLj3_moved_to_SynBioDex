@@ -1,4 +1,4 @@
-package org.sbolstandard.entity;
+package org.sbolstandard.entity.test;
 
 import java.io.IOException;
 import java.net.URI;
@@ -6,6 +6,10 @@ import java.util.Arrays;
 
 import org.sbolstandard.TestUtil;
 import org.sbolstandard.api.SBOLAPI;
+import org.sbolstandard.entity.Component;
+import org.sbolstandard.entity.Interface;
+import org.sbolstandard.entity.SBOLDocument;
+import org.sbolstandard.entity.SubComponent;
 import org.sbolstandard.io.SBOLWriter;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ComponentType;

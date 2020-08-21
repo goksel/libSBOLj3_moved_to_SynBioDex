@@ -6,10 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.StmtIterator;
 import org.sbolstandard.util.RDFHandler;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
+import org.sbolstandard.vocabulary.DataModel;
 
 public abstract class Identified {
 	protected Resource resource=null;
@@ -20,6 +25,12 @@ public abstract class Identified {
 	{
 		this.uri=uri;
 		this.resource=RDFUtil.createResource(model, this.uri,this.getResourceType());
+	}
+	
+	protected Identified(Model model, URI uri, URI resourceType) throws SBOLGraphException
+	{
+		this.uri=uri;
+		this.resource=RDFUtil.createResource(model, this.uri,resourceType);
 	}
 	
 	protected Identified(Resource resource)
@@ -34,41 +45,61 @@ public abstract class Identified {
 	}
 	
 	public String getDisplayId() {
+		if (displayId==null)
+		{
+			displayId=RDFUtil.getPropertyAsString(this.resource, DataModel.Identified.displayId);
+		}
 		return displayId;
 	}
 	public void setDisplayId(String displayId) {
 		this.displayId = displayId;
-		RDFUtil.setProperty(resource, URI.create("http://sbols.org/v3#displayId"), displayId);		
+		RDFUtil.setProperty(resource, DataModel.Identified.displayId, displayId);		
 	}
 	
 	public String getName() {
+		if (name==null)
+		{
+			name=RDFUtil.getPropertyAsString(this.resource, DataModel.Identified.name);
+		}
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
-		RDFUtil.setProperty(resource, URI.create("http://sbols.org/v3#name"), name);	
+		RDFUtil.setProperty(resource, DataModel.Identified.name, name);	
 	}
 	public String getDescription() {
+		if (description==null)
+		{
+			description=RDFUtil.getPropertyAsString(this.resource, DataModel.Identified.description);
+		}
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
-		RDFUtil.setProperty(resource, URI.create("http://sbols.org/v3#description"), description);	
+		RDFUtil.setProperty(resource, DataModel.Identified.description, description);	
 		
 	}
 	public List<URI> getWasDerivedFrom() {
+		if (wasDerivedFrom==null)
+		{
+			wasDerivedFrom=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Identified.wasDerivedFrom);
+		}
 		return wasDerivedFrom;
 	}
 	public void setWasDerivedFrom(List<URI> wasDerivedFrom) {
 		this.wasDerivedFrom = wasDerivedFrom;
-		RDFUtil.setProperty(resource, URI.create("https://www.w3.org/TR/prov-o/wasDerivedFrom"), this.wasDerivedFrom);
+		RDFUtil.setProperty(resource, DataModel.Identified.wasDerivedFrom, this.wasDerivedFrom);
 	}
 	public List<URI> getWasGeneratedy() {
+		if (wasGeneratedBy==null)
+		{
+			wasGeneratedBy=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Identified.wasGeneratedBy);
+		}
 		return wasGeneratedBy;
 	}
 	public void setWasGeneratedy(List<URI> wasGeneratedy) {
 		this.wasGeneratedBy = wasGeneratedy;
-		RDFUtil.setProperty(resource, URI.create("https://www.w3.org/TR/prov-o/wasGeneratedBy"), this.wasGeneratedBy);
+		RDFUtil.setProperty(resource, DataModel.Identified.wasGeneratedBy, this.wasGeneratedBy);
 
 	}
 	
@@ -182,6 +213,56 @@ public abstract class Identified {
 		}
 		return items;
 	}
+	
+	public void addAnnotion(URI property, String value)
+	{
+		RDFUtil.addProperty(resource, property, value);
+	}
+	
+	public void addAnnotion(URI property, URI value)
+	{
+		RDFUtil.addProperty(resource, property, value);
+	}
+	
+	public void addAnnotion(URI property, Metadata value)
+	{
+		RDFUtil.addProperty(resource, property, value.getUri());
+	}
+	
+	public List<Object> getAnnotion(URI propertyURI)
+	{
+		ArrayList<Object> values=null;
+        Property property=resource.getModel().getProperty(propertyURI.toString());
+        for (StmtIterator iterator=resource.listProperties(property);iterator.hasNext();)
+        {
+        	if (values==null)
+        	{
+        		values=new ArrayList<Object>();
+        	}
+        	Statement stmt=iterator.next();
+        	RDFNode object=stmt.getObject();
+        	
+        	if (object.isResource()) 
+        	{
+        		if (object.asResource().listProperties().hasNext()==false)
+        		{
+        			values.add(object.asResource().getURI());
+        		}
+        		else
+        		{
+        			Metadata metadata=new Metadata(object.asResource());
+        			values.add(metadata);
+        		}
+        	}
+        	else
+        	{
+        		values.add(object.asLiteral().getValue());
+        	}
+        }
+        return values;
+		
+	}
+	
 	
 	
 	

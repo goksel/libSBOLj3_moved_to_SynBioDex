@@ -6,7 +6,8 @@
     xmlns:CHEBI="https://identifiers.org/CHEBI:"
     xmlns:SBO="https://identifiers.org/SBO:"
     xmlns:GO="https://identifiers.org/GO:"
-    xmlns="https://sbolstandard.org/examples/">
+    xmlns="https://sbolstandard.org/examples/"
+   xml:base="https://sbolstandard.org/examples/">
    <sbol:Component rdf:about="LacI_protein">
       <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
       <sbol:description>LacI protein</sbol:description>

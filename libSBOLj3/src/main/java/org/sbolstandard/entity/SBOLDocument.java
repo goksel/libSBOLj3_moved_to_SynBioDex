@@ -3,12 +3,16 @@ package org.sbolstandard.entity;
 import java.lang.reflect.Constructor;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.util.URINameSpace;
+import org.sbolstandard.util.RDFHandler;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
@@ -49,6 +53,12 @@ public class SBOLDocument {
 			this.model.setNsPrefix(prefix, namespace.toString());	
 		}
 	}
+	
+	public void addNameSpacePrefixes(URINameSpace ns)
+	{
+		addNameSpacePrefixes(ns.getPrefix(), ns.getUri());
+	}
+	
 
 	public SBOLDocument() {
 		this.model = ModelFactory.createDefaultModel();
@@ -258,4 +268,35 @@ public class SBOLDocument {
 		}
 		list.add(item);
 	}
+	
+	private Set<URI> topLevelResourceTypes;
+	public Set<URI> getTopLevelResourceTypes()
+	{
+		if (topLevelResourceTypes==null)
+		{
+			List<URI> types = Arrays.asList(DataModel.Component.uri,
+					DataModel.Sequence.uri,
+					DataModel.Model.uri,
+					DataModel.Implementation.uri,
+					DataModel.ExperimentalData.uri,
+					DataModel.Attachment.uri,
+					DataModel.Collection.uri,
+					DataModel.Namespace.uri,
+					DataModel.CombinatorialDerivation.uri					
+					);
+			topLevelResourceTypes=new HashSet<URI>(types);
+		}
+		return topLevelResourceTypes;
+	}
+	
+	public void addTopLevelResourceType(URI type)
+	{
+		getTopLevelResourceTypes();
+		if (type!=null)
+		{
+			topLevelResourceTypes.add(type);
+		}
+	}
+
+	
 }

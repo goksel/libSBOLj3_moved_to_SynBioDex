@@ -2,7 +2,7 @@ package org.sbolstandard.util;
 
 import java.net.URI;
 
-public abstract class URINameSpace {
+public class URINameSpace {
 
 	protected  URI uri;
 	protected String prefix;
@@ -12,6 +12,9 @@ public abstract class URINameSpace {
 	protected static final String GO_Namespace="https://identifiers.org/GO:";
 	protected static final String SBOL_Namespace="http://sbols.org/v3#";
 	protected static final String EDAM_Namespace="https://identifiers.org/edam:";
+	protected static final String PROV_Namespace="https://www.w3.org/TR/prov-o/";
+	
+	
 	
 	
 	public URI getUri() {
@@ -23,7 +26,7 @@ public abstract class URINameSpace {
 	}
 	
 	private URINameSpace() {}
-	private URINameSpace(URI uriParam, String prefixParam)
+	public URINameSpace(URI uriParam, String prefixParam)
 	{
 		this.uri=uriParam;
 		this.prefix=prefixParam;	
@@ -40,6 +43,8 @@ public abstract class URINameSpace {
 	public static URINameSpace CHEBI=CHEBINameSpace.getInstance();
 	public static URINameSpace GO=GONameSpace.getInstance();
 	public static URINameSpace EDAM=EDAMNameSpace.getInstance();
+	public static URINameSpace PROV=EDAMNameSpace.getInstance();
+	
 	
 	
 	
@@ -159,6 +164,26 @@ public abstract class URINameSpace {
 				instance = new EDAMNameSpace ();
 				instance.uri=URI.create(EDAM_Namespace);
 				instance.prefix="EDAM";
+			}
+			return instance;
+		}
+	}
+	
+
+	protected static class PROVNameSpace extends URINameSpace
+	{
+		private static PROVNameSpace instance=null;
+		
+		private PROVNameSpace()
+		{
+		}
+		protected static URINameSpace getInstance()
+		{
+			if (instance == null)     
+			{
+				instance = new PROVNameSpace ();
+				instance.uri=URI.create(PROV_Namespace);
+				instance.prefix="prov";
 			}
 			return instance;
 		}

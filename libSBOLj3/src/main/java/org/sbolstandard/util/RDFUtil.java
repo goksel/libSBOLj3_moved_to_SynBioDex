@@ -31,6 +31,7 @@ public class RDFUtil {
 			model.setNsPrefix("", uri.toString());
 		}
 	}
+	
 	public static Resource createResource(Model model, URI resourceUri, URI type) throws SBOLGraphException {
 		String resourceUriString=resourceUri.toString();
 		Resource resource=null;
@@ -38,8 +39,11 @@ public class RDFUtil {
 		if (!exists)
 		{
 			resource = model.createResource(resourceUriString);
-			Resource typeResource=model.createResource(type.toString());	
-			resource.addProperty(RDF.type, typeResource);	
+			if (type!=null)
+			{
+				Resource typeResource=model.createResource(type.toString());	
+				resource.addProperty(RDF.type, typeResource);	
+			}
 		}
 		else
 		{
@@ -47,6 +51,19 @@ public class RDFUtil {
 		}
 		return resource;
 	}
+	
+	
+	public static void addType(Resource resource, URI type)
+	{
+		if (type!=null && resource!=null)
+		{
+			Resource typeResource=resource.getModel().createResource(type.toString());	
+			resource.addProperty(RDF.type, typeResource);	
+		}
+	}
+
+	
+	
 	private static void removeIfExists(Resource resource, Property p)
 	{
 		StmtIterator stmt =resource.listProperties(p);
