@@ -92,22 +92,35 @@ public class AnnotationTest extends TestCase {
 		 {
 			 Metadata metadata=(Metadata) informationMetadata.get(0);
 			 System.out.println("hasInformation");
-			 System.out.println("   uri:" + metadata.getUri());
-			 System.out.println("   name:" + metadata.getName());
-			 System.out.println("   desc:" + metadata.getDescription());
+			 printMetadata(metadata,3);
 			 System.out.println("   SigmaFactor:" + metadata.getAnnotion(igem.local("sigmaFactor")));
 			 System.out.println("   Regulation:" + metadata.getAnnotion(igem.local("regulation")));
-			 
-			 
-			 
-			 
-			 
-					 
-			 
 		 }
-		 
+		 List<Object> usage=identified.getAnnotion(igem.local("hasUsage"));
+		 if (usage!=null)
+		 {
+			 Metadata metadata=(Metadata) usage.get(0);
+			 System.out.println("hasUsage");
+			 printMetadata(metadata,3);
+			 System.out.println("   Uses:" + metadata.getAnnotion(igem.local("uses")));
+			 System.out.println("   Twins:" + metadata.getAnnotion(igem.local("twins")));
+			 List<Object> twinsURLs=metadata.getAnnotion(igem.local("twinURLs"));
+			 Metadata twinPartUsageMetadata=(Metadata) twinsURLs.get(0);
+			 System.out.println("   TwinPartUsage:");
+			 printMetadata(metadata,6);
+			 System.out.println("      twinURL:" + twinPartUsageMetadata.getAnnotion(igem.local("twinURL")));
+		 }
 	}
-	
+
+	 private void printMetadata(Metadata metadata, int count)
+	 {
+		 String space=String.format("%"+count+"s", "") ;
+		 System.out.println(space + "uri:" + metadata.getUri());
+		 System.out.println(space + "name:" + metadata.getName());
+		 System.out.println(space + "desc:" + metadata.getDescription());
+		 System.out.println(space + "displayId:" + metadata.getDisplayId());
+		 
+	 }
 	/*
 	public class IgemInformation extends Metadata
 	{

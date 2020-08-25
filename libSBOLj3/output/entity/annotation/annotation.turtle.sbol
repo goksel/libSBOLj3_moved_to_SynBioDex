@@ -15,6 +15,7 @@
         igem:twins         "7" ;
         igem:uses          "442" ;
         sbol:description   "BBa_J23119 usage statistics" ;
+        sbol:displayId     "usage1" ;
         sbol:name          "BBa_J23119_usage" .
 
 :BBa_J23119  a               sbol:Component ;
@@ -30,14 +31,16 @@
         sbol:type            SBO:0000251 .
 
 <BBa_J23119/twinParts>
-        a             sbol:Identified , igem:TwinPartUsage ;
-        igem:twinURL  <http://parts.igem.org/wiki/index.php?title=Part:BBa_M36800> , <http://parts.igem.org/wiki/index.php?title=Part:BBa_M1638> , <http://parts.igem.org/wiki/index.php?title=Part:BBa_J72073> ;
-        sbol:name     "twin parts" .
+        a               sbol:Identified , igem:TwinPartUsage ;
+        igem:twinURL    <http://parts.igem.org/wiki/index.php?title=Part:BBa_M36800> , <http://parts.igem.org/wiki/index.php?title=Part:BBa_M1638> , <http://parts.igem.org/wiki/index.php?title=Part:BBa_J72073> ;
+        sbol:displayId  "twinParts" ;
+        sbol:name       "twin parts" .
 
 <http://parts.igem.org>
         a                 sbol:TopLevel , igem:Repository ;
         igem:website      "http://parts.igem.org/Main_Page" ;
         sbol:description  "Registry of Standard Biological Parts" ;
+        sbol:displayId    "parts.igem.org" ;
         sbol:name         "iGEM Registry" .
 
 <BBa_J23119/information1>
@@ -45,4 +48,5 @@
         igem:regulation   "//regulation/second_regulation" , "//regulation/constitutive" ;
         igem:sigmaFactor  "//rnap/prokaryote/ecoli/sigma70" ;
         sbol:description  "The experience page captures users' experience using the BBa_J23119 part" ;
+        sbol:displayId    "information1" ;
         sbol:name         "BBa_J23119_experience" .

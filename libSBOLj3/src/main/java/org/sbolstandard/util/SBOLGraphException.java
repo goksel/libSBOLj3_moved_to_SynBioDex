@@ -9,5 +9,9 @@ public class SBOLGraphException extends Exception {
 	public SBOLGraphException(String message) {
 		super(message);
 	}
+	
+	public SBOLGraphException(String message, Exception e) {
+		super(message,e);
+	}
 
 }

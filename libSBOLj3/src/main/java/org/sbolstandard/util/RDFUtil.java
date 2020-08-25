@@ -91,10 +91,11 @@ public class RDFUtil {
 	
 	public static void setProperty(Resource resource, URI property, List<URI> values)
 	{
-		Property p=resource.getModel().createProperty(property.toString());
-		removeIfExists(resource,p);
 		if (values!=null && values.size()>0)
 		{
+			Property p=resource.getModel().createProperty(property.toString());
+			removeIfExists(resource,p);
+		
 			for (URI uri:values)
 			{
 				addProperty (resource, property, uri);
@@ -170,9 +171,13 @@ public class RDFUtil {
 		  {
 			  Statement stmt=it.nextStatement();
 			  RDFNode object=stmt.getObject();
-			  if (object.isResource() && hasType(resource.getModel(), resource, entityType))
+			  if (object.isResource())
 			  {
-				  resources.add(object.asResource());
+				  Resource objectResource=object.asResource();
+				  if (hasType(resource.getModel(), objectResource, entityType))
+				  {
+					  resources.add(objectResource);
+				  }
 			  }
 			  /*else
 			  {

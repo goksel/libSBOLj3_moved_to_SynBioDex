@@ -11,13 +11,21 @@ import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
-import org.sbolstandard.util.RDFHandler;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
 
 public abstract class Identified {
 	protected Resource resource=null;
+	
+	private String displayId;
+	private String name;
+	private String description;
+	private List<URI> wasDerivedFrom;
+	private List<URI> wasGeneratedBy;
+	private List<URI> measures;
+	private URI uri;
+	
 	protected Identified()
 	{}
 	
@@ -25,18 +33,21 @@ public abstract class Identified {
 	{
 		this.uri=uri;
 		this.resource=RDFUtil.createResource(model, this.uri,this.getResourceType());
+		inferDisplayId(uri);
 	}
 	
 	protected Identified(Model model, URI uri, URI resourceType) throws SBOLGraphException
 	{
 		this.uri=uri;
 		this.resource=RDFUtil.createResource(model, this.uri,resourceType);
+		inferDisplayId(uri);
 	}
 	
 	protected Identified(Resource resource)
 	{
 		this.uri=URI.create(resource.getURI());
 		this.resource=resource;
+		inferDisplayId(this.uri);
 	}
 	
 	public Identified (URI uri)
@@ -79,6 +90,7 @@ public abstract class Identified {
 		RDFUtil.setProperty(resource, DataModel.Identified.description, description);	
 		
 	}
+	
 	public List<URI> getWasDerivedFrom() {
 		if (wasDerivedFrom==null)
 		{
@@ -86,30 +98,39 @@ public abstract class Identified {
 		}
 		return wasDerivedFrom;
 	}
+	
 	public void setWasDerivedFrom(List<URI> wasDerivedFrom) {
 		this.wasDerivedFrom = wasDerivedFrom;
 		RDFUtil.setProperty(resource, DataModel.Identified.wasDerivedFrom, this.wasDerivedFrom);
 	}
-	public List<URI> getWasGeneratedy() {
+	
+	public List<URI> getWasGeneratedBy() {
 		if (wasGeneratedBy==null)
 		{
 			wasGeneratedBy=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Identified.wasGeneratedBy);
 		}
 		return wasGeneratedBy;
 	}
-	public void setWasGeneratedy(List<URI> wasGeneratedy) {
-		this.wasGeneratedBy = wasGeneratedy;
+	
+	public void setWasGeneratedBy(List<URI> wasGeneratedBy) {
+		this.wasGeneratedBy = wasGeneratedBy;
 		RDFUtil.setProperty(resource, DataModel.Identified.wasGeneratedBy, this.wasGeneratedBy);
 
 	}
 	
-	private String displayId;
-	private String name;
-	private String description;
-	private List<URI> wasDerivedFrom;
-	private List<URI> wasGeneratedBy;
-	private URI uri;
+	public List<URI> getMeasures() {
+		if (measures==null)
+		{
+			measures=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Identified.measure);
+		}
+		return measures;
+	}
 	
+	public void setMeasures(List<URI> measures) {
+		this.measures = measures;
+		RDFUtil.setProperty(resource, DataModel.Identified.measure, this.measures);
+	}
+
 	public URI getUri() {
 		return uri;
 	}
@@ -121,6 +142,10 @@ public abstract class Identified {
 		try
 		{
 			Constructor<T> constructor = identified.getDeclaredConstructor( new Class[] {Resource.class});
+			if (!constructor.isAccessible())
+			{
+				constructor.setAccessible(true);
+			}
 			Identified entity= (Identified)constructor.newInstance(new Object[]{res});
 			return entity;
 		}
@@ -263,8 +288,38 @@ public abstract class Identified {
 		
 	}
 	
-	
-	
+		 	 
+	 	 
+	 private  void inferDisplayId(URI uri)
+		{
+		 	displayId=getDisplayId();
+		 	if (displayId==null || displayId.length()==0)
+		 	{
+			 	String result=null;
+			 	String uriString=uri.toString();	
+			 	if (uriString.contains("://"))
+			 	{
+				 	int index=uriString.lastIndexOf("#");
+					int index2=uriString.lastIndexOf("/");
+					if (index2>index)
+					{
+						index=index2;
+					}
+					if (uriString.length()>index+1)
+					{
+						result= uriString.substring(index+1);
+					}
+					else
+					{
+						result=null;
+					}
+			 	}
+			 	if (result!=null)
+			 	{
+			 	 setDisplayId(result);	
+			 	}
+		 	}
+		}
 	
 }
 

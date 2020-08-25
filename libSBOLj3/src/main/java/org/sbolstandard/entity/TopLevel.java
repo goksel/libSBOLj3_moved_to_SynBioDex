@@ -41,4 +41,8 @@ public abstract class TopLevel extends Identified {
 		RDFUtil.setProperty(resource, DataModel.TopLevel.attachment, attachments);
 	}
 	
+	@Override
+	public URI getResourceType() {
+		return DataModel.TopLevel.uri;
+	}
 }

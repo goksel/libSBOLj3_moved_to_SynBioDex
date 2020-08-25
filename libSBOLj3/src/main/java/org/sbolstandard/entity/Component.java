@@ -13,9 +13,9 @@ import org.sbolstandard.vocabulary.DataModel;
 
 public class Component extends TopLevel {
 	
-	private List<URI> roles=new ArrayList<URI>();
-	private List<URI> sequences=new ArrayList<URI>();	
-	private List<URI> types=new ArrayList<URI>();
+	private List<URI> roles=null;
+	private List<URI> sequences=null;	
+	private List<URI> types=null;
 	private List<Feature> features=null;
 	private List<SubComponent> subComponents=null;
 	private List<ComponentReference> componentReferences=null;
@@ -43,14 +43,14 @@ public class Component extends TopLevel {
 	public List<URI> getTypes() {
 		if (types==null)
 		{
-			types=RDFUtil.getPropertiesAsURIs(this.resource, URI.create("http://sbols.org/v3#type"));
+			types=RDFUtil.getPropertiesAsURIs(this.resource,DataModel.type);
 		}
 		return types;
 	}
 	
 	public void setTypes(List<URI> types) {
 		this.types = types;
-		RDFUtil.setProperty(resource, URI.create("http://sbols.org/v3#type"), types);
+		RDFUtil.setProperty(resource, DataModel.type, types);
 	}
 	
 	

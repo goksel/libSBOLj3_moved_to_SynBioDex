@@ -1,5 +1,10 @@
 { 
   "https://sbolstandard.org/examples/BBa_J23119/usage1" : { 
+    "http://sbols.org/v3#displayId" : [ { 
+      "type" : "literal" ,
+      "value" : "usage1"
+    }
+     ] ,
     "http://parts.igem.org/twins" : [ { 
       "type" : "literal" ,
       "value" : "7"
@@ -47,6 +52,11 @@
   }
    ,
   "https://sbolstandard.org/examples/BBa_J23119/twinParts" : { 
+    "http://sbols.org/v3#displayId" : [ { 
+      "type" : "literal" ,
+      "value" : "twinParts"
+    }
+     ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
       "value" : "http://parts.igem.org/TwinPartUsage"
@@ -77,6 +87,11 @@
   }
    ,
   "https://sbolstandard.org/examples/BBa_J23119/information1" : { 
+    "http://sbols.org/v3#displayId" : [ { 
+      "type" : "literal" ,
+      "value" : "information1"
+    }
+     ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
       "value" : "http://parts.igem.org/Information"
@@ -113,6 +128,11 @@
   }
    ,
   "http://parts.igem.org" : { 
+    "http://sbols.org/v3#displayId" : [ { 
+      "type" : "literal" ,
+      "value" : "parts.igem.org"
+    }
+     ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
       "value" : "http://parts.igem.org/Repository"

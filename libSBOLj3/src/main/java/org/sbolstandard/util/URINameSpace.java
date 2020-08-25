@@ -12,10 +12,10 @@ public class URINameSpace {
 	protected static final String GO_Namespace="https://identifiers.org/GO:";
 	protected static final String SBOL_Namespace="http://sbols.org/v3#";
 	protected static final String EDAM_Namespace="https://identifiers.org/edam:";
-	protected static final String PROV_Namespace="https://www.w3.org/TR/prov-o/";
-	
-	
-	
+	//protected static final String PROV_Namespace="https://www.w3.org/TR/prov-o/";
+	protected static final String PROV_Namespace="http://www.w3.org/ns/prov#";
+	protected static final String OM_Namespace="http://www.ontology-of-units-of-measure.org/resource/om-2/";
+	protected static final String RDFS_Namespace="http://www.w3.org/2000/01/rdf-schema#";
 	
 	public URI getUri() {
 		return uri;
@@ -43,7 +43,11 @@ public class URINameSpace {
 	public static URINameSpace CHEBI=CHEBINameSpace.getInstance();
 	public static URINameSpace GO=GONameSpace.getInstance();
 	public static URINameSpace EDAM=EDAMNameSpace.getInstance();
-	public static URINameSpace PROV=EDAMNameSpace.getInstance();
+	public static URINameSpace PROV=PROVNameSpace.getInstance();
+	public static URINameSpace OM=OMNameSpace.getInstance();
+	public static URINameSpace RDFS=OMNameSpace.getInstance();
+	
+	
 	
 	
 	
@@ -184,6 +188,44 @@ public class URINameSpace {
 				instance = new PROVNameSpace ();
 				instance.uri=URI.create(PROV_Namespace);
 				instance.prefix="prov";
+			}
+			return instance;
+		}
+	}
+	
+	protected static class OMNameSpace extends URINameSpace
+	{
+		private static OMNameSpace instance=null;
+		
+		private OMNameSpace()
+		{
+		}
+		protected static URINameSpace getInstance()
+		{
+			if (instance == null)     
+			{
+				instance = new OMNameSpace ();
+				instance.uri=URI.create(OM_Namespace);
+				instance.prefix="om";
+			}
+			return instance;
+		}
+	}
+	
+	protected static class RDFSNameSpace extends URINameSpace
+	{
+		private static RDFSNameSpace instance=null;
+		
+		private RDFSNameSpace()
+		{
+		}
+		protected static URINameSpace getInstance()
+		{
+			if (instance == null)     
+			{
+				instance = new RDFSNameSpace ();
+				instance.uri=URI.create(URINameSpace.RDFS_Namespace);
+				instance.prefix="rdfs";
 			}
 			return instance;
 		}

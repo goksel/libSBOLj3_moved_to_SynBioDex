@@ -18,6 +18,7 @@ public class DataModel {
 			public static URI displayId=URINameSpace.SBOL.local("displayId");	
 			public static URI wasDerivedFrom=URINameSpace.PROV.local("wasDerivedFrom");	
 			public static URI wasGeneratedBy=URINameSpace.PROV.local("wasGeneratedBy");	
+			public static URI measure=URINameSpace.SBOL.local("hasMeasure");		
 		}
 		
 		public static final class TopLevel

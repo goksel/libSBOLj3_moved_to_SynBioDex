@@ -4,6 +4,7 @@
     "@type" : [ "sbol:TopLevel", "igem:Repository" ],
     "website" : "http://parts.igem.org/Main_Page",
     "description" : "Registry of Standard Biological Parts",
+    "displayId" : "parts.igem.org",
     "name" : "iGEM Registry"
   }, {
     "@id" : "BBa_J23119",
@@ -24,11 +25,13 @@
     "regulation" : [ "//regulation/second_regulation", "//regulation/constitutive" ],
     "sigmaFactor" : "//rnap/prokaryote/ecoli/sigma70",
     "description" : "The experience page captures users' experience using the BBa_J23119 part",
+    "displayId" : "information1",
     "name" : "BBa_J23119_experience"
   }, {
     "@id" : "BBa_J23119/twinParts",
     "@type" : [ "sbol:Identified", "igem:TwinPartUsage" ],
     "twinURL" : [ "igem:wiki/index.php?title=Part:BBa_M36800", "igem:wiki/index.php?title=Part:BBa_M1638", "igem:wiki/index.php?title=Part:BBa_J72073" ],
+    "displayId" : "twinParts",
     "name" : "twin parts"
   }, {
     "@id" : "BBa_J23119/usage1",
@@ -39,30 +42,34 @@
     "twins" : "7",
     "uses" : "442",
     "description" : "BBa_J23119 usage statistics",
+    "displayId" : "usage1",
     "name" : "BBa_J23119_usage"
   } ],
   "@context" : {
-    "twinURLs" : {
-      "@id" : "http://parts.igem.org/twinURLs",
-      "@type" : "@id"
-    },
-    "twins" : {
-      "@id" : "http://parts.igem.org/twins"
-    },
-    "uses" : {
-      "@id" : "http://parts.igem.org/uses"
+    "displayId" : {
+      "@id" : "http://sbols.org/v3#displayId"
     },
     "registryStar" : {
       "@id" : "http://parts.igem.org/registryStar"
     },
-    "inStock" : {
-      "@id" : "http://parts.igem.org/inStock"
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
+    },
+    "uses" : {
+      "@id" : "http://parts.igem.org/uses"
+    },
+    "twinURLs" : {
+      "@id" : "http://parts.igem.org/twinURLs",
+      "@type" : "@id"
     },
     "description" : {
       "@id" : "http://sbols.org/v3#description"
     },
-    "name" : {
-      "@id" : "http://sbols.org/v3#name"
+    "twins" : {
+      "@id" : "http://parts.igem.org/twins"
+    },
+    "inStock" : {
+      "@id" : "http://parts.igem.org/inStock"
     },
     "belongsTo" : {
       "@id" : "http://parts.igem.org/belongsTo",
@@ -71,9 +78,6 @@
     "role" : {
       "@id" : "http://sbols.org/v3#role",
       "@type" : "@id"
-    },
-    "displayId" : {
-      "@id" : "http://sbols.org/v3#displayId"
     },
     "hasInformation" : {
       "@id" : "http://parts.igem.org/hasInformation",
