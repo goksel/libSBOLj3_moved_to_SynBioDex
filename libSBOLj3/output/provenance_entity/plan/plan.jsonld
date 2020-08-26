@@ -1,0 +1,27 @@
+{
+  "@id" : "CodonOptimisationProtocol",
+  "@type" : "prov:Plan",
+  "description" : "Optimisation protocol to improve the translation of mRNAs.",
+  "displayId" : "CodonOptimisationProtocol",
+  "name" : "Codon Optimisation Protocol",
+  "@context" : {
+    "description" : {
+      "@id" : "http://sbols.org/v3#description"
+    },
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
+    },
+    "displayId" : {
+      "@id" : "http://sbols.org/v3#displayId"
+    },
+    "@vocab" : "https://sbolstandard.org/examples/",
+    "SBO" : "https://identifiers.org/SBO:",
+    "CHEBI" : "https://identifiers.org/CHEBI:",
+    "GO" : "https://identifiers.org/GO:",
+    "sbol" : "http://sbols.org/v3#",
+    "EDAM" : "https://identifiers.org/edam:",
+    "SO" : "https://identifiers.org/SO:",
+    "prov" : "http://www.w3.org/ns/prov#",
+    "om" : "http://www.ontology-of-units-of-measure.org/resource/om-2/"
+  }
+}

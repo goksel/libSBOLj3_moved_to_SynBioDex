@@ -24,11 +24,11 @@ public class TestUtil {
         	boolean result=outputDir.mkdirs();
         }
         
-        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.turtle.sbol", baseOutput,directory, file)), "Turtle");
-        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.rdfxml.sbol", baseOutput,directory, file)), "RDF/XML-ABBREV");
-        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.jsonld.sbol", baseOutput,directory, file)), "JSON-LD");
-        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.rdfjson.sbol", baseOutput,directory, file)), "rdfjson");
-        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.ntriples.sbol", baseOutput,directory, file)), "N-TRIPLES");
+        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.ttl", baseOutput,directory, file)), "Turtle");
+        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.rdf", baseOutput,directory, file)), "RDF/XML-ABBREV");
+        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.jsonld", baseOutput,directory, file)), "JSON-LD");
+        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.rj", baseOutput,directory, file)), "rdfjson");
+        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.nt", baseOutput,directory, file)), "N-TRIPLES");
 	}
 	
 	public static void assertReadWrite(SBOLDocument doc) throws IOException, SBOLGraphException
@@ -38,6 +38,7 @@ public class TestUtil {
 	    assertEqual(doc, doc2);
 	       
 	}
+	//TODO:
 	public static void assertEqual(SBOLDocument doc1, SBOLDocument doc2) throws SBOLGraphException
 	{
 		if (doc1.getAgents()!=null)

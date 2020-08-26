@@ -1,0 +1,557 @@
+{
+  "@graph" : [ {
+    "@id" : "GFP_protein",
+    "@type" : "sbol:Component",
+    "description" : "GFP",
+    "displayId" : "GFP",
+    "name" : "GFP",
+    "type" : "SBO:0000252"
+  }, {
+    "@id" : "IPTG",
+    "@type" : "sbol:Component",
+    "description" : "IPTG",
+    "displayId" : "IPTG",
+    "name" : "IPTG",
+    "role" : "CHEBI:35224",
+    "type" : "SBO:0000247"
+  }, {
+    "@id" : "IPTG_LacI",
+    "@type" : "sbol:Component",
+    "description" : "IPTG_LacI complex",
+    "displayId" : "IPTG_LacI",
+    "name" : "IPTG_LacI",
+    "type" : "SBO:0000253"
+  }, {
+    "@id" : "LacI_producer",
+    "@type" : "sbol:Component",
+    "description" : "LacI producer",
+    "displayId" : "LacI_producer",
+    "hasFeature" : [ "LacI_producer/subcomponent_3", "LacI_producer/TetR_protein", "LacI_producer/subcomponent_6", "LacI_producer/GFP", "LacI_producer/subcomponent_2", "LacI_producer/subcomponent_5", "LacI_producer/subcomponent_4", "LacI_producer/subcomponent_1", "LacI_producer/LacI_protein", "LacI_producer/aTC" ],
+    "hasInteraction" : [ "LacI_producer/interaction_3", "LacI_producer/interaction_4", "LacI_producer/interaction_2", "LacI_producer/interaction_1" ],
+    "hasSequence" : "LacI_producer/sequence_1",
+    "name" : "LacI_producer",
+    "role" : "SO:0000704",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "LacI_producer/GFP",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "GFP",
+    "instanceOf" : "GFP_protein"
+  }, {
+    "@id" : "LacI_producer/LacI_protein",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "LacI_protein",
+    "instanceOf" : "LacI_protein"
+  }, {
+    "@id" : "LacI_producer/TetR_protein",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "TetR_protein",
+    "instanceOf" : "TetR_protein"
+  }, {
+    "@id" : "LacI_producer/aTC",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "aTC",
+    "instanceOf" : "aTC"
+  }, {
+    "@id" : "LacI_producer/interaction_1",
+    "@type" : "sbol:Interaction",
+    "displayId" : "interaction_1",
+    "hasParticipation" : [ "LacI_producer/interaction_1/participation_1", "LacI_producer/interaction_1/participation_2" ],
+    "type" : "SBO:0000589"
+  }, {
+    "@id" : "LacI_producer/interaction_1/participation_1",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_1",
+    "participant" : "LacI_producer/subcomponent_3",
+    "role" : "SBO:0000645"
+  }, {
+    "@id" : "LacI_producer/interaction_1/participation_2",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_2",
+    "participant" : "LacI_producer/LacI_protein",
+    "role" : "SBO:0000011"
+  }, {
+    "@id" : "LacI_producer/interaction_2",
+    "@type" : "sbol:Interaction",
+    "displayId" : "interaction_2",
+    "hasParticipation" : [ "LacI_producer/interaction_2/participation_1", "LacI_producer/interaction_2/participation_2" ],
+    "type" : "SBO:0000589"
+  }, {
+    "@id" : "LacI_producer/interaction_2/participation_1",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_1",
+    "participant" : "LacI_producer/subcomponent_5",
+    "role" : "SBO:0000645"
+  }, {
+    "@id" : "LacI_producer/interaction_2/participation_2",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_2",
+    "participant" : "LacI_producer/GFP",
+    "role" : "SBO:0000011"
+  }, {
+    "@id" : "LacI_producer/interaction_3",
+    "@type" : "sbol:Interaction",
+    "displayId" : "interaction_3",
+    "hasParticipation" : [ "LacI_producer/interaction_3/participation_1", "LacI_producer/interaction_3/participation_2" ],
+    "type" : "SBO:0000169"
+  }, {
+    "@id" : "LacI_producer/interaction_3/participation_1",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_1",
+    "participant" : "LacI_producer/subcomponent_1",
+    "role" : "SBO:0000642"
+  }, {
+    "@id" : "LacI_producer/interaction_3/participation_2",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_2",
+    "participant" : "LacI_producer/TetR_protein",
+    "role" : "SBO:0000019"
+  }, {
+    "@id" : "LacI_producer/interaction_4",
+    "@type" : "sbol:Interaction",
+    "displayId" : "interaction_4",
+    "hasParticipation" : [ "LacI_producer/interaction_4/participation_1", "LacI_producer/interaction_4/participation_2", "LacI_producer/interaction_4/participation_3" ],
+    "type" : "SBO:0000177"
+  }, {
+    "@id" : "LacI_producer/interaction_4/participation_1",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_1",
+    "participant" : "LacI_producer/TetR_protein",
+    "role" : "SBO:0000010"
+  }, {
+    "@id" : "LacI_producer/interaction_4/participation_2",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_2",
+    "participant" : "LacI_producer/aTC",
+    "role" : "SBO:0000010"
+  }, {
+    "@id" : "LacI_producer/interaction_4/participation_3",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_3",
+    "participant" : "TetR_producer/atC_TetR",
+    "role" : "SBO:0000011"
+  }, {
+    "@id" : "LacI_producer/sequence_1",
+    "@type" : "sbol:Sequence",
+    "description" : "LacI_producer sequence",
+    "displayId" : "sequence_1",
+    "elements" : "",
+    "encoding" : "sbol:iupacNucleicAcid",
+    "name" : "LacI_producer"
+  }, {
+    "@id" : "LacI_producer/subcomponent_1",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "subcomponent_1",
+    "instanceOf" : "pTetR",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "LacI_producer/subcomponent_2",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "subcomponent_2",
+    "instanceOf" : "rbs_lacI",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "LacI_producer/subcomponent_3",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "subcomponent_3",
+    "instanceOf" : "lacI",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "LacI_producer/subcomponent_4",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "subcomponent_4",
+    "instanceOf" : "rbs_gfp",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "LacI_producer/subcomponent_5",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "subcomponent_5",
+    "instanceOf" : "gfp",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "LacI_producer/subcomponent_6",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "subcomponent_6",
+    "instanceOf" : "ter_lacI",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "LacI_protein",
+    "@type" : "sbol:Component",
+    "description" : "LacI protein",
+    "displayId" : "LacI_protein",
+    "name" : "LacI",
+    "role" : "GO:0003700",
+    "type" : "SBO:0000252"
+  }, {
+    "@id" : "TetR_producer",
+    "@type" : "sbol:Component",
+    "description" : "TetR producer",
+    "displayId" : "TetR_producer",
+    "hasFeature" : [ "TetR_producer/subcomponent_3", "TetR_producer/IPTG", "TetR_producer/subcomponent_1", "TetR_producer/atC_TetR", "TetR_producer/subcomponent_4", "TetR_producer/subcomponent_2", "TetR_producer/LacI_protein", "TetR_producer/TetR_protein", "TetR_producer/IPTG_LacI" ],
+    "hasInteraction" : [ "TetR_producer/interaction_3", "TetR_producer/interaction_1", "TetR_producer/interaction_2" ],
+    "hasSequence" : "TetR_producer/sequence_1",
+    "name" : "TetR_producer",
+    "role" : "SO:0000704",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "TetR_producer/IPTG",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "IPTG",
+    "instanceOf" : "IPTG"
+  }, {
+    "@id" : "TetR_producer/IPTG_LacI",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "IPTG_LacI",
+    "instanceOf" : "IPTG_LacI"
+  }, {
+    "@id" : "TetR_producer/LacI_protein",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "LacI_protein",
+    "instanceOf" : "LacI_protein"
+  }, {
+    "@id" : "TetR_producer/TetR_protein",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "TetR_protein",
+    "instanceOf" : "TetR_protein"
+  }, {
+    "@id" : "TetR_producer/atC_TetR",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "atC_TetR",
+    "instanceOf" : "atC_TetR"
+  }, {
+    "@id" : "TetR_producer/interaction_1",
+    "@type" : "sbol:Interaction",
+    "displayId" : "interaction_1",
+    "hasParticipation" : [ "TetR_producer/interaction_1/participation_1", "TetR_producer/interaction_1/participation_2" ],
+    "type" : "SBO:0000589"
+  }, {
+    "@id" : "TetR_producer/interaction_1/participation_1",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_1",
+    "participant" : "TetR_producer/subcomponent_3",
+    "role" : "SBO:0000645"
+  }, {
+    "@id" : "TetR_producer/interaction_1/participation_2",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_2",
+    "participant" : "TetR_producer/TetR_protein",
+    "role" : "SBO:0000011"
+  }, {
+    "@id" : "TetR_producer/interaction_2",
+    "@type" : "sbol:Interaction",
+    "displayId" : "interaction_2",
+    "hasParticipation" : [ "TetR_producer/interaction_2/participation_1", "TetR_producer/interaction_2/participation_2" ],
+    "type" : "SBO:0000169"
+  }, {
+    "@id" : "TetR_producer/interaction_2/participation_1",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_1",
+    "participant" : "TetR_producer/subcomponent_1",
+    "role" : "SBO:0000642"
+  }, {
+    "@id" : "TetR_producer/interaction_2/participation_2",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_2",
+    "participant" : "TetR_producer/LacI_protein",
+    "role" : "SBO:0000019"
+  }, {
+    "@id" : "TetR_producer/interaction_3",
+    "@type" : "sbol:Interaction",
+    "displayId" : "interaction_3",
+    "hasParticipation" : [ "TetR_producer/interaction_3/participation_1", "TetR_producer/interaction_3/participation_2", "TetR_producer/interaction_3/participation_3" ],
+    "type" : "SBO:0000177"
+  }, {
+    "@id" : "TetR_producer/interaction_3/participation_1",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_1",
+    "participant" : "TetR_producer/LacI_protein",
+    "role" : "SBO:0000010"
+  }, {
+    "@id" : "TetR_producer/interaction_3/participation_2",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_2",
+    "participant" : "TetR_producer/IPTG",
+    "role" : "SBO:0000010"
+  }, {
+    "@id" : "TetR_producer/interaction_3/participation_3",
+    "@type" : "sbol:Participation",
+    "displayId" : "participation_3",
+    "participant" : "TetR_producer/IPTG_LacI",
+    "role" : "SBO:0000011"
+  }, {
+    "@id" : "TetR_producer/sequence_1",
+    "@type" : "sbol:Sequence",
+    "description" : "TetR_producer sequence",
+    "displayId" : "sequence_1",
+    "elements" : "",
+    "encoding" : "sbol:iupacNucleicAcid",
+    "name" : "TetR_producer"
+  }, {
+    "@id" : "TetR_producer/subcomponent_1",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "subcomponent_1",
+    "instanceOf" : "pLacI",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "TetR_producer/subcomponent_2",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "subcomponent_2",
+    "instanceOf" : "rbs_tetR",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "TetR_producer/subcomponent_3",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "subcomponent_3",
+    "instanceOf" : "tetR",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "TetR_producer/subcomponent_4",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "subcomponent_4",
+    "instanceOf" : "ter_tetR",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "TetR_protein",
+    "@type" : "sbol:Component",
+    "description" : "TetR protein",
+    "displayId" : "TetR_protein",
+    "name" : "TetR",
+    "role" : "GO:0003700",
+    "type" : "SBO:0000252"
+  }, {
+    "@id" : "aTC",
+    "@type" : "sbol:Component",
+    "description" : "aTC",
+    "displayId" : "aTC",
+    "name" : "aTC",
+    "role" : "CHEBI:35224",
+    "type" : "SBO:0000247"
+  }, {
+    "@id" : "atC_TetR",
+    "@type" : "sbol:Component",
+    "description" : "atC_TetR complex",
+    "displayId" : "atC_TetR",
+    "name" : "atC_TetR",
+    "type" : "SBO:0000253"
+  }, {
+    "@id" : "gfp",
+    "@type" : "sbol:Component",
+    "description" : "gfp coding sequence",
+    "displayId" : "gfp",
+    "name" : "gfp",
+    "role" : "SO:0000316",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "lacI",
+    "@type" : "sbol:Component",
+    "description" : "lacI coding sequence",
+    "displayId" : "lacI",
+    "name" : "lacI",
+    "role" : "SO:0000316",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "pLacI",
+    "@type" : "sbol:Component",
+    "description" : "LacI repressible promoter",
+    "displayId" : "pLacI",
+    "name" : "pLacI",
+    "role" : "SO:0000167",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "pTetR",
+    "@type" : "sbol:Component",
+    "description" : "TetR repressible promoter",
+    "displayId" : "pTetR",
+    "name" : "pTetR",
+    "role" : "SO:0000167",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "rbs_gfp",
+    "@type" : "sbol:Component",
+    "description" : "RBS",
+    "displayId" : "rbs_gfp",
+    "name" : "rbs_gfp",
+    "role" : "SO:0000139",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "rbs_lacI",
+    "@type" : "sbol:Component",
+    "description" : "RBS",
+    "displayId" : "rbs_lacI",
+    "name" : "rbs_lacI",
+    "role" : "SO:0000139",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "rbs_tetR",
+    "@type" : "sbol:Component",
+    "description" : "RBS",
+    "displayId" : "rbs_tetR",
+    "name" : "rbs_tetR",
+    "role" : "SO:0000139",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "ter_lacI",
+    "@type" : "sbol:Component",
+    "description" : "Terminator",
+    "displayId" : "ter_lacI",
+    "name" : "ter_lacI",
+    "role" : "SO:0000141",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "ter_tetR",
+    "@type" : "sbol:Component",
+    "description" : "Terminator",
+    "displayId" : "ter_tetR",
+    "name" : "ter_tetR",
+    "role" : "SO:0000141",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "tetR",
+    "@type" : "sbol:Component",
+    "description" : "tetR coding sequence",
+    "displayId" : "tetR",
+    "name" : "tetR",
+    "role" : "SO:0000316",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "toggle_switch",
+    "@type" : "sbol:Component",
+    "description" : "Toggle Switch genetic circuit",
+    "displayId" : "toggle_switch",
+    "hasConstraint" : [ "toggle_switch/constraint_2", "toggle_switch/constraint_1" ],
+    "hasFeature" : [ "toggle_switch/componentreference_4", "toggle_switch/componentreference_3", "toggle_switch/LacI_producer", "toggle_switch/componentreference_2", "toggle_switch/componentreference_1", "toggle_switch/TetR_producer" ],
+    "name" : "Toggle Switch",
+    "type" : "SBO:0000241"
+  }, {
+    "@id" : "toggle_switch/LacI_producer",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "LacI_producer",
+    "instanceOf" : "LacI_producer"
+  }, {
+    "@id" : "toggle_switch/TetR_producer",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "TetR_producer",
+    "instanceOf" : "TetR_producer"
+  }, {
+    "@id" : "toggle_switch/componentreference_1",
+    "@type" : "sbol:ComponentReference",
+    "displayId" : "componentreference_1",
+    "hasFeature" : "LacI_producer/LacI_protein",
+    "inChildOf" : "toggle_switch/LacI_producer"
+  }, {
+    "@id" : "toggle_switch/componentreference_2",
+    "@type" : "sbol:ComponentReference",
+    "displayId" : "componentreference_2",
+    "hasFeature" : "TetR_producer/LacI_protein",
+    "inChildOf" : "toggle_switch/TetR_producer"
+  }, {
+    "@id" : "toggle_switch/componentreference_3",
+    "@type" : "sbol:ComponentReference",
+    "displayId" : "componentreference_3",
+    "hasFeature" : "LacI_producer/TetR_protein",
+    "inChildOf" : "toggle_switch/LacI_producer"
+  }, {
+    "@id" : "toggle_switch/componentreference_4",
+    "@type" : "sbol:ComponentReference",
+    "displayId" : "componentreference_4",
+    "hasFeature" : "TetR_producer/TetR_protein",
+    "inChildOf" : "toggle_switch/TetR_producer"
+  }, {
+    "@id" : "toggle_switch/constraint_1",
+    "@type" : "sbol:Constraint",
+    "displayId" : "constraint_1",
+    "object" : "toggle_switch/componentreference_2",
+    "restriction" : "sbol:verifyIdentical",
+    "subject" : "toggle_switch/componentreference_1"
+  }, {
+    "@id" : "toggle_switch/constraint_2",
+    "@type" : "sbol:Constraint",
+    "displayId" : "constraint_2",
+    "object" : "toggle_switch/componentreference_4",
+    "restriction" : "sbol:verifyIdentical",
+    "subject" : "toggle_switch/componentreference_3"
+  } ],
+  "@context" : {
+    "type" : {
+      "@id" : "http://sbols.org/v3#type",
+      "@type" : "@id"
+    },
+    "role" : {
+      "@id" : "http://sbols.org/v3#role",
+      "@type" : "@id"
+    },
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
+    },
+    "displayId" : {
+      "@id" : "http://sbols.org/v3#displayId"
+    },
+    "description" : {
+      "@id" : "http://sbols.org/v3#description"
+    },
+    "orientation" : {
+      "@id" : "http://sbols.org/v3#orientation",
+      "@type" : "@id"
+    },
+    "instanceOf" : {
+      "@id" : "http://sbols.org/v3#instanceOf",
+      "@type" : "@id"
+    },
+    "hasParticipation" : {
+      "@id" : "http://sbols.org/v3#hasParticipation",
+      "@type" : "@id"
+    },
+    "inChildOf" : {
+      "@id" : "http://sbols.org/v3#inChildOf",
+      "@type" : "@id"
+    },
+    "hasFeature" : {
+      "@id" : "http://sbols.org/v3#hasFeature",
+      "@type" : "@id"
+    },
+    "participant" : {
+      "@id" : "http://sbols.org/v3#participant",
+      "@type" : "@id"
+    },
+    "hasConstraint" : {
+      "@id" : "http://sbols.org/v3#hasConstraint",
+      "@type" : "@id"
+    },
+    "hasInteraction" : {
+      "@id" : "http://sbols.org/v3#hasInteraction",
+      "@type" : "@id"
+    },
+    "hasSequence" : {
+      "@id" : "http://sbols.org/v3#hasSequence",
+      "@type" : "@id"
+    },
+    "encoding" : {
+      "@id" : "http://sbols.org/v3#encoding",
+      "@type" : "@id"
+    },
+    "elements" : {
+      "@id" : "http://sbols.org/v3#elements"
+    },
+    "subject" : {
+      "@id" : "http://sbols.org/v3#subject",
+      "@type" : "@id"
+    },
+    "restriction" : {
+      "@id" : "http://sbols.org/v3#restriction",
+      "@type" : "@id"
+    },
+    "object" : {
+      "@id" : "http://sbols.org/v3#object",
+      "@type" : "@id"
+    },
+    "@vocab" : "https://sbolstandard.org/examples/",
+    "SBO" : "https://identifiers.org/SBO:",
+    "CHEBI" : "https://identifiers.org/CHEBI:",
+    "GO" : "https://identifiers.org/GO:",
+    "sbol" : "http://sbols.org/v3#",
+    "EDAM" : "https://identifiers.org/edam:",
+    "SO" : "https://identifiers.org/SO:",
+    "prov" : "http://www.w3.org/ns/prov#",
+    "om" : "http://www.ontology-of-units-of-measure.org/resource/om-2/"
+  }
+}

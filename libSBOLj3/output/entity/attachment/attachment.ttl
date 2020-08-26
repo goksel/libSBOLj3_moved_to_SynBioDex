@@ -1,0 +1,32 @@
+@base          <http://parts.igem.org/Part:> .
+@prefix :      <http://parts.igem.org/Part:> .
+@prefix SBO:   <https://identifiers.org/SBO:> .
+@prefix CHEBI: <https://identifiers.org/CHEBI:> .
+@prefix GO:    <https://identifiers.org/GO:> .
+@prefix sbol:  <http://sbols.org/v3#> .
+@prefix EDAM:  <https://identifiers.org/edam:> .
+@prefix SO:    <https://identifiers.org/SO:> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+
+<./Part:/TetR_protein>
+        a                 sbol:Component ;
+        sbol:description  "TetR protein" ;
+        sbol:displayId    "TetR_protein" ;
+        sbol:name         "TetR" ;
+        sbol:role         GO:0003700 ;
+        sbol:type         SBO:0000252 .
+
+<./Part:/impl1>  a          sbol:Implementation ;
+        sbol:built          <./Part:/TetR_protein> ;
+        sbol:displayId      "impl1" ;
+        sbol:hasAttachment  <./Part:/attachment1> .
+
+<./Part:/attachment1>
+        a                   sbol:Attachment ;
+        sbol:displayId      "attachment1" ;
+        sbol:format         EDAM:format_2585 ;
+        sbol:hash           "aaa" ;
+        sbol:hashAlgorithm  "Alg1" ;
+        sbol:size           "1000" ;
+        sbol:source         <https://sbolstandard.org/attachment1> .

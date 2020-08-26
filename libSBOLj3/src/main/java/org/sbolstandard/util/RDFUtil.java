@@ -10,6 +10,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.jena.datatypes.RDFDatatype;
+import org.apache.jena.datatypes.xsd.impl.XSDFloat;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
@@ -72,11 +74,19 @@ public class RDFUtil {
 			resource.getModel().remove(stmt);
 		}
 	}
+	
 	public static void setProperty(Resource resource, URI property, String value)
 	{
 		Property p=resource.getModel().createProperty(property.toString());
 		removeIfExists(resource,p);
 		resource.addProperty(p, value);	
+	}
+	
+	public static void setProperty(Resource resource, URI property, float value)
+	{
+		Property p=resource.getModel().createProperty(property.toString());
+		removeIfExists(resource,p);
+		resource.addProperty(p, String.valueOf(value), XSDFloat.XSDfloat);	
 	}
 	
 
@@ -99,6 +109,20 @@ public class RDFUtil {
 			for (URI uri:values)
 			{
 				addProperty (resource, property, uri);
+			}
+		}
+	}
+	
+	public static void setPropertyAsStrings(Resource resource, URI property, List<String> values)
+	{
+		if (values!=null && values.size()>0)
+		{
+			Property p=resource.getModel().createProperty(property.toString());
+			removeIfExists(resource,p);
+		
+			for (String value:values)
+			{
+				addProperty (resource, property, value);
 			}
 		}
 	}
@@ -268,6 +292,30 @@ public class RDFUtil {
 	        }
 	        return values;
 	    }
+	    
+	    /**
+	     * Gets the  property values for a given property and a resource.
+	     * @param model Model to search the property for
+	     * @param resource Resource to search the property values for 
+	     * @param propertyURI the URI of the property
+	     * @return List of String objects with the corresponding values
+	     */
+	    public static List<String> getPropertiesAsStrings(Resource resource, URI propertyURI) 
+	    {
+	        ArrayList<String> values=new ArrayList<String>();
+	        Property property=resource.getModel().getProperty(propertyURI.toString());
+	        for (StmtIterator iterator=resource.listProperties(property);iterator.hasNext();)
+	        {
+	        	Statement stmt=iterator.next();
+	        	RDFNode object=stmt.getObject();
+	        	if (!object.isResource())
+	        	{
+	        		values.add(object.asLiteral().getLexicalForm());
+	        	}
+	        }
+	        return values;
+	    }
+	    
 	    
 	    public static String toLiteralString(RDFNode node)
 		{

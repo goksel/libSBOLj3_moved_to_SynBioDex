@@ -1,6 +1,7 @@
 package org.sbolstandard.io;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,6 +67,16 @@ public class SBOLWriter{
 	public static SBOLDocument read(String sbolData, String format)
 	{
 		InputStream is=IOUtils.toInputStream(sbolData, Charset.defaultCharset());
+		Model model = ModelFactory.createDefaultModel();
+		model.read(is,null,format);
+		SBOLDocument doc=new SBOLDocument(model);
+		return doc;
+		
+	}
+	
+	public static SBOLDocument read(File file, String format) throws FileNotFoundException
+	{
+		InputStream is=new FileInputStream(file);
 		Model model = ModelFactory.createDefaultModel();
 		model.read(is,null,format);
 		SBOLDocument doc=new SBOLDocument(model);

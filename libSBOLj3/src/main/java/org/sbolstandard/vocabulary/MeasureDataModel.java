@@ -29,6 +29,7 @@ public class MeasureDataModel {
 		public static URI symbol=URINameSpace.OM.local("symbol");
 		public static URI alternativeSymbol=URINameSpace.OM.local("alternativeSymbol");
 		public static URI label=URINameSpace.RDFS.local("label");
+		public static URI alternativeLabel=URINameSpace.OM.local("alternativeLabel");
 		public static URI comment=URINameSpace.RDFS.local("comment");
 		public static URI longComment=URINameSpace.OM.local("longcomment");
 	}
@@ -36,7 +37,7 @@ public class MeasureDataModel {
 	public static final class SingularUnit
 	{
 		public static URI uri=URINameSpace.OM.local("SingularUnit");
-		public static URI factor=URINameSpace.OM.local("hasFactor");
+		public static URI factor=Prefix.factor;
 	}
 	
 	
@@ -55,7 +56,7 @@ public class MeasureDataModel {
 	
 	public static final class UnitMultiplication
 	{
-		public static URI uri=URINameSpace.OM.local("PrefixedUnit");
+		public static URI uri=URINameSpace.OM.local("UnitMultiplication");
 		public static URI term1=URINameSpace.OM.local("hasTerm1");
 		public static URI term2=URINameSpace.OM.local("hasTerm2");	
 	}

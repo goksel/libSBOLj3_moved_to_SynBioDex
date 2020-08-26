@@ -11,9 +11,11 @@ import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
+import org.sbolstandard.entity.measure.Measure;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
+import org.sbolstandard.vocabulary.MeasureDataModel;
 
 public abstract class Identified {
 	protected Resource resource=null;
@@ -23,7 +25,7 @@ public abstract class Identified {
 	private String description;
 	private List<URI> wasDerivedFrom;
 	private List<URI> wasGeneratedBy;
-	private List<URI> measures;
+	private List<Measure> measures;
 	private URI uri;
 	
 	protected Identified()
@@ -118,19 +120,20 @@ public abstract class Identified {
 
 	}
 	
-	public List<URI> getMeasures() {
-		if (measures==null)
-		{
-			measures=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Identified.measure);
-		}
+	public List<Measure> getMeasures()throws SBOLGraphException  {
+		this.measures=addToList(this.measures, DataModel.Identified.measure, Measure.class, MeasureDataModel.Measure.uri);
 		return measures;
 	}
-	
-	public void setMeasures(List<URI> measures) {
-		this.measures = measures;
-		RDFUtil.setProperty(resource, DataModel.Identified.measure, this.measures);
-	}
 
+	public Measure createMeasure(URI uri, float value, URI unit) throws SBOLGraphException
+	{
+		Measure measure = new Measure(this.resource.getModel(), uri) {};
+		measure.setValue(value);
+		measure.setUnit(unit);		
+		this.measures=addToList(this.measures, measure, DataModel.Identified.measure);
+		return measure;	
+	}
+	
 	public URI getUri() {
 		return uri;
 	}

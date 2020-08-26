@@ -1,6 +1,9 @@
 package org.sbolstandard.entity.measure;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.jena.datatypes.xsd.impl.XSDFloat;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
@@ -13,7 +16,9 @@ public abstract class Unit extends TopLevel{
 	
 	
 	private String symbol;
+	private List<String> alternativeSymbols;
 	private String label;
+	private List<String> alternativeLabels;
 	private String comment;
 	private String longComment;
 		
@@ -40,6 +45,20 @@ public abstract class Unit extends TopLevel{
 		RDFUtil.setProperty(resource, MeasureDataModel.Unit.label, symbol);	
 	}
 	
+	public List<String> getAlternativeSymbols() {
+		if (alternativeSymbols==null)
+		{
+			alternativeSymbols=RDFUtil.getPropertiesAsStrings(this.resource, MeasureDataModel.Unit.alternativeSymbol);
+		}
+		return alternativeSymbols;
+	}
+	
+	public void setAlternativeSymbols(List<String> alternativeSymbols) {
+		this.alternativeSymbols = alternativeSymbols;
+		RDFUtil.setPropertyAsStrings(resource, MeasureDataModel.Unit.alternativeSymbol, alternativeSymbols);	
+	}
+	
+	
 	public String getLabel() {
 		if (label==null)
 		{
@@ -55,6 +74,19 @@ public abstract class Unit extends TopLevel{
 		{
 			setName(label);
 		}
+	}
+	
+	public List<String> getAlternativeLabels() {
+		if (alternativeLabels==null)
+		{
+			alternativeLabels=RDFUtil.getPropertiesAsStrings(this.resource, MeasureDataModel.Unit.alternativeLabel);
+		}
+		return alternativeLabels;
+	}
+	
+	public void setAlternativeLabels(List<String> alternativeLabels) {
+		this.alternativeLabels = alternativeLabels;
+		RDFUtil.setPropertyAsStrings(resource, MeasureDataModel.Unit.alternativeLabel, alternativeLabels);
 	}
 	
 	@Override 

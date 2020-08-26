@@ -11,7 +11,7 @@ import org.sbolstandard.vocabulary.MeasureDataModel;
 
 public class SingularUnit extends Unit{
 	
-	private XSDFloat factor;
+	private float factor=Float.NaN;
 	private URI unit;
 	
 	protected  SingularUnit(Model model,URI uri) throws SBOLGraphException
@@ -24,30 +24,37 @@ public class SingularUnit extends Unit{
 		super(resource);
 	}
 	
-	public void setFactor(XSDFloat factor) {
+	public void setFactor(float factor) {
 		this.factor = factor;
-		String factorString=factor.toString();
-		RDFUtil.setProperty(resource, MeasureDataModel.Prefix.factor, factorString);	
+		String factorString=String.valueOf(factor);
+		//RDFUtil.setProperty(resource, MeasureDataModel.Prefix.factor, factorString);
+		RDFUtil.setProperty(resource, MeasureDataModel.Prefix.factor, factor);
+		
 	}
 	
-	public XSDFloat getFactor() throws SBOLGraphException {
-		if (this.factor==null)
+	public float getFactor() throws SBOLGraphException {
+		if (this.factor==Float.NaN)
 		{
-			String factorString=RDFUtil.getPropertyAsString(this.resource, MeasureDataModel.Prefix.factor);
+			String factorString=RDFUtil.getPropertyAsString(this.resource, MeasureDataModel.SingularUnit.factor);
 			if (factorString!=null)
 			{
 				try
 				{
-					factor= (XSDFloat) XSDDatatype.XSDfloat.parse(factorString);
+					factor= Float.parseFloat(factorString);
+					//(XSDFloat) XSDDatatype.XSDfloat.parse(factorString);
 				}
 				catch (Exception e)
 				{
-					throw new SBOLGraphException("Cannot read the factor value. Property:" + MeasureDataModel.Prefix.factor + " Uri:+ " +  this.getUri(), e);
+					throw new SBOLGraphException("Cannot read the factor value. Property:" + MeasureDataModel.SingularUnit.factor + " Uri:+ " +  this.getUri(), e);
 				}
 			}
 		}
 		return factor;
 	}
+	
+
+	
+	
 	
 	public URI getUnit() {
 		if (unit==null)

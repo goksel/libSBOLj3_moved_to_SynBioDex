@@ -401,12 +401,13 @@ public class SBOLDocument {
 	}
 	
 	
-	public PrefixedUnit createPrexiedUnit(URI uri, String symbol, String name, URI unitURI) throws SBOLGraphException {
+	public PrefixedUnit createPrexiedUnit(URI uri, String symbol, String name, URI unitURI, URI prefix) throws SBOLGraphException {
 
 		PrefixedUnit unit = new PrefixedUnit(this.model, uri) {};
 		unit.setSymbol(symbol);
 		unit.setLabel(name);
 		unit.setUnit(unitURI);
+		unit.setPrefix(prefix);
 		if (prefixedUnits== null) {
 			prefixedUnits = new ArrayList<PrefixedUnit>();
 		}
