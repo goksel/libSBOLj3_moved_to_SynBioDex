@@ -62,7 +62,7 @@ public class PoPSReceiverExample extends TestCase {
         TestUtil.serialise(doc2, "BBa_F2620_PoPSReceiver", "BBa_F2620_PoPSReceiver");     
         
 
-            
+        TestUtil.assertReadWrite(doc);    
         System.out.println("done");   
     }
     

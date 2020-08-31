@@ -92,9 +92,7 @@ public class ActivityTest extends TestCase {
         	printActivity(doc2, act);
         	
         }
-        
-        
-      
+        TestUtil.assertEqual(doc, doc2);
     }
 	
 	private void printActivity(SBOLDocument document, Activity activity) throws SBOLGraphException

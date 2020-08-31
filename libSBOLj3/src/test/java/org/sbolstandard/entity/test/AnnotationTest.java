@@ -79,6 +79,8 @@ public class AnnotationTest extends TestCase {
         System.out.println(output);
          
         printMetadata(doc2.getComponents().get(0));
+        
+        TestUtil.assertReadWrite(doc);
           
     }
 	

@@ -14,7 +14,6 @@
     "displayId" : "AHL_producer",
     "hasFeature" : [ "AHL_producer/subcomponent_3", "AHL_producer/subcomponent_2", "AHL_producer/subcomponent_1", "AHL_producer/AHL", "AHL_producer/subcomponent_4" ],
     "hasInteraction" : "AHL_producer/interaction_1",
-    "hasSequence" : "AHL_producer/sequence_1",
     "name" : "AHL_producer",
     "role" : "SO:0000704",
     "type" : "SBO:0000251"
@@ -41,14 +40,6 @@
     "displayId" : "participation_2",
     "participant" : "AHL_producer/AHL",
     "role" : "SBO:0000011"
-  }, {
-    "@id" : "AHL_producer/sequence_1",
-    "@type" : "sbol:Sequence",
-    "description" : "AHL_producer sequence",
-    "displayId" : "sequence_1",
-    "elements" : "",
-    "encoding" : "sbol:iupacNucleicAcid",
-    "name" : "AHL_producer"
   }, {
     "@id" : "AHL_producer/subcomponent_1",
     "@type" : "sbol:SubComponent",
@@ -80,7 +71,6 @@
     "displayId" : "AHL_receiver",
     "hasFeature" : [ "AHL_receiver/subcomponent_5", "AHL_receiver/subcomponent_7", "AHL_receiver/LuxR_protein", "AHL_receiver/subcomponent_8", "AHL_receiver/LuxR_AHL", "AHL_receiver/AHL", "AHL_receiver/GFP", "AHL_receiver/subcomponent_2", "AHL_receiver/subcomponent_1", "AHL_receiver/subcomponent_3", "AHL_receiver/subcomponent_4", "AHL_receiver/subcomponent_6" ],
     "hasInteraction" : [ "AHL_receiver/interaction_2", "AHL_receiver/interaction_3", "AHL_receiver/interaction_4", "AHL_receiver/interaction_1" ],
-    "hasSequence" : "AHL_receiver/sequence_1",
     "name" : "AHL_receiver",
     "role" : "SO:0000704",
     "type" : "SBO:0000251"
@@ -182,14 +172,6 @@
     "displayId" : "participation_3",
     "participant" : "AHL_receiver/LuxR_AHL",
     "role" : "SBO:0000011"
-  }, {
-    "@id" : "AHL_receiver/sequence_1",
-    "@type" : "sbol:Sequence",
-    "description" : "AHL_receiver sequence",
-    "displayId" : "sequence_1",
-    "elements" : "",
-    "encoding" : "sbol:iupacNucleicAcid",
-    "name" : "AHL_receiver"
   }, {
     "@id" : "AHL_receiver/subcomponent_1",
     "@type" : "sbol:SubComponent",
@@ -559,10 +541,6 @@
       "@id" : "http://sbols.org/v3#hasInteraction",
       "@type" : "@id"
     },
-    "hasSequence" : {
-      "@id" : "http://sbols.org/v3#hasSequence",
-      "@type" : "@id"
-    },
     "subject" : {
       "@id" : "http://sbols.org/v3#subject",
       "@type" : "@id"
@@ -582,13 +560,6 @@
     "hasParticipation" : {
       "@id" : "http://sbols.org/v3#hasParticipation",
       "@type" : "@id"
-    },
-    "encoding" : {
-      "@id" : "http://sbols.org/v3#encoding",
-      "@type" : "@id"
-    },
-    "elements" : {
-      "@id" : "http://sbols.org/v3#elements"
     },
     "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",

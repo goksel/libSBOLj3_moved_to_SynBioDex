@@ -60,8 +60,7 @@ public class Multicellular extends TestCase {
         SBOLAPI.appendComponent(doc, AHLProducer,luxI);
         SBOLAPI.appendComponent(doc, AHLProducer,ter_luxI);
         SBOLAPI.addSubComponent(AHLProducer, AHL);
-        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),AHLProducer, luxI, Arrays.asList(ParticipationRole.Template), AHL, Arrays.asList(ParticipationRole.Product));  
-          
+        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),AHLProducer, luxI, Arrays.asList(ParticipationRole.Template), AHL, Arrays.asList(ParticipationRole.Product));       
         
         //AHL Receiver
         Component AHLReceiver=SBOLAPI.createDnaComponent(doc, "AHL_receiver", "AHL receiver", Role.EngineeredGene, null);  
@@ -77,8 +76,6 @@ public class Multicellular extends TestCase {
         Component GFP=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "GFP_protein"), ComponentType.Protein.getUrl(), "GFP", "GFP", "GFP", null);
         Component LuxR_AHL=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "LuxR_AHL"), ComponentType.Protein.getUrl(), "LuxR_AHL", "LuxR_AHL", "LuxR_AHL complex", Role.TF);
          
-        
-        
         SBOLAPI.appendComponent(doc, AHLReceiver,pConstLuxR);
         SBOLAPI.appendComponent(doc, AHLReceiver,rbs_luxR);
         SBOLAPI.appendComponent(doc, AHLReceiver,luxR);
@@ -121,8 +118,11 @@ public class Multicellular extends TestCase {
         output=SBOLWriter.write(doc2, "RDF/XML-ABBREV");
         System.out.print(output);
         
-        TestUtil.serialise(doc2, "multicellular", "multicellular");     
+        TestUtil.serialise(doc2, "multicellular", "multicellular");    
+        
+        TestUtil.assertReadWrite(doc);
         System.out.println("done");   
+        
     }
 	 
 	

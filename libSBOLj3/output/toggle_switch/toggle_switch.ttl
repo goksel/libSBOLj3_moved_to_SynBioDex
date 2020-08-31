@@ -267,7 +267,6 @@
         sbol:displayId       "LacI_producer" ;
         sbol:hasFeature      <LacI_producer/subcomponent_3> , <LacI_producer/TetR_protein> , <LacI_producer/subcomponent_6> , <LacI_producer/GFP> , <LacI_producer/subcomponent_2> , <LacI_producer/subcomponent_5> , <LacI_producer/subcomponent_4> , <LacI_producer/subcomponent_1> , <LacI_producer/LacI_protein> , <LacI_producer/aTC> ;
         sbol:hasInteraction  <LacI_producer/interaction_3> , <LacI_producer/interaction_4> , <LacI_producer/interaction_2> , <LacI_producer/interaction_1> ;
-        sbol:hasSequence     <LacI_producer/sequence_1> ;
         sbol:name            "LacI_producer" ;
         sbol:role            SO:0000704 ;
         sbol:type            SBO:0000251 .
@@ -277,14 +276,6 @@
         sbol:displayId    "participation_1" ;
         sbol:participant  <LacI_producer/TetR_protein> ;
         sbol:role         SBO:0000010 .
-
-<LacI_producer/sequence_1>
-        a                 sbol:Sequence ;
-        sbol:description  "LacI_producer sequence" ;
-        sbol:displayId    "sequence_1" ;
-        sbol:elements     "" ;
-        sbol:encoding     sbol:iupacNucleicAcid ;
-        sbol:name         "LacI_producer" .
 
 <LacI_producer/interaction_4>
         a                      sbol:Interaction ;
@@ -310,7 +301,6 @@
         sbol:displayId       "TetR_producer" ;
         sbol:hasFeature      <TetR_producer/subcomponent_3> , <TetR_producer/IPTG> , <TetR_producer/subcomponent_1> , <TetR_producer/atC_TetR> , <TetR_producer/subcomponent_4> , <TetR_producer/subcomponent_2> , <TetR_producer/LacI_protein> , <TetR_producer/TetR_protein> , <TetR_producer/IPTG_LacI> ;
         sbol:hasInteraction  <TetR_producer/interaction_3> , <TetR_producer/interaction_1> , <TetR_producer/interaction_2> ;
-        sbol:hasSequence     <TetR_producer/sequence_1> ;
         sbol:name            "TetR_producer" ;
         sbol:role            SO:0000704 ;
         sbol:type            SBO:0000251 .
@@ -339,14 +329,6 @@
         sbol:displayId    "participation_2" ;
         sbol:participant  <LacI_producer/GFP> ;
         sbol:role         SBO:0000011 .
-
-<TetR_producer/sequence_1>
-        a                 sbol:Sequence ;
-        sbol:description  "TetR_producer sequence" ;
-        sbol:displayId    "sequence_1" ;
-        sbol:elements     "" ;
-        sbol:encoding     sbol:iupacNucleicAcid ;
-        sbol:name         "TetR_producer" .
 
 <LacI_producer/subcomponent_4>
         a                 sbol:SubComponent ;

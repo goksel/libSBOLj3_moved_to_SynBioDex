@@ -16,7 +16,7 @@
         om:alternativeLabel   "litre2" , "liter" ;
         om:alternativeSymbol  "L2" , "L" ;
         om:comment            "The litre is a unit of volume defined as 1.0e-3 cubic metre." ;
-        om:hasFactor          "0.001"^^<http://www.w3.org/2001/XMLSchema#float> ;
+        om:hasFactor          "0.001" ;
         om:label              "liter" ;
         om:longcomment        "This is an example long comment." .
 

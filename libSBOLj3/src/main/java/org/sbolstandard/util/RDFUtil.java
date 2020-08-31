@@ -154,11 +154,15 @@ public class RDFUtil {
 	  public static List<Resource> getResourcesOfType(Model rdfModel,URI type) 
 	   {
 	    	Resource typeResource=rdfModel.createResource(type.toString());
-	        ArrayList<Resource> resources=new ArrayList<Resource>();        
+	        ArrayList<Resource> resources=null;
 	        for (ResIterator iterator =  rdfModel.listResourcesWithProperty(RDF.type, typeResource);iterator.hasNext();)
 	        {
+	           if (resources==null)
+	           {
+	        	   resources=new ArrayList<Resource>();        
+	           }
 	           Resource resource=iterator.next();
-	          resources.add(resource);
+	           resources.add(resource);
 	        }
 	        return resources;
 	   }
@@ -166,7 +170,7 @@ public class RDFUtil {
 	  
 	  public static List<Resource> getResourcesWithProperty(Resource resource,URI propertyURI) throws SBOLGraphException 
 	   {
-		  ArrayList<Resource> resources=new ArrayList<Resource>();       
+		  ArrayList<Resource> resources=null;
 		  Property property=resource.getModel().getProperty(propertyURI.toString());   
 		  StmtIterator it=resource.listProperties(property);
 		  while (it.hasNext())
@@ -175,6 +179,10 @@ public class RDFUtil {
 			  RDFNode object=stmt.getObject();
 			  if (object.isResource())
 			  {
+				  if (resources==null)
+				  {
+					  resources=new ArrayList<Resource>();
+				  }
 				  resources.add(object.asResource());
 			  }
 			  else
@@ -188,7 +196,7 @@ public class RDFUtil {
 	  
 	  public static List<Resource> getResourcesWithProperty(Resource resource,URI propertyURI, URI entityType) throws SBOLGraphException 
 	   {
-		  ArrayList<Resource> resources=new ArrayList<Resource>();       
+		  ArrayList<Resource> resources=null;       
 		  Property property=resource.getModel().getProperty(propertyURI.toString());   
 		  StmtIterator it=resource.listProperties(property);
 		  while (it.hasNext())
@@ -200,6 +208,10 @@ public class RDFUtil {
 				  Resource objectResource=object.asResource();
 				  if (hasType(resource.getModel(), objectResource, entityType))
 				  {
+					  if (resources==null)
+					  {
+						  resources=new ArrayList<Resource>();
+					  }
 					  resources.add(objectResource);
 				  }
 			  }
@@ -254,18 +266,16 @@ public class RDFUtil {
 		}
 	  
 	  public static URI getPropertyAsURI(Resource resource, URI propertyURI) {
-			Property property=resource.getModel().getProperty(propertyURI.toString());   
-			Statement stmt = resource.getProperty(property);
-		    
-			RDFNode object=stmt.getObject();
-        	if (object.isResource())
-        	{
-        		return URI.create(object.asResource().getURI());
-        	}
-        	else
-        	{
-        		return null;
-        	}
+		  URI result=null;	
+		  Property property=resource.getModel().getProperty(propertyURI.toString());   
+		  Statement stmt = resource.getProperty(property);
+		  if (stmt!=null){
+			  RDFNode object=stmt.getObject();
+			  if (object.isResource()){
+				  result= URI.create(object.asResource().getURI());
+			  }
+		  }
+		  return result;  
 		}
 	  
 	  
@@ -279,7 +289,7 @@ public class RDFUtil {
 	     */
 	    public static List<URI> getPropertiesAsURIs(Resource resource, URI propertyURI) 
 	    {
-	        ArrayList<URI> values=new ArrayList<URI>();
+	        ArrayList<URI> values=null;
 	        Property property=resource.getModel().getProperty(propertyURI.toString());
 	        for (StmtIterator iterator=resource.listProperties(property);iterator.hasNext();)
 	        {
@@ -287,6 +297,10 @@ public class RDFUtil {
 	        	RDFNode object=stmt.getObject();
 	        	if (object.isResource())
 	        	{
+	        		if (values==null)
+	        		{
+	        			values=new ArrayList<URI>();
+	        		}
 	        		values.add(URI.create(object.asResource().getURI()));
 	        	}
 	        }
@@ -302,7 +316,7 @@ public class RDFUtil {
 	     */
 	    public static List<String> getPropertiesAsStrings(Resource resource, URI propertyURI) 
 	    {
-	        ArrayList<String> values=new ArrayList<String>();
+	        ArrayList<String> values=null;
 	        Property property=resource.getModel().getProperty(propertyURI.toString());
 	        for (StmtIterator iterator=resource.listProperties(property);iterator.hasNext();)
 	        {
@@ -310,6 +324,10 @@ public class RDFUtil {
 	        	RDFNode object=stmt.getObject();
 	        	if (!object.isResource())
 	        	{
+	        		if (values==null)
+	        		{
+	        			values=new ArrayList<String>();
+	        		}
 	        		values.add(object.asLiteral().getLexicalForm());
 	        	}
 	        }

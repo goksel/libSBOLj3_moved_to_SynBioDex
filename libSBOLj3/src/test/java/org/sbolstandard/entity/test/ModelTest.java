@@ -33,6 +33,7 @@ public class ModelTest extends TestCase {
         TestUtil.serialise(doc, "entity/model", "model");
       
         System.out.println(SBOLWriter.write(doc, "Turtle"));
+        TestUtil.assertReadWrite(doc);
     }
 
 }

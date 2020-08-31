@@ -71,14 +71,14 @@ public class Component extends TopLevel {
 	public List<URI> getSequences() {
 		if (sequences==null)
 		{
-			sequences=RDFUtil.getPropertiesAsURIs(this.resource, URI.create("http://sbols.org/v3#hasSequence"));
+			sequences=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Component.sequence);
 		}
 		return sequences;
 	}
 	
 	public void setSequences(List<URI> sequences) {
 		this.sequences = sequences;
-		RDFUtil.setProperty(resource, URI.create("http://sbols.org/v3#hasSequence"), sequences);
+		RDFUtil.setProperty(resource, DataModel.Component.sequence, sequences);
 	}
 	
 	//Features

@@ -23,7 +23,7 @@ public class SBOLWriter{
 
 	public static String write(SBOLDocument doc, String format) throws IOException
 	{
-		String output=RDFUtil.write(doc.getModel(), format, getTopLevelResources(doc), doc.getBaseURI());				
+		String output=RDFUtil.write(doc.getRDFModel(), format, getTopLevelResources(doc), doc.getBaseURI());				
 		return output;
 	}
 	
@@ -61,7 +61,7 @@ public class SBOLWriter{
 	
 	public static void write(SBOLDocument doc, File file, String format) throws FileNotFoundException, IOException
 	{
-		RDFUtil.write(doc.getModel(), file, format, getTopLevelResources(doc), doc.getBaseURI());				
+		RDFUtil.write(doc.getRDFModel(), file, format, getTopLevelResources(doc), doc.getBaseURI());				
 	}
 	
 	public static SBOLDocument read(String sbolData, String format)

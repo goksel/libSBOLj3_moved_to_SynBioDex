@@ -24,7 +24,7 @@ public class AttachmentTest extends TestCase {
 	
 	public void testImplementation() throws SBOLGraphException, IOException
     {
-		String baseUri="http://parts.igem.org/Part:";
+		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
         Component TetR_protein=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "TetR_protein"), ComponentType.Protein.getUrl(), "TetR", "TetR_protein", "TetR protein", Role.TF);
@@ -44,6 +44,7 @@ public class AttachmentTest extends TestCase {
         TestUtil.serialise(doc, "entity/attachment", "attachment");
       
         System.out.println(SBOLWriter.write(doc, "Turtle"));
+        TestUtil.assertReadWrite(doc);
     }
 
 }

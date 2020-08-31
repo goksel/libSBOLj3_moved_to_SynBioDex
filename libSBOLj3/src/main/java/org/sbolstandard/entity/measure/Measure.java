@@ -15,7 +15,7 @@ import org.sbolstandard.vocabulary.MeasureDataModel;
 
 public class Measure extends Identified{
 	
-	private float value;
+	private float value=Float.NaN;
 	private List<URI> types;
 	private URI unit;
 	
@@ -56,7 +56,7 @@ public class Measure extends Identified{
 	*/
 	
 	public float getValue() throws SBOLGraphException {
-		if (this.value==Float.NaN)
+		if (Float.isNaN(this.value))
 		{
 			String valueString=RDFUtil.getPropertyAsString(this.resource, MeasureDataModel.Measure.value);
 			if (valueString!=null)

@@ -4,12 +4,12 @@
     "@type" : "sbol:Component",
     "description" : "Transcriptional terminator consisting of a 64 bp stem-loop",
     "displayId" : "BBa_B0010",
-    "hasSequence" : "BBa_B0010/sequence_1",
+    "hasSequence" : "BBa_B0010_sequence_1",
     "name" : "BBa_B0010",
     "role" : "SO:0000141",
     "type" : "SBO:0000251"
   }, {
-    "@id" : "BBa_B0010/sequence_1",
+    "@id" : "BBa_B0010_sequence_1",
     "@type" : "sbol:Sequence",
     "description" : "BBa_B0010 sequence",
     "displayId" : "sequence_1",
@@ -21,12 +21,12 @@
     "@type" : "sbol:Component",
     "description" : "Double terminator consisting of BBa_B0010 and BBa_B0012",
     "displayId" : "BBa_B0012",
-    "hasSequence" : "BBa_B0012/sequence_1",
+    "hasSequence" : "BBa_B0012_sequence_1",
     "name" : "BBa_B0012",
     "role" : "SO:0000141",
     "type" : "SBO:0000251"
   }, {
-    "@id" : "BBa_B0012/sequence_1",
+    "@id" : "BBa_B0012_sequence_1",
     "@type" : "sbol:Sequence",
     "description" : "BBa_B0012 sequence",
     "displayId" : "sequence_1",
@@ -39,18 +39,10 @@
     "description" : "Double terminator consisting of BBa_B0010 and BBa_B0012",
     "displayId" : "BBa_B0015",
     "hasFeature" : [ "BBa_B0015/subcomponent_1", "BBa_B0015/subcomponent_2" ],
-    "hasSequence" : "BBa_B0015/sequence_1",
+    "hasSequence" : "BBa_B0015_sequence_1",
     "name" : "BBa_B0015",
     "role" : "SO:0000141",
     "type" : "SBO:0000251"
-  }, {
-    "@id" : "BBa_B0015/sequence_1",
-    "@type" : "sbol:Sequence",
-    "description" : "BBa_B0015 sequence",
-    "displayId" : "sequence_1",
-    "elements" : "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctcacactggctcaccttcgggtgggcctttctgcgtttata",
-    "encoding" : "sbol:iupacNucleicAcid",
-    "name" : "BBa_B0015"
   }, {
     "@id" : "BBa_B0015/subcomponent_1",
     "@type" : "sbol:SubComponent",
@@ -78,16 +70,24 @@
     "end" : "162",
     "start" : "122"
   }, {
+    "@id" : "BBa_B0015_sequence_1",
+    "@type" : "sbol:Sequence",
+    "description" : "BBa_B0015 sequence",
+    "displayId" : "sequence_1",
+    "elements" : "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctcacactggctcaccttcgggtgggcctttctgcgtttata",
+    "encoding" : "sbol:iupacNucleicAcid",
+    "name" : "BBa_B0015"
+  }, {
     "@id" : "BBa_B0034",
     "@type" : "sbol:Component",
     "description" : "RBS based on Elowitz repressilator",
     "displayId" : "BBa_B0034",
-    "hasSequence" : "BBa_B0034/sequence_1",
+    "hasSequence" : "BBa_B0034_sequence_1",
     "name" : "BBa_B0034",
     "role" : "SO:0000139",
     "type" : "SBO:0000251"
   }, {
-    "@id" : "BBa_B0034/sequence_1",
+    "@id" : "BBa_B0034_sequence_1",
     "@type" : "sbol:Sequence",
     "description" : "BBa_B0034 sequence",
     "displayId" : "sequence_1",
@@ -99,29 +99,21 @@
     "@type" : "sbol:Component",
     "description" : "luxR repressor/activator,  (no LVA?)",
     "displayId" : "BBa_C0062",
-    "hasSequence" : "BBa_C0062/sequence_1",
+    "hasSequence" : "BBa_C0062_sequence_1",
     "name" : "luxR",
     "role" : "SO:0000316",
     "type" : "SBO:0000251"
-  }, {
-    "@id" : "BBa_C0062/sequence_1",
-    "@type" : "sbol:Sequence",
-    "description" : "luxR sequence",
-    "displayId" : "sequence_1",
-    "elements" : "atgaaaaacataaatgccgacgacacatacagaataattaataaaattaaagcttgtagaagcaataatgatattaatcaatgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcac",
-    "encoding" : "sbol:iupacNucleicAcid",
-    "name" : "luxR"
   }, {
     "@id" : "BBa_C0062_protein",
     "@type" : "sbol:Component",
     "description" : "LuxR protein",
     "displayId" : "BBa_C0062_protein",
-    "hasSequence" : "BBa_C0062_protein/sequence_1",
+    "hasSequence" : "BBa_C0062_protein_sequence_1",
     "name" : "LuxR",
     "role" : "GO:0003700",
     "type" : "SBO:0000252"
   }, {
-    "@id" : "BBa_C0062_protein/sequence_1",
+    "@id" : "BBa_C0062_protein_sequence_1",
     "@type" : "sbol:Sequence",
     "description" : "LuxR sequence",
     "displayId" : "sequence_1",
@@ -129,13 +121,21 @@
     "encoding" : "sbol:iupacAminoAcid",
     "name" : "LuxR"
   }, {
+    "@id" : "BBa_C0062_sequence_1",
+    "@type" : "sbol:Sequence",
+    "description" : "luxR sequence",
+    "displayId" : "sequence_1",
+    "elements" : "atgaaaaacataaatgccgacgacacatacagaataattaataaaattaaagcttgtagaagcaataatgatattaatcaatgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcac",
+    "encoding" : "sbol:iupacNucleicAcid",
+    "name" : "luxR"
+  }, {
     "@id" : "BBa_F2620",
     "@type" : "sbol:Component",
     "description" : "PoPS Receiver",
     "displayId" : "BBa_F2620",
     "hasFeature" : [ "BBa_F2620/subcomponent_6", "BBa_F2620/subcomponent_7", "BBa_F2620/BBa_C0062_protein", "BBa_F2620/subcomponent_4", "BBa_F2620/subcomponent_3", "BBa_F2620/subcomponent_5", "BBa_F2620/TetR_protein" ],
     "hasInteraction" : [ "BBa_F2620/interaction_1", "BBa_F2620/interaction_3", "BBa_F2620/interaction_2" ],
-    "hasSequence" : "BBa_F2620/sequence_1",
+    "hasSequence" : "BBa_F2620_sequence_1",
     "name" : "BBa_F2620",
     "role" : "SO:0000704",
     "type" : "SBO:0000251"
@@ -204,14 +204,6 @@
     "participant" : "BBa_F2620/TetR_protein",
     "role" : "SBO:0000459"
   }, {
-    "@id" : "BBa_F2620/sequence_1",
-    "@type" : "sbol:Sequence",
-    "description" : "BBa_F2620 sequence",
-    "displayId" : "sequence_1",
-    "elements" : "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcacaaagaggagaaaatgaaaaacataaatgccgacgacacatacagaataattaataaaattaaagcttgtagaagcaataatgatattaatcaatgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcacccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctcacactggctcaccttcgggtgggcctttctgcgtttataacctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa",
-    "encoding" : "sbol:iupacNucleicAcid",
-    "name" : "BBa_F2620"
-  }, {
     "@id" : "BBa_F2620/subcomponent_3",
     "@type" : "sbol:SubComponent",
     "displayId" : "subcomponent_3",
@@ -277,16 +269,24 @@
     "end" : "1078",
     "start" : "1024"
   }, {
+    "@id" : "BBa_F2620_sequence_1",
+    "@type" : "sbol:Sequence",
+    "description" : "BBa_F2620 sequence",
+    "displayId" : "sequence_1",
+    "elements" : "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcacaaagaggagaaaatgaaaaacataaatgccgacgacacatacagaataattaataaaattaaagcttgtagaagcaataatgatattaatcaatgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcacccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctcacactggctcaccttcgggtgggcctttctgcgtttataacctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa",
+    "encoding" : "sbol:iupacNucleicAcid",
+    "name" : "BBa_F2620"
+  }, {
     "@id" : "BBa_R0040",
     "@type" : "sbol:Component",
     "description" : "TetR repressible promoter",
     "displayId" : "BBa_R0040",
-    "hasSequence" : "BBa_R0040/sequence_1",
+    "hasSequence" : "BBa_R0040_sequence_1",
     "name" : "pTetR",
     "role" : "SO:0000167",
     "type" : "SBO:0000251"
   }, {
-    "@id" : "BBa_R0040/sequence_1",
+    "@id" : "BBa_R0040_sequence_1",
     "@type" : "sbol:Sequence",
     "description" : "pTetR sequence",
     "displayId" : "sequence_1",
@@ -298,12 +298,12 @@
     "@type" : "sbol:Component",
     "description" : "Promoter (luxR &amp; HSL regulated -- lux pR)",
     "displayId" : "BBa_R0062",
-    "hasSequence" : "BBa_R0062/sequence_1",
+    "hasSequence" : "BBa_R0062_sequence_1",
     "name" : "lux pR",
     "role" : "SO:0000167",
     "type" : "SBO:0000251"
   }, {
-    "@id" : "BBa_R0062/sequence_1",
+    "@id" : "BBa_R0062_sequence_1",
     "@type" : "sbol:Sequence",
     "description" : "lux pR sequence",
     "displayId" : "sequence_1",
@@ -315,12 +315,12 @@
     "@type" : "sbol:Component",
     "description" : "TetR protein",
     "displayId" : "TetR_protein",
-    "hasSequence" : "TetR_protein/sequence_1",
+    "hasSequence" : "TetR_protein_sequence_1",
     "name" : "TetR",
     "role" : "GO:0003700",
     "type" : "SBO:0000252"
   }, {
-    "@id" : "TetR_protein/sequence_1",
+    "@id" : "TetR_protein_sequence_1",
     "@type" : "sbol:Sequence",
     "description" : "TetR sequence",
     "displayId" : "sequence_1",
@@ -329,22 +329,6 @@
     "name" : "TetR"
   } ],
   "@context" : {
-    "name" : {
-      "@id" : "http://sbols.org/v3#name"
-    },
-    "encoding" : {
-      "@id" : "http://sbols.org/v3#encoding",
-      "@type" : "@id"
-    },
-    "elements" : {
-      "@id" : "http://sbols.org/v3#elements"
-    },
-    "displayId" : {
-      "@id" : "http://sbols.org/v3#displayId"
-    },
-    "description" : {
-      "@id" : "http://sbols.org/v3#description"
-    },
     "role" : {
       "@id" : "http://sbols.org/v3#role",
       "@type" : "@id"
@@ -352,6 +336,9 @@
     "participant" : {
       "@id" : "http://sbols.org/v3#participant",
       "@type" : "@id"
+    },
+    "displayId" : {
+      "@id" : "http://sbols.org/v3#displayId"
     },
     "orientation" : {
       "@id" : "http://sbols.org/v3#orientation",
@@ -364,6 +351,19 @@
     "hasLocation" : {
       "@id" : "http://sbols.org/v3#hasLocation",
       "@type" : "@id"
+    },
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
+    },
+    "encoding" : {
+      "@id" : "http://sbols.org/v3#encoding",
+      "@type" : "@id"
+    },
+    "elements" : {
+      "@id" : "http://sbols.org/v3#elements"
+    },
+    "description" : {
+      "@id" : "http://sbols.org/v3#description"
     },
     "type" : {
       "@id" : "http://sbols.org/v3#type",

@@ -174,12 +174,13 @@ public abstract class Identified {
 			if (resources!=null && resources.size()>0)
 			{
 				items=new ArrayList<T>();
+				for (Resource res:resources)
+				{
+					Identified identified=createIdentified(res, identifiedClass);
+					items.add((T)identified);
+				}
 			}
-			for (Resource res:resources)
-			{
-				Identified identified=createIdentified(res, identifiedClass);
-				items.add((T)identified);
-			}
+			
 		}
 		return items;
 	}
@@ -232,12 +233,13 @@ public abstract class Identified {
 			if (resources!=null && resources.size()>0)
 			{
 				items=new ArrayList<T>();
+				for (Resource res:resources)
+				{
+					Identified identified=createIdentified(res, identifiedClass);
+					items.add((T)identified);
+				}
 			}
-			for (Resource res:resources)
-			{
-				Identified identified=createIdentified(res, identifiedClass);
-				items.add((T)identified);
-			}
+			
 		}
 		return items;
 	}

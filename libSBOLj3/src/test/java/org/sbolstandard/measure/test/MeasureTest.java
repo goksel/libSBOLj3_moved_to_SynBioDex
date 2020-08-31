@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
+import java.util.List;
 
 import org.sbolstandard.TestUtil;
 import org.sbolstandard.api.SBOLAPI;
@@ -78,6 +79,28 @@ public class MeasureTest extends TestCase {
         SBOLDocument doc2=SBOLWriter.read(new File("output/measurement_entity/measurement/measurement.ttl"), "turtle");
       
         System.out.println(SBOLWriter.write(doc2, "Turtle"));
+        List<SingularUnit> units=doc2.getSingularUnits();
+        if (units!=null)
+        {
+        	for (SingularUnit unit:units)
+        	{
+        		System.out.print("Name:" + unit.getName() + " ");
+        		System.out.println("Factor:" + unit.getFactor());
+        		
+        	}
+        }
+        
+        List<PrefixedUnit> prefixedUnits=doc2.getPrefixedUnits();
+        if (prefixedUnits!=null)
+        {
+        	for (PrefixedUnit unit:prefixedUnits)
+        	{
+        		System.out.print("Name:" + unit.getName() + " ");
+        		System.out.println("Prefix:" + unit.getPrefix());
+        		
+        	}
+        }
+        
         
         TestUtil.assertReadWrite(doc);
     }

@@ -9,7 +9,7 @@ import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.MeasureDataModel;
 
-public abstract class UnitExponentiation extends CompountUnit{
+public class UnitExponentiation extends CompountUnit{
 	
 	private URI base;
 	private int exponent=Integer.MIN_VALUE;

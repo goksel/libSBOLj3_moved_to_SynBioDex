@@ -46,6 +46,7 @@ public class InterfaceTest extends TestCase {
         TestUtil.serialise(doc, "entity/interface", "interface");
       
         System.out.println(SBOLWriter.write(doc, "Turtle"));
+        TestUtil.assertReadWrite(doc);
     }
 
 }

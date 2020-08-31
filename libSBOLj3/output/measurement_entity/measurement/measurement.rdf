@@ -32,12 +32,11 @@
       <sbol:description>The litre is a unit of volume defined as 1.0e-3 cubic metre.</sbol:description>
       <sbol:name>liter</sbol:name>
       <om:alternativeLabel>litre2</om:alternativeLabel>
-      <om:hasFactor rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
-      >0.001</om:hasFactor>
       <sbol:displayId>litre</sbol:displayId>
       <om:alternativeLabel>liter</om:alternativeLabel>
       <om:comment>The litre is a unit of volume defined as 1.0e-3 cubic metre.</om:comment>
       <om:label>liter</om:label>
+      <om:hasFactor>0.001</om:hasFactor>
       <om:longcomment>This is an example long comment.</om:longcomment>
       <om:alternativeSymbol>L2</om:alternativeSymbol>
       <om:alternativeSymbol>L</om:alternativeSymbol>

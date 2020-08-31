@@ -53,10 +53,10 @@ public class SBOLDocument {
 	private List<UnitDivision> unitDivisions;
 	private List<UnitExponentiation> unitExponentiations;
 	private List<PrefixedUnit> prefixedUnits;
-	private List<Measure> measures;
+	//private List<Measure> measures;
 	
 	
-	public Model getModel() {
+	public Model getRDFModel() {
 		return model;
 	}
 	
@@ -124,10 +124,7 @@ public class SBOLDocument {
 
 		Component component = new Component(this.model, uri);
 		component.setTypes(types);
-		if (components == null) {
-			components = new ArrayList<Component>();
-		}
-		components.add(component);
+		addToInMemoryList(component, components);
 		return component;
 	}
 	
@@ -136,13 +133,9 @@ public class SBOLDocument {
 		return sequences;
 	}
 	
-
 	public Sequence createSequence(URI uri) throws SBOLGraphException {
 		Sequence sequence = new Sequence(this.model, uri);
-		if (sequences == null) {
-			sequences = new ArrayList<Sequence>();
-		}
-		sequences.add(sequence);
+		addToInMemoryList(sequence, sequences);
 		return sequence;
 	}
 	
@@ -181,7 +174,6 @@ public class SBOLDocument {
 		addToInMemoryList(experimentalData, experimentalDatas);
 		return experimentalData;
 	}
-	
 	
 	public List<org.sbolstandard.entity.Model> getModels() throws SBOLGraphException {
 		this.models=addToList(model, this.models, DataModel.Model.uri,org.sbolstandard.entity.Model.class);
@@ -245,10 +237,7 @@ public class SBOLDocument {
 	public Agent createAgent(URI uri) throws SBOLGraphException {
 
 		Agent agent = new Agent(this.model, uri) {};
-		if (agents == null) {
-			agents = new ArrayList<Agent>();
-		}
-		agents.add(agent);
+		addToInMemoryList(agent, agents);
 		return agent;
 	}
 	
@@ -260,10 +249,7 @@ public class SBOLDocument {
 	public Plan createPlan(URI uri) throws SBOLGraphException {
 
 		Plan plan = new Plan(this.model, uri) {};
-		if (plans == null) {
-			plans = new ArrayList<Plan>();
-		}
-		plans.add(plan);
+		addToInMemoryList(plan, plans);
 		return plan;
 	}
 	
@@ -275,10 +261,7 @@ public class SBOLDocument {
 	public Activity createActivity(URI uri) throws SBOLGraphException {
 
 		Activity activity = new Activity(this.model, uri) {};
-		if (activities == null) {
-			activities = new ArrayList<Activity>();
-		}
-		activities.add(activity);
+		addToInMemoryList(activity, activities);
 		return activity;
 	}
 	
@@ -298,10 +281,7 @@ public class SBOLDocument {
 
 		SIPrefix prefix = new SIPrefix(this.model, uri) {};
 		initialisePrefix(prefix, symbol, name, factor);
-		if (siPrefixes == null) {
-			siPrefixes = new ArrayList<SIPrefix>();
-		}
-		siPrefixes.add(prefix);
+		addToInMemoryList(prefix, siPrefixes);
 		return prefix;
 	}
 	
@@ -314,10 +294,7 @@ public class SBOLDocument {
 
 		BinaryPrefix prefix = new BinaryPrefix(this.model, uri) {};
 		initialisePrefix(prefix, symbol, name, factor);
-		if (binaryPrefixes == null) {
-			binaryPrefixes = new ArrayList<BinaryPrefix>();
-		}
-		binaryPrefixes.add(prefix);
+		addToInMemoryList(prefix, binaryPrefixes);
 		return prefix;
 	}
 	
@@ -331,10 +308,7 @@ public class SBOLDocument {
 		SingularUnit unit = new SingularUnit(this.model, uri) {};
 		unit.setSymbol(symbol);
 		unit.setLabel(name);
-		if (singularUnits== null) {
-			singularUnits = new ArrayList<SingularUnit>();
-		}
-		singularUnits.add(unit);
+		addToInMemoryList(unit, singularUnits);
 		return unit;
 	}
 	
@@ -350,10 +324,7 @@ public class SBOLDocument {
 		unit.setLabel(name);
 		unit.setTerm1(unit1);
 		unit.setTerm2(unit2);
-		if (unitMultiplications== null) {
-			unitMultiplications = new ArrayList<UnitMultiplication>();
-		}
-		unitMultiplications.add(unit);
+		addToInMemoryList(unit, unitMultiplications);
 		return unit;
 	}
 	
@@ -369,10 +340,7 @@ public class SBOLDocument {
 		unit.setLabel(name);
 		unit.setNumerator(numerator);
 		unit.setDenominator(denominator);
-		if (unitDivisions== null) {
-			unitDivisions = new ArrayList<UnitDivision>();
-		}
-		unitDivisions.add(unit);
+		addToInMemoryList(unit, unitDivisions);
 		return unit;
 	}
 	
@@ -388,10 +356,7 @@ public class SBOLDocument {
 		unit.setLabel(name);
 		unit.setBase(baseUnit);
 		unit.setExponent(exponent);
-		if (unitExponentiations== null) {
-			unitExponentiations = new ArrayList<UnitExponentiation>();
-		}
-		unitExponentiations.add(unit);
+		addToInMemoryList(unit, unitExponentiations);
 		return unit;
 	}
 	
@@ -408,10 +373,7 @@ public class SBOLDocument {
 		unit.setLabel(name);
 		unit.setUnit(unitURI);
 		unit.setPrefix(prefix);
-		if (prefixedUnits== null) {
-			prefixedUnits = new ArrayList<PrefixedUnit>();
-		}
-		prefixedUnits.add(unit);
+		addToInMemoryList(unit, prefixedUnits);
 		return unit;
 	}
 	
@@ -420,7 +382,7 @@ public class SBOLDocument {
 		return prefixedUnits;
 	}
 	
-	public Measure createMeasure(URI uri, float value, URI unit) throws SBOLGraphException {
+	/*public Measure createMeasure(URI uri, float value, URI unit) throws SBOLGraphException {
 
 		Measure measure = new Measure(this.model, uri) {};
 		measure.setValue(value);
@@ -431,12 +393,12 @@ public class SBOLDocument {
 		measures.add(measure);
 		return measure;
 	}
-	
-	public List<Measure> getMeasures() throws SBOLGraphException {
+	*/
+	/*public List<Measure> getMeasures() throws SBOLGraphException {
 		this.measures=addToList(model, this.measures, MeasureDataModel.Measure.uri,Measure.class);
 		return measures;
 	}
-	
+	*/
 	public <T extends Identified>Identified getIdentified(URI uri, Class<T> identified) throws SBOLGraphException
 	{
 		Resource res=this.model.getResource(uri.toString());
@@ -478,15 +440,18 @@ public class SBOLDocument {
 
 	private <T extends Identified>  List<T> addToList(Model model, List<T> items, URI entityType, Class<T> identifiedClass) throws SBOLGraphException
 	{
-		List<Resource> resources=RDFUtil.getResourcesOfType(model, entityType);
-		if (resources!=null && resources.size()>0)
+		if (items==null)
 		{
-			items=new ArrayList<T>();
-		}
-		for (Resource resource:resources)
-		{
-			Identified identified=createIdentified(resource, identifiedClass) ;
-			items.add((T)identified);
+			List<Resource> resources=RDFUtil.getResourcesOfType(model, entityType);
+			if (resources!=null && resources.size()>0)
+			{
+				items=new ArrayList<T>();
+				for (Resource resource:resources)
+				{
+					Identified identified=createIdentified(resource, identifiedClass) ;
+					items.add((T)identified);
+				}
+			}
 		}
 		return items;
 	}

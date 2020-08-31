@@ -29,11 +29,13 @@ public abstract class Prefix extends Unit{
 	public void setFactor(float factor) {
 		this.factor = factor;
 		String factorString=String.valueOf(factor);
-		RDFUtil.setProperty(resource, MeasureDataModel.Prefix.factor, factorString);	
+		RDFUtil.setProperty(resource, MeasureDataModel.Prefix.factor, factorString);
+		//RDFUtil.setProperty(resource, MeasureDataModel.Prefix.factor, factor);
+		
 	}
 	
 	public float getFactor() throws SBOLGraphException {
-		if (this.factor==Float.NaN)
+		if (Float.isNaN(this.factor))
 		{
 			String factorString=RDFUtil.getPropertyAsString(this.resource, MeasureDataModel.Prefix.factor);
 			if (factorString!=null)

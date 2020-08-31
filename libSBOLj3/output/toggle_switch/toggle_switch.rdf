@@ -109,9 +109,6 @@
          </sbol:SubComponent>
       </sbol:hasFeature>
       <sbol:name>TetR_producer</sbol:name>
-      <sbol:hasSequence>
-         <sbol:Sequence rdf:about="TetR_producer/sequence_1"/>
-      </sbol:hasSequence>
       <sbol:displayId>TetR_producer</sbol:displayId>
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="TetR_producer/atC_TetR">
@@ -394,9 +391,6 @@
          </sbol:SubComponent>
       </sbol:hasFeature>
       <sbol:displayId>LacI_producer</sbol:displayId>
-      <sbol:hasSequence>
-         <sbol:Sequence rdf:about="LacI_producer/sequence_1"/>
-      </sbol:hasSequence>
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="LacI_producer/subcomponent_5">
             <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
@@ -504,18 +498,4 @@
       <sbol:displayId>IPTG_LacI</sbol:displayId>
       <sbol:description>IPTG_LacI complex</sbol:description>
    </sbol:Component>
-   <sbol:Sequence rdf:about="LacI_producer/sequence_1">
-      <sbol:name>LacI_producer</sbol:name>
-      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
-      <sbol:elements></sbol:elements>
-      <sbol:displayId>sequence_1</sbol:displayId>
-      <sbol:description>LacI_producer sequence</sbol:description>
-   </sbol:Sequence>
-   <sbol:Sequence rdf:about="TetR_producer/sequence_1">
-      <sbol:name>TetR_producer</sbol:name>
-      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
-      <sbol:elements></sbol:elements>
-      <sbol:displayId>sequence_1</sbol:displayId>
-      <sbol:description>TetR_producer sequence</sbol:description>
-   </sbol:Sequence>
 </rdf:RDF>

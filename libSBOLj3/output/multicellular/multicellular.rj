@@ -123,72 +123,6 @@
      ]
   }
    ,
-  "https://sbolstandard.org/examples/AHL_producer/sequence_1" : { 
-    "http://sbols.org/v3#displayId" : [ { 
-      "type" : "literal" ,
-      "value" : "sequence_1"
-    }
-     ] ,
-    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
-      "type" : "uri" ,
-      "value" : "http://sbols.org/v3#Sequence"
-    }
-     ] ,
-    "http://sbols.org/v3#elements" : [ { 
-      "type" : "literal" ,
-      "value" : ""
-    }
-     ] ,
-    "http://sbols.org/v3#name" : [ { 
-      "type" : "literal" ,
-      "value" : "AHL_producer"
-    }
-     ] ,
-    "http://sbols.org/v3#encoding" : [ { 
-      "type" : "uri" ,
-      "value" : "http://sbols.org/v3#iupacNucleicAcid"
-    }
-     ] ,
-    "http://sbols.org/v3#description" : [ { 
-      "type" : "literal" ,
-      "value" : "AHL_producer sequence"
-    }
-     ]
-  }
-   ,
-  "https://sbolstandard.org/examples/AHL_receiver/sequence_1" : { 
-    "http://sbols.org/v3#displayId" : [ { 
-      "type" : "literal" ,
-      "value" : "sequence_1"
-    }
-     ] ,
-    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
-      "type" : "uri" ,
-      "value" : "http://sbols.org/v3#Sequence"
-    }
-     ] ,
-    "http://sbols.org/v3#elements" : [ { 
-      "type" : "literal" ,
-      "value" : ""
-    }
-     ] ,
-    "http://sbols.org/v3#name" : [ { 
-      "type" : "literal" ,
-      "value" : "AHL_receiver"
-    }
-     ] ,
-    "http://sbols.org/v3#encoding" : [ { 
-      "type" : "uri" ,
-      "value" : "http://sbols.org/v3#iupacNucleicAcid"
-    }
-     ] ,
-    "http://sbols.org/v3#description" : [ { 
-      "type" : "literal" ,
-      "value" : "AHL_receiver sequence"
-    }
-     ]
-  }
-   ,
   "https://sbolstandard.org/examples/ReceiverSystem/componentreference_1" : { 
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
@@ -341,11 +275,6 @@
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
       "value" : "http://sbols.org/v3#Component"
-    }
-     ] ,
-    "http://sbols.org/v3#hasSequence" : [ { 
-      "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/AHL_producer/sequence_1"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 
@@ -1983,11 +1912,6 @@
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
       "value" : "http://sbols.org/v3#Component"
-    }
-     ] ,
-    "http://sbols.org/v3#hasSequence" : [ { 
-      "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/AHL_receiver/sequence_1"
     }
      ] ,
     "http://sbols.org/v3#hasFeature" : [ { 

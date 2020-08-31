@@ -1,11 +1,11 @@
 <https://sbolstandard.org/examples/litre> <http://sbols.org/v3#description> "The litre is a unit of volume defined as 1.0e-3 cubic metre." .
 <https://sbolstandard.org/examples/litre> <http://sbols.org/v3#name> "liter" .
 <https://sbolstandard.org/examples/litre> <http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeLabel> "litre2" .
-<https://sbolstandard.org/examples/litre> <http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor> "0.001"^^<http://www.w3.org/2001/XMLSchema#float> .
 <https://sbolstandard.org/examples/litre> <http://sbols.org/v3#displayId> "litre" .
 <https://sbolstandard.org/examples/litre> <http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeLabel> "liter" .
 <https://sbolstandard.org/examples/litre> <http://www.ontology-of-units-of-measure.org/resource/om-2/comment> "The litre is a unit of volume defined as 1.0e-3 cubic metre." .
 <https://sbolstandard.org/examples/litre> <http://www.ontology-of-units-of-measure.org/resource/om-2/label> "liter" .
+<https://sbolstandard.org/examples/litre> <http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor> "0.001" .
 <https://sbolstandard.org/examples/litre> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit> .
 <https://sbolstandard.org/examples/litre> <http://www.ontology-of-units-of-measure.org/resource/om-2/longcomment> "This is an example long comment." .
 <https://sbolstandard.org/examples/litre> <http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeSymbol> "L2" .

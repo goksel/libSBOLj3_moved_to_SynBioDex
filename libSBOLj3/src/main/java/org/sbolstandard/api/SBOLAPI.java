@@ -208,29 +208,32 @@ public class SBOLAPI {
 	    	SubComponent subComponent=parent.createSubComponent(append(parent.getUri(), localName), child.getUri());
 	    	subComponent.setOrientation(Orientation.inline);
 	    	
-	    	List<URI> sequences= parent.getSequences();
-	    	Sequence sequence=null;
-	    	if (sequences!=null && sequences.size()>0)
+	    	if (child.getSequences()!=null && child.getSequences().size()>0)
 	    	{
-	    		 sequence=(Sequence)document.getIdentified(sequences.get(0),Sequence.class);
-	    	}
-	    	else
-	    	{
-	    		sequence=createSequence(document, parent, Encoding.NucleicAcid, "");	
-	    	}
-	    	
-	    	
-	    	if ( child.getSequences()!=null && child.getSequences().size()>0)
-	    	{
-	    		URI childSequenceUri=child.getSequences().get(0);
-	    		Sequence childSequence=(Sequence)document.getIdentified(childSequenceUri, Sequence.class);
-	    		sequence.setElements(sequence.getElements() + childSequence.getElements());
-	    		String locationLocalName=createLocalName(DataModel.Location.uri, subComponent.getLocations());
-	    		URI locationUri=append(subComponent.getUri(),locationLocalName);
-	    		int start=sequence.getElements().length() + 1;
-	        	int end=start + childSequence.getElements().length()-1;
-	        	LocationBuilder builder=new Location.RangeLocationBuilder(locationUri, start, end);
-	        	subComponent.createLocation(builder);
+		    	List<URI> sequences= parent.getSequences();
+		    	Sequence sequence=null;
+		    	if (sequences!=null && sequences.size()>0)
+		    	{
+		    		 sequence=(Sequence)document.getIdentified(sequences.get(0),Sequence.class);
+		    	}
+		    	else
+		    	{
+		    		sequence=createSequence(document, parent, Encoding.NucleicAcid, "");	
+		    	}
+		    	
+		    	
+		    	if ( child.getSequences()!=null && child.getSequences().size()>0)
+		    	{
+		    		URI childSequenceUri=child.getSequences().get(0);
+		    		Sequence childSequence=(Sequence)document.getIdentified(childSequenceUri, Sequence.class);
+		    		sequence.setElements(sequence.getElements() + childSequence.getElements());
+		    		String locationLocalName=createLocalName(DataModel.Location.uri, subComponent.getLocations());
+		    		URI locationUri=append(subComponent.getUri(),locationLocalName);
+		    		int start=sequence.getElements().length() + 1;
+		        	int end=start + childSequence.getElements().length()-1;
+		        	LocationBuilder builder=new Location.RangeLocationBuilder(locationUri, start, end);
+		        	subComponent.createLocation(builder);
+		    	}
 	    	}
 	    }
 	    
@@ -280,7 +283,7 @@ public class SBOLAPI {
 	    public static Sequence createSequence(SBOLDocument doc, Component component, Encoding encoding, String elements) throws SBOLGraphException
 	    {
 	    	String localName=createLocalName(DataModel.Sequence.uri, component.getSequences());
-	    	Sequence seq=createSequence(doc, append(component.getUri(),localName), component.getName(), localName, component.getName() + " sequence" , elements, encoding);
+	    	Sequence seq=createSequence(doc, URI.create(component.getUri().toString() + "_" + localName), component.getName(), localName, component.getName() + " sequence" , elements, encoding);
 	 		component.setSequences(Arrays.asList(seq.getUri())); 
 	 		return seq;
 	    }

@@ -133,6 +133,7 @@ public class ToggleSwitch extends TestCase {
         System.out.print(output);
         
         TestUtil.serialise(doc2, "toggle_switch", "toggle_switch");     
+        TestUtil.assertReadWrite(doc);  
         System.out.println("done");   
     }
 	 

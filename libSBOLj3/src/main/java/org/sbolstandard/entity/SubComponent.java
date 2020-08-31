@@ -62,12 +62,14 @@ public class SubComponent extends Feature{
 		if (locations==null)
 		{
 			List<Resource> resources=RDFUtil.getResourcesWithProperty (resource, DataModel.SubComponent.location);
-			for (Resource res:resources)
+			if (resources!=null)
 			{
-				Location location= LocationFactory.create(res);	
-				locations.add(location);			
+				for (Resource res:resources)
+				{
+					Location location= LocationFactory.create(res);	
+					locations.add(location);			
+				}
 			}
-				
 		}
 		return locations;
 	}

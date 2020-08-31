@@ -55,6 +55,7 @@ public class MulticellularSimple extends TestCase {
         
         TestUtil.serialise(doc2, "multicellular_simple", "multicellular_simple");     
         System.out.println("done");   
+        TestUtil.assertReadWrite(doc);
     }
 	 
 	

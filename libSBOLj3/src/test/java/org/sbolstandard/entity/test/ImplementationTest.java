@@ -35,6 +35,7 @@ public class ImplementationTest extends TestCase {
         TestUtil.serialise(doc, "entity/implementation", "implementation");
       
         System.out.println(SBOLWriter.write(doc, "Turtle"));
+        TestUtil.assertReadWrite(doc);
     }
 
 }

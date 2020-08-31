@@ -38,6 +38,7 @@ public class MeasureDataModel {
 	{
 		public static URI uri=URINameSpace.OM.local("SingularUnit");
 		public static URI factor=Prefix.factor;
+		public static URI unit=PrefixedUnit.unit;
 	}
 	
 	

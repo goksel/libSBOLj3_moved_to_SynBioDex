@@ -83,15 +83,14 @@
   }
    ,
   "https://sbolstandard.org/examples/litre" : { 
-    "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor" : [ { 
-      "type" : "literal" ,
-      "value" : "0.001" ,
-      "datatype" : "http://www.w3.org/2001/XMLSchema#float"
-    }
-     ] ,
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
       "value" : "litre"
+    }
+     ] ,
+    "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor" : [ { 
+      "type" : "literal" ,
+      "value" : "0.001"
     }
      ] ,
     "http://www.ontology-of-units-of-measure.org/resource/om-2/label" : [ { 

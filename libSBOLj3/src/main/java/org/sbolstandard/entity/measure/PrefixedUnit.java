@@ -7,7 +7,7 @@ import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.MeasureDataModel;
 
-public abstract class PrefixedUnit extends Unit{
+public class PrefixedUnit extends Unit{
 	
 	private URI prefix;
 	private URI unit;

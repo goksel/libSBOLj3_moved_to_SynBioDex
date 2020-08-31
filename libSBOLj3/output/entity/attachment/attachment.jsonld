@@ -15,7 +15,7 @@
     "hash" : "aaa",
     "hashAlgorithm" : "Alg1",
     "size" : "1000",
-    "source" : "https://sbolstandard.org/attachment1"
+    "source" : "../../attachment1"
   }, {
     "@id" : "impl1",
     "@type" : "sbol:Implementation",
@@ -24,31 +24,6 @@
     "hasAttachment" : "attachment1"
   } ],
   "@context" : {
-    "role" : {
-      "@id" : "http://sbols.org/v3#role",
-      "@type" : "@id"
-    },
-    "description" : {
-      "@id" : "http://sbols.org/v3#description"
-    },
-    "displayId" : {
-      "@id" : "http://sbols.org/v3#displayId"
-    },
-    "type" : {
-      "@id" : "http://sbols.org/v3#type",
-      "@type" : "@id"
-    },
-    "name" : {
-      "@id" : "http://sbols.org/v3#name"
-    },
-    "hasAttachment" : {
-      "@id" : "http://sbols.org/v3#hasAttachment",
-      "@type" : "@id"
-    },
-    "built" : {
-      "@id" : "http://sbols.org/v3#built",
-      "@type" : "@id"
-    },
     "hashAlgorithm" : {
       "@id" : "http://sbols.org/v3#hashAlgorithm"
     },
@@ -66,7 +41,32 @@
       "@id" : "http://sbols.org/v3#source",
       "@type" : "@id"
     },
-    "@vocab" : "http://parts.igem.org/Part:",
+    "displayId" : {
+      "@id" : "http://sbols.org/v3#displayId"
+    },
+    "hasAttachment" : {
+      "@id" : "http://sbols.org/v3#hasAttachment",
+      "@type" : "@id"
+    },
+    "built" : {
+      "@id" : "http://sbols.org/v3#built",
+      "@type" : "@id"
+    },
+    "role" : {
+      "@id" : "http://sbols.org/v3#role",
+      "@type" : "@id"
+    },
+    "description" : {
+      "@id" : "http://sbols.org/v3#description"
+    },
+    "type" : {
+      "@id" : "http://sbols.org/v3#type",
+      "@type" : "@id"
+    },
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
+    },
+    "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",
     "CHEBI" : "https://identifiers.org/CHEBI:",
     "GO" : "https://identifiers.org/GO:",

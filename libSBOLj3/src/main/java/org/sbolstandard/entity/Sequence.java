@@ -6,6 +6,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
+import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.Encoding;
 
 public class Sequence extends TopLevel {
@@ -25,23 +26,23 @@ public class Sequence extends TopLevel {
 	public String getElements() {
 		if (elements==null)
 		{
-			elements=RDFUtil.getPropertyAsString(this.resource, URI.create("http://sbols.org/v3#elements"));
+			elements=RDFUtil.getPropertyAsString(this.resource, DataModel.Sequence.elements);
 		}
 		return elements;
 	}
 	
 	public void setElements(String elements) {
 		this.elements = elements;
-		RDFUtil.setProperty(this.resource, URI.create("http://sbols.org/v3#elements"), this.elements);
+		RDFUtil.setProperty(this.resource, DataModel.Sequence.elements, this.elements);
 	}
 	
 	public Encoding getEncoding() {
 		if (encoding==null)
 		{
-			String encodingValue=RDFUtil.getPropertyAsString(this.resource, URI.create("http://sbols.org/v3#elements"));
+			URI encodingValue=RDFUtil.getPropertyAsURI(this.resource, DataModel.Sequence.encoding);
 			if (encodingValue!=null)
 			{
-				encoding=Encoding.valueOf(encodingValue); 
+				encoding=Encoding.get(encodingValue); 
 			}
 		}
 		return encoding;
@@ -49,12 +50,12 @@ public class Sequence extends TopLevel {
 	
 	public void setEncoding(Encoding encoding) {
 		this.encoding = encoding;
-		RDFUtil.setProperty(this.resource, URI.create("http://sbols.org/v3#encoding"), this.encoding.getUrl());
+		RDFUtil.setProperty(this.resource, DataModel.Sequence.encoding, this.encoding.getUri());
 	}
 
 	public URI getResourceType()
 	{
-		return URI.create("http://sbols.org/v3#Sequence");
+		return DataModel.Sequence.uri;
 	}
 	
 }

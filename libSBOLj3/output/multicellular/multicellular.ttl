@@ -89,7 +89,6 @@
         sbol:displayId       "AHL_receiver" ;
         sbol:hasFeature      <AHL_receiver/subcomponent_5> , <AHL_receiver/subcomponent_7> , <AHL_receiver/LuxR_protein> , <AHL_receiver/subcomponent_8> , <AHL_receiver/LuxR_AHL> , <AHL_receiver/AHL> , <AHL_receiver/GFP> , <AHL_receiver/subcomponent_2> , <AHL_receiver/subcomponent_1> , <AHL_receiver/subcomponent_3> , <AHL_receiver/subcomponent_4> , <AHL_receiver/subcomponent_6> ;
         sbol:hasInteraction  <AHL_receiver/interaction_2> , <AHL_receiver/interaction_3> , <AHL_receiver/interaction_4> , <AHL_receiver/interaction_1> ;
-        sbol:hasSequence     <AHL_receiver/sequence_1> ;
         sbol:name            "AHL_receiver" ;
         sbol:role            SO:0000704 ;
         sbol:type            SBO:0000251 .
@@ -324,14 +323,6 @@
         sbol:role         SO:0000167 ;
         sbol:type         SBO:0000251 .
 
-<AHL_receiver/sequence_1>
-        a                 sbol:Sequence ;
-        sbol:description  "AHL_receiver sequence" ;
-        sbol:displayId    "sequence_1" ;
-        sbol:elements     "" ;
-        sbol:encoding     sbol:iupacNucleicAcid ;
-        sbol:name         "AHL_receiver" .
-
 <AHL_receiver/interaction_2/participation_2>
         a                 sbol:Participation ;
         sbol:displayId    "participation_2" ;
@@ -396,7 +387,6 @@
         sbol:displayId       "AHL_producer" ;
         sbol:hasFeature      <AHL_producer/subcomponent_3> , <AHL_producer/subcomponent_2> , <AHL_producer/subcomponent_1> , <AHL_producer/AHL> , <AHL_producer/subcomponent_4> ;
         sbol:hasInteraction  <AHL_producer/interaction_1> ;
-        sbol:hasSequence     <AHL_producer/sequence_1> ;
         sbol:name            "AHL_producer" ;
         sbol:role            SO:0000704 ;
         sbol:type            SBO:0000251 .
@@ -457,14 +447,6 @@
         sbol:name         "ter_luxI" ;
         sbol:role         SO:0000141 ;
         sbol:type         SBO:0000251 .
-
-<AHL_producer/sequence_1>
-        a                 sbol:Sequence ;
-        sbol:description  "AHL_producer sequence" ;
-        sbol:displayId    "sequence_1" ;
-        sbol:elements     "" ;
-        sbol:encoding     sbol:iupacNucleicAcid ;
-        sbol:name         "AHL_producer" .
 
 <ReceiverSystem/subcomponent_1>
         a                sbol:SubComponent ;

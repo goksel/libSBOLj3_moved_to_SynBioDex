@@ -70,7 +70,7 @@
     "alternativeLabel" : [ "milli1", "milli2" ],
     "alternativeSymbol" : [ "m1", "m2" ],
     "comment" : "Comment for the milli prefix.",
-    "om:hasFactor" : "0.001",
+    "hasFactor" : "0.001",
     "label" : "milli",
     "longcomment" : "This is an example long comment for the milli prefix."
   }, {
@@ -106,10 +106,6 @@
     "alternativeLabel" : {
       "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeLabel"
     },
-    "hasFactor" : {
-      "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor",
-      "@type" : "http://www.w3.org/2001/XMLSchema#float"
-    },
     "displayId" : {
       "@id" : "http://sbols.org/v3#displayId"
     },
@@ -118,6 +114,9 @@
     },
     "label" : {
       "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/label"
+    },
+    "hasFactor" : {
+      "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor"
     },
     "longcomment" : {
       "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/longcomment"

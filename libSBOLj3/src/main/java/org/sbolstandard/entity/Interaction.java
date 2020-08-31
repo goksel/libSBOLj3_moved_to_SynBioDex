@@ -10,8 +10,8 @@ import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
 
-public class Interaction extends Feature{
-	private List<URI> types=new ArrayList<URI>();
+public class Interaction extends Identified{
+	private List<URI> types=null;
 	private List<Participation> participations=null;
 
 	protected  Interaction(Model model,URI uri) throws SBOLGraphException

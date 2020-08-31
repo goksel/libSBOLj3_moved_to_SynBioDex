@@ -171,9 +171,6 @@
          </sbol:SubComponent>
       </sbol:hasFeature>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
-      <sbol:hasSequence>
-         <sbol:Sequence rdf:about="AHL_receiver/sequence_1"/>
-      </sbol:hasSequence>
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="AHL_receiver/subcomponent_8">
             <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
@@ -445,9 +442,6 @@
             <sbol:displayId>subcomponent_4</sbol:displayId>
          </sbol:SubComponent>
       </sbol:hasFeature>
-      <sbol:hasSequence>
-         <sbol:Sequence rdf:about="AHL_producer/sequence_1"/>
-      </sbol:hasSequence>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
    </sbol:Component>
    <sbol:Component rdf:about="SenderSystem">
@@ -557,18 +551,4 @@
       <sbol:displayId>gfp</sbol:displayId>
       <sbol:description>gfp coding sequence</sbol:description>
    </sbol:Component>
-   <sbol:Sequence rdf:about="AHL_producer/sequence_1">
-      <sbol:name>AHL_producer</sbol:name>
-      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
-      <sbol:elements></sbol:elements>
-      <sbol:displayId>sequence_1</sbol:displayId>
-      <sbol:description>AHL_producer sequence</sbol:description>
-   </sbol:Sequence>
-   <sbol:Sequence rdf:about="AHL_receiver/sequence_1">
-      <sbol:name>AHL_receiver</sbol:name>
-      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
-      <sbol:elements></sbol:elements>
-      <sbol:displayId>sequence_1</sbol:displayId>
-      <sbol:description>AHL_receiver sequence</sbol:description>
-   </sbol:Sequence>
 </rdf:RDF>

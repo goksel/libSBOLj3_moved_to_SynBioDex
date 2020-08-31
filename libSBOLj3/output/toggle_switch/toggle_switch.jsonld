@@ -28,7 +28,6 @@
     "displayId" : "LacI_producer",
     "hasFeature" : [ "LacI_producer/subcomponent_3", "LacI_producer/TetR_protein", "LacI_producer/subcomponent_6", "LacI_producer/GFP", "LacI_producer/subcomponent_2", "LacI_producer/subcomponent_5", "LacI_producer/subcomponent_4", "LacI_producer/subcomponent_1", "LacI_producer/LacI_protein", "LacI_producer/aTC" ],
     "hasInteraction" : [ "LacI_producer/interaction_3", "LacI_producer/interaction_4", "LacI_producer/interaction_2", "LacI_producer/interaction_1" ],
-    "hasSequence" : "LacI_producer/sequence_1",
     "name" : "LacI_producer",
     "role" : "SO:0000704",
     "type" : "SBO:0000251"
@@ -131,14 +130,6 @@
     "participant" : "TetR_producer/atC_TetR",
     "role" : "SBO:0000011"
   }, {
-    "@id" : "LacI_producer/sequence_1",
-    "@type" : "sbol:Sequence",
-    "description" : "LacI_producer sequence",
-    "displayId" : "sequence_1",
-    "elements" : "",
-    "encoding" : "sbol:iupacNucleicAcid",
-    "name" : "LacI_producer"
-  }, {
     "@id" : "LacI_producer/subcomponent_1",
     "@type" : "sbol:SubComponent",
     "displayId" : "subcomponent_1",
@@ -189,7 +180,6 @@
     "displayId" : "TetR_producer",
     "hasFeature" : [ "TetR_producer/subcomponent_3", "TetR_producer/IPTG", "TetR_producer/subcomponent_1", "TetR_producer/atC_TetR", "TetR_producer/subcomponent_4", "TetR_producer/subcomponent_2", "TetR_producer/LacI_protein", "TetR_producer/TetR_protein", "TetR_producer/IPTG_LacI" ],
     "hasInteraction" : [ "TetR_producer/interaction_3", "TetR_producer/interaction_1", "TetR_producer/interaction_2" ],
-    "hasSequence" : "TetR_producer/sequence_1",
     "name" : "TetR_producer",
     "role" : "SO:0000704",
     "type" : "SBO:0000251"
@@ -278,14 +268,6 @@
     "displayId" : "participation_3",
     "participant" : "TetR_producer/IPTG_LacI",
     "role" : "SBO:0000011"
-  }, {
-    "@id" : "TetR_producer/sequence_1",
-    "@type" : "sbol:Sequence",
-    "description" : "TetR_producer sequence",
-    "displayId" : "sequence_1",
-    "elements" : "",
-    "encoding" : "sbol:iupacNucleicAcid",
-    "name" : "TetR_producer"
   }, {
     "@id" : "TetR_producer/subcomponent_1",
     "@type" : "sbol:SubComponent",
@@ -520,17 +502,6 @@
     "hasInteraction" : {
       "@id" : "http://sbols.org/v3#hasInteraction",
       "@type" : "@id"
-    },
-    "hasSequence" : {
-      "@id" : "http://sbols.org/v3#hasSequence",
-      "@type" : "@id"
-    },
-    "encoding" : {
-      "@id" : "http://sbols.org/v3#encoding",
-      "@type" : "@id"
-    },
-    "elements" : {
-      "@id" : "http://sbols.org/v3#elements"
     },
     "subject" : {
       "@id" : "http://sbols.org/v3#subject",

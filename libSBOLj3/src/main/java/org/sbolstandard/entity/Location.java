@@ -34,7 +34,7 @@ public abstract class  Location extends Identified {
 			URI value=RDFUtil.getPropertyAsURI(this.resource, DataModel.orientation);
 			if (value!=null)
 			{
-				orientation=Orientation.valueOf(value.toString()); 
+				orientation=Orientation.get(value); 
 			}
 		}
 		return orientation;
@@ -42,7 +42,7 @@ public abstract class  Location extends Identified {
 	
 	public void setOrientation(Orientation orientation) {
 		this.orientation = orientation;
-		RDFUtil.setProperty(this.resource, DataModel.orientation, this.orientation.getUrl());
+		RDFUtil.setProperty(this.resource, DataModel.orientation, this.orientation.getUri());
 	}
 	
 	

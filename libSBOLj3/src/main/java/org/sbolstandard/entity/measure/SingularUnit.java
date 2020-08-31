@@ -27,13 +27,13 @@ public class SingularUnit extends Unit{
 	public void setFactor(float factor) {
 		this.factor = factor;
 		String factorString=String.valueOf(factor);
-		//RDFUtil.setProperty(resource, MeasureDataModel.Prefix.factor, factorString);
-		RDFUtil.setProperty(resource, MeasureDataModel.Prefix.factor, factor);
+		RDFUtil.setProperty(resource, MeasureDataModel.SingularUnit.factor, factorString);
+		//RDFUtil.setProperty(resource, MeasureDataModel.Prefix.factor, factor);
 		
 	}
 	
 	public float getFactor() throws SBOLGraphException {
-		if (this.factor==Float.NaN)
+		if (Float.isNaN(this.factor))
 		{
 			String factorString=RDFUtil.getPropertyAsString(this.resource, MeasureDataModel.SingularUnit.factor);
 			if (factorString!=null)
@@ -59,14 +59,14 @@ public class SingularUnit extends Unit{
 	public URI getUnit() {
 		if (unit==null)
 		{
-			unit=RDFUtil.getPropertyAsURI(this.resource, MeasureDataModel.PrefixedUnit.unit);	
+			unit=RDFUtil.getPropertyAsURI(this.resource, MeasureDataModel.SingularUnit.unit);	
 		}
 		return unit;
 	}
 
 	public void setUnit(URI unit) {
 		this.unit = unit;
-		RDFUtil.setProperty(resource, MeasureDataModel.PrefixedUnit.unit, unit);
+		RDFUtil.setProperty(resource, MeasureDataModel.SingularUnit.unit, unit);
 	}
 
 	

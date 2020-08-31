@@ -39,12 +39,17 @@ public class DataModel {
 			public static URI interaction=URINameSpace.SBOL.local("hasInteraction");	
 			public static URI constraint=URINameSpace.SBOL.local("hasConstraint");	
 			public static URI hasInterface=URINameSpace.SBOL.local("hasInterface");	
-			public static URI model=URINameSpace.SBOL.local("hasModel");	
+			public static URI model=URINameSpace.SBOL.local("hasModel");
+			public static URI sequence=URINameSpace.SBOL.local("hasSequence");
+			
 		}
 		
 		public static final class Sequence
 		{
 			public static URI uri=URINameSpace.SBOL.local("Sequence");
+			public static URI elements=URINameSpace.SBOL.local("elements");
+			public static URI encoding=URINameSpace.SBOL.local("encoding");
+
 		}
 		
 		public static final class SubComponent
