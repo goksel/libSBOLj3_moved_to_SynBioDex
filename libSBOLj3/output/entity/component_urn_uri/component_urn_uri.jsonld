@@ -1,5 +1,5 @@
 {
-  "@id" : "urn:uuid:d0accf73-2c60-11b2-80d9-acde48001122",
+  "@id" : "urn:uuid:d1ce016f-2c60-11b2-80b5-acde48001122",
   "@type" : "sbol:Component",
   "name" : "TetR",
   "type" : "SBO:0000252",
