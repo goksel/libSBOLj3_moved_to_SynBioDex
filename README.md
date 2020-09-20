@@ -16,10 +16,10 @@ Use this option if you are developing a Java application using [Maven](https://m
 </dependencies>
 	...
    <dependency>
-		<groupId>org.sbolstandard</groupId>
-		<artifactId>libSBOLj3</artifactId>
-		<version>1.0-SNAPSHOT</version>
-	</dependency>
+      <groupId>org.sbolstandard</groupId>
+      <artifactId>libSBOLj3</artifactId>
+      <version>1.0-SNAPSHOT</version>
+   </dependency>
    ...
 </dependencies>
 
@@ -39,4 +39,4 @@ Use this option if you are developing a Java application using [Maven](https://m
 The libSBOLj3 library is available as a JAR file. Please download the file from the [releases page](https://github.com/goksel/libSBOLj3/tags). A single JAR file (with the "withDepencencies" suffix), which includes all the required libSBOLj3 related dependencies, is also available.
 
 ## SBOL Examples
-[Several SBOL3 examples](https://github.com/goksel/libSBOLj3/tree/master/libSBOLj3/output) are available as part of the libSBOLj3 library. These examples have also been made available as part of the [SBOLTestSuite](https://github.com/SynBioDex/SBOLTestSuite/tree/master/SBOL3). Some of these examples have beeen explained in the recent SBOL3 paper, titled "[The Synthetic Biology Open Language (SBOL) Version 3: Simplified Data Exchange for Bioengineering]"(https://doi.org/10.3389/fbioe.2020.01009).
+[Several SBOL3 examples](https://github.com/goksel/libSBOLj3/tree/master/libSBOLj3/output) are available as part of the libSBOLj3 library. These examples have also been made available as part of the [SBOL Test Suite](https://github.com/SynBioDex/SBOLTestSuite/tree/master/SBOL3). Some of these examples have beeen explained in the recent SBOL3 paper, titled "[The Synthetic Biology Open Language (SBOL) Version 3: Simplified Data Exchange for Bioengineering](https://doi.org/10.3389/fbioe.2020.01009)".
