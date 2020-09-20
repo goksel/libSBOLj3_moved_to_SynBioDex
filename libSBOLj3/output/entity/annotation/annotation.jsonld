@@ -4,12 +4,16 @@
     "@type" : [ "sbol:TopLevel", "igem:Repository" ],
     "website" : "http://parts.igem.org/Main_Page",
     "description" : "Registry of Standard Biological Parts",
-    "displayId" : "parts.igem.org",
     "name" : "iGEM Registry"
+  }, {
+    "@id" : "http://synbiohub.org#about",
+    "@type" : [ "sbol:TopLevel", "igem:Repository" ],
+    "displayId" : "about",
+    "name" : "SynBioHub"
   }, {
     "@id" : "BBa_J23119",
     "@type" : "sbol:Component",
-    "belongsTo" : "http://parts.igem.org",
+    "belongsTo" : [ "http://parts.igem.org", "http://synbiohub.org#about" ],
     "experienceURL" : "igem:Part:BBa_J23119:Experience",
     "group" : "iGEM2006_Berkeley",
     "hasInformation" : "BBa_J23119/information1",
@@ -46,14 +50,14 @@
     "name" : "BBa_J23119_usage"
   } ],
   "@context" : {
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
+    },
     "displayId" : {
       "@id" : "http://sbols.org/v3#displayId"
     },
     "registryStar" : {
       "@id" : "http://parts.igem.org/registryStar"
-    },
-    "name" : {
-      "@id" : "http://sbols.org/v3#name"
     },
     "uses" : {
       "@id" : "http://parts.igem.org/uses"

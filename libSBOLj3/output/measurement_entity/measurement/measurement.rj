@@ -19,6 +19,11 @@
       "type" : "literal" ,
       "value" : "kelvin"
     }
+     ] ,
+    "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ { 
+      "type" : "literal" ,
+      "value" : "kelvin"
+    }
      ]
   }
    ,
@@ -122,6 +127,11 @@
       "value" : "liter"
     }
      ] ,
+    "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ { 
+      "type" : "literal" ,
+      "value" : "l"
+    }
+     ] ,
     "http://sbols.org/v3#description" : [ { 
       "type" : "literal" ,
       "value" : "The litre is a unit of volume defined as 1.0e-3 cubic metre."
@@ -169,6 +179,11 @@
       "value" : "millimole"
     }
      ] ,
+    "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ { 
+      "type" : "literal" ,
+      "value" : "mmol"
+    }
+     ] ,
     "http://www.ontology-of-units-of-measure.org/resource/om-2/hasPrefix" : [ { 
       "type" : "uri" ,
       "value" : "https://sbolstandard.org/examples/milli"
@@ -195,6 +210,11 @@
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
       "value" : "meter"
+    }
+     ] ,
+    "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ { 
+      "type" : "literal" ,
+      "value" : "m"
     }
      ]
   }
@@ -237,6 +257,11 @@
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
       "value" : "milli"
+    }
+     ] ,
+    "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ { 
+      "type" : "literal" ,
+      "value" : "m"
     }
      ] ,
     "http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeSymbol" : [ { 
@@ -323,6 +348,11 @@
       "type" : "literal" ,
       "value" : "millimolar"
     }
+     ] ,
+    "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ { 
+      "type" : "literal" ,
+      "value" : "mmol/l"
+    }
      ]
   }
    ,
@@ -350,6 +380,11 @@
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
       "value" : "kelvinMole"
+    }
+     ] ,
+    "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ { 
+      "type" : "literal" ,
+      "value" : "K mol"
     }
      ] ,
     "http://www.ontology-of-units-of-measure.org/resource/om-2/hasTerm2" : [ { 
@@ -389,6 +424,11 @@
       "type" : "literal" ,
       "value" : "cubicMeter"
     }
+     ] ,
+    "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ { 
+      "type" : "literal" ,
+      "value" : "m3"
+    }
      ]
   }
    ,
@@ -411,6 +451,11 @@
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
       "value" : "mole"
+    }
+     ] ,
+    "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ { 
+      "type" : "literal" ,
+      "value" : "mol"
     }
      ]
   }

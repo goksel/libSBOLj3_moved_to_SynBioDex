@@ -35,7 +35,8 @@ public class Metadata extends Identified{
 		super(doc.model,uri,dataType);
 		if (isTopLevel)
 		{
-			doc.addTopLevelResourceType(dataType);
+			//TODO GMGM
+			//doc.addTopLevelResourceType(dataType);
 			RDFUtil.addType(resource, DataModel.TopLevel.uri);
 		}
 		else

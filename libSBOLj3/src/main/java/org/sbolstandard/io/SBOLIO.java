@@ -19,7 +19,7 @@ import org.sbolstandard.util.RDFHandler;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.vocabulary.DataModel;
 
-public class SBOLWriter{
+public class SBOLIO{
 
 	public static String write(SBOLDocument doc, String format) throws IOException
 	{

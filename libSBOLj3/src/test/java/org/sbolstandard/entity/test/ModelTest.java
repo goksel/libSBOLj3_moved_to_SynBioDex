@@ -9,7 +9,7 @@ import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.Model;
 import org.sbolstandard.entity.SBOLDocument;
-import org.sbolstandard.io.SBOLWriter;
+import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.vocabulary.ComponentType;
@@ -32,7 +32,7 @@ public class ModelTest extends TestCase {
         toggleSwitch.setModels(Arrays.asList(model.getUri()));
         TestUtil.serialise(doc, "entity/model", "model");
       
-        System.out.println(SBOLWriter.write(doc, "Turtle"));
+        System.out.println(SBOLIO.write(doc, "Turtle"));
         TestUtil.assertReadWrite(doc);
     }
 

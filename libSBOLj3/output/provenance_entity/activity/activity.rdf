@@ -55,6 +55,7 @@
             <sbol:displayId>association</sbol:displayId>
          </prov:Association>
       </prov:qualifiedAssociation>
+      <prov:endedAtTime>2020-08-30T17:16:29.495Z</prov:endedAtTime>
       <prov:qualifiedUsage>
          <prov:Usage rdf:about="codon_optimization_activity/optimised_usage">
             <prov:hadRole rdf:resource="https://identifiers.org/SBO:0000011"/>
@@ -65,8 +66,7 @@
       <sbol:name>Codon optimization activity</sbol:name>
       <sbol:description>An activity that is used to optimise codons</sbol:description>
       <sbol:displayId>codon_optimization_activity</sbol:displayId>
-      <prov:startedAtTime>2019-07-29T16:37:18.635Z</prov:startedAtTime>
-      <prov:endedAtTime>2020-08-30T16:37:18.635Z</prov:endedAtTime>
+      <prov:startedAtTime>2019-07-29T17:16:29.495Z</prov:startedAtTime>
       <prov:qualifiedUsage>
          <prov:Usage rdf:about="codon_optimization_activity/source_usage">
             <prov:hadRole rdf:resource="https://identifiers.org/SBO:0000645"/>

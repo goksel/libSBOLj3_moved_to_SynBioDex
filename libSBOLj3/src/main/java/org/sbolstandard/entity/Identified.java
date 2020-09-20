@@ -11,9 +11,11 @@ import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.vocabulary.RDF;
 import org.sbolstandard.entity.measure.Measure;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
+import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.MeasureDataModel;
 
@@ -294,38 +296,60 @@ public abstract class Identified {
 	}
 	
 		 	 
-	 	 
-	 private  void inferDisplayId(URI uri)
+	 
+	private boolean hasSBOLType (List<URI> types){
+		boolean result=false;
+		if (types!=null)
 		{
-		 	displayId=getDisplayId();
-		 	if (displayId==null || displayId.length()==0)
-		 	{
-			 	String result=null;
-			 	String uriString=uri.toString();	
-			 	if (uriString.contains("://"))
-			 	{
-				 	int index=uriString.lastIndexOf("#");
-					int index2=uriString.lastIndexOf("/");
-					if (index2>index)
-					{
-						index=index2;
-					}
-					if (uriString.length()>index+1)
-					{
-						result= uriString.substring(index+1);
-					}
-					else
-					{
-						result=null;
-					}
-			 	}
-			 	if (result!=null)
-			 	{
-			 	 setDisplayId(result);	
-			 	}
-		 	}
+			for (URI rdfType:types)
+			{
+				if (rdfType.toString().toLowerCase().startsWith(URINameSpace.SBOL.getUri().toString().toLowerCase()))
+				{
+					result=true;
+					break;
+				}
+			}
 		}
+		return result;
+	}
 	
+	private  void inferDisplayId(URI uri)
+	{
+		 /*List<URI> types=RDFUtil.getPropertiesAsURIs(this.resource, URI.create(RDF.type.getURI()));
+		 if (hasSBOLType(types))
+		 {*/
+			 if ((uri.getPath()!=null && uri.getPath().length()>0) || (uri.getFragment()!=null && uri.getFragment().length()>0))
+			 	{
+				 	displayId=getDisplayId();
+				 	if (displayId==null || displayId.length()==0)
+				 	{
+					 	String result=null;
+					 	String uriString=uri.toString();	
+					 	if (uriString.contains("://"))
+					 	{
+						 	int index=uriString.lastIndexOf("#");
+							int index2=uriString.lastIndexOf("/");
+							if (index2>index)
+							{
+								index=index2;
+							}
+							if (uriString.length()>index+1)
+							{
+								result= uriString.substring(index+1);
+							}
+							else
+							{
+								result=null;
+							}
+					 	}
+					 	if (result!=null)
+					 	{
+					 	 setDisplayId(result);	
+					 	}
+				 	}
+			 	}
+			}
+	//}
 }
 
 /*protected <T extends Identified>  void addToList(Resource res, List<T> items, URI property, URI entityType) throws SBOLException, SBOLGraphException

@@ -11,7 +11,7 @@ import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.sbolstandard.entity.*;
 import org.sbolstandard.entity.measure.*;
 import org.sbolstandard.entity.provenance.*;
-import org.sbolstandard.io.SBOLWriter;
+import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.MeasureDataModel;
@@ -30,17 +30,17 @@ public class TestUtil {
         	boolean result=outputDir.mkdirs();
         }
         
-        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.ttl", baseOutput,directory, file)), "Turtle");
-        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.rdf", baseOutput,directory, file)), "RDF/XML-ABBREV");
-        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.jsonld", baseOutput,directory, file)), "JSON-LD");
-        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.rj", baseOutput,directory, file)), "rdfjson");
-        SBOLWriter.write(doc, new File(String.format("%s/%s/%s.nt", baseOutput,directory, file)), "N-TRIPLES");
+        SBOLIO.write(doc, new File(String.format("%s/%s/%s.ttl", baseOutput,directory, file)), "Turtle");
+        SBOLIO.write(doc, new File(String.format("%s/%s/%s.rdf", baseOutput,directory, file)), "RDF/XML-ABBREV");
+        SBOLIO.write(doc, new File(String.format("%s/%s/%s.jsonld", baseOutput,directory, file)), "JSON-LD");
+        SBOLIO.write(doc, new File(String.format("%s/%s/%s.rj", baseOutput,directory, file)), "rdfjson");
+        SBOLIO.write(doc, new File(String.format("%s/%s/%s.nt", baseOutput,directory, file)), "N-TRIPLES");
 	}
 	
 	public static void assertReadWrite(SBOLDocument doc) throws IOException, SBOLGraphException
 	{
-		String output=SBOLWriter.write(doc, "Turtle");
-	    SBOLDocument doc2=SBOLWriter.read(output, "Turtle"); 
+		String output=SBOLIO.write(doc, "Turtle");
+	    SBOLDocument doc2=SBOLIO.read(output, "Turtle"); 
 	    assertEqual(doc, doc2);
 	       
 	}

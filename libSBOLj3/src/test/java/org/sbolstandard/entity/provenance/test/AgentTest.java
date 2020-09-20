@@ -10,7 +10,7 @@ import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.Model;
 import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.entity.provenance.Agent;
-import org.sbolstandard.io.SBOLWriter;
+import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.vocabulary.ComponentType;
@@ -35,7 +35,7 @@ public class AgentTest extends TestCase {
         
         TestUtil.serialise(doc, "provenance_entity/agent", "agent");
       
-        System.out.println(SBOLWriter.write(doc, "Turtle"));
+        System.out.println(SBOLIO.write(doc, "Turtle"));
         
         TestUtil.assertReadWrite(doc);
     }

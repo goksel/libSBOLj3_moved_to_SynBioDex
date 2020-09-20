@@ -20,7 +20,7 @@ import org.sbolstandard.entity.measure.UnitDivision;
 import org.sbolstandard.entity.measure.UnitExponentiation;
 import org.sbolstandard.entity.measure.UnitMultiplication;
 import org.sbolstandard.entity.provenance.Agent;
-import org.sbolstandard.io.SBOLWriter;
+import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.vocabulary.ComponentType;
@@ -76,9 +76,9 @@ public class MeasureTest extends TestCase {
         
         
         TestUtil.serialise(doc, "measurement_entity/measurement", "measurement");
-        SBOLDocument doc2=SBOLWriter.read(new File("output/measurement_entity/measurement/measurement.ttl"), "turtle");
+        SBOLDocument doc2=SBOLIO.read(new File("output/measurement_entity/measurement/measurement.ttl"), "turtle");
       
-        System.out.println(SBOLWriter.write(doc2, "Turtle"));
+        System.out.println(SBOLIO.write(doc2, "Turtle"));
         List<SingularUnit> units=doc2.getSingularUnits();
         if (units!=null)
         {

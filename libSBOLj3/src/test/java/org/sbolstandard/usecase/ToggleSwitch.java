@@ -15,7 +15,7 @@ import org.sbolstandard.entity.ComponentReference;
 import org.sbolstandard.entity.Interaction;
 import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.entity.SubComponent;
-import org.sbolstandard.io.SBOLWriter;
+import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ComponentType;
 import org.sbolstandard.vocabulary.DataModel;
@@ -125,11 +125,11 @@ public class ToggleSwitch extends TestCase {
         
       
         
-        String output=SBOLWriter.write(doc, "Turtle");
+        String output=SBOLIO.write(doc, "Turtle");
         System.out.print(output);
         
-        SBOLDocument doc2=SBOLWriter.read(output, "Turtle"); 
-        output=SBOLWriter.write(doc2, "RDF/XML-ABBREV");
+        SBOLDocument doc2=SBOLIO.read(output, "Turtle"); 
+        output=SBOLIO.write(doc2, "RDF/XML-ABBREV");
         System.out.print(output);
         
         TestUtil.serialise(doc2, "toggle_switch", "toggle_switch");     

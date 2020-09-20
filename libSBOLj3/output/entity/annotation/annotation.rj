@@ -128,11 +128,6 @@
   }
    ,
   "http://parts.igem.org" : { 
-    "http://sbols.org/v3#displayId" : [ { 
-      "type" : "literal" ,
-      "value" : "parts.igem.org"
-    }
-     ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
       "value" : "http://parts.igem.org/Repository"
@@ -155,6 +150,28 @@
     "http://sbols.org/v3#description" : [ { 
       "type" : "literal" ,
       "value" : "Registry of Standard Biological Parts"
+    }
+     ]
+  }
+   ,
+  "http://synbiohub.org#about" : { 
+    "http://sbols.org/v3#displayId" : [ { 
+      "type" : "literal" ,
+      "value" : "about"
+    }
+     ] ,
+    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
+      "type" : "uri" ,
+      "value" : "http://parts.igem.org/Repository"
+    }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+     ] ,
+    "http://sbols.org/v3#name" : [ { 
+      "type" : "literal" ,
+      "value" : "SynBioHub"
     }
      ]
   }
@@ -193,6 +210,10 @@
     "http://parts.igem.org/belongsTo" : [ { 
       "type" : "uri" ,
       "value" : "http://parts.igem.org"
+    }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://synbiohub.org#about"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 

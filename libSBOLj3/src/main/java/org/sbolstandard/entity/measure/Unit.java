@@ -42,7 +42,7 @@ public abstract class Unit extends TopLevel{
 	
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
-		RDFUtil.setProperty(resource, MeasureDataModel.Unit.label, symbol);	
+		RDFUtil.setProperty(resource, MeasureDataModel.Unit.symbol, symbol);	
 	}
 	
 	public List<String> getAlternativeSymbols() {

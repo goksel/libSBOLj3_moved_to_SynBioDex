@@ -11,7 +11,7 @@ import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.Identified;
 import org.sbolstandard.entity.Metadata;
 import org.sbolstandard.entity.SBOLDocument;
-import org.sbolstandard.io.SBOLWriter;
+import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.vocabulary.ComponentType;
@@ -69,13 +69,28 @@ public class AnnotationTest extends TestCase {
         igemInf4.addAnnotion(igem.local("website"), "http://parts.igem.org/Main_Page");
         part.addAnnotion(igem.local("belongsTo"), igemInf4);
         
+        Metadata igemInf5=new Metadata(doc, URI.create("http://synbiohub.org#about"),igem.local("Repository"),true );
+        igemInf5.setName("SynBioHub");
+        part.addAnnotion(igem.local("belongsTo"), igemInf5);
+        
         TestUtil.serialise(doc, "entity/annotation", "annotation");
         
-        String output=SBOLWriter.write(doc, "Turtle");
+        String rdfxmloutput=SBOLIO.write(doc, "RDF/XML-ABBREV");
+        System.out.println(rdfxmloutput);
+        SBOLDocument docrdfxml=SBOLIO.read(rdfxmloutput, "RDF/XML-ABBREV");
+        rdfxmloutput=SBOLIO.write(docrdfxml, "RDF/XML-ABBREV");
+        System.out.println(rdfxmloutput);
+        
+   
+        
+        String output=SBOLIO.write(doc, "Turtle");
         System.out.println(output);
-        SBOLDocument doc2=SBOLWriter.read(output, "Turtle"); 
-        doc2.addTopLevelResourceType(igem.local("Repository"));
-        output=SBOLWriter.write(doc2, "RDF/XML-ABBREV");
+        SBOLDocument doc2=SBOLIO.read(output, "Turtle"); 
+      //  doc2.addTopLevelResourceType(igem.local("Repository"));
+        
+       
+        
+        output=SBOLIO.write(doc2, "RDF/XML-ABBREV");
         System.out.println(output);
          
         printMetadata(doc2.getComponents().get(0));

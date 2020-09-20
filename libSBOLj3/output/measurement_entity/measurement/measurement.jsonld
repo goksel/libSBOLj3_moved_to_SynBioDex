@@ -28,13 +28,15 @@
     "name" : "cubicMeter",
     "hasBase" : "meter",
     "hasExponent" : "3",
-    "label" : "cubicMeter"
+    "label" : "cubicMeter",
+    "symbol" : "m3"
   }, {
     "@id" : "kelvin",
     "@type" : "om:SingularUnit",
     "displayId" : "kelvin",
     "name" : "kelvin",
-    "label" : "kelvin"
+    "label" : "kelvin",
+    "symbol" : "kelvin"
   }, {
     "@id" : "kelvinMole",
     "@type" : "om:UnitMultiplication",
@@ -42,7 +44,8 @@
     "name" : "kelvinMole",
     "hasTerm1" : "kelvin",
     "hasTerm2" : "mole",
-    "label" : "kelvinMole"
+    "label" : "kelvinMole",
+    "symbol" : "K mol"
   }, {
     "@id" : "litre",
     "@type" : "om:SingularUnit",
@@ -54,13 +57,15 @@
     "comment" : "The litre is a unit of volume defined as 1.0e-3 cubic metre.",
     "hasFactor" : "0.001",
     "label" : "liter",
-    "longcomment" : "This is an example long comment."
+    "longcomment" : "This is an example long comment.",
+    "symbol" : "l"
   }, {
     "@id" : "meter",
     "@type" : "om:SingularUnit",
     "displayId" : "meter",
     "name" : "meter",
-    "label" : "meter"
+    "label" : "meter",
+    "symbol" : "m"
   }, {
     "@id" : "milli",
     "@type" : "om:SIPrefix",
@@ -72,7 +77,8 @@
     "comment" : "Comment for the milli prefix.",
     "hasFactor" : "0.001",
     "label" : "milli",
-    "longcomment" : "This is an example long comment for the milli prefix."
+    "longcomment" : "This is an example long comment for the milli prefix.",
+    "symbol" : "m"
   }, {
     "@id" : "millimole",
     "@type" : "om:PrefixedUnit",
@@ -80,7 +86,8 @@
     "name" : "millimole",
     "hasPrefix" : "milli",
     "hasUnit" : "mole",
-    "label" : "millimole"
+    "label" : "millimole",
+    "symbol" : "mmol"
   }, {
     "@id" : "millimolePerLitre",
     "@type" : "om:UnitDivision",
@@ -88,13 +95,15 @@
     "name" : "millimolar",
     "hasDenominator" : "litre",
     "hasNumerator" : "millimole",
-    "label" : "millimolar"
+    "label" : "millimolar",
+    "symbol" : "mmol/l"
   }, {
     "@id" : "mole",
     "@type" : "om:SingularUnit",
     "displayId" : "mole",
     "name" : "mole",
-    "label" : "mole"
+    "label" : "mole",
+    "symbol" : "mol"
   } ],
   "@context" : {
     "description" : {
@@ -108,6 +117,9 @@
     },
     "displayId" : {
       "@id" : "http://sbols.org/v3#displayId"
+    },
+    "symbol" : {
+      "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol"
     },
     "comment" : {
       "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/comment"

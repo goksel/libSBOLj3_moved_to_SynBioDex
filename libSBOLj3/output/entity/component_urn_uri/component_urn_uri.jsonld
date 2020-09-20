@@ -1,0 +1,24 @@
+{
+  "@id" : "urn:uuid:d0accf73-2c60-11b2-80d9-acde48001122",
+  "@type" : "sbol:Component",
+  "name" : "TetR",
+  "type" : "SBO:0000252",
+  "@context" : {
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
+    },
+    "type" : {
+      "@id" : "http://sbols.org/v3#type",
+      "@type" : "@id"
+    },
+    "@vocab" : "https://sbolstandard.org/examples/",
+    "SBO" : "https://identifiers.org/SBO:",
+    "CHEBI" : "https://identifiers.org/CHEBI:",
+    "GO" : "https://identifiers.org/GO:",
+    "sbol" : "http://sbols.org/v3#",
+    "EDAM" : "https://identifiers.org/edam:",
+    "SO" : "https://identifiers.org/SO:",
+    "prov" : "http://www.w3.org/ns/prov#",
+    "om" : "http://www.ontology-of-units-of-measure.org/resource/om-2/"
+  }
+}

@@ -9,7 +9,7 @@ import org.sbolstandard.TestUtil;
 import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.SBOLDocument;
-import org.sbolstandard.io.SBOLWriter;
+import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.InteractionType;
 import org.sbolstandard.vocabulary.ParticipationRole;
@@ -51,11 +51,11 @@ public class PoPSReceiverExample extends TestCase {
         SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation),popsReceiver, pLuxR, Arrays.asList(ParticipationRole.Stimulated), LuxR_protein, Arrays.asList(ParticipationRole.Stimulator));
         SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation),popsReceiver, pTetR, Arrays.asList(ParticipationRole.Stimulated), TetR_protein, Arrays.asList(ParticipationRole.Stimulator));
         
-        String output=SBOLWriter.write(doc, "Turtle");
+        String output=SBOLIO.write(doc, "Turtle");
         System.out.print(output);
         
-        SBOLDocument doc2=SBOLWriter.read(output, "Turtle"); 
-        output=SBOLWriter.write(doc2, "RDF/XML-ABBREV");
+        SBOLDocument doc2=SBOLIO.read(output, "Turtle"); 
+        output=SBOLIO.write(doc2, "RDF/XML-ABBREV");
         
         System.out.print(output);
         

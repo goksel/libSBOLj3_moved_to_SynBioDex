@@ -1,3 +1,7 @@
+<http://synbiohub.org#about> <http://sbols.org/v3#name> "SynBioHub" .
+<http://synbiohub.org#about> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#TopLevel> .
+<http://synbiohub.org#about> <http://sbols.org/v3#displayId> "about" .
+<http://synbiohub.org#about> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://parts.igem.org/Repository> .
 <https://sbolstandard.org/examples/BBa_J23119/usage1> <http://sbols.org/v3#displayId> "usage1" .
 <https://sbolstandard.org/examples/BBa_J23119/usage1> <http://parts.igem.org/registryStar> "1" .
 <https://sbolstandard.org/examples/BBa_J23119/usage1> <http://sbols.org/v3#name> "BBa_J23119_usage" .
@@ -16,6 +20,7 @@
 <https://sbolstandard.org/examples/BBa_J23119> <http://parts.igem.org/hasInformation> <https://sbolstandard.org/examples/BBa_J23119/information1> .
 <https://sbolstandard.org/examples/BBa_J23119> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000251> .
 <https://sbolstandard.org/examples/BBa_J23119> <http://parts.igem.org/hasUsage> <https://sbolstandard.org/examples/BBa_J23119/usage1> .
+<https://sbolstandard.org/examples/BBa_J23119> <http://parts.igem.org/belongsTo> <http://synbiohub.org#about> .
 <https://sbolstandard.org/examples/BBa_J23119> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Component> .
 <https://sbolstandard.org/examples/BBa_J23119> <http://parts.igem.org/experienceURL> <http://parts.igem.org/Part:BBa_J23119:Experience> .
 <https://sbolstandard.org/examples/BBa_J23119> <http://parts.igem.org/group> "iGEM2006_Berkeley" .
@@ -30,7 +35,6 @@
 <http://parts.igem.org> <http://sbols.org/v3#description> "Registry of Standard Biological Parts" .
 <http://parts.igem.org> <http://sbols.org/v3#name> "iGEM Registry" .
 <http://parts.igem.org> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#TopLevel> .
-<http://parts.igem.org> <http://sbols.org/v3#displayId> "parts.igem.org" .
 <http://parts.igem.org> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://parts.igem.org/Repository> .
 <https://sbolstandard.org/examples/BBa_J23119/information1> <http://parts.igem.org/regulation> "//regulation/second_regulation" .
 <https://sbolstandard.org/examples/BBa_J23119/information1> <http://parts.igem.org/regulation> "//regulation/constitutive" .

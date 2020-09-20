@@ -18,26 +18,30 @@
         om:comment            "The litre is a unit of volume defined as 1.0e-3 cubic metre." ;
         om:hasFactor          "0.001" ;
         om:label              "liter" ;
-        om:longcomment        "This is an example long comment." .
+        om:longcomment        "This is an example long comment." ;
+        om:symbol             "l" .
 
 :cubicMeter  a          om:UnitExponentiation ;
         sbol:displayId  "cubicMeter" ;
         sbol:name       "cubicMeter" ;
         om:hasBase      :meter ;
         om:hasExponent  "3" ;
-        om:label        "cubicMeter" .
+        om:label        "cubicMeter" ;
+        om:symbol       "m3" .
 
 :kelvin  a              om:SingularUnit ;
         sbol:displayId  "kelvin" ;
         sbol:name       "kelvin" ;
-        om:label        "kelvin" .
+        om:label        "kelvin" ;
+        om:symbol       "kelvin" .
 
 :kelvinMole  a          om:UnitMultiplication ;
         sbol:displayId  "kelvinMole" ;
         sbol:name       "kelvinMole" ;
         om:hasTerm1     :kelvin ;
         om:hasTerm2     :mole ;
-        om:label        "kelvinMole" .
+        om:label        "kelvinMole" ;
+        om:symbol       "K mol" .
 
 :M9_Glucose_CAA  a        sbol:Component ;
         sbol:description  "M9 Glucose CAA growth media" ;
@@ -56,19 +60,22 @@
 :mole   a               om:SingularUnit ;
         sbol:displayId  "mole" ;
         sbol:name       "mole" ;
-        om:label        "mole" .
+        om:label        "mole" ;
+        om:symbol       "mol" .
 
 :meter  a               om:SingularUnit ;
         sbol:displayId  "meter" ;
         sbol:name       "meter" ;
-        om:label        "meter" .
+        om:label        "meter" ;
+        om:symbol       "m" .
 
 :millimolePerLitre  a      om:UnitDivision ;
         sbol:displayId     "millimolePerLitre" ;
         sbol:name          "millimolar" ;
         om:hasDenominator  :litre ;
         om:hasNumerator    :millimole ;
-        om:label           "millimolar" .
+        om:label           "millimolar" ;
+        om:symbol          "mmol/l" .
 
 <M9_Glucose_CAA/CaCl2>
         a                sbol:ExternallyDefined ;
@@ -82,7 +89,8 @@
         sbol:name       "millimole" ;
         om:hasPrefix    :milli ;
         om:hasUnit      :mole ;
-        om:label        "millimole" .
+        om:label        "millimole" ;
+        om:symbol       "mmol" .
 
 :milli  a                     om:SIPrefix ;
         sbol:description      "Comment for the milli prefix." ;
@@ -93,4 +101,5 @@
         om:comment            "Comment for the milli prefix." ;
         om:hasFactor          "0.001" ;
         om:label              "milli" ;
-        om:longcomment        "This is an example long comment for the milli prefix." .
+        om:longcomment        "This is an example long comment for the milli prefix." ;
+        om:symbol             "m" .

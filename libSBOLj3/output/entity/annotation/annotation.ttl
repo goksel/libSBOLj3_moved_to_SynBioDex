@@ -10,6 +10,11 @@
 @prefix prov:  <http://www.w3.org/ns/prov#> .
 @prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
 
+<http://synbiohub.org#about>
+        a               sbol:TopLevel , igem:Repository ;
+        sbol:displayId  "about" ;
+        sbol:name       "SynBioHub" .
+
 <BBa_J23119/usage1>  a     sbol:Identified , igem:IGEMUsage ;
         igem:inStock       "true" ;
         igem:registryStar  "1" ;
@@ -21,7 +26,7 @@
         sbol:name          "BBa_J23119_usage" .
 
 :BBa_J23119  a               sbol:Component ;
-        igem:belongsTo       <http://parts.igem.org> ;
+        igem:belongsTo       <http://parts.igem.org> , <http://synbiohub.org#about> ;
         igem:experienceURL   igem:Part:BBa_J23119:Experience ;
         igem:group           "iGEM2006_Berkeley" ;
         igem:hasInformation  <BBa_J23119/information1> ;
@@ -42,7 +47,6 @@
         a                 sbol:TopLevel , igem:Repository ;
         igem:website      "http://parts.igem.org/Main_Page" ;
         sbol:description  "Registry of Standard Biological Parts" ;
-        sbol:displayId    "parts.igem.org" ;
         sbol:name         "iGEM Registry" .
 
 <BBa_J23119/information1>

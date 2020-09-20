@@ -478,6 +478,7 @@ public class SBOLDocument {
 					DataModel.Collection.uri,
 					DataModel.Namespace.uri,
 					DataModel.CombinatorialDerivation.uri,
+					DataModel.TopLevel.uri,
 					ProvenanceDataModel.Agent.uri,
 					ProvenanceDataModel.Plan.uri,
 					ProvenanceDataModel.Activity.uri,
