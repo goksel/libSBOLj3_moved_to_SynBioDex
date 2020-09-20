@@ -1,5 +1,5 @@
 # libSBOLj3 - A Java library for the Synthetic Biology Open Language 3
-The libSBOLj Java library has been developed for the Synthetic Biology Open Language 3.0. The library is  under development and is currently available as an alpha release. 
+The libSBOLj Java library has been developed for the [Synthetic Biology Open Language 3.0](https://sbolstandard.org/data-model-specification). The library is  under development and is currently available as an alpha release. 
 
 SBOL represents data using RDF graphs, which can be serialised in different formats. The libSBOLj3 library supports the following RDF formats.
 * RDF/XML
@@ -11,7 +11,7 @@ SBOL represents data using RDF graphs, which can be serialised in different form
 ## How to use libSBOLj3
 
 ### As a Maven dependency in a Maven project
-Use this option if you are developing a Java application using Maven. Add the following libSBOLj dependency to your Maven applications's POM file (pom.xml. Please also make sure that you include the Nexus's Snapshots repository in the POM file. 
+Use this option if you are developing a Java application using [Maven](https://maven.apache.org/). Add the following libSBOLj3 dependency to your Maven applications's POM file (pom.xml). Please also make sure that you include the Nexus' Snapshots repository URL in the POM file. 
 ``` 
 </dependencies>
 	...
@@ -36,7 +36,7 @@ Use this option if you are developing a Java application using Maven. Add the fo
 ```
 
 ### As a Java dependency in a non-Maven project
-The libSBOLj3 library is available as a JAR file. Please download the file from . A single JAR file (with the "withDepencencies" suffix), which includes all the required libSBOLj3 related dependencies is also available.
+The libSBOLj3 library is available as a JAR file. Please download the file from the [releases page](https://github.com/goksel/libSBOLj3/tags). A single JAR file (with the "withDepencencies" suffix), which includes all the required libSBOLj3 related dependencies, is also available.
 
 ## SBOL Examples
-Several SBOL3 examples are available as part of the libSBOLj3 library. These examples can be found at . These examples have also been made available as part of the SBOLTestSuite at https://github.com/SynBioDex/SBOLTestSuite/tree/master/SBOL3. Some of these examples have beeen explained in the recent SBOL3 paper. Please see  https://doi.org/10.3389/fbioe.2020.01009 for more details.
+[Several SBOL3 examples](https://github.com/goksel/libSBOLj3/tree/master/libSBOLj3/output) are available as part of the libSBOLj3 library. These examples have also been made available as part of the [SBOLTestSuite](https://github.com/SynBioDex/SBOLTestSuite/tree/master/SBOL3). Some of these examples have beeen explained in the recent SBOL3 paper, titled "[The Synthetic Biology Open Language (SBOL) Version 3: Simplified Data Exchange for Bioengineering]"(https://doi.org/10.3389/fbioe.2020.01009).
