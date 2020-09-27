@@ -1,0 +1,292 @@
+<rdf:RDF
+    xmlns:SO="https://identifiers.org/SO:"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:EDAM="https://identifiers.org/edam:"
+    xmlns:sbol="http://sbols.org/v3#"
+    xmlns:CHEBI="https://identifiers.org/CHEBI:"
+    xmlns:prov="http://www.w3.org/ns/prov#"
+    xmlns:SBO="https://identifiers.org/SBO:"
+    xmlns:GO="https://identifiers.org/GO:"
+    xmlns="https://synbiohub.org/public/igem/"
+    xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/"
+   xml:base="https://synbiohub.org/public/igem/">
+   <sbol:Component rdf:about="E0040">
+      <sbol:hasSequence>
+         <sbol:Sequence rdf:about="E0040_sequence_1"/>
+      </sbol:hasSequence>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000316"/>
+      <sbol:name>E0040</sbol:name>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:displayId>E0040</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="j23106">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:displayId>j23106</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="i13504_system">
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="i13504_system/gfp_production">
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="i13504_system/gfp_production/protein">
+                  <sbol:participant>
+                     <sbol:SubComponent rdf:about="i13504_system/GFP_protein">
+                        <sbol:instanceOf>
+                           <sbol:Component rdf:about="GFP_protein"/>
+                        </sbol:instanceOf>
+                        <sbol:displayId>GFP_protein</sbol:displayId>
+                     </sbol:SubComponent>
+                  </sbol:participant>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
+                  <sbol:displayId>protein</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="i13504_system/gfp_production/cds">
+                  <sbol:participant>
+                     <sbol:ComponentReference rdf:about="i13504_system/compRef">
+                        <sbol:inChildOf>
+                           <sbol:SubComponent rdf:about="i13504_system/i13504">
+                              <sbol:instanceOf>
+                                 <sbol:Component rdf:about="i13504"/>
+                              </sbol:instanceOf>
+                              <sbol:displayId>i13504</sbol:displayId>
+                           </sbol:SubComponent>
+                        </sbol:inChildOf>
+                        <sbol:hasFeature>
+                           <sbol:SubComponent rdf:about="i13504/subcomponent_2">
+                              <sbol:hasLocation>
+                                 <sbol:Range rdf:about="i13504/subcomponent_2/location_1">
+                                    <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+                                    <sbol:end>1458</sbol:end>
+                                    <sbol:start>739</sbol:start>
+                                    <sbol:hasSequence>
+                                       <sbol:Sequence rdf:about="i13504_sequence_1"/>
+                                    </sbol:hasSequence>
+                                    <sbol:displayId>location_1</sbol:displayId>
+                                 </sbol:Range>
+                              </sbol:hasLocation>
+                              <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+                              <sbol:instanceOf rdf:resource="E0040"/>
+                              <sbol:displayId>subcomponent_2</sbol:displayId>
+                           </sbol:SubComponent>
+                        </sbol:hasFeature>
+                        <sbol:displayId>compRef</sbol:displayId>
+                     </sbol:ComponentReference>
+                  </sbol:participant>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000645"/>
+                  <sbol:displayId>cds</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000589"/>
+            <sbol:displayId>gfp_production</sbol:displayId>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
+      <sbol:hasFeature rdf:resource="i13504_system/compRef"/>
+      <sbol:hasFeature rdf:resource="i13504_system/GFP_protein"/>
+      <sbol:hasFeature rdf:resource="i13504_system/i13504"/>
+      <sbol:role rdf:resource="https://identifiers.org/SBO:0000289"/>
+      <sbol:name>i13504 system</sbol:name>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
+      <sbol:displayId>i13504_system</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="i13504">
+      <sbol:hasFeature>
+         <sbol:SequenceFeature rdf:about="i13504/sequencefeature_1">
+            <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+            <sbol:hasLocation>
+               <sbol:Range rdf:about="i13504/sequencefeature_1/location">
+                  <sbol:end>24</sbol:end>
+                  <sbol:start>19</sbol:start>
+                  <sbol:hasSequence>
+                     <sbol:Sequence rdf:about="i13504_sequence_1"/>
+                  </sbol:hasSequence>
+                  <sbol:displayId>location</sbol:displayId>
+               </sbol:Range>
+            </sbol:hasLocation>
+            <sbol:displayId>sequencefeature_1</sbol:displayId>
+         </sbol:SequenceFeature>
+      </sbol:hasFeature>
+      <sbol:description>iGEM 2016 interlab reporter</sbol:description>
+      <sbol:name>iGEM 2016 interlab reporter</sbol:name>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
+      <sbol:hasFeature rdf:resource="i13504/subcomponent_2"/>
+      <sbol:hasSequence>
+         <sbol:Sequence rdf:about="i13504_sequence_1"/>
+      </sbol:hasSequence>
+      <sbol:displayId>i13504</sbol:displayId>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="i13504/subcomponent_1">
+            <sbol:hasLocation>
+               <sbol:Range rdf:about="i13504/subcomponent_1/location_1">
+                  <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+                  <sbol:end>24</sbol:end>
+                  <sbol:start>13</sbol:start>
+                  <sbol:hasSequence>
+                     <sbol:Sequence rdf:about="i13504_sequence_1"/>
+                  </sbol:hasSequence>
+                  <sbol:displayId>location_1</sbol:displayId>
+               </sbol:Range>
+            </sbol:hasLocation>
+            <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+            <sbol:instanceOf>
+               <sbol:Component rdf:about="B0034"/>
+            </sbol:instanceOf>
+            <sbol:displayId>subcomponent_1</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="i13504/B0015">
+            <sbol:hasLocation>
+               <sbol:Range rdf:about="i13504/B0015/location">
+                  <sbol:end>826</sbol:end>
+                  <sbol:start>747</sbol:start>
+                  <sbol:hasSequence>
+                     <sbol:Sequence rdf:about="i13504_sequence_1"/>
+                  </sbol:hasSequence>
+                  <sbol:displayId>location</sbol:displayId>
+               </sbol:Range>
+            </sbol:hasLocation>
+            <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+            <sbol:instanceOf>
+               <sbol:Component rdf:about="B0015"/>
+            </sbol:instanceOf>
+            <sbol:displayId>B0015</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:hasFeature>
+         <sbol:SequenceFeature rdf:about="i13504/sequencefeature_2">
+            <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+            <sbol:hasLocation>
+               <sbol:Range rdf:about="i13504/sequencefeature_2/location">
+                  <sbol:end>754</sbol:end>
+                  <sbol:start>747</sbol:start>
+                  <sbol:hasSequence>
+                     <sbol:Sequence rdf:about="i13504_sequence_1"/>
+                  </sbol:hasSequence>
+                  <sbol:displayId>location</sbol:displayId>
+               </sbol:Range>
+            </sbol:hasLocation>
+            <sbol:displayId>sequencefeature_2</sbol:displayId>
+         </sbol:SequenceFeature>
+      </sbol:hasFeature>
+   </sbol:Component>
+   <sbol:Component rdf:about="B0015">
+      <sbol:hasSequence>
+         <sbol:Sequence rdf:about="B0015_sequence_1"/>
+      </sbol:hasSequence>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000141"/>
+      <sbol:name>B0015</sbol:name>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:displayId>B0015</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="interlab16device1">
+      <sbol:hasConstraint>
+         <sbol:Constraint rdf:about="interlab16device1/constraint_dev1">
+            <sbol:object>
+               <sbol:ComponentReference rdf:about="interlab16device1/i13504_dev1_compref">
+                  <sbol:inChildOf>
+                     <sbol:SubComponent rdf:about="interlab16device1/i13504_system">
+                        <sbol:instanceOf rdf:resource="i13504_system"/>
+                        <sbol:displayId>i13504_system</sbol:displayId>
+                     </sbol:SubComponent>
+                  </sbol:inChildOf>
+                  <sbol:hasFeature rdf:resource="i13504_system/i13504"/>
+                  <sbol:displayId>i13504_dev1_compref</sbol:displayId>
+               </sbol:ComponentReference>
+            </sbol:object>
+            <sbol:subject>
+               <sbol:SubComponent rdf:about="interlab16device1/j23101">
+                  <sbol:instanceOf>
+                     <sbol:Component rdf:about="j23101"/>
+                  </sbol:instanceOf>
+                  <sbol:displayId>j23101</sbol:displayId>
+               </sbol:SubComponent>
+            </sbol:subject>
+            <sbol:restriction rdf:resource="http://sbols.org/v3#meets"/>
+            <sbol:displayId>constraint_dev1</sbol:displayId>
+         </sbol:Constraint>
+      </sbol:hasConstraint>
+      <sbol:hasFeature rdf:resource="interlab16device1/i13504_dev1_compref"/>
+      <sbol:hasFeature rdf:resource="interlab16device1/i13504_system"/>
+      <sbol:hasFeature rdf:resource="interlab16device1/j23101"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:displayId>interlab16device1</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="B0034">
+      <sbol:hasSequence>
+         <sbol:Sequence rdf:about="B0034_seq"/>
+      </sbol:hasSequence>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000139"/>
+      <sbol:name>B0034</sbol:name>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:displayId>B0034</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="interlab16device2">
+      <sbol:hasConstraint>
+         <sbol:Constraint rdf:about="interlab16device2/constraint_dev2">
+            <sbol:object>
+               <sbol:ComponentReference rdf:about="interlab16device2/i13504_dev2_compref">
+                  <sbol:inChildOf>
+                     <sbol:SubComponent rdf:about="interlab16device2/i13504_system">
+                        <sbol:instanceOf rdf:resource="i13504_system"/>
+                        <sbol:displayId>i13504_system</sbol:displayId>
+                     </sbol:SubComponent>
+                  </sbol:inChildOf>
+                  <sbol:hasFeature rdf:resource="i13504_system/i13504"/>
+                  <sbol:displayId>i13504_dev2_compref</sbol:displayId>
+               </sbol:ComponentReference>
+            </sbol:object>
+            <sbol:subject>
+               <sbol:SubComponent rdf:about="interlab16device2/j23106">
+                  <sbol:instanceOf rdf:resource="j23106"/>
+                  <sbol:displayId>j23106</sbol:displayId>
+               </sbol:SubComponent>
+            </sbol:subject>
+            <sbol:restriction rdf:resource="http://sbols.org/v3#meets"/>
+            <sbol:displayId>constraint_dev2</sbol:displayId>
+         </sbol:Constraint>
+      </sbol:hasConstraint>
+      <sbol:hasFeature rdf:resource="interlab16device2/i13504_dev2_compref"/>
+      <sbol:hasFeature rdf:resource="interlab16device2/i13504_system"/>
+      <sbol:hasFeature rdf:resource="interlab16device2/j23106"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:displayId>interlab16device2</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="j23101">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:displayId>j23101</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="GFP_protein">
+      <sbol:description>GFP</sbol:description>
+      <sbol:name>GFP</sbol:name>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
+      <sbol:displayId>GFP_protein</sbol:displayId>
+   </sbol:Component>
+   <sbol:Sequence rdf:about="i13504_sequence_1">
+      <sbol:elements>aaagaggagaaatactagatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataatactagagccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc</sbol:elements>
+      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
+      <sbol:description>iGEM 2016 interlab reporter sequence</sbol:description>
+      <sbol:name>sequence_1</sbol:name>
+      <sbol:displayId>i13504_sequence_1</sbol:displayId>
+   </sbol:Sequence>
+   <sbol:Sequence rdf:about="B0015_sequence_1">
+      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
+      <sbol:elements>ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc</sbol:elements>
+      <sbol:description>B0015 sequence</sbol:description>
+      <sbol:name>sequence_1</sbol:name>
+      <sbol:displayId>B0015_sequence_1</sbol:displayId>
+   </sbol:Sequence>
+   <sbol:Sequence rdf:about="E0040_sequence_1">
+      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
+      <sbol:elements>atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa</sbol:elements>
+      <sbol:description>E0040 sequence</sbol:description>
+      <sbol:name>sequence_1</sbol:name>
+      <sbol:displayId>E0040_sequence_1</sbol:displayId>
+   </sbol:Sequence>
+   <sbol:Sequence rdf:about="B0034_seq">
+      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
+      <sbol:elements>aaagaggagaaa</sbol:elements>
+      <sbol:displayId>B0034_seq</sbol:displayId>
+   </sbol:Sequence>
+</rdf:RDF>

@@ -1,0 +1,249 @@
+@base          <https://synbiohub.org/public/igem/> .
+@prefix :      <https://synbiohub.org/public/igem/> .
+@prefix SBO:   <https://identifiers.org/SBO:> .
+@prefix CHEBI: <https://identifiers.org/CHEBI:> .
+@prefix GO:    <https://identifiers.org/GO:> .
+@prefix sbol:  <http://sbols.org/v3#> .
+@prefix EDAM:  <https://identifiers.org/edam:> .
+@prefix SO:    <https://identifiers.org/SO:> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+
+<interlab16device2/i13504_dev2_compref>
+        a                sbol:ComponentReference ;
+        sbol:displayId   "i13504_dev2_compref" ;
+        sbol:hasFeature  <i13504_system/i13504> ;
+        sbol:inChildOf   <interlab16device2/i13504_system> .
+
+:interlab16device1  a       sbol:Component ;
+        sbol:displayId      "interlab16device1" ;
+        sbol:hasConstraint  <interlab16device1/constraint_dev1> ;
+        sbol:hasFeature     <interlab16device1/i13504_dev1_compref> , <interlab16device1/i13504_system> , <interlab16device1/j23101> ;
+        sbol:type           SBO:0000251 .
+
+<i13504/sequencefeature_2>
+        a                 sbol:SequenceFeature ;
+        sbol:displayId    "sequencefeature_2" ;
+        sbol:hasLocation  <i13504/sequencefeature_2/location> ;
+        sbol:orientation  sbol:inline .
+
+<i13504/subcomponent_2>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "subcomponent_2" ;
+        sbol:hasLocation  <i13504/subcomponent_2/location_1> ;
+        sbol:instanceOf   :E0040 ;
+        sbol:orientation  sbol:inline .
+
+<i13504/sequencefeature_2/location>
+        a                 sbol:Range ;
+        sbol:displayId    "location" ;
+        sbol:end          "754" ;
+        sbol:hasSequence  :i13504_sequence_1 ;
+        sbol:start        "747" .
+
+:E0040  a                 sbol:Component ;
+        sbol:displayId    "E0040" ;
+        sbol:hasSequence  :E0040_sequence_1 ;
+        sbol:name         "E0040" ;
+        sbol:role         SO:0000316 ;
+        sbol:type         SBO:0000251 .
+
+<i13504_system/gfp_production/protein>
+        a                 sbol:Participation ;
+        sbol:displayId    "protein" ;
+        sbol:participant  <i13504_system/GFP_protein> ;
+        sbol:role         SBO:0000011 .
+
+:B0015_sequence_1  a      sbol:Sequence ;
+        sbol:description  "B0015 sequence" ;
+        sbol:displayId    "B0015_sequence_1" ;
+        sbol:elements     "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc" ;
+        sbol:encoding     sbol:iupacNucleicAcid ;
+        sbol:name         "sequence_1" .
+
+<i13504/sequencefeature_1>
+        a                 sbol:SequenceFeature ;
+        sbol:displayId    "sequencefeature_1" ;
+        sbol:hasLocation  <i13504/sequencefeature_1/location> ;
+        sbol:orientation  sbol:inline .
+
+<i13504/subcomponent_1>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "subcomponent_1" ;
+        sbol:hasLocation  <i13504/subcomponent_1/location_1> ;
+        sbol:instanceOf   :B0034 ;
+        sbol:orientation  sbol:inline .
+
+<i13504_system/GFP_protein>
+        a                sbol:SubComponent ;
+        sbol:displayId   "GFP_protein" ;
+        sbol:instanceOf  :GFP_protein .
+
+<i13504_system/compRef>
+        a                sbol:ComponentReference ;
+        sbol:displayId   "compRef" ;
+        sbol:hasFeature  <i13504/subcomponent_2> ;
+        sbol:inChildOf   <i13504_system/i13504> .
+
+:E0040_sequence_1  a      sbol:Sequence ;
+        sbol:description  "E0040 sequence" ;
+        sbol:displayId    "E0040_sequence_1" ;
+        sbol:elements     "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa" ;
+        sbol:encoding     sbol:iupacNucleicAcid ;
+        sbol:name         "sequence_1" .
+
+<interlab16device1/constraint_dev1>
+        a                 sbol:Constraint ;
+        sbol:displayId    "constraint_dev1" ;
+        sbol:object       <interlab16device1/i13504_dev1_compref> ;
+        sbol:restriction  sbol:meets ;
+        sbol:subject      <interlab16device1/j23101> .
+
+<i13504/subcomponent_2/location_1>
+        a                 sbol:Range ;
+        sbol:displayId    "location_1" ;
+        sbol:end          "1458" ;
+        sbol:hasSequence  :i13504_sequence_1 ;
+        sbol:orientation  sbol:inline ;
+        sbol:start        "739" .
+
+<interlab16device2/i13504_system>
+        a                sbol:SubComponent ;
+        sbol:displayId   "i13504_system" ;
+        sbol:instanceOf  :i13504_system .
+
+<i13504_system/gfp_production/cds>
+        a                 sbol:Participation ;
+        sbol:displayId    "cds" ;
+        sbol:participant  <i13504_system/compRef> ;
+        sbol:role         SBO:0000645 .
+
+:GFP_protein  a           sbol:Component ;
+        sbol:description  "GFP" ;
+        sbol:displayId    "GFP_protein" ;
+        sbol:name         "GFP" ;
+        sbol:type         SBO:0000252 .
+
+:i13504  a                sbol:Component ;
+        sbol:description  "iGEM 2016 interlab reporter" ;
+        sbol:displayId    "i13504" ;
+        sbol:hasFeature   <i13504/sequencefeature_1> , <i13504/subcomponent_2> , <i13504/subcomponent_1> , <i13504/B0015> , <i13504/sequencefeature_2> ;
+        sbol:hasSequence  :i13504_sequence_1 ;
+        sbol:name         "iGEM 2016 interlab reporter" ;
+        sbol:role         SO:0000704 ;
+        sbol:type         SBO:0000251 .
+
+:j23101  a              sbol:Component ;
+        sbol:displayId  "j23101" ;
+        sbol:type       SBO:0000251 .
+
+<i13504/subcomponent_1/location_1>
+        a                 sbol:Range ;
+        sbol:displayId    "location_1" ;
+        sbol:end          "24" ;
+        sbol:hasSequence  :i13504_sequence_1 ;
+        sbol:orientation  sbol:inline ;
+        sbol:start        "13" .
+
+<i13504/sequencefeature_1/location>
+        a                 sbol:Range ;
+        sbol:displayId    "location" ;
+        sbol:end          "24" ;
+        sbol:hasSequence  :i13504_sequence_1 ;
+        sbol:start        "19" .
+
+:i13504_sequence_1  a     sbol:Sequence ;
+        sbol:description  "iGEM 2016 interlab reporter sequence" ;
+        sbol:displayId    "i13504_sequence_1" ;
+        sbol:elements     "aaagaggagaaatactagatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataatactagagccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc" ;
+        sbol:encoding     sbol:iupacNucleicAcid ;
+        sbol:name         "sequence_1" .
+
+<interlab16device2/constraint_dev2>
+        a                 sbol:Constraint ;
+        sbol:displayId    "constraint_dev2" ;
+        sbol:object       <interlab16device2/i13504_dev2_compref> ;
+        sbol:restriction  sbol:meets ;
+        sbol:subject      <interlab16device2/j23106> .
+
+<interlab16device2/j23106>
+        a                sbol:SubComponent ;
+        sbol:displayId   "j23106" ;
+        sbol:instanceOf  :j23106 .
+
+<interlab16device1/j23101>
+        a                sbol:SubComponent ;
+        sbol:displayId   "j23101" ;
+        sbol:instanceOf  :j23101 .
+
+:B0034  a                 sbol:Component ;
+        sbol:displayId    "B0034" ;
+        sbol:hasSequence  :B0034_seq ;
+        sbol:name         "B0034" ;
+        sbol:role         SO:0000139 ;
+        sbol:type         SBO:0000251 .
+
+:j23106  a              sbol:Component ;
+        sbol:displayId  "j23106" ;
+        sbol:type       SBO:0000251 .
+
+:i13504_system  a            sbol:Component ;
+        sbol:displayId       "i13504_system" ;
+        sbol:hasFeature      <i13504_system/compRef> , <i13504_system/GFP_protein> , <i13504_system/i13504> ;
+        sbol:hasInteraction  <i13504_system/gfp_production> ;
+        sbol:name            "i13504 system" ;
+        sbol:role            SBO:0000289 ;
+        sbol:type            SBO:0000241 .
+
+:B0015  a                 sbol:Component ;
+        sbol:displayId    "B0015" ;
+        sbol:hasSequence  :B0015_sequence_1 ;
+        sbol:name         "B0015" ;
+        sbol:role         SO:0000141 ;
+        sbol:type         SBO:0000251 .
+
+<i13504/B0015>  a         sbol:SubComponent ;
+        sbol:displayId    "B0015" ;
+        sbol:hasLocation  <i13504/B0015/location> ;
+        sbol:instanceOf   :B0015 ;
+        sbol:orientation  sbol:inline .
+
+<interlab16device1/i13504_dev1_compref>
+        a                sbol:ComponentReference ;
+        sbol:displayId   "i13504_dev1_compref" ;
+        sbol:hasFeature  <i13504_system/i13504> ;
+        sbol:inChildOf   <interlab16device1/i13504_system> .
+
+<i13504_system/i13504>
+        a                sbol:SubComponent ;
+        sbol:displayId   "i13504" ;
+        sbol:instanceOf  :i13504 .
+
+:B0034_seq  a           sbol:Sequence ;
+        sbol:displayId  "B0034_seq" ;
+        sbol:elements   "aaagaggagaaa" ;
+        sbol:encoding   sbol:iupacNucleicAcid .
+
+:interlab16device2  a       sbol:Component ;
+        sbol:displayId      "interlab16device2" ;
+        sbol:hasConstraint  <interlab16device2/constraint_dev2> ;
+        sbol:hasFeature     <interlab16device2/i13504_dev2_compref> , <interlab16device2/i13504_system> , <interlab16device2/j23106> ;
+        sbol:type           SBO:0000251 .
+
+<i13504_system/gfp_production>
+        a                      sbol:Interaction ;
+        sbol:displayId         "gfp_production" ;
+        sbol:hasParticipation  <i13504_system/gfp_production/protein> , <i13504_system/gfp_production/cds> ;
+        sbol:type              SBO:0000589 .
+
+<interlab16device1/i13504_system>
+        a                sbol:SubComponent ;
+        sbol:displayId   "i13504_system" ;
+        sbol:instanceOf  :i13504_system .
+
+<i13504/B0015/location>
+        a                 sbol:Range ;
+        sbol:displayId    "location" ;
+        sbol:end          "826" ;
+        sbol:hasSequence  :i13504_sequence_1 ;
+        sbol:start        "747" .

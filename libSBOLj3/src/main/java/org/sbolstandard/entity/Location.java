@@ -12,6 +12,7 @@ import org.sbolstandard.vocabulary.Orientation;
 public abstract class  Location extends Identified {
 	private Orientation orientation;
 	private int order=Integer.MIN_VALUE;
+	protected URI sequence;
 
 	protected Location(Model model,URI uri) throws SBOLGraphException
 	{
@@ -64,7 +65,19 @@ public abstract class  Location extends Identified {
 	}
 	
 	
+	public URI getSequence() {
+		if (sequence==null)
+		{
+			sequence=RDFUtil.getPropertyAsURI(this.resource, DataModel.Location.sequence);
+		}
+		return sequence;
+	}
 
+	public void setSequence(URI sequence) {
+		this.sequence = sequence;
+		RDFUtil.setProperty(this.resource, DataModel.Location.sequence, this.sequence);	
+	}
+	
 	public URI getResourceType()
 	{
 		return DataModel.Location.uri;
@@ -88,10 +101,34 @@ public abstract class  Location extends Identified {
 	public static abstract class LocationBuilder
 	{
 		protected URI uri;
-		public LocationBuilder(URI uri)
+		protected URI sequence;
+		private Orientation orientation;
+		private int order;
+		public LocationBuilder(URI uri, URI sequence)
 		{
 			this.uri=uri;
+			this.sequence=sequence;
 		}
+		
+		public int getOrder()
+		{
+			return order;
+		}
+		public void setOrder(int order)
+		{
+			this.order=order;
+		}
+		
+
+		public Orientation getOrientation()
+		{
+			return orientation;
+		}
+		public void setOrientation(Orientation orientation)
+		{
+			this.orientation=orientation;
+		}
+		
 		abstract public Location build(Model model) throws SBOLGraphException;
 		
 	}
@@ -99,15 +136,16 @@ public abstract class  Location extends Identified {
 	public static class CutLocationBuilder extends LocationBuilder
 	{
 		private int at;
-		public CutLocationBuilder(URI uri, int at)
+		public CutLocationBuilder(URI uri, int at, URI sequence)
 		{
-			super(uri);
+			super(uri,sequence);
 			this.at=at;
 		}
 		
 		public CutLocation build(Model model) throws SBOLGraphException 
 		{
 			CutLocation location= new CutLocation(model, this.uri);
+			location.setSequence(sequence);
 			location.setAt(at);
 			return location;
 		}
@@ -118,19 +156,37 @@ public abstract class  Location extends Identified {
 		private int start;
 		private int end;
 		
-		public RangeLocationBuilder(URI uri, int start, int end)
+		public RangeLocationBuilder(URI uri, int start, int end, URI sequence)
 		{
-			super(uri);
+			super(uri,sequence);
 			this.start=start;
 			this.end=end;
+			
 			
 		}
 		
 		public RangeLocation build(Model model) throws SBOLGraphException
 		{
 			RangeLocation location= new RangeLocation(model, this.uri);
+			location.setSequence(sequence);
 			location.setStart(start);
 			location.setEnd(end);
+			return location;
+		}
+	}
+	
+	public static class EntireSequenceLocationBuilder extends LocationBuilder
+	{
+		
+		public EntireSequenceLocationBuilder(URI uri, URI sequence)
+		{
+			super(uri,sequence);
+		}
+		
+		public EntireSequenceLocation build(Model model) throws SBOLGraphException
+		{
+			EntireSequenceLocation location= new EntireSequenceLocation(model, this.uri);
+			location.setSequence(sequence);	
 			return location;
 		}
 	}

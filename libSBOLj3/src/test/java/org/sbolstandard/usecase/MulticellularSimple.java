@@ -32,12 +32,12 @@ public class MulticellularSimple extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component multicellularSystem=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "MulticellularSystem"), ComponentType.FunctionalEntity.getUrl(), "MulticellularSystem", "MulticellularSystem", "Multicellular System", Role.FunctionalCompartment);
-        Component senderSystem=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "SenderSystem"), ComponentType.FunctionalEntity.getUrl(), "SenderSystem", "SenderSystem", "Sender System", Role.FunctionalCompartment);
-        Component receiverSystem=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "ReceiverSystem"), ComponentType.FunctionalEntity.getUrl(), "ReceiverSystem", "ReceiverSystem", "Receiver System", Role.FunctionalCompartment);
-        Component senderCell=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "OrganismA"), ComponentType.Cell.getUrl(), "OrganismA", "OrganismA", "Organism A", Role.PhysicalCompartment);
-        Component receiverCell=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "OrganismB"), ComponentType.Cell.getUrl(), "OrganismB", "OrganismB", "Organism B", Role.PhysicalCompartment);
-        Component ahl=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "AHL"), ComponentType.SimpleChemical.getUrl(), "AHL", "AHL", "AHL", Role.Effector);
+        Component multicellularSystem=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "MulticellularSystem"), ComponentType.FunctionalEntity.getUrl(), "MulticellularSystem", "Multicellular System", Role.FunctionalCompartment);
+        Component senderSystem=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "SenderSystem"), ComponentType.FunctionalEntity.getUrl(), "SenderSystem", "Sender System", Role.FunctionalCompartment);
+        Component receiverSystem=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "ReceiverSystem"), ComponentType.FunctionalEntity.getUrl(), "ReceiverSystem", "Receiver System", Role.FunctionalCompartment);
+        Component senderCell=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "OrganismA"), ComponentType.Cell.getUrl(), "OrganismA","Organism A", Role.PhysicalCompartment);
+        Component receiverCell=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "OrganismB"), ComponentType.Cell.getUrl(), "OrganismB", "Organism B", Role.PhysicalCompartment);
+        Component ahl=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "AHL"), ComponentType.SimpleChemical.getUrl(), "AHL", "AHL", Role.Effector);
        
         SBOLAPI.createConstraint(senderSystem, senderCell, ahl, RestrictionType.Topology.contains);
         SBOLAPI.createConstraint(receiverSystem, receiverCell, ahl, RestrictionType.Topology.contains);       

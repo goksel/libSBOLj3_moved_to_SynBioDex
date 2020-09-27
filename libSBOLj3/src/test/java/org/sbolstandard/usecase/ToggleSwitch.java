@@ -33,13 +33,13 @@ public class ToggleSwitch extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component TetR_protein=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "TetR_protein"), ComponentType.Protein.getUrl(), "TetR", "TetR_protein", "TetR protein", Role.TF);
-        Component LacI_protein=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "LacI_protein"), ComponentType.Protein.getUrl(), "LacI", "LacI_protein", "LacI protein", Role.TF);
-        Component IPTG=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "IPTG"), ComponentType.SimpleChemical.getUrl(), "IPTG", "IPTG", "IPTG", Role.Effector);
-        Component aTC=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "aTC"), ComponentType.SimpleChemical.getUrl(), "aTC", "aTC", "aTC", Role.Effector);
-        Component IPTG_LacI=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "IPTG_LacI"), ComponentType.NoncovalentComplex.getUrl(), "IPTG_LacI", "IPTG_LacI", "IPTG_LacI complex", null);
-        Component atC_TetR=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "atC_TetR"), ComponentType.NoncovalentComplex.getUrl(), "atC_TetR", "atC_TetR", "atC_TetR complex", null);
-        Component GFP=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "GFP_protein"), ComponentType.Protein.getUrl(), "GFP", "GFP", "GFP", null);
+        Component TetR_protein=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "TetR_protein"), ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
+        Component LacI_protein=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "LacI_protein"), ComponentType.Protein.getUrl(), "LacI",  "LacI protein", Role.TF);
+        Component IPTG=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "IPTG"), ComponentType.SimpleChemical.getUrl(), "IPTG", "IPTG", Role.Effector);
+        Component aTC=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "aTC"), ComponentType.SimpleChemical.getUrl(), "aTC", "aTC", Role.Effector);
+        Component IPTG_LacI=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "IPTG_LacI"), ComponentType.NoncovalentComplex.getUrl(), "IPTG_LacI", "IPTG_LacI complex", null);
+        Component atC_TetR=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "atC_TetR"), ComponentType.NoncovalentComplex.getUrl(), "atC_TetR", "atC_TetR complex", null);
+        Component GFP=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "GFP_protein"), ComponentType.Protein.getUrl(), "GFP", "GFP", null);
                  
         
         //TetR Producer
@@ -106,7 +106,7 @@ public class ToggleSwitch extends TestCase {
     	
         
         //Toggle Switch
-        Component toggleSwitch=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "toggle_switch"), ComponentType.FunctionalEntity.getUrl(), "Toggle Switch", "toggle_switch", "Toggle Switch genetic circuit", null);
+        Component toggleSwitch=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "toggle_switch"), ComponentType.FunctionalEntity.getUrl(), "Toggle Switch", "Toggle Switch genetic circuit", null);
        
         /*SubComponent TetRSubComponent=SBOLAPI.addSubComponent(toggleSwitch, TetR_protein);
         SubComponent LacISubComponent=SBOLAPI.addSubComponent(toggleSwitch, LacI_protein);

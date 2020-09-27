@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Location.LocationBuilder;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
@@ -138,7 +139,14 @@ public class Component extends TopLevel {
 		this.subComponents=addToList(this.subComponents, feature, DataModel.Component.feature);
 		return feature;	
 	}
+	
+	public SubComponent createSubComponent(String displayId, URI isInstanceOf) throws SBOLGraphException
+	{
+		return createSubComponent(SBOLAPI.append(this.getUri(), displayId), isInstanceOf);
+	}
 		
+	
+	
 	public List<ComponentReference> getComponentReferences() throws SBOLGraphException {
 		this.componentReferences=addToList(this.componentReferences, DataModel.Component.feature, ComponentReference.class, DataModel.ComponentReference.uri);
 		return this.componentReferences;
@@ -150,8 +158,21 @@ public class Component extends TopLevel {
 		componentReference.setInChildOf(inChildOf);
 		this.componentReferences=addToList(this.componentReferences, componentReference, DataModel.Component.feature);
 		return componentReference;	
-	}	
+	}
+	
+	public ComponentReference createComponentReference(String displayId, URI feature, URI inChildOf) throws SBOLGraphException {
+		return createComponentReference(SBOLAPI.append(this.getUri(), displayId), feature, inChildOf);	
+	}
+	
+	public ComponentReference createComponentReference(URI uri, Feature feature, SubComponent inChildOf) throws SBOLGraphException {
+		return createComponentReference(uri, feature.getUri(), inChildOf.getUri());
+	}
+	
+	public ComponentReference createComponentReference(String displayId, Feature feature, SubComponent inChildOf) throws SBOLGraphException {
+		return createComponentReference(displayId, feature.getUri(), inChildOf.getUri());
+	}
 
+	
 	public List<LocalSubComponent> getLocalSubComponents() throws SBOLGraphException {
 		this.localSubComponents=addToList(this.localSubComponents, DataModel.Component.feature, LocalSubComponent.class, DataModel.LocalSubComponent.uri);
 		return this.localSubComponents;
@@ -163,7 +184,12 @@ public class Component extends TopLevel {
 		localSubComponent.setTypes(types);
 		this.localSubComponents=addToList(this.localSubComponents, localSubComponent, DataModel.Component.feature);
 		return localSubComponent;	
-	}	
+	}
+	
+	public LocalSubComponent createLocalSubComponent(String displayId, List<URI> types) throws SBOLGraphException
+	{
+		return createLocalSubComponent(SBOLAPI.append(this.getUri(), displayId), types);
+	}
 	
 	
 	public List<ExternallyDefined> getExternallyDefineds() throws SBOLGraphException {
@@ -178,8 +204,12 @@ public class Component extends TopLevel {
 		externallyDefined.setDefinition(definition);
 		this.externallyDefineds=addToList(this.externallyDefineds, externallyDefined, DataModel.Component.feature);
 		return externallyDefined;	
-	}	
+	}
 	
+	public ExternallyDefined createExternallyDefined(String displayId, List<URI> types, URI definition) throws SBOLGraphException
+	{
+		return createExternallyDefined(SBOLAPI.append(this.getUri(), displayId), types, definition);
+	}
 	
 	public List<SequenceFeature> getSequenceFeatures() throws SBOLGraphException {
 		this.sequenceFatures=addToList(this.sequenceFatures, DataModel.Component.feature, SequenceFeature.class, DataModel.SequenceFeature.uri);
@@ -199,12 +229,21 @@ public class Component extends TopLevel {
 		}
 		return sequenceFeature;	
 	}	
+	
+	public SequenceFeature createSequenceFeature(String displayId, List<LocationBuilder> locations) throws SBOLGraphException {
+		return createSequenceFeature(SBOLAPI.append(this.getUri(), displayId), locations);
+	}	
+	
 
 	public Interaction createInteraction(URI uri, List<URI> types) throws SBOLGraphException {
 		Interaction interaction= new Interaction(this.resource.getModel(), uri);
 		interaction.setTypes(types);
 		this.interactions=addToList(this.interactions, interaction, DataModel.Component.interaction);
 		return interaction;
+	}
+	
+	public Interaction createInteraction(String displayId, List<URI> types) throws SBOLGraphException {
+		return createInteraction(SBOLAPI.append(this.getUri(), displayId), types);
 	}
 	
 	public List<Interaction> getInteractions() throws SBOLGraphException {
@@ -221,6 +260,11 @@ public class Component extends TopLevel {
 		return constraint;
 	}
 	
+	public Constraint createConstraint(String displayId, URI restriction, URI subject, URI object) throws SBOLGraphException {
+		return createConstraint(SBOLAPI.append(this.getUri(), displayId), restriction, subject, object);
+	}
+	
+	
 	public List<Constraint> getConstraints() throws SBOLGraphException {
 		this.constraints=addToList(this.constraints, DataModel.Component.constraint, Constraint.class);
 		return this.constraints;
@@ -230,6 +274,10 @@ public class Component extends TopLevel {
 		this.componentInterface = new Interface(this.resource.getModel(), uri);
 		RDFUtil.setProperty(resource, DataModel.Component.hasInterface, uri);
 		return componentInterface;
+	}
+	
+	public Interface createInterface(String displayId) throws SBOLGraphException {
+		return createInterface(SBOLAPI.append(this.getUri(), displayId));
 	}
 	
 	public Interface getInterface() throws SBOLGraphException {

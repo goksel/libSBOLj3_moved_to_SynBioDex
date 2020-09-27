@@ -12,9 +12,6 @@ public class RangeLocation extends Location {
 
 	private int start=Integer.MIN_VALUE;
 	private int end=Integer.MIN_VALUE;
-	
-	
-	
 
 	protected RangeLocation(Model model, URI uri) throws SBOLGraphException
 	{
@@ -25,10 +22,6 @@ public class RangeLocation extends Location {
 	{
 		super(resource);
 	}
-	
-	
-
-	
 	
 	public int getStart() {
 		if (start==Integer.MIN_VALUE)
@@ -62,13 +55,11 @@ public class RangeLocation extends Location {
 	public void setEnd(int end) {
 		this.end = end;
 		RDFUtil.setProperty(this.resource, DataModel.Range.end, String.valueOf(this.end));
-	}
-	
+	}	
 	
 	public URI getResourceType()
 	{
 		return DataModel.Range.uri;
 	}
-	
 	
 }

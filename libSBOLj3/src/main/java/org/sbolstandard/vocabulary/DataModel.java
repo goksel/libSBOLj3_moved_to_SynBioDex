@@ -100,6 +100,8 @@ public class DataModel {
 		{
 			public static URI uri=URINameSpace.SBOL.local("Location");
 			public static URI order=URINameSpace.SBOL.local("order");
+			public static URI sequence=URINameSpace.SBOL.local("hasSequence");
+			
 		}
 		public static final class Cut
 		{
@@ -111,6 +113,10 @@ public class DataModel {
 			public static URI uri=URINameSpace.SBOL.local("Range");
 			public static URI start=URINameSpace.SBOL.local("start");
 			public static URI end=URINameSpace.SBOL.local("end");
+		}
+		public static final class EntireSequenceLocation
+		{
+			public static URI uri=URINameSpace.SBOL.local("EntireSequence");
 		}
 		
 		public static final class Constraint

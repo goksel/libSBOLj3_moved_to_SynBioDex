@@ -1,0 +1,350 @@
+{
+  "@graph" : [ {
+    "@id" : "B0015",
+    "@type" : "sbol:Component",
+    "displayId" : "B0015",
+    "hasSequence" : "B0015_sequence_1",
+    "name" : "B0015",
+    "role" : "SO:0000141",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "B0015_sequence_1",
+    "@type" : "sbol:Sequence",
+    "description" : "B0015 sequence",
+    "displayId" : "B0015_sequence_1",
+    "elements" : "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc",
+    "encoding" : "sbol:iupacNucleicAcid",
+    "name" : "sequence_1"
+  }, {
+    "@id" : "B0034",
+    "@type" : "sbol:Component",
+    "displayId" : "B0034",
+    "hasSequence" : "B0034_seq",
+    "name" : "B0034",
+    "role" : "SO:0000139",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "B0034_seq",
+    "@type" : "sbol:Sequence",
+    "displayId" : "B0034_seq",
+    "elements" : "aaagaggagaaa",
+    "encoding" : "sbol:iupacNucleicAcid"
+  }, {
+    "@id" : "E0040",
+    "@type" : "sbol:Component",
+    "displayId" : "E0040",
+    "hasSequence" : "E0040_sequence_1",
+    "name" : "E0040",
+    "role" : "SO:0000316",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "E0040_sequence_1",
+    "@type" : "sbol:Sequence",
+    "description" : "E0040 sequence",
+    "displayId" : "E0040_sequence_1",
+    "elements" : "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa",
+    "encoding" : "sbol:iupacNucleicAcid",
+    "name" : "sequence_1"
+  }, {
+    "@id" : "GFP_protein",
+    "@type" : "sbol:Component",
+    "description" : "GFP",
+    "displayId" : "GFP_protein",
+    "name" : "GFP",
+    "type" : "SBO:0000252"
+  }, {
+    "@id" : "i13504",
+    "@type" : "sbol:Component",
+    "description" : "iGEM 2016 interlab reporter",
+    "displayId" : "i13504",
+    "hasFeature" : [ "i13504/sequencefeature_1", "i13504/subcomponent_2", "i13504/subcomponent_1", "i13504/B0015", "i13504/sequencefeature_2" ],
+    "hasSequence" : "i13504_sequence_1",
+    "name" : "iGEM 2016 interlab reporter",
+    "role" : "SO:0000704",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "i13504/B0015",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "B0015",
+    "hasLocation" : "i13504/B0015/location",
+    "instanceOf" : "B0015",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "i13504/B0015/location",
+    "@type" : "sbol:Range",
+    "displayId" : "location",
+    "end" : "826",
+    "hasSequence" : "i13504_sequence_1",
+    "start" : "747"
+  }, {
+    "@id" : "i13504/sequencefeature_1",
+    "@type" : "sbol:SequenceFeature",
+    "displayId" : "sequencefeature_1",
+    "hasLocation" : "i13504/sequencefeature_1/location",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "i13504/sequencefeature_1/location",
+    "@type" : "sbol:Range",
+    "displayId" : "location",
+    "end" : "24",
+    "hasSequence" : "i13504_sequence_1",
+    "start" : "19"
+  }, {
+    "@id" : "i13504/sequencefeature_2",
+    "@type" : "sbol:SequenceFeature",
+    "displayId" : "sequencefeature_2",
+    "hasLocation" : "i13504/sequencefeature_2/location",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "i13504/sequencefeature_2/location",
+    "@type" : "sbol:Range",
+    "displayId" : "location",
+    "end" : "754",
+    "hasSequence" : "i13504_sequence_1",
+    "start" : "747"
+  }, {
+    "@id" : "i13504/subcomponent_1",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "subcomponent_1",
+    "hasLocation" : "i13504/subcomponent_1/location_1",
+    "instanceOf" : "B0034",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "i13504/subcomponent_1/location_1",
+    "@type" : "sbol:Range",
+    "displayId" : "location_1",
+    "end" : "24",
+    "hasSequence" : "i13504_sequence_1",
+    "orientation" : "sbol:inline",
+    "start" : "13"
+  }, {
+    "@id" : "i13504/subcomponent_2",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "subcomponent_2",
+    "hasLocation" : "i13504/subcomponent_2/location_1",
+    "instanceOf" : "E0040",
+    "orientation" : "sbol:inline"
+  }, {
+    "@id" : "i13504/subcomponent_2/location_1",
+    "@type" : "sbol:Range",
+    "displayId" : "location_1",
+    "end" : "1458",
+    "hasSequence" : "i13504_sequence_1",
+    "orientation" : "sbol:inline",
+    "start" : "739"
+  }, {
+    "@id" : "i13504_sequence_1",
+    "@type" : "sbol:Sequence",
+    "description" : "iGEM 2016 interlab reporter sequence",
+    "displayId" : "i13504_sequence_1",
+    "elements" : "aaagaggagaaatactagatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataatactagagccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc",
+    "encoding" : "sbol:iupacNucleicAcid",
+    "name" : "sequence_1"
+  }, {
+    "@id" : "i13504_system",
+    "@type" : "sbol:Component",
+    "displayId" : "i13504_system",
+    "hasFeature" : [ "i13504_system/compRef", "i13504_system/GFP_protein", "i13504_system/i13504" ],
+    "hasInteraction" : "i13504_system/gfp_production",
+    "name" : "i13504 system",
+    "role" : "SBO:0000289",
+    "type" : "SBO:0000241"
+  }, {
+    "@id" : "i13504_system/GFP_protein",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "GFP_protein",
+    "instanceOf" : "GFP_protein"
+  }, {
+    "@id" : "i13504_system/compRef",
+    "@type" : "sbol:ComponentReference",
+    "displayId" : "compRef",
+    "hasFeature" : "i13504/subcomponent_2",
+    "inChildOf" : "i13504_system/i13504"
+  }, {
+    "@id" : "i13504_system/gfp_production",
+    "@type" : "sbol:Interaction",
+    "displayId" : "gfp_production",
+    "hasParticipation" : [ "i13504_system/gfp_production/protein", "i13504_system/gfp_production/cds" ],
+    "type" : "SBO:0000589"
+  }, {
+    "@id" : "i13504_system/gfp_production/cds",
+    "@type" : "sbol:Participation",
+    "displayId" : "cds",
+    "participant" : "i13504_system/compRef",
+    "role" : "SBO:0000645"
+  }, {
+    "@id" : "i13504_system/gfp_production/protein",
+    "@type" : "sbol:Participation",
+    "displayId" : "protein",
+    "participant" : "i13504_system/GFP_protein",
+    "role" : "SBO:0000011"
+  }, {
+    "@id" : "i13504_system/i13504",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "i13504",
+    "instanceOf" : "i13504"
+  }, {
+    "@id" : "interlab16device1",
+    "@type" : "sbol:Component",
+    "displayId" : "interlab16device1",
+    "hasConstraint" : "interlab16device1/constraint_dev1",
+    "hasFeature" : [ "interlab16device1/i13504_dev1_compref", "interlab16device1/i13504_system", "interlab16device1/j23101" ],
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "interlab16device1/constraint_dev1",
+    "@type" : "sbol:Constraint",
+    "displayId" : "constraint_dev1",
+    "object" : "interlab16device1/i13504_dev1_compref",
+    "restriction" : "sbol:meets",
+    "subject" : "interlab16device1/j23101"
+  }, {
+    "@id" : "interlab16device1/i13504_dev1_compref",
+    "@type" : "sbol:ComponentReference",
+    "displayId" : "i13504_dev1_compref",
+    "hasFeature" : "i13504_system/i13504",
+    "inChildOf" : "interlab16device1/i13504_system"
+  }, {
+    "@id" : "interlab16device1/i13504_system",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "i13504_system",
+    "instanceOf" : "i13504_system"
+  }, {
+    "@id" : "interlab16device1/j23101",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "j23101",
+    "instanceOf" : "j23101"
+  }, {
+    "@id" : "interlab16device2",
+    "@type" : "sbol:Component",
+    "displayId" : "interlab16device2",
+    "hasConstraint" : "interlab16device2/constraint_dev2",
+    "hasFeature" : [ "interlab16device2/i13504_dev2_compref", "interlab16device2/i13504_system", "interlab16device2/j23106" ],
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "interlab16device2/constraint_dev2",
+    "@type" : "sbol:Constraint",
+    "displayId" : "constraint_dev2",
+    "object" : "interlab16device2/i13504_dev2_compref",
+    "restriction" : "sbol:meets",
+    "subject" : "interlab16device2/j23106"
+  }, {
+    "@id" : "interlab16device2/i13504_dev2_compref",
+    "@type" : "sbol:ComponentReference",
+    "displayId" : "i13504_dev2_compref",
+    "hasFeature" : "i13504_system/i13504",
+    "inChildOf" : "interlab16device2/i13504_system"
+  }, {
+    "@id" : "interlab16device2/i13504_system",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "i13504_system",
+    "instanceOf" : "i13504_system"
+  }, {
+    "@id" : "interlab16device2/j23106",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "j23106",
+    "instanceOf" : "j23106"
+  }, {
+    "@id" : "j23101",
+    "@type" : "sbol:Component",
+    "displayId" : "j23101",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "j23106",
+    "@type" : "sbol:Component",
+    "displayId" : "j23106",
+    "type" : "SBO:0000251"
+  } ],
+  "@context" : {
+    "inChildOf" : {
+      "@id" : "http://sbols.org/v3#inChildOf",
+      "@type" : "@id"
+    },
+    "hasFeature" : {
+      "@id" : "http://sbols.org/v3#hasFeature",
+      "@type" : "@id"
+    },
+    "displayId" : {
+      "@id" : "http://sbols.org/v3#displayId"
+    },
+    "hasConstraint" : {
+      "@id" : "http://sbols.org/v3#hasConstraint",
+      "@type" : "@id"
+    },
+    "type" : {
+      "@id" : "http://sbols.org/v3#type",
+      "@type" : "@id"
+    },
+    "orientation" : {
+      "@id" : "http://sbols.org/v3#orientation",
+      "@type" : "@id"
+    },
+    "hasLocation" : {
+      "@id" : "http://sbols.org/v3#hasLocation",
+      "@type" : "@id"
+    },
+    "instanceOf" : {
+      "@id" : "http://sbols.org/v3#instanceOf",
+      "@type" : "@id"
+    },
+    "end" : {
+      "@id" : "http://sbols.org/v3#end"
+    },
+    "start" : {
+      "@id" : "http://sbols.org/v3#start"
+    },
+    "hasSequence" : {
+      "@id" : "http://sbols.org/v3#hasSequence",
+      "@type" : "@id"
+    },
+    "role" : {
+      "@id" : "http://sbols.org/v3#role",
+      "@type" : "@id"
+    },
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
+    },
+    "participant" : {
+      "@id" : "http://sbols.org/v3#participant",
+      "@type" : "@id"
+    },
+    "encoding" : {
+      "@id" : "http://sbols.org/v3#encoding",
+      "@type" : "@id"
+    },
+    "elements" : {
+      "@id" : "http://sbols.org/v3#elements"
+    },
+    "description" : {
+      "@id" : "http://sbols.org/v3#description"
+    },
+    "object" : {
+      "@id" : "http://sbols.org/v3#object",
+      "@type" : "@id"
+    },
+    "subject" : {
+      "@id" : "http://sbols.org/v3#subject",
+      "@type" : "@id"
+    },
+    "restriction" : {
+      "@id" : "http://sbols.org/v3#restriction",
+      "@type" : "@id"
+    },
+    "hasInteraction" : {
+      "@id" : "http://sbols.org/v3#hasInteraction",
+      "@type" : "@id"
+    },
+    "hasParticipation" : {
+      "@id" : "http://sbols.org/v3#hasParticipation",
+      "@type" : "@id"
+    },
+    "@vocab" : "https://synbiohub.org/public/igem/",
+    "SBO" : "https://identifiers.org/SBO:",
+    "CHEBI" : "https://identifiers.org/CHEBI:",
+    "GO" : "https://identifiers.org/GO:",
+    "sbol" : "http://sbols.org/v3#",
+    "EDAM" : "https://identifiers.org/edam:",
+    "SO" : "https://identifiers.org/SO:",
+    "prov" : "http://www.w3.org/ns/prov#",
+    "om" : "http://www.ontology-of-units-of-measure.org/resource/om-2/"
+  }
+}

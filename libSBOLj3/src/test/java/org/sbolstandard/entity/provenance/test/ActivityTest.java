@@ -38,8 +38,8 @@ public class ActivityTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component toggleSwitch=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "toggle_switch"), ComponentType.FunctionalEntity.getUrl(), "Toggle Switch", "toggle_switch", "Toggle Switch genetic circuit", null);
-        Component toggleSwitchOptimised=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "toggle_switch_optimised"), ComponentType.FunctionalEntity.getUrl(), "Toggle Switch Optimised", "toggle_switch optimised", "Toggle Switch genetic circuit - codon optimised", null);
+        Component toggleSwitch=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "toggle_switch"), ComponentType.FunctionalEntity.getUrl(), "Toggle Switch", "Toggle Switch genetic circuit", null);
+        Component toggleSwitchOptimised=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "toggle_switch_optimised"), ComponentType.FunctionalEntity.getUrl(), "Toggle Switch Optimised", "Toggle Switch genetic circuit - codon optimised", null);
         
         Agent agent=doc.createAgent(SBOLAPI.append(baseUri, "CodonOptimiserSoftware"));
         agent.setName("Codon Optimiser Software");

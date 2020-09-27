@@ -19,6 +19,7 @@ import org.sbolstandard.entity.Location;
 import org.sbolstandard.entity.Participation;
 import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.entity.Sequence;
+import org.sbolstandard.entity.SequenceFeature;
 import org.sbolstandard.entity.SubComponent;
 import org.sbolstandard.entity.Location.LocationBuilder;
 import org.sbolstandard.util.SBOLGraphException;
@@ -49,6 +50,27 @@ public class SBOLAPI {
 	    	}
 	    	return interactions;
 	    }
+	
+	  /*public static List<Interaction> createInteraction(List<URI> interactionTypes, Component parent, SubComponent participantContainer, Component participant1, List<URI> participant1Roles, Component participant2, List<URI> participant2Roles) throws SBOLGraphException
+	    {
+	    	List<Interaction> interactions=new ArrayList<Interaction>();
+	    	List<ComponentReference> features1=createComponentReference(parent, participantContainer, child)
+	    			createSubComponents(parent, participant1);
+	    	List<SubComponent> features2=createSubComponents(parent, participant2);
+	    	if (features1!=null && features2!=null)
+	    	{
+		    	for (Feature feature1: features1)
+		    	{
+		    		for (Feature feature2: features2)
+		    		{
+		    			Interaction interaction=createInteraction(interactionTypes, parent, feature1, participant1Roles, feature2, participant2Roles);	
+		    			interactions.add(interaction);
+		    		}
+		    	}
+	    	}
+	    	return interactions;
+	    }
+	    */
 	
 	 /* public static List<Interaction> createNonCovalentBindingInteraction(Component container, List<Component> reactants, List<Component> products)
 	  {
@@ -186,27 +208,18 @@ public class SBOLAPI {
 	    	String displayId=getLocal(entityType).toLowerCase() + "_" + suffix;
 	    	return displayId;
 	    }
-	    
+	   
 	    public static void appendComponent(SBOLDocument document, Component parent, Component child) throws SBOLGraphException 
 	    {
-//	    	int index=1;
-//	    	if (parent.getSubComponents()!=null)
-//	    	{
-//	    		/*for (SubComponent subComponent: parent.getSubComponents())
-//	    		{
-//	    			URI subComponentUri=subComponent.getIsInstanceOf();
-//	    			Component component=(Component)document.getIdentified(subComponentUri, Component.class);
-//	    			if (component.getTypes().contains(ComponentType.DNA.getUrl()))
-//	    			{
-//	    				index++;
-//	    			}
-//	    			
-//	    		}*/
-//	    		index=parent.getSubComponents().size()+1;
-//	    	}
+	    	appendComponent(document, parent, child, Orientation.inline);
+	    }
+	    
+	    //TODO:Remove
+	    public static SubComponent appendComponentRemove(SBOLDocument document, Component parent, Component child, Orientation orientation) throws SBOLGraphException 
+	    {
 	    	String localName=createLocalName(DataModel.SubComponent.uri, parent.getSubComponents());
 	    	SubComponent subComponent=parent.createSubComponent(append(parent.getUri(), localName), child.getUri());
-	    	subComponent.setOrientation(Orientation.inline);
+	    	subComponent.setOrientation(orientation);
 	    	
 	    	if (child.getSequences()!=null && child.getSequences().size()>0)
 	    	{
@@ -226,20 +239,97 @@ public class SBOLAPI {
 		    	{
 		    		URI childSequenceUri=child.getSequences().get(0);
 		    		Sequence childSequence=(Sequence)document.getIdentified(childSequenceUri, Sequence.class);
-		    		sequence.setElements(sequence.getElements() + childSequence.getElements());
+		    		if (orientation==Orientation.inline)
+		    		{
+		    			sequence.setElements(sequence.getElements() + childSequence.getElements());
+		    		}
+		    		else
+		    		{
+		    			throw new SBOLGraphException("Reverse complement sequence addition has not been implemented yet!");
+		    		}
 		    		String locationLocalName=createLocalName(DataModel.Location.uri, subComponent.getLocations());
 		    		URI locationUri=append(subComponent.getUri(),locationLocalName);
 		    		int start=sequence.getElements().length() + 1;
 		        	int end=start + childSequence.getElements().length()-1;
-		        	LocationBuilder builder=new Location.RangeLocationBuilder(locationUri, start, end);
-		        	subComponent.createLocation(builder);
+		        	LocationBuilder builder=new Location.RangeLocationBuilder(locationUri, start, end,sequence.getUri());
+		        	Location location=subComponent.createLocation(builder);
+		        	location.setOrientation(orientation);
 		    	}
 	    	}
+	    	return subComponent;
 	    }
 	    
-	    public static Component createDnaComponent(SBOLDocument doc, URI uri, String name, String displayId, String description, URI role, String sequence) throws SBOLGraphException
+	    
+	    public static SubComponent appendComponent(SBOLDocument document, Component parent, Component child, Orientation orientation) throws SBOLGraphException 
 	    {
-	    	Component dna=createComponent(doc, uri, ComponentType.DNA.getUrl(), name, displayId, description, role);
+	    	String localName=createLocalName(DataModel.SubComponent.uri, parent.getSubComponents());
+	    	SubComponent subComponent=parent.createSubComponent(append(parent.getUri(), localName), child.getUri());
+	    	subComponent.setOrientation(orientation);
+	    	if (child.getSequences()!=null && child.getSequences().size()>0)
+	    	{
+	    		URI childSequenceUri=child.getSequences().get(0);
+	    		Sequence childSequence=(Sequence)document.getIdentified(childSequenceUri, Sequence.class);
+	    		String locationLocalName=createLocalName(DataModel.Location.uri, subComponent.getLocations());
+	    		URI locationUri=append(subComponent.getUri(),locationLocalName);
+	    		LocationBuilder locationbuilder=createLocationBuilder(document, parent, childSequence.getElements(), orientation, locationUri);
+	    		Location location=subComponent.createLocation(locationbuilder);
+	        	location.setOrientation(orientation);
+	    	}
+	    	return subComponent;
+	    }
+
+	    public static SequenceFeature appendSequenceFeature(SBOLDocument document, Component parent, String elements, Orientation orientation) throws SBOLGraphException 
+	    {
+	    	String localName=createLocalName(DataModel.SequenceFeature.uri, parent.getSequenceFeatures());
+	    	URI featureURI=append(parent.getUri(), localName);
+	    	URI locationUri=append(featureURI,"location");
+	    	LocationBuilder locationbuilder=createLocationBuilder(document, parent, elements, orientation, locationUri);
+	    	
+	        SequenceFeature feature=parent.createSequenceFeature(append(parent.getUri(), localName), Arrays.asList(locationbuilder));
+		    if (feature!=null)
+		    {
+		    	feature.setOrientation(orientation);
+		    }
+	    	
+	    	return feature;
+	    }
+
+	    private static LocationBuilder createLocationBuilder(SBOLDocument document, Component parent, String elements, Orientation orientation, URI locationUri) throws SBOLGraphException
+	    {
+	    	LocationBuilder locationBuilder=null;
+	    	if (elements!=null && elements.length()>0)
+	    	{
+		    	List<URI> sequences= parent.getSequences();
+		    	Sequence sequence=null;
+		    	if (sequences!=null && sequences.size()>0)
+		    	{
+		    		 sequence=(Sequence)document.getIdentified(sequences.get(0),Sequence.class);
+		    	}
+		    	else
+		    	{
+		    		sequence=createSequence(document, parent, Encoding.NucleicAcid, "");	
+		    	}
+		    	
+		    	if (orientation==Orientation.inline)
+	    		{
+	    			sequence.setElements(sequence.getElements() + elements);
+	    		}
+	    		else
+	    		{
+	    			throw new SBOLGraphException("Reverse complement sequence addition has not been implemented yet!");
+	    		}
+		    	 
+		    	int start=sequence.getElements().length() + 1;
+	        	int end=start + elements.length()-1;
+	        	locationBuilder=new Location.RangeLocationBuilder(locationUri, start, end,sequence.getUri());
+	        	locationBuilder.setOrientation(orientation);
+	    	}
+	    	return locationBuilder;
+	    }
+	    
+	    public static Component createDnaComponent(SBOLDocument doc, URI uri, String name, String description, URI role, String sequence) throws SBOLGraphException
+	    {
+	    	Component dna=createComponent(doc, uri, ComponentType.DNA.getUrl(), name, description, role);
 	    	if (sequence!=null && sequence.length()>0)
 	    	{
 	    		createSequence(doc, dna, Encoding.NucleicAcid, sequence);
@@ -249,7 +339,7 @@ public class SBOLAPI {
 	    
 	    public static Component createDnaComponent(SBOLDocument doc, String displayId, String description, URI role, String sequence) throws SBOLGraphException
 	    {
-	    	Component dna=createComponent(doc, append(doc.getBaseURI(),displayId), ComponentType.DNA.getUrl(), displayId, displayId, description, role);
+	    	Component dna=createComponent(doc, displayId, ComponentType.DNA.getUrl(), displayId, description, role);	
 	    	if (sequence!=null && sequence.length()>0)
 	    	{
 	    		createSequence(doc, dna, Encoding.NucleicAcid, sequence);
@@ -257,10 +347,10 @@ public class SBOLAPI {
 	    	return dna;
 	    }
 	    
-	    public static Component createProteinComponent(SBOLDocument doc, Component container, URI uri, String name, String displayId, String description, URI role, String sequence) throws SBOLGraphException
+	    public static Component createProteinComponent(SBOLDocument doc, Component container, URI uri, String name, String description, URI role, String sequence) throws SBOLGraphException
 	    {
-	    	Component protein=createComponent(doc, uri, ComponentType.Protein.getUrl(), name, displayId, description, role);
-	    	container.createSubComponent(append(container.getUri(), displayId),  protein.getUri());
+	    	Component protein=createComponent(doc, uri, ComponentType.Protein.getUrl(), name, description, role);
+	    	container.createSubComponent(append(container.getUri(), protein.getDisplayId()),  protein.getUri());
 	    	if (sequence!=null && sequence.length()>0)
 	    	{
 	    		createSequence(doc, protein, Encoding.AminoAcid, sequence);
@@ -283,22 +373,36 @@ public class SBOLAPI {
 	    public static Sequence createSequence(SBOLDocument doc, Component component, Encoding encoding, String elements) throws SBOLGraphException
 	    {
 	    	String localName=createLocalName(DataModel.Sequence.uri, component.getSequences());
-	    	Sequence seq=createSequence(doc, URI.create(component.getUri().toString() + "_" + localName), component.getName(), localName, component.getName() + " sequence" , elements, encoding);
-	 		component.setSequences(Arrays.asList(seq.getUri())); 
+	    	Sequence seq=createSequence(doc, URI.create(component.getUri().toString() + "_" + localName), localName, component.getName() + " sequence", elements, encoding);
+	    	component.setSequences(Arrays.asList(seq.getUri())); 
 	 		return seq;
 	    }
 	   
 	    
-	    public static Component createComponent(SBOLDocument doc, URI uri, URI type, String name, String displayId, String description, URI role) throws SBOLGraphException
+	    public static Component createComponent(SBOLDocument doc, URI uri, URI type, String name, String description, URI role) throws SBOLGraphException
 	    {
 	    	Component component=doc.createComponent(uri, Arrays.asList(type)); 
-	        setCommonProperties(component, name, displayId, description);
+	    	component.setName(name);
+	    	component.setDescription(description);
 	        if (role!=null)
 	        {
 	        	component.setRoles(Arrays.asList(role));
 	        }
 	        
 	        return component;   
+	    }
+	    
+	    public static Component createComponent(SBOLDocument doc, String displayId, URI type, String name, String description, URI role) throws SBOLGraphException
+	    {
+	    	Component component=doc.createComponent(displayId, Arrays.asList(type)); 
+	    	component.setName(name);
+	    	component.setDescription(description);
+	        if (role!=null)
+	        {
+	        	component.setRoles(Arrays.asList(role));
+	        }
+	        
+	        return component;     
 	    }
 	    
 	   
@@ -326,10 +430,11 @@ public class SBOLAPI {
 	    }
 	    
 	    
-	    public static Sequence createSequence(SBOLDocument doc, URI uri, String name, String displayId, String description, String sequence, Encoding encoding) throws SBOLGraphException
+	    public static Sequence createSequence(SBOLDocument doc, URI uri, String name, String description, String sequence, Encoding encoding) throws SBOLGraphException
 	    {
 	        Sequence sequenceEntity=doc.createSequence(uri);
-	        setCommonProperties(sequenceEntity, name, displayId, description);
+	        sequenceEntity.setName(name);
+	        sequenceEntity.setDescription(description);   
 	        if (sequence!=null)
 	        {
 	        	sequenceEntity.setElements(sequence);
@@ -339,12 +444,7 @@ public class SBOLAPI {
 	        
 	    }
 	    
-	    private static void setCommonProperties(Identified identified, String name, String displayId, String description)
-	    {
-	    	identified.setName(name);
-	    	identified.setDisplayId(displayId);
-	    	identified.setDescription(description);
-	    }
+	   
 	    
 	    /*public static void mapTo(SubComponent subComponentInContainer,Component container, Component parent, Component child) throws SBOLGraphException
 		{
@@ -410,7 +510,7 @@ public class SBOLAPI {
 				
 	    }
 	      
-		
+		//TODO:Remove
 	    public static  List<ComponentReference> createComponentReference2(Component container, Component parent, Component child) throws SBOLGraphException
 		{
 			List<ComponentReference> componentReferences=null;

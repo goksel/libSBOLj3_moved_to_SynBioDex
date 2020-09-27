@@ -12,6 +12,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.vocabulary.RDF;
+import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.measure.Measure;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
@@ -79,8 +80,10 @@ public abstract class Identified {
 		return name;
 	}
 	public void setName(String name) {
-		this.name = name;
-		RDFUtil.setProperty(resource, DataModel.Identified.name, name);	
+		if (name!=null){
+			this.name = name;
+			RDFUtil.setProperty(resource, DataModel.Identified.name, name);	
+		}
 	}
 	public String getDescription() {
 		if (description==null)
@@ -90,8 +93,11 @@ public abstract class Identified {
 		return description;
 	}
 	public void setDescription(String description) {
-		this.description = description;
-		RDFUtil.setProperty(resource, DataModel.Identified.description, description);	
+		if (description!=null)
+		{
+			this.description = description;
+			RDFUtil.setProperty(resource, DataModel.Identified.description, description);
+		}
 		
 	}
 	
@@ -135,6 +141,12 @@ public abstract class Identified {
 		this.measures=addToList(this.measures, measure, DataModel.Identified.measure);
 		return measure;	
 	}
+	
+	public Measure createMeasure(String displayId, float value, URI unit) throws SBOLGraphException
+	{
+		return createMeasure(SBOLAPI.append(this.getUri(), displayId), value, unit);
+	}
+	
 	
 	public URI getUri() {
 		return uri;
