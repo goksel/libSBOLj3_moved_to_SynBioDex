@@ -56,7 +56,7 @@ public class LocalSubComponent extends Feature{
 	}
 
 	public Location createLocation(LocationBuilder builder ) throws SBOLGraphException {
-		Location location=builder.build(this.resource.getModel());
+		Location location=builder.build(this.resource.getModel(),this.getUri());
 		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
 		return location;
 	}

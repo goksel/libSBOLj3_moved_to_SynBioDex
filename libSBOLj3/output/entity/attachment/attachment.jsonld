@@ -59,12 +59,12 @@
     "description" : {
       "@id" : "http://sbols.org/v3#description"
     },
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
+    },
     "type" : {
       "@id" : "http://sbols.org/v3#type",
       "@type" : "@id"
-    },
-    "name" : {
-      "@id" : "http://sbols.org/v3#name"
     },
     "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",

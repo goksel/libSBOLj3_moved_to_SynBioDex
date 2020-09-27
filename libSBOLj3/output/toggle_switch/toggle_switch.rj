@@ -293,24 +293,6 @@
      ]
   }
    ,
-  "https://sbolstandard.org/examples/LacI_producer/GFP" : { 
-    "http://sbols.org/v3#displayId" : [ { 
-      "type" : "literal" ,
-      "value" : "GFP"
-    }
-     ] ,
-    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
-      "type" : "uri" ,
-      "value" : "http://sbols.org/v3#SubComponent"
-    }
-     ] ,
-    "http://sbols.org/v3#instanceOf" : [ { 
-      "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/GFP_protein"
-    }
-     ]
-  }
-   ,
   "https://sbolstandard.org/examples/TetR_producer/interaction_1/participation_1" : { 
     "http://sbols.org/v3#participant" : [ { 
       "type" : "uri" ,
@@ -353,6 +335,24 @@
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
       "value" : "http://sbols.org/v3#Participation"
+    }
+     ]
+  }
+   ,
+  "https://sbolstandard.org/examples/LacI_producer/GFP_protein" : { 
+    "http://sbols.org/v3#displayId" : [ { 
+      "type" : "literal" ,
+      "value" : "GFP_protein"
+    }
+     ] ,
+    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#SubComponent"
+    }
+     ] ,
+    "http://sbols.org/v3#instanceOf" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples/GFP_protein"
     }
      ]
   }
@@ -1027,10 +1027,6 @@
     }
     , { 
       "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/LacI_producer/GFP"
-    }
-    , { 
-      "type" : "uri" ,
       "value" : "https://sbolstandard.org/examples/LacI_producer/subcomponent_5"
     }
     , { 
@@ -1048,6 +1044,10 @@
     , { 
       "type" : "uri" ,
       "value" : "https://sbolstandard.org/examples/LacI_producer/LacI_protein"
+    }
+    , { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples/LacI_producer/GFP_protein"
     }
     , { 
       "type" : "uri" ,
@@ -1163,7 +1163,7 @@
   "https://sbolstandard.org/examples/GFP_protein" : { 
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
-      "value" : "GFP"
+      "value" : "GFP_protein"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
@@ -1475,7 +1475,7 @@
   "https://sbolstandard.org/examples/LacI_producer/interaction_2/participation_2" : { 
     "http://sbols.org/v3#participant" : [ { 
       "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/LacI_producer/GFP"
+      "value" : "https://sbolstandard.org/examples/LacI_producer/GFP_protein"
     }
      ] ,
     "http://sbols.org/v3#displayId" : [ { 

@@ -75,9 +75,9 @@
          </sbol:ExternallyDefined>
       </sbol:hasFeature>
       <sbol:description>M9 Glucose CAA growth media</sbol:description>
-      <sbol:displayId>M9_Glucose_CAA</sbol:displayId>
-      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
       <sbol:name>M9 Glucose CAA</sbol:name>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
+      <sbol:displayId>M9_Glucose_CAA</sbol:displayId>
    </sbol:Component>
    <om:PrefixedUnit rdf:about="millimole">
       <om:hasPrefix rdf:resource="milli"/>

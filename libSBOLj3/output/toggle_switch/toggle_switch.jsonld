@@ -3,7 +3,7 @@
     "@id" : "GFP_protein",
     "@type" : "sbol:Component",
     "description" : "GFP",
-    "displayId" : "GFP",
+    "displayId" : "GFP_protein",
     "name" : "GFP",
     "type" : "SBO:0000252"
   }, {
@@ -26,15 +26,15 @@
     "@type" : "sbol:Component",
     "description" : "LacI producer",
     "displayId" : "LacI_producer",
-    "hasFeature" : [ "LacI_producer/subcomponent_3", "LacI_producer/TetR_protein", "LacI_producer/subcomponent_6", "LacI_producer/GFP", "LacI_producer/subcomponent_2", "LacI_producer/subcomponent_5", "LacI_producer/subcomponent_4", "LacI_producer/subcomponent_1", "LacI_producer/LacI_protein", "LacI_producer/aTC" ],
+    "hasFeature" : [ "LacI_producer/subcomponent_3", "LacI_producer/TetR_protein", "LacI_producer/subcomponent_6", "LacI_producer/subcomponent_2", "LacI_producer/subcomponent_5", "LacI_producer/subcomponent_4", "LacI_producer/subcomponent_1", "LacI_producer/LacI_protein", "LacI_producer/aTC", "LacI_producer/GFP_protein" ],
     "hasInteraction" : [ "LacI_producer/interaction_3", "LacI_producer/interaction_4", "LacI_producer/interaction_2", "LacI_producer/interaction_1" ],
     "name" : "LacI_producer",
     "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
-    "@id" : "LacI_producer/GFP",
+    "@id" : "LacI_producer/GFP_protein",
     "@type" : "sbol:SubComponent",
-    "displayId" : "GFP",
+    "displayId" : "GFP_protein",
     "instanceOf" : "GFP_protein"
   }, {
     "@id" : "LacI_producer/LacI_protein",
@@ -85,7 +85,7 @@
     "@id" : "LacI_producer/interaction_2/participation_2",
     "@type" : "sbol:Participation",
     "displayId" : "participation_2",
-    "participant" : "LacI_producer/GFP",
+    "participant" : "LacI_producer/GFP_protein",
     "role" : "SBO:0000011"
   }, {
     "@id" : "LacI_producer/interaction_3",

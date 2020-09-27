@@ -86,7 +86,7 @@
    <sbol:Component rdf:about="GFP_protein">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
       <sbol:name>GFP</sbol:name>
-      <sbol:displayId>GFP</sbol:displayId>
+      <sbol:displayId>GFP_protein</sbol:displayId>
       <sbol:description>GFP</sbol:description>
    </sbol:Component>
    <sbol:Component rdf:about="LuxR_AHL">
@@ -140,9 +140,9 @@
                <sbol:Participation rdf:about="AHL_receiver/interaction_2/participation_2">
                   <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
                   <sbol:participant>
-                     <sbol:SubComponent rdf:about="AHL_receiver/GFP">
+                     <sbol:SubComponent rdf:about="AHL_receiver/GFP_protein">
                         <sbol:instanceOf rdf:resource="GFP_protein"/>
-                        <sbol:displayId>GFP</sbol:displayId>
+                        <sbol:displayId>GFP_protein</sbol:displayId>
                      </sbol:SubComponent>
                   </sbol:participant>
                   <sbol:displayId>participation_2</sbol:displayId>
@@ -184,6 +184,7 @@
             <sbol:displayId>LuxR_AHL</sbol:displayId>
          </sbol:SubComponent>
       </sbol:hasFeature>
+      <sbol:hasFeature rdf:resource="AHL_receiver/GFP_protein"/>
       <sbol:displayId>AHL_receiver</sbol:displayId>
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="AHL_receiver/AHL">
@@ -213,7 +214,6 @@
             <sbol:displayId>interaction_3</sbol:displayId>
          </sbol:Interaction>
       </sbol:hasInteraction>
-      <sbol:hasFeature rdf:resource="AHL_receiver/GFP"/>
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="AHL_receiver/subcomponent_2">
             <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
@@ -540,7 +540,7 @@
    <sbol:Component rdf:about="LuxR_protein">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
       <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
-      <sbol:name>LuxR</sbol:name>
+      <sbol:name>LuxR_protein</sbol:name>
       <sbol:displayId>LuxR_protein</sbol:displayId>
       <sbol:description>LuxR</sbol:description>
    </sbol:Component>

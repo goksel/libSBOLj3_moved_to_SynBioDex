@@ -12,9 +12,9 @@
    xml:base="https://sbolstandard.org/examples/">
    <sbol:Component rdf:about="toggle_switch">
       <sbol:description>Toggle Switch genetic circuit</sbol:description>
-      <sbol:displayId>toggle_switch</sbol:displayId>
-      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
       <sbol:name>Toggle Switch</sbol:name>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
+      <sbol:displayId>toggle_switch</sbol:displayId>
    </sbol:Component>
    <sbol:Component rdf:about="toggle_switch_optimised">
       <prov:wasDerivedFrom rdf:resource="toggle_switch"/>
@@ -22,9 +22,9 @@
          <prov:Activity rdf:about="codon_optimization_activity"/>
       </prov:wasGeneratedBy>
       <sbol:description>Toggle Switch genetic circuit - codon optimised</sbol:description>
-      <sbol:displayId>toggle_switch optimised</sbol:displayId>
-      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
       <sbol:name>Toggle Switch Optimised</sbol:name>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
+      <sbol:displayId>toggle_switch_optimised</sbol:displayId>
    </sbol:Component>
    <prov:Agent rdf:about="CodonOptimiserSoftware">
       <sbol:description>Used to optimise bacterial DNA sequences.</sbol:description>
@@ -55,7 +55,6 @@
             <sbol:displayId>association</sbol:displayId>
          </prov:Association>
       </prov:qualifiedAssociation>
-      <prov:startedAtTime>2019-07-29T17:48:04.765Z</prov:startedAtTime>
       <prov:qualifiedUsage>
          <prov:Usage rdf:about="codon_optimization_activity/optimised_usage">
             <prov:hadRole rdf:resource="https://identifiers.org/SBO:0000011"/>
@@ -63,10 +62,11 @@
             <sbol:displayId>optimised_usage</sbol:displayId>
          </prov:Usage>
       </prov:qualifiedUsage>
+      <prov:endedAtTime>2020-08-30T22:02:42.732Z</prov:endedAtTime>
       <sbol:name>Codon optimization activity</sbol:name>
       <sbol:description>An activity that is used to optimise codons</sbol:description>
       <sbol:displayId>codon_optimization_activity</sbol:displayId>
-      <prov:endedAtTime>2020-08-30T17:48:04.765Z</prov:endedAtTime>
+      <prov:startedAtTime>2019-07-29T22:02:42.732Z</prov:startedAtTime>
       <prov:qualifiedUsage>
          <prov:Usage rdf:about="codon_optimization_activity/source_usage">
             <prov:hadRole rdf:resource="https://identifiers.org/SBO:0000645"/>

@@ -39,12 +39,12 @@
     "description" : {
       "@id" : "http://sbols.org/v3#description"
     },
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
+    },
     "type" : {
       "@id" : "http://sbols.org/v3#type",
       "@type" : "@id"
-    },
-    "name" : {
-      "@id" : "http://sbols.org/v3#name"
     },
     "hasMeasure" : {
       "@id" : "http://sbols.org/v3#hasMeasure",

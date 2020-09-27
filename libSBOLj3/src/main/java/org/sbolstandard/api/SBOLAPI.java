@@ -248,10 +248,9 @@ public class SBOLAPI {
 		    			throw new SBOLGraphException("Reverse complement sequence addition has not been implemented yet!");
 		    		}
 		    		String locationLocalName=createLocalName(DataModel.Location.uri, subComponent.getLocations());
-		    		URI locationUri=append(subComponent.getUri(),locationLocalName);
 		    		int start=sequence.getElements().length() + 1;
 		        	int end=start + childSequence.getElements().length()-1;
-		        	LocationBuilder builder=new Location.RangeLocationBuilder(locationUri, start, end,sequence.getUri());
+		        	LocationBuilder builder=new Location.RangeLocationBuilder(locationLocalName, start, end,sequence.getUri());
 		        	Location location=subComponent.createLocation(builder);
 		        	location.setOrientation(orientation);
 		    	}
@@ -270,8 +269,7 @@ public class SBOLAPI {
 	    		URI childSequenceUri=child.getSequences().get(0);
 	    		Sequence childSequence=(Sequence)document.getIdentified(childSequenceUri, Sequence.class);
 	    		String locationLocalName=createLocalName(DataModel.Location.uri, subComponent.getLocations());
-	    		URI locationUri=append(subComponent.getUri(),locationLocalName);
-	    		LocationBuilder locationbuilder=createLocationBuilder(document, parent, childSequence.getElements(), orientation, locationUri);
+	    		LocationBuilder locationbuilder=createLocationBuilder(document, parent, childSequence.getElements(), orientation, locationLocalName);
 	    		Location location=subComponent.createLocation(locationbuilder);
 	        	location.setOrientation(orientation);
 	    	}
@@ -281,9 +279,7 @@ public class SBOLAPI {
 	    public static SequenceFeature appendSequenceFeature(SBOLDocument document, Component parent, String elements, Orientation orientation) throws SBOLGraphException 
 	    {
 	    	String localName=createLocalName(DataModel.SequenceFeature.uri, parent.getSequenceFeatures());
-	    	URI featureURI=append(parent.getUri(), localName);
-	    	URI locationUri=append(featureURI,"location");
-	    	LocationBuilder locationbuilder=createLocationBuilder(document, parent, elements, orientation, locationUri);
+	    	LocationBuilder locationbuilder=createLocationBuilder(document, parent, elements, orientation, "location");
 	    	
 	        SequenceFeature feature=parent.createSequenceFeature(append(parent.getUri(), localName), Arrays.asList(locationbuilder));
 		    if (feature!=null)
@@ -294,20 +290,25 @@ public class SBOLAPI {
 	    	return feature;
 	    }
 
-	    private static LocationBuilder createLocationBuilder(SBOLDocument document, Component parent, String elements, Orientation orientation, URI locationUri) throws SBOLGraphException
+	    private static LocationBuilder createLocationBuilder(SBOLDocument document, Component parent, String elements, Orientation orientation, String locationId) throws SBOLGraphException
 	    {
 	    	LocationBuilder locationBuilder=null;
 	    	if (elements!=null && elements.length()>0)
 	    	{
 		    	List<URI> sequences= parent.getSequences();
 		    	Sequence sequence=null;
+		    	int start, end;
 		    	if (sequences!=null && sequences.size()>0)
 		    	{
-		    		 sequence=(Sequence)document.getIdentified(sequences.get(0),Sequence.class);
+		    		sequence=(Sequence)document.getIdentified(sequences.get(0),Sequence.class);
+				    start=sequence.getElements().length() + 1;
+			        end=start + elements.length()-1;
 		    	}
 		    	else
 		    	{
 		    		sequence=createSequence(document, parent, Encoding.NucleicAcid, "");	
+			    	start=1;
+		        	end=elements.length()-1;
 		    	}
 		    	
 		    	if (orientation==Orientation.inline)
@@ -319,9 +320,8 @@ public class SBOLAPI {
 	    			throw new SBOLGraphException("Reverse complement sequence addition has not been implemented yet!");
 	    		}
 		    	 
-		    	int start=sequence.getElements().length() + 1;
-	        	int end=start + elements.length()-1;
-	        	locationBuilder=new Location.RangeLocationBuilder(locationUri, start, end,sequence.getUri());
+
+	        	locationBuilder=new Location.RangeLocationBuilder(locationId, start, end,sequence.getUri());
 	        	locationBuilder.setOrientation(orientation);
 	    	}
 	    	return locationBuilder;

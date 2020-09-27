@@ -23,6 +23,11 @@ public class RangeLocation extends Location {
 		super(resource);
 	}
 	
+	/*public RangeLocation(String displayId)
+	{
+		super(displayId);
+	}*/
+	
 	public int getStart() {
 		if (start==Integer.MIN_VALUE)
 		{

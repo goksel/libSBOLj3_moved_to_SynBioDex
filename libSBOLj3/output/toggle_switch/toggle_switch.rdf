@@ -34,7 +34,7 @@
    <sbol:Component rdf:about="GFP_protein">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
       <sbol:name>GFP</sbol:name>
-      <sbol:displayId>GFP</sbol:displayId>
+      <sbol:displayId>GFP_protein</sbol:displayId>
       <sbol:description>GFP</sbol:description>
    </sbol:Component>
    <sbol:Component rdf:about="ter_lacI">
@@ -350,12 +350,6 @@
          </sbol:SubComponent>
       </sbol:hasFeature>
       <sbol:name>LacI_producer</sbol:name>
-      <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="LacI_producer/GFP">
-            <sbol:instanceOf rdf:resource="GFP_protein"/>
-            <sbol:displayId>GFP</sbol:displayId>
-         </sbol:SubComponent>
-      </sbol:hasFeature>
       <sbol:description>LacI producer</sbol:description>
       <sbol:hasInteraction>
          <sbol:Interaction rdf:about="LacI_producer/interaction_3">
@@ -445,7 +439,12 @@
             <sbol:hasParticipation>
                <sbol:Participation rdf:about="LacI_producer/interaction_2/participation_2">
                   <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
-                  <sbol:participant rdf:resource="LacI_producer/GFP"/>
+                  <sbol:participant>
+                     <sbol:SubComponent rdf:about="LacI_producer/GFP_protein">
+                        <sbol:instanceOf rdf:resource="GFP_protein"/>
+                        <sbol:displayId>GFP_protein</sbol:displayId>
+                     </sbol:SubComponent>
+                  </sbol:participant>
                   <sbol:displayId>participation_2</sbol:displayId>
                </sbol:Participation>
             </sbol:hasParticipation>
@@ -463,6 +462,7 @@
       <sbol:hasFeature rdf:resource="LacI_producer/LacI_protein"/>
       <sbol:hasFeature rdf:resource="LacI_producer/aTC"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
+      <sbol:hasFeature rdf:resource="LacI_producer/GFP_protein"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:hasInteraction>
          <sbol:Interaction rdf:about="LacI_producer/interaction_1">

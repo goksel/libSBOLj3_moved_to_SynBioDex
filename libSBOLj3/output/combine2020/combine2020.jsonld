@@ -86,9 +86,9 @@
     "@id" : "i13504/sequencefeature_1/location",
     "@type" : "sbol:Range",
     "displayId" : "location",
-    "end" : "24",
+    "end" : "18",
     "hasSequence" : "i13504_sequence_1",
-    "start" : "19"
+    "start" : "13"
   }, {
     "@id" : "i13504/sequencefeature_2",
     "@type" : "sbol:SequenceFeature",
@@ -99,9 +99,9 @@
     "@id" : "i13504/sequencefeature_2/location",
     "@type" : "sbol:Range",
     "displayId" : "location",
-    "end" : "754",
+    "end" : "746",
     "hasSequence" : "i13504_sequence_1",
-    "start" : "747"
+    "start" : "739"
   }, {
     "@id" : "i13504/subcomponent_1",
     "@type" : "sbol:SubComponent",
@@ -113,10 +113,10 @@
     "@id" : "i13504/subcomponent_1/location_1",
     "@type" : "sbol:Range",
     "displayId" : "location_1",
-    "end" : "24",
+    "end" : "11",
     "hasSequence" : "i13504_sequence_1",
     "orientation" : "sbol:inline",
-    "start" : "13"
+    "start" : "1"
   }, {
     "@id" : "i13504/subcomponent_2",
     "@type" : "sbol:SubComponent",
@@ -128,10 +128,10 @@
     "@id" : "i13504/subcomponent_2/location_1",
     "@type" : "sbol:Range",
     "displayId" : "location_1",
-    "end" : "1458",
+    "end" : "738",
     "hasSequence" : "i13504_sequence_1",
     "orientation" : "sbol:inline",
-    "start" : "739"
+    "start" : "19"
   }, {
     "@id" : "i13504_sequence_1",
     "@type" : "sbol:Sequence",

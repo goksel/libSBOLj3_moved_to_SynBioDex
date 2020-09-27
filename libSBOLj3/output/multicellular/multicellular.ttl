@@ -87,7 +87,7 @@
 :AHL_receiver  a             sbol:Component ;
         sbol:description     "AHL receiver" ;
         sbol:displayId       "AHL_receiver" ;
-        sbol:hasFeature      <AHL_receiver/subcomponent_5> , <AHL_receiver/subcomponent_7> , <AHL_receiver/LuxR_protein> , <AHL_receiver/subcomponent_8> , <AHL_receiver/LuxR_AHL> , <AHL_receiver/AHL> , <AHL_receiver/GFP> , <AHL_receiver/subcomponent_2> , <AHL_receiver/subcomponent_1> , <AHL_receiver/subcomponent_3> , <AHL_receiver/subcomponent_4> , <AHL_receiver/subcomponent_6> ;
+        sbol:hasFeature      <AHL_receiver/subcomponent_5> , <AHL_receiver/subcomponent_7> , <AHL_receiver/LuxR_protein> , <AHL_receiver/subcomponent_8> , <AHL_receiver/LuxR_AHL> , <AHL_receiver/GFP_protein> , <AHL_receiver/AHL> , <AHL_receiver/subcomponent_2> , <AHL_receiver/subcomponent_1> , <AHL_receiver/subcomponent_3> , <AHL_receiver/subcomponent_4> , <AHL_receiver/subcomponent_6> ;
         sbol:hasInteraction  <AHL_receiver/interaction_2> , <AHL_receiver/interaction_3> , <AHL_receiver/interaction_4> , <AHL_receiver/interaction_1> ;
         sbol:name            "AHL_receiver" ;
         sbol:role            SO:0000704 ;
@@ -148,10 +148,6 @@
         sbol:participant  <AHL_receiver/LuxR_protein> ;
         sbol:role         SBO:0000011 .
 
-<AHL_receiver/GFP>  a    sbol:SubComponent ;
-        sbol:displayId   "GFP" ;
-        sbol:instanceOf  :GFP_protein .
-
 <AHL_receiver/AHL>  a    sbol:SubComponent ;
         sbol:displayId   "AHL" ;
         sbol:instanceOf  :AHL .
@@ -161,6 +157,11 @@
         sbol:displayId    "subcomponent_4" ;
         sbol:instanceOf   :ter_luxI ;
         sbol:orientation  sbol:inline .
+
+<AHL_receiver/GFP_protein>
+        a                sbol:SubComponent ;
+        sbol:displayId   "GFP_protein" ;
+        sbol:instanceOf  :GFP_protein .
 
 <MulticellularSystem/componentreference_2>
         a                sbol:ComponentReference ;
@@ -215,7 +216,7 @@
 :LuxR_protein  a          sbol:Component ;
         sbol:description  "LuxR" ;
         sbol:displayId    "LuxR_protein" ;
-        sbol:name         "LuxR" ;
+        sbol:name         "LuxR_protein" ;
         sbol:role         GO:0003700 ;
         sbol:type         SBO:0000252 .
 
@@ -326,7 +327,7 @@
 <AHL_receiver/interaction_2/participation_2>
         a                 sbol:Participation ;
         sbol:displayId    "participation_2" ;
-        sbol:participant  <AHL_receiver/GFP> ;
+        sbol:participant  <AHL_receiver/GFP_protein> ;
         sbol:role         SBO:0000011 .
 
 <SenderSystem/subcomponent_2>
@@ -365,7 +366,7 @@
 
 :GFP_protein  a           sbol:Component ;
         sbol:description  "GFP" ;
-        sbol:displayId    "GFP" ;
+        sbol:displayId    "GFP_protein" ;
         sbol:name         "GFP" ;
         sbol:type         SBO:0000252 .
 

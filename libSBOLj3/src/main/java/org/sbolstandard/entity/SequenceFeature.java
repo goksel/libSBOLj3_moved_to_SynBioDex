@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.StmtIterator;
+import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Location.LocationBuilder;
 import org.sbolstandard.entity.Location.LocationFactory;
 import org.sbolstandard.util.RDFUtil;
@@ -39,7 +42,23 @@ public class SequenceFeature extends Feature{
 
 	public Location createLocation(LocationBuilder builder ) throws SBOLGraphException
 	{
-		Location location=builder.build(this.resource.getModel());
+		Location location=builder.build(this.resource.getModel(),this.getUri());
+		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
+		return location;
+	}
+	
+	public Location createLocation2(Location locationData) throws SBOLGraphException
+	{
+		URI uri=SBOLAPI.append(this.getUri(), locationData.getDisplayId());
+		RangeLocation location=new RangeLocation(this.resource.getModel(), uri);
+		
+		StmtIterator it=location.resource.listProperties();
+		while (it.hasNext())
+		{
+			Statement stmt=it.next();
+			location.resource.addProperty(stmt.getPredicate(), stmt.getObject());
+		}
+		
 		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
 		return location;
 	}

@@ -48,7 +48,7 @@
      ] ,
     "http://sbols.org/v3#start" : [ { 
       "type" : "literal" ,
-      "value" : "747"
+      "value" : "739"
     }
      ] ,
     "http://sbols.org/v3#hasSequence" : [ { 
@@ -58,7 +58,7 @@
      ] ,
     "http://sbols.org/v3#end" : [ { 
       "type" : "literal" ,
-      "value" : "754"
+      "value" : "746"
     }
      ]
   }
@@ -356,7 +356,7 @@
      ] ,
     "http://sbols.org/v3#start" : [ { 
       "type" : "literal" ,
-      "value" : "19"
+      "value" : "13"
     }
      ] ,
     "http://sbols.org/v3#hasSequence" : [ { 
@@ -366,7 +366,7 @@
      ] ,
     "http://sbols.org/v3#end" : [ { 
       "type" : "literal" ,
-      "value" : "24"
+      "value" : "18"
     }
      ]
   }
@@ -695,7 +695,7 @@
      ] ,
     "http://sbols.org/v3#start" : [ { 
       "type" : "literal" ,
-      "value" : "739"
+      "value" : "19"
     }
      ] ,
     "http://sbols.org/v3#hasSequence" : [ { 
@@ -710,7 +710,7 @@
      ] ,
     "http://sbols.org/v3#end" : [ { 
       "type" : "literal" ,
-      "value" : "1458"
+      "value" : "738"
     }
      ]
   }
@@ -820,7 +820,7 @@
      ] ,
     "http://sbols.org/v3#start" : [ { 
       "type" : "literal" ,
-      "value" : "13"
+      "value" : "1"
     }
      ] ,
     "http://sbols.org/v3#hasSequence" : [ { 
@@ -835,7 +835,7 @@
      ] ,
     "http://sbols.org/v3#end" : [ { 
       "type" : "literal" ,
-      "value" : "24"
+      "value" : "11"
     }
      ]
   }

@@ -69,7 +69,7 @@
     "@type" : "sbol:Component",
     "description" : "AHL receiver",
     "displayId" : "AHL_receiver",
-    "hasFeature" : [ "AHL_receiver/subcomponent_5", "AHL_receiver/subcomponent_7", "AHL_receiver/LuxR_protein", "AHL_receiver/subcomponent_8", "AHL_receiver/LuxR_AHL", "AHL_receiver/AHL", "AHL_receiver/GFP", "AHL_receiver/subcomponent_2", "AHL_receiver/subcomponent_1", "AHL_receiver/subcomponent_3", "AHL_receiver/subcomponent_4", "AHL_receiver/subcomponent_6" ],
+    "hasFeature" : [ "AHL_receiver/subcomponent_5", "AHL_receiver/subcomponent_7", "AHL_receiver/LuxR_protein", "AHL_receiver/subcomponent_8", "AHL_receiver/LuxR_AHL", "AHL_receiver/GFP_protein", "AHL_receiver/AHL", "AHL_receiver/subcomponent_2", "AHL_receiver/subcomponent_1", "AHL_receiver/subcomponent_3", "AHL_receiver/subcomponent_4", "AHL_receiver/subcomponent_6" ],
     "hasInteraction" : [ "AHL_receiver/interaction_2", "AHL_receiver/interaction_3", "AHL_receiver/interaction_4", "AHL_receiver/interaction_1" ],
     "name" : "AHL_receiver",
     "role" : "SO:0000704",
@@ -80,9 +80,9 @@
     "displayId" : "AHL",
     "instanceOf" : "AHL"
   }, {
-    "@id" : "AHL_receiver/GFP",
+    "@id" : "AHL_receiver/GFP_protein",
     "@type" : "sbol:SubComponent",
-    "displayId" : "GFP",
+    "displayId" : "GFP_protein",
     "instanceOf" : "GFP_protein"
   }, {
     "@id" : "AHL_receiver/LuxR_AHL",
@@ -128,7 +128,7 @@
     "@id" : "AHL_receiver/interaction_2/participation_2",
     "@type" : "sbol:Participation",
     "displayId" : "participation_2",
-    "participant" : "AHL_receiver/GFP",
+    "participant" : "AHL_receiver/GFP_protein",
     "role" : "SBO:0000011"
   }, {
     "@id" : "AHL_receiver/interaction_3",
@@ -224,7 +224,7 @@
     "@id" : "GFP_protein",
     "@type" : "sbol:Component",
     "description" : "GFP",
-    "displayId" : "GFP",
+    "displayId" : "GFP_protein",
     "name" : "GFP",
     "type" : "SBO:0000252"
   }, {
@@ -240,7 +240,7 @@
     "@type" : "sbol:Component",
     "description" : "LuxR",
     "displayId" : "LuxR_protein",
-    "name" : "LuxR",
+    "name" : "LuxR_protein",
     "role" : "GO:0003700",
     "type" : "SBO:0000252"
   }, {

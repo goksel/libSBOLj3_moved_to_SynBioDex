@@ -518,24 +518,6 @@
      ]
   }
    ,
-  "https://sbolstandard.org/examples/AHL_receiver/GFP" : { 
-    "http://sbols.org/v3#displayId" : [ { 
-      "type" : "literal" ,
-      "value" : "GFP"
-    }
-     ] ,
-    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
-      "type" : "uri" ,
-      "value" : "http://sbols.org/v3#SubComponent"
-    }
-     ] ,
-    "http://sbols.org/v3#instanceOf" : [ { 
-      "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/GFP_protein"
-    }
-     ]
-  }
-   ,
   "https://sbolstandard.org/examples/AHL_receiver/subcomponent_6" : { 
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
@@ -1027,7 +1009,7 @@
   "https://sbolstandard.org/examples/AHL_receiver/interaction_2/participation_2" : { 
     "http://sbols.org/v3#participant" : [ { 
       "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/AHL_receiver/GFP"
+      "value" : "https://sbolstandard.org/examples/AHL_receiver/GFP_protein"
     }
      ] ,
     "http://sbols.org/v3#displayId" : [ { 
@@ -1099,6 +1081,24 @@
     "http://sbols.org/v3#hasFeature" : [ { 
       "type" : "uri" ,
       "value" : "https://sbolstandard.org/examples/ReceiverSystem/subcomponent_2"
+    }
+     ]
+  }
+   ,
+  "https://sbolstandard.org/examples/AHL_receiver/GFP_protein" : { 
+    "http://sbols.org/v3#displayId" : [ { 
+      "type" : "literal" ,
+      "value" : "GFP_protein"
+    }
+     ] ,
+    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#SubComponent"
+    }
+     ] ,
+    "http://sbols.org/v3#instanceOf" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples/GFP_protein"
     }
      ]
   }
@@ -1282,7 +1282,7 @@
   "https://sbolstandard.org/examples/GFP_protein" : { 
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
-      "value" : "GFP"
+      "value" : "GFP_protein"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
@@ -1591,7 +1591,7 @@
      ] ,
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
-      "value" : "LuxR"
+      "value" : "LuxR_protein"
     }
      ] ,
     "http://sbols.org/v3#description" : [ { 
@@ -1952,7 +1952,7 @@
     }
     , { 
       "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/AHL_receiver/GFP"
+      "value" : "https://sbolstandard.org/examples/AHL_receiver/GFP_protein"
     }
     , { 
       "type" : "uri" ,

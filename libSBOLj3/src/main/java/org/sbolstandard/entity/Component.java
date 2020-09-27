@@ -232,7 +232,24 @@ public class Component extends TopLevel {
 	
 	public SequenceFeature createSequenceFeature(String displayId, List<LocationBuilder> locations) throws SBOLGraphException {
 		return createSequenceFeature(SBOLAPI.append(this.getUri(), displayId), locations);
-	}	
+	}
+	
+	public SequenceFeature createSequenceFeature2(String displayId, List<Location> locations) throws SBOLGraphException {
+		return createSequenceFeature2(SBOLAPI.append(this.getUri(), displayId), locations);
+	}
+	public SequenceFeature createSequenceFeature2(URI uri, List<Location> locations) throws SBOLGraphException {
+		SequenceFeature sequenceFeature= new SequenceFeature(this.resource.getModel(), uri);
+		
+		RDFUtil.addProperty(resource, DataModel.Component.feature, sequenceFeature.getUri());
+		if (locations!=null && locations.size()>0)
+		{
+			for (Location location:locations)
+			{
+				sequenceFeature.createLocation2(location);
+			}
+		}
+		return sequenceFeature;	
+	}
 	
 
 	public Interaction createInteraction(URI uri, List<URI> types) throws SBOLGraphException {

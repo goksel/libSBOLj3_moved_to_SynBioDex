@@ -4,6 +4,7 @@ import java.net.URI;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
@@ -24,10 +25,10 @@ public abstract class  Location extends Identified {
 		super(resource);
 	}
 	
-	public Location(URI uri)
+	/*public Location(String displayId)
 	{
-		super(uri);
-	}
+		super(displayId);
+	}*/
 
 	public Orientation getOrientation() {
 		if (orientation==null)
@@ -100,13 +101,13 @@ public abstract class  Location extends Identified {
 	
 	public static abstract class LocationBuilder
 	{
-		protected URI uri;
+		protected String displayId;
 		protected URI sequence;
 		private Orientation orientation;
 		private int order;
-		public LocationBuilder(URI uri, URI sequence)
+		public LocationBuilder(String displayId, URI sequence)
 		{
-			this.uri=uri;
+			this.displayId=displayId;
 			this.sequence=sequence;
 		}
 		
@@ -129,22 +130,22 @@ public abstract class  Location extends Identified {
 			this.orientation=orientation;
 		}
 		
-		abstract public Location build(Model model) throws SBOLGraphException;
+		abstract public Location build(Model model, URI parentUri) throws SBOLGraphException;
 		
 	}
 	
 	public static class CutLocationBuilder extends LocationBuilder
 	{
 		private int at;
-		public CutLocationBuilder(URI uri, int at, URI sequence)
+		public CutLocationBuilder(String displayId, int at, URI sequence)
 		{
-			super(uri,sequence);
+			super(displayId,sequence);
 			this.at=at;
 		}
 		
-		public CutLocation build(Model model) throws SBOLGraphException 
+		public CutLocation build(Model model, URI parentUri) throws SBOLGraphException 
 		{
-			CutLocation location= new CutLocation(model, this.uri);
+			CutLocation location= new CutLocation(model, SBOLAPI.append(parentUri, this.displayId));
 			location.setSequence(sequence);
 			location.setAt(at);
 			return location;
@@ -156,18 +157,18 @@ public abstract class  Location extends Identified {
 		private int start;
 		private int end;
 		
-		public RangeLocationBuilder(URI uri, int start, int end, URI sequence)
+		public RangeLocationBuilder(String displayId, int start, int end, URI sequence)
 		{
-			super(uri,sequence);
+			super(displayId,sequence);
 			this.start=start;
 			this.end=end;
 			
 			
 		}
 		
-		public RangeLocation build(Model model) throws SBOLGraphException
+		public RangeLocation build(Model model, URI parentUri) throws SBOLGraphException
 		{
-			RangeLocation location= new RangeLocation(model, this.uri);
+			RangeLocation location= new RangeLocation(model, SBOLAPI.append(parentUri, this.displayId));
 			location.setSequence(sequence);
 			location.setStart(start);
 			location.setEnd(end);
@@ -178,14 +179,14 @@ public abstract class  Location extends Identified {
 	public static class EntireSequenceLocationBuilder extends LocationBuilder
 	{
 		
-		public EntireSequenceLocationBuilder(URI uri, URI sequence)
+		public EntireSequenceLocationBuilder(String displayId, URI sequence)
 		{
-			super(uri,sequence);
+			super(displayId,sequence);
 		}
 		
-		public EntireSequenceLocation build(Model model) throws SBOLGraphException
+		public EntireSequenceLocation build(Model model, URI parentUri) throws SBOLGraphException
 		{
-			EntireSequenceLocation location= new EntireSequenceLocation(model, this.uri);
+			EntireSequenceLocation location= new EntireSequenceLocation(model, SBOLAPI.append(parentUri, this.displayId));
 			location.setSequence(sequence);	
 			return location;
 		}

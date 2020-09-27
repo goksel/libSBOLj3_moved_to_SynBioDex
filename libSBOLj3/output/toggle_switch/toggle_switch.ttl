@@ -64,10 +64,6 @@
         sbol:hasFeature  <TetR_producer/TetR_protein> ;
         sbol:inChildOf   <toggle_switch/TetR_producer> .
 
-<LacI_producer/GFP>  a   sbol:SubComponent ;
-        sbol:displayId   "GFP" ;
-        sbol:instanceOf  :GFP_protein .
-
 :IPTG   a                 sbol:Component ;
         sbol:description  "IPTG" ;
         sbol:displayId    "IPTG" ;
@@ -117,6 +113,11 @@
         sbol:displayId    "participation_3" ;
         sbol:participant  <TetR_producer/atC_TetR> ;
         sbol:role         SBO:0000011 .
+
+<LacI_producer/GFP_protein>
+        a                sbol:SubComponent ;
+        sbol:displayId   "GFP_protein" ;
+        sbol:instanceOf  :GFP_protein .
 
 <LacI_producer/subcomponent_1>
         a                 sbol:SubComponent ;
@@ -265,7 +266,7 @@
 :LacI_producer  a            sbol:Component ;
         sbol:description     "LacI producer" ;
         sbol:displayId       "LacI_producer" ;
-        sbol:hasFeature      <LacI_producer/subcomponent_3> , <LacI_producer/TetR_protein> , <LacI_producer/subcomponent_6> , <LacI_producer/GFP> , <LacI_producer/subcomponent_2> , <LacI_producer/subcomponent_5> , <LacI_producer/subcomponent_4> , <LacI_producer/subcomponent_1> , <LacI_producer/LacI_protein> , <LacI_producer/aTC> ;
+        sbol:hasFeature      <LacI_producer/subcomponent_3> , <LacI_producer/TetR_protein> , <LacI_producer/subcomponent_6> , <LacI_producer/subcomponent_2> , <LacI_producer/subcomponent_5> , <LacI_producer/subcomponent_4> , <LacI_producer/subcomponent_1> , <LacI_producer/LacI_protein> , <LacI_producer/aTC> , <LacI_producer/GFP_protein> ;
         sbol:hasInteraction  <LacI_producer/interaction_3> , <LacI_producer/interaction_4> , <LacI_producer/interaction_2> , <LacI_producer/interaction_1> ;
         sbol:name            "LacI_producer" ;
         sbol:role            SO:0000704 ;
@@ -327,7 +328,7 @@
 <LacI_producer/interaction_2/participation_2>
         a                 sbol:Participation ;
         sbol:displayId    "participation_2" ;
-        sbol:participant  <LacI_producer/GFP> ;
+        sbol:participant  <LacI_producer/GFP_protein> ;
         sbol:role         SBO:0000011 .
 
 <LacI_producer/subcomponent_4>
@@ -363,7 +364,7 @@
 
 :GFP_protein  a           sbol:Component ;
         sbol:description  "GFP" ;
-        sbol:displayId    "GFP" ;
+        sbol:displayId    "GFP_protein" ;
         sbol:name         "GFP" ;
         sbol:type         SBO:0000252 .
 

@@ -23,15 +23,15 @@
     "description" : {
       "@id" : "http://sbols.org/v3#description"
     },
-    "displayId" : {
-      "@id" : "http://sbols.org/v3#displayId"
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
     },
     "type" : {
       "@id" : "http://sbols.org/v3#type",
       "@type" : "@id"
     },
-    "name" : {
-      "@id" : "http://sbols.org/v3#name"
+    "displayId" : {
+      "@id" : "http://sbols.org/v3#displayId"
     },
     "language" : {
       "@id" : "http://sbols.org/v3#language",

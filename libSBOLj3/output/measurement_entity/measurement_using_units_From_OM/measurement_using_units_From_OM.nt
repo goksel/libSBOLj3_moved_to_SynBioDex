@@ -4,9 +4,9 @@
 <https://sbolstandard.org/examples/M9_Glucose_CAA/CaCl2/measure1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.ontology-of-units-of-measure.org/resource/om-2/Measure> .
 <https://sbolstandard.org/examples/M9_Glucose_CAA> <http://sbols.org/v3#hasFeature> <https://sbolstandard.org/examples/M9_Glucose_CAA/CaCl2> .
 <https://sbolstandard.org/examples/M9_Glucose_CAA> <http://sbols.org/v3#description> "M9 Glucose CAA growth media" .
-<https://sbolstandard.org/examples/M9_Glucose_CAA> <http://sbols.org/v3#displayId> "M9_Glucose_CAA" .
-<https://sbolstandard.org/examples/M9_Glucose_CAA> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000241> .
 <https://sbolstandard.org/examples/M9_Glucose_CAA> <http://sbols.org/v3#name> "M9 Glucose CAA" .
+<https://sbolstandard.org/examples/M9_Glucose_CAA> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000241> .
+<https://sbolstandard.org/examples/M9_Glucose_CAA> <http://sbols.org/v3#displayId> "M9_Glucose_CAA" .
 <https://sbolstandard.org/examples/M9_Glucose_CAA> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Component> .
 <https://sbolstandard.org/examples/M9_Glucose_CAA/CaCl2> <http://sbols.org/v3#hasMeasure> <https://sbolstandard.org/examples/M9_Glucose_CAA/CaCl2/measure1> .
 <https://sbolstandard.org/examples/M9_Glucose_CAA/CaCl2> <http://sbols.org/v3#definition> <https://identifiers.org/CHEBI:3312> .

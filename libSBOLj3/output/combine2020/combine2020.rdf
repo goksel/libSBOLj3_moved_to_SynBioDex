@@ -57,8 +57,8 @@
                               <sbol:hasLocation>
                                  <sbol:Range rdf:about="i13504/subcomponent_2/location_1">
                                     <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
-                                    <sbol:end>1458</sbol:end>
-                                    <sbol:start>739</sbol:start>
+                                    <sbol:end>738</sbol:end>
+                                    <sbol:start>19</sbol:start>
                                     <sbol:hasSequence>
                                        <sbol:Sequence rdf:about="i13504_sequence_1"/>
                                     </sbol:hasSequence>
@@ -95,8 +95,8 @@
             <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
             <sbol:hasLocation>
                <sbol:Range rdf:about="i13504/sequencefeature_1/location">
-                  <sbol:end>24</sbol:end>
-                  <sbol:start>19</sbol:start>
+                  <sbol:end>18</sbol:end>
+                  <sbol:start>13</sbol:start>
                   <sbol:hasSequence>
                      <sbol:Sequence rdf:about="i13504_sequence_1"/>
                   </sbol:hasSequence>
@@ -119,8 +119,8 @@
             <sbol:hasLocation>
                <sbol:Range rdf:about="i13504/subcomponent_1/location_1">
                   <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
-                  <sbol:end>24</sbol:end>
-                  <sbol:start>13</sbol:start>
+                  <sbol:end>11</sbol:end>
+                  <sbol:start>1</sbol:start>
                   <sbol:hasSequence>
                      <sbol:Sequence rdf:about="i13504_sequence_1"/>
                   </sbol:hasSequence>
@@ -159,8 +159,8 @@
             <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
             <sbol:hasLocation>
                <sbol:Range rdf:about="i13504/sequencefeature_2/location">
-                  <sbol:end>754</sbol:end>
-                  <sbol:start>747</sbol:start>
+                  <sbol:end>746</sbol:end>
+                  <sbol:start>739</sbol:start>
                   <sbol:hasSequence>
                      <sbol:Sequence rdf:about="i13504_sequence_1"/>
                   </sbol:hasSequence>

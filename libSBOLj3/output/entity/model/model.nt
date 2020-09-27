@@ -1,8 +1,8 @@
 <https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#hasModel> <https://sbolstandard.org/examples/model1> .
 <https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#description> "Toggle Switch genetic circuit" .
-<https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#displayId> "toggle_switch" .
-<https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000241> .
 <https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#name> "Toggle Switch" .
+<https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000241> .
+<https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#displayId> "toggle_switch" .
 <https://sbolstandard.org/examples/toggle_switch> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Component> .
 <https://sbolstandard.org/examples/model1> <http://sbols.org/v3#language> <https://identifiers.org/edam:format_2585> .
 <https://sbolstandard.org/examples/model1> <http://sbols.org/v3#framework> <https://identifiers.org/SBO:0000062> .

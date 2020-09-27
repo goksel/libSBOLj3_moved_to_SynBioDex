@@ -37,9 +37,9 @@
 <i13504/sequencefeature_2/location>
         a                 sbol:Range ;
         sbol:displayId    "location" ;
-        sbol:end          "754" ;
+        sbol:end          "746" ;
         sbol:hasSequence  :i13504_sequence_1 ;
-        sbol:start        "747" .
+        sbol:start        "739" .
 
 :E0040  a                 sbol:Component ;
         sbol:displayId    "E0040" ;
@@ -102,10 +102,10 @@
 <i13504/subcomponent_2/location_1>
         a                 sbol:Range ;
         sbol:displayId    "location_1" ;
-        sbol:end          "1458" ;
+        sbol:end          "738" ;
         sbol:hasSequence  :i13504_sequence_1 ;
         sbol:orientation  sbol:inline ;
-        sbol:start        "739" .
+        sbol:start        "19" .
 
 <interlab16device2/i13504_system>
         a                sbol:SubComponent ;
@@ -140,17 +140,17 @@
 <i13504/subcomponent_1/location_1>
         a                 sbol:Range ;
         sbol:displayId    "location_1" ;
-        sbol:end          "24" ;
+        sbol:end          "11" ;
         sbol:hasSequence  :i13504_sequence_1 ;
         sbol:orientation  sbol:inline ;
-        sbol:start        "13" .
+        sbol:start        "1" .
 
 <i13504/sequencefeature_1/location>
         a                 sbol:Range ;
         sbol:displayId    "location" ;
-        sbol:end          "24" ;
+        sbol:end          "18" ;
         sbol:hasSequence  :i13504_sequence_1 ;
-        sbol:start        "19" .
+        sbol:start        "13" .
 
 :i13504_sequence_1  a     sbol:Sequence ;
         sbol:description  "iGEM 2016 interlab reporter sequence" ;

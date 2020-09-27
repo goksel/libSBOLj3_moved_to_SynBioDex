@@ -77,7 +77,7 @@ public class SubComponent extends Feature{
 
 	public Location createLocation(LocationBuilder builder ) throws SBOLGraphException
 	{
-		Location location=builder.build(this.resource.getModel());
+		Location location=builder.build(this.resource.getModel(), this.getUri());
 		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
 		return location;
 	}
@@ -100,7 +100,7 @@ public class SubComponent extends Feature{
 
 	public Location createSourceLocation(LocationBuilder builder ) throws SBOLGraphException
 	{
-		Location sourceLocation=builder.build(this.resource.getModel());
+		Location sourceLocation=builder.build(this.resource.getModel(),this.getUri());
 		RDFUtil.setProperty(resource, DataModel.SubComponent.sourceLocation, sourceLocation.getUri());
 		
 		if (sourceLocations==null)

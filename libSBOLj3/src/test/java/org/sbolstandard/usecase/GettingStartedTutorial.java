@@ -105,7 +105,7 @@ public class GettingStartedTutorial {
 		int start=i13504Sequence.getElements().length() + 1;
     	int end=start + term_na.length()-1;
     	i13504Sequence.setElements(i13504Sequence.getElements() + term_na);
-    	LocationBuilder locationBuilder=new Location.RangeLocationBuilder(SBOLAPI.append(termSubComponent.getUri(), "location"), start, end,i13504Sequence.getUri());
+    	LocationBuilder locationBuilder=new Location.RangeLocationBuilder("location", start, end,i13504Sequence.getUri());
     	locationBuilder.setOrientation(Orientation.inline);
     	termSubComponent.createLocation(locationBuilder);
     	System.out.println(String.format("Added the terminator subcomponent %s", term.getUri()));
