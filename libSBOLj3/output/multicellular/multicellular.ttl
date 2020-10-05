@@ -9,66 +9,127 @@
 @prefix prov:  <http://www.w3.org/ns/prov#> .
 @prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
 
-<MulticellularSystem/SenderSystem>
-        a                sbol:SubComponent ;
-        sbol:displayId   "SenderSystem" ;
-        sbol:instanceOf  :SenderSystem .
-
 :rbs_luxR  a              sbol:Component ;
         sbol:description  "RBS" ;
         sbol:displayId    "rbs_luxR" ;
-        sbol:name         "rbs_luxR" ;
+        sbol:name         "rbs" ;
         sbol:role         SO:0000139 ;
         sbol:type         SBO:0000251 .
 
-<SenderSystem/AHL_producer>
+<ReceiverSystem/SubComponent2>
         a                sbol:SubComponent ;
-        sbol:displayId   "AHL_producer" ;
-        sbol:instanceOf  :AHL_producer .
+        sbol:displayId   "SubComponent2" ;
+        sbol:instanceOf  :AHL .
 
-<ReceiverSystem/componentreference_1>
+<AHL_receiver/Interaction2>
+        a                      sbol:Interaction ;
+        sbol:displayId         "Interaction2" ;
+        sbol:hasParticipation  <AHL_receiver/Interaction2/Participation1> , <AHL_receiver/Interaction2/Participation2> ;
+        sbol:type              SBO:0000589 .
+
+<AHL_receiver/Interaction1/Participation2>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation2" ;
+        sbol:participant  <AHL_receiver/SubComponent10> ;
+        sbol:role         SBO:0000011 .
+
+<MulticellularSystem/ComponentReference2>
         a                sbol:ComponentReference ;
-        sbol:displayId   "componentreference_1" ;
-        sbol:hasFeature  <AHL_receiver/AHL> ;
-        sbol:inChildOf   <ReceiverSystem/AHL_receiver> .
+        sbol:displayId   "ComponentReference2" ;
+        sbol:hasFeature  <ReceiverSystem/SubComponent2> ;
+        sbol:inChildOf   <MulticellularSystem/SubComponent2> .
+
+<AHL_receiver/Interaction2/Participation2>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation2" ;
+        sbol:participant  <AHL_receiver/SubComponent11> ;
+        sbol:role         SBO:0000011 .
+
+<AHL_receiver/Interaction3/Participation2>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation2" ;
+        sbol:participant  <AHL_receiver/SubComponent12> ;
+        sbol:role         SBO:0000459 .
+
+<AHL_receiver/Interaction4/Participation2>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation2" ;
+        sbol:participant  <AHL_receiver/SubComponent9> ;
+        sbol:role         SBO:0000010 .
 
 :MulticellularSystem  a     sbol:Component ;
         sbol:description    "Multicellular System" ;
         sbol:displayId      "MulticellularSystem" ;
-        sbol:hasConstraint  <MulticellularSystem/constraint_1> ;
-        sbol:hasFeature     <MulticellularSystem/ReceiverSystem> , <MulticellularSystem/componentreference_1> , <MulticellularSystem/SenderSystem> , <MulticellularSystem/componentreference_2> ;
+        sbol:hasConstraint  <MulticellularSystem/Constraint1> ;
+        sbol:hasFeature     <MulticellularSystem/ComponentReference2> , <MulticellularSystem/SubComponent1> , <MulticellularSystem/ComponentReference1> , <MulticellularSystem/SubComponent2> ;
         sbol:name           "MulticellularSystem" ;
         sbol:role           SBO:0000289 ;
         sbol:type           SBO:0000241 .
 
-<AHL_receiver/subcomponent_5>
-        a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_5" ;
-        sbol:instanceOf   :pLuxR ;
-        sbol:orientation  sbol:inline .
-
 :SenderSystem  a            sbol:Component ;
         sbol:description    "Sender System" ;
         sbol:displayId      "SenderSystem" ;
-        sbol:hasConstraint  <SenderSystem/constraint_2> , <SenderSystem/constraint_3> , <SenderSystem/constraint_1> ;
-        sbol:hasFeature     <SenderSystem/AHL_producer> , <SenderSystem/componentreference_1> , <SenderSystem/subcomponent_2> , <SenderSystem/subcomponent_1> ;
+        sbol:hasConstraint  <SenderSystem/Constraint1> , <SenderSystem/Constraint3> , <SenderSystem/Constraint2> ;
+        sbol:hasFeature     <SenderSystem/SubComponent1> , <SenderSystem/ComponentReference1> , <SenderSystem/SubComponent3> , <SenderSystem/SubComponent2> ;
         sbol:name           "SenderSystem" ;
         sbol:role           SBO:0000289 ;
         sbol:type           SBO:0000241 .
 
+<SenderSystem/Constraint1>
+        a                 sbol:Constraint ;
+        sbol:displayId    "Constraint1" ;
+        sbol:object       <SenderSystem/SubComponent2> ;
+        sbol:restriction  sbol:contains ;
+        sbol:subject      <SenderSystem/SubComponent1> .
+
+<MulticellularSystem/Constraint1>
+        a                 sbol:Constraint ;
+        sbol:displayId    "Constraint1" ;
+        sbol:object       <MulticellularSystem/ComponentReference2> ;
+        sbol:restriction  sbol:verifyIdentical ;
+        sbol:subject      <MulticellularSystem/ComponentReference1> .
+
+<SenderSystem/SubComponent3>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent3" ;
+        sbol:instanceOf  :AHL_producer .
+
+<AHL_receiver/SubComponent5>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "SubComponent5" ;
+        sbol:instanceOf   :pLuxR ;
+        sbol:orientation  sbol:inline .
+
 :ter_gfp  a               sbol:Component ;
         sbol:description  "Terminator" ;
         sbol:displayId    "ter_gfp" ;
-        sbol:name         "ter_gfp" ;
+        sbol:name         "gfp terminator" ;
         sbol:role         SO:0000141 ;
         sbol:type         SBO:0000251 .
+
+<MulticellularSystem/SubComponent1>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent1" ;
+        sbol:instanceOf  :SenderSystem .
+
+<AHL_producer/Interaction1>
+        a                      sbol:Interaction ;
+        sbol:displayId         "Interaction1" ;
+        sbol:hasParticipation  <AHL_producer/Interaction1/Participation1> , <AHL_producer/Interaction1/Participation2> ;
+        sbol:type              SBO:0000589 .
 
 :rbs_gfp  a               sbol:Component ;
         sbol:description  "RBS" ;
         sbol:displayId    "rbs_gfp" ;
-        sbol:name         "rbs_gfp" ;
+        sbol:name         "rbs" ;
         sbol:role         SO:0000139 ;
         sbol:type         SBO:0000251 .
+
+<AHL_producer/SubComponent1>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "SubComponent1" ;
+        sbol:instanceOf   :pConstLuxI ;
+        sbol:orientation  sbol:inline .
 
 :luxR   a                 sbol:Component ;
         sbol:description  "luxR coding sequence" ;
@@ -77,110 +138,87 @@
         sbol:role         SO:0000316 ;
         sbol:type         SBO:0000251 .
 
+<AHL_receiver/Interaction3/Participation1>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation1" ;
+        sbol:participant  <AHL_receiver/SubComponent5> ;
+        sbol:role         SBO:0000643 .
+
 :pConstLuxR  a            sbol:Component ;
         sbol:description  "Constituve promoter" ;
         sbol:displayId    "pConstLuxR" ;
-        sbol:name         "pConstLuxR" ;
+        sbol:name         "pLuxR" ;
         sbol:role         SO:0000167 ;
         sbol:type         SBO:0000251 .
+
+<MulticellularSystem/ComponentReference1>
+        a                sbol:ComponentReference ;
+        sbol:displayId   "ComponentReference1" ;
+        sbol:hasFeature  <SenderSystem/SubComponent2> ;
+        sbol:inChildOf   <MulticellularSystem/SubComponent1> .
+
+<AHL_receiver/Interaction1>
+        a                      sbol:Interaction ;
+        sbol:displayId         "Interaction1" ;
+        sbol:hasParticipation  <AHL_receiver/Interaction1/Participation1> , <AHL_receiver/Interaction1/Participation2> ;
+        sbol:type              SBO:0000589 .
 
 :AHL_receiver  a             sbol:Component ;
         sbol:description     "AHL receiver" ;
         sbol:displayId       "AHL_receiver" ;
-        sbol:hasFeature      <AHL_receiver/subcomponent_5> , <AHL_receiver/subcomponent_7> , <AHL_receiver/LuxR_protein> , <AHL_receiver/subcomponent_8> , <AHL_receiver/LuxR_AHL> , <AHL_receiver/GFP_protein> , <AHL_receiver/AHL> , <AHL_receiver/subcomponent_2> , <AHL_receiver/subcomponent_1> , <AHL_receiver/subcomponent_3> , <AHL_receiver/subcomponent_4> , <AHL_receiver/subcomponent_6> ;
-        sbol:hasInteraction  <AHL_receiver/interaction_2> , <AHL_receiver/interaction_3> , <AHL_receiver/interaction_4> , <AHL_receiver/interaction_1> ;
-        sbol:name            "AHL_receiver" ;
+        sbol:hasFeature      <AHL_receiver/SubComponent11> , <AHL_receiver/SubComponent5> , <AHL_receiver/SubComponent12> , <AHL_receiver/SubComponent7> , <AHL_receiver/SubComponent6> , <AHL_receiver/SubComponent8> , <AHL_receiver/SubComponent9> , <AHL_receiver/SubComponent1> , <AHL_receiver/SubComponent3> , <AHL_receiver/SubComponent2> , <AHL_receiver/SubComponent10> , <AHL_receiver/SubComponent4> ;
+        sbol:hasInteraction  <AHL_receiver/Interaction4> , <AHL_receiver/Interaction1> , <AHL_receiver/Interaction2> , <AHL_receiver/Interaction3> ;
+        sbol:name            "AHL receiver" ;
         sbol:role            SO:0000704 ;
         sbol:type            SBO:0000251 .
 
-<SenderSystem/constraint_3>
-        a                 sbol:Constraint ;
-        sbol:displayId    "constraint_3" ;
-        sbol:object       <SenderSystem/subcomponent_2> ;
-        sbol:restriction  sbol:verifyIdentical ;
-        sbol:subject      <SenderSystem/componentreference_1> .
-
-<MulticellularSystem/constraint_1>
-        a                 sbol:Constraint ;
-        sbol:displayId    "constraint_1" ;
-        sbol:object       <MulticellularSystem/componentreference_2> ;
-        sbol:restriction  sbol:verifyIdentical ;
-        sbol:subject      <MulticellularSystem/componentreference_1> .
-
-<AHL_receiver/subcomponent_4>
-        a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_4" ;
-        sbol:instanceOf   :ter_luxR ;
-        sbol:orientation  sbol:inline .
-
-<AHL_receiver/interaction_3/participation_2>
+<AHL_receiver/Interaction1/Participation1>
         a                 sbol:Participation ;
-        sbol:displayId    "participation_2" ;
-        sbol:participant  <AHL_receiver/LuxR_AHL> ;
-        sbol:role         SBO:0000459 .
+        sbol:displayId    "Participation1" ;
+        sbol:participant  <AHL_receiver/SubComponent3> ;
+        sbol:role         SBO:0000645 .
 
-<SenderSystem/componentreference_1>
-        a                sbol:ComponentReference ;
-        sbol:displayId   "componentreference_1" ;
-        sbol:hasFeature  <AHL_producer/AHL> ;
-        sbol:inChildOf   <SenderSystem/AHL_producer> .
+<AHL_receiver/Interaction2/Participation1>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation1" ;
+        sbol:participant  <AHL_receiver/SubComponent7> ;
+        sbol:role         SBO:0000645 .
+
+<ReceiverSystem/SubComponent1>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent1" ;
+        sbol:instanceOf  :OrganismB .
+
+<AHL_receiver/Interaction4/Participation1>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation1" ;
+        sbol:participant  <AHL_receiver/SubComponent10> ;
+        sbol:role         SBO:0000010 .
+
+<ReceiverSystem/Constraint3>
+        a                 sbol:Constraint ;
+        sbol:displayId    "Constraint3" ;
+        sbol:object       <ReceiverSystem/SubComponent2> ;
+        sbol:restriction  sbol:verifyIdentical ;
+        sbol:subject      <ReceiverSystem/ComponentReference1> .
 
 :ter_luxR  a              sbol:Component ;
         sbol:description  "Terminator" ;
         sbol:displayId    "ter_luxR" ;
-        sbol:name         "ter_luxR" ;
+        sbol:name         "luxR terminator" ;
         sbol:role         SO:0000141 ;
         sbol:type         SBO:0000251 .
 
-<AHL_producer/interaction_1>
-        a                      sbol:Interaction ;
-        sbol:displayId         "interaction_1" ;
-        sbol:hasParticipation  <AHL_producer/interaction_1/participation_1> , <AHL_producer/interaction_1/participation_2> ;
-        sbol:type              SBO:0000589 .
-
-<AHL_producer/AHL>  a    sbol:SubComponent ;
-        sbol:displayId   "AHL" ;
-        sbol:instanceOf  :AHL .
-
-<AHL_receiver/interaction_1/participation_2>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_2" ;
-        sbol:participant  <AHL_receiver/LuxR_protein> ;
-        sbol:role         SBO:0000011 .
-
-<AHL_receiver/AHL>  a    sbol:SubComponent ;
-        sbol:displayId   "AHL" ;
-        sbol:instanceOf  :AHL .
-
-<AHL_producer/subcomponent_4>
-        a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_4" ;
-        sbol:instanceOf   :ter_luxI ;
-        sbol:orientation  sbol:inline .
-
-<AHL_receiver/GFP_protein>
+<SenderSystem/SubComponent2>
         a                sbol:SubComponent ;
-        sbol:displayId   "GFP_protein" ;
-        sbol:instanceOf  :GFP_protein .
+        sbol:displayId   "SubComponent2" ;
+        sbol:instanceOf  :AHL .
 
-<MulticellularSystem/componentreference_2>
-        a                sbol:ComponentReference ;
-        sbol:displayId   "componentreference_2" ;
-        sbol:hasFeature  <ReceiverSystem/subcomponent_2> ;
-        sbol:inChildOf   <MulticellularSystem/ReceiverSystem> .
-
-<AHL_receiver/interaction_4>
-        a                      sbol:Interaction ;
-        sbol:displayId         "interaction_4" ;
-        sbol:hasParticipation  <AHL_receiver/interaction_4/participation_1> , <AHL_receiver/interaction_4/participation_2> , <AHL_receiver/interaction_4/participation_3> ;
-        sbol:type              SBO:0000177 .
-
-<SenderSystem/constraint_2>
-        a                 sbol:Constraint ;
-        sbol:displayId    "constraint_2" ;
-        sbol:object       <SenderSystem/AHL_producer> ;
-        sbol:restriction  sbol:contains ;
-        sbol:subject      <SenderSystem/subcomponent_1> .
+<AHL_receiver/SubComponent4>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "SubComponent4" ;
+        sbol:instanceOf   :ter_luxR ;
+        sbol:orientation  sbol:inline .
 
 :OrganismB  a             sbol:Component ;
         sbol:description  "Organism B" ;
@@ -189,29 +227,27 @@
         sbol:role         SBO:0000290 ;
         sbol:type         GO:0005623 .
 
-<AHL_receiver/subcomponent_3>
-        a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_3" ;
-        sbol:instanceOf   :luxR ;
-        sbol:orientation  sbol:inline .
+<AHL_receiver/SubComponent9>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent9" ;
+        sbol:instanceOf  :AHL .
 
-<AHL_receiver/interaction_3/participation_1>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_1" ;
-        sbol:participant  <AHL_receiver/subcomponent_5> ;
-        sbol:role         SBO:0000643 .
+<ReceiverSystem/Constraint2>
+        a                 sbol:Constraint ;
+        sbol:displayId    "Constraint2" ;
+        sbol:object       <ReceiverSystem/SubComponent3> ;
+        sbol:restriction  sbol:contains ;
+        sbol:subject      <ReceiverSystem/SubComponent1> .
 
-<AHL_receiver/interaction_4/participation_3>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_3" ;
-        sbol:participant  <AHL_receiver/LuxR_AHL> ;
-        sbol:role         SBO:0000011 .
+<AHL_producer/SubComponent5>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent5" ;
+        sbol:instanceOf  :AHL .
 
-<AHL_receiver/interaction_1/participation_1>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_1" ;
-        sbol:participant  <AHL_receiver/subcomponent_3> ;
-        sbol:role         SBO:0000645 .
+<SenderSystem/SubComponent1>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent1" ;
+        sbol:instanceOf  :OrganismA .
 
 :LuxR_protein  a          sbol:Component ;
         sbol:description  "LuxR" ;
@@ -220,22 +256,17 @@
         sbol:role         GO:0003700 ;
         sbol:type         SBO:0000252 .
 
-<ReceiverSystem/AHL_receiver>
-        a                sbol:SubComponent ;
-        sbol:displayId   "AHL_receiver" ;
-        sbol:instanceOf  :AHL_receiver .
+<AHL_producer/Interaction1/Participation2>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation2" ;
+        sbol:participant  <AHL_producer/SubComponent5> ;
+        sbol:role         SBO:0000011 .
 
-<MulticellularSystem/ReceiverSystem>
-        a                sbol:SubComponent ;
-        sbol:displayId   "ReceiverSystem" ;
-        sbol:instanceOf  :ReceiverSystem .
-
-<ReceiverSystem/constraint_3>
-        a                 sbol:Constraint ;
-        sbol:displayId    "constraint_3" ;
-        sbol:object       <ReceiverSystem/subcomponent_2> ;
-        sbol:restriction  sbol:verifyIdentical ;
-        sbol:subject      <ReceiverSystem/componentreference_1> .
+<AHL_receiver/SubComponent3>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "SubComponent3" ;
+        sbol:instanceOf   :luxR ;
+        sbol:orientation  sbol:inline .
 
 :gfp    a                 sbol:Component ;
         sbol:description  "gfp coding sequence" ;
@@ -247,29 +278,11 @@
 :ReceiverSystem  a          sbol:Component ;
         sbol:description    "Receiver System" ;
         sbol:displayId      "ReceiverSystem" ;
-        sbol:hasConstraint  <ReceiverSystem/constraint_3> , <ReceiverSystem/constraint_1> , <ReceiverSystem/constraint_2> ;
-        sbol:hasFeature     <ReceiverSystem/AHL_receiver> , <ReceiverSystem/subcomponent_2> , <ReceiverSystem/subcomponent_1> , <ReceiverSystem/componentreference_1> ;
+        sbol:hasConstraint  <ReceiverSystem/Constraint3> , <ReceiverSystem/Constraint1> , <ReceiverSystem/Constraint2> ;
+        sbol:hasFeature     <ReceiverSystem/SubComponent3> , <ReceiverSystem/ComponentReference1> , <ReceiverSystem/SubComponent2> , <ReceiverSystem/SubComponent1> ;
         sbol:name           "ReceiverSystem" ;
         sbol:role           SBO:0000289 ;
         sbol:type           SBO:0000241 .
-
-<AHL_receiver/subcomponent_8>
-        a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_8" ;
-        sbol:instanceOf   :ter_gfp ;
-        sbol:orientation  sbol:inline .
-
-<AHL_producer/subcomponent_3>
-        a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_3" ;
-        sbol:instanceOf   :luxI ;
-        sbol:orientation  sbol:inline .
-
-<MulticellularSystem/componentreference_1>
-        a                sbol:ComponentReference ;
-        sbol:displayId   "componentreference_1" ;
-        sbol:hasFeature  <SenderSystem/subcomponent_2> ;
-        sbol:inChildOf   <MulticellularSystem/SenderSystem> .
 
 :LuxR_AHL  a              sbol:Component ;
         sbol:description  "LuxR_AHL complex" ;
@@ -281,22 +294,14 @@
 :rbs_luxI  a              sbol:Component ;
         sbol:description  "RBS" ;
         sbol:displayId    "rbs_luxI" ;
-        sbol:name         "rbs_luxI" ;
+        sbol:name         "rbs" ;
         sbol:role         SO:0000139 ;
         sbol:type         SBO:0000251 .
 
-<SenderSystem/constraint_1>
-        a                 sbol:Constraint ;
-        sbol:displayId    "constraint_1" ;
-        sbol:object       <SenderSystem/subcomponent_2> ;
-        sbol:restriction  sbol:contains ;
-        sbol:subject      <SenderSystem/subcomponent_1> .
-
-<AHL_receiver/interaction_3>
-        a                      sbol:Interaction ;
-        sbol:displayId         "interaction_3" ;
-        sbol:hasParticipation  <AHL_receiver/interaction_3/participation_1> , <AHL_receiver/interaction_3/participation_2> ;
-        sbol:type              SBO:0000170 .
+<AHL_receiver/SubComponent12>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent12" ;
+        sbol:instanceOf  :LuxR_AHL .
 
 :OrganismA  a             sbol:Component ;
         sbol:description  "Organism A" ;
@@ -305,17 +310,24 @@
         sbol:role         SBO:0000290 ;
         sbol:type         GO:0005623 .
 
-<AHL_receiver/subcomponent_2>
+<AHL_receiver/SubComponent8>
         a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_2" ;
-        sbol:instanceOf   :rbs_luxR ;
+        sbol:displayId    "SubComponent8" ;
+        sbol:instanceOf   :ter_gfp ;
         sbol:orientation  sbol:inline .
 
-<AHL_receiver/interaction_4/participation_2>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_2" ;
-        sbol:participant  <AHL_receiver/AHL> ;
-        sbol:role         SBO:0000010 .
+<ReceiverSystem/Constraint1>
+        a                 sbol:Constraint ;
+        sbol:displayId    "Constraint1" ;
+        sbol:object       <ReceiverSystem/SubComponent2> ;
+        sbol:restriction  sbol:contains ;
+        sbol:subject      <ReceiverSystem/SubComponent1> .
+
+<AHL_producer/SubComponent4>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "SubComponent4" ;
+        sbol:instanceOf   :ter_luxI ;
+        sbol:orientation  sbol:inline .
 
 :pLuxR  a                 sbol:Component ;
         sbol:description  "LuxR inducible promoter" ;
@@ -324,45 +336,23 @@
         sbol:role         SO:0000167 ;
         sbol:type         SBO:0000251 .
 
-<AHL_receiver/interaction_2/participation_2>
+<AHL_producer/Interaction1/Participation1>
         a                 sbol:Participation ;
-        sbol:displayId    "participation_2" ;
-        sbol:participant  <AHL_receiver/GFP_protein> ;
-        sbol:role         SBO:0000011 .
+        sbol:displayId    "Participation1" ;
+        sbol:participant  <AHL_producer/SubComponent3> ;
+        sbol:role         SBO:0000645 .
 
-<SenderSystem/subcomponent_2>
-        a                sbol:SubComponent ;
-        sbol:displayId   "subcomponent_2" ;
-        sbol:instanceOf  :AHL .
-
-<ReceiverSystem/constraint_2>
-        a                 sbol:Constraint ;
-        sbol:displayId    "constraint_2" ;
-        sbol:object       <ReceiverSystem/AHL_receiver> ;
-        sbol:restriction  sbol:contains ;
-        sbol:subject      <ReceiverSystem/subcomponent_1> .
-
-<ReceiverSystem/subcomponent_2>
-        a                sbol:SubComponent ;
-        sbol:displayId   "subcomponent_2" ;
-        sbol:instanceOf  :AHL .
-
-<AHL_receiver/subcomponent_7>
+<AHL_receiver/SubComponent2>
         a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_7" ;
-        sbol:instanceOf   :gfp ;
+        sbol:displayId    "SubComponent2" ;
+        sbol:instanceOf   :rbs_luxR ;
         sbol:orientation  sbol:inline .
 
-<AHL_receiver/LuxR_AHL>
-        a                sbol:SubComponent ;
-        sbol:displayId   "LuxR_AHL" ;
-        sbol:instanceOf  :LuxR_AHL .
-
-<AHL_producer/subcomponent_2>
-        a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_2" ;
-        sbol:instanceOf   :rbs_luxI ;
-        sbol:orientation  sbol:inline .
+<AHL_receiver/Interaction4>
+        a                      sbol:Interaction ;
+        sbol:displayId         "Interaction4" ;
+        sbol:hasParticipation  <AHL_receiver/Interaction4/Participation1> , <AHL_receiver/Interaction4/Participation2> , <AHL_receiver/Interaction4/Participation3> ;
+        sbol:type              SBO:0000177 .
 
 :GFP_protein  a           sbol:Component ;
         sbol:description  "GFP" ;
@@ -377,26 +367,32 @@
         sbol:role         SO:0000316 ;
         sbol:type         SBO:0000251 .
 
-<AHL_receiver/interaction_2>
-        a                      sbol:Interaction ;
-        sbol:displayId         "interaction_2" ;
-        sbol:hasParticipation  <AHL_receiver/interaction_2/participation_1> , <AHL_receiver/interaction_2/participation_2> ;
-        sbol:type              SBO:0000589 .
+<SenderSystem/Constraint3>
+        a                 sbol:Constraint ;
+        sbol:displayId    "Constraint3" ;
+        sbol:object       <SenderSystem/SubComponent2> ;
+        sbol:restriction  sbol:verifyIdentical ;
+        sbol:subject      <SenderSystem/ComponentReference1> .
+
+<AHL_receiver/SubComponent11>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent11" ;
+        sbol:instanceOf  :GFP_protein .
 
 :AHL_producer  a             sbol:Component ;
         sbol:description     "AHL producer" ;
         sbol:displayId       "AHL_producer" ;
-        sbol:hasFeature      <AHL_producer/subcomponent_3> , <AHL_producer/subcomponent_2> , <AHL_producer/subcomponent_1> , <AHL_producer/AHL> , <AHL_producer/subcomponent_4> ;
-        sbol:hasInteraction  <AHL_producer/interaction_1> ;
-        sbol:name            "AHL_producer" ;
+        sbol:hasFeature      <AHL_producer/SubComponent3> , <AHL_producer/SubComponent2> , <AHL_producer/SubComponent1> , <AHL_producer/SubComponent4> , <AHL_producer/SubComponent5> ;
+        sbol:hasInteraction  <AHL_producer/Interaction1> ;
+        sbol:name            "AHL producer" ;
         sbol:role            SO:0000704 ;
         sbol:type            SBO:0000251 .
 
-<AHL_producer/interaction_1/participation_2>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_2" ;
-        sbol:participant  <AHL_producer/AHL> ;
-        sbol:role         SBO:0000011 .
+<AHL_receiver/SubComponent7>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "SubComponent7" ;
+        sbol:instanceOf   :gfp ;
+        sbol:orientation  sbol:inline .
 
 :AHL    a                 sbol:Component ;
         sbol:description  "AHL" ;
@@ -405,17 +401,11 @@
         sbol:role         CHEBI:35224 ;
         sbol:type         SBO:0000247 .
 
-<AHL_receiver/subcomponent_1>
+<AHL_producer/SubComponent3>
         a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_1" ;
-        sbol:instanceOf   :pConstLuxR ;
+        sbol:displayId    "SubComponent3" ;
+        sbol:instanceOf   :luxI ;
         sbol:orientation  sbol:inline .
-
-<AHL_receiver/interaction_4/participation_1>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_1" ;
-        sbol:participant  <AHL_receiver/LuxR_protein> ;
-        sbol:role         SBO:0000010 .
 
 :pConstLuxI  a            sbol:Component ;
         sbol:description  "Constituve promoter" ;
@@ -424,61 +414,73 @@
         sbol:role         SO:0000167 ;
         sbol:type         SBO:0000251 .
 
-<AHL_receiver/interaction_2/participation_1>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_1" ;
-        sbol:participant  <AHL_receiver/subcomponent_7> ;
-        sbol:role         SBO:0000645 .
-
-<SenderSystem/subcomponent_1>
-        a                sbol:SubComponent ;
-        sbol:displayId   "subcomponent_1" ;
-        sbol:instanceOf  :OrganismA .
-
-<ReceiverSystem/constraint_1>
-        a                 sbol:Constraint ;
-        sbol:displayId    "constraint_1" ;
-        sbol:object       <ReceiverSystem/subcomponent_2> ;
-        sbol:restriction  sbol:contains ;
-        sbol:subject      <ReceiverSystem/subcomponent_1> .
+<AHL_receiver/SubComponent1>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "SubComponent1" ;
+        sbol:instanceOf   :pConstLuxR ;
+        sbol:orientation  sbol:inline .
 
 :ter_luxI  a              sbol:Component ;
         sbol:description  "Terminator" ;
         sbol:displayId    "ter_luxI" ;
-        sbol:name         "ter_luxI" ;
+        sbol:name         "luxI terminator" ;
         sbol:role         SO:0000141 ;
         sbol:type         SBO:0000251 .
 
-<ReceiverSystem/subcomponent_1>
-        a                sbol:SubComponent ;
-        sbol:displayId   "subcomponent_1" ;
-        sbol:instanceOf  :OrganismB .
+<AHL_receiver/Interaction3>
+        a                      sbol:Interaction ;
+        sbol:displayId         "Interaction3" ;
+        sbol:hasParticipation  <AHL_receiver/Interaction3/Participation1> , <AHL_receiver/Interaction3/Participation2> ;
+        sbol:type              SBO:0000170 .
 
-<AHL_receiver/subcomponent_6>
+<ReceiverSystem/SubComponent3>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent3" ;
+        sbol:instanceOf  :AHL_receiver .
+
+<AHL_receiver/Interaction4/Participation3>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation3" ;
+        sbol:participant  <AHL_receiver/SubComponent12> ;
+        sbol:role         SBO:0000011 .
+
+<ReceiverSystem/ComponentReference1>
+        a                sbol:ComponentReference ;
+        sbol:displayId   "ComponentReference1" ;
+        sbol:hasFeature  <AHL_receiver/SubComponent9> ;
+        sbol:inChildOf   <ReceiverSystem/SubComponent3> .
+
+<SenderSystem/ComponentReference1>
+        a                sbol:ComponentReference ;
+        sbol:displayId   "ComponentReference1" ;
+        sbol:hasFeature  <AHL_producer/SubComponent5> ;
+        sbol:inChildOf   <SenderSystem/SubComponent3> .
+
+<SenderSystem/Constraint2>
+        a                 sbol:Constraint ;
+        sbol:displayId    "Constraint2" ;
+        sbol:object       <SenderSystem/SubComponent3> ;
+        sbol:restriction  sbol:contains ;
+        sbol:subject      <SenderSystem/SubComponent1> .
+
+<AHL_receiver/SubComponent10>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent10" ;
+        sbol:instanceOf  :LuxR_protein .
+
+<AHL_receiver/SubComponent6>
         a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_6" ;
+        sbol:displayId    "SubComponent6" ;
         sbol:instanceOf   :rbs_gfp ;
         sbol:orientation  sbol:inline .
 
-<AHL_producer/subcomponent_1>
-        a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_1" ;
-        sbol:instanceOf   :pConstLuxI ;
-        sbol:orientation  sbol:inline .
-
-<AHL_receiver/LuxR_protein>
+<MulticellularSystem/SubComponent2>
         a                sbol:SubComponent ;
-        sbol:displayId   "LuxR_protein" ;
-        sbol:instanceOf  :LuxR_protein .
+        sbol:displayId   "SubComponent2" ;
+        sbol:instanceOf  :ReceiverSystem .
 
-<AHL_receiver/interaction_1>
-        a                      sbol:Interaction ;
-        sbol:displayId         "interaction_1" ;
-        sbol:hasParticipation  <AHL_receiver/interaction_1/participation_1> , <AHL_receiver/interaction_1/participation_2> ;
-        sbol:type              SBO:0000589 .
-
-<AHL_producer/interaction_1/participation_1>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_1" ;
-        sbol:participant  <AHL_producer/subcomponent_3> ;
-        sbol:role         SBO:0000645 .
+<AHL_producer/SubComponent2>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "SubComponent2" ;
+        sbol:instanceOf   :rbs_luxI ;
+        sbol:orientation  sbol:inline .

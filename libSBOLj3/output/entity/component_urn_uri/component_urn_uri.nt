@@ -1,3 +1,3 @@
-<urn:uuid:43665a15-2c62-11b2-808d-acde48001122> <http://sbols.org/v3#name> "TetR" .
-<urn:uuid:43665a15-2c62-11b2-808d-acde48001122> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000252> .
-<urn:uuid:43665a15-2c62-11b2-808d-acde48001122> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Component> .
+<urn:uuid:d4e04544-2c63-11b2-80ec-acde48001122> <http://sbols.org/v3#name> "TetR" .
+<urn:uuid:d4e04544-2c63-11b2-80ec-acde48001122> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000252> .
+<urn:uuid:d4e04544-2c63-11b2-80ec-acde48001122> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Component> .

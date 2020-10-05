@@ -1,9 +1,6 @@
 package org.sbolstandard.entity.measure;
 
 import java.net.URI;
-
-import org.apache.jena.datatypes.xsd.XSDDatatype;
-import org.apache.jena.datatypes.xsd.impl.XSDFloat;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.util.RDFUtil;
@@ -53,11 +50,7 @@ public abstract class Prefix extends Unit{
 		}
 		return factor;
 	}
-	
 
-	
-	
-	
 	@Override
 	public URI getResourceType() {
 		return MeasureDataModel.Prefix.uri;

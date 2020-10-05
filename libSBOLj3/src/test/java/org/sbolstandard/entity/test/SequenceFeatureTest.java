@@ -31,12 +31,12 @@ public class SequenceFeatureTest extends TestCase {
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
         String gfp_na="atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa";
-		Component gfp=SBOLAPI.createDnaComponent(doc, "E0040", null, Role.CDS, gfp_na);
+		Component gfp=SBOLAPI.createDnaComponent(doc, "E0040", "E0040", null, Role.CDS, gfp_na);
 		
 		Sequence seq= (Sequence)doc.getIdentified(gfp.getSequences().get(0),Sequence.class);
 		
-		RangeLocationBuilder location=new RangeLocationBuilder("location1", 1, 3, seq.getUri());
-		gfp.createSequenceFeature("startcodon", Arrays.asList(location));
+		RangeLocationBuilder location=new RangeLocationBuilder(1, 3, seq.getUri());
+		gfp.createSequenceFeature(Arrays.asList(location));
 		
 		System.out.println(SBOLIO.write(doc, "Turtle"));
         

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Location.LocationBuilder;
 import org.sbolstandard.entity.Location.LocationFactory;
 import org.sbolstandard.util.RDFUtil;
@@ -77,7 +78,18 @@ public class SubComponent extends Feature{
 
 	public Location createLocation(LocationBuilder builder ) throws SBOLGraphException
 	{
-		Location location=builder.build(this.resource.getModel(), this.getUri());
+		//URI locationUri=SBOLAPI.createLocalUri(this,DataModel.Location.uri,getLocations());
+		List<Location> allLocations=new ArrayList<Location>();
+		if (getLocations()!=null)
+		{
+			allLocations.addAll(getLocations());
+		}
+		if (sourceLocations!=null)
+		{
+			allLocations.addAll(getSourceLocations());
+		}
+		URI locationUri=SBOLAPI.createLocalUri(this,builder.getLocationTypeUri(),allLocations,builder.getLocationClass());
+		Location location=builder.build(this.resource.getModel(), locationUri);
 		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
 		return location;
 	}
@@ -87,10 +99,13 @@ public class SubComponent extends Feature{
 		if (sourceLocations==null)
 		{
 			List<Resource> resources=RDFUtil.getResourcesWithProperty (resource, DataModel.SubComponent.sourceLocation);
-			for (Resource res:resources)
+			if (resources!=null)
 			{
-				Location location= LocationFactory.create(res);	
-				sourceLocations.add(location);			
+				for (Resource res:resources)
+				{
+					Location location= LocationFactory.create(res);	
+					sourceLocations.add(location);			
+				}
 			}
 				
 		}
@@ -100,7 +115,19 @@ public class SubComponent extends Feature{
 
 	public Location createSourceLocation(LocationBuilder builder ) throws SBOLGraphException
 	{
-		Location sourceLocation=builder.build(this.resource.getModel(),this.getUri());
+		//URI locationUri=SBOLAPI.createLocalUri(this,DataModel.Location.uri,getSourceLocations());
+		List<Location> allLocations=new ArrayList<Location>();
+		if (getLocations()!=null)
+		{
+			allLocations.addAll(getLocations());
+		}
+		if (sourceLocations!=null)
+		{
+			allLocations.addAll(getSourceLocations());
+		}
+		URI locationUri=SBOLAPI.createLocalUri(this,builder.getLocationTypeUri(),allLocations,builder.getLocationClass());
+		
+		Location sourceLocation=builder.build(this.resource.getModel(),locationUri);
 		RDFUtil.setProperty(resource, DataModel.SubComponent.sourceLocation, sourceLocation.getUri());
 		
 		if (sourceLocations==null)

@@ -12,6 +12,13 @@ import java.util.List;
 
 import org.apache.jena.datatypes.RDFDatatype;
 import org.apache.jena.datatypes.xsd.impl.XSDFloat;
+import org.apache.jena.query.Query;
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QueryFactory;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.ResultSetFactory;
+import org.apache.jena.query.Syntax;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
@@ -465,4 +472,22 @@ public class RDFUtil {
 				}
 			}
 		}
+	    
+	    public static ResultSet executeSPARQLSelectQuery(Model model, String query, Syntax syntax)
+	    {
+	    	System.out.println ("Executing the query 2" + query + "...");
+	    	Query q = QueryFactory.create(query, syntax);
+		    QueryExecution qe = QueryExecutionFactory.create(q, model);
+		    ResultSet rsMemory=null;
+		    try
+		    {
+		    	ResultSet rs = qe.execSelect();
+		    	rsMemory=ResultSetFactory.copyResults(rs);
+		    }
+		    finally
+		    {
+		    	qe.close();
+		    }
+		    return rsMemory;		          
+	    }
 }

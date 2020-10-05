@@ -26,29 +26,29 @@
     "displayId" : "codon_optimization_activity",
     "name" : "Codon optimization activity",
     "type" : "sbol:design",
-    "endedAtTime" : "2020-08-30T22:02:42.732Z",
-    "qualifiedAssociation" : "codon_optimization_activity/association",
-    "qualifiedUsage" : [ "codon_optimization_activity/optimised_usage", "codon_optimization_activity/source_usage" ],
-    "startedAtTime" : "2019-07-29T22:02:42.732Z"
+    "endedAtTime" : "2020-08-30T17:07:48.051Z",
+    "qualifiedAssociation" : "codon_optimization_activity/Association1",
+    "qualifiedUsage" : [ "codon_optimization_activity/Usage2", "codon_optimization_activity/Usage1" ],
+    "startedAtTime" : "2019-07-29T17:07:48.051Z"
   }, {
-    "@id" : "codon_optimization_activity/association",
+    "@id" : "codon_optimization_activity/Association1",
     "@type" : "prov:Association",
-    "displayId" : "association",
+    "displayId" : "Association1",
     "hadAgent" : "CodonOptimiserSoftware",
     "hadPlan" : "CodonOptimisationProtocol",
     "hadRole" : "sbol:design"
   }, {
-    "@id" : "codon_optimization_activity/optimised_usage",
+    "@id" : "codon_optimization_activity/Usage1",
     "@type" : "prov:Usage",
-    "displayId" : "optimised_usage",
-    "entity" : "toggle_switch_optimised",
-    "hadRole" : "SBO:0000011"
-  }, {
-    "@id" : "codon_optimization_activity/source_usage",
-    "@type" : "prov:Usage",
-    "displayId" : "source_usage",
+    "displayId" : "Usage1",
     "entity" : "toggle_switch",
     "hadRole" : "SBO:0000645"
+  }, {
+    "@id" : "codon_optimization_activity/Usage2",
+    "@type" : "prov:Usage",
+    "displayId" : "Usage2",
+    "entity" : "toggle_switch_optimised",
+    "hadRole" : "SBO:0000011"
   }, {
     "@id" : "toggle_switch",
     "@type" : "sbol:Component",
@@ -96,10 +96,6 @@
       "@id" : "http://www.w3.org/ns/prov#hadRole",
       "@type" : "@id"
     },
-    "entity" : {
-      "@id" : "http://www.w3.org/ns/prov#entity",
-      "@type" : "@id"
-    },
     "hadPlan" : {
       "@id" : "http://www.w3.org/ns/prov#hadPlan",
       "@type" : "@id"
@@ -108,19 +104,23 @@
       "@id" : "http://www.w3.org/ns/prov#hadAgent",
       "@type" : "@id"
     },
-    "qualifiedAssociation" : {
-      "@id" : "http://www.w3.org/ns/prov#qualifiedAssociation",
+    "entity" : {
+      "@id" : "http://www.w3.org/ns/prov#entity",
       "@type" : "@id"
     },
     "qualifiedUsage" : {
       "@id" : "http://www.w3.org/ns/prov#qualifiedUsage",
       "@type" : "@id"
     },
-    "endedAtTime" : {
-      "@id" : "http://www.w3.org/ns/prov#endedAtTime"
+    "qualifiedAssociation" : {
+      "@id" : "http://www.w3.org/ns/prov#qualifiedAssociation",
+      "@type" : "@id"
     },
     "startedAtTime" : {
       "@id" : "http://www.w3.org/ns/prov#startedAtTime"
+    },
+    "endedAtTime" : {
+      "@id" : "http://www.w3.org/ns/prov#endedAtTime"
     },
     "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",

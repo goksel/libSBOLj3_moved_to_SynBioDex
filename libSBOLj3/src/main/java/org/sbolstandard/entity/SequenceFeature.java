@@ -28,26 +28,32 @@ public class SequenceFeature extends Feature{
 	}
 
 	public List<Location> getLocations() throws SBOLGraphException {
+		/*this.locations=addToList(this.locations, DataModel.SubComponent.location, Location.class, DataModel.Location.uri);
+		return locations;*/
 		if (locations==null)
 		{
 			List<Resource> resources=RDFUtil.getResourcesWithProperty (resource, DataModel.SubComponent.location);
-			for (Resource res:resources)
+			if (resources!=null)
 			{
-				Location location= LocationFactory.create(res);	
-				locations.add(location);			
-			}		
+				for (Resource res:resources)
+				{
+					Location location= LocationFactory.create(res);	
+					locations.add(location);			
+				}		
+			}
 		}
 		return locations;
 	}
 
 	public Location createLocation(LocationBuilder builder ) throws SBOLGraphException
 	{
-		Location location=builder.build(this.resource.getModel(),this.getUri());
+		URI locationUri=SBOLAPI.createLocalUri(this,builder.getLocationTypeUri(),getLocations(),builder.getLocationClass());
+		Location location=builder.build(this.resource.getModel(),locationUri);
 		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
 		return location;
 	}
 	
-	public Location createLocation2(Location locationData) throws SBOLGraphException
+	private Location createLocation2(Location locationData) throws SBOLGraphException
 	{
 		URI uri=SBOLAPI.append(this.getUri(), locationData.getDisplayId());
 		RangeLocation location=new RangeLocation(this.resource.getModel(), uri);

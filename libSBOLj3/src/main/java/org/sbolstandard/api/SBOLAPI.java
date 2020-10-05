@@ -3,12 +3,8 @@ package org.sbolstandard.api;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import javax.annotation.Generated;
-
 import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.ComponentReference;
 import org.sbolstandard.entity.Constraint;
@@ -26,7 +22,6 @@ import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ComponentType;
 import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.Encoding;
-import org.sbolstandard.vocabulary.InteractionType;
 import org.sbolstandard.vocabulary.Orientation;
 import org.sbolstandard.vocabulary.RestrictionType;
 
@@ -98,8 +93,7 @@ public class SBOLAPI {
 	    	//If not DNA and there is no subComponent yet, add a subcomponent for the child
 	    	if ((subComponents==null || subComponents.size()==0) && !child.getTypes().contains(ComponentType.DNA.getUrl()))
 	    	{
-	    		String localName=createLocalName(DataModel.SubComponent.uri, parent.getSubComponents());
-		    	SubComponent subComponent=parent.createSubComponent(append(parent.getUri(), localName), child.getUri());
+	    		SubComponent subComponent=parent.createSubComponent(child.getUri());
 		    	if (subComponents==null)
 		    	{
 		    		subComponents=new ArrayList<SubComponent>();
@@ -133,8 +127,7 @@ public class SBOLAPI {
 	    
 	    public static  Interaction createInteraction(List<URI> interactionTypes, Component container, Feature participant1, List<URI> participant1Roles, Feature participant2, List<URI> participant2Roles) throws SBOLGraphException
 	    {
-	    	String localName=createLocalName(DataModel.Interaction.uri, container.getInteractions()); 
-	    	Interaction interaction= container.createInteraction(append(container.getUri(), localName), interactionTypes);
+	    	Interaction interaction= container.createInteraction(interactionTypes);
 	    	createParticipation(interaction, participant1Roles, participant1);
 	    	createParticipation(interaction, participant2Roles, participant2);
 	    	return interaction;
@@ -143,9 +136,7 @@ public class SBOLAPI {
 	   
 	    public static  Participation createParticipation(Interaction interaction, List<URI> roles, Feature feature) throws SBOLGraphException
 	    {
-	    	String localName=createLocalName(DataModel.Participation.uri, interaction.getParticipations()); 
-	    	URI uri=append(interaction.getUri(), localName);
-	    	Participation participation=interaction.createParticipation(uri, roles, feature.getUri());
+	    	Participation participation=interaction.createParticipation(roles, feature.getUri());
 	    	return participation;
 	    }
 	    
@@ -155,6 +146,22 @@ public class SBOLAPI {
 	    	if (items!=null)
 	    	{
 	    		index=items.size()+1;
+	    	}
+	    	return index;
+	    }
+	    
+	    private static  int getIndex(List items, Class instanceType) 
+	    {
+	    	int index=1;
+	    	if (items!=null)
+	    	{
+	    		for (int i=0;i<items.size();i++)
+	    		{
+	    			if (instanceType.isInstance(items.get(i)))
+	    			{
+	    				index++;
+	    			}
+	    		}
 	    	}
 	    	return index;
 	    }
@@ -198,14 +205,34 @@ public class SBOLAPI {
 	    	return createLocalName(entityType, suffix);
 	    }
 	    
+	    public static String createLocalName(URI entityType, List items, Class entityClass)
+	    {
+	    	int suffix=getIndex(items,entityClass);
+	    	return createLocalName(entityType, suffix);
+	    }
+	    
 	    private static String createLocalName(URI entityType, int suffix)
 	    {
 	    	return createLocalName(entityType, String.valueOf(suffix));
 	    }
 	    
+	    public static URI createLocalUri(Identified identified, URI entityType, List items)
+	    {
+	    	String displayId=SBOLAPI.createLocalName(entityType, items);	
+	    	URI uri=SBOLAPI.append(identified.getUri(), displayId);
+	    	return uri;
+	    }
+	    
+	    public static URI createLocalUri(Identified identified, URI entityType, List items, Class entityClass)
+	    {
+	    	String displayId=SBOLAPI.createLocalName(entityType, items,entityClass);	
+	    	URI uri=SBOLAPI.append(identified.getUri(), displayId);
+	    	return uri;
+	    }
+		
 	    private static String createLocalName(URI entityType, String suffix)
 	    {
-	    	String displayId=getLocal(entityType).toLowerCase() + "_" + suffix;
+	    	String displayId=getLocal(entityType) + suffix;
 	    	return displayId;
 	    }
 	   
@@ -217,8 +244,7 @@ public class SBOLAPI {
 	    //TODO:Remove
 	    public static SubComponent appendComponentRemove(SBOLDocument document, Component parent, Component child, Orientation orientation) throws SBOLGraphException 
 	    {
-	    	String localName=createLocalName(DataModel.SubComponent.uri, parent.getSubComponents());
-	    	SubComponent subComponent=parent.createSubComponent(append(parent.getUri(), localName), child.getUri());
+	    	SubComponent subComponent=parent.createSubComponent(child.getUri());
 	    	subComponent.setOrientation(orientation);
 	    	
 	    	if (child.getSequences()!=null && child.getSequences().size()>0)
@@ -247,10 +273,9 @@ public class SBOLAPI {
 		    		{
 		    			throw new SBOLGraphException("Reverse complement sequence addition has not been implemented yet!");
 		    		}
-		    		String locationLocalName=createLocalName(DataModel.Location.uri, subComponent.getLocations());
 		    		int start=sequence.getElements().length() + 1;
 		        	int end=start + childSequence.getElements().length()-1;
-		        	LocationBuilder builder=new Location.RangeLocationBuilder(locationLocalName, start, end,sequence.getUri());
+		        	LocationBuilder builder=new Location.RangeLocationBuilder(start, end,sequence.getUri());
 		        	Location location=subComponent.createLocation(builder);
 		        	location.setOrientation(orientation);
 		    	}
@@ -261,15 +286,13 @@ public class SBOLAPI {
 	    
 	    public static SubComponent appendComponent(SBOLDocument document, Component parent, Component child, Orientation orientation) throws SBOLGraphException 
 	    {
-	    	String localName=createLocalName(DataModel.SubComponent.uri, parent.getSubComponents());
-	    	SubComponent subComponent=parent.createSubComponent(append(parent.getUri(), localName), child.getUri());
+	    	SubComponent subComponent=parent.createSubComponent(child.getUri());
 	    	subComponent.setOrientation(orientation);
 	    	if (child.getSequences()!=null && child.getSequences().size()>0)
 	    	{
 	    		URI childSequenceUri=child.getSequences().get(0);
 	    		Sequence childSequence=(Sequence)document.getIdentified(childSequenceUri, Sequence.class);
-	    		String locationLocalName=createLocalName(DataModel.Location.uri, subComponent.getLocations());
-	    		LocationBuilder locationbuilder=createLocationBuilder(document, parent, childSequence.getElements(), orientation, locationLocalName);
+	    		LocationBuilder locationbuilder=createLocationBuilder(document, parent, childSequence.getElements(), orientation);
 	    		Location location=subComponent.createLocation(locationbuilder);
 	        	location.setOrientation(orientation);
 	    	}
@@ -278,10 +301,9 @@ public class SBOLAPI {
 
 	    public static SequenceFeature appendSequenceFeature(SBOLDocument document, Component parent, String elements, Orientation orientation) throws SBOLGraphException 
 	    {
-	    	String localName=createLocalName(DataModel.SequenceFeature.uri, parent.getSequenceFeatures());
-	    	LocationBuilder locationbuilder=createLocationBuilder(document, parent, elements, orientation, "location");
+	    	LocationBuilder locationbuilder=createLocationBuilder(document, parent, elements, orientation);
 	    	
-	        SequenceFeature feature=parent.createSequenceFeature(append(parent.getUri(), localName), Arrays.asList(locationbuilder));
+	        SequenceFeature feature=parent.createSequenceFeature(Arrays.asList(locationbuilder));
 		    if (feature!=null)
 		    {
 		    	feature.setOrientation(orientation);
@@ -290,7 +312,7 @@ public class SBOLAPI {
 	    	return feature;
 	    }
 
-	    private static LocationBuilder createLocationBuilder(SBOLDocument document, Component parent, String elements, Orientation orientation, String locationId) throws SBOLGraphException
+	    private static LocationBuilder createLocationBuilder(SBOLDocument document, Component parent, String elements, Orientation orientation) throws SBOLGraphException
 	    {
 	    	LocationBuilder locationBuilder=null;
 	    	if (elements!=null && elements.length()>0)
@@ -321,7 +343,7 @@ public class SBOLAPI {
 	    		}
 		    	 
 
-	        	locationBuilder=new Location.RangeLocationBuilder(locationId, start, end,sequence.getUri());
+	        	locationBuilder=new Location.RangeLocationBuilder(start, end,sequence.getUri());
 	        	locationBuilder.setOrientation(orientation);
 	    	}
 	    	return locationBuilder;
@@ -337,9 +359,9 @@ public class SBOLAPI {
 	    	return dna;
 	    }
 	    
-	    public static Component createDnaComponent(SBOLDocument doc, String displayId, String description, URI role, String sequence) throws SBOLGraphException
+	    public static Component createDnaComponent(SBOLDocument doc, String displayId, String name, String description, URI role, String sequence) throws SBOLGraphException
 	    {
-	    	Component dna=createComponent(doc, displayId, ComponentType.DNA.getUrl(), displayId, description, role);	
+	    	Component dna=createComponent(doc, displayId, ComponentType.DNA.getUrl(), name, description, role);	
 	    	if (sequence!=null && sequence.length()>0)
 	    	{
 	    		createSequence(doc, dna, Encoding.NucleicAcid, sequence);
@@ -350,7 +372,7 @@ public class SBOLAPI {
 	    public static Component createProteinComponent(SBOLDocument doc, Component container, URI uri, String name, String description, URI role, String sequence) throws SBOLGraphException
 	    {
 	    	Component protein=createComponent(doc, uri, ComponentType.Protein.getUrl(), name, description, role);
-	    	container.createSubComponent(append(container.getUri(), protein.getDisplayId()),  protein.getUri());
+	    	container.createSubComponent(protein.getUri());
 	    	if (sequence!=null && sequence.length()>0)
 	    	{
 	    		createSequence(doc, protein, Encoding.AminoAcid, sequence);
@@ -358,14 +380,10 @@ public class SBOLAPI {
 	    	return protein;
 	    }
 	    
-	    private static String getDisplayId(Identified identified)	    
-	    {
-	    	return identified.getDisplayId();
-	    }
 	    
 	    public static SubComponent addSubComponent(Component parent, Component child) throws SBOLGraphException
 	    {
-	    	SubComponent subComponent=parent.createSubComponent(append(parent.getUri(), getDisplayId(child)),  child.getUri());
+	    	SubComponent subComponent=parent.createSubComponent(child.getUri());
 	    	return subComponent;
 	    }
 	    
@@ -410,11 +428,6 @@ public class SBOLAPI {
 	    public static URI append(URI uri, String id)
 	    {
 	    	return append(uri.toString(),id);   	
-	    }
-	    
-	    public static URI append(URI uri, String type, String id)
-	    {
-	    	return append(append(uri.toString(),type),id);   	
 	    }
 	    
 	    public static URI append(String text, String add)
@@ -469,8 +482,7 @@ public class SBOLAPI {
 				 {
 					 for (ComponentReference compRef2: childReferences2)
 					 {
-						 String localName=SBOLAPI.createLocalName(DataModel.Constraint.uri, container.getConstraints());
-						 container.createConstraint(SBOLAPI.append(container.getUri(), localName), RestrictionType.Identity.verifyIdentical, compRef1.getUri(), compRef2.getUri());
+						 container.createConstraint(RestrictionType.Identity.verifyIdentical, compRef1.getUri(), compRef2.getUri());
 					 }
 				 } 
 			 }	 
@@ -502,8 +514,7 @@ public class SBOLAPI {
 				 {
 					 for (SubComponent compRef2: childReferences2)
 					 {
-						 String localName=SBOLAPI.createLocalName(DataModel.Constraint.uri, container.getConstraints());
-						 container.createConstraint(SBOLAPI.append(container.getUri(), localName), RestrictionType.Identity.verifyIdentical, compRef1.getUri(), compRef2.getUri());
+						 container.createConstraint(RestrictionType.Identity.verifyIdentical, compRef1.getUri(), compRef2.getUri());
 					 }
 				 } 
 			 }	 
@@ -519,8 +530,7 @@ public class SBOLAPI {
 			{
 				for (SubComponent subComponent:subComponents)
 				{
-					String localName=SBOLAPI.createLocalName(DataModel.ComponentReference.uri, container.getComponentReferences());
-					ComponentReference compRef=container.createComponentReference(SBOLAPI.append(container.getUri(),localName), child.getUri(), subComponent.getUri());
+					ComponentReference compRef=container.createComponentReference(child.getUri(), subComponent.getUri());
 			        if (componentReferences==null)
 			        {
 			        	componentReferences=new ArrayList<ComponentReference>();
@@ -543,8 +553,7 @@ public class SBOLAPI {
 	  				{
 	  					for (SubComponent subComponentInParent:subComponentsInParent)
 	  					{	
-		  					String localName=SBOLAPI.createLocalName(DataModel.ComponentReference.uri, container.getComponentReferences());
-		  					ComponentReference compRef=container.createComponentReference(SBOLAPI.append(container.getUri(),localName), subComponentInParent.getUri(), subComponentInContainer.getUri());
+		  					ComponentReference compRef=container.createComponentReference(subComponentInParent.getUri(), subComponentInContainer.getUri());
 		  			        if (componentReferences==null)
 		  			        {
 		  			        	componentReferences=new ArrayList<ComponentReference>();
@@ -568,8 +577,7 @@ public class SBOLAPI {
 	    		{
 	    			for (SubComponent subComponent2:subComponents2)
 		    		{	
-	    				String localName=SBOLAPI.createLocalName(DataModel.Constraint.uri, container.getConstraints());
-	    		        Constraint constraint=container.createConstraint(SBOLAPI.append(container.getUri(), localName), RestrictionType.Topology.contains, subComponent1.getUri(), subComponent2.getUri());
+	    		        Constraint constraint=container.createConstraint(RestrictionType.Topology.contains, subComponent1.getUri(), subComponent2.getUri());
 	    		        if (result==null)
 	    		        {
 	    		        	result=new ArrayList<Constraint>();

@@ -56,7 +56,7 @@
       <om:symbol>mol</om:symbol>
       <sbol:displayId>mole</sbol:displayId>
    </om:SingularUnit>
-   <om:Measure rdf:about="M9_Glucose_CAA/CaCl2/measure1">
+   <om:Measure rdf:about="M9_Glucose_CAA/ExternallyDefined1/measure1">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000197"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000196"/>
       <om:hasUnit>
@@ -67,11 +67,11 @@
    </om:Measure>
    <sbol:Component rdf:about="M9_Glucose_CAA">
       <sbol:hasFeature>
-         <sbol:ExternallyDefined rdf:about="M9_Glucose_CAA/CaCl2">
-            <sbol:hasMeasure rdf:resource="M9_Glucose_CAA/CaCl2/measure1"/>
+         <sbol:ExternallyDefined rdf:about="M9_Glucose_CAA/ExternallyDefined1">
+            <sbol:hasMeasure rdf:resource="M9_Glucose_CAA/ExternallyDefined1/measure1"/>
             <sbol:definition rdf:resource="https://identifiers.org/CHEBI:3312"/>
             <sbol:type rdf:resource="https://identifiers.org/SBO:0000247"/>
-            <sbol:displayId>CaCl2</sbol:displayId>
+            <sbol:displayId>ExternallyDefined1</sbol:displayId>
          </sbol:ExternallyDefined>
       </sbol:hasFeature>
       <sbol:description>M9 Glucose CAA growth media</sbol:description>

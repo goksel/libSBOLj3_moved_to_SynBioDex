@@ -9,9 +9,10 @@
 @prefix prov:  <http://www.w3.org/ns/prov#> .
 @prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
 
-<LacI_producer/aTC>  a   sbol:SubComponent ;
-        sbol:displayId   "aTC" ;
-        sbol:instanceOf  :aTC .
+<LacI_producer/SubComponent1>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent1" ;
+        sbol:instanceOf  :LacI_protein .
 
 :TetR_protein  a          sbol:Component ;
         sbol:description  "TetR protein" ;
@@ -23,15 +24,22 @@
 :LacI_producer  a          sbol:Component ;
         sbol:description   "LacI producer" ;
         sbol:displayId     "LacI_producer" ;
-        sbol:hasFeature    <LacI_producer/TetR_protein> , <LacI_producer/LacI_protein> , <LacI_producer/aTC> ;
-        sbol:hasInterface  <LacI_producer/interface> ;
-        sbol:name          "LacI_producer" ;
+        sbol:hasFeature    <LacI_producer/SubComponent1> , <LacI_producer/SubComponent2> , <LacI_producer/SubComponent3> ;
+        sbol:hasInterface  <LacI_producer/Interface1> ;
+        sbol:name          "LacI produce" ;
         sbol:role          SO:0000704 ;
         sbol:type          SBO:0000251 .
 
-<LacI_producer/TetR_protein>
+<LacI_producer/Interface1>
+        a                    sbol:Interface ;
+        sbol:displayId       "Interface1" ;
+        sbol:input           <LacI_producer/SubComponent2> , <LacI_producer/SubComponent1> ;
+        sbol:nondirectional  <LacI_producer/SubComponent3> ;
+        sbol:output          <LacI_producer/SubComponent1> .
+
+<LacI_producer/SubComponent2>
         a                sbol:SubComponent ;
-        sbol:displayId   "TetR_protein" ;
+        sbol:displayId   "SubComponent2" ;
         sbol:instanceOf  :TetR_protein .
 
 :LacI_protein  a          sbol:Component ;
@@ -41,17 +49,10 @@
         sbol:role         GO:0003700 ;
         sbol:type         SBO:0000252 .
 
-<LacI_producer/LacI_protein>
+<LacI_producer/SubComponent3>
         a                sbol:SubComponent ;
-        sbol:displayId   "LacI_protein" ;
-        sbol:instanceOf  :LacI_protein .
-
-<LacI_producer/interface>
-        a                    sbol:Interface ;
-        sbol:displayId       "interface" ;
-        sbol:input           <LacI_producer/TetR_protein> , <LacI_producer/LacI_protein> ;
-        sbol:nondirectional  <LacI_producer/aTC> ;
-        sbol:output          <LacI_producer/LacI_protein> .
+        sbol:displayId   "SubComponent3" ;
+        sbol:instanceOf  :aTC .
 
 :aTC    a                 sbol:Component ;
         sbol:description  "aTC" ;

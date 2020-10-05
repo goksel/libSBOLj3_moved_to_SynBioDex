@@ -1,22 +1,4 @@
 { 
-  "https://sbolstandard.org/examples/LacI_producer/TetR_protein" : { 
-    "http://sbols.org/v3#displayId" : [ { 
-      "type" : "literal" ,
-      "value" : "TetR_protein"
-    }
-     ] ,
-    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
-      "type" : "uri" ,
-      "value" : "http://sbols.org/v3#SubComponent"
-    }
-     ] ,
-    "http://sbols.org/v3#instanceOf" : [ { 
-      "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/TetR_protein"
-    }
-     ]
-  }
-   ,
   "https://sbolstandard.org/examples/aTC" : { 
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
@@ -50,10 +32,42 @@
      ]
   }
    ,
-  "https://sbolstandard.org/examples/LacI_producer/LacI_protein" : { 
+  "https://sbolstandard.org/examples/LacI_producer/Interface1" : { 
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
-      "value" : "LacI_protein"
+      "value" : "Interface1"
+    }
+     ] ,
+    "http://sbols.org/v3#nondirectional" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples/LacI_producer/SubComponent3"
+    }
+     ] ,
+    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#Interface"
+    }
+     ] ,
+    "http://sbols.org/v3#output" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples/LacI_producer/SubComponent1"
+    }
+     ] ,
+    "http://sbols.org/v3#input" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples/LacI_producer/SubComponent1"
+    }
+    , { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples/LacI_producer/SubComponent2"
+    }
+     ]
+  }
+   ,
+  "https://sbolstandard.org/examples/LacI_producer/SubComponent1" : { 
+    "http://sbols.org/v3#displayId" : [ { 
+      "type" : "literal" ,
+      "value" : "SubComponent1"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
@@ -64,24 +78,6 @@
     "http://sbols.org/v3#instanceOf" : [ { 
       "type" : "uri" ,
       "value" : "https://sbolstandard.org/examples/LacI_protein"
-    }
-     ]
-  }
-   ,
-  "https://sbolstandard.org/examples/LacI_producer/aTC" : { 
-    "http://sbols.org/v3#displayId" : [ { 
-      "type" : "literal" ,
-      "value" : "aTC"
-    }
-     ] ,
-    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
-      "type" : "uri" ,
-      "value" : "http://sbols.org/v3#SubComponent"
-    }
-     ] ,
-    "http://sbols.org/v3#instanceOf" : [ { 
-      "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/aTC"
     }
      ]
   }
@@ -137,25 +133,25 @@
      ] ,
     "http://sbols.org/v3#hasInterface" : [ { 
       "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/LacI_producer/interface"
+      "value" : "https://sbolstandard.org/examples/LacI_producer/Interface1"
     }
      ] ,
     "http://sbols.org/v3#hasFeature" : [ { 
       "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/LacI_producer/TetR_protein"
+      "value" : "https://sbolstandard.org/examples/LacI_producer/SubComponent1"
     }
     , { 
       "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/LacI_producer/LacI_protein"
+      "value" : "https://sbolstandard.org/examples/LacI_producer/SubComponent3"
     }
     , { 
       "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/LacI_producer/aTC"
+      "value" : "https://sbolstandard.org/examples/LacI_producer/SubComponent2"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
-      "value" : "LacI_producer"
+      "value" : "LacI produce"
     }
      ] ,
     "http://sbols.org/v3#description" : [ { 
@@ -203,34 +199,38 @@
      ]
   }
    ,
-  "https://sbolstandard.org/examples/LacI_producer/interface" : { 
+  "https://sbolstandard.org/examples/LacI_producer/SubComponent3" : { 
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
-      "value" : "interface"
-    }
-     ] ,
-    "http://sbols.org/v3#nondirectional" : [ { 
-      "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/LacI_producer/aTC"
+      "value" : "SubComponent3"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
-      "value" : "http://sbols.org/v3#Interface"
+      "value" : "http://sbols.org/v3#SubComponent"
     }
      ] ,
-    "http://sbols.org/v3#output" : [ { 
+    "http://sbols.org/v3#instanceOf" : [ { 
       "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/LacI_producer/LacI_protein"
+      "value" : "https://sbolstandard.org/examples/aTC"
+    }
+     ]
+  }
+   ,
+  "https://sbolstandard.org/examples/LacI_producer/SubComponent2" : { 
+    "http://sbols.org/v3#displayId" : [ { 
+      "type" : "literal" ,
+      "value" : "SubComponent2"
     }
      ] ,
-    "http://sbols.org/v3#input" : [ { 
+    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/LacI_producer/TetR_protein"
+      "value" : "http://sbols.org/v3#SubComponent"
     }
-    , { 
+     ] ,
+    "http://sbols.org/v3#instanceOf" : [ { 
       "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/LacI_producer/LacI_protein"
+      "value" : "https://sbolstandard.org/examples/TetR_protein"
     }
      ]
   }

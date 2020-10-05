@@ -4,33 +4,33 @@
     "@type" : "sbol:Component",
     "description" : "LacI producer",
     "displayId" : "LacI_producer",
-    "hasFeature" : [ "LacI_producer/TetR_protein", "LacI_producer/LacI_protein", "LacI_producer/aTC" ],
-    "hasInterface" : "LacI_producer/interface",
-    "name" : "LacI_producer",
+    "hasFeature" : [ "LacI_producer/SubComponent1", "LacI_producer/SubComponent2", "LacI_producer/SubComponent3" ],
+    "hasInterface" : "LacI_producer/Interface1",
+    "name" : "LacI produce",
     "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
-    "@id" : "LacI_producer/LacI_protein",
+    "@id" : "LacI_producer/Interface1",
+    "@type" : "sbol:Interface",
+    "displayId" : "Interface1",
+    "input" : [ "LacI_producer/SubComponent2", "LacI_producer/SubComponent1" ],
+    "nondirectional" : "LacI_producer/SubComponent3",
+    "output" : "LacI_producer/SubComponent1"
+  }, {
+    "@id" : "LacI_producer/SubComponent1",
     "@type" : "sbol:SubComponent",
-    "displayId" : "LacI_protein",
+    "displayId" : "SubComponent1",
     "instanceOf" : "LacI_protein"
   }, {
-    "@id" : "LacI_producer/TetR_protein",
+    "@id" : "LacI_producer/SubComponent2",
     "@type" : "sbol:SubComponent",
-    "displayId" : "TetR_protein",
+    "displayId" : "SubComponent2",
     "instanceOf" : "TetR_protein"
   }, {
-    "@id" : "LacI_producer/aTC",
+    "@id" : "LacI_producer/SubComponent3",
     "@type" : "sbol:SubComponent",
-    "displayId" : "aTC",
+    "displayId" : "SubComponent3",
     "instanceOf" : "aTC"
-  }, {
-    "@id" : "LacI_producer/interface",
-    "@type" : "sbol:Interface",
-    "displayId" : "interface",
-    "input" : [ "LacI_producer/TetR_protein", "LacI_producer/LacI_protein" ],
-    "nondirectional" : "LacI_producer/aTC",
-    "output" : "LacI_producer/LacI_protein"
   }, {
     "@id" : "LacI_protein",
     "@type" : "sbol:Component",
