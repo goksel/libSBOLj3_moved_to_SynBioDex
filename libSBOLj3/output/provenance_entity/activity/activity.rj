@@ -114,17 +114,17 @@
      ] ,
     "http://www.w3.org/ns/prov#endedAtTime" : [ { 
       "type" : "literal" ,
-      "value" : "2020-08-30T17:07:48.051Z"
+      "value" : "2020-08-30T18:45:30.605Z"
+    }
+     ] ,
+    "http://www.w3.org/ns/prov#startedAtTime" : [ { 
+      "type" : "literal" ,
+      "value" : "2019-07-29T18:45:30.605Z"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Activity"
-    }
-     ] ,
-    "http://www.w3.org/ns/prov#startedAtTime" : [ { 
-      "type" : "literal" ,
-      "value" : "2019-07-29T17:07:48.051Z"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 

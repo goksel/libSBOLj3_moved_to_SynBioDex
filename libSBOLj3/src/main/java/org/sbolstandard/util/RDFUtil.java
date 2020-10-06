@@ -9,8 +9,6 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.jena.datatypes.RDFDatatype;
 import org.apache.jena.datatypes.xsd.impl.XSDFloat;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
@@ -61,6 +59,10 @@ public class RDFUtil {
 		return resource;
 	}
 	
+	public static Resource createResource(Model model, URI resourceUri) {
+		Resource resource = model.createResource(resourceUri.toString());
+		return resource;
+	}
 	
 	public static void addType(Resource resource, URI type)
 	{

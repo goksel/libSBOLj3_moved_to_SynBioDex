@@ -1,46 +1,25 @@
 package org.sbolstandard.usecase;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
-
-import org.sbolstandard.TestUtil;
 import org.sbolstandard.api.SBOLAPI;
-import org.sbolstandard.entity.Component;
-import org.sbolstandard.entity.ComponentReference;
-import org.sbolstandard.entity.Constraint;
-import org.sbolstandard.entity.Identified;
-import org.sbolstandard.entity.Interaction;
-import org.sbolstandard.entity.Location;
-import org.sbolstandard.entity.Participation;
-import org.sbolstandard.entity.Location.LocationBuilder;
-import org.sbolstandard.entity.SBOLDocument;
-import org.sbolstandard.entity.Sequence;
-import org.sbolstandard.entity.SequenceFeature;
-import org.sbolstandard.entity.SubComponent;
+import org.sbolstandard.entity.*;
+import org.sbolstandard.entity.Location.*;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
-import org.sbolstandard.vocabulary.ComponentType;
-import org.sbolstandard.vocabulary.DataModel;
-import org.sbolstandard.vocabulary.Encoding;
-import org.sbolstandard.vocabulary.InteractionType;
-import org.sbolstandard.vocabulary.Orientation;
-import org.sbolstandard.vocabulary.ParticipationRole;
-import org.sbolstandard.vocabulary.RestrictionType;
-import org.sbolstandard.vocabulary.Role;
-
+import org.sbolstandard.vocabulary.*;
 /**
  * COMBINE 2020 SBOL 3 Tutorial
  * October, 2020
  * This tutorial code goes with the slides at:
- * https://github.com/SynBioDex/Community-Media/blob/master/2020/IWBDA20/SBOL3-IWBDA-2020.pptx
+ * https://github.com/SynBioDex/Community-Media/blob/master/2020/COMBINE20/SBOL3-COMBINE-2020.pptx
  */
 public class GettingStartedTutorial {
 
 
-	public void runExample() throws SBOLGraphException, IOException
+	public SBOLDocument runExample() throws SBOLGraphException, IOException
 	{
 		// Create a new SBOL document
 		URI base=URI.create("https://synbiohub.org/public/igem/");
@@ -129,7 +108,6 @@ public class GettingStartedTutorial {
     		System.out.println("  " +  component.getDisplayId());
     	}
     	
-    	
     	/* --------------------------------------------------
 		 Slide 32: GFP production from expression cassette
 		 -------------------------------------------------- */
@@ -137,9 +115,7 @@ public class GettingStartedTutorial {
 		 Component GFP=SBOLAPI.createComponent(doc, "GFP_protein", ComponentType.Protein.getUrl(), "GFP", "GFP", null); 
 		 SubComponent i13504SubComponent=SBOLAPI.addSubComponent(i13504_system, device);
 		 SubComponent gfpProteinSubComponent=SBOLAPI.addSubComponent(i13504_system, GFP);
-		 
-		// List<ComponentReference> gfpRefs=SBOLAPI.createComponentReference(i13504_system, i13504, gfp);
-	     
+		  
 		 ComponentReference gfpCDSReference=i13504_system.createComponentReference(gfpSubComponent, i13504SubComponent);
 					    
 		 Interaction interaction= i13504_system.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
@@ -149,7 +125,6 @@ public class GettingStartedTutorial {
 		 /* --------------------------------------------------
 		  Slide 34: Example: concatenating & reusing components
 		  -------------------------------------------------- */
-		 
 		 //Left hand side of slide: interlab16device1
 		 Component ilab16_dev1=doc.createComponent("interlab16device1", Arrays.asList(ComponentType.DNA.getUrl())); 
 		 Component j23101=doc.createComponent("j23101", Arrays.asList(ComponentType.DNA.getUrl())); 
@@ -167,23 +142,12 @@ public class GettingStartedTutorial {
 		 
 		 ComponentReference compRef_i13504_dev2=ilab16_dev2.createComponentReference(i13504SubComponent, sc_i13504_system_dev2);
 		 ilab16_dev2.createConstraint(RestrictionType.Topology.meets, sc_j23106.getUri(), compRef_i13504_dev2.getUri());
-		    
+		 
+		 System.out.println(System.lineSeparator() + "SBOL:");
 		 String output=SBOLIO.write(doc, "Turtle");
-		 System.out.println("");
-		 System.out.println("SBOL:");
-		 System.out.println(output);   
-	     TestUtil.serialise(doc, "combine2020", "combine2020");   
-	     
-	     /*
-	     System.out.println("--------------------------");
-	     SBOLDocument doc2=SBOLIO.read(new File("input/gfp.nt"),"N-TRIPLES");
-	     
-	     TestUtil.assertReadWrite(doc2);
-	     String output2=SBOLIO.write(doc2, "RDF/XML-ABBREV");
-	     System.out.println(output2);   
-		 */
-	     System.out.println("done");   
-	     
+		 System.out.println(output); 
+		 System.out.println("...done!");   
+		 return doc;
 	}
 	
 	public static void main(String[] args) throws SBOLGraphException, IOException

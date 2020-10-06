@@ -132,8 +132,7 @@ public class SBOLAPI {
 	    	createParticipation(interaction, participant2Roles, participant2);
 	    	return interaction;
 	    }
-	    
-	   
+	    	   
 	    public static  Participation createParticipation(Interaction interaction, List<URI> roles, Feature feature) throws SBOLGraphException
 	    {
 	    	Participation participation=interaction.createParticipation(roles, feature.getUri());
