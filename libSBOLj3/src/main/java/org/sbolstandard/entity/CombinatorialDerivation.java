@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
@@ -64,7 +65,18 @@ public class CombinatorialDerivation extends TopLevel{
 		variableComponent.setSubComponent(subComponent);
 		this.variableComponents=addToList (this.variableComponents, variableComponent, DataModel.CombinatorialDerivation.variableComponent);
 		return variableComponent;	
-	}	
+	}
+	
+	private VariableComponent createVariableComponent(String displayId, URI cardinality, URI subComponent) throws SBOLGraphException
+	{
+		return createVariableComponent(SBOLAPI.append(this.getUri(), displayId), cardinality, subComponent);	
+	}
+	
+	public VariableComponent createVariableComponent(URI cardinality, URI subComponent) throws SBOLGraphException
+	{
+		String displayId=SBOLAPI.createLocalName(DataModel.VariableComponent.uri, getVariableComponents());	
+		return createVariableComponent(displayId, cardinality, subComponent);	
+	}
 	
 
 	@Override

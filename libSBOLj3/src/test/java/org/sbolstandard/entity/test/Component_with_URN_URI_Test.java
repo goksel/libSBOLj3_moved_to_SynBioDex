@@ -27,7 +27,7 @@ public class Component_with_URN_URI_Test extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        JenaUUID test=JenaUUID.generate();
+       // JenaUUID test=JenaUUID.generate();
         
         //String uriString=getUniqueIri("urn:");
         URI uri=getUniqueURN();

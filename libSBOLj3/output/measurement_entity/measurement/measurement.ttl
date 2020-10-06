@@ -9,6 +9,20 @@
 @prefix prov:  <http://www.w3.org/ns/prov#> .
 @prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
 
+<M9_Glucose_CAA/ExternallyDefined1/measure1>
+        a                     om:Measure ;
+        sbol:displayId        "measure1" ;
+        sbol:type             SBO:0000197 , SBO:0000196 ;
+        om:hasNumericalValue  "0.1" ;
+        om:hasUnit            :millimolePerLitre .
+
+<M9_Glucose_CAA/ExternallyDefined1>
+        a                sbol:ExternallyDefined ;
+        sbol:definition  CHEBI:3312 ;
+        sbol:displayId   "ExternallyDefined1" ;
+        sbol:hasMeasure  <M9_Glucose_CAA/ExternallyDefined1/measure1> ;
+        sbol:type        SBO:0000247 .
+
 :litre  a                     om:SingularUnit ;
         sbol:description      "The litre is a unit of volume defined as 1.0e-3 cubic metre." ;
         sbol:displayId        "litre" ;
@@ -46,16 +60,9 @@
 :M9_Glucose_CAA  a        sbol:Component ;
         sbol:description  "M9 Glucose CAA growth media" ;
         sbol:displayId    "M9_Glucose_CAA" ;
-        sbol:hasFeature   <M9_Glucose_CAA/CaCl2> ;
+        sbol:hasFeature   <M9_Glucose_CAA/ExternallyDefined1> ;
         sbol:name         "M9 Glucose CAA" ;
         sbol:type         SBO:0000241 .
-
-<M9_Glucose_CAA/CaCl2/measure1>
-        a                     om:Measure ;
-        sbol:displayId        "measure1" ;
-        sbol:type             SBO:0000197 , SBO:0000196 ;
-        om:hasNumericalValue  "0.1" ;
-        om:hasUnit            :millimolePerLitre .
 
 :mole   a               om:SingularUnit ;
         sbol:displayId  "mole" ;
@@ -76,13 +83,6 @@
         om:hasNumerator    :millimole ;
         om:label           "millimolar" ;
         om:symbol          "mmol/l" .
-
-<M9_Glucose_CAA/CaCl2>
-        a                sbol:ExternallyDefined ;
-        sbol:definition  CHEBI:3312 ;
-        sbol:displayId   "CaCl2" ;
-        sbol:hasMeasure  <M9_Glucose_CAA/CaCl2/measure1> ;
-        sbol:type        SBO:0000247 .
 
 :millimole  a           om:PrefixedUnit ;
         sbol:displayId  "millimole" ;

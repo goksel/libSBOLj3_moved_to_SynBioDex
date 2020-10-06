@@ -37,8 +37,8 @@ public class MeasureTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component media=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "M9_Glucose_CAA"), ComponentType.FunctionalEntity.getUrl(), "M9 Glucose CAA", "M9_Glucose_CAA", "M9 Glucose CAA growth media", null);
-        ExternallyDefined CaCl2=media.createExternallyDefined(SBOLAPI.append(media.getUri(), "CaCl2"), Arrays.asList(ComponentType.SimpleChemical.getUrl()), URINameSpace.CHEBI.local("3312"));
+        Component media=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "M9_Glucose_CAA"), ComponentType.FunctionalEntity.getUrl(), "M9 Glucose CAA", "M9 Glucose CAA growth media", null);
+        ExternallyDefined CaCl2=media.createExternallyDefined(Arrays.asList(ComponentType.SimpleChemical.getUrl()), URINameSpace.CHEBI.local("3312"));
         
         
         SingularUnit liter=doc.createSingularUnit(SBOLAPI.append(baseUri, "litre"), "l", "liter");

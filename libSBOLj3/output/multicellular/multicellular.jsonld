@@ -12,219 +12,219 @@
     "@type" : "sbol:Component",
     "description" : "AHL producer",
     "displayId" : "AHL_producer",
-    "hasFeature" : [ "AHL_producer/subcomponent_3", "AHL_producer/subcomponent_2", "AHL_producer/subcomponent_1", "AHL_producer/AHL", "AHL_producer/subcomponent_4" ],
-    "hasInteraction" : "AHL_producer/interaction_1",
-    "name" : "AHL_producer",
+    "hasFeature" : [ "AHL_producer/SubComponent3", "AHL_producer/SubComponent2", "AHL_producer/SubComponent1", "AHL_producer/SubComponent4", "AHL_producer/SubComponent5" ],
+    "hasInteraction" : "AHL_producer/Interaction1",
+    "name" : "AHL producer",
     "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
-    "@id" : "AHL_producer/AHL",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "AHL",
-    "instanceOf" : "AHL"
-  }, {
-    "@id" : "AHL_producer/interaction_1",
+    "@id" : "AHL_producer/Interaction1",
     "@type" : "sbol:Interaction",
-    "displayId" : "interaction_1",
-    "hasParticipation" : [ "AHL_producer/interaction_1/participation_1", "AHL_producer/interaction_1/participation_2" ],
+    "displayId" : "Interaction1",
+    "hasParticipation" : [ "AHL_producer/Interaction1/Participation1", "AHL_producer/Interaction1/Participation2" ],
     "type" : "SBO:0000589"
   }, {
-    "@id" : "AHL_producer/interaction_1/participation_1",
+    "@id" : "AHL_producer/Interaction1/Participation1",
     "@type" : "sbol:Participation",
-    "displayId" : "participation_1",
-    "participant" : "AHL_producer/subcomponent_3",
+    "displayId" : "Participation1",
+    "participant" : "AHL_producer/SubComponent3",
     "role" : "SBO:0000645"
   }, {
-    "@id" : "AHL_producer/interaction_1/participation_2",
+    "@id" : "AHL_producer/Interaction1/Participation2",
     "@type" : "sbol:Participation",
-    "displayId" : "participation_2",
-    "participant" : "AHL_producer/AHL",
+    "displayId" : "Participation2",
+    "participant" : "AHL_producer/SubComponent5",
     "role" : "SBO:0000011"
   }, {
-    "@id" : "AHL_producer/subcomponent_1",
+    "@id" : "AHL_producer/SubComponent1",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_1",
+    "displayId" : "SubComponent1",
     "instanceOf" : "pConstLuxI",
     "orientation" : "sbol:inline"
   }, {
-    "@id" : "AHL_producer/subcomponent_2",
+    "@id" : "AHL_producer/SubComponent2",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_2",
+    "displayId" : "SubComponent2",
     "instanceOf" : "rbs_luxI",
     "orientation" : "sbol:inline"
   }, {
-    "@id" : "AHL_producer/subcomponent_3",
+    "@id" : "AHL_producer/SubComponent3",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_3",
+    "displayId" : "SubComponent3",
     "instanceOf" : "luxI",
     "orientation" : "sbol:inline"
   }, {
-    "@id" : "AHL_producer/subcomponent_4",
+    "@id" : "AHL_producer/SubComponent4",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_4",
+    "displayId" : "SubComponent4",
     "instanceOf" : "ter_luxI",
     "orientation" : "sbol:inline"
+  }, {
+    "@id" : "AHL_producer/SubComponent5",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent5",
+    "instanceOf" : "AHL"
   }, {
     "@id" : "AHL_receiver",
     "@type" : "sbol:Component",
     "description" : "AHL receiver",
     "displayId" : "AHL_receiver",
-    "hasFeature" : [ "AHL_receiver/subcomponent_5", "AHL_receiver/subcomponent_7", "AHL_receiver/LuxR_protein", "AHL_receiver/subcomponent_8", "AHL_receiver/LuxR_AHL", "AHL_receiver/AHL", "AHL_receiver/GFP", "AHL_receiver/subcomponent_2", "AHL_receiver/subcomponent_1", "AHL_receiver/subcomponent_3", "AHL_receiver/subcomponent_4", "AHL_receiver/subcomponent_6" ],
-    "hasInteraction" : [ "AHL_receiver/interaction_2", "AHL_receiver/interaction_3", "AHL_receiver/interaction_4", "AHL_receiver/interaction_1" ],
-    "name" : "AHL_receiver",
+    "hasFeature" : [ "AHL_receiver/SubComponent11", "AHL_receiver/SubComponent5", "AHL_receiver/SubComponent12", "AHL_receiver/SubComponent7", "AHL_receiver/SubComponent6", "AHL_receiver/SubComponent8", "AHL_receiver/SubComponent9", "AHL_receiver/SubComponent1", "AHL_receiver/SubComponent3", "AHL_receiver/SubComponent2", "AHL_receiver/SubComponent10", "AHL_receiver/SubComponent4" ],
+    "hasInteraction" : [ "AHL_receiver/Interaction4", "AHL_receiver/Interaction1", "AHL_receiver/Interaction2", "AHL_receiver/Interaction3" ],
+    "name" : "AHL receiver",
     "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
-    "@id" : "AHL_receiver/AHL",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "AHL",
-    "instanceOf" : "AHL"
-  }, {
-    "@id" : "AHL_receiver/GFP",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "GFP",
-    "instanceOf" : "GFP_protein"
-  }, {
-    "@id" : "AHL_receiver/LuxR_AHL",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "LuxR_AHL",
-    "instanceOf" : "LuxR_AHL"
-  }, {
-    "@id" : "AHL_receiver/LuxR_protein",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "LuxR_protein",
-    "instanceOf" : "LuxR_protein"
-  }, {
-    "@id" : "AHL_receiver/interaction_1",
+    "@id" : "AHL_receiver/Interaction1",
     "@type" : "sbol:Interaction",
-    "displayId" : "interaction_1",
-    "hasParticipation" : [ "AHL_receiver/interaction_1/participation_1", "AHL_receiver/interaction_1/participation_2" ],
+    "displayId" : "Interaction1",
+    "hasParticipation" : [ "AHL_receiver/Interaction1/Participation1", "AHL_receiver/Interaction1/Participation2" ],
     "type" : "SBO:0000589"
   }, {
-    "@id" : "AHL_receiver/interaction_1/participation_1",
+    "@id" : "AHL_receiver/Interaction1/Participation1",
     "@type" : "sbol:Participation",
-    "displayId" : "participation_1",
-    "participant" : "AHL_receiver/subcomponent_3",
+    "displayId" : "Participation1",
+    "participant" : "AHL_receiver/SubComponent3",
     "role" : "SBO:0000645"
   }, {
-    "@id" : "AHL_receiver/interaction_1/participation_2",
+    "@id" : "AHL_receiver/Interaction1/Participation2",
     "@type" : "sbol:Participation",
-    "displayId" : "participation_2",
-    "participant" : "AHL_receiver/LuxR_protein",
+    "displayId" : "Participation2",
+    "participant" : "AHL_receiver/SubComponent10",
     "role" : "SBO:0000011"
   }, {
-    "@id" : "AHL_receiver/interaction_2",
+    "@id" : "AHL_receiver/Interaction2",
     "@type" : "sbol:Interaction",
-    "displayId" : "interaction_2",
-    "hasParticipation" : [ "AHL_receiver/interaction_2/participation_1", "AHL_receiver/interaction_2/participation_2" ],
+    "displayId" : "Interaction2",
+    "hasParticipation" : [ "AHL_receiver/Interaction2/Participation1", "AHL_receiver/Interaction2/Participation2" ],
     "type" : "SBO:0000589"
   }, {
-    "@id" : "AHL_receiver/interaction_2/participation_1",
+    "@id" : "AHL_receiver/Interaction2/Participation1",
     "@type" : "sbol:Participation",
-    "displayId" : "participation_1",
-    "participant" : "AHL_receiver/subcomponent_7",
+    "displayId" : "Participation1",
+    "participant" : "AHL_receiver/SubComponent7",
     "role" : "SBO:0000645"
   }, {
-    "@id" : "AHL_receiver/interaction_2/participation_2",
+    "@id" : "AHL_receiver/Interaction2/Participation2",
     "@type" : "sbol:Participation",
-    "displayId" : "participation_2",
-    "participant" : "AHL_receiver/GFP",
+    "displayId" : "Participation2",
+    "participant" : "AHL_receiver/SubComponent11",
     "role" : "SBO:0000011"
   }, {
-    "@id" : "AHL_receiver/interaction_3",
+    "@id" : "AHL_receiver/Interaction3",
     "@type" : "sbol:Interaction",
-    "displayId" : "interaction_3",
-    "hasParticipation" : [ "AHL_receiver/interaction_3/participation_1", "AHL_receiver/interaction_3/participation_2" ],
+    "displayId" : "Interaction3",
+    "hasParticipation" : [ "AHL_receiver/Interaction3/Participation1", "AHL_receiver/Interaction3/Participation2" ],
     "type" : "SBO:0000170"
   }, {
-    "@id" : "AHL_receiver/interaction_3/participation_1",
+    "@id" : "AHL_receiver/Interaction3/Participation1",
     "@type" : "sbol:Participation",
-    "displayId" : "participation_1",
-    "participant" : "AHL_receiver/subcomponent_5",
+    "displayId" : "Participation1",
+    "participant" : "AHL_receiver/SubComponent5",
     "role" : "SBO:0000643"
   }, {
-    "@id" : "AHL_receiver/interaction_3/participation_2",
+    "@id" : "AHL_receiver/Interaction3/Participation2",
     "@type" : "sbol:Participation",
-    "displayId" : "participation_2",
-    "participant" : "AHL_receiver/LuxR_AHL",
+    "displayId" : "Participation2",
+    "participant" : "AHL_receiver/SubComponent12",
     "role" : "SBO:0000459"
   }, {
-    "@id" : "AHL_receiver/interaction_4",
+    "@id" : "AHL_receiver/Interaction4",
     "@type" : "sbol:Interaction",
-    "displayId" : "interaction_4",
-    "hasParticipation" : [ "AHL_receiver/interaction_4/participation_1", "AHL_receiver/interaction_4/participation_2", "AHL_receiver/interaction_4/participation_3" ],
+    "displayId" : "Interaction4",
+    "hasParticipation" : [ "AHL_receiver/Interaction4/Participation1", "AHL_receiver/Interaction4/Participation2", "AHL_receiver/Interaction4/Participation3" ],
     "type" : "SBO:0000177"
   }, {
-    "@id" : "AHL_receiver/interaction_4/participation_1",
+    "@id" : "AHL_receiver/Interaction4/Participation1",
     "@type" : "sbol:Participation",
-    "displayId" : "participation_1",
-    "participant" : "AHL_receiver/LuxR_protein",
+    "displayId" : "Participation1",
+    "participant" : "AHL_receiver/SubComponent10",
     "role" : "SBO:0000010"
   }, {
-    "@id" : "AHL_receiver/interaction_4/participation_2",
+    "@id" : "AHL_receiver/Interaction4/Participation2",
     "@type" : "sbol:Participation",
-    "displayId" : "participation_2",
-    "participant" : "AHL_receiver/AHL",
+    "displayId" : "Participation2",
+    "participant" : "AHL_receiver/SubComponent9",
     "role" : "SBO:0000010"
   }, {
-    "@id" : "AHL_receiver/interaction_4/participation_3",
+    "@id" : "AHL_receiver/Interaction4/Participation3",
     "@type" : "sbol:Participation",
-    "displayId" : "participation_3",
-    "participant" : "AHL_receiver/LuxR_AHL",
+    "displayId" : "Participation3",
+    "participant" : "AHL_receiver/SubComponent12",
     "role" : "SBO:0000011"
   }, {
-    "@id" : "AHL_receiver/subcomponent_1",
+    "@id" : "AHL_receiver/SubComponent1",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_1",
+    "displayId" : "SubComponent1",
     "instanceOf" : "pConstLuxR",
     "orientation" : "sbol:inline"
   }, {
-    "@id" : "AHL_receiver/subcomponent_2",
+    "@id" : "AHL_receiver/SubComponent10",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_2",
+    "displayId" : "SubComponent10",
+    "instanceOf" : "LuxR_protein"
+  }, {
+    "@id" : "AHL_receiver/SubComponent11",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent11",
+    "instanceOf" : "GFP_protein"
+  }, {
+    "@id" : "AHL_receiver/SubComponent12",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent12",
+    "instanceOf" : "LuxR_AHL"
+  }, {
+    "@id" : "AHL_receiver/SubComponent2",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent2",
     "instanceOf" : "rbs_luxR",
     "orientation" : "sbol:inline"
   }, {
-    "@id" : "AHL_receiver/subcomponent_3",
+    "@id" : "AHL_receiver/SubComponent3",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_3",
+    "displayId" : "SubComponent3",
     "instanceOf" : "luxR",
     "orientation" : "sbol:inline"
   }, {
-    "@id" : "AHL_receiver/subcomponent_4",
+    "@id" : "AHL_receiver/SubComponent4",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_4",
+    "displayId" : "SubComponent4",
     "instanceOf" : "ter_luxR",
     "orientation" : "sbol:inline"
   }, {
-    "@id" : "AHL_receiver/subcomponent_5",
+    "@id" : "AHL_receiver/SubComponent5",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_5",
+    "displayId" : "SubComponent5",
     "instanceOf" : "pLuxR",
     "orientation" : "sbol:inline"
   }, {
-    "@id" : "AHL_receiver/subcomponent_6",
+    "@id" : "AHL_receiver/SubComponent6",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_6",
+    "displayId" : "SubComponent6",
     "instanceOf" : "rbs_gfp",
     "orientation" : "sbol:inline"
   }, {
-    "@id" : "AHL_receiver/subcomponent_7",
+    "@id" : "AHL_receiver/SubComponent7",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_7",
+    "displayId" : "SubComponent7",
     "instanceOf" : "gfp",
     "orientation" : "sbol:inline"
   }, {
-    "@id" : "AHL_receiver/subcomponent_8",
+    "@id" : "AHL_receiver/SubComponent8",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_8",
+    "displayId" : "SubComponent8",
     "instanceOf" : "ter_gfp",
     "orientation" : "sbol:inline"
+  }, {
+    "@id" : "AHL_receiver/SubComponent9",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent9",
+    "instanceOf" : "AHL"
   }, {
     "@id" : "GFP_protein",
     "@type" : "sbol:Component",
     "description" : "GFP",
-    "displayId" : "GFP",
+    "displayId" : "GFP_protein",
     "name" : "GFP",
     "type" : "SBO:0000252"
   }, {
@@ -240,7 +240,7 @@
     "@type" : "sbol:Component",
     "description" : "LuxR",
     "displayId" : "LuxR_protein",
-    "name" : "LuxR",
+    "name" : "LuxR_protein",
     "role" : "GO:0003700",
     "type" : "SBO:0000252"
   }, {
@@ -248,40 +248,40 @@
     "@type" : "sbol:Component",
     "description" : "Multicellular System",
     "displayId" : "MulticellularSystem",
-    "hasConstraint" : "MulticellularSystem/constraint_1",
-    "hasFeature" : [ "MulticellularSystem/ReceiverSystem", "MulticellularSystem/componentreference_1", "MulticellularSystem/SenderSystem", "MulticellularSystem/componentreference_2" ],
+    "hasConstraint" : "MulticellularSystem/Constraint1",
+    "hasFeature" : [ "MulticellularSystem/ComponentReference2", "MulticellularSystem/SubComponent1", "MulticellularSystem/ComponentReference1", "MulticellularSystem/SubComponent2" ],
     "name" : "MulticellularSystem",
     "role" : "SBO:0000289",
     "type" : "SBO:0000241"
   }, {
-    "@id" : "MulticellularSystem/ReceiverSystem",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "ReceiverSystem",
-    "instanceOf" : "ReceiverSystem"
+    "@id" : "MulticellularSystem/ComponentReference1",
+    "@type" : "sbol:ComponentReference",
+    "displayId" : "ComponentReference1",
+    "hasFeature" : "SenderSystem/SubComponent2",
+    "inChildOf" : "MulticellularSystem/SubComponent1"
   }, {
-    "@id" : "MulticellularSystem/SenderSystem",
+    "@id" : "MulticellularSystem/ComponentReference2",
+    "@type" : "sbol:ComponentReference",
+    "displayId" : "ComponentReference2",
+    "hasFeature" : "ReceiverSystem/SubComponent2",
+    "inChildOf" : "MulticellularSystem/SubComponent2"
+  }, {
+    "@id" : "MulticellularSystem/Constraint1",
+    "@type" : "sbol:Constraint",
+    "displayId" : "Constraint1",
+    "object" : "MulticellularSystem/ComponentReference2",
+    "restriction" : "sbol:verifyIdentical",
+    "subject" : "MulticellularSystem/ComponentReference1"
+  }, {
+    "@id" : "MulticellularSystem/SubComponent1",
     "@type" : "sbol:SubComponent",
-    "displayId" : "SenderSystem",
+    "displayId" : "SubComponent1",
     "instanceOf" : "SenderSystem"
   }, {
-    "@id" : "MulticellularSystem/componentreference_1",
-    "@type" : "sbol:ComponentReference",
-    "displayId" : "componentreference_1",
-    "hasFeature" : "SenderSystem/subcomponent_2",
-    "inChildOf" : "MulticellularSystem/SenderSystem"
-  }, {
-    "@id" : "MulticellularSystem/componentreference_2",
-    "@type" : "sbol:ComponentReference",
-    "displayId" : "componentreference_2",
-    "hasFeature" : "ReceiverSystem/subcomponent_2",
-    "inChildOf" : "MulticellularSystem/ReceiverSystem"
-  }, {
-    "@id" : "MulticellularSystem/constraint_1",
-    "@type" : "sbol:Constraint",
-    "displayId" : "constraint_1",
-    "object" : "MulticellularSystem/componentreference_2",
-    "restriction" : "sbol:verifyIdentical",
-    "subject" : "MulticellularSystem/componentreference_1"
+    "@id" : "MulticellularSystem/SubComponent2",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent2",
+    "instanceOf" : "ReceiverSystem"
   }, {
     "@id" : "OrganismA",
     "@type" : "sbol:Component",
@@ -303,105 +303,105 @@
     "@type" : "sbol:Component",
     "description" : "Receiver System",
     "displayId" : "ReceiverSystem",
-    "hasConstraint" : [ "ReceiverSystem/constraint_3", "ReceiverSystem/constraint_1", "ReceiverSystem/constraint_2" ],
-    "hasFeature" : [ "ReceiverSystem/AHL_receiver", "ReceiverSystem/subcomponent_2", "ReceiverSystem/subcomponent_1", "ReceiverSystem/componentreference_1" ],
+    "hasConstraint" : [ "ReceiverSystem/Constraint3", "ReceiverSystem/Constraint1", "ReceiverSystem/Constraint2" ],
+    "hasFeature" : [ "ReceiverSystem/SubComponent3", "ReceiverSystem/ComponentReference1", "ReceiverSystem/SubComponent2", "ReceiverSystem/SubComponent1" ],
     "name" : "ReceiverSystem",
     "role" : "SBO:0000289",
     "type" : "SBO:0000241"
   }, {
-    "@id" : "ReceiverSystem/AHL_receiver",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "AHL_receiver",
-    "instanceOf" : "AHL_receiver"
-  }, {
-    "@id" : "ReceiverSystem/componentreference_1",
+    "@id" : "ReceiverSystem/ComponentReference1",
     "@type" : "sbol:ComponentReference",
-    "displayId" : "componentreference_1",
-    "hasFeature" : "AHL_receiver/AHL",
-    "inChildOf" : "ReceiverSystem/AHL_receiver"
+    "displayId" : "ComponentReference1",
+    "hasFeature" : "AHL_receiver/SubComponent9",
+    "inChildOf" : "ReceiverSystem/SubComponent3"
   }, {
-    "@id" : "ReceiverSystem/constraint_1",
+    "@id" : "ReceiverSystem/Constraint1",
     "@type" : "sbol:Constraint",
-    "displayId" : "constraint_1",
-    "object" : "ReceiverSystem/subcomponent_2",
+    "displayId" : "Constraint1",
+    "object" : "ReceiverSystem/SubComponent2",
     "restriction" : "sbol:contains",
-    "subject" : "ReceiverSystem/subcomponent_1"
+    "subject" : "ReceiverSystem/SubComponent1"
   }, {
-    "@id" : "ReceiverSystem/constraint_2",
+    "@id" : "ReceiverSystem/Constraint2",
     "@type" : "sbol:Constraint",
-    "displayId" : "constraint_2",
-    "object" : "ReceiverSystem/AHL_receiver",
+    "displayId" : "Constraint2",
+    "object" : "ReceiverSystem/SubComponent3",
     "restriction" : "sbol:contains",
-    "subject" : "ReceiverSystem/subcomponent_1"
+    "subject" : "ReceiverSystem/SubComponent1"
   }, {
-    "@id" : "ReceiverSystem/constraint_3",
+    "@id" : "ReceiverSystem/Constraint3",
     "@type" : "sbol:Constraint",
-    "displayId" : "constraint_3",
-    "object" : "ReceiverSystem/subcomponent_2",
+    "displayId" : "Constraint3",
+    "object" : "ReceiverSystem/SubComponent2",
     "restriction" : "sbol:verifyIdentical",
-    "subject" : "ReceiverSystem/componentreference_1"
+    "subject" : "ReceiverSystem/ComponentReference1"
   }, {
-    "@id" : "ReceiverSystem/subcomponent_1",
+    "@id" : "ReceiverSystem/SubComponent1",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_1",
+    "displayId" : "SubComponent1",
     "instanceOf" : "OrganismB"
   }, {
-    "@id" : "ReceiverSystem/subcomponent_2",
+    "@id" : "ReceiverSystem/SubComponent2",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_2",
+    "displayId" : "SubComponent2",
     "instanceOf" : "AHL"
+  }, {
+    "@id" : "ReceiverSystem/SubComponent3",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent3",
+    "instanceOf" : "AHL_receiver"
   }, {
     "@id" : "SenderSystem",
     "@type" : "sbol:Component",
     "description" : "Sender System",
     "displayId" : "SenderSystem",
-    "hasConstraint" : [ "SenderSystem/constraint_2", "SenderSystem/constraint_3", "SenderSystem/constraint_1" ],
-    "hasFeature" : [ "SenderSystem/AHL_producer", "SenderSystem/componentreference_1", "SenderSystem/subcomponent_2", "SenderSystem/subcomponent_1" ],
+    "hasConstraint" : [ "SenderSystem/Constraint1", "SenderSystem/Constraint3", "SenderSystem/Constraint2" ],
+    "hasFeature" : [ "SenderSystem/SubComponent1", "SenderSystem/ComponentReference1", "SenderSystem/SubComponent3", "SenderSystem/SubComponent2" ],
     "name" : "SenderSystem",
     "role" : "SBO:0000289",
     "type" : "SBO:0000241"
   }, {
-    "@id" : "SenderSystem/AHL_producer",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "AHL_producer",
-    "instanceOf" : "AHL_producer"
-  }, {
-    "@id" : "SenderSystem/componentreference_1",
+    "@id" : "SenderSystem/ComponentReference1",
     "@type" : "sbol:ComponentReference",
-    "displayId" : "componentreference_1",
-    "hasFeature" : "AHL_producer/AHL",
-    "inChildOf" : "SenderSystem/AHL_producer"
+    "displayId" : "ComponentReference1",
+    "hasFeature" : "AHL_producer/SubComponent5",
+    "inChildOf" : "SenderSystem/SubComponent3"
   }, {
-    "@id" : "SenderSystem/constraint_1",
+    "@id" : "SenderSystem/Constraint1",
     "@type" : "sbol:Constraint",
-    "displayId" : "constraint_1",
-    "object" : "SenderSystem/subcomponent_2",
+    "displayId" : "Constraint1",
+    "object" : "SenderSystem/SubComponent2",
     "restriction" : "sbol:contains",
-    "subject" : "SenderSystem/subcomponent_1"
+    "subject" : "SenderSystem/SubComponent1"
   }, {
-    "@id" : "SenderSystem/constraint_2",
+    "@id" : "SenderSystem/Constraint2",
     "@type" : "sbol:Constraint",
-    "displayId" : "constraint_2",
-    "object" : "SenderSystem/AHL_producer",
+    "displayId" : "Constraint2",
+    "object" : "SenderSystem/SubComponent3",
     "restriction" : "sbol:contains",
-    "subject" : "SenderSystem/subcomponent_1"
+    "subject" : "SenderSystem/SubComponent1"
   }, {
-    "@id" : "SenderSystem/constraint_3",
+    "@id" : "SenderSystem/Constraint3",
     "@type" : "sbol:Constraint",
-    "displayId" : "constraint_3",
-    "object" : "SenderSystem/subcomponent_2",
+    "displayId" : "Constraint3",
+    "object" : "SenderSystem/SubComponent2",
     "restriction" : "sbol:verifyIdentical",
-    "subject" : "SenderSystem/componentreference_1"
+    "subject" : "SenderSystem/ComponentReference1"
   }, {
-    "@id" : "SenderSystem/subcomponent_1",
+    "@id" : "SenderSystem/SubComponent1",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_1",
+    "displayId" : "SubComponent1",
     "instanceOf" : "OrganismA"
   }, {
-    "@id" : "SenderSystem/subcomponent_2",
+    "@id" : "SenderSystem/SubComponent2",
     "@type" : "sbol:SubComponent",
-    "displayId" : "subcomponent_2",
+    "displayId" : "SubComponent2",
     "instanceOf" : "AHL"
+  }, {
+    "@id" : "SenderSystem/SubComponent3",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent3",
+    "instanceOf" : "AHL_producer"
   }, {
     "@id" : "gfp",
     "@type" : "sbol:Component",
@@ -439,7 +439,7 @@
     "@type" : "sbol:Component",
     "description" : "Constituve promoter",
     "displayId" : "pConstLuxR",
-    "name" : "pConstLuxR",
+    "name" : "pLuxR",
     "role" : "SO:0000167",
     "type" : "SBO:0000251"
   }, {
@@ -455,7 +455,7 @@
     "@type" : "sbol:Component",
     "description" : "RBS",
     "displayId" : "rbs_gfp",
-    "name" : "rbs_gfp",
+    "name" : "rbs",
     "role" : "SO:0000139",
     "type" : "SBO:0000251"
   }, {
@@ -463,7 +463,7 @@
     "@type" : "sbol:Component",
     "description" : "RBS",
     "displayId" : "rbs_luxI",
-    "name" : "rbs_luxI",
+    "name" : "rbs",
     "role" : "SO:0000139",
     "type" : "SBO:0000251"
   }, {
@@ -471,7 +471,7 @@
     "@type" : "sbol:Component",
     "description" : "RBS",
     "displayId" : "rbs_luxR",
-    "name" : "rbs_luxR",
+    "name" : "rbs",
     "role" : "SO:0000139",
     "type" : "SBO:0000251"
   }, {
@@ -479,7 +479,7 @@
     "@type" : "sbol:Component",
     "description" : "Terminator",
     "displayId" : "ter_gfp",
-    "name" : "ter_gfp",
+    "name" : "gfp terminator",
     "role" : "SO:0000141",
     "type" : "SBO:0000251"
   }, {
@@ -487,7 +487,7 @@
     "@type" : "sbol:Component",
     "description" : "Terminator",
     "displayId" : "ter_luxI",
-    "name" : "ter_luxI",
+    "name" : "luxI terminator",
     "role" : "SO:0000141",
     "type" : "SBO:0000251"
   }, {
@@ -495,18 +495,11 @@
     "@type" : "sbol:Component",
     "description" : "Terminator",
     "displayId" : "ter_luxR",
-    "name" : "ter_luxR",
+    "name" : "luxR terminator",
     "role" : "SO:0000141",
     "type" : "SBO:0000251"
   } ],
   "@context" : {
-    "instanceOf" : {
-      "@id" : "http://sbols.org/v3#instanceOf",
-      "@type" : "@id"
-    },
-    "displayId" : {
-      "@id" : "http://sbols.org/v3#displayId"
-    },
     "type" : {
       "@id" : "http://sbols.org/v3#type",
       "@type" : "@id"
@@ -518,8 +511,23 @@
     "name" : {
       "@id" : "http://sbols.org/v3#name"
     },
+    "displayId" : {
+      "@id" : "http://sbols.org/v3#displayId"
+    },
     "description" : {
       "@id" : "http://sbols.org/v3#description"
+    },
+    "instanceOf" : {
+      "@id" : "http://sbols.org/v3#instanceOf",
+      "@type" : "@id"
+    },
+    "hasParticipation" : {
+      "@id" : "http://sbols.org/v3#hasParticipation",
+      "@type" : "@id"
+    },
+    "participant" : {
+      "@id" : "http://sbols.org/v3#participant",
+      "@type" : "@id"
     },
     "inChildOf" : {
       "@id" : "http://sbols.org/v3#inChildOf",
@@ -531,14 +539,6 @@
     },
     "hasConstraint" : {
       "@id" : "http://sbols.org/v3#hasConstraint",
-      "@type" : "@id"
-    },
-    "orientation" : {
-      "@id" : "http://sbols.org/v3#orientation",
-      "@type" : "@id"
-    },
-    "hasInteraction" : {
-      "@id" : "http://sbols.org/v3#hasInteraction",
       "@type" : "@id"
     },
     "subject" : {
@@ -553,12 +553,12 @@
       "@id" : "http://sbols.org/v3#object",
       "@type" : "@id"
     },
-    "participant" : {
-      "@id" : "http://sbols.org/v3#participant",
+    "orientation" : {
+      "@id" : "http://sbols.org/v3#orientation",
       "@type" : "@id"
     },
-    "hasParticipation" : {
-      "@id" : "http://sbols.org/v3#hasParticipation",
+    "hasInteraction" : {
+      "@id" : "http://sbols.org/v3#hasInteraction",
       "@type" : "@id"
     },
     "@vocab" : "https://sbolstandard.org/examples/",

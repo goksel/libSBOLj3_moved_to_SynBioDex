@@ -1,8 +1,6 @@
 package org.sbolstandard.vocabulary;
 
 import java.net.URI;
-
-import org.apache.jena.ext.xerces.xni.QName;
 import org.sbolstandard.util.URINameSpace;
 
 public class InteractionType {

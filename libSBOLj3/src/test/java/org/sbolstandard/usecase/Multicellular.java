@@ -33,12 +33,12 @@ public class Multicellular extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component multicellularSystem=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "MulticellularSystem"), ComponentType.FunctionalEntity.getUrl(), "MulticellularSystem", "MulticellularSystem", "Multicellular System", Role.FunctionalCompartment);
-        Component senderSystem=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "SenderSystem"), ComponentType.FunctionalEntity.getUrl(), "SenderSystem", "SenderSystem", "Sender System", Role.FunctionalCompartment);
-        Component receiverSystem=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "ReceiverSystem"), ComponentType.FunctionalEntity.getUrl(), "ReceiverSystem", "ReceiverSystem", "Receiver System", Role.FunctionalCompartment);
-        Component senderCell=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "OrganismA"), ComponentType.Cell.getUrl(), "OrganismA", "OrganismA", "Organism A", Role.PhysicalCompartment);
-        Component receiverCell=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "OrganismB"), ComponentType.Cell.getUrl(), "OrganismB", "OrganismB", "Organism B", Role.PhysicalCompartment);
-        Component AHL=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "AHL"), ComponentType.SimpleChemical.getUrl(), "AHL", "AHL", "AHL", Role.Effector);
+        Component multicellularSystem=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "MulticellularSystem"), ComponentType.FunctionalEntity.getUrl(), "MulticellularSystem", "Multicellular System", Role.FunctionalCompartment);
+        Component senderSystem=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "SenderSystem"), ComponentType.FunctionalEntity.getUrl(), "SenderSystem", "Sender System", Role.FunctionalCompartment);
+        Component receiverSystem=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "ReceiverSystem"), ComponentType.FunctionalEntity.getUrl(), "ReceiverSystem", "Receiver System", Role.FunctionalCompartment);
+        Component senderCell=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "OrganismA"), ComponentType.Cell.getUrl(), "OrganismA", "Organism A", Role.PhysicalCompartment);
+        Component receiverCell=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "OrganismB"), ComponentType.Cell.getUrl(), "OrganismB", "Organism B", Role.PhysicalCompartment);
+        Component AHL=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "AHL"), ComponentType.SimpleChemical.getUrl(), "AHL", "AHL", Role.Effector);
        
         SBOLAPI.createConstraint(senderSystem, senderCell, AHL, RestrictionType.Topology.contains);
         SBOLAPI.createConstraint(receiverSystem, receiverCell, AHL, RestrictionType.Topology.contains);       
@@ -49,11 +49,11 @@ public class Multicellular extends TestCase {
             
         
         //AHL Producer
-        Component AHLProducer=SBOLAPI.createDnaComponent(doc, "AHL_producer", "AHL producer", Role.EngineeredGene, null);  
-        Component pConstLuxI=SBOLAPI.createDnaComponent(doc, "pConstLuxI", "Constituve promoter", Role.Promoter, null); 
-        Component rbs_luxI=SBOLAPI.createDnaComponent(doc, "rbs_luxI", "RBS", Role.RBS, null);
-        Component luxI=SBOLAPI.createDnaComponent(doc, "luxI", "luxI coding sequence", Role.CDS, null);
-        Component ter_luxI=SBOLAPI.createDnaComponent(doc, "ter_luxI", "Terminator", Role.Terminator, null);
+        Component AHLProducer=SBOLAPI.createDnaComponent(doc, "AHL_producer", "AHL producer", "AHL producer", Role.EngineeredGene, null);  
+        Component pConstLuxI=SBOLAPI.createDnaComponent(doc, "pConstLuxI", "pConstLuxI","Constituve promoter", Role.Promoter, null); 
+        Component rbs_luxI=SBOLAPI.createDnaComponent(doc, "rbs_luxI","rbs", "RBS", Role.RBS, null);
+        Component luxI=SBOLAPI.createDnaComponent(doc, "luxI","luxI", "luxI coding sequence", Role.CDS, null);
+        Component ter_luxI=SBOLAPI.createDnaComponent(doc, "ter_luxI","luxI terminator", "Terminator", Role.Terminator, null);
         
         SBOLAPI.appendComponent(doc, AHLProducer,pConstLuxI);
         SBOLAPI.appendComponent(doc, AHLProducer,rbs_luxI);
@@ -63,18 +63,18 @@ public class Multicellular extends TestCase {
         SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),AHLProducer, luxI, Arrays.asList(ParticipationRole.Template), AHL, Arrays.asList(ParticipationRole.Product));       
         
         //AHL Receiver
-        Component AHLReceiver=SBOLAPI.createDnaComponent(doc, "AHL_receiver", "AHL receiver", Role.EngineeredGene, null);  
-        Component pConstLuxR=SBOLAPI.createDnaComponent(doc, "pConstLuxR", "Constituve promoter", Role.Promoter, null); 
-        Component rbs_luxR=SBOLAPI.createDnaComponent(doc, "rbs_luxR", "RBS", Role.RBS, null);
-        Component luxR=SBOLAPI.createDnaComponent(doc, "luxR", "luxR coding sequence", Role.CDS, null);
-        Component ter_luxR=SBOLAPI.createDnaComponent(doc, "ter_luxR", "Terminator", Role.Terminator, null);
-        Component pLuxR=SBOLAPI.createDnaComponent(doc, "pLuxR", "LuxR inducible promoter", Role.Promoter, null); 
-        Component rbs_gfp=SBOLAPI.createDnaComponent(doc, "rbs_gfp", "RBS", Role.RBS, null);
-        Component gfp=SBOLAPI.createDnaComponent(doc, "gfp", "gfp coding sequence", Role.CDS, null);
-        Component ter_gfp=SBOLAPI.createDnaComponent(doc, "ter_gfp", "Terminator", Role.Terminator, null);
-        Component LuxR=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "LuxR_protein"), ComponentType.Protein.getUrl(), "LuxR", "LuxR_protein", "LuxR", Role.TF);
-        Component GFP=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "GFP_protein"), ComponentType.Protein.getUrl(), "GFP", "GFP", "GFP", null);
-        Component LuxR_AHL=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "LuxR_AHL"), ComponentType.Protein.getUrl(), "LuxR_AHL", "LuxR_AHL", "LuxR_AHL complex", Role.TF);
+        Component AHLReceiver=SBOLAPI.createDnaComponent(doc, "AHL_receiver", "AHL receiver","AHL receiver", Role.EngineeredGene, null);  
+        Component pConstLuxR=SBOLAPI.createDnaComponent(doc, "pConstLuxR","pLuxR", "Constituve promoter", Role.Promoter, null); 
+        Component rbs_luxR=SBOLAPI.createDnaComponent(doc, "rbs_luxR", "rbs", "RBS", Role.RBS, null);
+        Component luxR=SBOLAPI.createDnaComponent(doc, "luxR", "luxR", "luxR coding sequence", Role.CDS, null);
+        Component ter_luxR=SBOLAPI.createDnaComponent(doc, "ter_luxR", "luxR terminator", "Terminator", Role.Terminator, null);
+        Component pLuxR=SBOLAPI.createDnaComponent(doc, "pLuxR", "pLuxR", "LuxR inducible promoter", Role.Promoter, null); 
+        Component rbs_gfp=SBOLAPI.createDnaComponent(doc, "rbs_gfp", "rbs", "RBS", Role.RBS, null);
+        Component gfp=SBOLAPI.createDnaComponent(doc, "gfp", "gfp", "gfp coding sequence", Role.CDS, null);
+        Component ter_gfp=SBOLAPI.createDnaComponent(doc, "ter_gfp", "gfp terminator", "Terminator", Role.Terminator, null);
+        Component LuxR=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "LuxR_protein"), ComponentType.Protein.getUrl(), "LuxR_protein", "LuxR", Role.TF);
+        Component GFP=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "GFP_protein"), ComponentType.Protein.getUrl(), "GFP", "GFP", null);
+        Component LuxR_AHL=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "LuxR_AHL"), ComponentType.Protein.getUrl(), "LuxR_AHL", "LuxR_AHL complex", Role.TF);
          
         SBOLAPI.appendComponent(doc, AHLReceiver,pConstLuxR);
         SBOLAPI.appendComponent(doc, AHLReceiver,rbs_luxR);
@@ -95,8 +95,7 @@ public class Multicellular extends TestCase {
         SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation),AHLReceiver, pLuxR, Arrays.asList(ParticipationRole.Stimulated), LuxR_AHL, Arrays.asList(ParticipationRole.Stimulator));
                 
     	//LuxR AHL binding
-        String localName=SBOLAPI.createLocalName(DataModel.Interaction.uri, AHLReceiver.getInteractions()); 
-    	Interaction interaction= AHLReceiver.createInteraction(SBOLAPI.append(AHLReceiver.getUri(), localName), Arrays.asList(InteractionType.NonCovalentBinding));
+        Interaction interaction= AHLReceiver.createInteraction(Arrays.asList(InteractionType.NonCovalentBinding));
     	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Reactant), LuxRProteinSubComponent);
     	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Reactant), AHLSubComponent);
     	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Product), LuxRAHLSubComponent);

@@ -1,11 +1,10 @@
 package org.sbolstandard.entity;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
@@ -52,6 +51,17 @@ public class Interaction extends Identified{
 		participation.setParticipant(feature);
 		this.participations=addToList(this.participations, participation, DataModel.Interaction.participation);
 		return participation;
+	}
+	
+	private Participation createParticipation(String displayId, List<URI> roles, URI feature) throws SBOLGraphException
+	{
+		return createParticipation(SBOLAPI.append(this.getUri(), displayId), roles, feature);	
+	}
+	
+	public Participation createParticipation(List<URI> roles, URI feature) throws SBOLGraphException
+	{
+		String displayId=SBOLAPI.createLocalName(DataModel.Participation.uri, getParticipations());	
+		return createParticipation(displayId, roles, feature);	
 	}
 	
 	

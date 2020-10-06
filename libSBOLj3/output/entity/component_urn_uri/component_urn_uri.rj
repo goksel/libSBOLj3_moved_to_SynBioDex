@@ -1,5 +1,5 @@
 { 
-  "urn:uuid:d1ce016f-2c60-11b2-80b5-acde48001122" : { 
+  "urn:uuid:0c27b730-2c64-11b2-8059-acde48001122" : { 
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
       "value" : "http://sbols.org/v3#Component"

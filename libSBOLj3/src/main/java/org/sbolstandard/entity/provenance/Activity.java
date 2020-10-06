@@ -7,6 +7,7 @@ import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.apache.jena.datatypes.xsd.impl.XSDDateType;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Identified;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
@@ -128,6 +129,12 @@ public class Activity extends Identified{
 		return usage;	
 	}
 	
+	public Usage createUsage(URI entity) throws SBOLGraphException
+	{
+		URI childUri=SBOLAPI.createLocalUri(this, ProvenanceDataModel.Usage.uri, this.getUsages());
+		return createUsage(childUri, entity);
+	}
+	
 	public List<Association> getAssociations() throws SBOLGraphException {
 		this.associations=addToList(this.associations, ProvenanceDataModel.Activity.qualifiedAssociation, Association.class, ProvenanceDataModel.Association.uri);
 		return this.associations;
@@ -139,6 +146,12 @@ public class Activity extends Identified{
 		association.setAgent(agent);
 		this.associations=addToList (this.associations, association, ProvenanceDataModel.Activity.qualifiedAssociation);
 		return association;	
+	}
+	
+	public Association createAssociation(URI agent) throws SBOLGraphException
+	{
+		URI childUri=SBOLAPI.createLocalUri(this, ProvenanceDataModel.Association.uri, this.getAssociations());
+		return createAssociation(childUri, agent);	
 	}
 	
 	@Override

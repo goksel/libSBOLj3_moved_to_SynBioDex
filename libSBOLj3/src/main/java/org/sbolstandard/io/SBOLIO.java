@@ -15,9 +15,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.entity.SBOLDocument;
-import org.sbolstandard.util.RDFHandler;
 import org.sbolstandard.util.RDFUtil;
-import org.sbolstandard.vocabulary.DataModel;
 
 public class SBOLIO{
 
@@ -53,7 +51,7 @@ public class SBOLIO{
 		
 		while (it.hasNext())
 		{
-			resources.add(RDFHandler.createResource(model, it.next()));	
+			resources.add(RDFUtil.createResource(model, it.next()));	
 		}
 		Resource[] topLevelResources=resources.toArray(new Resource[resources.size()]);
 		return topLevelResources;

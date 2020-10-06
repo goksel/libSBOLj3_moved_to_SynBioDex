@@ -1,5 +1,5 @@
 { 
-  "https://sbolstandard.org/examples/M9_Glucose_CAA/CaCl2/measure1" : { 
+  "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1" : { 
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
       "value" : "measure1"
@@ -22,10 +22,10 @@
      ]
   }
    ,
-  "https://sbolstandard.org/examples/M9_Glucose_CAA/CaCl2" : { 
+  "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1" : { 
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
-      "value" : "CaCl2"
+      "value" : "ExternallyDefined1"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
@@ -45,7 +45,7 @@
      ] ,
     "http://sbols.org/v3#hasMeasure" : [ { 
       "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/M9_Glucose_CAA/CaCl2/measure1"
+      "value" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1"
     }
      ]
   }
@@ -63,7 +63,7 @@
      ] ,
     "http://sbols.org/v3#hasFeature" : [ { 
       "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/M9_Glucose_CAA/CaCl2"
+      "value" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 

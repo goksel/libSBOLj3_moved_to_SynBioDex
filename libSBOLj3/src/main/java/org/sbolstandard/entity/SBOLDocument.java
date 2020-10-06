@@ -6,21 +6,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.Syntax;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.entity.provenance.Agent;
-import org.sbolstandard.util.RDFHandler;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.MeasureDataModel;
 import org.sbolstandard.vocabulary.ProvenanceDataModel;
+import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.measure.BinaryPrefix;
-import org.sbolstandard.entity.measure.Measure;
 import org.sbolstandard.entity.measure.Prefix;
 import org.sbolstandard.entity.measure.PrefixedUnit;
 import org.sbolstandard.entity.measure.SIPrefix;
@@ -53,8 +57,6 @@ public class SBOLDocument {
 	private List<UnitDivision> unitDivisions;
 	private List<UnitExponentiation> unitExponentiations;
 	private List<PrefixedUnit> prefixedUnits;
-	//private List<Measure> measures;
-	
 	
 	public Model getRDFModel() {
 		return model;
@@ -128,6 +130,17 @@ public class SBOLDocument {
 		return component;
 	}
 	
+	public Component createComponent(String displayId, List<URI> types) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createComponent(SBOLAPI.append(this.getBaseURI(), displayId), types);
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
+	
 	public List<Sequence> getSequences() throws SBOLGraphException {
 		this.sequences=addToList(model, this.sequences, DataModel.Sequence.uri,Sequence.class);
 		return sequences;
@@ -139,6 +152,17 @@ public class SBOLDocument {
 		return sequence;
 	}
 	
+	public Sequence createSequence(String displayId) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createSequence(SBOLAPI.append(this.getBaseURI(), displayId));
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
+
 	public List<CombinatorialDerivation> getCombinatorialDerivations() throws SBOLGraphException {
 		this.combinatorialDerivations=addToList(model, this.combinatorialDerivations, DataModel.CombinatorialDerivation.uri,CombinatorialDerivation.class);
 		return combinatorialDerivations;
@@ -152,6 +176,16 @@ public class SBOLDocument {
 		return combinatorialDerivation;
 	}
 	
+	public CombinatorialDerivation createCombinatorialDerivation(String displayId, URI template) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createCombinatorialDerivation(SBOLAPI.append(this.getBaseURI(), displayId), template);
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
 	
 	public List<Implementation> getImplementations() throws SBOLGraphException {
 		this.implementations=addToList(model, this.implementations, DataModel.Implementation.uri,Implementation.class);
@@ -164,10 +198,22 @@ public class SBOLDocument {
 		return implementation;
 	}
 	
+	public Implementation createImplementation(String displayId) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createImplementation(SBOLAPI.append(this.getBaseURI(), displayId));
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
+	
 	public List<ExperimentalData> getExperimentalData() throws SBOLGraphException {
 		this.experimentalDatas=addToList(model, this.experimentalDatas, DataModel.ExperimentalData.uri,ExperimentalData.class);
 		return experimentalDatas;
 	}
+	
 
 	public ExperimentalData createExperimentalData(URI uri) throws SBOLGraphException {
 		ExperimentalData experimentalData= new ExperimentalData(this.model, uri);
@@ -175,6 +221,17 @@ public class SBOLDocument {
 		return experimentalData;
 	}
 	
+	public ExperimentalData createExperimentalData(String displayId) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createExperimentalData(SBOLAPI.append(this.getBaseURI(), displayId));
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
+		
 	public List<org.sbolstandard.entity.Model> getModels() throws SBOLGraphException {
 		this.models=addToList(model, this.models, DataModel.Model.uri,org.sbolstandard.entity.Model.class);
 		return models;
@@ -189,6 +246,17 @@ public class SBOLDocument {
 		return model;
 	}
 	
+	public org.sbolstandard.entity.Model createModel(String displayId, URI source, URI framework, URI language) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createModel(SBOLAPI.append(this.getBaseURI(), displayId), source, framework, language);
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
+	
 	public List<Collection> getCollections() throws SBOLGraphException {
 		this.collections=addToList(model, this.collections, DataModel.Collection.uri,Collection.class);
 		return collections;
@@ -200,15 +268,38 @@ public class SBOLDocument {
 		return collection;
 	}
 	
+	public Collection createCollection(String displayId) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createCollection(SBOLAPI.append(this.getBaseURI(), displayId));
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
+	
+	
 	public List<Namespace> getNamespaces() throws SBOLGraphException {
 		this.namespaces=addToList(model, this.namespaces, DataModel.Namespace.uri,Namespace.class);
 		return namespaces;
 	}
 
-	public Collection createNamespace(URI uri) throws SBOLGraphException {
+	public Namespace createNamespace(URI uri) throws SBOLGraphException {
 		Namespace namespace= new Namespace(this.model, uri);
 		addToInMemoryList(namespace, namespaces);
 		return namespace;
+	}
+	
+	public Namespace createNamespace(String displayId) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createNamespace(SBOLAPI.append(this.getBaseURI(), displayId));
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
 	}
 	
 	public List<Experiment> getExperiments() throws SBOLGraphException {
@@ -222,6 +313,17 @@ public class SBOLDocument {
 		return experiment;
 	}
 	
+	public Experiment createExperiment(String displayId) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createExperiment(SBOLAPI.append(this.getBaseURI(), displayId));
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
+		
 	public List<Attachment> getAttachments() throws SBOLGraphException {
 		this.attachments=addToList(model, this.attachments, DataModel.Attachment.uri,Attachment.class);
 		return attachments;
@@ -234,12 +336,36 @@ public class SBOLDocument {
 		return attachment;
 	}
 	
+	public Attachment createAttachment(String displayId, URI source) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createAttachment(SBOLAPI.append(this.getBaseURI(), displayId),source);
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
+	
+	
 	public Agent createAgent(URI uri) throws SBOLGraphException {
 
 		Agent agent = new Agent(this.model, uri) {};
 		addToInMemoryList(agent, agents);
 		return agent;
 	}
+	
+	public Agent createAgent(String displayId) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createAgent(SBOLAPI.append(this.getBaseURI(), displayId));
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
+	
 	
 	public List<Agent> getAgents() throws SBOLGraphException {
 		this.agents=addToList(model, this.agents, ProvenanceDataModel.Agent.uri,Agent.class);
@@ -253,6 +379,17 @@ public class SBOLDocument {
 		return plan;
 	}
 	
+	public Plan createPlan(String displayId) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createPlan(SBOLAPI.append(this.getBaseURI(), displayId));
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
+	
 	public List<Plan> getPlans() throws SBOLGraphException {
 		this.plans=addToList(model, this.plans, ProvenanceDataModel.Plan.uri,Plan.class);
 		return plans;
@@ -263,6 +400,17 @@ public class SBOLDocument {
 		Activity activity = new Activity(this.model, uri) {};
 		addToInMemoryList(activity, activities);
 		return activity;
+	}
+	
+	public Activity createActivity(String displayId) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createActivity(SBOLAPI.append(this.getBaseURI(), displayId));
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
 	}
 	
 	public List<Activity> getActivities() throws SBOLGraphException {
@@ -285,6 +433,17 @@ public class SBOLDocument {
 		return prefix;
 	}
 	
+	public SIPrefix createSIPrefix(String displayId, String symbol, String name, float factor) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createSIPrefix(SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, factor);
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
+	
 	public List<SIPrefix> getSIPrefixes() throws SBOLGraphException {
 		this.siPrefixes=addToList(model, this.siPrefixes, MeasureDataModel.SIPrefix.uri,SIPrefix.class);
 		return siPrefixes;
@@ -297,6 +456,18 @@ public class SBOLDocument {
 		addToInMemoryList(prefix, binaryPrefixes);
 		return prefix;
 	}
+	
+	public BinaryPrefix createBinaryPrefix(String displayId, String symbol, String name, float factor) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createBinaryPrefix(SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, factor);
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
+	
 	
 	public List<BinaryPrefix> getBinaryPrefixes() throws SBOLGraphException {
 		this.binaryPrefixes=addToList(model, this.binaryPrefixes, MeasureDataModel.BinaryPrefix.uri,BinaryPrefix.class);
@@ -312,6 +483,18 @@ public class SBOLDocument {
 		return unit;
 	}
 	
+	public SingularUnit createSingularUnit(String displayId, String symbol, String name) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createSingularUnit(SBOLAPI.append(this.getBaseURI(), displayId), symbol, name);
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
+	
+	
 	public List<SingularUnit> getSingularUnits() throws SBOLGraphException {
 		this.singularUnits=addToList(model, this.singularUnits, MeasureDataModel.SingularUnit.uri,SingularUnit.class);
 		return singularUnits;
@@ -326,6 +509,17 @@ public class SBOLDocument {
 		unit.setTerm2(unit2);
 		addToInMemoryList(unit, unitMultiplications);
 		return unit;
+	}
+	
+	public UnitMultiplication createUnitMultiplication(String displayId, String symbol, String name, URI unit1, URI unit2) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createUnitMultiplication(SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, unit1, unit2);
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
 	}
 	
 	public List<UnitMultiplication> getUnitMultiplications() throws SBOLGraphException {
@@ -344,6 +538,18 @@ public class SBOLDocument {
 		return unit;
 	}
 	
+
+	public UnitDivision createUnitDivision(String displayId, String symbol, String name, URI numerator, URI denominator) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createUnitDivision(SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, numerator, denominator);
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
+	
 	public List<UnitDivision> getUnitDivisions() throws SBOLGraphException {
 		this.unitDivisions=addToList(model, this.unitDivisions, MeasureDataModel.UnitDivision.uri,UnitDivision.class);
 		return unitDivisions;
@@ -358,6 +564,17 @@ public class SBOLDocument {
 		unit.setExponent(exponent);
 		addToInMemoryList(unit, unitExponentiations);
 		return unit;
+	}
+	
+	public UnitExponentiation createUnitExponentiation(String displayId, String symbol, String name, URI baseUnit, int exponent) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createUnitExponentiation(SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, baseUnit, exponent);
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
 	}
 	
 	public List<UnitExponentiation> getUnitExponentiations() throws SBOLGraphException {
@@ -377,10 +594,23 @@ public class SBOLDocument {
 		return unit;
 	}
 	
+	public PrefixedUnit createPrexiedUnit(String displayId, String symbol, String name, URI unitURI, URI prefix) throws SBOLGraphException {
+		if (this.getBaseURI()!=null)
+		{
+			return createPrexiedUnit(SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, unitURI, prefix);
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
+	
 	public List<PrefixedUnit> getPrefixedUnits() throws SBOLGraphException {
 		this.prefixedUnits=addToList(model, this.prefixedUnits, MeasureDataModel.PrefixedUnit.uri,PrefixedUnit.class);
 		return prefixedUnits;
 	}
+	
+
 	
 	/*public Measure createMeasure(URI uri, float value, URI unit) throws SBOLGraphException {
 
@@ -418,6 +648,61 @@ public class SBOLDocument {
 		}
 
 	}
+	
+	private String constructQuery(String search)
+	{
+		StringBuilder query=new StringBuilder();
+		for (Entry<String, String> ns:this.model.getNsPrefixMap().entrySet())
+		{
+			String prefix=ns.getKey();
+			String prefixUri=ns.getValue();
+			if (prefix!=null && prefix!="")
+			{
+				query.append(String.format("PREFIX %s: <%s>", prefix, prefixUri));
+				query.append(System.lineSeparator());
+			}
+		}
+		query.append("SELECT ?identified" + System.lineSeparator());
+		query.append("WHERE {" + System.lineSeparator()); 
+			//query=query + "  ?identified a sbol:Component ." + System.lineSeparator();identified.
+		query.append(search);
+		query.append(System.lineSeparator());
+		query.append("}");
+		return query.toString();
+	}
+	
+	
+	public <T extends Identified> List<T> getIdentifieds(String search, Class<T> identified) throws SBOLGraphException
+	{
+		List<T> items=new ArrayList<T>();
+		ResultSet rs=null;
+		try
+		{
+			String query=constructQuery(search);
+	   	        rs=RDFUtil.executeSPARQLSelectQuery(this.model, query, Syntax.syntaxSPARQL_11);
+	        if (rs!=null)
+	        {
+	        	String resultColumnName=rs.getResultVars().get(0);
+		        while (rs.hasNext())
+	 	        {
+	 	            QuerySolution solution=rs.next();
+	 	            RDFNode node=solution.get(resultColumnName);
+	 	            if (node.isResource())
+	 	            {
+	 	                String found=node.asResource().getURI();
+	 	                Identified item=getIdentified(URI.create(found), identified);
+	 	                items.add((T)item);
+	 	            }
+	 	        }
+	        }
+		}
+		catch (Exception ex)
+		{
+			throw new SBOLGraphException(ex.getMessage());
+		}
+		return items;
+	}
+	
 	
 	protected <T extends Identified> Identified createIdentified(Resource res, Class<T> identified) throws SBOLGraphException
 	{
@@ -503,7 +788,5 @@ public class SBOLDocument {
 		{
 			topLevelResourceTypes.add(type);
 		}
-	}
-
-	
+	}	
 }
