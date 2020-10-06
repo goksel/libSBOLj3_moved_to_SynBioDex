@@ -2,11 +2,11 @@
 The libSBOLj Java library has been developed for the [Synthetic Biology Open Language 3.0](https://sbolstandard.org/data-model-specification). The library is  under development and is currently available as an alpha release. 
 
 SBOL represents data using RDF graphs, which can be serialised in different formats. The libSBOLj3 library supports the following RDF formats.
-* RDF/XML
-* Turtle
-* N3
-* JSON-LD
-* RDF/JSON
+* RDF/XML (File extension: rdf)
+* Turtle (File extension: ttl)
+* N-Triples (File extension: nt)
+* JSON-LD (File extension: jsonld)
+* RDF/JSON (File extension: rj)
 
 ## How to use libSBOLj3
 
@@ -18,7 +18,7 @@ Use this option if you are developing a Java application using [Maven](https://m
    <dependency>
       <groupId>org.sbolstandard</groupId>
       <artifactId>libSBOLj3</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>1.1-SNAPSHOT</version>
    </dependency>
    ...
 </dependencies>
@@ -55,7 +55,7 @@ The following sections summarises how to create the [i13504](http://parts.igem.o
 The newly created SBOLDocument object then be used as a *factory* to create new SBOL entities. These entities can then be defined via their different properties. The following example creates an RBS part, which is represented as a Component in SBOL. 
 ```java
 //Create the RBS component
-Component rbs=doc.createComponent("B0034", Arrays.asList(ComponentType.DNA.getUrl())); 
+Component rbs = doc.createComponent("B0034", Arrays.asList(ComponentType.DNA.getUrl())); 
 rbs.setName("B0034");
 rbs.setDescription("RBS (Elowitz 1999)");
 rbs.setRoles(Arrays.asList(Role.RBS));
@@ -110,6 +110,10 @@ for (SubComponent subComp: device.getSubComponents()){
  //Read
  SBOLIO.read(doc, new File("sbol.ttl"), "Turtle");
 ``` 
+
+The following constants can be used to set the RDF serialisation type:
+
+```Turtle```, ```RDF/XML-ABBREV```, ```JSON-LD```, ```RDFJSON```, ```N-TRIPLES```.
 
 ### Looking up for SBOL entities
 SBOL utilises URIs to link different entities. An SBOL entity may store a reference to another entity for more details. These additional details can be retrieved using the ```getIdentified``` method which expects the URI of the entity to retrieve, and its type. The followig example shows retrieving nucleotide sequences of the rbs component. The Sequence entity, the URI of which is referenced in the rbs component, is retrieved first. Its elements property is then used to read the nucleotides information.
