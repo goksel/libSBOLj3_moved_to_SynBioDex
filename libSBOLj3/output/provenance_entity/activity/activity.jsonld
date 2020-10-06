@@ -26,10 +26,10 @@
     "displayId" : "codon_optimization_activity",
     "name" : "Codon optimization activity",
     "type" : "sbol:design",
-    "endedAtTime" : "2020-08-30T18:45:30.605Z",
+    "endedAtTime" : "2020-08-30T18:54:30.747Z",
     "qualifiedAssociation" : "codon_optimization_activity/Association1",
     "qualifiedUsage" : [ "codon_optimization_activity/Usage2", "codon_optimization_activity/Usage1" ],
-    "startedAtTime" : "2019-07-29T18:45:30.605Z"
+    "startedAtTime" : "2019-07-29T18:54:30.747Z"
   }, {
     "@id" : "codon_optimization_activity/Association1",
     "@type" : "prov:Association",
@@ -108,19 +108,19 @@
       "@id" : "http://www.w3.org/ns/prov#entity",
       "@type" : "@id"
     },
-    "startedAtTime" : {
-      "@id" : "http://www.w3.org/ns/prov#startedAtTime"
-    },
-    "endedAtTime" : {
-      "@id" : "http://www.w3.org/ns/prov#endedAtTime"
-    },
     "qualifiedUsage" : {
       "@id" : "http://www.w3.org/ns/prov#qualifiedUsage",
       "@type" : "@id"
     },
+    "endedAtTime" : {
+      "@id" : "http://www.w3.org/ns/prov#endedAtTime"
+    },
     "qualifiedAssociation" : {
       "@id" : "http://www.w3.org/ns/prov#qualifiedAssociation",
       "@type" : "@id"
+    },
+    "startedAtTime" : {
+      "@id" : "http://www.w3.org/ns/prov#startedAtTime"
     },
     "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",
