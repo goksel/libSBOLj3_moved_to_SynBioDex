@@ -19,8 +19,8 @@
    <sbol:Component rdf:about="toggle_switch">
       <sbol:hasModel rdf:resource="model1"/>
       <sbol:description>Toggle Switch genetic circuit</sbol:description>
-      <sbol:displayId>toggle_switch</sbol:displayId>
-      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
       <sbol:name>Toggle Switch</sbol:name>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
+      <sbol:displayId>toggle_switch</sbol:displayId>
    </sbol:Component>
 </rdf:RDF>

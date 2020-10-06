@@ -16,16 +16,15 @@
         sbol:role         SO:0000316 ;
         sbol:type         SBO:0000251 .
 
-<LacI_producer/subcomponent_2>
-        a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_2" ;
-        sbol:instanceOf   :rbs_lacI ;
-        sbol:orientation  sbol:inline .
+<TetR_producer/SubComponent6>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent6" ;
+        sbol:instanceOf  :LacI_protein .
 
 :ter_tetR  a              sbol:Component ;
         sbol:description  "Terminator" ;
         sbol:displayId    "ter_tetR" ;
-        sbol:name         "ter_tetR" ;
+        sbol:name         "tetR terminator" ;
         sbol:role         SO:0000141 ;
         sbol:type         SBO:0000251 .
 
@@ -35,38 +34,25 @@
         sbol:name         "IPTG_LacI" ;
         sbol:type         SBO:0000253 .
 
-<TetR_producer/TetR_protein>
-        a                sbol:SubComponent ;
-        sbol:displayId   "TetR_protein" ;
-        sbol:instanceOf  :TetR_protein .
-
-<LacI_producer/interaction_1>
-        a                      sbol:Interaction ;
-        sbol:displayId         "interaction_1" ;
-        sbol:hasParticipation  <LacI_producer/interaction_1/participation_1> , <LacI_producer/interaction_1/participation_2> ;
-        sbol:type              SBO:0000589 .
+<toggle_switch/Constraint2>
+        a                 sbol:Constraint ;
+        sbol:displayId    "Constraint2" ;
+        sbol:object       <toggle_switch/ComponentReference4> ;
+        sbol:restriction  sbol:verifyIdentical ;
+        sbol:subject      <toggle_switch/ComponentReference3> .
 
 :ter_lacI  a              sbol:Component ;
         sbol:description  "Terminator" ;
         sbol:displayId    "ter_lacI" ;
-        sbol:name         "ter_lacI" ;
+        sbol:name         "lacI terminator" ;
         sbol:role         SO:0000141 ;
         sbol:type         SBO:0000251 .
 
-<LacI_producer/TetR_protein>
-        a                sbol:SubComponent ;
-        sbol:displayId   "TetR_protein" ;
-        sbol:instanceOf  :TetR_protein .
-
-<toggle_switch/componentreference_4>
-        a                sbol:ComponentReference ;
-        sbol:displayId   "componentreference_4" ;
-        sbol:hasFeature  <TetR_producer/TetR_protein> ;
-        sbol:inChildOf   <toggle_switch/TetR_producer> .
-
-<LacI_producer/GFP>  a   sbol:SubComponent ;
-        sbol:displayId   "GFP" ;
-        sbol:instanceOf  :GFP_protein .
+<LacI_producer/SubComponent6>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "SubComponent6" ;
+        sbol:instanceOf   :ter_lacI ;
+        sbol:orientation  sbol:inline .
 
 :IPTG   a                 sbol:Component ;
         sbol:description  "IPTG" ;
@@ -75,14 +61,16 @@
         sbol:role         CHEBI:35224 ;
         sbol:type         SBO:0000247 .
 
-<LacI_producer/aTC>  a   sbol:SubComponent ;
-        sbol:displayId   "aTC" ;
-        sbol:instanceOf  :aTC .
-
-<TetR_producer/interaction_3/participation_2>
+<TetR_producer/Interaction2/Participation1>
         a                 sbol:Participation ;
-        sbol:displayId    "participation_2" ;
-        sbol:participant  <TetR_producer/IPTG> ;
+        sbol:displayId    "Participation1" ;
+        sbol:participant  <TetR_producer/SubComponent1> ;
+        sbol:role         SBO:0000642 .
+
+<TetR_producer/Interaction3/Participation1>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation1" ;
+        sbol:participant  <TetR_producer/SubComponent6> ;
         sbol:role         SBO:0000010 .
 
 :pTetR  a                 sbol:Component ;
@@ -99,30 +87,23 @@
         sbol:role         GO:0003700 ;
         sbol:type         SBO:0000252 .
 
-<LacI_producer/interaction_3/participation_1>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_1" ;
-        sbol:participant  <LacI_producer/subcomponent_1> ;
-        sbol:role         SBO:0000642 .
-
 :rbs_gfp  a               sbol:Component ;
         sbol:description  "RBS" ;
         sbol:displayId    "rbs_gfp" ;
-        sbol:name         "rbs_gfp" ;
+        sbol:name         "rbs" ;
         sbol:role         SO:0000139 ;
         sbol:type         SBO:0000251 .
 
-<LacI_producer/interaction_4/participation_3>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_3" ;
-        sbol:participant  <TetR_producer/atC_TetR> ;
-        sbol:role         SBO:0000011 .
+<TetR_producer/SubComponent5>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent5" ;
+        sbol:instanceOf  :TetR_protein .
 
-<LacI_producer/subcomponent_1>
-        a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_1" ;
-        sbol:instanceOf   :pTetR ;
-        sbol:orientation  sbol:inline .
+<LacI_producer/Interaction4>
+        a                      sbol:Interaction ;
+        sbol:displayId         "Interaction4" ;
+        sbol:hasParticipation  <LacI_producer/Interaction4/Participation1> , <LacI_producer/Interaction4/Participation2> , <LacI_producer/Interaction4/Participation3> ;
+        sbol:type              SBO:0000177 .
 
 :atC_TetR  a              sbol:Component ;
         sbol:description  "atC_TetR complex" ;
@@ -130,71 +111,53 @@
         sbol:name         "atC_TetR" ;
         sbol:type         SBO:0000253 .
 
-<toggle_switch/LacI_producer>
-        a                sbol:SubComponent ;
-        sbol:displayId   "LacI_producer" ;
-        sbol:instanceOf  :LacI_producer .
+<toggle_switch/Constraint1>
+        a                 sbol:Constraint ;
+        sbol:displayId    "Constraint1" ;
+        sbol:object       <toggle_switch/ComponentReference2> ;
+        sbol:restriction  sbol:verifyIdentical ;
+        sbol:subject      <toggle_switch/ComponentReference1> .
 
-<toggle_switch/TetR_producer>
-        a                sbol:SubComponent ;
-        sbol:displayId   "TetR_producer" ;
-        sbol:instanceOf  :TetR_producer .
-
-<toggle_switch/componentreference_3>
-        a                sbol:ComponentReference ;
-        sbol:displayId   "componentreference_3" ;
-        sbol:hasFeature  <LacI_producer/TetR_protein> ;
-        sbol:inChildOf   <toggle_switch/LacI_producer> .
-
-<LacI_producer/interaction_1/participation_2>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_2" ;
-        sbol:participant  <LacI_producer/LacI_protein> ;
-        sbol:role         SBO:0000011 .
-
-<TetR_producer/atC_TetR>
-        a                sbol:SubComponent ;
-        sbol:displayId   "atC_TetR" ;
-        sbol:instanceOf  :atC_TetR .
-
-<LacI_producer/subcomponent_6>
+<LacI_producer/SubComponent5>
         a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_6" ;
-        sbol:instanceOf   :ter_lacI ;
+        sbol:displayId    "SubComponent5" ;
+        sbol:instanceOf   :gfp ;
         sbol:orientation  sbol:inline .
 
-<TetR_producer/IPTG_LacI>
-        a                sbol:SubComponent ;
-        sbol:displayId   "IPTG_LacI" ;
-        sbol:instanceOf  :IPTG_LacI .
+<toggle_switch/ComponentReference4>
+        a                sbol:ComponentReference ;
+        sbol:displayId   "ComponentReference4" ;
+        sbol:hasFeature  <TetR_producer/SubComponent5> ;
+        sbol:inChildOf   <toggle_switch/SubComponent2> .
 
-<TetR_producer/interaction_3/participation_1>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_1" ;
-        sbol:participant  <TetR_producer/LacI_protein> ;
-        sbol:role         SBO:0000010 .
-
-<TetR_producer/subcomponent_4>
+<TetR_producer/SubComponent4>
         a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_4" ;
+        sbol:displayId    "SubComponent4" ;
         sbol:instanceOf   :ter_tetR ;
         sbol:orientation  sbol:inline .
 
-<LacI_producer/interaction_4/participation_2>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_2" ;
-        sbol:participant  <LacI_producer/aTC> ;
-        sbol:role         SBO:0000010 .
-
-<TetR_producer/interaction_3>
+<TetR_producer/Interaction3>
         a                      sbol:Interaction ;
-        sbol:displayId         "interaction_3" ;
-        sbol:hasParticipation  <TetR_producer/interaction_3/participation_1> , <TetR_producer/interaction_3/participation_2> , <TetR_producer/interaction_3/participation_3> ;
+        sbol:displayId         "Interaction3" ;
+        sbol:hasParticipation  <TetR_producer/Interaction3/Participation1> , <TetR_producer/Interaction3/Participation2> , <TetR_producer/Interaction3/Participation3> ;
         sbol:type              SBO:0000177 .
 
-<TetR_producer/IPTG>  a  sbol:SubComponent ;
-        sbol:displayId   "IPTG" ;
-        sbol:instanceOf  :IPTG .
+<LacI_producer/SubComponent10>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent10" ;
+        sbol:instanceOf  :aTC .
+
+<LacI_producer/Interaction3>
+        a                      sbol:Interaction ;
+        sbol:displayId         "Interaction3" ;
+        sbol:hasParticipation  <LacI_producer/Interaction3/Participation1> , <LacI_producer/Interaction3/Participation2> ;
+        sbol:type              SBO:0000169 .
+
+<LacI_producer/Interaction4/Participation3>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation3" ;
+        sbol:participant  <TetR_producer/SubComponent9> ;
+        sbol:role         SBO:0000011 .
 
 :TetR_protein  a          sbol:Component ;
         sbol:description  "TetR protein" ;
@@ -206,54 +169,41 @@
 :toggle_switch  a           sbol:Component ;
         sbol:description    "Toggle Switch genetic circuit" ;
         sbol:displayId      "toggle_switch" ;
-        sbol:hasConstraint  <toggle_switch/constraint_2> , <toggle_switch/constraint_1> ;
-        sbol:hasFeature     <toggle_switch/componentreference_4> , <toggle_switch/componentreference_3> , <toggle_switch/LacI_producer> , <toggle_switch/componentreference_2> , <toggle_switch/componentreference_1> , <toggle_switch/TetR_producer> ;
+        sbol:hasConstraint  <toggle_switch/Constraint1> , <toggle_switch/Constraint2> ;
+        sbol:hasFeature     <toggle_switch/SubComponent1> , <toggle_switch/ComponentReference4> , <toggle_switch/ComponentReference3> , <toggle_switch/ComponentReference2> , <toggle_switch/ComponentReference1> , <toggle_switch/SubComponent2> ;
         sbol:name           "Toggle Switch" ;
         sbol:type           SBO:0000241 .
 
-<TetR_producer/interaction_1/participation_2>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_2" ;
-        sbol:participant  <TetR_producer/TetR_protein> ;
-        sbol:role         SBO:0000011 .
-
-<toggle_switch/componentreference_2>
-        a                sbol:ComponentReference ;
-        sbol:displayId   "componentreference_2" ;
-        sbol:hasFeature  <TetR_producer/LacI_protein> ;
-        sbol:inChildOf   <toggle_switch/TetR_producer> .
-
-<LacI_producer/interaction_1/participation_1>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_1" ;
-        sbol:participant  <LacI_producer/subcomponent_3> ;
-        sbol:role         SBO:0000645 .
+<LacI_producer/SubComponent4>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "SubComponent4" ;
+        sbol:instanceOf   :rbs_gfp ;
+        sbol:orientation  sbol:inline .
 
 :pLacI  a                 sbol:Component ;
         sbol:description  "LacI repressible promoter" ;
         sbol:displayId    "pLacI" ;
-        sbol:name         "pLacI" ;
+        sbol:name         "pLacI promoter" ;
         sbol:role         SO:0000167 ;
         sbol:type         SBO:0000251 .
 
-<LacI_producer/subcomponent_5>
-        a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_5" ;
-        sbol:instanceOf   :gfp ;
-        sbol:orientation  sbol:inline .
+<TetR_producer/SubComponent9>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent9" ;
+        sbol:instanceOf  :atC_TetR .
+
+<toggle_switch/ComponentReference3>
+        a                sbol:ComponentReference ;
+        sbol:displayId   "ComponentReference3" ;
+        sbol:hasFeature  <LacI_producer/SubComponent9> ;
+        sbol:inChildOf   <toggle_switch/SubComponent1> .
 
 :rbs_tetR  a              sbol:Component ;
-        sbol:description  "RBS" ;
+        sbol:description  "tetR RBS" ;
         sbol:displayId    "rbs_tetR" ;
-        sbol:name         "rbs_tetR" ;
+        sbol:name         "rbs" ;
         sbol:role         SO:0000139 ;
         sbol:type         SBO:0000251 .
-
-<TetR_producer/subcomponent_3>
-        a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_3" ;
-        sbol:instanceOf   :tetR ;
-        sbol:orientation  sbol:inline .
 
 :gfp    a                 sbol:Component ;
         sbol:description  "gfp coding sequence" ;
@@ -265,76 +215,96 @@
 :LacI_producer  a            sbol:Component ;
         sbol:description     "LacI producer" ;
         sbol:displayId       "LacI_producer" ;
-        sbol:hasFeature      <LacI_producer/subcomponent_3> , <LacI_producer/TetR_protein> , <LacI_producer/subcomponent_6> , <LacI_producer/GFP> , <LacI_producer/subcomponent_2> , <LacI_producer/subcomponent_5> , <LacI_producer/subcomponent_4> , <LacI_producer/subcomponent_1> , <LacI_producer/LacI_protein> , <LacI_producer/aTC> ;
-        sbol:hasInteraction  <LacI_producer/interaction_3> , <LacI_producer/interaction_4> , <LacI_producer/interaction_2> , <LacI_producer/interaction_1> ;
-        sbol:name            "LacI_producer" ;
+        sbol:hasFeature      <LacI_producer/SubComponent1> , <LacI_producer/SubComponent5> , <LacI_producer/SubComponent10> , <LacI_producer/SubComponent2> , <LacI_producer/SubComponent8> , <LacI_producer/SubComponent9> , <LacI_producer/SubComponent3> , <LacI_producer/SubComponent6> , <LacI_producer/SubComponent7> , <LacI_producer/SubComponent4> ;
+        sbol:hasInteraction  <LacI_producer/Interaction3> , <LacI_producer/Interaction2> , <LacI_producer/Interaction1> , <LacI_producer/Interaction4> ;
+        sbol:name            "LacI producer" ;
         sbol:role            SO:0000704 ;
         sbol:type            SBO:0000251 .
 
-<LacI_producer/interaction_4/participation_1>
+<TetR_producer/SubComponent3>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "SubComponent3" ;
+        sbol:instanceOf   :tetR ;
+        sbol:orientation  sbol:inline .
+
+<TetR_producer/Interaction2>
+        a                      sbol:Interaction ;
+        sbol:displayId         "Interaction2" ;
+        sbol:hasParticipation  <TetR_producer/Interaction2/Participation1> , <TetR_producer/Interaction2/Participation2> ;
+        sbol:type              SBO:0000169 .
+
+<LacI_producer/Interaction2/Participation2>
         a                 sbol:Participation ;
-        sbol:displayId    "participation_1" ;
-        sbol:participant  <LacI_producer/TetR_protein> ;
+        sbol:displayId    "Participation2" ;
+        sbol:participant  <LacI_producer/SubComponent8> ;
+        sbol:role         SBO:0000011 .
+
+<toggle_switch/SubComponent2>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent2" ;
+        sbol:instanceOf  :TetR_producer .
+
+<LacI_producer/Interaction1/Participation2>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation2" ;
+        sbol:participant  <LacI_producer/SubComponent7> ;
+        sbol:role         SBO:0000011 .
+
+<LacI_producer/Interaction2>
+        a                      sbol:Interaction ;
+        sbol:displayId         "Interaction2" ;
+        sbol:hasParticipation  <LacI_producer/Interaction2/Participation1> , <LacI_producer/Interaction2/Participation2> ;
+        sbol:type              SBO:0000589 .
+
+<LacI_producer/Interaction3/Participation2>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation2" ;
+        sbol:participant  <LacI_producer/SubComponent9> ;
+        sbol:role         SBO:0000019 .
+
+<LacI_producer/Interaction4/Participation2>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation2" ;
+        sbol:participant  <LacI_producer/SubComponent10> ;
         sbol:role         SBO:0000010 .
 
-<LacI_producer/interaction_4>
-        a                      sbol:Interaction ;
-        sbol:displayId         "interaction_4" ;
-        sbol:hasParticipation  <LacI_producer/interaction_4/participation_1> , <LacI_producer/interaction_4/participation_2> , <LacI_producer/interaction_4/participation_3> ;
-        sbol:type              SBO:0000177 .
-
-<TetR_producer/interaction_2>
-        a                      sbol:Interaction ;
-        sbol:displayId         "interaction_2" ;
-        sbol:hasParticipation  <TetR_producer/interaction_2/participation_1> , <TetR_producer/interaction_2/participation_2> ;
-        sbol:type              SBO:0000169 .
+<LacI_producer/SubComponent9>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent9" ;
+        sbol:instanceOf  :TetR_protein .
 
 :rbs_lacI  a              sbol:Component ;
         sbol:description  "RBS" ;
         sbol:displayId    "rbs_lacI" ;
-        sbol:name         "rbs_lacI" ;
+        sbol:name         "rbs" ;
         sbol:role         SO:0000139 ;
         sbol:type         SBO:0000251 .
 
 :TetR_producer  a            sbol:Component ;
         sbol:description     "TetR producer" ;
         sbol:displayId       "TetR_producer" ;
-        sbol:hasFeature      <TetR_producer/subcomponent_3> , <TetR_producer/IPTG> , <TetR_producer/subcomponent_1> , <TetR_producer/atC_TetR> , <TetR_producer/subcomponent_4> , <TetR_producer/subcomponent_2> , <TetR_producer/LacI_protein> , <TetR_producer/TetR_protein> , <TetR_producer/IPTG_LacI> ;
-        sbol:hasInteraction  <TetR_producer/interaction_3> , <TetR_producer/interaction_1> , <TetR_producer/interaction_2> ;
-        sbol:name            "TetR_producer" ;
+        sbol:hasFeature      <TetR_producer/SubComponent2> , <TetR_producer/SubComponent7> , <TetR_producer/SubComponent5> , <TetR_producer/SubComponent3> , <TetR_producer/SubComponent8> , <TetR_producer/SubComponent1> , <TetR_producer/SubComponent6> , <TetR_producer/SubComponent4> , <TetR_producer/SubComponent9> ;
+        sbol:hasInteraction  <TetR_producer/Interaction2> , <TetR_producer/Interaction1> , <TetR_producer/Interaction3> ;
+        sbol:name            "TetR device" ;
         sbol:role            SO:0000704 ;
         sbol:type            SBO:0000251 .
 
-<toggle_switch/constraint_2>
-        a                 sbol:Constraint ;
-        sbol:displayId    "constraint_2" ;
-        sbol:object       <toggle_switch/componentreference_4> ;
-        sbol:restriction  sbol:verifyIdentical ;
-        sbol:subject      <toggle_switch/componentreference_3> .
-
-<TetR_producer/interaction_1/participation_1>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_1" ;
-        sbol:participant  <TetR_producer/subcomponent_3> ;
-        sbol:role         SBO:0000645 .
-
-<toggle_switch/componentreference_1>
-        a                sbol:ComponentReference ;
-        sbol:displayId   "componentreference_1" ;
-        sbol:hasFeature  <LacI_producer/LacI_protein> ;
-        sbol:inChildOf   <toggle_switch/LacI_producer> .
-
-<LacI_producer/interaction_2/participation_2>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_2" ;
-        sbol:participant  <LacI_producer/GFP> ;
-        sbol:role         SBO:0000011 .
-
-<LacI_producer/subcomponent_4>
+<LacI_producer/SubComponent3>
         a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_4" ;
-        sbol:instanceOf   :rbs_gfp ;
+        sbol:displayId    "SubComponent3" ;
+        sbol:instanceOf   :lacI ;
         sbol:orientation  sbol:inline .
+
+<TetR_producer/SubComponent8>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent8" ;
+        sbol:instanceOf  :IPTG_LacI .
+
+<toggle_switch/ComponentReference2>
+        a                sbol:ComponentReference ;
+        sbol:displayId   "ComponentReference2" ;
+        sbol:hasFeature  <TetR_producer/SubComponent6> ;
+        sbol:inChildOf   <toggle_switch/SubComponent2> .
 
 :tetR   a                 sbol:Component ;
         sbol:description  "tetR coding sequence" ;
@@ -343,36 +313,81 @@
         sbol:role         SO:0000316 ;
         sbol:type         SBO:0000251 .
 
-<TetR_producer/subcomponent_2>
+<TetR_producer/Interaction1/Participation2>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation2" ;
+        sbol:participant  <TetR_producer/SubComponent5> ;
+        sbol:role         SBO:0000011 .
+
+<TetR_producer/SubComponent2>
         a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_2" ;
+        sbol:displayId    "SubComponent2" ;
         sbol:instanceOf   :rbs_tetR ;
         sbol:orientation  sbol:inline .
 
-<LacI_producer/interaction_3>
+<TetR_producer/Interaction1>
         a                      sbol:Interaction ;
-        sbol:displayId         "interaction_3" ;
-        sbol:hasParticipation  <LacI_producer/interaction_3/participation_1> , <LacI_producer/interaction_3/participation_2> ;
-        sbol:type              SBO:0000169 .
-
-<TetR_producer/interaction_1>
-        a                      sbol:Interaction ;
-        sbol:displayId         "interaction_1" ;
-        sbol:hasParticipation  <TetR_producer/interaction_1/participation_1> , <TetR_producer/interaction_1/participation_2> ;
+        sbol:displayId         "Interaction1" ;
+        sbol:hasParticipation  <TetR_producer/Interaction1/Participation1> , <TetR_producer/Interaction1/Participation2> ;
         sbol:type              SBO:0000589 .
+
+<LacI_producer/Interaction1>
+        a                      sbol:Interaction ;
+        sbol:displayId         "Interaction1" ;
+        sbol:hasParticipation  <LacI_producer/Interaction1/Participation1> , <LacI_producer/Interaction1/Participation2> ;
+        sbol:type              SBO:0000589 .
+
+<toggle_switch/SubComponent1>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent1" ;
+        sbol:instanceOf  :LacI_producer .
+
+<LacI_producer/Interaction1/Participation1>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation1" ;
+        sbol:participant  <LacI_producer/SubComponent3> ;
+        sbol:role         SBO:0000645 .
+
+<LacI_producer/Interaction2/Participation1>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation1" ;
+        sbol:participant  <LacI_producer/SubComponent5> ;
+        sbol:role         SBO:0000645 .
+
+<LacI_producer/Interaction3/Participation1>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation1" ;
+        sbol:participant  <LacI_producer/SubComponent1> ;
+        sbol:role         SBO:0000642 .
+
+<LacI_producer/Interaction4/Participation1>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation1" ;
+        sbol:participant  <LacI_producer/SubComponent9> ;
+        sbol:role         SBO:0000010 .
+
+<LacI_producer/SubComponent8>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent8" ;
+        sbol:instanceOf  :GFP_protein .
 
 :GFP_protein  a           sbol:Component ;
         sbol:description  "GFP" ;
-        sbol:displayId    "GFP" ;
+        sbol:displayId    "GFP_protein" ;
         sbol:name         "GFP" ;
         sbol:type         SBO:0000252 .
 
-<toggle_switch/constraint_1>
-        a                 sbol:Constraint ;
-        sbol:displayId    "constraint_1" ;
-        sbol:object       <toggle_switch/componentreference_2> ;
-        sbol:restriction  sbol:verifyIdentical ;
-        sbol:subject      <toggle_switch/componentreference_1> .
+<LacI_producer/SubComponent2>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "SubComponent2" ;
+        sbol:instanceOf   :rbs_lacI ;
+        sbol:orientation  sbol:inline .
+
+<TetR_producer/Interaction3/Participation3>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation3" ;
+        sbol:participant  <TetR_producer/SubComponent8> ;
+        sbol:role         SBO:0000011 .
 
 :aTC    a                 sbol:Component ;
         sbol:description  "aTC" ;
@@ -381,60 +396,48 @@
         sbol:role         CHEBI:35224 ;
         sbol:type         SBO:0000247 .
 
-<TetR_producer/interaction_2/participation_2>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_2" ;
-        sbol:participant  <TetR_producer/LacI_protein> ;
-        sbol:role         SBO:0000019 .
+<TetR_producer/SubComponent7>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent7" ;
+        sbol:instanceOf  :IPTG .
 
-<LacI_producer/interaction_2/participation_1>
+<toggle_switch/ComponentReference1>
+        a                sbol:ComponentReference ;
+        sbol:displayId   "ComponentReference1" ;
+        sbol:hasFeature  <LacI_producer/SubComponent7> ;
+        sbol:inChildOf   <toggle_switch/SubComponent1> .
+
+<TetR_producer/Interaction1/Participation1>
         a                 sbol:Participation ;
-        sbol:displayId    "participation_1" ;
-        sbol:participant  <LacI_producer/subcomponent_5> ;
+        sbol:displayId    "Participation1" ;
+        sbol:participant  <TetR_producer/SubComponent3> ;
         sbol:role         SBO:0000645 .
 
-<TetR_producer/LacI_protein>
-        a                sbol:SubComponent ;
-        sbol:displayId   "LacI_protein" ;
-        sbol:instanceOf  :LacI_protein .
-
-<LacI_producer/LacI_protein>
-        a                sbol:SubComponent ;
-        sbol:displayId   "LacI_protein" ;
-        sbol:instanceOf  :LacI_protein .
-
-<LacI_producer/subcomponent_3>
+<TetR_producer/SubComponent1>
         a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_3" ;
-        sbol:instanceOf   :lacI ;
-        sbol:orientation  sbol:inline .
-
-<TetR_producer/subcomponent_1>
-        a                 sbol:SubComponent ;
-        sbol:displayId    "subcomponent_1" ;
+        sbol:displayId    "SubComponent1" ;
         sbol:instanceOf   :pLacI ;
         sbol:orientation  sbol:inline .
 
-<LacI_producer/interaction_2>
-        a                      sbol:Interaction ;
-        sbol:displayId         "interaction_2" ;
-        sbol:hasParticipation  <LacI_producer/interaction_2/participation_1> , <LacI_producer/interaction_2/participation_2> ;
-        sbol:type              SBO:0000589 .
+<LacI_producer/SubComponent7>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent7" ;
+        sbol:instanceOf  :LacI_protein .
 
-<TetR_producer/interaction_2/participation_1>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_1" ;
-        sbol:participant  <TetR_producer/subcomponent_1> ;
-        sbol:role         SBO:0000642 .
+<LacI_producer/SubComponent1>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "SubComponent1" ;
+        sbol:instanceOf   :pTetR ;
+        sbol:orientation  sbol:inline .
 
-<TetR_producer/interaction_3/participation_3>
+<TetR_producer/Interaction2/Participation2>
         a                 sbol:Participation ;
-        sbol:displayId    "participation_3" ;
-        sbol:participant  <TetR_producer/IPTG_LacI> ;
-        sbol:role         SBO:0000011 .
-
-<LacI_producer/interaction_3/participation_2>
-        a                 sbol:Participation ;
-        sbol:displayId    "participation_2" ;
-        sbol:participant  <LacI_producer/TetR_protein> ;
+        sbol:displayId    "Participation2" ;
+        sbol:participant  <TetR_producer/SubComponent6> ;
         sbol:role         SBO:0000019 .
+
+<TetR_producer/Interaction3/Participation2>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation2" ;
+        sbol:participant  <TetR_producer/SubComponent7> ;
+        sbol:role         SBO:0000010 .

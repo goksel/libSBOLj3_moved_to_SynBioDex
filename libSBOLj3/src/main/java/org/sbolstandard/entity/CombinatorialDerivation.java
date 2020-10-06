@@ -67,9 +67,15 @@ public class CombinatorialDerivation extends TopLevel{
 		return variableComponent;	
 	}
 	
-	public VariableComponent createVariableComponent(String displayId, URI cardinality, URI subComponent) throws SBOLGraphException
+	private VariableComponent createVariableComponent(String displayId, URI cardinality, URI subComponent) throws SBOLGraphException
 	{
 		return createVariableComponent(SBOLAPI.append(this.getUri(), displayId), cardinality, subComponent);	
+	}
+	
+	public VariableComponent createVariableComponent(URI cardinality, URI subComponent) throws SBOLGraphException
+	{
+		String displayId=SBOLAPI.createLocalName(DataModel.VariableComponent.uri, getVariableComponents());	
+		return createVariableComponent(displayId, cardinality, subComponent);	
 	}
 	
 

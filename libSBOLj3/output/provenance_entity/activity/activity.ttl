@@ -12,7 +12,7 @@
 :toggle_switch_optimised
         a                    sbol:Component ;
         sbol:description     "Toggle Switch genetic circuit - codon optimised" ;
-        sbol:displayId       "toggle_switch optimised" ;
+        sbol:displayId       "toggle_switch_optimised" ;
         sbol:name            "Toggle Switch Optimised" ;
         sbol:type            SBO:0000241 ;
         prov:wasDerivedFrom  :toggle_switch ;
@@ -32,17 +32,12 @@
         sbol:type           sbol:design ;
         prov:wasInformedBy  :codon_optimization_activity .
 
-<codon_optimization_activity/source_usage>
-        a               prov:Usage ;
-        sbol:displayId  "source_usage" ;
-        prov:entity     :toggle_switch ;
-        prov:hadRole    SBO:0000645 .
-
-<codon_optimization_activity/optimised_usage>
-        a               prov:Usage ;
-        sbol:displayId  "optimised_usage" ;
-        prov:entity     :toggle_switch_optimised ;
-        prov:hadRole    SBO:0000011 .
+<codon_optimization_activity/Association1>
+        a               prov:Association ;
+        sbol:displayId  "Association1" ;
+        prov:hadAgent   :CodonOptimiserSoftware ;
+        prov:hadPlan    :CodonOptimisationProtocol ;
+        prov:hadRole    sbol:design .
 
 :toggle_switch  a         sbol:Component ;
         sbol:description  "Toggle Switch genetic circuit" ;
@@ -50,12 +45,17 @@
         sbol:name         "Toggle Switch" ;
         sbol:type         SBO:0000241 .
 
-<codon_optimization_activity/association>
-        a               prov:Association ;
-        sbol:displayId  "association" ;
-        prov:hadAgent   :CodonOptimiserSoftware ;
-        prov:hadPlan    :CodonOptimisationProtocol ;
-        prov:hadRole    sbol:design .
+<codon_optimization_activity/Usage1>
+        a               prov:Usage ;
+        sbol:displayId  "Usage1" ;
+        prov:entity     :toggle_switch ;
+        prov:hadRole    SBO:0000645 .
+
+<codon_optimization_activity/Usage2>
+        a               prov:Usage ;
+        sbol:displayId  "Usage2" ;
+        prov:entity     :toggle_switch_optimised ;
+        prov:hadRole    SBO:0000011 .
 
 :CodonOptimisationProtocol
         a                 prov:Plan ;
@@ -69,7 +69,7 @@
         sbol:displayId             "codon_optimization_activity" ;
         sbol:name                  "Codon optimization activity" ;
         sbol:type                  sbol:design ;
-        prov:endedAtTime           "2020-08-30T17:48:04.765Z" ;
-        prov:qualifiedAssociation  <codon_optimization_activity/association> ;
-        prov:qualifiedUsage        <codon_optimization_activity/optimised_usage> , <codon_optimization_activity/source_usage> ;
-        prov:startedAtTime         "2019-07-29T17:48:04.765Z" .
+        prov:endedAtTime           "2020-08-30T18:45:30.605Z" ;
+        prov:qualifiedAssociation  <codon_optimization_activity/Association1> ;
+        prov:qualifiedUsage        <codon_optimization_activity/Usage2> , <codon_optimization_activity/Usage1> ;
+        prov:startedAtTime         "2019-07-29T18:45:30.605Z" .

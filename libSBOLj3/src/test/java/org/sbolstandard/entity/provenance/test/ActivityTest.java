@@ -61,12 +61,12 @@ public class ActivityTest extends TestCase {
         activity.setEndedAtTime(new XSDDateTime(calendar));
            
         
-        Usage usage1=activity.createUsage(SBOLAPI.append(activity.getUri(), "source_usage"), toggleSwitch.getUri());
+        Usage usage1=activity.createUsage(toggleSwitch.getUri());
         usage1.setRoles(Arrays.asList(ParticipationRole.Template));
-        Usage usage2=activity.createUsage(SBOLAPI.append(activity.getUri(), "optimised_usage"), toggleSwitchOptimised.getUri());
+        Usage usage2=activity.createUsage(toggleSwitchOptimised.getUri());
         usage2.setRoles(Arrays.asList(ParticipationRole.Product));
         
-        Association association=activity.createAssociation(SBOLAPI.append(activity.getUri(), "association"), agent.getUri());
+        Association association=activity.createAssociation(agent.getUri());
         association.setPlan(plan.getUri());
         association.setRoles(Arrays.asList(ActivityType.Design.getUrl()));
         

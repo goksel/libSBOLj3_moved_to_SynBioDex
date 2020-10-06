@@ -1,25 +1,45 @@
 package org.sbolstandard.usecase;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
+
+import org.sbolstandard.TestUtil;
 import org.sbolstandard.api.SBOLAPI;
-import org.sbolstandard.entity.*;
-import org.sbolstandard.entity.Location.*;
+import org.sbolstandard.entity.Component;
+import org.sbolstandard.entity.ComponentReference;
+import org.sbolstandard.entity.Constraint;
+import org.sbolstandard.entity.Interaction;
+import org.sbolstandard.entity.Location;
+import org.sbolstandard.entity.Participation;
+import org.sbolstandard.entity.Location.LocationBuilder;
+import org.sbolstandard.entity.SBOLDocument;
+import org.sbolstandard.entity.Sequence;
+import org.sbolstandard.entity.SequenceFeature;
+import org.sbolstandard.entity.SubComponent;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
-import org.sbolstandard.vocabulary.*;
+import org.sbolstandard.vocabulary.ComponentType;
+import org.sbolstandard.vocabulary.DataModel;
+import org.sbolstandard.vocabulary.Encoding;
+import org.sbolstandard.vocabulary.InteractionType;
+import org.sbolstandard.vocabulary.Orientation;
+import org.sbolstandard.vocabulary.ParticipationRole;
+import org.sbolstandard.vocabulary.RestrictionType;
+import org.sbolstandard.vocabulary.Role;
+
 /**
  * COMBINE 2020 SBOL 3 Tutorial
  * October, 2020
  * This tutorial code goes with the slides at:
- * https://github.com/SynBioDex/Community-Media/blob/master/2020/COMBINE20/SBOL3-COMBINE-2020.pptx
+ * https://github.com/SynBioDex/Community-Media/blob/master/2020/IWBDA20/SBOL3-IWBDA-2020.pptx
  */
-public class GettingStartedTutorial {
+public class GettingStartedTutorial_Short {
 
 
-	public SBOLDocument runExample() throws SBOLGraphException, IOException
+	public void runExample() throws SBOLGraphException, IOException
 	{
 		// Create a new SBOL document
 		URI base=URI.create("https://synbiohub.org/public/igem/");
@@ -36,10 +56,7 @@ public class GettingStartedTutorial {
 		 * role: SO:0000804 (Engineered Region)
 		 */
 		System.out.println("Creating GFP expression cassette");
-		Component device=doc.createComponent("i13504", Arrays.asList(ComponentType.DNA.getUrl())); 
-		device.setName("i13504");
-		device.setDescription("Screening plasmid intermediate");
-		device.setRoles(Arrays.asList(Role.EngineeredGene));
+		Component device= SBOLAPI.createDnaComponent(doc, "i13504", "i13504", "Screening plasmid intermediate", ComponentType.DNA.getUrl(), null);
 		System.out.println(String.format("Created GFP expression cassette component: %s", device.getUri()));
 		  
 		/* --------------------------------------------------
@@ -47,16 +64,7 @@ public class GettingStartedTutorial {
 		-------------------------------------------------- */
 		//Add the RBS subcomponent:
 		//Create the RBS component
-		Component rbs=doc.createComponent("B0034", Arrays.asList(ComponentType.DNA.getUrl())); 
-		rbs.setName("B0034");
-		rbs.setDescription("RBS (Elowitz 1999)");
-		rbs.setRoles(Arrays.asList(Role.RBS));
-		
-		//Create a sequence entity for the RBS component
-		Sequence rbs_seq=doc.createSequence("B0034_Sequence");
-		rbs_seq.setElements("aaagaggagaaa");
-		rbs_seq.setEncoding(Encoding.NucleicAcid);
-		rbs.setSequences(Arrays.asList(rbs_seq.getUri()));
+		Component rbs=SBOLAPI.createDnaComponent(doc, "B0034", "rbs", "RBS (Elowitz 1999)", Role.RBS, "aaagaggagaaa");
 		
 		//Start assembling the i13504 device's sequence by adding the RBS component.
 		SBOLAPI.appendComponent(doc, device,rbs,Orientation.inline);
@@ -80,42 +88,20 @@ public class GettingStartedTutorial {
 		String term_na="ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc";
 		Component term=SBOLAPI.createDnaComponent(doc, "B0015", "terminator", "B0015 double terminator", Role.Terminator,term_na);
 		
-		//Add the terminator as a subcomponent. This time we will be using low level API methods, which can be used to create features and locations.
-		SubComponent termSubComponent=device.createSubComponent(term.getUri());
-		termSubComponent.setOrientation(Orientation.inline);
-		Sequence i13504Sequence= (Sequence)doc.getIdentified(device.getSequences().get(0),Sequence.class);
+		//Add the terminator as a subcomponent.
+		SBOLAPI.appendComponent(doc, device,term, Orientation.inline);
+		System.out.println(String.format("Added the terminator subcomponent %s", term.getUri()));
 		
-		int start=i13504Sequence.getElements().length() + 1;
-    	int end=start + term_na.length()-1;
-    	i13504Sequence.setElements(i13504Sequence.getElements() + term_na);
-    	LocationBuilder locationBuilder=new Location.RangeLocationBuilder(start, end,i13504Sequence.getUri());
-    	locationBuilder.setOrientation(Orientation.inline);
-    	termSubComponent.createLocation(locationBuilder);
-    	System.out.println(String.format("Added the terminator subcomponent %s", term.getUri()));
-		
-    	//Iterate through sub components
-    	System.out.println("Subcomponents:");
-    	for (SubComponent subComp: device.getSubComponents())
-    	{
-    		System.out.println(subComp.getIsInstanceOf());
-    	}
-
-    	//Search for components using the SPARQL graph query language.
-    	List<Component> components=(List<Component>)doc.getIdentifieds("?identified a sbol:Component; sbol:role  SO:0000141; sbol:type SBO:0000251 .", Component.class);
-    	System.out.println("Graph query results:");
-    	for (Component component:components)
-    	{
-    		System.out.println("  " +  component.getDisplayId());
-    	}
-    	
-    	/* --------------------------------------------------
+		/* --------------------------------------------------
 		 Slide 32: GFP production from expression cassette
 		 -------------------------------------------------- */
 		 Component i13504_system=SBOLAPI.createComponent(doc,"i13504_system", ComponentType.FunctionalEntity.getUrl(), "i13504 system", null, Role.FunctionalCompartment);
 		 Component GFP=SBOLAPI.createComponent(doc, "GFP_protein", ComponentType.Protein.getUrl(), "GFP", "GFP", null); 
 		 SubComponent i13504SubComponent=SBOLAPI.addSubComponent(i13504_system, device);
 		 SubComponent gfpProteinSubComponent=SBOLAPI.addSubComponent(i13504_system, GFP);
-		  
+		 
+		// List<ComponentReference> gfpRefs=SBOLAPI.createComponentReference(i13504_system, i13504, gfp);
+	     
 		 ComponentReference gfpCDSReference=i13504_system.createComponentReference(gfpSubComponent, i13504SubComponent);
 					    
 		 Interaction interaction= i13504_system.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
@@ -125,6 +111,7 @@ public class GettingStartedTutorial {
 		 /* --------------------------------------------------
 		  Slide 34: Example: concatenating & reusing components
 		  -------------------------------------------------- */
+		 
 		 //Left hand side of slide: interlab16device1
 		 Component ilab16_dev1=doc.createComponent("interlab16device1", Arrays.asList(ComponentType.DNA.getUrl())); 
 		 Component j23101=doc.createComponent("j23101", Arrays.asList(ComponentType.DNA.getUrl())); 
@@ -142,17 +129,29 @@ public class GettingStartedTutorial {
 		 
 		 ComponentReference compRef_i13504_dev2=ilab16_dev2.createComponentReference(i13504SubComponent, sc_i13504_system_dev2);
 		 ilab16_dev2.createConstraint(RestrictionType.Topology.meets, sc_j23106.getUri(), compRef_i13504_dev2.getUri());
-		 
-		 System.out.println(System.lineSeparator() + "SBOL:");
-		 String output=SBOLIO.write(doc, "Turtle");
-		 System.out.println(output); 
-		 System.out.println("...done!");   
-		 return doc;
+		    
+		 String output=SBOLIO.write(doc, "RDF/XML-ABBREV");
+		 System.out.println("");
+		 System.out.println("SBOL:");
+		 System.out.println(output);   
+	     TestUtil.serialise(doc, "combine2020", "combine2020");   
+	     System.out.println("--------------------------");
+	     SBOLDocument doc2=SBOLIO.read(new File("input/gfp.nt"),"N-TRIPLES");
+	     //SBOLDocument doc2=SBOLIO.read(new File("output/combine2020/combine2020.nt"),"N-TRIPLES");
+	     //SBOLDocument doc2=SBOLIO.read(new File("output/combine2020/combine2020.rdf"),"RDF/XML-ABBREV");
+	     
+	     
+	     TestUtil.assertReadWrite(doc2);
+	     String output2=SBOLIO.write(doc2, "RDF/XML-ABBREV");
+	     System.out.println(output2);   
+		    
+	     System.out.println("done");   
+	     
 	}
 	
 	public static void main(String[] args) throws SBOLGraphException, IOException
 	{
-		GettingStartedTutorial tutorial=new GettingStartedTutorial();
+		GettingStartedTutorial_Short tutorial=new GettingStartedTutorial_Short();
 		tutorial.runExample();
 	}
 }

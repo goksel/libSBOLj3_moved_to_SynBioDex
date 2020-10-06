@@ -6,14 +6,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.Syntax;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.entity.provenance.Agent;
-import org.sbolstandard.util.RDFHandler;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
@@ -21,7 +25,6 @@ import org.sbolstandard.vocabulary.MeasureDataModel;
 import org.sbolstandard.vocabulary.ProvenanceDataModel;
 import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.measure.BinaryPrefix;
-import org.sbolstandard.entity.measure.Measure;
 import org.sbolstandard.entity.measure.Prefix;
 import org.sbolstandard.entity.measure.PrefixedUnit;
 import org.sbolstandard.entity.measure.SIPrefix;
@@ -54,8 +57,6 @@ public class SBOLDocument {
 	private List<UnitDivision> unitDivisions;
 	private List<UnitExponentiation> unitExponentiations;
 	private List<PrefixedUnit> prefixedUnits;
-	//private List<Measure> measures;
-	
 	
 	public Model getRDFModel() {
 		return model;
@@ -609,6 +610,8 @@ public class SBOLDocument {
 		return prefixedUnits;
 	}
 	
+
+	
 	/*public Measure createMeasure(URI uri, float value, URI unit) throws SBOLGraphException {
 
 		Measure measure = new Measure(this.model, uri) {};
@@ -645,6 +648,61 @@ public class SBOLDocument {
 		}
 
 	}
+	
+	private String constructQuery(String search)
+	{
+		StringBuilder query=new StringBuilder();
+		for (Entry<String, String> ns:this.model.getNsPrefixMap().entrySet())
+		{
+			String prefix=ns.getKey();
+			String prefixUri=ns.getValue();
+			if (prefix!=null && prefix!="")
+			{
+				query.append(String.format("PREFIX %s: <%s>", prefix, prefixUri));
+				query.append(System.lineSeparator());
+			}
+		}
+		query.append("SELECT ?identified" + System.lineSeparator());
+		query.append("WHERE {" + System.lineSeparator()); 
+			//query=query + "  ?identified a sbol:Component ." + System.lineSeparator();identified.
+		query.append(search);
+		query.append(System.lineSeparator());
+		query.append("}");
+		return query.toString();
+	}
+	
+	
+	public <T extends Identified> List<T> getIdentifieds(String search, Class<T> identified) throws SBOLGraphException
+	{
+		List<T> items=new ArrayList<T>();
+		ResultSet rs=null;
+		try
+		{
+			String query=constructQuery(search);
+	   	        rs=RDFUtil.executeSPARQLSelectQuery(this.model, query, Syntax.syntaxSPARQL_11);
+	        if (rs!=null)
+	        {
+	        	String resultColumnName=rs.getResultVars().get(0);
+		        while (rs.hasNext())
+	 	        {
+	 	            QuerySolution solution=rs.next();
+	 	            RDFNode node=solution.get(resultColumnName);
+	 	            if (node.isResource())
+	 	            {
+	 	                String found=node.asResource().getURI();
+	 	                Identified item=getIdentified(URI.create(found), identified);
+	 	                items.add((T)item);
+	 	            }
+	 	        }
+	        }
+		}
+		catch (Exception ex)
+		{
+			throw new SBOLGraphException(ex.getMessage());
+		}
+		return items;
+	}
+	
 	
 	protected <T extends Identified> Identified createIdentified(Resource res, Class<T> identified) throws SBOLGraphException
 	{
@@ -730,7 +788,5 @@ public class SBOLDocument {
 		{
 			topLevelResourceTypes.add(type);
 		}
-	}
-
-	
+	}	
 }

@@ -11,83 +11,83 @@
     xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/"
    xml:base="https://sbolstandard.org/examples/">
    <sbol:Component rdf:about="MulticellularSystem">
-      <sbol:displayId>MulticellularSystem</sbol:displayId>
+      <sbol:hasFeature>
+         <sbol:ComponentReference rdf:about="MulticellularSystem/ComponentReference2">
+            <sbol:inChildOf>
+               <sbol:SubComponent rdf:about="MulticellularSystem/SubComponent2">
+                  <sbol:instanceOf>
+                     <sbol:Component rdf:about="ReceiverSystem"/>
+                  </sbol:instanceOf>
+                  <sbol:displayId>SubComponent2</sbol:displayId>
+               </sbol:SubComponent>
+            </sbol:inChildOf>
+            <sbol:hasFeature>
+               <sbol:SubComponent rdf:about="ReceiverSystem/SubComponent2">
+                  <sbol:instanceOf>
+                     <sbol:Component rdf:about="AHL"/>
+                  </sbol:instanceOf>
+                  <sbol:displayId>SubComponent2</sbol:displayId>
+               </sbol:SubComponent>
+            </sbol:hasFeature>
+            <sbol:displayId>ComponentReference2</sbol:displayId>
+         </sbol:ComponentReference>
+      </sbol:hasFeature>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
+      <sbol:description>Multicellular System</sbol:description>
       <sbol:hasConstraint>
-         <sbol:Constraint rdf:about="MulticellularSystem/constraint_1">
+         <sbol:Constraint rdf:about="MulticellularSystem/Constraint1">
             <sbol:subject>
-               <sbol:ComponentReference rdf:about="MulticellularSystem/componentreference_1">
+               <sbol:ComponentReference rdf:about="MulticellularSystem/ComponentReference1">
                   <sbol:inChildOf>
-                     <sbol:SubComponent rdf:about="MulticellularSystem/SenderSystem">
+                     <sbol:SubComponent rdf:about="MulticellularSystem/SubComponent1">
                         <sbol:instanceOf>
                            <sbol:Component rdf:about="SenderSystem"/>
                         </sbol:instanceOf>
-                        <sbol:displayId>SenderSystem</sbol:displayId>
+                        <sbol:displayId>SubComponent1</sbol:displayId>
                      </sbol:SubComponent>
                   </sbol:inChildOf>
                   <sbol:hasFeature>
-                     <sbol:SubComponent rdf:about="SenderSystem/subcomponent_2">
+                     <sbol:SubComponent rdf:about="SenderSystem/SubComponent2">
                         <sbol:instanceOf>
                            <sbol:Component rdf:about="AHL"/>
                         </sbol:instanceOf>
-                        <sbol:displayId>subcomponent_2</sbol:displayId>
+                        <sbol:displayId>SubComponent2</sbol:displayId>
                      </sbol:SubComponent>
                   </sbol:hasFeature>
-                  <sbol:displayId>componentreference_1</sbol:displayId>
+                  <sbol:displayId>ComponentReference1</sbol:displayId>
                </sbol:ComponentReference>
             </sbol:subject>
             <sbol:restriction rdf:resource="http://sbols.org/v3#verifyIdentical"/>
-            <sbol:object>
-               <sbol:ComponentReference rdf:about="MulticellularSystem/componentreference_2">
-                  <sbol:inChildOf>
-                     <sbol:SubComponent rdf:about="MulticellularSystem/ReceiverSystem">
-                        <sbol:instanceOf>
-                           <sbol:Component rdf:about="ReceiverSystem"/>
-                        </sbol:instanceOf>
-                        <sbol:displayId>ReceiverSystem</sbol:displayId>
-                     </sbol:SubComponent>
-                  </sbol:inChildOf>
-                  <sbol:hasFeature>
-                     <sbol:SubComponent rdf:about="ReceiverSystem/subcomponent_2">
-                        <sbol:instanceOf>
-                           <sbol:Component rdf:about="AHL"/>
-                        </sbol:instanceOf>
-                        <sbol:displayId>subcomponent_2</sbol:displayId>
-                     </sbol:SubComponent>
-                  </sbol:hasFeature>
-                  <sbol:displayId>componentreference_2</sbol:displayId>
-               </sbol:ComponentReference>
-            </sbol:object>
-            <sbol:displayId>constraint_1</sbol:displayId>
+            <sbol:object rdf:resource="MulticellularSystem/ComponentReference2"/>
+            <sbol:displayId>Constraint1</sbol:displayId>
          </sbol:Constraint>
       </sbol:hasConstraint>
-      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
-      <sbol:hasFeature rdf:resource="MulticellularSystem/ReceiverSystem"/>
-      <sbol:description>Multicellular System</sbol:description>
-      <sbol:hasFeature rdf:resource="MulticellularSystem/componentreference_1"/>
-      <sbol:hasFeature rdf:resource="MulticellularSystem/SenderSystem"/>
-      <sbol:hasFeature rdf:resource="MulticellularSystem/componentreference_2"/>
       <sbol:role rdf:resource="https://identifiers.org/SBO:0000289"/>
       <sbol:name>MulticellularSystem</sbol:name>
+      <sbol:hasFeature rdf:resource="MulticellularSystem/SubComponent1"/>
+      <sbol:hasFeature rdf:resource="MulticellularSystem/ComponentReference1"/>
+      <sbol:hasFeature rdf:resource="MulticellularSystem/SubComponent2"/>
+      <sbol:displayId>MulticellularSystem</sbol:displayId>
    </sbol:Component>
    <sbol:Component rdf:about="ReceiverSystem">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
       <sbol:role rdf:resource="https://identifiers.org/SBO:0000289"/>
       <sbol:name>ReceiverSystem</sbol:name>
       <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="ReceiverSystem/subcomponent_1">
+         <sbol:SubComponent rdf:about="ReceiverSystem/SubComponent1">
             <sbol:instanceOf>
                <sbol:Component rdf:about="OrganismB"/>
             </sbol:instanceOf>
-            <sbol:displayId>subcomponent_1</sbol:displayId>
+            <sbol:displayId>SubComponent1</sbol:displayId>
          </sbol:SubComponent>
       </sbol:hasFeature>
-      <sbol:hasFeature rdf:resource="ReceiverSystem/subcomponent_2"/>
+      <sbol:hasFeature rdf:resource="ReceiverSystem/SubComponent2"/>
       <sbol:hasConstraint>
-         <sbol:Constraint rdf:about="ReceiverSystem/constraint_1">
-            <sbol:subject rdf:resource="ReceiverSystem/subcomponent_1"/>
+         <sbol:Constraint rdf:about="ReceiverSystem/Constraint1">
+            <sbol:subject rdf:resource="ReceiverSystem/SubComponent1"/>
             <sbol:restriction rdf:resource="http://sbols.org/v3#contains"/>
-            <sbol:object rdf:resource="ReceiverSystem/subcomponent_2"/>
-            <sbol:displayId>constraint_1</sbol:displayId>
+            <sbol:object rdf:resource="ReceiverSystem/SubComponent2"/>
+            <sbol:displayId>Constraint1</sbol:displayId>
          </sbol:Constraint>
       </sbol:hasConstraint>
       <sbol:displayId>ReceiverSystem</sbol:displayId>
@@ -98,20 +98,20 @@
       <sbol:role rdf:resource="https://identifiers.org/SBO:0000289"/>
       <sbol:name>SenderSystem</sbol:name>
       <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="SenderSystem/subcomponent_1">
+         <sbol:SubComponent rdf:about="SenderSystem/SubComponent1">
             <sbol:instanceOf>
                <sbol:Component rdf:about="OrganismA"/>
             </sbol:instanceOf>
-            <sbol:displayId>subcomponent_1</sbol:displayId>
+            <sbol:displayId>SubComponent1</sbol:displayId>
          </sbol:SubComponent>
       </sbol:hasFeature>
-      <sbol:hasFeature rdf:resource="SenderSystem/subcomponent_2"/>
+      <sbol:hasFeature rdf:resource="SenderSystem/SubComponent2"/>
       <sbol:hasConstraint>
-         <sbol:Constraint rdf:about="SenderSystem/constraint_1">
-            <sbol:subject rdf:resource="SenderSystem/subcomponent_1"/>
+         <sbol:Constraint rdf:about="SenderSystem/Constraint1">
+            <sbol:subject rdf:resource="SenderSystem/SubComponent1"/>
             <sbol:restriction rdf:resource="http://sbols.org/v3#contains"/>
-            <sbol:object rdf:resource="SenderSystem/subcomponent_2"/>
-            <sbol:displayId>constraint_1</sbol:displayId>
+            <sbol:object rdf:resource="SenderSystem/SubComponent2"/>
+            <sbol:displayId>Constraint1</sbol:displayId>
          </sbol:Constraint>
       </sbol:hasConstraint>
       <sbol:displayId>SenderSystem</sbol:displayId>

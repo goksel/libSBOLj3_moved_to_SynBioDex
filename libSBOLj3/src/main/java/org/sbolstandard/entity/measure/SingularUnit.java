@@ -1,8 +1,6 @@
 package org.sbolstandard.entity.measure;
 
 import java.net.URI;
-import org.apache.jena.datatypes.xsd.XSDDatatype;
-import org.apache.jena.datatypes.xsd.impl.XSDFloat;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.util.RDFUtil;
@@ -29,7 +27,6 @@ public class SingularUnit extends Unit{
 		String factorString=String.valueOf(factor);
 		RDFUtil.setProperty(resource, MeasureDataModel.SingularUnit.factor, factorString);
 		//RDFUtil.setProperty(resource, MeasureDataModel.Prefix.factor, factor);
-		
 	}
 	
 	public float getFactor() throws SBOLGraphException {
@@ -51,10 +48,6 @@ public class SingularUnit extends Unit{
 		}
 		return factor;
 	}
-	
-
-	
-	
 	
 	public URI getUnit() {
 		if (unit==null)

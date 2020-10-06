@@ -43,12 +43,12 @@ public class ToggleSwitch extends TestCase {
                  
         
         //TetR Producer
-        Component TetRProducer=SBOLAPI.createDnaComponent(doc, "TetR_producer", "TetR producer", Role.EngineeredGene, null); 
+        Component TetRProducer=SBOLAPI.createDnaComponent(doc, "TetR_producer","TetR device", "TetR producer", Role.EngineeredGene, null); 
         
-        Component pLacI=SBOLAPI.createDnaComponent(doc, "pLacI", "LacI repressible promoter", Role.Promoter, null); 
-        Component rbs_tetR=SBOLAPI.createDnaComponent(doc, "rbs_tetR", "RBS", Role.RBS, null);
-        Component tetR=SBOLAPI.createDnaComponent(doc, "tetR", "tetR coding sequence", Role.CDS, null);
-        Component ter_tetR=SBOLAPI.createDnaComponent(doc, "ter_tetR", "Terminator", Role.Terminator, null);
+        Component pLacI=SBOLAPI.createDnaComponent(doc, "pLacI", "pLacI promoter", "LacI repressible promoter", Role.Promoter, null); 
+        Component rbs_tetR=SBOLAPI.createDnaComponent(doc, "rbs_tetR", "rbs", "tetR RBS", Role.RBS, null);
+        Component tetR=SBOLAPI.createDnaComponent(doc, "tetR", "tetR", "tetR coding sequence", Role.CDS, null);
+        Component ter_tetR=SBOLAPI.createDnaComponent(doc, "ter_tetR", "tetR terminator", "Terminator", Role.Terminator, null);
         //Component TetR_protein=SBOLAPI.createProteinComponent(doc,TetRProducer, SBOLAPI.append(baseUri, "TetR_protein"),"TetR", "TetR_protein", "TetR protein", Role.TF, null);
         
         SBOLAPI.appendComponent(doc, TetRProducer,pLacI);
@@ -64,22 +64,21 @@ public class ToggleSwitch extends TestCase {
         SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),TetRProducer, tetR, Arrays.asList(ParticipationRole.Template), TetR_protein, Arrays.asList(ParticipationRole.Product));  
         SBOLAPI.createInteraction(Arrays.asList(InteractionType.Inhibition),TetRProducer, pLacI, Arrays.asList(ParticipationRole.Inhibited), LacI_protein, Arrays.asList(ParticipationRole.Modifier));
         //IPTG LacIbinding
-        String localName=SBOLAPI.createLocalName(DataModel.Interaction.uri, TetRProducer.getInteractions()); 
-    	Interaction interaction= TetRProducer.createInteraction(SBOLAPI.append(TetRProducer.getUri(), localName), Arrays.asList(InteractionType.NonCovalentBinding));
+     	Interaction interaction= TetRProducer.createInteraction(Arrays.asList(InteractionType.NonCovalentBinding));
     	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Reactant), LacI_protein_subComponent);
     	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Reactant), IPTG_subComponent);
     	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Product), IPTG_LacI_subComponent);
        
         //LacI producer
-        Component LacIProducer=SBOLAPI.createDnaComponent(doc, "LacI_producer", "LacI producer", Role.EngineeredGene, null); 
+        Component LacIProducer=SBOLAPI.createDnaComponent(doc, "LacI_producer", "LacI producer", "LacI producer", Role.EngineeredGene, null); 
         
-        Component pTetR=SBOLAPI.createDnaComponent(doc, "pTetR", "TetR repressible promoter", Role.Promoter, null); 
-        Component rbs_lacI=SBOLAPI.createDnaComponent(doc, "rbs_lacI", "RBS", Role.RBS, null);
-        Component lacI=SBOLAPI.createDnaComponent(doc, "lacI", "lacI coding sequence", Role.CDS, null);
-        Component rbs_gfp=SBOLAPI.createDnaComponent(doc, "rbs_gfp", "RBS", Role.RBS, null);
-        Component gfp=SBOLAPI.createDnaComponent(doc, "gfp", "gfp coding sequence", Role.CDS, null);
+        Component pTetR=SBOLAPI.createDnaComponent(doc, "pTetR", "pTetR", "TetR repressible promoter", Role.Promoter, null); 
+        Component rbs_lacI=SBOLAPI.createDnaComponent(doc, "rbs_lacI","rbs", "RBS", Role.RBS, null);
+        Component lacI=SBOLAPI.createDnaComponent(doc, "lacI", "lacI", "lacI coding sequence", Role.CDS, null);
+        Component rbs_gfp=SBOLAPI.createDnaComponent(doc, "rbs_gfp", "rbs", "RBS", Role.RBS, null);
+        Component gfp=SBOLAPI.createDnaComponent(doc, "gfp", "gfp", "gfp coding sequence", Role.CDS, null);
         
-        Component ter_lacI=SBOLAPI.createDnaComponent(doc, "ter_lacI", "Terminator", Role.Terminator, null);
+        Component ter_lacI=SBOLAPI.createDnaComponent(doc, "ter_lacI","lacI terminator", "Terminator", Role.Terminator, null);
         
         SBOLAPI.appendComponent(doc, LacIProducer,pTetR);
         SBOLAPI.appendComponent(doc, LacIProducer,rbs_lacI);
@@ -97,8 +96,7 @@ public class ToggleSwitch extends TestCase {
         SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),LacIProducer, gfp, Arrays.asList(ParticipationRole.Template), GFP, Arrays.asList(ParticipationRole.Product));  
         SBOLAPI.createInteraction(Arrays.asList(InteractionType.Inhibition),LacIProducer, pTetR, Arrays.asList(ParticipationRole.Inhibited), TetR_protein, Arrays.asList(ParticipationRole.Modifier));
         //aTC TetR binding
-        localName=SBOLAPI.createLocalName(DataModel.Interaction.uri, LacIProducer.getInteractions()); 
-    	Interaction aTCTetRbinding= LacIProducer.createInteraction(SBOLAPI.append(LacIProducer.getUri(), localName), Arrays.asList(InteractionType.NonCovalentBinding));
+      	Interaction aTCTetRbinding= LacIProducer.createInteraction(Arrays.asList(InteractionType.NonCovalentBinding));
     	SBOLAPI.createParticipation(aTCTetRbinding, Arrays.asList(ParticipationRole.Reactant), TetR_protein_subComponent);
     	SBOLAPI.createParticipation(aTCTetRbinding, Arrays.asList(ParticipationRole.Reactant), aTC_subComponent);
     	SBOLAPI.createParticipation(aTCTetRbinding, Arrays.asList(ParticipationRole.Product), atC_TetR_subComponent);

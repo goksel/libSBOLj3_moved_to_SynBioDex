@@ -22,9 +22,9 @@
    <sbol:Component rdf:about="TetR_protein">
       <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
       <sbol:description>TetR protein</sbol:description>
-      <sbol:displayId>TetR_protein</sbol:displayId>
-      <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
       <sbol:name>TetR</sbol:name>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
+      <sbol:displayId>TetR_protein</sbol:displayId>
    </sbol:Component>
    <sbol:Attachment rdf:about="attachment1">
       <sbol:hashAlgorithm>Alg1</sbol:hashAlgorithm>

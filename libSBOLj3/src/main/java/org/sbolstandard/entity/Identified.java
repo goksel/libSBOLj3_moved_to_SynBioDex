@@ -4,14 +4,12 @@ import java.lang.reflect.Constructor;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
-import org.apache.jena.vocabulary.RDF;
 import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.measure.Measure;
 import org.sbolstandard.util.RDFUtil;
@@ -55,10 +53,11 @@ public abstract class Identified {
 		inferDisplayId(this.uri);
 	}
 	
-	public Identified (URI uri)
+	/*public Identified (String displayId)
 	{
-		this.uri=uri;
-	}
+		this.displayId=displayId;
+		this.resource=ResourceFactory.createResource();	
+	}*/
 	
 	public String getDisplayId() {
 		if (displayId==null)
@@ -67,6 +66,7 @@ public abstract class Identified {
 		}
 		return displayId;
 	}
+	
 	public void setDisplayId(String displayId) {
 		this.displayId = displayId;
 		RDFUtil.setProperty(resource, DataModel.Identified.displayId, displayId);		

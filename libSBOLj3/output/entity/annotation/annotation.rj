@@ -179,7 +179,7 @@
   "https://sbolstandard.org/examples/BBa_J23119" : { 
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
-      "value" : "BBa_J23119 part"
+      "value" : "BBa_J23119"
     }
      ] ,
     "http://sbols.org/v3#role" : [ { 
@@ -218,7 +218,7 @@
      ] ,
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
-      "value" : "BBa_J23119"
+      "value" : "BBa_J23119 part"
     }
      ] ,
     "http://sbols.org/v3#description" : [ { 
