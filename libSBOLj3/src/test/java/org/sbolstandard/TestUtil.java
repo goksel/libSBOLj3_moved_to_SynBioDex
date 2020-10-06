@@ -30,10 +30,10 @@ public class TestUtil {
         	boolean result=outputDir.mkdirs();
         }
         
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.ttl", baseOutput,directory, file)), "Turtle");
+        SBOLIO.write(doc, new File(String.format("%s/%s/%s.ttl", baseOutput,directory, file)), "TURTLE");
         SBOLIO.write(doc, new File(String.format("%s/%s/%s.rdf", baseOutput,directory, file)), "RDF/XML-ABBREV");
         SBOLIO.write(doc, new File(String.format("%s/%s/%s.jsonld", baseOutput,directory, file)), "JSON-LD");
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.rj", baseOutput,directory, file)), "rdfjson");
+        SBOLIO.write(doc, new File(String.format("%s/%s/%s.rj", baseOutput,directory, file)), "RDFJSON");
         SBOLIO.write(doc, new File(String.format("%s/%s/%s.nt", baseOutput,directory, file)), "N-TRIPLES");
 	}
 	
