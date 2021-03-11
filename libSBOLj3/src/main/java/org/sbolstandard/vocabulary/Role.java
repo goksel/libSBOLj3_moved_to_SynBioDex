@@ -12,6 +12,7 @@ public class Role {
 		public static URI Gene = URINameSpace.SO.local("0000704");
 		public static URI Operator = URINameSpace.SO.local("0000057");
 		public static URI EngineeredGene = URINameSpace.SO.local("0000704");
+		public static URI EngineeredRegion = URINameSpace.SO.local("0000804");
 		
 		public static URI mRNA = URINameSpace.SO.local("0000234");
 		public static URI Effector = URINameSpace.CHEBI.local("35224");
