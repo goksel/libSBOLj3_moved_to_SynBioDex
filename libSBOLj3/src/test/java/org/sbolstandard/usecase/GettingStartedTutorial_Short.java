@@ -19,6 +19,7 @@ import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.entity.Sequence;
 import org.sbolstandard.entity.SequenceFeature;
 import org.sbolstandard.entity.SubComponent;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ComponentType;
@@ -130,19 +131,19 @@ public class GettingStartedTutorial_Short {
 		 ComponentReference compRef_i13504_dev2=ilab16_dev2.createComponentReference(i13504SubComponent, sc_i13504_system_dev2);
 		 ilab16_dev2.createConstraint(RestrictionType.Topology.meets, sc_j23106.getUri(), compRef_i13504_dev2.getUri());
 		    
-		 String output=SBOLIO.write(doc, "RDF/XML-ABBREV");
+		 String output=SBOLIO.write(doc, SBOLFormat.RDFXML);
 		 System.out.println("");
 		 System.out.println("SBOL:");
 		 System.out.println(output);   
 	     TestUtil.serialise(doc, "combine2020", "combine2020");   
 	     System.out.println("--------------------------");
-	     SBOLDocument doc2=SBOLIO.read(new File("input/gfp.nt"),"N-TRIPLES");
+	     SBOLDocument doc2=SBOLIO.read(new File("input/gfp.nt"),SBOLFormat.NTRIPLES);
 	     //SBOLDocument doc2=SBOLIO.read(new File("output/combine2020/combine2020.nt"),"N-TRIPLES");
 	     //SBOLDocument doc2=SBOLIO.read(new File("output/combine2020/combine2020.rdf"),"RDF/XML-ABBREV");
 	     
 	     
 	     TestUtil.assertReadWrite(doc2);
-	     String output2=SBOLIO.write(doc2, "RDF/XML-ABBREV");
+	     String output2=SBOLIO.write(doc2, SBOLFormat.RDFXML);
 	     System.out.println(output2);   
 		    
 	     System.out.println("done");   

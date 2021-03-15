@@ -19,6 +19,7 @@ import org.sbolstandard.entity.provenance.Agent;
 import org.sbolstandard.entity.provenance.Association;
 import org.sbolstandard.entity.provenance.Plan;
 import org.sbolstandard.entity.provenance.Usage;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.util.URINameSpace;
@@ -84,9 +85,9 @@ public class ActivityTest extends TestCase {
        
         TestUtil.serialise(doc, "provenance_entity/activity", "activity");
         
-        String output=SBOLIO.write(doc, "Turtle");
+        String output=SBOLIO.write(doc, SBOLFormat.TURTLE);
         System.out.print("-----Reading back from serialised data!");
-        SBOLDocument doc2=SBOLIO.read(output, "Turtle"); 
+        SBOLDocument doc2=SBOLIO.read(output, SBOLFormat.TURTLE); 
         for (Activity act: doc2.getActivities())
         {
         	printActivity(doc2, act);

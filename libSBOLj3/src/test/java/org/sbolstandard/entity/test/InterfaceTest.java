@@ -10,6 +10,7 @@ import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.Interface;
 import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.entity.SubComponent;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ComponentType;
@@ -44,7 +45,7 @@ public class InterfaceTest extends TestCase {
         
         TestUtil.serialise(doc, "entity/interface", "interface");
       
-        System.out.println(SBOLIO.write(doc, "Turtle"));
+        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
     }
 

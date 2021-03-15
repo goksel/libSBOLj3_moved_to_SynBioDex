@@ -1,0 +1,10 @@
+[ {
+  "@id" : "urn:uuid:0ebcc02f-7ff0-4191-8e49-f97a8bee63fd",
+  "http://sbols.org/v3#name" : [ {
+    "@value" : "TetR"
+  } ],
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000252"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Component" ]
+} ]

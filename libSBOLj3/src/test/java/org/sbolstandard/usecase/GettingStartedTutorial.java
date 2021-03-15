@@ -7,6 +7,7 @@ import java.util.List;
 import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.*;
 import org.sbolstandard.entity.Location.*;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.*;
@@ -146,7 +147,7 @@ public class GettingStartedTutorial {
 		 ilab16_dev2.createConstraint(RestrictionType.Topology.meets, sc_j23106.getUri(), compRef_i13504_dev2.getUri());
 		 
 		 System.out.println(System.lineSeparator() + "SBOL:");
-		 String output=SBOLIO.write(doc, "Turtle");
+		 String output=SBOLIO.write(doc, SBOLFormat.TURTLE);
 		 System.out.println(output); 
 		 System.out.println("...done!");   
 		 return doc;

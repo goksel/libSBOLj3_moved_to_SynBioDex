@@ -11,6 +11,7 @@ import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.sbolstandard.entity.*;
 import org.sbolstandard.entity.measure.*;
 import org.sbolstandard.entity.provenance.*;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
@@ -30,17 +31,18 @@ public class TestUtil {
         	boolean result=outputDir.mkdirs();
         }
         
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.ttl", baseOutput,directory, file)), "TURTLE");
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.rdf", baseOutput,directory, file)), "RDF/XML-ABBREV");
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.jsonld", baseOutput,directory, file)), "JSON-LD");
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.rj", baseOutput,directory, file)), "RDFJSON");
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.nt", baseOutput,directory, file)), "N-TRIPLES");
+        SBOLIO.write(doc, new File(String.format("%s/%s/%s.ttl", baseOutput,directory, file)), SBOLFormat.TURTLE);
+        SBOLIO.write(doc, new File(String.format("%s/%s/%s.rdf", baseOutput,directory, file)),SBOLFormat.RDFXML);
+        SBOLIO.write(doc, new File(String.format("%s/%s/%s.jsonld", baseOutput,directory, file)), SBOLFormat.JSONLD);
+        SBOLIO.write(doc, new File(String.format("%s/%s/%s.jsonld_expanded", baseOutput,directory, file)), SBOLFormat.JSONLD_EXPAND);
+        //SBOLIO.write(doc, new File(String.format("%s/%s/%s.rj", baseOutput,directory, file)), "RDFJSON");
+        SBOLIO.write(doc, new File(String.format("%s/%s/%s.nt", baseOutput,directory, file)), SBOLFormat.NTRIPLES);
 	}
 	
 	public static void assertReadWrite(SBOLDocument doc) throws IOException, SBOLGraphException
 	{
-		String output=SBOLIO.write(doc, "Turtle");
-	    SBOLDocument doc2=SBOLIO.read(output, "Turtle"); 
+		String output=SBOLIO.write(doc, SBOLFormat.TURTLE);
+	    SBOLDocument doc2=SBOLIO.read(output, SBOLFormat.TURTLE); 
 	    assertEqual(doc, doc2);
 	       
 	}

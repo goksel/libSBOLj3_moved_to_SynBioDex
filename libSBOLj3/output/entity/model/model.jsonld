@@ -1,17 +1,17 @@
 {
   "@graph" : [ {
-    "@id" : "model1",
+    "@id" : "https://sbolstandard.org/examples/model1",
     "@type" : "sbol:Model",
     "displayId" : "model1",
     "framework" : "SBO:0000062",
     "language" : "EDAM:format_2585",
     "source" : "http://virtualparts.org"
   }, {
-    "@id" : "toggle_switch",
+    "@id" : "https://sbolstandard.org/examples/toggle_switch",
     "@type" : "sbol:Component",
     "description" : "Toggle Switch genetic circuit",
     "displayId" : "toggle_switch",
-    "hasModel" : "model1",
+    "hasModel" : "https://sbolstandard.org/examples/model1",
     "name" : "Toggle Switch",
     "type" : "SBO:0000241"
   } ],
@@ -45,7 +45,6 @@
       "@id" : "http://sbols.org/v3#source",
       "@type" : "@id"
     },
-    "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",
     "CHEBI" : "https://identifiers.org/CHEBI:",
     "GO" : "https://identifiers.org/GO:",

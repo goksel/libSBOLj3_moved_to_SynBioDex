@@ -1,5 +1,5 @@
 {
-  "@id" : "urn:uuid:0c27b730-2c64-11b2-8059-acde48001122",
+  "@id" : "urn:uuid:0ebcc02f-7ff0-4191-8e49-f97a8bee63fd",
   "@type" : "sbol:Component",
   "name" : "TetR",
   "type" : "SBO:0000252",
@@ -11,7 +11,6 @@
       "@id" : "http://sbols.org/v3#type",
       "@type" : "@id"
     },
-    "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",
     "CHEBI" : "https://identifiers.org/CHEBI:",
     "GO" : "https://identifiers.org/GO:",

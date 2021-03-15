@@ -20,6 +20,7 @@ import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.entity.Sequence;
 import org.sbolstandard.entity.SequenceFeature;
 import org.sbolstandard.entity.SubComponent;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ComponentType;
@@ -47,9 +48,9 @@ public class GettingStartedTutorialTest  extends TestCase {
 	    TestUtil.serialise(doc, "combine2020", "combine2020");   
 	    
 	    System.out.println("-------------------------- Now reading from input/gfp.nt --------------------------");
-	    SBOLDocument doc2=SBOLIO.read(new File("input/gfp.nt"),"N-TRIPLES");
+	    SBOLDocument doc2=SBOLIO.read(new File("input/gfp.nt"),SBOLFormat.NTRIPLES);
 	    TestUtil.assertReadWrite(doc2);
-	    String output2=SBOLIO.write(doc2, "RDF/XML-ABBREV");
+	    String output2=SBOLIO.write(doc2, SBOLFormat.RDFXML);
 	    System.out.println(output2);  
 	}
 }

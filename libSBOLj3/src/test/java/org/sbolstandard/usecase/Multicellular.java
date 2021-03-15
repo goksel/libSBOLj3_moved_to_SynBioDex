@@ -15,6 +15,7 @@ import org.sbolstandard.entity.ComponentReference;
 import org.sbolstandard.entity.Interaction;
 import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.entity.SubComponent;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ComponentType;
@@ -110,11 +111,11 @@ public class Multicellular extends TestCase {
     	SBOLAPI.mapTo(senderSystem, AHLProducer, AHL, AHL);
     	SBOLAPI.mapTo(receiverSystem, AHLReceiver, AHL, AHL);
     	
-        String output=SBOLIO.write(doc, "Turtle");
+        String output=SBOLIO.write(doc, SBOLFormat.TURTLE);
         System.out.print(output);
         
-        SBOLDocument doc2=SBOLIO.read(output, "Turtle"); 
-        output=SBOLIO.write(doc2, "RDF/XML-ABBREV");
+        SBOLDocument doc2=SBOLIO.read(output, SBOLFormat.TURTLE); 
+        output=SBOLIO.write(doc2,SBOLFormat.RDFXML);
         System.out.print(output);
         
         TestUtil.serialise(doc2, "multicellular", "multicellular");    

@@ -1,6 +1,6 @@
 {
   "@graph" : [ {
-    "@id" : "AHL",
+    "@id" : "https://sbolstandard.org/examples/AHL",
     "@type" : "sbol:Component",
     "description" : "AHL",
     "displayId" : "AHL",
@@ -8,46 +8,46 @@
     "role" : "CHEBI:35224",
     "type" : "SBO:0000247"
   }, {
-    "@id" : "MulticellularSystem",
+    "@id" : "https://sbolstandard.org/examples/MulticellularSystem",
     "@type" : "sbol:Component",
     "description" : "Multicellular System",
     "displayId" : "MulticellularSystem",
-    "hasConstraint" : "MulticellularSystem/Constraint1",
-    "hasFeature" : [ "MulticellularSystem/ComponentReference2", "MulticellularSystem/SubComponent1", "MulticellularSystem/ComponentReference1", "MulticellularSystem/SubComponent2" ],
+    "hasConstraint" : "https://sbolstandard.org/examples/MulticellularSystem/Constraint1",
+    "hasFeature" : [ "https://sbolstandard.org/examples/MulticellularSystem/ComponentReference2", "https://sbolstandard.org/examples/MulticellularSystem/SubComponent1", "https://sbolstandard.org/examples/MulticellularSystem/ComponentReference1", "https://sbolstandard.org/examples/MulticellularSystem/SubComponent2" ],
     "name" : "MulticellularSystem",
     "role" : "SBO:0000289",
     "type" : "SBO:0000241"
   }, {
-    "@id" : "MulticellularSystem/ComponentReference1",
+    "@id" : "https://sbolstandard.org/examples/MulticellularSystem/ComponentReference1",
     "@type" : "sbol:ComponentReference",
     "displayId" : "ComponentReference1",
-    "hasFeature" : "SenderSystem/SubComponent2",
-    "inChildOf" : "MulticellularSystem/SubComponent1"
+    "hasFeature" : "https://sbolstandard.org/examples/SenderSystem/SubComponent2",
+    "inChildOf" : "https://sbolstandard.org/examples/MulticellularSystem/SubComponent1"
   }, {
-    "@id" : "MulticellularSystem/ComponentReference2",
+    "@id" : "https://sbolstandard.org/examples/MulticellularSystem/ComponentReference2",
     "@type" : "sbol:ComponentReference",
     "displayId" : "ComponentReference2",
-    "hasFeature" : "ReceiverSystem/SubComponent2",
-    "inChildOf" : "MulticellularSystem/SubComponent2"
+    "hasFeature" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent2",
+    "inChildOf" : "https://sbolstandard.org/examples/MulticellularSystem/SubComponent2"
   }, {
-    "@id" : "MulticellularSystem/Constraint1",
+    "@id" : "https://sbolstandard.org/examples/MulticellularSystem/Constraint1",
     "@type" : "sbol:Constraint",
     "displayId" : "Constraint1",
-    "object" : "MulticellularSystem/ComponentReference2",
+    "object" : "https://sbolstandard.org/examples/MulticellularSystem/ComponentReference2",
     "restriction" : "sbol:verifyIdentical",
-    "subject" : "MulticellularSystem/ComponentReference1"
+    "subject" : "https://sbolstandard.org/examples/MulticellularSystem/ComponentReference1"
   }, {
-    "@id" : "MulticellularSystem/SubComponent1",
+    "@id" : "https://sbolstandard.org/examples/MulticellularSystem/SubComponent1",
     "@type" : "sbol:SubComponent",
     "displayId" : "SubComponent1",
-    "instanceOf" : "SenderSystem"
+    "instanceOf" : "https://sbolstandard.org/examples/SenderSystem"
   }, {
-    "@id" : "MulticellularSystem/SubComponent2",
+    "@id" : "https://sbolstandard.org/examples/MulticellularSystem/SubComponent2",
     "@type" : "sbol:SubComponent",
     "displayId" : "SubComponent2",
-    "instanceOf" : "ReceiverSystem"
+    "instanceOf" : "https://sbolstandard.org/examples/ReceiverSystem"
   }, {
-    "@id" : "OrganismA",
+    "@id" : "https://sbolstandard.org/examples/OrganismA",
     "@type" : "sbol:Component",
     "description" : "Organism A",
     "displayId" : "OrganismA",
@@ -55,7 +55,7 @@
     "role" : "SBO:0000290",
     "type" : "GO:0005623"
   }, {
-    "@id" : "OrganismB",
+    "@id" : "https://sbolstandard.org/examples/OrganismB",
     "@type" : "sbol:Component",
     "description" : "Organism B",
     "displayId" : "OrganismB",
@@ -63,59 +63,59 @@
     "role" : "SBO:0000290",
     "type" : "GO:0005623"
   }, {
-    "@id" : "ReceiverSystem",
+    "@id" : "https://sbolstandard.org/examples/ReceiverSystem",
     "@type" : "sbol:Component",
     "description" : "Receiver System",
     "displayId" : "ReceiverSystem",
-    "hasConstraint" : "ReceiverSystem/Constraint1",
-    "hasFeature" : [ "ReceiverSystem/SubComponent1", "ReceiverSystem/SubComponent2" ],
+    "hasConstraint" : "https://sbolstandard.org/examples/ReceiverSystem/Constraint1",
+    "hasFeature" : [ "https://sbolstandard.org/examples/ReceiverSystem/SubComponent1", "https://sbolstandard.org/examples/ReceiverSystem/SubComponent2" ],
     "name" : "ReceiverSystem",
     "role" : "SBO:0000289",
     "type" : "SBO:0000241"
   }, {
-    "@id" : "ReceiverSystem/Constraint1",
+    "@id" : "https://sbolstandard.org/examples/ReceiverSystem/Constraint1",
     "@type" : "sbol:Constraint",
     "displayId" : "Constraint1",
-    "object" : "ReceiverSystem/SubComponent2",
+    "object" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent2",
     "restriction" : "sbol:contains",
-    "subject" : "ReceiverSystem/SubComponent1"
+    "subject" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent1"
   }, {
-    "@id" : "ReceiverSystem/SubComponent1",
+    "@id" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent1",
     "@type" : "sbol:SubComponent",
     "displayId" : "SubComponent1",
-    "instanceOf" : "OrganismB"
+    "instanceOf" : "https://sbolstandard.org/examples/OrganismB"
   }, {
-    "@id" : "ReceiverSystem/SubComponent2",
+    "@id" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent2",
     "@type" : "sbol:SubComponent",
     "displayId" : "SubComponent2",
-    "instanceOf" : "AHL"
+    "instanceOf" : "https://sbolstandard.org/examples/AHL"
   }, {
-    "@id" : "SenderSystem",
+    "@id" : "https://sbolstandard.org/examples/SenderSystem",
     "@type" : "sbol:Component",
     "description" : "Sender System",
     "displayId" : "SenderSystem",
-    "hasConstraint" : "SenderSystem/Constraint1",
-    "hasFeature" : [ "SenderSystem/SubComponent1", "SenderSystem/SubComponent2" ],
+    "hasConstraint" : "https://sbolstandard.org/examples/SenderSystem/Constraint1",
+    "hasFeature" : [ "https://sbolstandard.org/examples/SenderSystem/SubComponent1", "https://sbolstandard.org/examples/SenderSystem/SubComponent2" ],
     "name" : "SenderSystem",
     "role" : "SBO:0000289",
     "type" : "SBO:0000241"
   }, {
-    "@id" : "SenderSystem/Constraint1",
+    "@id" : "https://sbolstandard.org/examples/SenderSystem/Constraint1",
     "@type" : "sbol:Constraint",
     "displayId" : "Constraint1",
-    "object" : "SenderSystem/SubComponent2",
+    "object" : "https://sbolstandard.org/examples/SenderSystem/SubComponent2",
     "restriction" : "sbol:contains",
-    "subject" : "SenderSystem/SubComponent1"
+    "subject" : "https://sbolstandard.org/examples/SenderSystem/SubComponent1"
   }, {
-    "@id" : "SenderSystem/SubComponent1",
+    "@id" : "https://sbolstandard.org/examples/SenderSystem/SubComponent1",
     "@type" : "sbol:SubComponent",
     "displayId" : "SubComponent1",
-    "instanceOf" : "OrganismA"
+    "instanceOf" : "https://sbolstandard.org/examples/OrganismA"
   }, {
-    "@id" : "SenderSystem/SubComponent2",
+    "@id" : "https://sbolstandard.org/examples/SenderSystem/SubComponent2",
     "@type" : "sbol:SubComponent",
     "displayId" : "SubComponent2",
-    "instanceOf" : "AHL"
+    "instanceOf" : "https://sbolstandard.org/examples/AHL"
   } ],
   "@context" : {
     "instanceOf" : {
@@ -163,7 +163,6 @@
       "@id" : "http://sbols.org/v3#inChildOf",
       "@type" : "@id"
     },
-    "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",
     "CHEBI" : "https://identifiers.org/CHEBI:",
     "GO" : "https://identifiers.org/GO:",

@@ -2,13 +2,19 @@ package org.sbolstandard.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+
 import org.apache.jena.datatypes.xsd.impl.XSDFloat;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
@@ -18,16 +24,39 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFactory;
 import org.apache.jena.query.Syntax;
 import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.rdf.model.RDFWriter;
 import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.riot.JsonLDWriteContext;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.riot.RDFFormat;
+import org.apache.jena.riot.RDFParser;
+import org.apache.jena.riot.RDFParserBuilder;
+import org.apache.jena.riot.RDFWriter;
+import org.apache.jena.riot.RDFWriterBuilder;
+import org.apache.jena.riot.SysRIOT;
+import org.apache.jena.riot.writer.JsonLDWriter;
+import org.apache.jena.sparql.util.Context;
 import org.apache.jena.vocabulary.RDF;
+import org.sbolstandard.entity.SBOLDocument;
 
+import com.github.jsonldjava.core.JsonLdOptions;
+
+//IO: https://jena.apache.org/documentation/io/rdf-input.html
+//https://jena.apache.org/tutorials/rdf_api.html#ch-Writing-RDF
+	
+//Some examples: https://github.com/apache/jena/tree/main/jena-arq/src-examples/arq/examples/riot/
+//https://franz.com/agraph/support/documentation/current/java-tutorial/jena-tutorial.html
+
+//Serialisation performance: https://users.jena.apache.narkive.com/DkpVI0cr/json-ld-serialization-performances
+//Shacl Tools: https://github.com/griddigit/CimPal/blob/master/src/main/java/core/ShaclTools.java
+	
 public class RDFUtil {
 	
     private static String RDFXMLABBREV = "RDF/XML-ABBREV";
@@ -365,7 +394,7 @@ public class RDFUtil {
 		}
 	    
 	   
-	    private static void writeToStreamORG(Model model, OutputStream stream, String format, Resource[] topLevelResources, URI baseUri)
+	   /* private static void writeToStreamORG(Model model, OutputStream stream, String format, Resource[] topLevelResources, URI baseUri)
 	    {
 	    	RDFWriter writer = model.getWriter(format);
 			writer.setProperty("tab", "3");
@@ -383,11 +412,11 @@ public class RDFUtil {
 				}
 			}
 			writer.write(model, stream, base);
-	    }
+	    }*/
 	    
-	    private static void writeToStream(Model model, OutputStream stream, String format, Resource[] topLevelResources, URI baseUri)
+	    private static void writeToStreamRDFXML(Model model, OutputStream stream, String format, Resource[] topLevelResources, URI baseUri)
 	    {
-	    	RDFWriter writer = model.getWriter(format);
+	    	org.apache.jena.rdf.model.RDFWriter writer = model.getWriter(format);
 			writer.setProperty("tab", "3");
 			if (topLevelResources != null && topLevelResources.length > 0) {
 				writer.setProperty("prettyTypes", topLevelResources);
@@ -404,27 +433,179 @@ public class RDFUtil {
 			}
 			writer.write(model, stream, base);
 	    }
-	    
-	    public static String write(Model model, String format, Resource[] topLevelResources,URI baseUri) throws IOException {
-			if (format == null || format.length() == 0) {
-				format = "RDF/XML-ABBREV";
+		
+	    private static void configureRDFWriter_RDFXML(RDFWriterBuilder writerBuilder, Model model, RDFFormat format, Resource[] topLevelResources, String baseUri)
+	    {
+	    	Map<String, Object> properties = new HashMap<>();
+			if (baseUri!=null)
+			{
+				properties.put("xmlbase", baseUri);
+				writerBuilder.base(baseUri.toString());
 			}
-			String rdfData = null;
-			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			properties.put("tab", 3);
+			properties.put("prettyTypes", topLevelResources);
+			Context ctx = new Context();
+			ctx.set(SysRIOT.sysRdfWriterProperties, properties);
+			writerBuilder.context(ctx);	
+	    }
+	    
+		public static void write(Model model, OutputStream stream, RDFFormat format, Resource[] topLevelResources
+				) {
+			if (format == null) {
+				format = RDFFormat.RDFXML_ABBREV;
+			}
+			boolean baseNsRemoved = false;
+			String baseUri = model.getNsPrefixURI("");
+			RDFWriterBuilder writerBuilder = RDFWriter.create().source(model).format(format);
+
+			if (format.equals(RDFFormat.RDFXML_ABBREV)){ // RDF/XML
+				configureRDFWriter_RDFXML(writerBuilder, model, format, topLevelResources, baseUri);
+			} 
+			else if (format.getLang().getLabel().toString().toLowerCase().startsWith("json")) { // JSON-LD...
+				if (baseUri!=null)
+				{
+					model.removeNsPrefix("");
+					baseNsRemoved = true;
+					//writerBuilder.base(baseUri.toString());
+				}
+			} 
+			else { // Turtle, NTriples
+				if (baseUri != null) {
+					writerBuilder.base(baseUri.toString());
+				}
+			}
+
+			RDFWriter writer = writerBuilder.build();
+			writer.output(stream);
+
+			if (baseNsRemoved) {
+				model.setNsPrefix("", baseUri);
+			}
+		}
+
+		 public static String write(Model model, RDFFormat format, Resource[] topLevelResources) throws IOException {
+				String rdfData = null;
+				ByteArrayOutputStream stream = new ByteArrayOutputStream();
+				try {
+					write(model, stream, format, topLevelResources);
+					rdfData = new String(stream.toString());
+				} finally {
+					if (stream != null) {
+						stream.close();
+						stream = null;
+					}
+				}
+				return rdfData;
+			}
+		    
+
+	    public static void write(Model model, File file, RDFFormat format, Resource[] topLevelResources) throws IOException, FileNotFoundException {
+			FileOutputStream stream = new FileOutputStream(file);
 			try {
-				writeToStream(model, stream, format, topLevelResources, baseUri);
-				rdfData = new String(stream.toString());
-			} finally {
+				write(model, stream, format, topLevelResources);
+			} 
+			finally {
 				if (stream != null) {
 					stream.close();
 					stream = null;
 				}
 			}
-			return rdfData;
+		}
+	  
+	    
+	    public static ResultSet executeSPARQLSelectQuery(Model model, String query, Syntax syntax)
+	    {
+	    	System.out.println ("Executing the query 2" + query + "...");
+	    	Query q = QueryFactory.create(query, syntax);
+		    QueryExecution qe = QueryExecutionFactory.create(q, model);
+		    ResultSet rsMemory=null;
+		    try
+		    {
+		    	ResultSet rs = qe.execSelect();
+		    	rsMemory=ResultSetFactory.copyResults(rs);
+		    }
+		    finally
+		    {
+		    	qe.close();
+		    }
+		    return rsMemory;		          
+	    }
+	    
+	    /**
+	     * 
+	     * @param path The file path or remote web URL
+	     * @param format
+	     * @return
+	     * @throws FileNotFoundException
+	     */
+	    
+	    public static Model read(File file) throws FileNotFoundException
+		{
+			Model model = RDFDataMgr.loadModel(file.getPath()) ;
+			return model;			
 		}
 	    
+	    /**
+	     * 
+	     * @param file The file path 
+	     * @param format
+	     * @return
+	     * @throws FileNotFoundException
+	     */
+	    public static Model read(File file, RDFFormat format) throws FileNotFoundException
+		{
+			Model model = RDFDataMgr.loadModel(file.getPath(), format.getLang());
+			return model;			
+		}
+	    
+	    /**
+	     * 
+	     * @param file The file path 
+	     * @param format
+	     * @return
+	     * @throws FileNotFoundException
+	     */
+	    public static Model read(URI uri, RDFFormat format) throws FileNotFoundException
+		{
+			Model model = RDFDataMgr.loadModel(uri.toString(), format.getLang());
+			return model;			
+		}
+	   
+	    public static Model read(URI uri) throws FileNotFoundException
+		{
+			Model model = RDFDataMgr.loadModel(uri.toString());
+			return model;			
+		}
+	   
+	    
+	    
+	    public static Model read(InputStream stream, RDFFormat format) throws FileNotFoundException
+		{
+	    	Model model = ModelFactory.createDefaultModel();
+	        RDFParserBuilder rdfBuilder= RDFParser.create().source(stream);
+	        rdfBuilder.lang(format.getLang());
+	        RDFParser parser=rdfBuilder.build();
+	        parser.parse(model);    
+			return model;			
+		}
+	    
+	    public static Model read(String input, RDFFormat format) throws FileNotFoundException
+		{
+	    	Model model = ModelFactory.createDefaultModel();
+	        RDFParserBuilder rdfBuilder= RDFParser.create().fromString(input);
+	        rdfBuilder.lang(format.getLang());
+	        RDFParser parser=rdfBuilder.build();
+	        parser.parse(model);    
+			return model;			
+		}
+}
 
-	    public static String getRdfString_Del(Model model, String format, Resource[] topLevelResources,URI baseUri)
+
+
+
+/*
+ 
+ 	    public static String getRdfString_Del(Model model, String format, Resource[] topLevelResources,URI baseUri)
 				throws Exception {
 			String rdfData = null;
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -453,43 +634,47 @@ public class RDFUtil {
 			}
 			return rdfData;
 		}
-	    
-	  
 		
-
-	    
-	    public static void write(Model model, File file, String format, Resource[] topLevelResources,URI baseUri) throws IOException, FileNotFoundException {
-			if (format == null || format.length() == 0) {
-				format = "RDF/XML-ABBREV";
-			}
-			FileOutputStream stream = null;
-			try {
-				stream = new FileOutputStream(file);
-				writeToStream(model, stream, format, topLevelResources, baseUri);
-			} 
-			finally {
-				if (stream != null) {
-					stream.close();
-					stream = null;
+		
+	SERIALISATION:	
+		if (format.toLowerCase().equals("json-ld"))
+				{
+					//RDFDataMgr.write(stream, model, RDFFormat.JSONLD_FLAT);
+					//RDFDataMgr.write(stream, model, RDFFormat.JSONLD_COMPACT_PRETTY);
+					//RDFDataMgr.write(stream, model, RDFFormat.JSONLD);
+					writeToStream(model, stream, format, topLevelResources, baseUri);
+					
+					//model.write(stream, format, baseUri.toString());
+				}	
+				else {
+					writeToStream(model, stream, format, topLevelResources, baseUri);
 				}
-			}
-		}
+	
 	    
-	    public static ResultSet executeSPARQLSelectQuery(Model model, String query, Syntax syntax)
-	    {
-	    	System.out.println ("Executing the query 2" + query + "...");
-	    	Query q = QueryFactory.create(query, syntax);
-		    QueryExecution qe = QueryExecutionFactory.create(q, model);
-		    ResultSet rsMemory=null;
-		    try
-		    {
-		    	ResultSet rs = qe.execSelect();
-		    	rsMemory=ResultSetFactory.copyResults(rs);
-		    }
-		    finally
-		    {
-		    	qe.close();
-		    }
-		    return rsMemory;		          
-	    }
-}
+	    RDFDataMgr.read(graph, is, Lang.RDFXML);    
+				Map<String, Object> properties = new HashMap<>();
+				properties.put("xmlbase", "http://example#");
+				Context cxt = new Context();
+				cxt.set(SysRIOT.sysRdfWriterProperties, properties);
+				RDFWriter.create().source(graph).format(RDFFormat.RDFXML_PLAIN).base("http://example#").context(cxt).output(os);
+				
+						//String atContextAsJson = "{\"@vocab\":\"" + baseUri.toString() +  "\"}";
+						//JsonLDWriteContext ctx = new JsonLDWriteContext();
+					    //ctx.setJsonLDContext(atContextAsJson);
+					    
+						//JsonLDWriteContext
+						Context cxt = new Context();
+						Map<String, Object> properties = new HashMap<>();
+						properties.put("base", "http://hede.hedo");
+						properties.put("vocab", "http://hede.hedod");
+						
+						cxt.set(SysRIOT.sysRdfWriterProperties, properties);
+					    writerBuilder.context(cxt);
+					    
+					    JsonLDWriteContext ctx = new JsonLDWriteContext();
+					    JsonLdOptions opts = new JsonLdOptions();
+					    ctx.setOptions(opts);
+					    // default is true
+					    opts.setBase("http://hede.hedo");
+					    writerBuilder.context(ctx);
+ */

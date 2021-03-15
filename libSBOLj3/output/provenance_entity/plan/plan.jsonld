@@ -1,5 +1,5 @@
 {
-  "@id" : "CodonOptimisationProtocol",
+  "@id" : "https://sbolstandard.org/examples/CodonOptimisationProtocol",
   "@type" : "prov:Plan",
   "description" : "Optimisation protocol to improve the translation of mRNAs.",
   "displayId" : "CodonOptimisationProtocol",
@@ -14,7 +14,6 @@
     "displayId" : {
       "@id" : "http://sbols.org/v3#displayId"
     },
-    "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",
     "CHEBI" : "https://identifiers.org/CHEBI:",
     "GO" : "https://identifiers.org/GO:",

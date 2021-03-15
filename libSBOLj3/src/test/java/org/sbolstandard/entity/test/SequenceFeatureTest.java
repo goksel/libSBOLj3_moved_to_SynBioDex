@@ -15,6 +15,7 @@ import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.entity.Sequence;
 import org.sbolstandard.entity.SequenceFeature;
 import org.sbolstandard.entity.SubComponent;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ComponentType;
@@ -38,7 +39,7 @@ public class SequenceFeatureTest extends TestCase {
 		RangeLocationBuilder location=new RangeLocationBuilder(1, 3, seq.getUri());
 		gfp.createSequenceFeature(Arrays.asList(location));
 		
-		System.out.println(SBOLIO.write(doc, "Turtle"));
+		System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         
     }
 

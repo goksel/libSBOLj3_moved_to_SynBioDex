@@ -11,6 +11,7 @@ import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.Identified;
 import org.sbolstandard.entity.Metadata;
 import org.sbolstandard.entity.SBOLDocument;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.util.URINameSpace;
@@ -75,28 +76,27 @@ public class AnnotationTest extends TestCase {
         
         TestUtil.serialise(doc, "entity/annotation", "annotation");
         
-        String rdfxmloutput=SBOLIO.write(doc, "RDF/XML-ABBREV");
+        String rdfxmloutput=SBOLIO.write(doc, SBOLFormat.TURTLE.RDFXML);
         System.out.println(rdfxmloutput);
-        SBOLDocument docrdfxml=SBOLIO.read(rdfxmloutput, "RDF/XML-ABBREV");
-        rdfxmloutput=SBOLIO.write(docrdfxml, "RDF/XML-ABBREV");
+        SBOLDocument docrdfxml=SBOLIO.read(rdfxmloutput, SBOLFormat.RDFXML);
+        rdfxmloutput=SBOLIO.write(docrdfxml, SBOLFormat.RDFXML);
         System.out.println(rdfxmloutput);
         
    
         
-        String output=SBOLIO.write(doc, "Turtle");
+        String output=SBOLIO.write(doc, SBOLFormat.TURTLE);
         System.out.println(output);
-        SBOLDocument doc2=SBOLIO.read(output, "Turtle"); 
+        SBOLDocument doc2=SBOLIO.read(output, SBOLFormat.TURTLE); 
       //  doc2.addTopLevelResourceType(igem.local("Repository"));
         
        
         
-        output=SBOLIO.write(doc2, "RDF/XML-ABBREV");
+        output=SBOLIO.write(doc2, SBOLFormat.RDFXML);
         System.out.println(output);
          
         printMetadata(doc2.getComponents().get(0));
         
         TestUtil.assertReadWrite(doc);
-          
     }
 	
 	public void printMetadata(Identified identified)

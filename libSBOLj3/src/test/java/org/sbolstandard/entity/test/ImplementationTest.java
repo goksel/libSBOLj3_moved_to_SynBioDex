@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 
-import org.apache.jena.shared.uuid.JenaUUID;
 import org.sbolstandard.TestUtil;
 import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.Implementation;
 import org.sbolstandard.entity.SBOLDocument;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.util.URINameSpace;
@@ -35,7 +35,7 @@ public class ImplementationTest extends TestCase {
         
         TestUtil.serialise(doc, "entity/implementation", "implementation");
       
-        System.out.println(SBOLIO.write(doc, "Turtle"));
+        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
     }
 

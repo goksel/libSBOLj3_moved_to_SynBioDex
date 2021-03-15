@@ -1,21 +1,21 @@
 {
   "@graph" : [ {
-    "@id" : "M9_Glucose_CAA",
+    "@id" : "https://sbolstandard.org/examples/M9_Glucose_CAA",
     "@type" : "sbol:Component",
     "description" : "M9 Glucose CAA growth media",
     "displayId" : "M9_Glucose_CAA",
-    "hasFeature" : "M9_Glucose_CAA/ExternallyDefined1",
+    "hasFeature" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1",
     "name" : "M9 Glucose CAA",
     "type" : "SBO:0000241"
   }, {
-    "@id" : "M9_Glucose_CAA/ExternallyDefined1",
+    "@id" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1",
     "@type" : "sbol:ExternallyDefined",
     "definition" : "CHEBI:3312",
     "displayId" : "ExternallyDefined1",
-    "hasMeasure" : "M9_Glucose_CAA/ExternallyDefined1/measure1",
+    "hasMeasure" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1",
     "type" : "SBO:0000247"
   }, {
-    "@id" : "M9_Glucose_CAA/ExternallyDefined1/measure1",
+    "@id" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1",
     "@type" : "om:Measure",
     "displayId" : "measure1",
     "hasNumericalValue" : "0.1",
@@ -54,7 +54,6 @@
     "hasNumericalValue" : {
       "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumericalValue"
     },
-    "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",
     "CHEBI" : "https://identifiers.org/CHEBI:",
     "GO" : "https://identifiers.org/GO:",

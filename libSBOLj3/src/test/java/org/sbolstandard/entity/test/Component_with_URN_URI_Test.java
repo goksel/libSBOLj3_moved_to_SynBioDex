@@ -3,13 +3,16 @@ package org.sbolstandard.entity.test;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
+import java.util.UUID;
 
-import org.apache.jena.shared.uuid.JenaUUID;
 import org.sbolstandard.TestUtil;
+//import org.apache.jena.shared.uuid.JenaUUID;
+//import org.sbolstandard.TestUtil;
 import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.Implementation;
 import org.sbolstandard.entity.SBOLDocument;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.util.URINameSpace;
@@ -40,18 +43,19 @@ public class Component_with_URN_URI_Test extends TestCase {
         
         TestUtil.serialise(doc, "entity/component_urn_uri", "component_urn_uri");
       
-        System.out.println(SBOLIO.write(doc, "Turtle"));
+        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
         
     }
 	
 	public static URI getUniqueURN() {
-		  return URI.create(JenaUUID.generate().asURN());
+		  return URI.create("urn:uuid:" + UUID.randomUUID().toString()); //<urn:uuid:0c27b730-2c64-11b2-8059-acde48001122>
+				  //JenaUUID.generate().asURN());
 		}
 	
-	public static String getUniqueIri(String prefix) {
+	/*public static String getUniqueIri(String prefix) {
 		  return prefix + JenaUUID.generate().asString();
 		}
-	
+	*/
 
 }

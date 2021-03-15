@@ -1,6 +1,6 @@
 {
   "@graph" : [ {
-    "@id" : "TetR_protein",
+    "@id" : "https://sbolstandard.org/examples/TetR_protein",
     "@type" : "sbol:Component",
     "description" : "TetR protein",
     "displayId" : "TetR_protein",
@@ -8,9 +8,9 @@
     "role" : "GO:0003700",
     "type" : "SBO:0000252"
   }, {
-    "@id" : "impl1",
+    "@id" : "https://sbolstandard.org/examples/impl1",
     "@type" : "sbol:Implementation",
-    "built" : "TetR_protein",
+    "built" : "https://sbolstandard.org/examples/TetR_protein",
     "displayId" : "impl1"
   } ],
   "@context" : {
@@ -35,7 +35,6 @@
       "@id" : "http://sbols.org/v3#type",
       "@type" : "@id"
     },
-    "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",
     "CHEBI" : "https://identifiers.org/CHEBI:",
     "GO" : "https://identifiers.org/GO:",

@@ -10,6 +10,7 @@ import org.sbolstandard.entity.Attachment;
 import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.Implementation;
 import org.sbolstandard.entity.SBOLDocument;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.util.URINameSpace;
@@ -43,7 +44,7 @@ public class AttachmentTest extends TestCase {
         
         TestUtil.serialise(doc, "entity/attachment", "attachment");
       
-        System.out.println(SBOLIO.write(doc, "Turtle"));
+        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
     }
 

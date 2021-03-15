@@ -11,6 +11,7 @@ import org.sbolstandard.entity.Model;
 import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.entity.provenance.Agent;
 import org.sbolstandard.entity.provenance.Plan;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.util.URINameSpace;
@@ -31,10 +32,15 @@ public class PlanTest extends TestCase {
         Plan plan=doc.createPlan(SBOLAPI.append(baseUri, "CodonOptimisationProtocol"));
         plan.setName("Codon Optimisation Protocol");
         plan.setDescription("Optimisation protocol to improve the translation of mRNAs.");
-         
+        
+        System.out.println(SBOLIO.write(doc, SBOLFormat.JSONLD));
+        System.out.println("--------------------");
+        
+        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
+        
+        
         TestUtil.serialise(doc, "provenance_entity/plan", "plan");
       
-        System.out.println(SBOLIO.write(doc, "Turtle"));
         
         TestUtil.assertReadWrite(doc);
     }

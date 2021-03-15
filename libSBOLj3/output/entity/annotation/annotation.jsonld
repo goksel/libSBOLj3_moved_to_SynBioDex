@@ -11,20 +11,20 @@
     "displayId" : "about",
     "name" : "SynBioHub"
   }, {
-    "@id" : "BBa_J23119",
+    "@id" : "https://sbolstandard.org/examples/BBa_J23119",
     "@type" : "sbol:Component",
     "belongsTo" : [ "http://parts.igem.org", "http://synbiohub.org#about" ],
     "experienceURL" : "igem:Part:BBa_J23119:Experience",
     "group" : "iGEM2006_Berkeley",
-    "hasInformation" : "BBa_J23119/information1",
-    "hasUsage" : "BBa_J23119/usage1",
+    "hasInformation" : "https://sbolstandard.org/examples/BBa_J23119/information1",
+    "hasUsage" : "https://sbolstandard.org/examples/BBa_J23119/usage1",
     "description" : "Parts J23100 through J23119 are a family of constitutive promoter parts isolated from a small combinatorial library.",
     "displayId" : "BBa_J23119",
     "name" : "BBa_J23119 part",
     "role" : "SO:0000167",
     "type" : "SBO:0000251"
   }, {
-    "@id" : "BBa_J23119/information1",
+    "@id" : "https://sbolstandard.org/examples/BBa_J23119/information1",
     "@type" : [ "sbol:Identified", "igem:Information" ],
     "regulation" : [ "//regulation/second_regulation", "//regulation/constitutive" ],
     "sigmaFactor" : "//rnap/prokaryote/ecoli/sigma70",
@@ -32,17 +32,17 @@
     "displayId" : "information1",
     "name" : "BBa_J23119_experience"
   }, {
-    "@id" : "BBa_J23119/twinParts",
+    "@id" : "https://sbolstandard.org/examples/BBa_J23119/twinParts",
     "@type" : [ "sbol:Identified", "igem:TwinPartUsage" ],
     "twinURL" : [ "igem:wiki/index.php?title=Part:BBa_M36800", "igem:wiki/index.php?title=Part:BBa_M1638", "igem:wiki/index.php?title=Part:BBa_J72073" ],
     "displayId" : "twinParts",
     "name" : "twin parts"
   }, {
-    "@id" : "BBa_J23119/usage1",
+    "@id" : "https://sbolstandard.org/examples/BBa_J23119/usage1",
     "@type" : [ "sbol:Identified", "igem:IGEMUsage" ],
     "inStock" : "true",
     "registryStar" : "1",
-    "twinURLs" : "BBa_J23119/twinParts",
+    "twinURLs" : "https://sbolstandard.org/examples/BBa_J23119/twinParts",
     "twins" : "7",
     "uses" : "442",
     "description" : "BBa_J23119 usage statistics",
@@ -115,7 +115,6 @@
     "sigmaFactor" : {
       "@id" : "http://parts.igem.org/sigmaFactor"
     },
-    "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",
     "CHEBI" : "https://identifiers.org/CHEBI:",
     "igem" : "http://parts.igem.org/",
