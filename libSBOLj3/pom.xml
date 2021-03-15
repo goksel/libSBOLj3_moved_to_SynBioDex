@@ -5,7 +5,7 @@
 	<groupId>org.sbolstandard</groupId>
 	<artifactId>libSBOLj3</artifactId>
 	<packaging>jar</packaging>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 	<name>libSBOLj3</name>
 	<url>https://github.com/goksel/libSBOLj3</url>
 	<issueManagement>
