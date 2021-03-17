@@ -4,6 +4,7 @@
     "@type" : "sbol:Component",
     "description" : "LacI protein",
     "displayId" : "LacI_protein",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "LacI",
     "role" : "GO:0003700",
     "type" : "SBO:0000252"
@@ -12,6 +13,7 @@
     "@type" : "sbol:Component",
     "description" : "TetR protein",
     "displayId" : "TetR_protein",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "TetR",
     "role" : "GO:0003700",
     "type" : "SBO:0000252"
@@ -19,11 +21,16 @@
     "@id" : "https://sbolstandard.org/examples/col1",
     "@type" : "sbol:Collection",
     "displayId" : "col1",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "member" : [ "https://sbolstandard.org/examples/LacI_protein", "https://sbolstandard.org/examples/TetR_protein" ]
   } ],
   "@context" : {
     "member" : {
       "@id" : "http://sbols.org/v3#member",
+      "@type" : "@id"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
       "@type" : "@id"
     },
     "displayId" : {

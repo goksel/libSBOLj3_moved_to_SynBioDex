@@ -6,6 +6,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "Codon Optimiser Software"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "CodonOptimiserSoftware"
   } ],
@@ -17,6 +20,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "Toggle Switch"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000241"

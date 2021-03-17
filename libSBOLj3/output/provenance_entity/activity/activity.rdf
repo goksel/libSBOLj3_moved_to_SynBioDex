@@ -13,6 +13,7 @@
    <sbol:Component rdf:about="toggle_switch">
       <sbol:description>Toggle Switch genetic circuit</sbol:description>
       <sbol:name>Toggle Switch</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
       <sbol:displayId>toggle_switch</sbol:displayId>
    </sbol:Component>
@@ -23,17 +24,20 @@
       </prov:wasGeneratedBy>
       <sbol:description>Toggle Switch genetic circuit - codon optimised</sbol:description>
       <sbol:name>Toggle Switch Optimised</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
       <sbol:displayId>toggle_switch_optimised</sbol:displayId>
    </sbol:Component>
    <prov:Agent rdf:about="CodonOptimiserSoftware">
       <sbol:description>Used to optimise bacterial DNA sequences.</sbol:description>
       <sbol:name>Codon Optimiser Software</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>CodonOptimiserSoftware</sbol:displayId>
    </prov:Agent>
    <prov:Plan rdf:about="CodonOptimisationProtocol">
       <sbol:description>Optimisation protocol to improve the translation of mRNAs.</sbol:description>
       <sbol:name>Codon Optimisation Protocol</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>CodonOptimisationProtocol</sbol:displayId>
    </prov:Plan>
    <prov:Activity rdf:about="RBS_optimisation_activity">
@@ -43,13 +47,14 @@
       <sbol:description>An activity that is used to RBSs</sbol:description>
       <sbol:name>RBS optimization activity</sbol:name>
       <sbol:type rdf:resource="http://sbols.org/v3#design"/>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>RBS_optimisation_activity</sbol:displayId>
    </prov:Activity>
    <prov:Activity rdf:about="codon_optimization_activity">
       <sbol:type rdf:resource="http://sbols.org/v3#design"/>
+      <prov:startedAtTime>2019-07-29T14:25:47.981Z</prov:startedAtTime>
       <sbol:name>Codon optimization activity</sbol:name>
       <sbol:description>An activity that is used to optimise codons</sbol:description>
-      <prov:endedAtTime>2020-08-30T14:37:46.574Z</prov:endedAtTime>
       <prov:qualifiedUsage>
          <prov:Usage rdf:about="codon_optimization_activity/Usage2">
             <prov:hadRole rdf:resource="https://identifiers.org/SBO:0000011"/>
@@ -57,8 +62,8 @@
             <sbol:displayId>Usage2</sbol:displayId>
          </prov:Usage>
       </prov:qualifiedUsage>
-      <prov:startedAtTime>2019-07-29T14:37:46.574Z</prov:startedAtTime>
       <sbol:displayId>codon_optimization_activity</sbol:displayId>
+      <prov:endedAtTime>2020-08-30T14:25:47.981Z</prov:endedAtTime>
       <prov:qualifiedAssociation>
          <prov:Association rdf:about="codon_optimization_activity/Association1">
             <prov:hadRole rdf:resource="http://sbols.org/v3#design"/>
@@ -67,6 +72,7 @@
             <sbol:displayId>Association1</sbol:displayId>
          </prov:Association>
       </prov:qualifiedAssociation>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <prov:qualifiedUsage>
          <prov:Usage rdf:about="codon_optimization_activity/Usage1">
             <prov:hadRole rdf:resource="https://identifiers.org/SBO:0000645"/>

@@ -10,10 +10,7 @@ import org.sbolstandard.TestUtil;
 import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.Identified;
-import org.sbolstandard.entity.Metadata;
-import org.sbolstandard.entity.Model;
 import org.sbolstandard.entity.SBOLDocument;
-import org.sbolstandard.entity.Sequence;
 import org.sbolstandard.entity.provenance.Activity;
 import org.sbolstandard.entity.provenance.Agent;
 import org.sbolstandard.entity.provenance.Association;
@@ -22,13 +19,9 @@ import org.sbolstandard.entity.provenance.Usage;
 import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
-import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.vocabulary.ActivityType;
 import org.sbolstandard.vocabulary.ComponentType;
-import org.sbolstandard.vocabulary.ModelFramework;
-import org.sbolstandard.vocabulary.ModelLanguage;
 import org.sbolstandard.vocabulary.ParticipationRole;
-import org.sbolstandard.vocabulary.Role;
 
 import junit.framework.TestCase;
 
@@ -39,19 +32,19 @@ public class ActivityTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component toggleSwitch=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "toggle_switch"), ComponentType.FunctionalEntity.getUrl(), "Toggle Switch", "Toggle Switch genetic circuit", null);
-        Component toggleSwitchOptimised=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "toggle_switch_optimised"), ComponentType.FunctionalEntity.getUrl(), "Toggle Switch Optimised", "Toggle Switch genetic circuit - codon optimised", null);
+        Component toggleSwitch=SBOLAPI.createComponent(doc, "toggle_switch", ComponentType.FunctionalEntity.getUrl(), "Toggle Switch", "Toggle Switch genetic circuit", null);
+        Component toggleSwitchOptimised=SBOLAPI.createComponent(doc, "toggle_switch_optimised", ComponentType.FunctionalEntity.getUrl(), "Toggle Switch Optimised", "Toggle Switch genetic circuit - codon optimised", null);
         
-        Agent agent=doc.createAgent(SBOLAPI.append(baseUri, "CodonOptimiserSoftware"));
+        Agent agent=doc.createAgent("CodonOptimiserSoftware");
         agent.setName("Codon Optimiser Software");
         agent.setDescription("Used to optimise bacterial DNA sequences.");
         
-        Plan plan=doc.createPlan(SBOLAPI.append(baseUri, "CodonOptimisationProtocol"));
+        Plan plan=doc.createPlan("CodonOptimisationProtocol");
         plan.setName("Codon Optimisation Protocol");
         plan.setDescription("Optimisation protocol to improve the translation of mRNAs.");
         
          
-        Activity activity=doc.createActivity(SBOLAPI.append(baseUri, "codon_optimization_activity"));
+        Activity activity=doc.createActivity("codon_optimization_activity");
         activity.setTypes(Arrays.asList(ActivityType.Design.getUrl()));
         activity.setName("Codon optimization activity");
         activity.setDescription("An activity that is used to optimise codons");
@@ -76,7 +69,7 @@ public class ActivityTest extends TestCase {
         
         
         
-        Activity rbsactivity=doc.createActivity(SBOLAPI.append(baseUri, "RBS_optimisation_activity"));
+        Activity rbsactivity=doc.createActivity("RBS_optimisation_activity");
         rbsactivity.setTypes(Arrays.asList(ActivityType.Design.getUrl()));
         rbsactivity.setName("RBS optimization activity");
         rbsactivity.setDescription("An activity that is used to RBSs");

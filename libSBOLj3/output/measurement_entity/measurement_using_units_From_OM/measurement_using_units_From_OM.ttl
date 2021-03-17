@@ -9,12 +9,13 @@
 @prefix prov:  <http://www.w3.org/ns/prov#> .
 @prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
 
-:M9_Glucose_CAA  a        sbol:Component ;
-        sbol:description  "M9 Glucose CAA growth media" ;
-        sbol:displayId    "M9_Glucose_CAA" ;
-        sbol:hasFeature   <M9_Glucose_CAA/ExternallyDefined1> ;
-        sbol:name         "M9 Glucose CAA" ;
-        sbol:type         SBO:0000241 .
+:M9_Glucose_CAA  a         sbol:Component ;
+        sbol:description   "M9 Glucose CAA growth media" ;
+        sbol:displayId     "M9_Glucose_CAA" ;
+        sbol:hasFeature    <M9_Glucose_CAA/ExternallyDefined1> ;
+        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:name          "M9 Glucose CAA" ;
+        sbol:type          SBO:0000241 .
 
 <M9_Glucose_CAA/ExternallyDefined1>
         a                sbol:ExternallyDefined ;

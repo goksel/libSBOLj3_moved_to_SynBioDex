@@ -4,6 +4,7 @@
     "@type" : "sbol:Component",
     "description" : "GFP",
     "displayId" : "GFP_protein",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "GFP",
     "type" : "SBO:0000252"
   }, {
@@ -11,6 +12,7 @@
     "@type" : "sbol:Component",
     "description" : "IPTG",
     "displayId" : "IPTG",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "IPTG",
     "role" : "CHEBI:35224",
     "type" : "SBO:0000247"
@@ -19,6 +21,7 @@
     "@type" : "sbol:Component",
     "description" : "IPTG_LacI complex",
     "displayId" : "IPTG_LacI",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "IPTG_LacI",
     "type" : "SBO:0000253"
   }, {
@@ -28,6 +31,7 @@
     "displayId" : "LacI_producer",
     "hasFeature" : [ "https://sbolstandard.org/examples/LacI_producer/SubComponent1", "https://sbolstandard.org/examples/LacI_producer/SubComponent5", "https://sbolstandard.org/examples/LacI_producer/SubComponent10", "https://sbolstandard.org/examples/LacI_producer/SubComponent2", "https://sbolstandard.org/examples/LacI_producer/SubComponent8", "https://sbolstandard.org/examples/LacI_producer/SubComponent9", "https://sbolstandard.org/examples/LacI_producer/SubComponent3", "https://sbolstandard.org/examples/LacI_producer/SubComponent6", "https://sbolstandard.org/examples/LacI_producer/SubComponent7", "https://sbolstandard.org/examples/LacI_producer/SubComponent4" ],
     "hasInteraction" : [ "https://sbolstandard.org/examples/LacI_producer/Interaction3", "https://sbolstandard.org/examples/LacI_producer/Interaction2", "https://sbolstandard.org/examples/LacI_producer/Interaction1", "https://sbolstandard.org/examples/LacI_producer/Interaction4" ],
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "LacI producer",
     "role" : "SO:0000704",
     "type" : "SBO:0000251"
@@ -170,6 +174,7 @@
     "@type" : "sbol:Component",
     "description" : "LacI protein",
     "displayId" : "LacI_protein",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "LacI",
     "role" : "GO:0003700",
     "type" : "SBO:0000252"
@@ -180,6 +185,7 @@
     "displayId" : "TetR_producer",
     "hasFeature" : [ "https://sbolstandard.org/examples/TetR_producer/SubComponent2", "https://sbolstandard.org/examples/TetR_producer/SubComponent7", "https://sbolstandard.org/examples/TetR_producer/SubComponent5", "https://sbolstandard.org/examples/TetR_producer/SubComponent3", "https://sbolstandard.org/examples/TetR_producer/SubComponent8", "https://sbolstandard.org/examples/TetR_producer/SubComponent1", "https://sbolstandard.org/examples/TetR_producer/SubComponent6", "https://sbolstandard.org/examples/TetR_producer/SubComponent4", "https://sbolstandard.org/examples/TetR_producer/SubComponent9" ],
     "hasInteraction" : [ "https://sbolstandard.org/examples/TetR_producer/Interaction2", "https://sbolstandard.org/examples/TetR_producer/Interaction1", "https://sbolstandard.org/examples/TetR_producer/Interaction3" ],
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "TetR device",
     "role" : "SO:0000704",
     "type" : "SBO:0000251"
@@ -297,6 +303,7 @@
     "@type" : "sbol:Component",
     "description" : "TetR protein",
     "displayId" : "TetR_protein",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "TetR",
     "role" : "GO:0003700",
     "type" : "SBO:0000252"
@@ -305,6 +312,7 @@
     "@type" : "sbol:Component",
     "description" : "aTC",
     "displayId" : "aTC",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "aTC",
     "role" : "CHEBI:35224",
     "type" : "SBO:0000247"
@@ -313,6 +321,7 @@
     "@type" : "sbol:Component",
     "description" : "atC_TetR complex",
     "displayId" : "atC_TetR",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "atC_TetR",
     "type" : "SBO:0000253"
   }, {
@@ -320,6 +329,7 @@
     "@type" : "sbol:Component",
     "description" : "gfp coding sequence",
     "displayId" : "gfp",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "gfp",
     "role" : "SO:0000316",
     "type" : "SBO:0000251"
@@ -328,6 +338,7 @@
     "@type" : "sbol:Component",
     "description" : "lacI coding sequence",
     "displayId" : "lacI",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "lacI",
     "role" : "SO:0000316",
     "type" : "SBO:0000251"
@@ -336,6 +347,7 @@
     "@type" : "sbol:Component",
     "description" : "LacI repressible promoter",
     "displayId" : "pLacI",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "pLacI promoter",
     "role" : "SO:0000167",
     "type" : "SBO:0000251"
@@ -344,6 +356,7 @@
     "@type" : "sbol:Component",
     "description" : "TetR repressible promoter",
     "displayId" : "pTetR",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "pTetR",
     "role" : "SO:0000167",
     "type" : "SBO:0000251"
@@ -352,6 +365,7 @@
     "@type" : "sbol:Component",
     "description" : "RBS",
     "displayId" : "rbs_gfp",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "rbs",
     "role" : "SO:0000139",
     "type" : "SBO:0000251"
@@ -360,6 +374,7 @@
     "@type" : "sbol:Component",
     "description" : "RBS",
     "displayId" : "rbs_lacI",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "rbs",
     "role" : "SO:0000139",
     "type" : "SBO:0000251"
@@ -368,6 +383,7 @@
     "@type" : "sbol:Component",
     "description" : "tetR RBS",
     "displayId" : "rbs_tetR",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "rbs",
     "role" : "SO:0000139",
     "type" : "SBO:0000251"
@@ -376,6 +392,7 @@
     "@type" : "sbol:Component",
     "description" : "Terminator",
     "displayId" : "ter_lacI",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "lacI terminator",
     "role" : "SO:0000141",
     "type" : "SBO:0000251"
@@ -384,6 +401,7 @@
     "@type" : "sbol:Component",
     "description" : "Terminator",
     "displayId" : "ter_tetR",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "tetR terminator",
     "role" : "SO:0000141",
     "type" : "SBO:0000251"
@@ -392,6 +410,7 @@
     "@type" : "sbol:Component",
     "description" : "tetR coding sequence",
     "displayId" : "tetR",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "tetR",
     "role" : "SO:0000316",
     "type" : "SBO:0000251"
@@ -402,6 +421,7 @@
     "displayId" : "toggle_switch",
     "hasConstraint" : [ "https://sbolstandard.org/examples/toggle_switch/Constraint1", "https://sbolstandard.org/examples/toggle_switch/Constraint2" ],
     "hasFeature" : [ "https://sbolstandard.org/examples/toggle_switch/SubComponent1", "https://sbolstandard.org/examples/toggle_switch/ComponentReference4", "https://sbolstandard.org/examples/toggle_switch/ComponentReference3", "https://sbolstandard.org/examples/toggle_switch/ComponentReference2", "https://sbolstandard.org/examples/toggle_switch/ComponentReference1", "https://sbolstandard.org/examples/toggle_switch/SubComponent2" ],
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "Toggle Switch",
     "type" : "SBO:0000241"
   }, {
@@ -464,6 +484,10 @@
     },
     "name" : {
       "@id" : "http://sbols.org/v3#name"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
+      "@type" : "@id"
     },
     "displayId" : {
       "@id" : "http://sbols.org/v3#displayId"

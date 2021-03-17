@@ -1,6 +1,9 @@
 package org.sbolstandard.entity;
 
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
@@ -12,6 +15,7 @@ import org.sbolstandard.vocabulary.DataModel;
 public abstract class TopLevel extends Identified {
 
 	private List<URI> attachments=null;
+	private URI namespace=null;
 	
 	
 	protected TopLevel(Model model, URI uri) throws SBOLGraphException
@@ -41,6 +45,40 @@ public abstract class TopLevel extends Identified {
 		RDFUtil.setProperty(resource, DataModel.TopLevel.attachment, attachments);
 	}
 	
+	public URI getNamespace() {
+		if (namespace==null)
+		{
+			namespace=RDFUtil.getPropertyAsURI(this.resource, DataModel.TopLevel.namespace);	
+		}
+		return namespace;
+	}
+
+	public void setNamespace(URI namespace) {
+		
+		String uriString=namespace.toString();
+		if (isURL(uriString))
+		{
+			if (uriString.endsWith("/") || uriString.endsWith("#"))
+			{
+				uriString=uriString.substring(0, uriString.length()-1);
+			}
+		}
+		this.namespace = URI.create(uriString);
+		RDFUtil.setProperty(resource, DataModel.TopLevel.namespace, this.namespace);
+	}
+	
+	 private boolean isURL(String s){
+	        try{
+	            URL url = new URL(s);
+	            url.toURI();
+	            return true;
+	        }catch(MalformedURLException e){
+	            return false;
+	        } catch (URISyntaxException e) {
+	            return false;
+	        }
+	    }
+	 
 	@Override
 	public URI getResourceType() {
 		return DataModel.TopLevel.uri;

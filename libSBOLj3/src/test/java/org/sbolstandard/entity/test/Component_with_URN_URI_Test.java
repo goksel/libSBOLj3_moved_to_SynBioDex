@@ -6,20 +6,12 @@ import java.util.Arrays;
 import java.util.UUID;
 
 import org.sbolstandard.TestUtil;
-//import org.apache.jena.shared.uuid.JenaUUID;
-//import org.sbolstandard.TestUtil;
-import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Component;
-import org.sbolstandard.entity.Implementation;
 import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
-import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.vocabulary.ComponentType;
-import org.sbolstandard.vocabulary.ModelFramework;
-import org.sbolstandard.vocabulary.ModelLanguage;
-import org.sbolstandard.vocabulary.Role;
 
 import junit.framework.TestCase;
 
@@ -34,10 +26,12 @@ public class Component_with_URN_URI_Test extends TestCase {
         
         //String uriString=getUniqueIri("urn:");
         URI uri=getUniqueURN();
-        Component comp=doc.createComponent(uri, Arrays.asList(ComponentType.Protein.getUrl()));
+        URI namespace=getUniqueURN();
+        
+        Component comp=doc.createComponent(namespace, uri, Arrays.asList(ComponentType.Protein.getUrl()));
         comp.setName("TetR");
         Component compRead=(Component)doc.getIdentified(uri, Component.class);
-        assertNotNull("Could not retrieve the compoennt identitied by a urn:uuid URI ",compRead);
+        assertNotNull("Could not retrieve the compoenent identitied by a urn:uuid URI ",compRead);
         assertTrue ("Names are not equal", comp.getName().equals(compRead.getName()));
         
         

@@ -1,11 +1,16 @@
 {
-  "@id" : "urn:uuid:0ebcc02f-7ff0-4191-8e49-f97a8bee63fd",
+  "@id" : "urn:uuid:321de476-fb44-4e47-808f-076ec8ffaa9d",
   "@type" : "sbol:Component",
+  "hasNamespace" : "urn:uuid:dcd90bfe-dc0e-49f4-a992-dcd1d15a1fd0",
   "name" : "TetR",
   "type" : "SBO:0000252",
   "@context" : {
     "name" : {
       "@id" : "http://sbols.org/v3#name"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
+      "@type" : "@id"
     },
     "type" : {
       "@id" : "http://sbols.org/v3#type",

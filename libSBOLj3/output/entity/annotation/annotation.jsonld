@@ -20,6 +20,7 @@
     "hasUsage" : "https://sbolstandard.org/examples/BBa_J23119/usage1",
     "description" : "Parts J23100 through J23119 are a family of constitutive promoter parts isolated from a small combinatorial library.",
     "displayId" : "BBa_J23119",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "BBa_J23119 part",
     "role" : "SO:0000167",
     "type" : "SBO:0000251"
@@ -93,6 +94,10 @@
     },
     "hasUsage" : {
       "@id" : "http://parts.igem.org/hasUsage",
+      "@type" : "@id"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
       "@type" : "@id"
     },
     "experienceURL" : {

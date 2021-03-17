@@ -515,7 +515,7 @@ public class RDFUtil {
 	    
 	    public static ResultSet executeSPARQLSelectQuery(Model model, String query, Syntax syntax)
 	    {
-	    	System.out.println ("Executing the query 2" + query + "...");
+	    	//System.out.println ("Executing the query " + query + "...");
 	    	Query q = QueryFactory.create(query, syntax);
 		    QueryExecution qe = QueryExecutionFactory.create(q, model);
 		    ResultSet rsMemory=null;
@@ -583,7 +583,10 @@ public class RDFUtil {
 		{
 	    	Model model = ModelFactory.createDefaultModel();
 	        RDFParserBuilder rdfBuilder= RDFParser.create().source(stream);
-	        rdfBuilder.lang(format.getLang());
+	        if (format!=null)
+	        {
+	        	rdfBuilder.lang(format.getLang());
+	        }
 	        RDFParser parser=rdfBuilder.build();
 	        parser.parse(model);    
 			return model;			
@@ -593,15 +596,15 @@ public class RDFUtil {
 		{
 	    	Model model = ModelFactory.createDefaultModel();
 	        RDFParserBuilder rdfBuilder= RDFParser.create().fromString(input);
-	        rdfBuilder.lang(format.getLang());
+	        if (format!=null)
+	        {
+	        	rdfBuilder.lang(format.getLang());
+	        }
 	        RDFParser parser=rdfBuilder.build();
 	        parser.parse(model);    
 			return model;			
 		}
 }
-
-
-
 
 /*
  

@@ -9,6 +9,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "M9 Glucose CAA"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000241"
   } ],

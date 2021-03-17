@@ -13,6 +13,7 @@
    <prov:Plan rdf:about="CodonOptimisationProtocol">
       <sbol:description>Optimisation protocol to improve the translation of mRNAs.</sbol:description>
       <sbol:name>Codon Optimisation Protocol</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>CodonOptimisationProtocol</sbol:displayId>
    </prov:Plan>
 </rdf:RDF>

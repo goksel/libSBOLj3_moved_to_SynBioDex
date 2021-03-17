@@ -9,6 +9,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "LacI"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000252"
   } ],
@@ -27,6 +30,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "TetR"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000252"
   } ],
@@ -40,6 +46,9 @@
     "@id" : "https://sbolstandard.org/examples/LacI_protein"
   }, {
     "@id" : "https://sbolstandard.org/examples/TetR_protein"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "col1"

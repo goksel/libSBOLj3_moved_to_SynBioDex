@@ -4,12 +4,14 @@
     "@type" : "prov:Agent",
     "description" : "Used to optimise bacterial DNA sequences.",
     "displayId" : "CodonOptimiserSoftware",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "Codon Optimiser Software"
   }, {
     "@id" : "https://sbolstandard.org/examples/toggle_switch",
     "@type" : "sbol:Component",
     "description" : "Toggle Switch genetic circuit",
     "displayId" : "toggle_switch",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "Toggle Switch",
     "type" : "SBO:0000241"
   } ],
@@ -19,6 +21,10 @@
     },
     "name" : {
       "@id" : "http://sbols.org/v3#name"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
+      "@type" : "@id"
     },
     "type" : {
       "@id" : "http://sbols.org/v3#type",

@@ -17,12 +17,14 @@
       <sbol:built>
          <sbol:Component rdf:about="TetR_protein"/>
       </sbol:built>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>impl1</sbol:displayId>
    </sbol:Implementation>
    <sbol:Component rdf:about="TetR_protein">
       <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
       <sbol:description>TetR protein</sbol:description>
       <sbol:name>TetR</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
       <sbol:displayId>TetR_protein</sbol:displayId>
    </sbol:Component>
@@ -32,6 +34,7 @@
       <sbol:size>1000</sbol:size>
       <sbol:format rdf:resource="https://identifiers.org/edam:format_2585"/>
       <sbol:source rdf:resource="/attachment1"/>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>attachment1</sbol:displayId>
    </sbol:Attachment>
 </rdf:RDF>

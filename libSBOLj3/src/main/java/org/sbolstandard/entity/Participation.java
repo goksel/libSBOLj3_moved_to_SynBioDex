@@ -11,6 +11,8 @@ import org.sbolstandard.vocabulary.DataModel;
 public class Participation extends Identified{
 	private List<URI> roles=null;
 	private URI participant=null;
+	private URI higherOrderParticipant=null;
+	
 
 	protected  Participation(Model model,URI uri) throws SBOLGraphException
 	{
@@ -48,6 +50,20 @@ public class Participation extends Identified{
 		this.participant = participant;
 		RDFUtil.setProperty(resource, DataModel.Participation.participant, participant);
 	}
+	
+	public URI getHigherOrderParticipant() throws SBOLGraphException {
+		if (higherOrderParticipant==null)
+		{
+			higherOrderParticipant=RDFUtil.getPropertyAsURI(this.resource, DataModel.Participation.higherOrderParticipant);	
+		}
+		return participant;
+	}
+
+	public void setHigherOrderParticipant(URI higherOrderParticipant) {
+		this.higherOrderParticipant = higherOrderParticipant;
+		RDFUtil.setProperty(resource, DataModel.Participation.higherOrderParticipant, higherOrderParticipant);
+	}
+	
 
 	
 	

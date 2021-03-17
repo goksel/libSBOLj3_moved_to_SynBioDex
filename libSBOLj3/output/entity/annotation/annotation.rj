@@ -202,6 +202,11 @@
       "value" : "http://sbols.org/v3#Component"
     }
      ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
+    }
+     ] ,
     "http://parts.igem.org/hasInformation" : [ { 
       "type" : "uri" ,
       "value" : "https://sbolstandard.org/examples/BBa_J23119/information1"

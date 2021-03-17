@@ -13,12 +13,14 @@
    <sbol:Component rdf:about="toggle_switch">
       <sbol:description>Toggle Switch genetic circuit</sbol:description>
       <sbol:name>Toggle Switch</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
       <sbol:displayId>toggle_switch</sbol:displayId>
    </sbol:Component>
    <prov:Agent rdf:about="CodonOptimiserSoftware">
       <sbol:description>Used to optimise bacterial DNA sequences.</sbol:description>
       <sbol:name>Codon Optimiser Software</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>CodonOptimiserSoftware</sbol:displayId>
    </prov:Agent>
 </rdf:RDF>

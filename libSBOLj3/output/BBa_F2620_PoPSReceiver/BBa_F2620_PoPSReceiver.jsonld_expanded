@@ -12,6 +12,9 @@
   "http://sbols.org/v3#hasSequence" : [ {
     "@id" : "https://synbiohub.org/public/igem/BBa_B0010_Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "BBa_B0010"
   } ],
@@ -24,8 +27,11 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#encoding" : [ {
-    "@id" : "http://sbols.org/v3#iupacNucleicAcid"
+    "@id" : "https://identifiers.org/edam:format_1207"
   } ],
   "http://sbols.org/v3#elements" : [ {
     "@value" : "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc"
@@ -51,6 +57,9 @@
   "http://sbols.org/v3#hasSequence" : [ {
     "@id" : "https://synbiohub.org/public/igem/BBa_B0012_Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "BBa_B0012"
   } ],
@@ -63,8 +72,11 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#encoding" : [ {
-    "@id" : "http://sbols.org/v3#iupacNucleicAcid"
+    "@id" : "https://identifiers.org/edam:format_1207"
   } ],
   "http://sbols.org/v3#elements" : [ {
     "@value" : "tcacactggctcaccttcgggtgggcctttctgcgtttata"
@@ -78,8 +90,23 @@
   "@type" : [ "http://sbols.org/v3#Sequence" ]
 }, {
   "@id" : "https://synbiohub.org/public/igem/BBa_B0015",
+  "http://sbols.org/v3#hasSequence" : [ {
+    "@id" : "https://synbiohub.org/public/igem/BBa_B0015_Sequence1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Component" ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000251"
+  } ],
+  "http://sbols.org/v3#hasFeature" : [ {
+    "@id" : "https://synbiohub.org/public/igem/BBa_B0015/SubComponent2"
+  }, {
+    "@id" : "https://synbiohub.org/public/igem/BBa_B0015/SubComponent1"
+  } ],
+  "http://sbols.org/v3#description" : [ {
+    "@value" : "Double terminator consisting of BBa_B0010 and BBa_B0012"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
   } ],
   "http://sbols.org/v3#role" : [ {
     "@id" : "https://identifiers.org/SO:0000141"
@@ -87,21 +114,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "BBa_B0015"
   } ],
-  "http://sbols.org/v3#hasSequence" : [ {
-    "@id" : "https://synbiohub.org/public/igem/BBa_B0015_Sequence1"
-  } ],
-  "http://sbols.org/v3#hasFeature" : [ {
-    "@id" : "https://synbiohub.org/public/igem/BBa_B0015/SubComponent1"
-  }, {
-    "@id" : "https://synbiohub.org/public/igem/BBa_B0015/SubComponent2"
-  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "BBa_B0015"
-  } ],
-  "http://sbols.org/v3#description" : [ {
-    "@value" : "Double terminator consisting of BBa_B0010 and BBa_B0012"
-  } ],
-  "@type" : [ "http://sbols.org/v3#Component" ]
+  } ]
 }, {
   "@id" : "https://synbiohub.org/public/igem/BBa_B0015/SubComponent1",
   "http://sbols.org/v3#orientation" : [ {
@@ -173,8 +188,11 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#encoding" : [ {
-    "@id" : "http://sbols.org/v3#iupacNucleicAcid"
+    "@id" : "https://identifiers.org/edam:format_1207"
   } ],
   "http://sbols.org/v3#elements" : [ {
     "@value" : "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctcacactggctcaccttcgggtgggcctttctgcgtttata"
@@ -200,6 +218,9 @@
   "http://sbols.org/v3#hasSequence" : [ {
     "@id" : "https://synbiohub.org/public/igem/BBa_B0034_Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "BBa_B0034"
   } ],
@@ -212,8 +233,11 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#encoding" : [ {
-    "@id" : "http://sbols.org/v3#iupacNucleicAcid"
+    "@id" : "https://identifiers.org/edam:format_1207"
   } ],
   "http://sbols.org/v3#elements" : [ {
     "@value" : "aaagaggagaaa"
@@ -239,6 +263,9 @@
   "http://sbols.org/v3#hasSequence" : [ {
     "@id" : "https://synbiohub.org/public/igem/BBa_C0062_Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "BBa_C0062"
   } ],
@@ -251,8 +278,11 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#encoding" : [ {
-    "@id" : "http://sbols.org/v3#iupacNucleicAcid"
+    "@id" : "https://identifiers.org/edam:format_1207"
   } ],
   "http://sbols.org/v3#elements" : [ {
     "@value" : "atgaaaaacataaatgccgacgacacatacagaataattaataaaattaaagcttgtagaagcaataatgatattaatcaatgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcac"
@@ -278,6 +308,9 @@
   "http://sbols.org/v3#hasSequence" : [ {
     "@id" : "https://synbiohub.org/public/igem/BBa_C0062_protein_Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "BBa_C0062_protein"
   } ],
@@ -290,8 +323,11 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#encoding" : [ {
-    "@id" : "http://sbols.org/v3#iupacAminoAcid"
+    "@id" : "https://identifiers.org/edam:format_1208"
   } ],
   "http://sbols.org/v3#elements" : [ {
     "@value" : "NNNNNNNNNNN"
@@ -336,6 +372,9 @@
   "@type" : [ "http://sbols.org/v3#Component" ],
   "http://sbols.org/v3#role" : [ {
     "@id" : "https://identifiers.org/SO:0000704"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "BBa_F2620"
@@ -648,8 +687,11 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#encoding" : [ {
-    "@id" : "http://sbols.org/v3#iupacNucleicAcid"
+    "@id" : "https://identifiers.org/edam:format_1207"
   } ],
   "http://sbols.org/v3#elements" : [ {
     "@value" : "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcacaaagaggagaaaatgaaaaacataaatgccgacgacacatacagaataattaataaaattaaagcttgtagaagcaataatgatattaatcaatgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcacccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctcacactggctcaccttcgggtgggcctttctgcgtttataacctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa"
@@ -675,6 +717,9 @@
   "http://sbols.org/v3#hasSequence" : [ {
     "@id" : "https://synbiohub.org/public/igem/BBa_R0040_Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "BBa_R0040"
   } ],
@@ -687,8 +732,11 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#encoding" : [ {
-    "@id" : "http://sbols.org/v3#iupacNucleicAcid"
+    "@id" : "https://identifiers.org/edam:format_1207"
   } ],
   "http://sbols.org/v3#elements" : [ {
     "@value" : "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac"
@@ -714,6 +762,9 @@
   "http://sbols.org/v3#hasSequence" : [ {
     "@id" : "https://synbiohub.org/public/igem/BBa_R0062_Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "BBa_R0062"
   } ],
@@ -726,8 +777,11 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#encoding" : [ {
-    "@id" : "http://sbols.org/v3#iupacNucleicAcid"
+    "@id" : "https://identifiers.org/edam:format_1207"
   } ],
   "http://sbols.org/v3#elements" : [ {
     "@value" : "acctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa"
@@ -753,6 +807,9 @@
   "http://sbols.org/v3#hasSequence" : [ {
     "@id" : "https://synbiohub.org/public/igem/TetR_protein_Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "TetR_protein"
   } ],
@@ -765,8 +822,11 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
   "http://sbols.org/v3#encoding" : [ {
-    "@id" : "http://sbols.org/v3#iupacAminoAcid"
+    "@id" : "https://identifiers.org/edam:format_1208"
   } ],
   "http://sbols.org/v3#elements" : [ {
     "@value" : "NNNNNNNNNNN"

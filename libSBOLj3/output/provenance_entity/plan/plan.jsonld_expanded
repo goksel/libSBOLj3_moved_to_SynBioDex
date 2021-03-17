@@ -6,6 +6,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "Codon Optimisation Protocol"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "CodonOptimisationProtocol"
   } ],

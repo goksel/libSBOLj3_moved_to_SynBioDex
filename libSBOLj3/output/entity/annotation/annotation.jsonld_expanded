@@ -44,6 +44,9 @@
   "http://parts.igem.org/hasUsage" : [ {
     "@id" : "https://sbolstandard.org/examples/BBa_J23119/usage1"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "@type" : [ "http://sbols.org/v3#Component" ],
   "http://parts.igem.org/experienceURL" : [ {
     "@id" : "http://parts.igem.org/Part:BBa_J23119:Experience"

@@ -17,10 +17,11 @@
       <om:alternativeLabel>milli2</om:alternativeLabel>
       <om:longcomment>This is an example long comment for the milli prefix.</om:longcomment>
       <om:label>milli</om:label>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>milli</sbol:displayId>
       <sbol:name>milli</sbol:name>
-      <om:symbol>m</om:symbol>
       <sbol:description>Comment for the milli prefix.</sbol:description>
+      <om:symbol>m</om:symbol>
       <om:comment>Comment for the milli prefix.</om:comment>
       <om:hasFactor>0.001</om:hasFactor>
    </om:SIPrefix>
@@ -28,11 +29,13 @@
       <sbol:name>kelvin</sbol:name>
       <om:label>kelvin</om:label>
       <om:symbol>kelvin</om:symbol>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>kelvin</sbol:displayId>
    </om:SingularUnit>
    <om:SingularUnit rdf:about="litre">
       <sbol:description>The litre is a unit of volume defined as 1.0e-3 cubic metre.</sbol:description>
       <sbol:name>liter</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <om:alternativeLabel>litre2</om:alternativeLabel>
       <sbol:displayId>litre</sbol:displayId>
       <om:alternativeLabel>liter</om:alternativeLabel>
@@ -48,12 +51,14 @@
       <sbol:name>meter</sbol:name>
       <om:label>meter</om:label>
       <om:symbol>m</om:symbol>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>meter</sbol:displayId>
    </om:SingularUnit>
    <om:SingularUnit rdf:about="mole">
       <sbol:name>mole</sbol:name>
       <om:label>mole</om:label>
       <om:symbol>mol</om:symbol>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>mole</sbol:displayId>
    </om:SingularUnit>
    <om:Measure rdf:about="M9_Glucose_CAA/ExternallyDefined1/measure1">
@@ -76,6 +81,7 @@
       </sbol:hasFeature>
       <sbol:description>M9 Glucose CAA growth media</sbol:description>
       <sbol:name>M9 Glucose CAA</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
       <sbol:displayId>M9_Glucose_CAA</sbol:displayId>
    </sbol:Component>
@@ -85,6 +91,7 @@
       <sbol:name>millimole</sbol:name>
       <om:label>millimole</om:label>
       <om:symbol>mmol</om:symbol>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>millimole</sbol:displayId>
    </om:PrefixedUnit>
    <om:UnitExponentiation rdf:about="cubicMeter">
@@ -93,6 +100,7 @@
       <sbol:name>cubicMeter</sbol:name>
       <om:label>cubicMeter</om:label>
       <om:symbol>m3</om:symbol>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>cubicMeter</sbol:displayId>
    </om:UnitExponentiation>
    <om:UnitMultiplication rdf:about="kelvinMole">
@@ -101,6 +109,7 @@
       <sbol:name>kelvinMole</sbol:name>
       <om:label>kelvinMole</om:label>
       <om:symbol>K mol</om:symbol>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>kelvinMole</sbol:displayId>
    </om:UnitMultiplication>
    <om:UnitDivision rdf:about="millimolePerLitre">
@@ -109,6 +118,7 @@
       <sbol:name>millimolar</sbol:name>
       <om:label>millimolar</om:label>
       <om:symbol>mmol/l</om:symbol>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>millimolePerLitre</sbol:displayId>
    </om:UnitDivision>
 </rdf:RDF>

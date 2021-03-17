@@ -44,7 +44,6 @@ public class SBOLDocument {
 	private List<ExperimentalData> experimentalDatas;
 	private List<org.sbolstandard.entity.Model> models;
 	private List<Collection> collections;
-	private List<Namespace> namespaces;
 	private List<Experiment> experiments;
 	private List<Attachment> attachments;
 	private List<Agent> agents;
@@ -117,15 +116,21 @@ public class SBOLDocument {
 		}
 	}
 	
+	public void setBaseURI(URI base)
+	{
+		RDFUtil.setBaseURI(this.model, base);
+	}
+	
 	public List<Component> getComponents() throws SBOLGraphException {
 		this.components=addToList(model, this.components, DataModel.Component.uri,Component.class);
 		return components;
 	}
 	
-	public Component createComponent(URI uri, List<URI> types) throws SBOLGraphException {
+	public Component createComponent(URI namespace, URI uri, List<URI> types) throws SBOLGraphException {
 
 		Component component = new Component(this.model, uri);
 		component.setTypes(types);
+		component.setNamespace(namespace);
 		addToInMemoryList(component, components);
 		return component;
 	}
@@ -133,7 +138,7 @@ public class SBOLDocument {
 	public Component createComponent(String displayId, List<URI> types) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createComponent(SBOLAPI.append(this.getBaseURI(), displayId), types);
+			return createComponent(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId), types);
 		}
 		else
 		{
@@ -146,8 +151,9 @@ public class SBOLDocument {
 		return sequences;
 	}
 	
-	public Sequence createSequence(URI uri) throws SBOLGraphException {
+	public Sequence createSequence(URI namespace, URI uri) throws SBOLGraphException {
 		Sequence sequence = new Sequence(this.model, uri);
+		sequence.setNamespace(namespace);
 		addToInMemoryList(sequence, sequences);
 		return sequence;
 	}
@@ -155,7 +161,7 @@ public class SBOLDocument {
 	public Sequence createSequence(String displayId) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createSequence(SBOLAPI.append(this.getBaseURI(), displayId));
+			return createSequence(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId));
 		}
 		else
 		{
@@ -168,10 +174,11 @@ public class SBOLDocument {
 		return combinatorialDerivations;
 	}
 
-	public CombinatorialDerivation createCombinatorialDerivation(URI uri, URI template) throws SBOLGraphException {
+	public CombinatorialDerivation createCombinatorialDerivation(URI namespace, URI uri, URI template) throws SBOLGraphException {
 
 		CombinatorialDerivation combinatorialDerivation= new CombinatorialDerivation(this.model, uri);
 		combinatorialDerivation.setTemplate(template);
+		combinatorialDerivation.setNamespace(namespace);
 		addToInMemoryList(combinatorialDerivation, combinatorialDerivations);
 		return combinatorialDerivation;
 	}
@@ -179,7 +186,7 @@ public class SBOLDocument {
 	public CombinatorialDerivation createCombinatorialDerivation(String displayId, URI template) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createCombinatorialDerivation(SBOLAPI.append(this.getBaseURI(), displayId), template);
+			return createCombinatorialDerivation(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId), template);
 		}
 		else
 		{
@@ -192,8 +199,9 @@ public class SBOLDocument {
 		return implementations;
 	}
 
-	public Implementation createImplementation(URI uri) throws SBOLGraphException {
+	public Implementation createImplementation(URI namespace, URI uri) throws SBOLGraphException {
 		Implementation implementation= new Implementation(this.model, uri);
+		implementation.setNamespace(namespace);
 		addToInMemoryList(implementation, implementations);
 		return implementation;
 	}
@@ -201,7 +209,7 @@ public class SBOLDocument {
 	public Implementation createImplementation(String displayId) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createImplementation(SBOLAPI.append(this.getBaseURI(), displayId));
+			return createImplementation(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId));
 		}
 		else
 		{
@@ -215,8 +223,9 @@ public class SBOLDocument {
 	}
 	
 
-	public ExperimentalData createExperimentalData(URI uri) throws SBOLGraphException {
+	public ExperimentalData createExperimentalData(URI namespace, URI uri) throws SBOLGraphException {
 		ExperimentalData experimentalData= new ExperimentalData(this.model, uri);
+		experimentalData.setNamespace(namespace);
 		addToInMemoryList(experimentalData, experimentalDatas);
 		return experimentalData;
 	}
@@ -224,7 +233,7 @@ public class SBOLDocument {
 	public ExperimentalData createExperimentalData(String displayId) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createExperimentalData(SBOLAPI.append(this.getBaseURI(), displayId));
+			return createExperimentalData(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId));
 		}
 		else
 		{
@@ -237,8 +246,9 @@ public class SBOLDocument {
 		return models;
 	}
 
-	public org.sbolstandard.entity.Model createModel(URI uri, URI source, URI framework, URI language) throws SBOLGraphException {
+	public org.sbolstandard.entity.Model createModel(URI namespace, URI uri, URI source, URI framework, URI language) throws SBOLGraphException {
 		org.sbolstandard.entity.Model model= new org.sbolstandard.entity.Model(this.model, uri);
+		model.setNamespace(namespace);
 		model.setSource(source);
 		model.setFramework(framework);
 		model.setLanguage(language);
@@ -249,7 +259,7 @@ public class SBOLDocument {
 	public org.sbolstandard.entity.Model createModel(String displayId, URI source, URI framework, URI language) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createModel(SBOLAPI.append(this.getBaseURI(), displayId), source, framework, language);
+			return createModel(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId), source, framework, language);
 		}
 		else
 		{
@@ -262,8 +272,9 @@ public class SBOLDocument {
 		return collections;
 	}
 
-	public Collection createCollection(URI uri) throws SBOLGraphException {
+	public Collection createCollection(URI namespace, URI uri) throws SBOLGraphException {
 		Collection collection= new Collection(this.model, uri);
+		collection.setNamespace(namespace);
 		addToInMemoryList(collection, collections);
 		return collection;
 	}
@@ -271,44 +282,22 @@ public class SBOLDocument {
 	public Collection createCollection(String displayId) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createCollection(SBOLAPI.append(this.getBaseURI(), displayId));
+			return createCollection(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId));
 		}
 		else
 		{
 			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
 		}
 	}
-	
-	
-	public List<Namespace> getNamespaces() throws SBOLGraphException {
-		this.namespaces=addToList(model, this.namespaces, DataModel.Namespace.uri,Namespace.class);
-		return namespaces;
-	}
-
-	public Namespace createNamespace(URI uri) throws SBOLGraphException {
-		Namespace namespace= new Namespace(this.model, uri);
-		addToInMemoryList(namespace, namespaces);
-		return namespace;
-	}
-	
-	public Namespace createNamespace(String displayId) throws SBOLGraphException {
-		if (this.getBaseURI()!=null)
-		{
-			return createNamespace(SBOLAPI.append(this.getBaseURI(), displayId));
-		}
-		else
-		{
-			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
-		}
-	}
-	
+		
 	public List<Experiment> getExperiments() throws SBOLGraphException {
 		this.experiments=addToList(model, this.experiments, DataModel.Experiment.uri,Experiment.class);
 		return experiments;
 	}
 
-	public Experiment createExperiment(URI uri) throws SBOLGraphException {
+	public Experiment createExperiment(URI namespace, URI uri) throws SBOLGraphException {
 		Experiment experiment= new Experiment(this.model, uri);
+		experiment.setNamespace(namespace);
 		addToInMemoryList(experiment, experiments);
 		return experiment;
 	}
@@ -316,7 +305,7 @@ public class SBOLDocument {
 	public Experiment createExperiment(String displayId) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createExperiment(SBOLAPI.append(this.getBaseURI(), displayId));
+			return createExperiment(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId));
 		}
 		else
 		{
@@ -329,8 +318,9 @@ public class SBOLDocument {
 		return attachments;
 	}
 
-	public Attachment createAttachment(URI uri, URI source) throws SBOLGraphException {
+	public Attachment createAttachment(URI namespace, URI uri, URI source) throws SBOLGraphException {
 		Attachment attachment= new Attachment(this.model, uri);
+		attachment.setNamespace(namespace);
 		attachment.setSource(source);
 		addToInMemoryList(attachment, attachments);
 		return attachment;
@@ -339,7 +329,7 @@ public class SBOLDocument {
 	public Attachment createAttachment(String displayId, URI source) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createAttachment(SBOLAPI.append(this.getBaseURI(), displayId),source);
+			return createAttachment(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId),source);
 		}
 		else
 		{
@@ -348,9 +338,10 @@ public class SBOLDocument {
 	}
 	
 	
-	public Agent createAgent(URI uri) throws SBOLGraphException {
+	public Agent createAgent(URI namespace, URI uri) throws SBOLGraphException {
 
 		Agent agent = new Agent(this.model, uri) {};
+		agent.setNamespace(namespace);
 		addToInMemoryList(agent, agents);
 		return agent;
 	}
@@ -358,7 +349,7 @@ public class SBOLDocument {
 	public Agent createAgent(String displayId) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createAgent(SBOLAPI.append(this.getBaseURI(), displayId));
+			return createAgent(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId));
 		}
 		else
 		{
@@ -372,9 +363,9 @@ public class SBOLDocument {
 		return agents;
 	}
 	
-	public Plan createPlan(URI uri) throws SBOLGraphException {
-
+	public Plan createPlan(URI namespace, URI uri) throws SBOLGraphException {
 		Plan plan = new Plan(this.model, uri) {};
+		plan.setNamespace(namespace);
 		addToInMemoryList(plan, plans);
 		return plan;
 	}
@@ -382,7 +373,7 @@ public class SBOLDocument {
 	public Plan createPlan(String displayId) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createPlan(SBOLAPI.append(this.getBaseURI(), displayId));
+			return createPlan(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId));
 		}
 		else
 		{
@@ -395,9 +386,10 @@ public class SBOLDocument {
 		return plans;
 	}
 	
-	public Activity createActivity(URI uri) throws SBOLGraphException {
+	public Activity createActivity(URI namespace, URI uri) throws SBOLGraphException {
 
 		Activity activity = new Activity(this.model, uri) {};
+		activity.setNamespace(namespace);
 		addToInMemoryList(activity, activities);
 		return activity;
 	}
@@ -405,7 +397,7 @@ public class SBOLDocument {
 	public Activity createActivity(String displayId) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createActivity(SBOLAPI.append(this.getBaseURI(), displayId));
+			return createActivity(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId));
 		}
 		else
 		{
@@ -418,16 +410,15 @@ public class SBOLDocument {
 		return activities;
 	}
 	
-	private void initialisePrefix(Prefix prefix, String symbol, String name, float factor)
-	{
+	private void initialisePrefix(Prefix prefix, String symbol, String name, float factor){
 		prefix.setSymbol(symbol);
 		prefix.setLabel(name);
 		prefix.setFactor(factor);
 	}
 	
-	public SIPrefix createSIPrefix(URI uri, String symbol, String name, float factor) throws SBOLGraphException {
-
+	public SIPrefix createSIPrefix(URI namespace, URI uri, String symbol, String name, float factor) throws SBOLGraphException {		
 		SIPrefix prefix = new SIPrefix(this.model, uri) {};
+		prefix.setNamespace(namespace);
 		initialisePrefix(prefix, symbol, name, factor);
 		addToInMemoryList(prefix, siPrefixes);
 		return prefix;
@@ -436,7 +427,7 @@ public class SBOLDocument {
 	public SIPrefix createSIPrefix(String displayId, String symbol, String name, float factor) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createSIPrefix(SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, factor);
+			return createSIPrefix(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, factor);
 		}
 		else
 		{
@@ -449,9 +440,10 @@ public class SBOLDocument {
 		return siPrefixes;
 	}
 	
-	public BinaryPrefix createBinaryPrefix(URI uri, String symbol, String name, float factor) throws SBOLGraphException {
+	public BinaryPrefix createBinaryPrefix(URI namespace, URI uri, String symbol, String name, float factor) throws SBOLGraphException {
 
 		BinaryPrefix prefix = new BinaryPrefix(this.model, uri) {};
+		prefix.setNamespace(namespace);
 		initialisePrefix(prefix, symbol, name, factor);
 		addToInMemoryList(prefix, binaryPrefixes);
 		return prefix;
@@ -460,7 +452,7 @@ public class SBOLDocument {
 	public BinaryPrefix createBinaryPrefix(String displayId, String symbol, String name, float factor) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createBinaryPrefix(SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, factor);
+			return createBinaryPrefix(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, factor);
 		}
 		else
 		{
@@ -474,9 +466,10 @@ public class SBOLDocument {
 		return binaryPrefixes;
 	}
 	
-	public SingularUnit createSingularUnit(URI uri, String symbol, String name) throws SBOLGraphException {
+	public SingularUnit createSingularUnit(URI namespace, URI uri, String symbol, String name) throws SBOLGraphException {
 
 		SingularUnit unit = new SingularUnit(this.model, uri) {};
+		unit.setNamespace(namespace);
 		unit.setSymbol(symbol);
 		unit.setLabel(name);
 		addToInMemoryList(unit, singularUnits);
@@ -486,7 +479,7 @@ public class SBOLDocument {
 	public SingularUnit createSingularUnit(String displayId, String symbol, String name) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createSingularUnit(SBOLAPI.append(this.getBaseURI(), displayId), symbol, name);
+			return createSingularUnit(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId), symbol, name);
 		}
 		else
 		{
@@ -494,15 +487,15 @@ public class SBOLDocument {
 		}
 	}
 	
-	
 	public List<SingularUnit> getSingularUnits() throws SBOLGraphException {
 		this.singularUnits=addToList(model, this.singularUnits, MeasureDataModel.SingularUnit.uri,SingularUnit.class);
 		return singularUnits;
 	}
 	
-	public UnitMultiplication createUnitMultiplication(URI uri, String symbol, String name, URI unit1, URI unit2) throws SBOLGraphException {
+	public UnitMultiplication createUnitMultiplication(URI namespace, URI uri, String symbol, String name, URI unit1, URI unit2) throws SBOLGraphException {
 
 		UnitMultiplication unit = new UnitMultiplication(this.model, uri) {};
+		unit.setNamespace(namespace);
 		unit.setSymbol(symbol);
 		unit.setLabel(name);
 		unit.setTerm1(unit1);
@@ -514,7 +507,7 @@ public class SBOLDocument {
 	public UnitMultiplication createUnitMultiplication(String displayId, String symbol, String name, URI unit1, URI unit2) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createUnitMultiplication(SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, unit1, unit2);
+			return createUnitMultiplication(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, unit1, unit2);
 		}
 		else
 		{
@@ -527,9 +520,10 @@ public class SBOLDocument {
 		return unitMultiplications;
 	}
 	
-	public UnitDivision createUnitDivision(URI uri, String symbol, String name, URI numerator, URI denominator) throws SBOLGraphException {
+	public UnitDivision createUnitDivision(URI namespace, URI uri, String symbol, String name, URI numerator, URI denominator) throws SBOLGraphException {
 
 		UnitDivision unit = new UnitDivision(this.model, uri) {};
+		unit.setNamespace(namespace);
 		unit.setSymbol(symbol);
 		unit.setLabel(name);
 		unit.setNumerator(numerator);
@@ -542,7 +536,7 @@ public class SBOLDocument {
 	public UnitDivision createUnitDivision(String displayId, String symbol, String name, URI numerator, URI denominator) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createUnitDivision(SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, numerator, denominator);
+			return createUnitDivision(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, numerator, denominator);
 		}
 		else
 		{
@@ -555,9 +549,10 @@ public class SBOLDocument {
 		return unitDivisions;
 	}
 	
-	public UnitExponentiation createUnitExponentiation(URI uri, String symbol, String name, URI baseUnit, int exponent) throws SBOLGraphException {
+	public UnitExponentiation createUnitExponentiation(URI namespace, URI uri, String symbol, String name, URI baseUnit, int exponent) throws SBOLGraphException {
 
 		UnitExponentiation unit = new UnitExponentiation(this.model, uri) {};
+		unit.setNamespace(namespace);
 		unit.setSymbol(symbol);
 		unit.setLabel(name);
 		unit.setBase(baseUnit);
@@ -569,7 +564,7 @@ public class SBOLDocument {
 	public UnitExponentiation createUnitExponentiation(String displayId, String symbol, String name, URI baseUnit, int exponent) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createUnitExponentiation(SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, baseUnit, exponent);
+			return createUnitExponentiation(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, baseUnit, exponent);
 		}
 		else
 		{
@@ -583,9 +578,10 @@ public class SBOLDocument {
 	}
 	
 	
-	public PrefixedUnit createPrexiedUnit(URI uri, String symbol, String name, URI unitURI, URI prefix) throws SBOLGraphException {
+	public PrefixedUnit createPrexiedUnit(URI namespace, URI uri, String symbol, String name, URI unitURI, URI prefix) throws SBOLGraphException {
 
 		PrefixedUnit unit = new PrefixedUnit(this.model, uri) {};
+		unit.setNamespace(namespace);
 		unit.setSymbol(symbol);
 		unit.setLabel(name);
 		unit.setUnit(unitURI);
@@ -597,7 +593,7 @@ public class SBOLDocument {
 	public PrefixedUnit createPrexiedUnit(String displayId, String symbol, String name, URI unitURI, URI prefix) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createPrexiedUnit(SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, unitURI, prefix);
+			return createPrexiedUnit(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId), symbol, name, unitURI, prefix);
 		}
 		else
 		{
@@ -761,7 +757,6 @@ public class SBOLDocument {
 					DataModel.ExperimentalData.uri,
 					DataModel.Attachment.uri,
 					DataModel.Collection.uri,
-					DataModel.Namespace.uri,
 					DataModel.CombinatorialDerivation.uri,
 					DataModel.TopLevel.uri,
 					ProvenanceDataModel.Agent.uri,

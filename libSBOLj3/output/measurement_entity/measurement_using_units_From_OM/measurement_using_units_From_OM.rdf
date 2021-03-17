@@ -26,6 +26,7 @@
       </sbol:hasFeature>
       <sbol:description>M9 Glucose CAA growth media</sbol:description>
       <sbol:name>M9 Glucose CAA</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
       <sbol:displayId>M9_Glucose_CAA</sbol:displayId>
    </sbol:Component>

@@ -61,6 +61,11 @@
       "value" : "http://sbols.org/v3#Component"
     }
      ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
+    }
+     ] ,
     "http://sbols.org/v3#hasFeature" : [ { 
       "type" : "uri" ,
       "value" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1"

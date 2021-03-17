@@ -2,7 +2,6 @@ package org.sbolstandard.entity.test;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 
 import org.sbolstandard.TestUtil;
@@ -16,9 +15,6 @@ import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.vocabulary.ComponentType;
-import org.sbolstandard.vocabulary.DataModel;
-import org.sbolstandard.vocabulary.ModelFramework;
-import org.sbolstandard.vocabulary.ModelLanguage;
 import org.sbolstandard.vocabulary.Role;
 
 import junit.framework.TestCase;
@@ -32,7 +28,7 @@ public class AnnotationTest extends TestCase {
         URINameSpace igem=new URINameSpace(URI.create("http://parts.igem.org/"), "igem");
         doc.addNameSpacePrefixes(igem);
         
-        Component part=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "BBa_J23119"), ComponentType.DNA.getUrl(), "BBa_J23119 part", "Parts J23100 through J23119 are a family of constitutive promoter parts isolated from a small combinatorial library.", Role.Promoter);
+        Component part=SBOLAPI.createComponent(doc, "BBa_J23119", ComponentType.DNA.getUrl(), "BBa_J23119 part", "Parts J23100 through J23119 are a family of constitutive promoter parts isolated from a small combinatorial library.", Role.Promoter);
         part.addAnnotion(igem.local("group"), "iGEM2006_Berkeley");
         part.addAnnotion(igem.local("experienceURL"), URI.create("http://parts.igem.org/Part:BBa_J23119:Experience"));
         
@@ -76,11 +72,6 @@ public class AnnotationTest extends TestCase {
         
         TestUtil.serialise(doc, "entity/annotation", "annotation");
         
-        String rdfxmloutput=SBOLIO.write(doc, SBOLFormat.TURTLE.RDFXML);
-        System.out.println(rdfxmloutput);
-        SBOLDocument docrdfxml=SBOLIO.read(rdfxmloutput, SBOLFormat.RDFXML);
-        rdfxmloutput=SBOLIO.write(docrdfxml, SBOLFormat.RDFXML);
-        System.out.println(rdfxmloutput);
         
    
         

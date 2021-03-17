@@ -1,0 +1,14 @@
+PREFIX CHEBI: <https://identifiers.org/CHEBI:>
+PREFIX GO: <https://identifiers.org/GO:>
+PREFIX sbol: <http://sbols.org/v3#>
+PREFIX EDAM: <https://identifiers.org/edam:>
+PREFIX SO: <https://identifiers.org/SO:>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX om: <http://www.ontology-of-units-of-measure.org/resource/om-2/>
+SELECT ?identified ?displayId 
+WHERE {
+   ?identified sbol:displayId ?displayId.
+   
+ 	FILTER (!regex(?displayId, "^[a-zA-Z_]+[a-zA-Z0-9_]*$")) .
+   
+}

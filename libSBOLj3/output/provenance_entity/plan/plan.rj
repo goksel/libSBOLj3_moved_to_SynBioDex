@@ -10,6 +10,11 @@
       "value" : "http://www.w3.org/ns/prov#Plan"
     }
      ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
+    }
+     ] ,
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
       "value" : "Codon Optimisation Protocol"

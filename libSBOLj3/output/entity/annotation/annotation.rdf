@@ -52,6 +52,7 @@
             <igem:inStock>true</igem:inStock>
          </sbol:Identified>
       </igem:hasUsage>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <igem:belongsTo>
          <sbol:TopLevel rdf:about="http://synbiohub.org#about"/>
       </igem:belongsTo>

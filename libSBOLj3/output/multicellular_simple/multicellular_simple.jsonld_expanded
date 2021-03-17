@@ -9,6 +9,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "AHL"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "AHL"
   } ],
@@ -26,6 +29,9 @@
     "@id" : "https://sbolstandard.org/examples/MulticellularSystem/ComponentReference1"
   }, {
     "@id" : "https://sbolstandard.org/examples/MulticellularSystem/SubComponent2"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000241"
@@ -114,6 +120,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "OrganismA"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "OrganismA"
   } ],
@@ -132,6 +141,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "OrganismB"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "OrganismB"
   } ],
@@ -141,30 +153,33 @@
   "@type" : [ "http://sbols.org/v3#Component" ]
 }, {
   "@id" : "https://sbolstandard.org/examples/ReceiverSystem",
-  "http://sbols.org/v3#type" : [ {
-    "@id" : "https://identifiers.org/SBO:0000241"
-  } ],
   "http://sbols.org/v3#role" : [ {
     "@id" : "https://identifiers.org/SBO:0000289"
-  } ],
-  "http://sbols.org/v3#name" : [ {
-    "@value" : "ReceiverSystem"
-  } ],
-  "http://sbols.org/v3#hasFeature" : [ {
-    "@id" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent1"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent2"
-  } ],
-  "http://sbols.org/v3#hasConstraint" : [ {
-    "@id" : "https://sbolstandard.org/examples/ReceiverSystem/Constraint1"
-  } ],
-  "http://sbols.org/v3#displayId" : [ {
-    "@value" : "ReceiverSystem"
   } ],
   "http://sbols.org/v3#description" : [ {
     "@value" : "Receiver System"
   } ],
-  "@type" : [ "http://sbols.org/v3#Component" ]
+  "http://sbols.org/v3#name" : [ {
+    "@value" : "ReceiverSystem"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Component" ],
+  "http://sbols.org/v3#hasFeature" : [ {
+    "@id" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent2"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent1"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "ReceiverSystem"
+  } ],
+  "http://sbols.org/v3#hasConstraint" : [ {
+    "@id" : "https://sbolstandard.org/examples/ReceiverSystem/Constraint1"
+  } ],
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000241"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/ReceiverSystem/Constraint1",
   "http://sbols.org/v3#subject" : [ {
@@ -200,30 +215,33 @@
   "@type" : [ "http://sbols.org/v3#SubComponent" ]
 }, {
   "@id" : "https://sbolstandard.org/examples/SenderSystem",
-  "http://sbols.org/v3#type" : [ {
-    "@id" : "https://identifiers.org/SBO:0000241"
-  } ],
-  "http://sbols.org/v3#role" : [ {
-    "@id" : "https://identifiers.org/SBO:0000289"
-  } ],
-  "http://sbols.org/v3#name" : [ {
-    "@value" : "SenderSystem"
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#hasFeature" : [ {
     "@id" : "https://sbolstandard.org/examples/SenderSystem/SubComponent1"
   }, {
     "@id" : "https://sbolstandard.org/examples/SenderSystem/SubComponent2"
   } ],
+  "http://sbols.org/v3#description" : [ {
+    "@value" : "Sender System"
+  } ],
   "http://sbols.org/v3#hasConstraint" : [ {
     "@id" : "https://sbolstandard.org/examples/SenderSystem/Constraint1"
+  } ],
+  "http://sbols.org/v3#name" : [ {
+    "@value" : "SenderSystem"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "SenderSystem"
   } ],
-  "http://sbols.org/v3#description" : [ {
-    "@value" : "Sender System"
+  "@type" : [ "http://sbols.org/v3#Component" ],
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000289"
   } ],
-  "@type" : [ "http://sbols.org/v3#Component" ]
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000241"
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/SenderSystem/Constraint1",
   "http://sbols.org/v3#subject" : [ {

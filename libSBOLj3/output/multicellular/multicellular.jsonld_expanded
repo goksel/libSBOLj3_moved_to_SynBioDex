@@ -9,6 +9,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "AHL"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "AHL"
   } ],
@@ -45,6 +48,9 @@
     "@id" : "https://identifiers.org/SO:0000704"
   } ],
   "@type" : [ "http://sbols.org/v3#Component" ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "AHL producer"
   } ]
@@ -186,6 +192,9 @@
     "@value" : "AHL receiver"
   } ],
   "@type" : [ "http://sbols.org/v3#Component" ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "AHL_receiver"
   } ],
@@ -501,6 +510,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "GFP"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "GFP_protein"
   } ],
@@ -518,6 +530,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "LuxR_AHL"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "LuxR_AHL"
@@ -537,6 +552,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "LuxR_protein"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "LuxR_protein"
   } ],
@@ -554,6 +572,9 @@
     "@id" : "https://sbolstandard.org/examples/MulticellularSystem/ComponentReference1"
   }, {
     "@id" : "https://sbolstandard.org/examples/MulticellularSystem/SubComponent2"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000241"
@@ -642,6 +663,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "OrganismA"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "OrganismA"
   } ],
@@ -659,6 +683,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "OrganismB"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "OrganismB"
@@ -700,6 +727,9 @@
   } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000241"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/ReceiverSystem/ComponentReference1",
@@ -787,6 +817,9 @@
   "@type" : [ "http://sbols.org/v3#SubComponent" ]
 }, {
   "@id" : "https://sbolstandard.org/examples/SenderSystem",
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#hasFeature" : [ {
     "@id" : "https://sbolstandard.org/examples/SenderSystem/SubComponent1"
   }, {
@@ -914,6 +947,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "gfp"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "gfp"
   } ],
@@ -931,6 +967,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "luxI"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "luxI"
@@ -950,6 +989,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "luxR"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "luxR"
   } ],
@@ -967,6 +1009,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "pConstLuxI"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "pConstLuxI"
@@ -986,6 +1031,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "pLuxR"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "pConstLuxR"
   } ],
@@ -1003,6 +1051,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "pLuxR"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "pLuxR"
@@ -1022,6 +1073,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "rbs"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "rbs_gfp"
   } ],
@@ -1039,6 +1093,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "rbs"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "rbs_luxI"
@@ -1058,6 +1115,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "rbs"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "rbs_luxR"
   } ],
@@ -1075,6 +1135,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "gfp terminator"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "ter_gfp"
@@ -1094,6 +1157,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "luxI terminator"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "ter_luxI"
   } ],
@@ -1111,6 +1177,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "luxR terminator"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "ter_luxR"

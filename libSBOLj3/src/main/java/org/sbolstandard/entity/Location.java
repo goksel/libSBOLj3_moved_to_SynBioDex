@@ -8,7 +8,6 @@ import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.Orientation;
-import org.sbolstandard.vocabulary.DataModel.Cut;
 
 public abstract class  Location extends Identified {
 	private Orientation orientation;

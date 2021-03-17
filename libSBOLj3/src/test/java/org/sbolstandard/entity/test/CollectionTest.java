@@ -12,10 +12,7 @@ import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
-import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.vocabulary.ComponentType;
-import org.sbolstandard.vocabulary.ModelFramework;
-import org.sbolstandard.vocabulary.ModelLanguage;
 import org.sbolstandard.vocabulary.Role;
 
 import junit.framework.TestCase;
@@ -27,10 +24,10 @@ public class CollectionTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component TetR_protein=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "TetR_protein"), ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
-        Component LacI_protein=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "LacI_protein"), ComponentType.Protein.getUrl(), "LacI", "LacI protein", Role.TF);
+        Component TetR_protein=SBOLAPI.createComponent(doc, "TetR_protein", ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
+        Component LacI_protein=SBOLAPI.createComponent(doc, "LacI_protein", ComponentType.Protein.getUrl(), "LacI", "LacI protein", Role.TF);
       
-        Collection col=doc.createCollection(SBOLAPI.append(baseUri,"col1"));
+        Collection col=doc.createCollection("col1");
         col.setTopLevels(Arrays.asList(TetR_protein.getUri(), LacI_protein.getUri()));
         TestUtil.serialise(doc, "entity/collection", "collection");
       

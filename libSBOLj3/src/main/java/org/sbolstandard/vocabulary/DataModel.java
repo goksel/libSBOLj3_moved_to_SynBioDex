@@ -25,6 +25,8 @@ public class DataModel {
 		{
 			public static URI uri=URINameSpace.SBOL.local("TopLevel");
 			public static URI attachment=URINameSpace.SBOL.local("hasAttachment");	
+			public static URI namespace=URINameSpace.SBOL.local("hasNamespace");	
+			
 		}
 		
 		public static final class Feature
@@ -94,6 +96,7 @@ public class DataModel {
 		{
 			public static URI uri=URINameSpace.SBOL.local("Participation");
 			public static URI participant=URINameSpace.SBOL.local("participant");
+			public static URI higherOrderParticipant=URINameSpace.SBOL.local("higherOrderParticipant");
 		}
 		
 		public static final class Location
@@ -140,7 +143,7 @@ public class DataModel {
 		{
 			public static URI uri=URINameSpace.SBOL.local("CombinatorialDerivation");
 			public static URI template=URINameSpace.SBOL.local("input");
-			public static URI variableComponent=URINameSpace.SBOL.local("hasVariableComponent");
+			public static URI variableFeature=URINameSpace.SBOL.local("hasVariableFeature");
 			public static URI strategy=URINameSpace.SBOL.local("strategy");	
 		}
 		
@@ -152,6 +155,7 @@ public class DataModel {
 			public static URI variable=URINameSpace.SBOL.local("variable");	
 			public static URI variantDerivation=URINameSpace.SBOL.local("variantDerivation");	
 			public static URI variantCollection=URINameSpace.SBOL.local("variantCollection");	
+			public static URI variantMeasure=URINameSpace.SBOL.local("variantMeasure");	
 		}
 		
 		
@@ -178,11 +182,6 @@ public class DataModel {
 		{
 			public static URI uri=URINameSpace.SBOL.local("Collection");
 			public static URI member=URINameSpace.SBOL.local("member");
-		}
-		
-		public static final class Namespace
-		{
-			public static URI uri=URINameSpace.SBOL.local("Namespace");
 		}
 		
 		public static final class Experiment

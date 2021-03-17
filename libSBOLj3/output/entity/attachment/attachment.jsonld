@@ -4,6 +4,7 @@
     "@type" : "sbol:Component",
     "description" : "TetR protein",
     "displayId" : "TetR_protein",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "TetR",
     "role" : "GO:0003700",
     "type" : "SBO:0000252"
@@ -12,6 +13,7 @@
     "@type" : "sbol:Attachment",
     "displayId" : "attachment1",
     "format" : "EDAM:format_2585",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "hash" : "aaa",
     "hashAlgorithm" : "Alg1",
     "size" : "1000",
@@ -21,7 +23,8 @@
     "@type" : "sbol:Implementation",
     "built" : "https://sbolstandard.org/examples/TetR_protein",
     "displayId" : "impl1",
-    "hasAttachment" : "https://sbolstandard.org/examples/attachment1"
+    "hasAttachment" : "https://sbolstandard.org/examples/attachment1",
+    "hasNamespace" : "https://sbolstandard.org/examples"
   } ],
   "@context" : {
     "hashAlgorithm" : {
@@ -39,6 +42,10 @@
     },
     "source" : {
       "@id" : "http://sbols.org/v3#source",
+      "@type" : "@id"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
       "@type" : "@id"
     },
     "displayId" : {
