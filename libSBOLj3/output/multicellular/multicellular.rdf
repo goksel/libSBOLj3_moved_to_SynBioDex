@@ -532,7 +532,7 @@
       <sbol:name>pConstLuxI</sbol:name>
       <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>pConstLuxI</sbol:displayId>
-      <sbol:description>Constituve promoter</sbol:description>
+      <sbol:description>Constitutive promoter</sbol:description>
    </sbol:Component>
    <sbol:Component rdf:about="pLuxR">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>

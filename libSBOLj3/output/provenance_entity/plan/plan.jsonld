@@ -1,6 +1,6 @@
 {
   "@id" : "https://sbolstandard.org/examples/CodonOptimisationProtocol",
-  "@type" : "prov:Plan",
+  "@type" : [ "sbol:TopLevel", "prov:Plan" ],
   "description" : "Optimisation protocol to improve the translation of mRNAs.",
   "displayId" : "CodonOptimisationProtocol",
   "hasNamespace" : "https://sbolstandard.org/examples",

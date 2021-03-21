@@ -9,6 +9,10 @@
       "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Plan"
     }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
      ] ,
     "http://sbols.org/v3#hasNamespace" : [ { 
       "type" : "uri" ,

@@ -42,8 +42,8 @@
   "http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumericalValue" : [ {
     "@value" : "0.1"
   } ],
+  "@type" : [ "http://sbols.org/v3#Identified", "http://www.ontology-of-units-of-measure.org/resource/om-2/Measure" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "measure1"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/Measure" ]
+  } ]
 } ]

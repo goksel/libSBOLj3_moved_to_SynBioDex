@@ -1,7 +1,7 @@
 {
   "@graph" : [ {
     "@id" : "https://sbolstandard.org/examples/CodonOptimiserSoftware",
-    "@type" : "prov:Agent",
+    "@type" : [ "sbol:TopLevel", "prov:Agent" ],
     "description" : "Used to optimise bacterial DNA sequences.",
     "displayId" : "CodonOptimiserSoftware",
     "hasNamespace" : "https://sbolstandard.org/examples",

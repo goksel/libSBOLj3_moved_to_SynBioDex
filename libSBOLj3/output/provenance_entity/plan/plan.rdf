@@ -10,10 +10,11 @@
     xmlns="https://sbolstandard.org/examples/"
     xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/"
    xml:base="https://sbolstandard.org/examples/">
-   <prov:Plan rdf:about="CodonOptimisationProtocol">
+   <sbol:TopLevel rdf:about="CodonOptimisationProtocol">
       <sbol:description>Optimisation protocol to improve the translation of mRNAs.</sbol:description>
       <sbol:name>Codon Optimisation Protocol</sbol:name>
       <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>CodonOptimisationProtocol</sbol:displayId>
-   </prov:Plan>
+      <rdf:type rdf:resource="http://www.w3.org/ns/prov#Plan"/>
+   </sbol:TopLevel>
 </rdf:RDF>

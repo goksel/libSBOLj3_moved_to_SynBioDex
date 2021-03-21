@@ -7,6 +7,10 @@
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+    , { 
+      "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Agent"
     }
      ] ,
@@ -39,6 +43,10 @@
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+    , { 
       "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Activity"
     }
@@ -108,6 +116,10 @@
       "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Plan"
     }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
      ] ,
     "http://sbols.org/v3#hasNamespace" : [ { 
       "type" : "uri" ,
@@ -134,17 +146,21 @@
      ] ,
     "http://www.w3.org/ns/prov#endedAtTime" : [ { 
       "type" : "literal" ,
-      "value" : "2020-08-30T17:00:21.96Z"
-    }
-     ] ,
-    "http://www.w3.org/ns/prov#startedAtTime" : [ { 
-      "type" : "literal" ,
-      "value" : "2019-07-29T17:00:21.96Z"
+      "value" : "2020-08-30T18:18:15.673Z"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+    , { 
+      "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Activity"
+    }
+     ] ,
+    "http://www.w3.org/ns/prov#startedAtTime" : [ { 
+      "type" : "literal" ,
+      "value" : "2019-07-29T18:18:15.673Z"
     }
      ] ,
     "http://sbols.org/v3#hasNamespace" : [ { 
@@ -239,6 +255,10 @@
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
+      "value" : "http://sbols.org/v3#Identified"
+    }
+    , { 
+      "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Association"
     }
      ] ,
@@ -262,6 +282,10 @@
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
+      "value" : "http://sbols.org/v3#Identified"
+    }
+    , { 
+      "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Usage"
     }
      ] ,
@@ -284,6 +308,10 @@
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#Identified"
+    }
+    , { 
       "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Usage"
     }

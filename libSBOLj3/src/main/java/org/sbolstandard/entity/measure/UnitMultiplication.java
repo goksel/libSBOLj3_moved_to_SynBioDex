@@ -7,7 +7,7 @@ import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.MeasureDataModel;
 
-public class UnitMultiplication extends CompountUnit{
+public class UnitMultiplication extends CompoundUnit{
 	
 	private URI term1;
 	private URI term2;

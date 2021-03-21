@@ -47,10 +47,10 @@
   "http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumericalValue" : [ {
     "@value" : "0.1"
   } ],
+  "@type" : [ "http://sbols.org/v3#Identified", "http://www.ontology-of-units-of-measure.org/resource/om-2/Measure" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "measure1"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/Measure" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/cubicMeter",
   "http://www.ontology-of-units-of-measure.org/resource/om-2/hasExponent" : [ {
@@ -71,10 +71,10 @@
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://sbolstandard.org/examples"
   } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitExponentiation" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "cubicMeter"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitExponentiation" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/kelvin",
   "http://sbols.org/v3#name" : [ {
@@ -89,10 +89,10 @@
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://sbolstandard.org/examples"
   } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "kelvin"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/kelvinMole",
   "http://www.ontology-of-units-of-measure.org/resource/om-2/hasTerm2" : [ {
@@ -113,10 +113,10 @@
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://sbolstandard.org/examples"
   } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitMultiplication" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "kelvinMole"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitMultiplication" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/litre",
   "http://sbols.org/v3#description" : [ {
@@ -145,10 +145,10 @@
   "http://www.ontology-of-units-of-measure.org/resource/om-2/label" : [ {
     "@value" : "liter"
   } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ],
   "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor" : [ {
     "@value" : "0.001"
   } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ],
   "http://www.ontology-of-units-of-measure.org/resource/om-2/longcomment" : [ {
     "@value" : "This is an example long comment."
   } ],
@@ -171,10 +171,10 @@
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://sbolstandard.org/examples"
   } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "meter"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/milli",
   "http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeLabel" : [ {
@@ -182,7 +182,7 @@
   }, {
     "@value" : "milli2"
   } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/SIPrefix" ],
+  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/SIPrefix", "http://sbols.org/v3#TopLevel" ],
   "http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeSymbol" : [ {
     "@value" : "m1"
   }, {
@@ -235,10 +235,10 @@
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://sbolstandard.org/examples"
   } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/PrefixedUnit" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "millimole"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/PrefixedUnit" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/millimolePerLitre",
   "http://www.ontology-of-units-of-measure.org/resource/om-2/hasDenominator" : [ {
@@ -259,10 +259,10 @@
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://sbolstandard.org/examples"
   } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitDivision" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "millimolePerLitre"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitDivision" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/mole",
   "http://sbols.org/v3#name" : [ {
@@ -277,8 +277,8 @@
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://sbolstandard.org/examples"
   } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "mole"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ]
+  } ]
 } ]

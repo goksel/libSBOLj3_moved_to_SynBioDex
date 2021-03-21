@@ -393,6 +393,21 @@ public class RDFUtil {
 		    return result;
 		}
 	    
+	    public static boolean hasTypePrefix(Resource resource, URI prefix)
+		{
+			boolean result=false;
+			List<String> types=getPropertiesAsStrings(resource, URI.create(RDF.type.getURI()));
+			for (String typeURI: types)
+			{
+				if (typeURI.toLowerCase().startsWith(prefix.toString().toLowerCase()))
+				{
+					result=true;
+					break;
+				}
+			}
+			return result;
+		}
+	    
 	   
 	   /* private static void writeToStreamORG(Model model, OutputStream stream, String format, Resource[] topLevelResources, URI baseUri)
 	    {

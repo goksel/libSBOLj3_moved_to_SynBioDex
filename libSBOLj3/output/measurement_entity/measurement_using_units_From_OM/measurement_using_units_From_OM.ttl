@@ -25,7 +25,7 @@
         sbol:type        SBO:0000247 .
 
 <M9_Glucose_CAA/ExternallyDefined1/measure1>
-        a                     om:Measure ;
+        a                     sbol:Identified , om:Measure ;
         sbol:displayId        "measure1" ;
         om:hasNumericalValue  "0.1" ;
         om:hasUnit            om:millimolePerLitre .

@@ -1038,7 +1038,7 @@
      ] ,
     "http://sbols.org/v3#description" : [ { 
       "type" : "literal" ,
-      "value" : "Constituve promoter"
+      "value" : "Constitutive promoter"
     }
      ] ,
     "http://sbols.org/v3#type" : [ { 

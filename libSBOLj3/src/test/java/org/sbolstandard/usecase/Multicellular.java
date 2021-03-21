@@ -45,7 +45,7 @@ public class Multicellular extends TestCase {
         
         //AHL Producer
         Component AHLProducer=SBOLAPI.createDnaComponent(doc, "AHL_producer", "AHL producer", "AHL producer", Role.EngineeredGene, null);  
-        Component pConstLuxI=SBOLAPI.createDnaComponent(doc, "pConstLuxI", "pConstLuxI","Constituve promoter", Role.Promoter, null); 
+        Component pConstLuxI=SBOLAPI.createDnaComponent(doc, "pConstLuxI", "pConstLuxI","Constitutive promoter", Role.Promoter, null); 
         Component rbs_luxI=SBOLAPI.createDnaComponent(doc, "rbs_luxI","rbs", "RBS", Role.RBS, null);
         Component luxI=SBOLAPI.createDnaComponent(doc, "luxI","luxI", "luxI coding sequence", Role.CDS, null);
         Component ter_luxI=SBOLAPI.createDnaComponent(doc, "ter_luxI","luxI terminator", "Terminator", Role.Terminator, null);

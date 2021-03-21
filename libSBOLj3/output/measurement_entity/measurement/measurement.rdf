@@ -16,6 +16,7 @@
       <om:alternativeSymbol>m2</om:alternativeSymbol>
       <om:alternativeLabel>milli2</om:alternativeLabel>
       <om:longcomment>This is an example long comment for the milli prefix.</om:longcomment>
+      <rdf:type rdf:resource="http://sbols.org/v3#TopLevel"/>
       <om:label>milli</om:label>
       <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>milli</sbol:displayId>
@@ -25,55 +26,21 @@
       <om:comment>Comment for the milli prefix.</om:comment>
       <om:hasFactor>0.001</om:hasFactor>
    </om:SIPrefix>
-   <om:SingularUnit rdf:about="kelvin">
-      <sbol:name>kelvin</sbol:name>
-      <om:label>kelvin</om:label>
-      <om:symbol>kelvin</om:symbol>
-      <sbol:hasNamespace rdf:resource="/examples"/>
-      <sbol:displayId>kelvin</sbol:displayId>
-   </om:SingularUnit>
-   <om:SingularUnit rdf:about="litre">
-      <sbol:description>The litre is a unit of volume defined as 1.0e-3 cubic metre.</sbol:description>
-      <sbol:name>liter</sbol:name>
-      <sbol:hasNamespace rdf:resource="/examples"/>
-      <om:alternativeLabel>litre2</om:alternativeLabel>
-      <sbol:displayId>litre</sbol:displayId>
-      <om:alternativeLabel>liter</om:alternativeLabel>
-      <om:symbol>l</om:symbol>
-      <om:comment>The litre is a unit of volume defined as 1.0e-3 cubic metre.</om:comment>
-      <om:label>liter</om:label>
-      <om:hasFactor>0.001</om:hasFactor>
-      <om:longcomment>This is an example long comment.</om:longcomment>
-      <om:alternativeSymbol>L2</om:alternativeSymbol>
-      <om:alternativeSymbol>L</om:alternativeSymbol>
-   </om:SingularUnit>
-   <om:SingularUnit rdf:about="meter">
-      <sbol:name>meter</sbol:name>
-      <om:label>meter</om:label>
-      <om:symbol>m</om:symbol>
-      <sbol:hasNamespace rdf:resource="/examples"/>
-      <sbol:displayId>meter</sbol:displayId>
-   </om:SingularUnit>
-   <om:SingularUnit rdf:about="mole">
-      <sbol:name>mole</sbol:name>
-      <om:label>mole</om:label>
-      <om:symbol>mol</om:symbol>
-      <sbol:hasNamespace rdf:resource="/examples"/>
-      <sbol:displayId>mole</sbol:displayId>
-   </om:SingularUnit>
-   <om:Measure rdf:about="M9_Glucose_CAA/ExternallyDefined1/measure1">
-      <sbol:type rdf:resource="https://identifiers.org/SBO:0000197"/>
-      <sbol:type rdf:resource="https://identifiers.org/SBO:0000196"/>
-      <om:hasUnit>
-         <om:UnitDivision rdf:about="millimolePerLitre"/>
-      </om:hasUnit>
-      <om:hasNumericalValue>0.1</om:hasNumericalValue>
-      <sbol:displayId>measure1</sbol:displayId>
-   </om:Measure>
    <sbol:Component rdf:about="M9_Glucose_CAA">
       <sbol:hasFeature>
          <sbol:ExternallyDefined rdf:about="M9_Glucose_CAA/ExternallyDefined1">
-            <sbol:hasMeasure rdf:resource="M9_Glucose_CAA/ExternallyDefined1/measure1"/>
+            <sbol:hasMeasure>
+               <sbol:Identified rdf:about="M9_Glucose_CAA/ExternallyDefined1/measure1">
+                  <sbol:type rdf:resource="https://identifiers.org/SBO:0000197"/>
+                  <sbol:type rdf:resource="https://identifiers.org/SBO:0000196"/>
+                  <om:hasUnit>
+                     <sbol:TopLevel rdf:about="millimolePerLitre"/>
+                  </om:hasUnit>
+                  <om:hasNumericalValue>0.1</om:hasNumericalValue>
+                  <sbol:displayId>measure1</sbol:displayId>
+                  <rdf:type rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/Measure"/>
+               </sbol:Identified>
+            </sbol:hasMeasure>
             <sbol:definition rdf:resource="https://identifiers.org/CHEBI:3312"/>
             <sbol:type rdf:resource="https://identifiers.org/SBO:0000247"/>
             <sbol:displayId>ExternallyDefined1</sbol:displayId>
@@ -85,34 +52,51 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
       <sbol:displayId>M9_Glucose_CAA</sbol:displayId>
    </sbol:Component>
-   <om:PrefixedUnit rdf:about="millimole">
+   <sbol:TopLevel rdf:about="kelvin">
+      <sbol:name>kelvin</sbol:name>
+      <om:label>kelvin</om:label>
+      <om:symbol>kelvin</om:symbol>
+      <sbol:hasNamespace rdf:resource="/examples"/>
+      <sbol:displayId>kelvin</sbol:displayId>
+      <rdf:type rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit"/>
+   </sbol:TopLevel>
+   <sbol:TopLevel rdf:about="litre">
+      <sbol:description>The litre is a unit of volume defined as 1.0e-3 cubic metre.</sbol:description>
+      <sbol:name>liter</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
+      <om:alternativeLabel>litre2</om:alternativeLabel>
+      <sbol:displayId>litre</sbol:displayId>
+      <om:alternativeLabel>liter</om:alternativeLabel>
+      <om:symbol>l</om:symbol>
+      <om:comment>The litre is a unit of volume defined as 1.0e-3 cubic metre.</om:comment>
+      <om:label>liter</om:label>
+      <om:hasFactor>0.001</om:hasFactor>
+      <rdf:type rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit"/>
+      <om:longcomment>This is an example long comment.</om:longcomment>
+      <om:alternativeSymbol>L2</om:alternativeSymbol>
+      <om:alternativeSymbol>L</om:alternativeSymbol>
+   </sbol:TopLevel>
+   <sbol:TopLevel rdf:about="millimole">
       <om:hasPrefix rdf:resource="milli"/>
-      <om:hasUnit rdf:resource="mole"/>
+      <om:hasUnit>
+         <sbol:TopLevel rdf:about="mole"/>
+      </om:hasUnit>
       <sbol:name>millimole</sbol:name>
       <om:label>millimole</om:label>
       <om:symbol>mmol</om:symbol>
       <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>millimole</sbol:displayId>
-   </om:PrefixedUnit>
-   <om:UnitExponentiation rdf:about="cubicMeter">
-      <om:hasExponent>3</om:hasExponent>
-      <om:hasBase rdf:resource="meter"/>
-      <sbol:name>cubicMeter</sbol:name>
-      <om:label>cubicMeter</om:label>
-      <om:symbol>m3</om:symbol>
+      <rdf:type rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/PrefixedUnit"/>
+   </sbol:TopLevel>
+   <sbol:TopLevel rdf:about="meter">
+      <sbol:name>meter</sbol:name>
+      <om:label>meter</om:label>
+      <om:symbol>m</om:symbol>
       <sbol:hasNamespace rdf:resource="/examples"/>
-      <sbol:displayId>cubicMeter</sbol:displayId>
-   </om:UnitExponentiation>
-   <om:UnitMultiplication rdf:about="kelvinMole">
-      <om:hasTerm2 rdf:resource="mole"/>
-      <om:hasTerm1 rdf:resource="kelvin"/>
-      <sbol:name>kelvinMole</sbol:name>
-      <om:label>kelvinMole</om:label>
-      <om:symbol>K mol</om:symbol>
-      <sbol:hasNamespace rdf:resource="/examples"/>
-      <sbol:displayId>kelvinMole</sbol:displayId>
-   </om:UnitMultiplication>
-   <om:UnitDivision rdf:about="millimolePerLitre">
+      <sbol:displayId>meter</sbol:displayId>
+      <rdf:type rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit"/>
+   </sbol:TopLevel>
+   <sbol:TopLevel rdf:about="millimolePerLitre">
       <om:hasDenominator rdf:resource="litre"/>
       <om:hasNumerator rdf:resource="millimole"/>
       <sbol:name>millimolar</sbol:name>
@@ -120,5 +104,36 @@
       <om:symbol>mmol/l</om:symbol>
       <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>millimolePerLitre</sbol:displayId>
-   </om:UnitDivision>
+      <rdf:type rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/UnitDivision"/>
+   </sbol:TopLevel>
+   <sbol:TopLevel rdf:about="kelvinMole">
+      <om:hasTerm2>
+         <sbol:TopLevel rdf:about="mole"/>
+      </om:hasTerm2>
+      <om:hasTerm1 rdf:resource="kelvin"/>
+      <sbol:name>kelvinMole</sbol:name>
+      <om:label>kelvinMole</om:label>
+      <om:symbol>K mol</om:symbol>
+      <sbol:hasNamespace rdf:resource="/examples"/>
+      <sbol:displayId>kelvinMole</sbol:displayId>
+      <rdf:type rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/UnitMultiplication"/>
+   </sbol:TopLevel>
+   <sbol:TopLevel rdf:about="cubicMeter">
+      <om:hasExponent>3</om:hasExponent>
+      <om:hasBase rdf:resource="meter"/>
+      <sbol:name>cubicMeter</sbol:name>
+      <om:label>cubicMeter</om:label>
+      <om:symbol>m3</om:symbol>
+      <sbol:hasNamespace rdf:resource="/examples"/>
+      <sbol:displayId>cubicMeter</sbol:displayId>
+      <rdf:type rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/UnitExponentiation"/>
+   </sbol:TopLevel>
+   <sbol:TopLevel rdf:about="mole">
+      <sbol:name>mole</sbol:name>
+      <om:label>mole</om:label>
+      <om:symbol>mol</om:symbol>
+      <sbol:hasNamespace rdf:resource="/examples"/>
+      <sbol:displayId>mole</sbol:displayId>
+      <rdf:type rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit"/>
+   </sbol:TopLevel>
 </rdf:RDF>

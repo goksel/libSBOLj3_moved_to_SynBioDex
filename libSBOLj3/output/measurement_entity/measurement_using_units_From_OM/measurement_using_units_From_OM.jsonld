@@ -17,7 +17,7 @@
     "type" : "SBO:0000247"
   }, {
     "@id" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1",
-    "@type" : "om:Measure",
+    "@type" : [ "sbol:Identified", "om:Measure" ],
     "displayId" : "measure1",
     "hasNumericalValue" : "0.1",
     "hasUnit" : "om:millimolePerLitre"

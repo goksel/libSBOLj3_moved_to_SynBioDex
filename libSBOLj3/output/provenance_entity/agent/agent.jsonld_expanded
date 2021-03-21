@@ -9,10 +9,10 @@
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://sbolstandard.org/examples"
   } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.w3.org/ns/prov#Agent" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "CodonOptimiserSoftware"
-  } ],
-  "@type" : [ "http://www.w3.org/ns/prov#Agent" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/toggle_switch",
   "http://sbols.org/v3#description" : [ {

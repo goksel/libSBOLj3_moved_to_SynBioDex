@@ -429,7 +429,7 @@
         sbol:orientation  sbol:inline .
 
 :pConstLuxI  a             sbol:Component ;
-        sbol:description   "Constituve promoter" ;
+        sbol:description   "Constitutive promoter" ;
         sbol:displayId     "pConstLuxI" ;
         sbol:hasNamespace  <https://sbolstandard.org/examples> ;
         sbol:name          "pConstLuxI" ;

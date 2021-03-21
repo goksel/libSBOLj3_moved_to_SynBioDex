@@ -17,7 +17,7 @@
         sbol:type          SBO:0000241 .
 
 :CodonOptimiserSoftware
-        a                  prov:Agent ;
+        a                  sbol:TopLevel , prov:Agent ;
         sbol:description   "Used to optimise bacterial DNA sequences." ;
         sbol:displayId     "CodonOptimiserSoftware" ;
         sbol:hasNamespace  <https://sbolstandard.org/examples> ;

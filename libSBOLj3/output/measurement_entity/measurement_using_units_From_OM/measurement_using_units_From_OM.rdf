@@ -10,15 +10,17 @@
     xmlns="https://sbolstandard.org/examples/"
     xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/"
    xml:base="https://sbolstandard.org/examples/">
-   <om:Measure rdf:about="M9_Glucose_CAA/ExternallyDefined1/measure1">
-      <om:hasUnit rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/millimolePerLitre"/>
-      <om:hasNumericalValue>0.1</om:hasNumericalValue>
-      <sbol:displayId>measure1</sbol:displayId>
-   </om:Measure>
    <sbol:Component rdf:about="M9_Glucose_CAA">
       <sbol:hasFeature>
          <sbol:ExternallyDefined rdf:about="M9_Glucose_CAA/ExternallyDefined1">
-            <sbol:hasMeasure rdf:resource="M9_Glucose_CAA/ExternallyDefined1/measure1"/>
+            <sbol:hasMeasure>
+               <sbol:Identified rdf:about="M9_Glucose_CAA/ExternallyDefined1/measure1">
+                  <om:hasUnit rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/millimolePerLitre"/>
+                  <om:hasNumericalValue>0.1</om:hasNumericalValue>
+                  <sbol:displayId>measure1</sbol:displayId>
+                  <rdf:type rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/Measure"/>
+               </sbol:Identified>
+            </sbol:hasMeasure>
             <sbol:definition rdf:resource="https://identifiers.org/CHEBI:3312"/>
             <sbol:type rdf:resource="https://identifiers.org/SBO:0000247"/>
             <sbol:displayId>ExternallyDefined1</sbol:displayId>

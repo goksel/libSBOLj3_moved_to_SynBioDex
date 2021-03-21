@@ -11,6 +11,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.util.SBOLUtil;
+import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.vocabulary.DataModel;
 
 public abstract class TopLevel extends Identified {

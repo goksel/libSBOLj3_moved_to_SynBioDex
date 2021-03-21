@@ -1017,7 +1017,7 @@
     "@value" : "pConstLuxI"
   } ],
   "http://sbols.org/v3#description" : [ {
-    "@value" : "Constituve promoter"
+    "@value" : "Constitutive promoter"
   } ],
   "@type" : [ "http://sbols.org/v3#Component" ]
 }, {

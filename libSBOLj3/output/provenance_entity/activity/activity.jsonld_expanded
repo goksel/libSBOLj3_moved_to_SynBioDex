@@ -9,10 +9,10 @@
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://sbolstandard.org/examples"
   } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.w3.org/ns/prov#Plan" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "CodonOptimisationProtocol"
-  } ],
-  "@type" : [ "http://www.w3.org/ns/prov#Plan" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/CodonOptimiserSoftware",
   "http://sbols.org/v3#description" : [ {
@@ -24,10 +24,10 @@
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://sbolstandard.org/examples"
   } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.w3.org/ns/prov#Agent" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "CodonOptimiserSoftware"
-  } ],
-  "@type" : [ "http://www.w3.org/ns/prov#Agent" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/RBS_optimisation_activity",
   "http://www.w3.org/ns/prov#wasInformedBy" : [ {
@@ -45,33 +45,33 @@
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://sbolstandard.org/examples"
   } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.w3.org/ns/prov#Activity" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "RBS_optimisation_activity"
-  } ],
-  "@type" : [ "http://www.w3.org/ns/prov#Activity" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/codon_optimization_activity",
   "http://sbols.org/v3#type" : [ {
     "@id" : "http://sbols.org/v3#design"
   } ],
-  "http://www.w3.org/ns/prov#startedAtTime" : [ {
-    "@value" : "2019-07-29T17:00:21.96Z"
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@value" : "2020-08-30T18:18:15.673Z"
   } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.w3.org/ns/prov#Activity" ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "Codon optimization activity"
   } ],
   "http://sbols.org/v3#description" : [ {
     "@value" : "An activity that is used to optimise codons"
   } ],
-  "http://www.w3.org/ns/prov#endedAtTime" : [ {
-    "@value" : "2020-08-30T17:00:21.96Z"
-  } ],
   "http://www.w3.org/ns/prov#qualifiedUsage" : [ {
     "@id" : "https://sbolstandard.org/examples/codon_optimization_activity/Usage2"
   }, {
     "@id" : "https://sbolstandard.org/examples/codon_optimization_activity/Usage1"
   } ],
-  "@type" : [ "http://www.w3.org/ns/prov#Activity" ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@value" : "2019-07-29T18:18:15.673Z"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "codon_optimization_activity"
   } ],
@@ -92,10 +92,10 @@
   "http://www.w3.org/ns/prov#hadAgent" : [ {
     "@id" : "https://sbolstandard.org/examples/CodonOptimiserSoftware"
   } ],
+  "@type" : [ "http://sbols.org/v3#Identified", "http://www.w3.org/ns/prov#Association" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "Association1"
-  } ],
-  "@type" : [ "http://www.w3.org/ns/prov#Association" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/codon_optimization_activity/Usage1",
   "http://www.w3.org/ns/prov#hadRole" : [ {
@@ -104,10 +104,10 @@
   "http://www.w3.org/ns/prov#entity" : [ {
     "@id" : "https://sbolstandard.org/examples/toggle_switch"
   } ],
+  "@type" : [ "http://sbols.org/v3#Identified", "http://www.w3.org/ns/prov#Usage" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "Usage1"
-  } ],
-  "@type" : [ "http://www.w3.org/ns/prov#Usage" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/codon_optimization_activity/Usage2",
   "http://www.w3.org/ns/prov#hadRole" : [ {
@@ -116,10 +116,10 @@
   "http://www.w3.org/ns/prov#entity" : [ {
     "@id" : "https://sbolstandard.org/examples/toggle_switch_optimised"
   } ],
+  "@type" : [ "http://sbols.org/v3#Identified", "http://www.w3.org/ns/prov#Usage" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "Usage2"
-  } ],
-  "@type" : [ "http://www.w3.org/ns/prov#Usage" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/toggle_switch",
   "http://sbols.org/v3#description" : [ {
