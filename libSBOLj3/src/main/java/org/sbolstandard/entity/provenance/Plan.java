@@ -14,7 +14,7 @@ public class Plan extends TopLevel{
 		super(model, uri);
 	}
 	
-	protected  Plan(Resource resource)
+	protected  Plan(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

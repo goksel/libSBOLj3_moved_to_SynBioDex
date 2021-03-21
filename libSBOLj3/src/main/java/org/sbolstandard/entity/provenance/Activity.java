@@ -26,7 +26,7 @@ public class Activity extends TopLevel{
 		super(model, uri);
 	}
 	
-	protected  Activity(Resource resource)
+	protected  Activity(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

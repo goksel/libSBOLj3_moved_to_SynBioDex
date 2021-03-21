@@ -16,7 +16,7 @@ public abstract class Prefix extends Unit{
 		super(model, uri);
 	}
 	
-	protected  Prefix(Resource resource)
+	protected  Prefix(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

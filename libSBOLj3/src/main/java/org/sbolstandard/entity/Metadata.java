@@ -15,7 +15,7 @@ public class Metadata extends Identified{
 		super(model, uri);
 	}
 	
-	protected  Metadata(Resource resource)
+	protected  Metadata(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}
@@ -26,8 +26,7 @@ public class Metadata extends Identified{
 		if (dataType==null)
 		{
 			throw new SBOLGraphException("Application specific types MUST have a datatype property specified. " + "Metadata URI:" + uri);
-		}
-		
+		}	
 	}
 	
 	public Metadata(SBOLDocument doc, URI uri, URI dataType, boolean isTopLevel) throws SBOLGraphException

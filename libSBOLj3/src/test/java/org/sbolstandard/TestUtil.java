@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.CharSet;
 import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.entity.*;
@@ -15,6 +17,7 @@ import org.sbolstandard.entity.provenance.*;
 import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
+import org.sbolstandard.util.SBOLUtil;
 import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.MeasureDataModel;
 import org.sbolstandard.vocabulary.ProvenanceDataModel;
@@ -31,13 +34,15 @@ public class TestUtil {
         {
         	outputDir.mkdirs();
         }
+        String filename=String.format("%s/%s/%s", baseOutput,directory, file);
+        SBOLIO.write(doc, new File(filename + ".ttl"), SBOLFormat.TURTLE);
+        SBOLIO.write(doc, new File(filename + ".rdf"),SBOLFormat.RDFXML);
+        SBOLIO.write(doc, new File(filename + ".jsonld"), SBOLFormat.JSONLD);
+        SBOLIO.write(doc, new File(filename + ".jsonld_expanded"), SBOLFormat.JSONLD_EXPAND);
+        SBOLIO.write(doc, new File(filename + ".rj"), RDFFormat.RDFJSON);
+        SBOLIO.write(doc, new File(filename + ".nt"), SBOLFormat.NTRIPLES);
+        SBOLUtil.sort(new File(filename + ".nt"), new File(filename + "_ordered.nt"), Charset.forName("ASCII"));
         
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.ttl", baseOutput,directory, file)), SBOLFormat.TURTLE);
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.rdf", baseOutput,directory, file)),SBOLFormat.RDFXML);
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.jsonld", baseOutput,directory, file)), SBOLFormat.JSONLD);
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.jsonld_expanded", baseOutput,directory, file)), SBOLFormat.JSONLD_EXPAND);
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.rj", baseOutput,directory, file)), RDFFormat.RDFJSON);
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.nt", baseOutput,directory, file)), SBOLFormat.NTRIPLES);
 	}
 	
 	public static void assertReadWrite(SBOLDocument doc) throws IOException, SBOLGraphException

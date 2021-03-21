@@ -14,7 +14,7 @@ public class Agent extends TopLevel{
 		super(model, uri);
 	}
 	
-	protected  Agent(Resource resource)
+	protected  Agent(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

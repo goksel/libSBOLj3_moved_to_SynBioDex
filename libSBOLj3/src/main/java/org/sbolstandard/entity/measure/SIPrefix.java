@@ -13,7 +13,7 @@ public class SIPrefix extends Prefix{
 		super(model, uri);
 	}
 	
-	protected  SIPrefix(Resource resource)
+	protected  SIPrefix(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

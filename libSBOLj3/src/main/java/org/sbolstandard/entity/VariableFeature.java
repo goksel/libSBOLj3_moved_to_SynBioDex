@@ -24,7 +24,7 @@ public class VariableFeature extends Identified{
 		super(model, uri);
 	}
 	
-	protected  VariableFeature(Resource resource)
+	protected  VariableFeature(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

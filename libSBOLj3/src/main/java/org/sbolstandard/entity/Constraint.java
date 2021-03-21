@@ -17,7 +17,7 @@ public class Constraint extends Identified{
 		super(model, uri);
 	}
 	
-	protected  Constraint(Resource resource)
+	protected  Constraint(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

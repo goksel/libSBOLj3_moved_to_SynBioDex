@@ -21,7 +21,7 @@ public class Measure extends Identified{
 		super(model, uri);
 	}
 	
-	protected  Measure(Resource resource)
+	protected  Measure(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

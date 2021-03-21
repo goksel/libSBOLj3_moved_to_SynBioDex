@@ -24,7 +24,7 @@ public abstract class Unit extends TopLevel{
 		super(model, uri);
 	}
 	
-	protected  Unit(Resource resource)
+	protected  Unit(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

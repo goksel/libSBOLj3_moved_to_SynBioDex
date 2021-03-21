@@ -21,7 +21,7 @@ public class CombinatorialDerivation extends TopLevel{
 		super(model, uri);
 	}
 	
-	protected  CombinatorialDerivation(Resource resource)
+	protected  CombinatorialDerivation(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

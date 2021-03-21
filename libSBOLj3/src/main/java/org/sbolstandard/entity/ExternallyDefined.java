@@ -19,7 +19,7 @@ public class ExternallyDefined extends Feature{
 		super(model, uri);
 	}
 	
-	protected  ExternallyDefined(Resource resource)
+	protected  ExternallyDefined(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

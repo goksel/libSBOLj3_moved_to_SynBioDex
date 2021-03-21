@@ -10,6 +10,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
+import org.sbolstandard.util.SBOLUtil;
 import org.sbolstandard.vocabulary.DataModel;
 
 public abstract class TopLevel extends Identified {
@@ -27,7 +28,7 @@ public abstract class TopLevel extends Identified {
 		
 	}
 	
-	protected TopLevel (Resource resource)
+	protected TopLevel (Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}
@@ -56,7 +57,7 @@ public abstract class TopLevel extends Identified {
 	public void setNamespace(URI namespace) {
 		
 		String uriString=namespace.toString();
-		if (isURL(uriString))
+		if (SBOLUtil.isURL(uriString))
 		{
 			if (uriString.endsWith("/") || uriString.endsWith("#"))
 			{
@@ -67,17 +68,7 @@ public abstract class TopLevel extends Identified {
 		RDFUtil.setProperty(resource, DataModel.TopLevel.namespace, this.namespace);
 	}
 	
-	 private boolean isURL(String s){
-	        try{
-	            URL url = new URL(s);
-	            url.toURI();
-	            return true;
-	        }catch(MalformedURLException e){
-	            return false;
-	        } catch (URISyntaxException e) {
-	            return false;
-	        }
-	    }
+	
 	 
 	@Override
 	public URI getResourceType() {

@@ -19,7 +19,7 @@ public class Usage extends Identified{
 		super(model, uri);
 	}
 	
-	protected  Usage(Resource resource)
+	protected  Usage(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

@@ -14,7 +14,7 @@ public abstract class CompountUnit extends Unit{
 		super(model, uri);
 	}
 	
-	protected  CompountUnit(Resource resource)
+	protected  CompountUnit(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

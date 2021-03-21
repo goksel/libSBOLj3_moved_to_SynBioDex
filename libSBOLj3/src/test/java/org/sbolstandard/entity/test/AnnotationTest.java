@@ -60,13 +60,13 @@ public class AnnotationTest extends TestCase {
         part.addAnnotion(igem.local("hasUsage"), igemInf2);
        
         
-        Metadata igemInf4=new Metadata(doc, URI.create("http://parts.igem.org"),igem.local("Repository"),true );
+        Metadata igemInf4=new Metadata(doc, URI.create("http://parts.igem.org/aboutigem"),igem.local("Repository"),true );
         igemInf4.setName("iGEM Registry");
         igemInf4.setDescription("Registry of Standard Biological Parts");
         igemInf4.addAnnotion(igem.local("website"), "http://parts.igem.org/Main_Page");
         part.addAnnotion(igem.local("belongsTo"), igemInf4);
         
-        Metadata igemInf5=new Metadata(doc, URI.create("http://synbiohub.org#about"),igem.local("Repository"),true );
+        Metadata igemInf5=new Metadata(doc, URI.create("http://synbiohub.org/aboutsynbiohub"),igem.local("Repository"),true );
         igemInf5.setName("SynBioHub");
         part.addAnnotion(igem.local("belongsTo"), igemInf5);
         
@@ -82,7 +82,7 @@ public class AnnotationTest extends TestCase {
         
        
         
-        output=SBOLIO.write(doc2, SBOLFormat.RDFXML);
+        output=SBOLIO.write(doc2, SBOLFormat.TURTLE);
         System.out.println(output);
          
         printMetadata(doc2.getComponents().get(0));
@@ -90,7 +90,7 @@ public class AnnotationTest extends TestCase {
         TestUtil.assertReadWrite(doc);
     }
 	
-	public void printMetadata(Identified identified)
+	public void printMetadata(Identified identified) throws SBOLGraphException
 	{
 		 URINameSpace igem=new URINameSpace(URI.create("http://parts.igem.org/"), "igem");  
 		 System.out.println("group:" + identified.getAnnotion(igem.local("group")));

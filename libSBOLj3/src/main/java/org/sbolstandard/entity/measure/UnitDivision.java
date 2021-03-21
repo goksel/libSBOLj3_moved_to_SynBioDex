@@ -18,7 +18,7 @@ public class UnitDivision extends CompountUnit{
 		super(model, uri);
 	}
 	
-	protected  UnitDivision(Resource resource)
+	protected  UnitDivision(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

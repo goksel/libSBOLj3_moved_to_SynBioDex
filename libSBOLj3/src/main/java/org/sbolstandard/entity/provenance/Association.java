@@ -22,7 +22,7 @@ public class Association extends Identified{
 		super(model, uri);
 	}
 	
-	protected  Association(Resource resource)
+	protected  Association(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

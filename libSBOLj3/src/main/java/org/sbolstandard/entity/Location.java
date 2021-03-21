@@ -19,7 +19,7 @@ public abstract class  Location extends Identified {
 		super(model, uri);
 	}
 	
-	protected  Location(Resource resource)
+	protected  Location(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}
@@ -85,7 +85,7 @@ public abstract class  Location extends Identified {
 	
 	public static class LocationFactory
 	{
-		public static Location create(Resource resource)
+		public static Location create(Resource resource) throws SBOLGraphException
 		{
 			if (RDFUtil.hasType(resource.getModel(), resource, DataModel.Cut.uri))
 			{

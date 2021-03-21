@@ -19,7 +19,7 @@ public class UnitExponentiation extends CompountUnit{
 		super(model, uri);
 	}
 	
-	protected  UnitExponentiation(Resource resource)
+	protected  UnitExponentiation(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

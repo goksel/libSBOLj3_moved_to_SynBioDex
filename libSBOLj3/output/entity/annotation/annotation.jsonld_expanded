@@ -1,5 +1,5 @@
 [ {
-  "@id" : "http://parts.igem.org",
+  "@id" : "http://parts.igem.org/aboutigem",
   "http://parts.igem.org/website" : [ {
     "@value" : "http://parts.igem.org/Main_Page"
   } ],
@@ -9,25 +9,28 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "iGEM Registry"
   } ],
-  "@type" : [ "http://sbols.org/v3#TopLevel", "http://parts.igem.org/Repository" ]
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://parts.igem.org/Repository" ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "aboutigem"
+  } ]
 }, {
-  "@id" : "http://synbiohub.org#about",
+  "@id" : "http://synbiohub.org/aboutsynbiohub",
   "http://sbols.org/v3#name" : [ {
     "@value" : "SynBioHub"
   } ],
   "@type" : [ "http://sbols.org/v3#TopLevel", "http://parts.igem.org/Repository" ],
   "http://sbols.org/v3#displayId" : [ {
-    "@value" : "about"
+    "@value" : "aboutsynbiohub"
   } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/BBa_J23119",
-  "http://parts.igem.org/belongsTo" : [ {
-    "@id" : "http://parts.igem.org"
-  }, {
-    "@id" : "http://synbiohub.org#about"
-  } ],
   "http://sbols.org/v3#role" : [ {
     "@id" : "https://identifiers.org/SO:0000167"
+  } ],
+  "http://parts.igem.org/belongsTo" : [ {
+    "@id" : "http://synbiohub.org/aboutsynbiohub"
+  }, {
+    "@id" : "http://parts.igem.org/aboutigem"
   } ],
   "http://sbols.org/v3#description" : [ {
     "@value" : "Parts J23100 through J23119 are a family of constitutive promoter parts isolated from a small combinatorial library."

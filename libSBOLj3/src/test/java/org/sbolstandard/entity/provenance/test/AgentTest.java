@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.nio.charset.Charset;
 
 import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.TestUtil;
@@ -14,6 +15,7 @@ import org.sbolstandard.entity.provenance.Agent;
 import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
+import org.sbolstandard.util.SBOLUtil;
 import org.sbolstandard.vocabulary.ComponentType;
 
 import junit.framework.TestCase;
@@ -56,6 +58,12 @@ public class AgentTest extends TestCase {
         //When the wrong RDF type is given, the file is still read
         System.out.println("-------------------------WRONG RDF FORMAT INTO PROVIDED  - STILL READ-----------------------------"); 
         System.out.println(SBOLIO.write(SBOLIO.read(new File("output/provenance_entity/agent/agent.jsonld"), SBOLFormat.RDFXML), SBOLFormat.JSONLD));
+        
+        System.out.println("-------------------------ORDERED NTRIPLES-----------------------------");        
+        String output=SBOLIO.write(doc, SBOLFormat.NTRIPLES);
+        String sortedOutput=SBOLUtil.sort(output, Charset.defaultCharset());
+        System.out.println(sortedOutput);
+        
         
         /*
         System.out.println("-------------------------READING FROM STRING WITH NO RDF FORMAT INFO -----------------------------"); 

@@ -1,19 +1,20 @@
 {
   "@graph" : [ {
-    "@id" : "http://parts.igem.org",
+    "@id" : "igem:aboutigem",
     "@type" : [ "sbol:TopLevel", "igem:Repository" ],
     "website" : "http://parts.igem.org/Main_Page",
     "description" : "Registry of Standard Biological Parts",
+    "displayId" : "aboutigem",
     "name" : "iGEM Registry"
   }, {
-    "@id" : "http://synbiohub.org#about",
+    "@id" : "http://synbiohub.org/aboutsynbiohub",
     "@type" : [ "sbol:TopLevel", "igem:Repository" ],
-    "displayId" : "about",
+    "displayId" : "aboutsynbiohub",
     "name" : "SynBioHub"
   }, {
     "@id" : "https://sbolstandard.org/examples/BBa_J23119",
     "@type" : "sbol:Component",
-    "belongsTo" : [ "http://parts.igem.org", "http://synbiohub.org#about" ],
+    "belongsTo" : [ "http://synbiohub.org/aboutsynbiohub", "igem:aboutigem" ],
     "experienceURL" : "igem:Part:BBa_J23119:Experience",
     "group" : "iGEM2006_Berkeley",
     "hasInformation" : "https://sbolstandard.org/examples/BBa_J23119/information1",
@@ -51,6 +52,12 @@
     "name" : "BBa_J23119_usage"
   } ],
   "@context" : {
+    "website" : {
+      "@id" : "http://parts.igem.org/website"
+    },
+    "description" : {
+      "@id" : "http://sbols.org/v3#description"
+    },
     "name" : {
       "@id" : "http://sbols.org/v3#name"
     },
@@ -67,21 +74,18 @@
       "@id" : "http://parts.igem.org/twinURLs",
       "@type" : "@id"
     },
-    "description" : {
-      "@id" : "http://sbols.org/v3#description"
-    },
     "twins" : {
       "@id" : "http://parts.igem.org/twins"
     },
     "inStock" : {
       "@id" : "http://parts.igem.org/inStock"
     },
-    "belongsTo" : {
-      "@id" : "http://parts.igem.org/belongsTo",
-      "@type" : "@id"
-    },
     "role" : {
       "@id" : "http://sbols.org/v3#role",
+      "@type" : "@id"
+    },
+    "belongsTo" : {
+      "@id" : "http://parts.igem.org/belongsTo",
       "@type" : "@id"
     },
     "hasInformation" : {
@@ -110,9 +114,6 @@
     "twinURL" : {
       "@id" : "http://parts.igem.org/twinURL",
       "@type" : "@id"
-    },
-    "website" : {
-      "@id" : "http://parts.igem.org/website"
     },
     "regulation" : {
       "@id" : "http://parts.igem.org/regulation"

@@ -19,7 +19,7 @@ public class Participation extends Identified{
 		super(model, uri);
 	}
 	
-	protected  Participation(Resource resource)
+	protected  Participation(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

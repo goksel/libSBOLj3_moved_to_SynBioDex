@@ -18,7 +18,7 @@ public class UnitMultiplication extends CompountUnit{
 		super(model, uri);
 	}
 	
-	protected  UnitMultiplication(Resource resource)
+	protected  UnitMultiplication(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

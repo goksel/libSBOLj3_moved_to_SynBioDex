@@ -18,7 +18,7 @@ public class Interface extends Identified{
 		super(model, uri);
 	}
 	
-	protected  Interface(Resource resource)
+	protected  Interface(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

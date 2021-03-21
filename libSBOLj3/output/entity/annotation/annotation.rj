@@ -51,6 +51,38 @@
      ]
   }
    ,
+  "http://parts.igem.org/aboutigem" : { 
+    "http://sbols.org/v3#displayId" : [ { 
+      "type" : "literal" ,
+      "value" : "aboutigem"
+    }
+     ] ,
+    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
+      "type" : "uri" ,
+      "value" : "http://parts.igem.org/Repository"
+    }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+     ] ,
+    "http://sbols.org/v3#name" : [ { 
+      "type" : "literal" ,
+      "value" : "iGEM Registry"
+    }
+     ] ,
+    "http://parts.igem.org/website" : [ { 
+      "type" : "literal" ,
+      "value" : "http://parts.igem.org/Main_Page"
+    }
+     ] ,
+    "http://sbols.org/v3#description" : [ { 
+      "type" : "literal" ,
+      "value" : "Registry of Standard Biological Parts"
+    }
+     ]
+  }
+   ,
   "https://sbolstandard.org/examples/BBa_J23119/twinParts" : { 
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
@@ -127,55 +159,6 @@
      ]
   }
    ,
-  "http://parts.igem.org" : { 
-    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
-      "type" : "uri" ,
-      "value" : "http://parts.igem.org/Repository"
-    }
-    , { 
-      "type" : "uri" ,
-      "value" : "http://sbols.org/v3#TopLevel"
-    }
-     ] ,
-    "http://sbols.org/v3#name" : [ { 
-      "type" : "literal" ,
-      "value" : "iGEM Registry"
-    }
-     ] ,
-    "http://parts.igem.org/website" : [ { 
-      "type" : "literal" ,
-      "value" : "http://parts.igem.org/Main_Page"
-    }
-     ] ,
-    "http://sbols.org/v3#description" : [ { 
-      "type" : "literal" ,
-      "value" : "Registry of Standard Biological Parts"
-    }
-     ]
-  }
-   ,
-  "http://synbiohub.org#about" : { 
-    "http://sbols.org/v3#displayId" : [ { 
-      "type" : "literal" ,
-      "value" : "about"
-    }
-     ] ,
-    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
-      "type" : "uri" ,
-      "value" : "http://parts.igem.org/Repository"
-    }
-    , { 
-      "type" : "uri" ,
-      "value" : "http://sbols.org/v3#TopLevel"
-    }
-     ] ,
-    "http://sbols.org/v3#name" : [ { 
-      "type" : "literal" ,
-      "value" : "SynBioHub"
-    }
-     ]
-  }
-   ,
   "https://sbolstandard.org/examples/BBa_J23119" : { 
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
@@ -214,11 +197,11 @@
      ] ,
     "http://parts.igem.org/belongsTo" : [ { 
       "type" : "uri" ,
-      "value" : "http://parts.igem.org"
+      "value" : "http://parts.igem.org/aboutigem"
     }
     , { 
       "type" : "uri" ,
-      "value" : "http://synbiohub.org#about"
+      "value" : "http://synbiohub.org/aboutsynbiohub"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 
@@ -239,6 +222,28 @@
     "http://sbols.org/v3#type" : [ { 
       "type" : "uri" ,
       "value" : "https://identifiers.org/SBO:0000251"
+    }
+     ]
+  }
+   ,
+  "http://synbiohub.org/aboutsynbiohub" : { 
+    "http://sbols.org/v3#displayId" : [ { 
+      "type" : "literal" ,
+      "value" : "aboutsynbiohub"
+    }
+     ] ,
+    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
+      "type" : "uri" ,
+      "value" : "http://parts.igem.org/Repository"
+    }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+     ] ,
+    "http://sbols.org/v3#name" : [ { 
+      "type" : "literal" ,
+      "value" : "SynBioHub"
     }
      ]
   }
