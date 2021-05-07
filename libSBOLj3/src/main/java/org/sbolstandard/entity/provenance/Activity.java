@@ -8,12 +8,12 @@ import org.apache.jena.datatypes.xsd.impl.XSDDateType;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.api.SBOLAPI;
-import org.sbolstandard.entity.Identified;
+import org.sbolstandard.entity.ControlledTopLevel;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ProvenanceDataModel;
 
-public class Activity extends Identified{
+public class Activity extends ControlledTopLevel{
 	private XSDDateTime startedAtTime=null;
 	private XSDDateTime endedAtTime=null;
 	private List<URI> types=null;
@@ -26,7 +26,7 @@ public class Activity extends Identified{
 		super(model, uri);
 	}
 	
-	protected  Activity(Resource resource)
+	protected  Activity(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

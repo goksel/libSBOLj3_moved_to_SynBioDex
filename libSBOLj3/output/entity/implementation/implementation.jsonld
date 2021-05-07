@@ -4,6 +4,7 @@
     "@type" : "sbol:Component",
     "description" : "TetR protein",
     "displayId" : "TetR_protein",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "TetR",
     "role" : "GO:0003700",
     "type" : "SBO:0000252"
@@ -11,11 +12,16 @@
     "@id" : "https://sbolstandard.org/examples/impl1",
     "@type" : "sbol:Implementation",
     "built" : "https://sbolstandard.org/examples/TetR_protein",
-    "displayId" : "impl1"
+    "displayId" : "impl1",
+    "hasNamespace" : "https://sbolstandard.org/examples"
   } ],
   "@context" : {
     "built" : {
       "@id" : "http://sbols.org/v3#built",
+      "@type" : "@id"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
       "@type" : "@id"
     },
     "displayId" : {

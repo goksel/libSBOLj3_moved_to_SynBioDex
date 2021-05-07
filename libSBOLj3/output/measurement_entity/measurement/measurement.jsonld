@@ -5,6 +5,7 @@
     "description" : "M9 Glucose CAA growth media",
     "displayId" : "M9_Glucose_CAA",
     "hasFeature" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "M9 Glucose CAA",
     "type" : "SBO:0000241"
   }, {
@@ -16,15 +17,16 @@
     "type" : "SBO:0000247"
   }, {
     "@id" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1",
-    "@type" : "om:Measure",
+    "@type" : [ "sbol:Identified", "om:Measure" ],
     "displayId" : "measure1",
     "type" : [ "SBO:0000197", "SBO:0000196" ],
     "hasNumericalValue" : "0.1",
     "hasUnit" : "https://sbolstandard.org/examples/millimolePerLitre"
   }, {
     "@id" : "https://sbolstandard.org/examples/cubicMeter",
-    "@type" : "om:UnitExponentiation",
+    "@type" : [ "sbol:TopLevel", "om:UnitExponentiation" ],
     "displayId" : "cubicMeter",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "cubicMeter",
     "hasBase" : "https://sbolstandard.org/examples/meter",
     "hasExponent" : "3",
@@ -32,15 +34,17 @@
     "symbol" : "m3"
   }, {
     "@id" : "https://sbolstandard.org/examples/kelvin",
-    "@type" : "om:SingularUnit",
+    "@type" : [ "sbol:TopLevel", "om:SingularUnit" ],
     "displayId" : "kelvin",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "kelvin",
     "label" : "kelvin",
     "symbol" : "kelvin"
   }, {
     "@id" : "https://sbolstandard.org/examples/kelvinMole",
-    "@type" : "om:UnitMultiplication",
+    "@type" : [ "sbol:TopLevel", "om:UnitMultiplication" ],
     "displayId" : "kelvinMole",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "kelvinMole",
     "hasTerm1" : "https://sbolstandard.org/examples/kelvin",
     "hasTerm2" : "https://sbolstandard.org/examples/mole",
@@ -48,9 +52,10 @@
     "symbol" : "K mol"
   }, {
     "@id" : "https://sbolstandard.org/examples/litre",
-    "@type" : "om:SingularUnit",
+    "@type" : [ "sbol:TopLevel", "om:SingularUnit" ],
     "description" : "The litre is a unit of volume defined as 1.0e-3 cubic metre.",
     "displayId" : "litre",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "liter",
     "alternativeLabel" : [ "litre2", "liter" ],
     "alternativeSymbol" : [ "L2", "L" ],
@@ -61,16 +66,18 @@
     "symbol" : "l"
   }, {
     "@id" : "https://sbolstandard.org/examples/meter",
-    "@type" : "om:SingularUnit",
+    "@type" : [ "sbol:TopLevel", "om:SingularUnit" ],
     "displayId" : "meter",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "meter",
     "label" : "meter",
     "symbol" : "m"
   }, {
     "@id" : "https://sbolstandard.org/examples/milli",
-    "@type" : "om:SIPrefix",
+    "@type" : [ "om:SIPrefix", "sbol:TopLevel" ],
     "description" : "Comment for the milli prefix.",
     "displayId" : "milli",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "milli",
     "alternativeLabel" : [ "milli1", "milli2" ],
     "alternativeSymbol" : [ "m1", "m2" ],
@@ -81,8 +88,9 @@
     "symbol" : "m"
   }, {
     "@id" : "https://sbolstandard.org/examples/millimole",
-    "@type" : "om:PrefixedUnit",
+    "@type" : [ "sbol:TopLevel", "om:PrefixedUnit" ],
     "displayId" : "millimole",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "millimole",
     "hasPrefix" : "https://sbolstandard.org/examples/milli",
     "hasUnit" : "https://sbolstandard.org/examples/mole",
@@ -90,8 +98,9 @@
     "symbol" : "mmol"
   }, {
     "@id" : "https://sbolstandard.org/examples/millimolePerLitre",
-    "@type" : "om:UnitDivision",
+    "@type" : [ "sbol:TopLevel", "om:UnitDivision" ],
     "displayId" : "millimolePerLitre",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "millimolar",
     "hasDenominator" : "https://sbolstandard.org/examples/litre",
     "hasNumerator" : "https://sbolstandard.org/examples/millimole",
@@ -99,8 +108,9 @@
     "symbol" : "mmol/l"
   }, {
     "@id" : "https://sbolstandard.org/examples/mole",
-    "@type" : "om:SingularUnit",
+    "@type" : [ "sbol:TopLevel", "om:SingularUnit" ],
     "displayId" : "mole",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "mole",
     "label" : "mole",
     "symbol" : "mol"
@@ -133,6 +143,10 @@
     },
     "name" : {
       "@id" : "http://sbols.org/v3#name"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
+      "@type" : "@id"
     },
     "alternativeLabel" : {
       "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeLabel"

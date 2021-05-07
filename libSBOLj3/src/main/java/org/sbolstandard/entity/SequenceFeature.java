@@ -22,7 +22,7 @@ public class SequenceFeature extends Feature{
 		super(model, uri);
 	}
 	
-	protected  SequenceFeature(Resource resource)
+	protected  SequenceFeature(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

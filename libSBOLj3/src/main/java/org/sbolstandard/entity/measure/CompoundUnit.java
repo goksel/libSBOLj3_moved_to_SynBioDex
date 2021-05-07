@@ -6,15 +6,15 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.MeasureDataModel;
 
-public abstract class CompountUnit extends Unit{
+public abstract class CompoundUnit extends Unit{
 	
 	
-	protected  CompountUnit(Model model,URI uri) throws SBOLGraphException
+	protected  CompoundUnit(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
 	}
 	
-	protected  CompountUnit(Resource resource)
+	protected  CompoundUnit(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

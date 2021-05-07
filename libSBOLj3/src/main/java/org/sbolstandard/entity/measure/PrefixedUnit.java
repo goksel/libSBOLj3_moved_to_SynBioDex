@@ -18,7 +18,7 @@ public class PrefixedUnit extends Unit{
 		super(model, uri);
 	}
 	
-	protected  PrefixedUnit(Resource resource)
+	protected  PrefixedUnit(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

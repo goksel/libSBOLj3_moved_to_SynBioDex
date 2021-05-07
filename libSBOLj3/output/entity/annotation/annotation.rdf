@@ -12,10 +12,10 @@
     xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/"
    xml:base="https://sbolstandard.org/examples/">
    <sbol:Component rdf:about="BBa_J23119">
-      <igem:belongsTo>
-         <sbol:TopLevel rdf:about="http://parts.igem.org"/>
-      </igem:belongsTo>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000167"/>
+      <igem:belongsTo>
+         <sbol:TopLevel rdf:about="http://synbiohub.org/aboutsynbiohub"/>
+      </igem:belongsTo>
       <sbol:description>Parts J23100 through J23119 are a family of constitutive promoter parts isolated from a small combinatorial library.</sbol:description>
       <igem:hasInformation>
          <sbol:Identified rdf:about="BBa_J23119/information1">
@@ -30,6 +30,9 @@
       </igem:hasInformation>
       <sbol:name>BBa_J23119 part</sbol:name>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <igem:belongsTo>
+         <sbol:TopLevel rdf:about="http://parts.igem.org/aboutigem"/>
+      </igem:belongsTo>
       <igem:hasUsage>
          <sbol:Identified rdf:about="BBa_J23119/usage1">
             <sbol:displayId>usage1</sbol:displayId>
@@ -52,22 +55,21 @@
             <igem:inStock>true</igem:inStock>
          </sbol:Identified>
       </igem:hasUsage>
-      <igem:belongsTo>
-         <sbol:TopLevel rdf:about="http://synbiohub.org#about"/>
-      </igem:belongsTo>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <igem:experienceURL rdf:resource="http://parts.igem.org/Part:BBa_J23119:Experience"/>
       <sbol:displayId>BBa_J23119</sbol:displayId>
       <igem:group>iGEM2006_Berkeley</igem:group>
    </sbol:Component>
-   <sbol:TopLevel rdf:about="http://parts.igem.org">
+   <sbol:TopLevel rdf:about="http://parts.igem.org/aboutigem">
       <igem:website>http://parts.igem.org/Main_Page</igem:website>
       <sbol:description>Registry of Standard Biological Parts</sbol:description>
       <sbol:name>iGEM Registry</sbol:name>
+      <sbol:displayId>aboutigem</sbol:displayId>
       <rdf:type rdf:resource="http://parts.igem.org/Repository"/>
    </sbol:TopLevel>
-   <sbol:TopLevel rdf:about="http://synbiohub.org#about">
+   <sbol:TopLevel rdf:about="http://synbiohub.org/aboutsynbiohub">
       <sbol:name>SynBioHub</sbol:name>
-      <sbol:displayId>about</sbol:displayId>
+      <sbol:displayId>aboutsynbiohub</sbol:displayId>
       <rdf:type rdf:resource="http://parts.igem.org/Repository"/>
    </sbol:TopLevel>
 </rdf:RDF>

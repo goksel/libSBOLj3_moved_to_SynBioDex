@@ -5,12 +5,12 @@ import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.sbolstandard.entity.Identified;
+import org.sbolstandard.entity.ControlledIdentified;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ProvenanceDataModel;
 
-public class Association extends Identified{
+public class Association extends ControlledIdentified{
 	
 	private List<URI> roles=null;
 	private URI plan=null;
@@ -22,7 +22,7 @@ public class Association extends Identified{
 		super(model, uri);
 	}
 	
-	protected  Association(Resource resource)
+	protected  Association(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

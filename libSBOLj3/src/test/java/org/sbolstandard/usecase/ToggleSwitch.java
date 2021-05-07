@@ -1,17 +1,11 @@
 package org.sbolstandard.usecase;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 import org.sbolstandard.TestUtil;
 import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Component;
-import org.sbolstandard.entity.ComponentReference;
 import org.sbolstandard.entity.Interaction;
 import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.entity.SubComponent;
@@ -19,10 +13,8 @@ import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ComponentType;
-import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.InteractionType;
 import org.sbolstandard.vocabulary.ParticipationRole;
-import org.sbolstandard.vocabulary.RestrictionType;
 import org.sbolstandard.vocabulary.Role;
 
 import junit.framework.TestCase;

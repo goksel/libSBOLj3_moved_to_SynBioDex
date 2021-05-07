@@ -1,7 +1,5 @@
 package org.sbolstandard.io;
 
-import java.net.URI;
-
 import org.apache.jena.riot.RDFFormat;
 
 public enum SBOLFormat

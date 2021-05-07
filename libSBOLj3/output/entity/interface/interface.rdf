@@ -14,6 +14,7 @@
       <sbol:role rdf:resource="https://identifiers.org/CHEBI:35224"/>
       <sbol:description>aTC</sbol:description>
       <sbol:name>aTC</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000247"/>
       <sbol:displayId>aTC</sbol:displayId>
    </sbol:Component>
@@ -21,6 +22,7 @@
       <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
       <sbol:description>TetR protein</sbol:description>
       <sbol:name>TetR</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
       <sbol:displayId>TetR_protein</sbol:displayId>
    </sbol:Component>
@@ -54,6 +56,7 @@
          </sbol:Interface>
       </sbol:hasInterface>
       <sbol:displayId>LacI_producer</sbol:displayId>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:hasFeature rdf:resource="LacI_producer/SubComponent2"/>
       <sbol:hasFeature rdf:resource="LacI_producer/SubComponent3"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
@@ -64,6 +67,7 @@
       <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
       <sbol:description>LacI protein</sbol:description>
       <sbol:name>LacI</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
       <sbol:displayId>LacI_protein</sbol:displayId>
    </sbol:Component>

@@ -393,6 +393,21 @@ public class RDFUtil {
 		    return result;
 		}
 	    
+	    public static boolean hasTypePrefix(Resource resource, URI prefix)
+		{
+			boolean result=false;
+			List<String> types=getPropertiesAsStrings(resource, URI.create(RDF.type.getURI()));
+			for (String typeURI: types)
+			{
+				if (typeURI.toLowerCase().startsWith(prefix.toString().toLowerCase()))
+				{
+					result=true;
+					break;
+				}
+			}
+			return result;
+		}
+	    
 	   
 	   /* private static void writeToStreamORG(Model model, OutputStream stream, String format, Resource[] topLevelResources, URI baseUri)
 	    {
@@ -515,7 +530,7 @@ public class RDFUtil {
 	    
 	    public static ResultSet executeSPARQLSelectQuery(Model model, String query, Syntax syntax)
 	    {
-	    	System.out.println ("Executing the query 2" + query + "...");
+	    	//System.out.println ("Executing the query " + query + "...");
 	    	Query q = QueryFactory.create(query, syntax);
 		    QueryExecution qe = QueryExecutionFactory.create(q, model);
 		    ResultSet rsMemory=null;
@@ -583,7 +598,10 @@ public class RDFUtil {
 		{
 	    	Model model = ModelFactory.createDefaultModel();
 	        RDFParserBuilder rdfBuilder= RDFParser.create().source(stream);
-	        rdfBuilder.lang(format.getLang());
+	        if (format!=null)
+	        {
+	        	rdfBuilder.lang(format.getLang());
+	        }
 	        RDFParser parser=rdfBuilder.build();
 	        parser.parse(model);    
 			return model;			
@@ -593,15 +611,15 @@ public class RDFUtil {
 		{
 	    	Model model = ModelFactory.createDefaultModel();
 	        RDFParserBuilder rdfBuilder= RDFParser.create().fromString(input);
-	        rdfBuilder.lang(format.getLang());
+	        if (format!=null)
+	        {
+	        	rdfBuilder.lang(format.getLang());
+	        }
 	        RDFParser parser=rdfBuilder.build();
 	        parser.parse(model);    
 			return model;			
 		}
 }
-
-
-
 
 /*
  

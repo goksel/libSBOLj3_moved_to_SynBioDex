@@ -18,7 +18,7 @@ public class RangeLocation extends Location {
 		super(model, uri);
 	}
 	
-	protected  RangeLocation(Resource resource)
+	protected  RangeLocation(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

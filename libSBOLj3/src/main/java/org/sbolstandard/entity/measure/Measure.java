@@ -4,13 +4,13 @@ import java.net.URI;
 import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.sbolstandard.entity.Identified;
+import org.sbolstandard.entity.ControlledIdentified;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.MeasureDataModel;
 
-public class Measure extends Identified{
+public class Measure extends ControlledIdentified{
 	
 	private float value=Float.NaN;
 	private List<URI> types;
@@ -21,7 +21,7 @@ public class Measure extends Identified{
 		super(model, uri);
 	}
 	
-	protected  Measure(Resource resource)
+	protected  Measure(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

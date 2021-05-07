@@ -17,6 +17,9 @@
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "LacI_producer"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#role" : [ {
     "@id" : "https://identifiers.org/SO:0000704"
   } ],
@@ -81,6 +84,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "LacI"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000252"
   } ],
@@ -99,6 +105,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "TetR"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000252"
   } ],
@@ -116,6 +125,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "aTC"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000247"

@@ -13,7 +13,7 @@ public class Experiment extends Collection{
 		super(model, uri);
 	}
 	
-	protected  Experiment(Resource resource)
+	protected  Experiment(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

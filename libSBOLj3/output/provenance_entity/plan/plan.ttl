@@ -10,7 +10,8 @@
 @prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
 
 :CodonOptimisationProtocol
-        a                 prov:Plan ;
-        sbol:description  "Optimisation protocol to improve the translation of mRNAs." ;
-        sbol:displayId    "CodonOptimisationProtocol" ;
-        sbol:name         "Codon Optimisation Protocol" .
+        a                  sbol:TopLevel , prov:Plan ;
+        sbol:description   "Optimisation protocol to improve the translation of mRNAs." ;
+        sbol:displayId     "CodonOptimisationProtocol" ;
+        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:name          "Codon Optimisation Protocol" .

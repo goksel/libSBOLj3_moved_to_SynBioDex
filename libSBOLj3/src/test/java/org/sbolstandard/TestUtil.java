@@ -4,16 +4,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.CharSet;
 import org.apache.jena.datatypes.xsd.XSDDateTime;
+import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.entity.*;
 import org.sbolstandard.entity.measure.*;
 import org.sbolstandard.entity.provenance.*;
 import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
+import org.sbolstandard.util.SBOLUtil;
 import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.MeasureDataModel;
 import org.sbolstandard.vocabulary.ProvenanceDataModel;
@@ -28,15 +32,17 @@ public class TestUtil {
 		File outputDir=new File(baseOutput +  "/" + directory);
         if (!outputDir.exists())
         {
-        	boolean result=outputDir.mkdirs();
+        	outputDir.mkdirs();
         }
+        String filename=String.format("%s/%s/%s", baseOutput,directory, file);
+        SBOLIO.write(doc, new File(filename + ".ttl"), SBOLFormat.TURTLE);
+        SBOLIO.write(doc, new File(filename + ".rdf"),SBOLFormat.RDFXML);
+        SBOLIO.write(doc, new File(filename + ".jsonld"), SBOLFormat.JSONLD);
+        SBOLIO.write(doc, new File(filename + ".jsonld_expanded"), SBOLFormat.JSONLD_EXPAND);
+        SBOLIO.write(doc, new File(filename + ".rj"), RDFFormat.RDFJSON);
+        SBOLIO.write(doc, new File(filename + ".nt"), SBOLFormat.NTRIPLES);
+        SBOLUtil.sort(new File(filename + ".nt"), new File(filename + "_ordered.nt"), Charset.forName("ASCII"));
         
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.ttl", baseOutput,directory, file)), SBOLFormat.TURTLE);
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.rdf", baseOutput,directory, file)),SBOLFormat.RDFXML);
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.jsonld", baseOutput,directory, file)), SBOLFormat.JSONLD);
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.jsonld_expanded", baseOutput,directory, file)), SBOLFormat.JSONLD_EXPAND);
-        //SBOLIO.write(doc, new File(String.format("%s/%s/%s.rj", baseOutput,directory, file)), "RDFJSON");
-        SBOLIO.write(doc, new File(String.format("%s/%s/%s.nt", baseOutput,directory, file)), SBOLFormat.NTRIPLES);
 	}
 	
 	public static void assertReadWrite(SBOLDocument doc) throws IOException, SBOLGraphException
@@ -59,7 +65,6 @@ public class TestUtil {
 		assertEqualEntity(doc1.getExperiments(), doc2,Experiment.class);
 		assertEqualEntity(doc1.getImplementations(), doc2,Implementation.class);
 		assertEqualEntity(doc1.getModels(), doc2,Model.class);
-		assertEqualEntity(doc1.getNamespaces(), doc2,Namespace.class);
 		assertEqualEntity(doc1.getPlans(), doc2,Plan.class);
 		assertEqualEntity(doc1.getPrefixedUnits(), doc2,PrefixedUnit.class);
 		assertEqualEntity(doc1.getSequences(), doc2,Sequence.class);
@@ -172,10 +177,6 @@ public class TestUtil {
 		{
 			assertEqualModel((Model)identified1, (Model) identified2);
 		}
-		else if (identified1 instanceof Namespace)
-		{
-			assertEqualNamespace((Namespace)identified1, (Namespace) identified2);
-		}
 		else if (identified1 instanceof Model)
 		{
 			assertEqualModel((Model)identified1, (Model) identified2);
@@ -225,9 +226,9 @@ public class TestUtil {
 		{
 			assertEqualUsage((Usage)identified1,  (Usage) identified2);
 		}
-		else if (identified1 instanceof VariableComponent)
+		else if (identified1 instanceof VariableFeature)
 		{
-			assertEqualVariableComponent((VariableComponent)identified1, (VariableComponent) identified2);
+			assertEqualVariableComponent((VariableFeature)identified1, (VariableFeature) identified2);
 		}
 		else if (identified1 instanceof ExternallyDefined)
 		{
@@ -372,14 +373,6 @@ public class TestUtil {
 		}
 	}
 	
-	private static void assertEqualNamespace(Namespace entity1, Namespace entity2)  throws SBOLGraphException
-	{
-		if (entity1!=null)
-		{
-			assertEqualCollection(entity1, entity2);
-		}
-	}
-	
 	private static void assertEqualCombinatorialDerivation(CombinatorialDerivation entity1, CombinatorialDerivation entity2)  throws SBOLGraphException
 	{
 		if (entity1!=null)
@@ -391,13 +384,13 @@ public class TestUtil {
 		}
 	}
 	
-	private static void assertEqualVariableComponent(VariableComponent entity1, VariableComponent entity2)  throws SBOLGraphException
+	private static void assertEqualVariableComponent(VariableFeature entity1, VariableFeature entity2)  throws SBOLGraphException
 	{
 		if (entity1!=null)
 		{
 			assertEqual(entity1, entity2);
 			assertEqual(entity1, entity2, entity1.getCardinality(),entity2.getCardinality(), DataModel.VariableComponent.cardinality);
-			assertEqual(entity1, entity2, entity1.getSubComponent(),entity2.getSubComponent(), DataModel.VariableComponent.variable);
+			assertEqual(entity1, entity2, entity1.getFeature(),entity2.getFeature(), DataModel.VariableComponent.variable);
 			assertEqual(entity1, entity2, entity1.getVariantCollections(),entity2.getVariantCollections(), DataModel.VariableComponent.variantCollection);
 			assertEqual(entity1, entity2, entity1.getVariantDerivations(),entity2.getVariantDerivations(), DataModel.VariableComponent.variantDerivation);
 			assertEqual(entity1, entity2, entity1.getVariants(),entity2.getVariants(), DataModel.VariableComponent.variant);	
@@ -646,7 +639,8 @@ public class TestUtil {
 	private static void assertEqual(TopLevel topLevel1, TopLevel topLevel2) throws SBOLGraphException
 	{
 		assertEqual((Identified)topLevel1, (Identified)topLevel2);	
-		assertEqual(topLevel1, topLevel1, topLevel1.getAttachments(),topLevel2.getAttachments(), DataModel.TopLevel.attachment);
+		assertEqual(topLevel1,topLevel2, topLevel1.getNamespace(), topLevel2.getNamespace(), DataModel.TopLevel.namespace);	
+		assertEqual(topLevel1, topLevel2, topLevel1.getAttachments(),topLevel2.getAttachments(), DataModel.TopLevel.attachment);
 	}
 	
 	private static void assertEqual(Identified identified1, Identified identified2) throws SBOLGraphException

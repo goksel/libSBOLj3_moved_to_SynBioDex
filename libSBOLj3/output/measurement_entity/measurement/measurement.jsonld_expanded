@@ -9,6 +9,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "M9 Glucose CAA"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000241"
   } ],
@@ -44,10 +47,10 @@
   "http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumericalValue" : [ {
     "@value" : "0.1"
   } ],
+  "@type" : [ "http://sbols.org/v3#Identified", "http://www.ontology-of-units-of-measure.org/resource/om-2/Measure" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "measure1"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/Measure" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/cubicMeter",
   "http://www.ontology-of-units-of-measure.org/resource/om-2/hasExponent" : [ {
@@ -65,10 +68,13 @@
   "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ {
     "@value" : "m3"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitExponentiation" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "cubicMeter"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitExponentiation" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/kelvin",
   "http://sbols.org/v3#name" : [ {
@@ -80,10 +86,13 @@
   "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ {
     "@value" : "kelvin"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "kelvin"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/kelvinMole",
   "http://www.ontology-of-units-of-measure.org/resource/om-2/hasTerm2" : [ {
@@ -101,10 +110,13 @@
   "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ {
     "@value" : "K mol"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitMultiplication" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "kelvinMole"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitMultiplication" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/litre",
   "http://sbols.org/v3#description" : [ {
@@ -112,6 +124,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "liter"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeLabel" : [ {
     "@value" : "litre2"
@@ -130,10 +145,10 @@
   "http://www.ontology-of-units-of-measure.org/resource/om-2/label" : [ {
     "@value" : "liter"
   } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ],
   "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor" : [ {
     "@value" : "0.001"
   } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ],
   "http://www.ontology-of-units-of-measure.org/resource/om-2/longcomment" : [ {
     "@value" : "This is an example long comment."
   } ],
@@ -153,10 +168,13 @@
   "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ {
     "@value" : "m"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "meter"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/milli",
   "http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeLabel" : [ {
@@ -164,7 +182,7 @@
   }, {
     "@value" : "milli2"
   } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/SIPrefix" ],
+  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/SIPrefix", "http://sbols.org/v3#TopLevel" ],
   "http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeSymbol" : [ {
     "@value" : "m1"
   }, {
@@ -176,17 +194,20 @@
   "http://www.ontology-of-units-of-measure.org/resource/om-2/label" : [ {
     "@value" : "milli"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "milli"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "milli"
   } ],
-  "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ {
-    "@value" : "m"
-  } ],
   "http://sbols.org/v3#description" : [ {
     "@value" : "Comment for the milli prefix."
+  } ],
+  "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ {
+    "@value" : "m"
   } ],
   "http://www.ontology-of-units-of-measure.org/resource/om-2/comment" : [ {
     "@value" : "Comment for the milli prefix."
@@ -211,10 +232,13 @@
   "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ {
     "@value" : "mmol"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/PrefixedUnit" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "millimole"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/PrefixedUnit" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/millimolePerLitre",
   "http://www.ontology-of-units-of-measure.org/resource/om-2/hasDenominator" : [ {
@@ -232,10 +256,13 @@
   "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ {
     "@value" : "mmol/l"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitDivision" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "millimolePerLitre"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitDivision" ]
+  } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/mole",
   "http://sbols.org/v3#name" : [ {
@@ -247,8 +274,11 @@
   "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol" : [ {
     "@value" : "mol"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
+  "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "mole"
-  } ],
-  "@type" : [ "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit" ]
+  } ]
 } ]

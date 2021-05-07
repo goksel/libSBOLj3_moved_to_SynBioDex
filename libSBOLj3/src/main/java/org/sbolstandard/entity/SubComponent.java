@@ -25,7 +25,7 @@ public class SubComponent extends Feature{
 		super(model, uri);
 	}
 	
-	protected  SubComponent(Resource resource)
+	protected  SubComponent(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

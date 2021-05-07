@@ -7,7 +7,7 @@ import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.MeasureDataModel;
 
-public class UnitDivision extends CompountUnit{
+public class UnitDivision extends CompoundUnit{
 	
 	private URI numerator;
 	private URI denominator;
@@ -18,7 +18,7 @@ public class UnitDivision extends CompountUnit{
 		super(model, uri);
 	}
 	
-	protected  UnitDivision(Resource resource)
+	protected  UnitDivision(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

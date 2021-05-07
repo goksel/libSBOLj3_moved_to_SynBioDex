@@ -1,17 +1,12 @@
 package org.sbolstandard.usecase;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.sbolstandard.TestUtil;
 import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Component;
-import org.sbolstandard.entity.ComponentReference;
 import org.sbolstandard.entity.Interaction;
 import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.entity.SubComponent;
@@ -19,7 +14,6 @@ import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ComponentType;
-import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.InteractionType;
 import org.sbolstandard.vocabulary.ParticipationRole;
 import org.sbolstandard.vocabulary.RestrictionType;
@@ -34,12 +28,12 @@ public class Multicellular extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component multicellularSystem=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "MulticellularSystem"), ComponentType.FunctionalEntity.getUrl(), "MulticellularSystem", "Multicellular System", Role.FunctionalCompartment);
-        Component senderSystem=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "SenderSystem"), ComponentType.FunctionalEntity.getUrl(), "SenderSystem", "Sender System", Role.FunctionalCompartment);
-        Component receiverSystem=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "ReceiverSystem"), ComponentType.FunctionalEntity.getUrl(), "ReceiverSystem", "Receiver System", Role.FunctionalCompartment);
-        Component senderCell=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "OrganismA"), ComponentType.Cell.getUrl(), "OrganismA", "Organism A", Role.PhysicalCompartment);
-        Component receiverCell=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "OrganismB"), ComponentType.Cell.getUrl(), "OrganismB", "Organism B", Role.PhysicalCompartment);
-        Component AHL=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "AHL"), ComponentType.SimpleChemical.getUrl(), "AHL", "AHL", Role.Effector);
+        Component multicellularSystem=SBOLAPI.createComponent(doc, "MulticellularSystem", ComponentType.FunctionalEntity.getUrl(), "MulticellularSystem", "Multicellular System", Role.FunctionalCompartment);
+        Component senderSystem=SBOLAPI.createComponent(doc, "SenderSystem", ComponentType.FunctionalEntity.getUrl(), "SenderSystem", "Sender System", Role.FunctionalCompartment);
+        Component receiverSystem=SBOLAPI.createComponent(doc, "ReceiverSystem", ComponentType.FunctionalEntity.getUrl(), "ReceiverSystem", "Receiver System", Role.FunctionalCompartment);
+        Component senderCell=SBOLAPI.createComponent(doc, "OrganismA", ComponentType.Cell.getUrl(), "OrganismA", "Organism A", Role.PhysicalCompartment);
+        Component receiverCell=SBOLAPI.createComponent(doc, "OrganismB", ComponentType.Cell.getUrl(), "OrganismB", "Organism B", Role.PhysicalCompartment);
+        Component AHL=SBOLAPI.createComponent(doc, "AHL", ComponentType.SimpleChemical.getUrl(), "AHL", "AHL", Role.Effector);
        
         SBOLAPI.createConstraint(senderSystem, senderCell, AHL, RestrictionType.Topology.contains);
         SBOLAPI.createConstraint(receiverSystem, receiverCell, AHL, RestrictionType.Topology.contains);       
@@ -51,7 +45,7 @@ public class Multicellular extends TestCase {
         
         //AHL Producer
         Component AHLProducer=SBOLAPI.createDnaComponent(doc, "AHL_producer", "AHL producer", "AHL producer", Role.EngineeredGene, null);  
-        Component pConstLuxI=SBOLAPI.createDnaComponent(doc, "pConstLuxI", "pConstLuxI","Constituve promoter", Role.Promoter, null); 
+        Component pConstLuxI=SBOLAPI.createDnaComponent(doc, "pConstLuxI", "pConstLuxI","Constitutive promoter", Role.Promoter, null); 
         Component rbs_luxI=SBOLAPI.createDnaComponent(doc, "rbs_luxI","rbs", "RBS", Role.RBS, null);
         Component luxI=SBOLAPI.createDnaComponent(doc, "luxI","luxI", "luxI coding sequence", Role.CDS, null);
         Component ter_luxI=SBOLAPI.createDnaComponent(doc, "ter_luxI","luxI terminator", "Terminator", Role.Terminator, null);
@@ -73,9 +67,9 @@ public class Multicellular extends TestCase {
         Component rbs_gfp=SBOLAPI.createDnaComponent(doc, "rbs_gfp", "rbs", "RBS", Role.RBS, null);
         Component gfp=SBOLAPI.createDnaComponent(doc, "gfp", "gfp", "gfp coding sequence", Role.CDS, null);
         Component ter_gfp=SBOLAPI.createDnaComponent(doc, "ter_gfp", "gfp terminator", "Terminator", Role.Terminator, null);
-        Component LuxR=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "LuxR_protein"), ComponentType.Protein.getUrl(), "LuxR_protein", "LuxR", Role.TF);
-        Component GFP=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "GFP_protein"), ComponentType.Protein.getUrl(), "GFP", "GFP", null);
-        Component LuxR_AHL=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "LuxR_AHL"), ComponentType.Protein.getUrl(), "LuxR_AHL", "LuxR_AHL complex", Role.TF);
+        Component LuxR=SBOLAPI.createComponent(doc, "LuxR_protein", ComponentType.Protein.getUrl(), "LuxR_protein", "LuxR", Role.TF);
+        Component GFP=SBOLAPI.createComponent(doc, "GFP_protein", ComponentType.Protein.getUrl(), "GFP", "GFP", null);
+        Component LuxR_AHL=SBOLAPI.createComponent(doc, "LuxR_AHL", ComponentType.Protein.getUrl(), "LuxR_AHL", "LuxR_AHL complex", Role.TF);
          
         SBOLAPI.appendComponent(doc, AHLReceiver,pConstLuxR);
         SBOLAPI.appendComponent(doc, AHLReceiver,rbs_luxR);

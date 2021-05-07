@@ -3,17 +3,19 @@ package org.sbolstandard.entity;
 import java.net.URI;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
 
-public class Namespace extends Collection{
+public abstract class ControlledTopLevel extends TopLevel{
 	
-	protected  Namespace(Model model,URI uri) throws SBOLGraphException
+	protected  ControlledTopLevel(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
+		RDFUtil.addType(resource, DataModel.TopLevel.uri);
 	}
 	
-	protected  Namespace(Resource resource)
+	protected  ControlledTopLevel(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}
@@ -21,7 +23,7 @@ public class Namespace extends Collection{
 	
 	@Override
 	public URI getResourceType() {
-		return DataModel.Namespace.uri;
+		return DataModel.TopLevel.uri;
 	}
 	
 }

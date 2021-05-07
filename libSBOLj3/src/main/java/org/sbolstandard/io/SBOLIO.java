@@ -1,17 +1,13 @@
 package org.sbolstandard.io;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import org.apache.commons.io.IOUtils;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
@@ -85,7 +81,7 @@ public class SBOLIO{
 		return topLevelResources;
 	}
 	
-	public static SBOLDocument readOld(String sbolData, String format)
+	/*public static SBOLDocument readOld(String sbolData, String format)
 	{
 		InputStream is=IOUtils.toInputStream(sbolData, Charset.defaultCharset());
 		Model model = ModelFactory.createDefaultModel();
@@ -101,7 +97,7 @@ public class SBOLIO{
 		model.read(is,null,format);
 		SBOLDocument doc=new SBOLDocument(model);
 		return doc;
-	}
+	}*/
 	
 	public static SBOLDocument read(File file, SBOLFormat format) throws FileNotFoundException
 	{
@@ -126,6 +122,7 @@ public class SBOLIO{
 		return read(uri, format.getFormat());
 	}
 	
+	
 	public static SBOLDocument read(URI uri, RDFFormat format) throws FileNotFoundException
 	{
 		Model model = RDFUtil.read(uri,format) ;
@@ -140,6 +137,13 @@ public class SBOLIO{
 		return doc;
 	}
 	
+	/*public static SBOLDocument read(String input) throws FileNotFoundException
+	{
+		Model model = RDFUtil.read(input, null) ;
+		SBOLDocument doc=new SBOLDocument(model);
+		return doc;
+	}*/
+	
 	public static SBOLDocument read(String input, SBOLFormat format) throws FileNotFoundException
 	{
 		return read(input, format.getFormat());
@@ -151,6 +155,13 @@ public class SBOLIO{
 		SBOLDocument doc=new SBOLDocument(model);
 		return doc;
 	}
+	
+	/*public static SBOLDocument read(InputStream stream) throws FileNotFoundException
+	{
+		Model model = RDFUtil.read(stream, null);
+		SBOLDocument doc=new SBOLDocument(model);
+		return doc;
+	}*/
 	
 	public static SBOLDocument read(InputStream stream, SBOLFormat format) throws FileNotFoundException
 	{

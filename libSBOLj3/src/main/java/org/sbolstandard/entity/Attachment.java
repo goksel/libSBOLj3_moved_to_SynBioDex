@@ -20,7 +20,7 @@ public class Attachment extends TopLevel{
 		super(model, uri);
 	}
 	
-	protected  Attachment(Resource resource)
+	protected  Attachment(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

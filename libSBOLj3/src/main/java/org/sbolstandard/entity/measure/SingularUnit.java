@@ -17,7 +17,7 @@ public class SingularUnit extends Unit{
 		super(model, uri);
 	}
 	
-	protected  SingularUnit(Resource resource)
+	protected  SingularUnit(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

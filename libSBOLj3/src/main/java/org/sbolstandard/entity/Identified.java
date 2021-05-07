@@ -4,6 +4,8 @@ import java.lang.reflect.Constructor;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
@@ -14,6 +16,7 @@ import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.measure.Measure;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
+import org.sbolstandard.util.SBOLUtil;
 import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.MeasureDataModel;
@@ -46,7 +49,7 @@ public abstract class Identified {
 		inferDisplayId(uri);
 	}
 	
-	protected Identified(Resource resource)
+	protected Identified(Resource resource) throws SBOLGraphException
 	{
 		this.uri=URI.create(resource.getURI());
 		this.resource=resource;
@@ -273,7 +276,7 @@ public abstract class Identified {
 		RDFUtil.addProperty(resource, property, value.getUri());
 	}
 	
-	public List<Object> getAnnotion(URI propertyURI)
+	public List<Object> getAnnotion(URI propertyURI) throws SBOLGraphException
 	{
 		ArrayList<Object> values=null;
         Property property=resource.getModel().getProperty(propertyURI.toString());
@@ -325,44 +328,64 @@ public abstract class Identified {
 		return result;
 	}
 	
-	private  void inferDisplayId(URI uri)
-	{
-		 /*List<URI> types=RDFUtil.getPropertiesAsURIs(this.resource, URI.create(RDF.type.getURI()));
-		 if (hasSBOLType(types))
-		 {*/
-			 if ((uri.getPath()!=null && uri.getPath().length()>0) || (uri.getFragment()!=null && uri.getFragment().length()>0))
-			 	{
-				 	displayId=getDisplayId();
-				 	if (displayId==null || displayId.length()==0)
-				 	{
-					 	String result=null;
-					 	String uriString=uri.toString();	
-					 	if (uriString.contains("://"))
-					 	{
-						 	int index=uriString.lastIndexOf("#");
-							int index2=uriString.lastIndexOf("/");
-							if (index2>index)
-							{
-								index=index2;
-							}
-							if (uriString.length()>index+1)
-							{
-								result= uriString.substring(index+1);
-							}
-							else
-							{
-								result=null;
-							}
-					 	}
-					 	if (result!=null)
-					 	{
-					 	 setDisplayId(result);	
-					 	}
-				 	}
-			 	}
-			}
-	//}
+	private void inferDisplayId(URI uri) throws SBOLGraphException {
+		displayId = getDisplayId();
+		if (StringUtils.isEmpty(displayId)) {
+			String result = null;
+			String uriString = uri.toString();
+
+			if (SBOLUtil.isURL(uriString))// .contains("://"))
+			{
+				String path=uri.getPath();
+				int index = path.lastIndexOf("/");
+				if (path.length() > index + 1) {
+					result = path.substring(index + 1);
+				} else {
+					result = null;
+				}
+				if (result != null) {
+					setDisplayId(result);
+				}
+				else
+				{
+					throw new SBOLGraphException("An SBOL URI MUST include the display id fragment. URI:" + uri);
+				}
+			}	
+		}
+	}
+	
+	
 }
+
+/*private void inferDisplayId(URI uri) {
+	if ((uri.getPath() != null && uri.getPath().length() > 0)|| (uri.getFragment() != null && uri.getFragment().length() > 0)) {
+		displayId = getDisplayId();
+		if (StringUtils.isEmpty(displayId)) {
+			String result = null;
+			String uriString = uri.toString();
+
+			if (SBOLUtil.isURL(uriString))// .contains("://"))
+			{
+				int index = uriString.lastIndexOf("#");
+				int index2 = uriString.lastIndexOf("/");
+				if (index2 > index) {
+					index = index2;
+				}
+				if (uriString.length() > index + 1) {
+					result = uriString.substring(index + 1);
+				} else {
+					result = null;
+				}
+			}
+			if (result != null) {
+				setDisplayId(result);
+			}
+		}
+	}
+}
+// }
+}
+*/
 
 /*protected <T extends Identified>  void addToList(Resource res, List<T> items, URI property, URI entityType) throws SBOLException, SBOLGraphException
 {

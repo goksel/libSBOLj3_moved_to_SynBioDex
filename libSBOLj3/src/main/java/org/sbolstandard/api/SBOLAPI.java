@@ -240,8 +240,7 @@ public class SBOLAPI {
 	    	appendComponent(document, parent, child, Orientation.inline);
 	    }
 	    
-	    //TODO:Remove
-	    public static SubComponent appendComponentRemove(SBOLDocument document, Component parent, Component child, Orientation orientation) throws SBOLGraphException 
+	    /*public static SubComponent appendComponentRemove(SBOLDocument document, Component parent, Component child, Orientation orientation) throws SBOLGraphException 
 	    {
 	    	SubComponent subComponent=parent.createSubComponent(child.getUri());
 	    	subComponent.setOrientation(orientation);
@@ -280,7 +279,7 @@ public class SBOLAPI {
 		    	}
 	    	}
 	    	return subComponent;
-	    }
+	    }*/
 	    
 	    
 	    public static SubComponent appendComponent(SBOLDocument document, Component parent, Component child, Orientation orientation) throws SBOLGraphException 
@@ -398,7 +397,7 @@ public class SBOLAPI {
 	    
 	    public static Component createComponent(SBOLDocument doc, URI uri, URI type, String name, String description, URI role) throws SBOLGraphException
 	    {
-	    	Component component=doc.createComponent(uri, Arrays.asList(type)); 
+	    	Component component=doc.createComponent(doc.getBaseURI(), uri, Arrays.asList(type)); 
 	    	component.setName(name);
 	    	component.setDescription(description);
 	        if (role!=null)
@@ -444,7 +443,7 @@ public class SBOLAPI {
 	    
 	    public static Sequence createSequence(SBOLDocument doc, URI uri, String name, String description, String sequence, Encoding encoding) throws SBOLGraphException
 	    {
-	        Sequence sequenceEntity=doc.createSequence(uri);
+	        Sequence sequenceEntity=doc.createSequence(doc.getBaseURI(), uri);
 	        sequenceEntity.setName(name);
 	        sequenceEntity.setDescription(description);   
 	        if (sequence!=null)
@@ -521,7 +520,7 @@ public class SBOLAPI {
 	    }
 	      
 		//TODO:Remove
-	    public static  List<ComponentReference> createComponentReference2(Component container, Component parent, Component child) throws SBOLGraphException
+	   /* public static  List<ComponentReference> createComponentReference2(Component container, Component parent, Component child) throws SBOLGraphException
 		{
 			List<ComponentReference> componentReferences=null;
 			List<SubComponent> subComponents=getSubComponents(parent, child);
@@ -538,7 +537,7 @@ public class SBOLAPI {
 				}
 			}
 			return componentReferences;
-		}
+		}*/
 	    
 	    public static  List<ComponentReference> createComponentReference(Component container, Component parent, Component child) throws SBOLGraphException
 	  		{

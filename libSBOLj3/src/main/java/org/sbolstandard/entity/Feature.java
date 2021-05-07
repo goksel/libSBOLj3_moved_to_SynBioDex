@@ -20,7 +20,7 @@ public abstract class Feature extends Identified{
 		super(model, uri);
 	}
 	
-	protected  Feature(Resource resource)
+	protected  Feature(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

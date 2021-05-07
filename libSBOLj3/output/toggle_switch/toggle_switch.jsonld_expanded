@@ -6,6 +6,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "GFP"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "GFP_protein"
   } ],
@@ -24,6 +27,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "IPTG"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "IPTG"
   } ],
@@ -38,6 +44,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "IPTG_LacI"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "IPTG_LacI"
@@ -84,6 +93,9 @@
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "LacI_producer"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "LacI producer"
@@ -379,6 +391,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "LacI"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "LacI_protein"
   } ],
@@ -416,6 +431,9 @@
     "@id" : "https://sbolstandard.org/examples/TetR_producer/Interaction1"
   }, {
     "@id" : "https://sbolstandard.org/examples/TetR_producer/Interaction3"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "@type" : [ "http://sbols.org/v3#Component" ],
   "http://sbols.org/v3#description" : [ {
@@ -662,6 +680,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "TetR"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "TetR_protein"
   } ],
@@ -680,6 +701,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "aTC"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "aTC"
   } ],
@@ -694,6 +718,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "atC_TetR"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "atC_TetR"
@@ -713,6 +740,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "gfp"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "gfp"
   } ],
@@ -730,6 +760,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "lacI"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "lacI"
@@ -749,6 +782,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "pLacI promoter"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "pLacI"
   } ],
@@ -766,6 +802,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "pTetR"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "pTetR"
@@ -785,6 +824,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "rbs"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "rbs_gfp"
   } ],
@@ -802,6 +844,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "rbs"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "rbs_lacI"
@@ -821,6 +866,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "rbs"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "rbs_tetR"
   } ],
@@ -838,6 +886,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "lacI terminator"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "ter_lacI"
@@ -857,6 +908,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "tetR terminator"
   } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "ter_tetR"
   } ],
@@ -874,6 +928,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "tetR"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "tetR"
@@ -896,6 +953,9 @@
     "@id" : "https://sbolstandard.org/examples/toggle_switch/ComponentReference1"
   }, {
     "@id" : "https://sbolstandard.org/examples/toggle_switch/SubComponent2"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "toggle_switch"

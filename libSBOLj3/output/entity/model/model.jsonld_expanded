@@ -1,13 +1,16 @@
 [ {
   "@id" : "https://sbolstandard.org/examples/model1",
-  "http://sbols.org/v3#language" : [ {
-    "@id" : "https://identifiers.org/edam:format_2585"
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org"
   } ],
   "http://sbols.org/v3#framework" : [ {
     "@id" : "https://identifiers.org/SBO:0000062"
   } ],
   "http://sbols.org/v3#source" : [ {
     "@id" : "http://virtualparts.org"
+  } ],
+  "http://sbols.org/v3#language" : [ {
+    "@id" : "https://identifiers.org/edam:format_2585"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "model1"
@@ -23,6 +26,9 @@
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "Toggle Switch"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000241"

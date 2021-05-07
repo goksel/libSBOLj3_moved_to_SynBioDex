@@ -6,6 +6,7 @@
     "displayId" : "LacI_producer",
     "hasFeature" : [ "https://sbolstandard.org/examples/LacI_producer/SubComponent1", "https://sbolstandard.org/examples/LacI_producer/SubComponent2", "https://sbolstandard.org/examples/LacI_producer/SubComponent3" ],
     "hasInterface" : "https://sbolstandard.org/examples/LacI_producer/Interface1",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "LacI produce",
     "role" : "SO:0000704",
     "type" : "SBO:0000251"
@@ -36,6 +37,7 @@
     "@type" : "sbol:Component",
     "description" : "LacI protein",
     "displayId" : "LacI_protein",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "LacI",
     "role" : "GO:0003700",
     "type" : "SBO:0000252"
@@ -44,6 +46,7 @@
     "@type" : "sbol:Component",
     "description" : "TetR protein",
     "displayId" : "TetR_protein",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "TetR",
     "role" : "GO:0003700",
     "type" : "SBO:0000252"
@@ -52,6 +55,7 @@
     "@type" : "sbol:Component",
     "description" : "aTC",
     "displayId" : "aTC",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "aTC",
     "role" : "CHEBI:35224",
     "type" : "SBO:0000247"
@@ -73,6 +77,10 @@
     },
     "name" : {
       "@id" : "http://sbols.org/v3#name"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
+      "@type" : "@id"
     },
     "type" : {
       "@id" : "http://sbols.org/v3#type",

@@ -15,7 +15,7 @@ public class EntireSequenceLocation extends Location {
 		super(model, uri);
 	}
 	
-	protected  EntireSequenceLocation(Resource resource)
+	protected  EntireSequenceLocation(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

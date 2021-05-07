@@ -5,6 +5,7 @@
     "description" : "M9 Glucose CAA growth media",
     "displayId" : "M9_Glucose_CAA",
     "hasFeature" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "M9 Glucose CAA",
     "type" : "SBO:0000241"
   }, {
@@ -16,7 +17,7 @@
     "type" : "SBO:0000247"
   }, {
     "@id" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1",
-    "@type" : "om:Measure",
+    "@type" : [ "sbol:Identified", "om:Measure" ],
     "displayId" : "measure1",
     "hasNumericalValue" : "0.1",
     "hasUnit" : "om:millimolePerLitre"
@@ -31,6 +32,10 @@
     },
     "name" : {
       "@id" : "http://sbols.org/v3#name"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
+      "@type" : "@id"
     },
     "type" : {
       "@id" : "http://sbols.org/v3#type",

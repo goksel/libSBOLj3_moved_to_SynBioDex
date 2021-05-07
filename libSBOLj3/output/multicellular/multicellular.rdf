@@ -32,6 +32,7 @@
             <sbol:displayId>ComponentReference2</sbol:displayId>
          </sbol:ComponentReference>
       </sbol:hasFeature>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
       <sbol:description>Multicellular System</sbol:description>
       <sbol:hasConstraint>
@@ -73,6 +74,7 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000316"/>
       <sbol:name>luxI</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>luxI</sbol:displayId>
       <sbol:description>luxI coding sequence</sbol:description>
    </sbol:Component>
@@ -80,12 +82,14 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000139"/>
       <sbol:name>rbs</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>rbs_luxI</sbol:displayId>
       <sbol:description>RBS</sbol:description>
    </sbol:Component>
    <sbol:Component rdf:about="GFP_protein">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
       <sbol:name>GFP</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>GFP_protein</sbol:displayId>
       <sbol:description>GFP</sbol:description>
    </sbol:Component>
@@ -93,6 +97,7 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
       <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
       <sbol:name>LuxR_AHL</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>LuxR_AHL</sbol:displayId>
       <sbol:description>LuxR_AHL complex</sbol:description>
    </sbol:Component>
@@ -100,6 +105,7 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000139"/>
       <sbol:name>rbs</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>rbs_gfp</sbol:displayId>
       <sbol:description>RBS</sbol:description>
    </sbol:Component>
@@ -107,6 +113,7 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000141"/>
       <sbol:name>gfp terminator</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>ter_gfp</sbol:displayId>
       <sbol:description>Terminator</sbol:description>
    </sbol:Component>
@@ -114,6 +121,7 @@
       <sbol:type rdf:resource="https://identifiers.org/GO:0005623"/>
       <sbol:role rdf:resource="https://identifiers.org/SBO:0000290"/>
       <sbol:name>OrganismA</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>OrganismA</sbol:displayId>
       <sbol:description>Organism A</sbol:description>
    </sbol:Component>
@@ -253,6 +261,7 @@
             <sbol:displayId>SubComponent8</sbol:displayId>
          </sbol:SubComponent>
       </sbol:hasFeature>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>AHL_receiver</sbol:displayId>
       <sbol:hasFeature rdf:resource="AHL_receiver/SubComponent9"/>
       <sbol:hasFeature>
@@ -311,6 +320,7 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000141"/>
       <sbol:name>luxI terminator</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>ter_luxI</sbol:displayId>
       <sbol:description>Terminator</sbol:description>
    </sbol:Component>
@@ -318,6 +328,7 @@
       <sbol:type rdf:resource="https://identifiers.org/GO:0005623"/>
       <sbol:role rdf:resource="https://identifiers.org/SBO:0000290"/>
       <sbol:name>OrganismB</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>OrganismB</sbol:displayId>
       <sbol:description>Organism B</sbol:description>
    </sbol:Component>
@@ -371,11 +382,13 @@
             <sbol:displayId>Constraint2</sbol:displayId>
          </sbol:Constraint>
       </sbol:hasConstraint>
+      <sbol:hasNamespace rdf:resource="/examples"/>
    </sbol:Component>
    <sbol:Component rdf:about="pConstLuxR">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000167"/>
       <sbol:name>pLuxR</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>pConstLuxR</sbol:displayId>
       <sbol:description>Constituve promoter</sbol:description>
    </sbol:Component>
@@ -442,9 +455,11 @@
          </sbol:SubComponent>
       </sbol:hasFeature>
       <sbol:hasFeature rdf:resource="AHL_producer/SubComponent5"/>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:name>AHL producer</sbol:name>
    </sbol:Component>
    <sbol:Component rdf:about="SenderSystem">
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="SenderSystem/SubComponent1">
             <sbol:instanceOf rdf:resource="OrganismA"/>
@@ -499,6 +514,7 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000141"/>
       <sbol:name>luxR terminator</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>ter_luxR</sbol:displayId>
       <sbol:description>Terminator</sbol:description>
    </sbol:Component>
@@ -506,6 +522,7 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000247"/>
       <sbol:role rdf:resource="https://identifiers.org/CHEBI:35224"/>
       <sbol:name>AHL</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>AHL</sbol:displayId>
       <sbol:description>AHL</sbol:description>
    </sbol:Component>
@@ -513,13 +530,15 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000167"/>
       <sbol:name>pConstLuxI</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>pConstLuxI</sbol:displayId>
-      <sbol:description>Constituve promoter</sbol:description>
+      <sbol:description>Constitutive promoter</sbol:description>
    </sbol:Component>
    <sbol:Component rdf:about="pLuxR">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000167"/>
       <sbol:name>pLuxR</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>pLuxR</sbol:displayId>
       <sbol:description>LuxR inducible promoter</sbol:description>
    </sbol:Component>
@@ -527,6 +546,7 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000316"/>
       <sbol:name>luxR</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>luxR</sbol:displayId>
       <sbol:description>luxR coding sequence</sbol:description>
    </sbol:Component>
@@ -534,6 +554,7 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000139"/>
       <sbol:name>rbs</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>rbs_luxR</sbol:displayId>
       <sbol:description>RBS</sbol:description>
    </sbol:Component>
@@ -541,6 +562,7 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
       <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
       <sbol:name>LuxR_protein</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>LuxR_protein</sbol:displayId>
       <sbol:description>LuxR</sbol:description>
    </sbol:Component>
@@ -548,6 +570,7 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000316"/>
       <sbol:name>gfp</sbol:name>
+      <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>gfp</sbol:displayId>
       <sbol:description>gfp coding sequence</sbol:description>
    </sbol:Component>

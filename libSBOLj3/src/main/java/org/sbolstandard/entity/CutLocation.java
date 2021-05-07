@@ -17,7 +17,7 @@ public class CutLocation extends Location {
 		super(model, uri);
 	}
 	
-	protected  CutLocation(Resource resource)
+	protected  CutLocation(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

@@ -18,7 +18,7 @@ public class Interaction extends Identified{
 		super(model, uri);
 	}
 	
-	protected  Interaction(Resource resource)
+	protected  Interaction(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

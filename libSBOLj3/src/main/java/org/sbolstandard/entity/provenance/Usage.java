@@ -4,12 +4,12 @@ import java.net.URI;
 import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.sbolstandard.entity.Identified;
+import org.sbolstandard.entity.ControlledIdentified;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ProvenanceDataModel;
 
-public class Usage extends Identified{
+public class Usage extends ControlledIdentified{
 	private URI entity=null;
 	private List<URI> roles=null;
 		
@@ -19,7 +19,7 @@ public class Usage extends Identified{
 		super(model, uri);
 	}
 	
-	protected  Usage(Resource resource)
+	protected  Usage(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}
