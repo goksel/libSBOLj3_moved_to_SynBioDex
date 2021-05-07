@@ -1,36 +1,12 @@
 [ {
-  "@id" : "http://parts.igem.org/aboutigem",
-  "http://parts.igem.org/website" : [ {
-    "@value" : "http://parts.igem.org/Main_Page"
-  } ],
-  "http://sbols.org/v3#description" : [ {
-    "@value" : "Registry of Standard Biological Parts"
-  } ],
-  "http://sbols.org/v3#name" : [ {
-    "@value" : "iGEM Registry"
-  } ],
-  "@type" : [ "http://sbols.org/v3#TopLevel", "http://parts.igem.org/Repository" ],
-  "http://sbols.org/v3#displayId" : [ {
-    "@value" : "aboutigem"
-  } ]
-}, {
-  "@id" : "http://synbiohub.org/aboutsynbiohub",
-  "http://sbols.org/v3#name" : [ {
-    "@value" : "SynBioHub"
-  } ],
-  "@type" : [ "http://sbols.org/v3#TopLevel", "http://parts.igem.org/Repository" ],
-  "http://sbols.org/v3#displayId" : [ {
-    "@value" : "aboutsynbiohub"
-  } ]
-}, {
   "@id" : "https://sbolstandard.org/examples/BBa_J23119",
+  "http://parts.igem.org/belongsTo" : [ {
+    "@id" : "https://sbolstandard.org/examples/iGEMRepository"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/SynBioHubRepository"
+  } ],
   "http://sbols.org/v3#role" : [ {
     "@id" : "https://identifiers.org/SO:0000167"
-  } ],
-  "http://parts.igem.org/belongsTo" : [ {
-    "@id" : "http://synbiohub.org/aboutsynbiohub"
-  }, {
-    "@id" : "http://parts.igem.org/aboutigem"
   } ],
   "http://sbols.org/v3#description" : [ {
     "@value" : "Parts J23100 through J23119 are a family of constitutive promoter parts isolated from a small combinatorial library."
@@ -76,25 +52,9 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "BBa_J23119_experience"
   } ],
-  "@type" : [ "http://sbols.org/v3#Identified", "http://parts.igem.org/Information" ],
+  "@type" : [ "http://parts.igem.org/Information", "http://sbols.org/v3#Identified" ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "information1"
-  } ]
-}, {
-  "@id" : "https://sbolstandard.org/examples/BBa_J23119/twinParts",
-  "http://parts.igem.org/twinURL" : [ {
-    "@id" : "http://parts.igem.org/wiki/index.php?title=Part:BBa_M36800"
-  }, {
-    "@id" : "http://parts.igem.org/wiki/index.php?title=Part:BBa_M1638"
-  }, {
-    "@id" : "http://parts.igem.org/wiki/index.php?title=Part:BBa_J72073"
-  } ],
-  "http://sbols.org/v3#name" : [ {
-    "@value" : "twin parts"
-  } ],
-  "@type" : [ "http://sbols.org/v3#Identified", "http://parts.igem.org/TwinPartUsage" ],
-  "http://sbols.org/v3#displayId" : [ {
-    "@value" : "twinParts"
   } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/BBa_J23119/usage1",
@@ -111,7 +71,7 @@
     "@value" : "442"
   } ],
   "http://parts.igem.org/twinURLs" : [ {
-    "@id" : "https://sbolstandard.org/examples/BBa_J23119/twinParts"
+    "@id" : "https://sbolstandard.org/examples/BBa_J23119/usage1/twinParts"
   } ],
   "http://sbols.org/v3#description" : [ {
     "@value" : "BBa_J23119 usage statistics"
@@ -122,5 +82,51 @@
   } ],
   "http://parts.igem.org/inStock" : [ {
     "@value" : "true"
+  } ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/BBa_J23119/usage1/twinParts",
+  "http://parts.igem.org/twinURL" : [ {
+    "@id" : "http://parts.igem.org/wiki/index.php?title=Part:BBa_M36800"
+  }, {
+    "@id" : "http://parts.igem.org/wiki/index.php?title=Part:BBa_M1638"
+  }, {
+    "@id" : "http://parts.igem.org/wiki/index.php?title=Part:BBa_J72073"
+  } ],
+  "http://sbols.org/v3#name" : [ {
+    "@value" : "twin parts"
+  } ],
+  "@type" : [ "http://parts.igem.org/TwinPartUsage", "http://sbols.org/v3#Identified" ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "twinParts"
+  } ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/SynBioHubRepository",
+  "http://sbols.org/v3#name" : [ {
+    "@value" : "SynBioHub"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
+  "@type" : [ "http://parts.igem.org/Repository", "http://sbols.org/v3#TopLevel" ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "SynBioHubRepository"
+  } ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/iGEMRepository",
+  "http://parts.igem.org/website" : [ {
+    "@id" : "http://parts.igem.org/Main_Page"
+  } ],
+  "http://sbols.org/v3#description" : [ {
+    "@value" : "Registry of Standard Biological Parts"
+  } ],
+  "http://sbols.org/v3#name" : [ {
+    "@value" : "iGEM Registry"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
+  "@type" : [ "http://parts.igem.org/Repository", "http://sbols.org/v3#TopLevel" ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "iGEMRepository"
   } ]
 } ]

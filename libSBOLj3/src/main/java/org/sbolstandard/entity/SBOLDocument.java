@@ -16,6 +16,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.vocabulary.RDF;
 import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.entity.provenance.Agent;
 import org.sbolstandard.util.RDFUtil;
@@ -606,6 +607,29 @@ public class SBOLDocument {
 		return prefixedUnits;
 	}
 	
+	public TopLevelMetadata createMetadata(URI namespace, URI uri, URI dataType) throws SBOLGraphException
+	{
+		if (dataType==null)
+		{
+			throw new SBOLGraphException("Application specific types MUST have a datatype property specified. " + "Metadata URI:" + uri);
+		}
+		TopLevelMetadata metadata=new TopLevelMetadata(this.model, uri);
+		metadata.addAnnotationType(dataType);
+		metadata.setNamespace(namespace);
+		return metadata;
+	}
+	
+	public TopLevelMetadata createMetadata(String displayId, URI dataType) throws SBOLGraphException
+	{
+		if (this.getBaseURI()!=null)
+		{
+			return createMetadata(this.getBaseURI(), SBOLAPI.append(this.getBaseURI(), displayId), dataType);
+		}
+		else
+		{
+			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
+		}
+	}
 
 	
 	/*public Measure createMeasure(URI uri, float value, URI unit) throws SBOLGraphException {

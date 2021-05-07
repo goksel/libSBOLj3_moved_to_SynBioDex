@@ -10,6 +10,8 @@ import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.Identified;
 import org.sbolstandard.entity.Metadata;
 import org.sbolstandard.entity.SBOLDocument;
+import org.sbolstandard.entity.TopLevel;
+import org.sbolstandard.entity.TopLevelMetadata;
 import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
@@ -32,56 +34,47 @@ public class AnnotationTest extends TestCase {
         part.addAnnotion(igem.local("group"), "iGEM2006_Berkeley");
         part.addAnnotion(igem.local("experienceURL"), URI.create("http://parts.igem.org/Part:BBa_J23119:Experience"));
         
-        Metadata igemInf=new Metadata(doc, SBOLAPI.append(part.getUri(), "information1"), igem.local("Information"));
+        //Internal metadata
+        Identified igemInf=part.createMetadata("information1", igem.local("Information"), igem.local("hasInformation"));
         igemInf.setName("BBa_J23119_experience");
         igemInf.setDescription("The experience page captures users' experience using the BBa_J23119 part");
         igemInf.addAnnotion(igem.local("sigmaFactor"), "//rnap/prokaryote/ecoli/sigma70");
         igemInf.addAnnotion(igem.local("regulation"), "//regulation/constitutive");
         igemInf.addAnnotion(igem.local("regulation"), "//regulation/second_regulation");
-        part.addAnnotion(igem.local("hasInformation"), igemInf);
         
-        
-        Metadata igemInf2=new Metadata(doc, SBOLAPI.append(part.getUri(), "usage1"), igem.local("IGEMUsage"));
+        Identified igemInf2=part.createMetadata("usage1", igem.local("IGEMUsage"), igem.local("hasUsage"));
         igemInf2.setName("BBa_J23119_usage");
         igemInf2.setDescription("BBa_J23119 usage statistics");
         igemInf2.addAnnotion(igem.local("inStock"), "true");
         igemInf2.addAnnotion(igem.local("registryStar"), "1");
         igemInf2.addAnnotion(igem.local("uses"), "442");
         igemInf2.addAnnotion(igem.local("twins"), "7");
-        
-        Metadata igemInfInternal=new Metadata(doc, SBOLAPI.append(part.getUri(), "twinParts"), igem.local("TwinPartUsage"));
+     
+        //Metadata within metadata
+        Identified igemInfInternal=igemInf2.createMetadata("twinParts", igem.local("TwinPartUsage"), igem.local("twinURLs"));
         igemInfInternal.setName("twin parts");
         igemInfInternal.addAnnotion(igem.local("twinURL"), URI.create("http://parts.igem.org/wiki/index.php?title=Part:BBa_J72073"));
         igemInfInternal.addAnnotion(igem.local("twinURL"), URI.create("http://parts.igem.org/wiki/index.php?title=Part:BBa_M1638"));
         igemInfInternal.addAnnotion(igem.local("twinURL"), URI.create("http://parts.igem.org/wiki/index.php?title=Part:BBa_M36800"));
 
-        igemInf2.addAnnotion(igem.local("twinURLs"), igemInfInternal);
-        
-        part.addAnnotion(igem.local("hasUsage"), igemInf2);
-       
-        
-        Metadata igemInf4=new Metadata(doc, URI.create("http://parts.igem.org/aboutigem"),igem.local("Repository"),true );
+        //TopLevel metadata
+        TopLevel igemInf4=doc.createMetadata("iGEMRepository", igem.local("Repository"));
         igemInf4.setName("iGEM Registry");
         igemInf4.setDescription("Registry of Standard Biological Parts");
-        igemInf4.addAnnotion(igem.local("website"), "http://parts.igem.org/Main_Page");
+        igemInf4.addAnnotion(igem.local("website"), URI.create("http://parts.igem.org/Main_Page"));
+        
+        TopLevel igemInf5=doc.createMetadata("SynBioHubRepository", igem.local("Repository"));
+        igemInf5.setName("SynBioHub");
+        
+        part.addAnnotion(igem.local("belongsTo"), igemInf5);
         part.addAnnotion(igem.local("belongsTo"), igemInf4);
         
-        Metadata igemInf5=new Metadata(doc, URI.create("http://synbiohub.org/aboutsynbiohub"),igem.local("Repository"),true );
-        igemInf5.setName("SynBioHub");
-        part.addAnnotion(igem.local("belongsTo"), igemInf5);
-        
         TestUtil.serialise(doc, "entity/annotation", "annotation");
-        
-        
    
-        
         String output=SBOLIO.write(doc, SBOLFormat.TURTLE);
         System.out.println(output);
         SBOLDocument doc2=SBOLIO.read(output, SBOLFormat.TURTLE); 
-      //  doc2.addTopLevelResourceType(igem.local("Repository"));
-        
-       
-        
+            
         output=SBOLIO.write(doc2, SBOLFormat.TURTLE);
         System.out.println(output);
          
@@ -117,6 +110,18 @@ public class AnnotationTest extends TestCase {
 			 System.out.println("   TwinPartUsage:");
 			 printMetadata(metadata,6);
 			 System.out.println("      twinURL:" + twinPartUsageMetadata.getAnnotion(igem.local("twinURL")));
+		 }
+		 
+		 List<Object> repositoryMetadataList=identified.getAnnotion(igem.local("belongsTo"));
+		 System.out.println("belongsTo:");
+		 if (repositoryMetadataList!=null)
+		 {
+			 for (Object o: repositoryMetadataList)
+			 {
+				 Identified repositoryMetadata=(Identified) o;
+				 System.out.println("  " + repositoryMetadata.getName());
+				 
+			 }
 		 }
 	}
 

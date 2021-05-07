@@ -54,10 +54,10 @@
   "http://sbols.org/v3#type" : [ {
     "@id" : "http://sbols.org/v3#design"
   } ],
-  "http://www.w3.org/ns/prov#endedAtTime" : [ {
-    "@value" : "2020-08-30T18:18:15.673Z"
-  } ],
   "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.w3.org/ns/prov#Activity" ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@value" : "2019-07-29T16:00:20.683Z"
+  } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "Codon optimization activity"
   } ],
@@ -69,11 +69,11 @@
   }, {
     "@id" : "https://sbolstandard.org/examples/codon_optimization_activity/Usage1"
   } ],
-  "http://www.w3.org/ns/prov#startedAtTime" : [ {
-    "@value" : "2019-07-29T18:18:15.673Z"
-  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "codon_optimization_activity"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@value" : "2020-08-30T16:00:20.683Z"
   } ],
   "http://www.w3.org/ns/prov#qualifiedAssociation" : [ {
     "@id" : "https://sbolstandard.org/examples/codon_optimization_activity/Association1"
@@ -89,7 +89,7 @@
   "http://www.w3.org/ns/prov#hadPlan" : [ {
     "@id" : "https://sbolstandard.org/examples/CodonOptimisationProtocol"
   } ],
-  "http://www.w3.org/ns/prov#hadAgent" : [ {
+  "http://www.w3.org/ns/prov#agent" : [ {
     "@id" : "https://sbolstandard.org/examples/CodonOptimiserSoftware"
   } ],
   "@type" : [ "http://sbols.org/v3#Identified", "http://www.w3.org/ns/prov#Association" ],

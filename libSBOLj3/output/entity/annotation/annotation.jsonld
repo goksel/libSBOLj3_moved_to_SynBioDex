@@ -1,20 +1,8 @@
 {
   "@graph" : [ {
-    "@id" : "igem:aboutigem",
-    "@type" : [ "sbol:TopLevel", "igem:Repository" ],
-    "website" : "http://parts.igem.org/Main_Page",
-    "description" : "Registry of Standard Biological Parts",
-    "displayId" : "aboutigem",
-    "name" : "iGEM Registry"
-  }, {
-    "@id" : "http://synbiohub.org/aboutsynbiohub",
-    "@type" : [ "sbol:TopLevel", "igem:Repository" ],
-    "displayId" : "aboutsynbiohub",
-    "name" : "SynBioHub"
-  }, {
     "@id" : "https://sbolstandard.org/examples/BBa_J23119",
     "@type" : "sbol:Component",
-    "belongsTo" : [ "http://synbiohub.org/aboutsynbiohub", "igem:aboutigem" ],
+    "belongsTo" : [ "https://sbolstandard.org/examples/iGEMRepository", "https://sbolstandard.org/examples/SynBioHubRepository" ],
     "experienceURL" : "igem:Part:BBa_J23119:Experience",
     "group" : "iGEM2006_Berkeley",
     "hasInformation" : "https://sbolstandard.org/examples/BBa_J23119/information1",
@@ -27,45 +15,53 @@
     "type" : "SBO:0000251"
   }, {
     "@id" : "https://sbolstandard.org/examples/BBa_J23119/information1",
-    "@type" : [ "sbol:Identified", "igem:Information" ],
+    "@type" : [ "igem:Information", "sbol:Identified" ],
     "regulation" : [ "//regulation/second_regulation", "//regulation/constitutive" ],
     "sigmaFactor" : "//rnap/prokaryote/ecoli/sigma70",
     "description" : "The experience page captures users' experience using the BBa_J23119 part",
     "displayId" : "information1",
     "name" : "BBa_J23119_experience"
   }, {
-    "@id" : "https://sbolstandard.org/examples/BBa_J23119/twinParts",
-    "@type" : [ "sbol:Identified", "igem:TwinPartUsage" ],
-    "twinURL" : [ "igem:wiki/index.php?title=Part:BBa_M36800", "igem:wiki/index.php?title=Part:BBa_M1638", "igem:wiki/index.php?title=Part:BBa_J72073" ],
-    "displayId" : "twinParts",
-    "name" : "twin parts"
-  }, {
     "@id" : "https://sbolstandard.org/examples/BBa_J23119/usage1",
     "@type" : [ "sbol:Identified", "igem:IGEMUsage" ],
     "inStock" : "true",
     "registryStar" : "1",
-    "twinURLs" : "https://sbolstandard.org/examples/BBa_J23119/twinParts",
+    "twinURLs" : "https://sbolstandard.org/examples/BBa_J23119/usage1/twinParts",
     "twins" : "7",
     "uses" : "442",
     "description" : "BBa_J23119 usage statistics",
     "displayId" : "usage1",
     "name" : "BBa_J23119_usage"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/BBa_J23119/usage1/twinParts",
+    "@type" : [ "igem:TwinPartUsage", "sbol:Identified" ],
+    "twinURL" : [ "igem:wiki/index.php?title=Part:BBa_M36800", "igem:wiki/index.php?title=Part:BBa_M1638", "igem:wiki/index.php?title=Part:BBa_J72073" ],
+    "displayId" : "twinParts",
+    "name" : "twin parts"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/SynBioHubRepository",
+    "@type" : [ "igem:Repository", "sbol:TopLevel" ],
+    "displayId" : "SynBioHubRepository",
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "name" : "SynBioHub"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/iGEMRepository",
+    "@type" : [ "igem:Repository", "sbol:TopLevel" ],
+    "website" : "igem:Main_Page",
+    "description" : "Registry of Standard Biological Parts",
+    "displayId" : "iGEMRepository",
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "name" : "iGEM Registry"
   } ],
   "@context" : {
-    "website" : {
-      "@id" : "http://parts.igem.org/website"
-    },
-    "description" : {
-      "@id" : "http://sbols.org/v3#description"
-    },
-    "name" : {
-      "@id" : "http://sbols.org/v3#name"
-    },
     "displayId" : {
       "@id" : "http://sbols.org/v3#displayId"
     },
     "registryStar" : {
       "@id" : "http://parts.igem.org/registryStar"
+    },
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
     },
     "uses" : {
       "@id" : "http://parts.igem.org/uses"
@@ -74,18 +70,29 @@
       "@id" : "http://parts.igem.org/twinURLs",
       "@type" : "@id"
     },
+    "description" : {
+      "@id" : "http://sbols.org/v3#description"
+    },
     "twins" : {
       "@id" : "http://parts.igem.org/twins"
     },
     "inStock" : {
       "@id" : "http://parts.igem.org/inStock"
     },
-    "role" : {
-      "@id" : "http://sbols.org/v3#role",
+    "website" : {
+      "@id" : "http://parts.igem.org/website",
+      "@type" : "@id"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
       "@type" : "@id"
     },
     "belongsTo" : {
       "@id" : "http://parts.igem.org/belongsTo",
+      "@type" : "@id"
+    },
+    "role" : {
+      "@id" : "http://sbols.org/v3#role",
       "@type" : "@id"
     },
     "hasInformation" : {
@@ -98,10 +105,6 @@
     },
     "hasUsage" : {
       "@id" : "http://parts.igem.org/hasUsage",
-      "@type" : "@id"
-    },
-    "hasNamespace" : {
-      "@id" : "http://sbols.org/v3#hasNamespace",
       "@type" : "@id"
     },
     "experienceURL" : {

@@ -12,6 +12,7 @@ public class Metadata extends Identified{
 	
 	protected  Metadata(org.apache.jena.rdf.model.Model model,URI uri) throws SBOLGraphException
 	{
+		//super(model, uri, dataType);
 		super(model, uri);
 	}
 	
@@ -20,7 +21,7 @@ public class Metadata extends Identified{
 		super(resource);
 	}
 	
-	public Metadata(SBOLDocument doc, URI uri, URI dataType) throws SBOLGraphException
+	/*protected Metadata(SBOLDocument doc, URI uri, URI dataType) throws SBOLGraphException
 	{
 		this(doc, uri,dataType,false);
 		if (dataType==null)
@@ -29,7 +30,7 @@ public class Metadata extends Identified{
 		}	
 	}
 	
-	public Metadata(SBOLDocument doc, URI uri, URI dataType, boolean isTopLevel) throws SBOLGraphException
+	protected Metadata(SBOLDocument doc, URI uri, URI dataType, boolean isTopLevel) throws SBOLGraphException
 	{
 		super(doc.model,uri,dataType);
 		if (isTopLevel)
@@ -42,11 +43,11 @@ public class Metadata extends Identified{
 		{
 			RDFUtil.addType(resource, DataModel.Identified.uri);
 		}
-	}
+	}*/
 
 	@Override
 	public URI getResourceType() {
-		return null;
+		return DataModel.Identified.uri;
 	}
 	
 	

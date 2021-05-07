@@ -146,7 +146,7 @@
      ] ,
     "http://www.w3.org/ns/prov#endedAtTime" : [ { 
       "type" : "literal" ,
-      "value" : "2020-08-30T18:18:15.673Z"
+      "value" : "2020-08-30T16:00:20.683Z"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
@@ -160,7 +160,7 @@
      ] ,
     "http://www.w3.org/ns/prov#startedAtTime" : [ { 
       "type" : "literal" ,
-      "value" : "2019-07-29T18:18:15.673Z"
+      "value" : "2019-07-29T16:00:20.683Z"
     }
      ] ,
     "http://sbols.org/v3#hasNamespace" : [ { 
@@ -243,14 +243,14 @@
   }
    ,
   "https://sbolstandard.org/examples/codon_optimization_activity/Association1" : { 
-    "http://www.w3.org/ns/prov#hadAgent" : [ { 
-      "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/CodonOptimiserSoftware"
-    }
-     ] ,
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
       "value" : "Association1"
+    }
+     ] ,
+    "http://www.w3.org/ns/prov#agent" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples/CodonOptimiserSoftware"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 

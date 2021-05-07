@@ -56,7 +56,6 @@ public abstract class TopLevel extends Identified {
 	}
 
 	public void setNamespace(URI namespace) {
-		
 		String uriString=namespace.toString();
 		if (SBOLUtil.isURL(uriString))
 		{
