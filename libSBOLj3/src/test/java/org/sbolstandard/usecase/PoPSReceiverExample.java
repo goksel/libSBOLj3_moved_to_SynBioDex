@@ -1,14 +1,13 @@
 package org.sbolstandard.usecase;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
-
 import org.sbolstandard.TestUtil;
 import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.SBOLDocument;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.InteractionType;
@@ -51,18 +50,21 @@ public class PoPSReceiverExample extends TestCase {
         SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation),popsReceiver, pLuxR, Arrays.asList(ParticipationRole.Stimulated), LuxR_protein, Arrays.asList(ParticipationRole.Stimulator));
         SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation),popsReceiver, pTetR, Arrays.asList(ParticipationRole.Stimulated), TetR_protein, Arrays.asList(ParticipationRole.Stimulator));
         
-        String output=SBOLIO.write(doc, "Turtle");
+        String output=SBOLIO.write(doc, SBOLFormat.TURTLE);
         System.out.print(output);
         
-        SBOLDocument doc2=SBOLIO.read(output, "Turtle"); 
-        output=SBOLIO.write(doc2, "RDF/XML-ABBREV");
+        SBOLDocument doc2=SBOLIO.read(output, SBOLFormat.TURTLE); 
+        output=SBOLIO.write(doc2, SBOLFormat.RDFXML);
         
         System.out.print(output);
         
         TestUtil.serialise(doc2, "BBa_F2620_PoPSReceiver", "BBa_F2620_PoPSReceiver");     
         
 
-        TestUtil.assertReadWrite(doc);    
+        TestUtil.assertReadWrite(doc); 
+        
+        System.out.print(SBOLIO.write(doc2, SBOLFormat.JSONLD));
+        
         System.out.println("done");   
     }
     

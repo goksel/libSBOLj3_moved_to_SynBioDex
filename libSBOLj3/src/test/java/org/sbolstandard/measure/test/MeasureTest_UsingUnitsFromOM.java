@@ -8,17 +8,12 @@ import org.sbolstandard.TestUtil;
 import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.ExternallyDefined;
-import org.sbolstandard.entity.Model;
 import org.sbolstandard.entity.SBOLDocument;
-import org.sbolstandard.entity.measure.Measure;
-import org.sbolstandard.entity.provenance.Agent;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.vocabulary.ComponentType;
-import org.sbolstandard.vocabulary.ModelFramework;
-import org.sbolstandard.vocabulary.ModelLanguage;
-import org.sbolstandard.vocabulary.Role;
 
 import junit.framework.TestCase;
 
@@ -29,15 +24,15 @@ public class MeasureTest_UsingUnitsFromOM extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component media=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "M9_Glucose_CAA"), ComponentType.FunctionalEntity.getUrl(), "M9 Glucose CAA", "M9 Glucose CAA growth media", null);
+        Component media=SBOLAPI.createComponent(doc, "M9_Glucose_CAA", ComponentType.FunctionalEntity.getUrl(), "M9 Glucose CAA", "M9 Glucose CAA growth media", null);
         ExternallyDefined CaCl2=media.createExternallyDefined(Arrays.asList(ComponentType.SimpleChemical.getUrl()), URINameSpace.CHEBI.local("3312"));
         
         URI milliMolePerLiter=URINameSpace.OM.local("millimolePerLitre");
-        Measure measure=CaCl2.createMeasure(SBOLAPI.append(CaCl2.getUri(), "measure1"), 0.1f, milliMolePerLiter);
+        CaCl2.createMeasure(SBOLAPI.append(CaCl2.getUri(), "measure1"), 0.1f, milliMolePerLiter);
         
         TestUtil.serialise(doc, "measurement_entity/measurement_using_units_From_OM", "measurement_using_units_From_OM");
       
-        System.out.println(SBOLIO.write(doc, "Turtle"));
+        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         
         TestUtil.assertReadWrite(doc);
     }

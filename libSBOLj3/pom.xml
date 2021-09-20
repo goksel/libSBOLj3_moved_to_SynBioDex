@@ -5,7 +5,7 @@
 	<groupId>org.sbolstandard</groupId>
 	<artifactId>libSBOLj3</artifactId>
 	<packaging>jar</packaging>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 	<name>libSBOLj3</name>
 	<url>https://github.com/goksel/libSBOLj3</url>
 	<issueManagement>
@@ -16,24 +16,36 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13</version>
+			<version>4.13.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.jena</groupId>
 			<artifactId>jena-base</artifactId>
-			<version>3.14.0</version>
+			<version>3.17.0</version>
+		</dependency>
+				<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>jena-core</artifactId>
+			<version>3.17.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.jena/jena -->
+		<dependency>
+		    <groupId>org.apache.jena</groupId>
+		    <artifactId>jena</artifactId>
+		    <version>3.17.0</version>
+		    <type>pom</type>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.jena</groupId>
 			<artifactId>jena-arq</artifactId>
-			<version>3.14.0</version>
+			<version>3.17.0</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.6</version>
+			<version>2.7</version>
 		</dependency>
 
 	</dependencies>

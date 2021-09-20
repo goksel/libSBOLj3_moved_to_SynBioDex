@@ -1,27 +1,20 @@
 package org.sbolstandard.usecase;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 import org.sbolstandard.TestUtil;
 import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Component;
-import org.sbolstandard.entity.ComponentReference;
 import org.sbolstandard.entity.Interaction;
 import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.entity.SubComponent;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ComponentType;
-import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.InteractionType;
 import org.sbolstandard.vocabulary.ParticipationRole;
-import org.sbolstandard.vocabulary.RestrictionType;
 import org.sbolstandard.vocabulary.Role;
 
 import junit.framework.TestCase;
@@ -123,11 +116,11 @@ public class ToggleSwitch extends TestCase {
         
       
         
-        String output=SBOLIO.write(doc, "Turtle");
+        String output=SBOLIO.write(doc, SBOLFormat.TURTLE);
         System.out.print(output);
         
-        SBOLDocument doc2=SBOLIO.read(output, "Turtle"); 
-        output=SBOLIO.write(doc2, "RDF/XML-ABBREV");
+        SBOLDocument doc2=SBOLIO.read(output, SBOLFormat.TURTLE); 
+        output=SBOLIO.write(doc2, SBOLFormat.RDFXML);
         System.out.print(output);
         
         TestUtil.serialise(doc2, "toggle_switch", "toggle_switch");     

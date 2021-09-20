@@ -1,8 +1,9 @@
 {
-  "@id" : "CodonOptimisationProtocol",
-  "@type" : "prov:Plan",
+  "@id" : "https://sbolstandard.org/examples/CodonOptimisationProtocol",
+  "@type" : [ "sbol:TopLevel", "prov:Plan" ],
   "description" : "Optimisation protocol to improve the translation of mRNAs.",
   "displayId" : "CodonOptimisationProtocol",
+  "hasNamespace" : "https://sbolstandard.org/examples",
   "name" : "Codon Optimisation Protocol",
   "@context" : {
     "description" : {
@@ -11,10 +12,13 @@
     "name" : {
       "@id" : "http://sbols.org/v3#name"
     },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
+      "@type" : "@id"
+    },
     "displayId" : {
       "@id" : "http://sbols.org/v3#displayId"
     },
-    "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",
     "CHEBI" : "https://identifiers.org/CHEBI:",
     "GO" : "https://identifiers.org/GO:",

@@ -1,70 +1,76 @@
 {
   "@graph" : [ {
-    "@id" : "CodonOptimisationProtocol",
-    "@type" : "prov:Plan",
+    "@id" : "https://sbolstandard.org/examples/CodonOptimisationProtocol",
+    "@type" : [ "sbol:TopLevel", "prov:Plan" ],
     "description" : "Optimisation protocol to improve the translation of mRNAs.",
     "displayId" : "CodonOptimisationProtocol",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "Codon Optimisation Protocol"
   }, {
-    "@id" : "CodonOptimiserSoftware",
-    "@type" : "prov:Agent",
+    "@id" : "https://sbolstandard.org/examples/CodonOptimiserSoftware",
+    "@type" : [ "sbol:TopLevel", "prov:Agent" ],
     "description" : "Used to optimise bacterial DNA sequences.",
     "displayId" : "CodonOptimiserSoftware",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "Codon Optimiser Software"
   }, {
-    "@id" : "RBS_optimisation_activity",
-    "@type" : "prov:Activity",
+    "@id" : "https://sbolstandard.org/examples/RBS_optimisation_activity",
+    "@type" : [ "sbol:TopLevel", "prov:Activity" ],
     "description" : "An activity that is used to RBSs",
     "displayId" : "RBS_optimisation_activity",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "RBS optimization activity",
     "type" : "sbol:design",
-    "wasInformedBy" : "codon_optimization_activity"
+    "wasInformedBy" : "https://sbolstandard.org/examples/codon_optimization_activity"
   }, {
-    "@id" : "codon_optimization_activity",
-    "@type" : "prov:Activity",
+    "@id" : "https://sbolstandard.org/examples/codon_optimization_activity",
+    "@type" : [ "sbol:TopLevel", "prov:Activity" ],
     "description" : "An activity that is used to optimise codons",
     "displayId" : "codon_optimization_activity",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "Codon optimization activity",
     "type" : "sbol:design",
-    "endedAtTime" : "2020-08-30T18:54:30.747Z",
-    "qualifiedAssociation" : "codon_optimization_activity/Association1",
-    "qualifiedUsage" : [ "codon_optimization_activity/Usage2", "codon_optimization_activity/Usage1" ],
-    "startedAtTime" : "2019-07-29T18:54:30.747Z"
+    "endedAtTime" : "2020-08-30T11:59:52.577Z",
+    "qualifiedAssociation" : "https://sbolstandard.org/examples/codon_optimization_activity/Association1",
+    "qualifiedUsage" : [ "https://sbolstandard.org/examples/codon_optimization_activity/Usage2", "https://sbolstandard.org/examples/codon_optimization_activity/Usage1" ],
+    "startedAtTime" : "2019-07-29T11:59:52.577Z"
   }, {
-    "@id" : "codon_optimization_activity/Association1",
-    "@type" : "prov:Association",
+    "@id" : "https://sbolstandard.org/examples/codon_optimization_activity/Association1",
+    "@type" : [ "sbol:Identified", "prov:Association" ],
     "displayId" : "Association1",
-    "hadAgent" : "CodonOptimiserSoftware",
-    "hadPlan" : "CodonOptimisationProtocol",
+    "agent" : "https://sbolstandard.org/examples/CodonOptimiserSoftware",
+    "hadPlan" : "https://sbolstandard.org/examples/CodonOptimisationProtocol",
     "hadRole" : "sbol:design"
   }, {
-    "@id" : "codon_optimization_activity/Usage1",
-    "@type" : "prov:Usage",
+    "@id" : "https://sbolstandard.org/examples/codon_optimization_activity/Usage1",
+    "@type" : [ "sbol:Identified", "prov:Usage" ],
     "displayId" : "Usage1",
-    "entity" : "toggle_switch",
+    "entity" : "https://sbolstandard.org/examples/toggle_switch",
     "hadRole" : "SBO:0000645"
   }, {
-    "@id" : "codon_optimization_activity/Usage2",
-    "@type" : "prov:Usage",
+    "@id" : "https://sbolstandard.org/examples/codon_optimization_activity/Usage2",
+    "@type" : [ "sbol:Identified", "prov:Usage" ],
     "displayId" : "Usage2",
-    "entity" : "toggle_switch_optimised",
+    "entity" : "https://sbolstandard.org/examples/toggle_switch_optimised",
     "hadRole" : "SBO:0000011"
   }, {
-    "@id" : "toggle_switch",
+    "@id" : "https://sbolstandard.org/examples/toggle_switch",
     "@type" : "sbol:Component",
     "description" : "Toggle Switch genetic circuit",
     "displayId" : "toggle_switch",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "Toggle Switch",
     "type" : "SBO:0000241"
   }, {
-    "@id" : "toggle_switch_optimised",
+    "@id" : "https://sbolstandard.org/examples/toggle_switch_optimised",
     "@type" : "sbol:Component",
     "description" : "Toggle Switch genetic circuit - codon optimised",
     "displayId" : "toggle_switch_optimised",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "Toggle Switch Optimised",
     "type" : "SBO:0000241",
-    "wasDerivedFrom" : "toggle_switch",
-    "wasGeneratedBy" : "codon_optimization_activity"
+    "wasDerivedFrom" : "https://sbolstandard.org/examples/toggle_switch",
+    "wasGeneratedBy" : "https://sbolstandard.org/examples/codon_optimization_activity"
   } ],
   "@context" : {
     "wasDerivedFrom" : {
@@ -80,6 +86,10 @@
     },
     "name" : {
       "@id" : "http://sbols.org/v3#name"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
+      "@type" : "@id"
     },
     "type" : {
       "@id" : "http://sbols.org/v3#type",
@@ -100,13 +110,16 @@
       "@id" : "http://www.w3.org/ns/prov#hadPlan",
       "@type" : "@id"
     },
-    "hadAgent" : {
-      "@id" : "http://www.w3.org/ns/prov#hadAgent",
+    "agent" : {
+      "@id" : "http://www.w3.org/ns/prov#agent",
       "@type" : "@id"
     },
     "entity" : {
       "@id" : "http://www.w3.org/ns/prov#entity",
       "@type" : "@id"
+    },
+    "startedAtTime" : {
+      "@id" : "http://www.w3.org/ns/prov#startedAtTime"
     },
     "qualifiedUsage" : {
       "@id" : "http://www.w3.org/ns/prov#qualifiedUsage",
@@ -119,10 +132,6 @@
       "@id" : "http://www.w3.org/ns/prov#qualifiedAssociation",
       "@type" : "@id"
     },
-    "startedAtTime" : {
-      "@id" : "http://www.w3.org/ns/prov#startedAtTime"
-    },
-    "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",
     "CHEBI" : "https://identifiers.org/CHEBI:",
     "GO" : "https://identifiers.org/GO:",

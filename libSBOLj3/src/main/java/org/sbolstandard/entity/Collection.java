@@ -16,7 +16,7 @@ public class Collection extends TopLevel{
 		super(model, uri);
 	}
 	
-	protected  Collection(Resource resource)
+	protected  Collection(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

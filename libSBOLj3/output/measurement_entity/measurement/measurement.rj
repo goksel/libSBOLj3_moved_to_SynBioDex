@@ -14,6 +14,15 @@
       "type" : "uri" ,
       "value" : "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit"
     }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
+    }
      ] ,
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
@@ -47,10 +56,19 @@
       "type" : "uri" ,
       "value" : "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit"
     }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
      ] ,
     "http://www.ontology-of-units-of-measure.org/resource/om-2/comment" : [ { 
       "type" : "literal" ,
       "value" : "The litre is a unit of volume defined as 1.0e-3 cubic metre."
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
     }
      ] ,
     "http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeLabel" : [ { 
@@ -108,10 +126,19 @@
       "type" : "uri" ,
       "value" : "http://www.ontology-of-units-of-measure.org/resource/om-2/PrefixedUnit"
     }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
      ] ,
     "http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit" : [ { 
       "type" : "uri" ,
       "value" : "https://sbolstandard.org/examples/mole"
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 
@@ -138,6 +165,10 @@
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#Identified"
+    }
+    , { 
       "type" : "uri" ,
       "value" : "http://www.ontology-of-units-of-measure.org/resource/om-2/Measure"
     }
@@ -178,6 +209,15 @@
       "type" : "uri" ,
       "value" : "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit"
     }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
+    }
      ] ,
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
@@ -206,6 +246,10 @@
       "type" : "uri" ,
       "value" : "http://www.ontology-of-units-of-measure.org/resource/om-2/SIPrefix"
     }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
      ] ,
     "http://www.ontology-of-units-of-measure.org/resource/om-2/label" : [ { 
       "type" : "literal" ,
@@ -215,6 +259,11 @@
     "http://www.ontology-of-units-of-measure.org/resource/om-2/comment" : [ { 
       "type" : "literal" ,
       "value" : "Comment for the milli prefix."
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
     }
      ] ,
     "http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeLabel" : [ { 
@@ -296,6 +345,11 @@
       "value" : "http://sbols.org/v3#Component"
     }
      ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
+    }
+     ] ,
     "http://sbols.org/v3#hasFeature" : [ { 
       "type" : "uri" ,
       "value" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1"
@@ -338,6 +392,15 @@
       "type" : "uri" ,
       "value" : "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitDivision"
     }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
+    }
      ] ,
     "http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumerator" : [ { 
       "type" : "uri" ,
@@ -376,6 +439,15 @@
       "type" : "uri" ,
       "value" : "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitMultiplication"
     }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
+    }
      ] ,
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
@@ -409,10 +481,19 @@
       "type" : "uri" ,
       "value" : "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitExponentiation"
     }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
      ] ,
     "http://www.ontology-of-units-of-measure.org/resource/om-2/hasBase" : [ { 
       "type" : "uri" ,
       "value" : "https://sbolstandard.org/examples/meter"
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
     }
      ] ,
     "http://www.ontology-of-units-of-measure.org/resource/om-2/hasExponent" : [ { 
@@ -446,6 +527,15 @@
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
       "value" : "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit"
+    }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 

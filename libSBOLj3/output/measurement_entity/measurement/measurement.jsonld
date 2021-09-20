@@ -1,56 +1,61 @@
 {
   "@graph" : [ {
-    "@id" : "M9_Glucose_CAA",
+    "@id" : "https://sbolstandard.org/examples/M9_Glucose_CAA",
     "@type" : "sbol:Component",
     "description" : "M9 Glucose CAA growth media",
     "displayId" : "M9_Glucose_CAA",
-    "hasFeature" : "M9_Glucose_CAA/ExternallyDefined1",
+    "hasFeature" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "M9 Glucose CAA",
     "type" : "SBO:0000241"
   }, {
-    "@id" : "M9_Glucose_CAA/ExternallyDefined1",
+    "@id" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1",
     "@type" : "sbol:ExternallyDefined",
     "definition" : "CHEBI:3312",
     "displayId" : "ExternallyDefined1",
-    "hasMeasure" : "M9_Glucose_CAA/ExternallyDefined1/measure1",
+    "hasMeasure" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1",
     "type" : "SBO:0000247"
   }, {
-    "@id" : "M9_Glucose_CAA/ExternallyDefined1/measure1",
-    "@type" : "om:Measure",
+    "@id" : "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1",
+    "@type" : [ "sbol:Identified", "om:Measure" ],
     "displayId" : "measure1",
     "type" : [ "SBO:0000197", "SBO:0000196" ],
     "hasNumericalValue" : "0.1",
-    "hasUnit" : "millimolePerLitre"
+    "hasUnit" : "https://sbolstandard.org/examples/millimolePerLitre"
   }, {
-    "@id" : "cubicMeter",
-    "@type" : "om:UnitExponentiation",
+    "@id" : "https://sbolstandard.org/examples/cubicMeter",
+    "@type" : [ "sbol:TopLevel", "om:UnitExponentiation" ],
     "displayId" : "cubicMeter",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "cubicMeter",
-    "hasBase" : "meter",
+    "hasBase" : "https://sbolstandard.org/examples/meter",
     "hasExponent" : "3",
     "label" : "cubicMeter",
     "symbol" : "m3"
   }, {
-    "@id" : "kelvin",
-    "@type" : "om:SingularUnit",
+    "@id" : "https://sbolstandard.org/examples/kelvin",
+    "@type" : [ "sbol:TopLevel", "om:SingularUnit" ],
     "displayId" : "kelvin",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "kelvin",
     "label" : "kelvin",
     "symbol" : "kelvin"
   }, {
-    "@id" : "kelvinMole",
-    "@type" : "om:UnitMultiplication",
+    "@id" : "https://sbolstandard.org/examples/kelvinMole",
+    "@type" : [ "sbol:TopLevel", "om:UnitMultiplication" ],
     "displayId" : "kelvinMole",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "kelvinMole",
-    "hasTerm1" : "kelvin",
-    "hasTerm2" : "mole",
+    "hasTerm1" : "https://sbolstandard.org/examples/kelvin",
+    "hasTerm2" : "https://sbolstandard.org/examples/mole",
     "label" : "kelvinMole",
     "symbol" : "K mol"
   }, {
-    "@id" : "litre",
-    "@type" : "om:SingularUnit",
+    "@id" : "https://sbolstandard.org/examples/litre",
+    "@type" : [ "sbol:TopLevel", "om:SingularUnit" ],
     "description" : "The litre is a unit of volume defined as 1.0e-3 cubic metre.",
     "displayId" : "litre",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "liter",
     "alternativeLabel" : [ "litre2", "liter" ],
     "alternativeSymbol" : [ "L2", "L" ],
@@ -60,17 +65,19 @@
     "longcomment" : "This is an example long comment.",
     "symbol" : "l"
   }, {
-    "@id" : "meter",
-    "@type" : "om:SingularUnit",
+    "@id" : "https://sbolstandard.org/examples/meter",
+    "@type" : [ "sbol:TopLevel", "om:SingularUnit" ],
     "displayId" : "meter",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "meter",
     "label" : "meter",
     "symbol" : "m"
   }, {
-    "@id" : "milli",
-    "@type" : "om:SIPrefix",
+    "@id" : "https://sbolstandard.org/examples/milli",
+    "@type" : [ "om:SIPrefix", "sbol:TopLevel" ],
     "description" : "Comment for the milli prefix.",
     "displayId" : "milli",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "milli",
     "alternativeLabel" : [ "milli1", "milli2" ],
     "alternativeSymbol" : [ "m1", "m2" ],
@@ -80,27 +87,30 @@
     "longcomment" : "This is an example long comment for the milli prefix.",
     "symbol" : "m"
   }, {
-    "@id" : "millimole",
-    "@type" : "om:PrefixedUnit",
+    "@id" : "https://sbolstandard.org/examples/millimole",
+    "@type" : [ "sbol:TopLevel", "om:PrefixedUnit" ],
     "displayId" : "millimole",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "millimole",
-    "hasPrefix" : "milli",
-    "hasUnit" : "mole",
+    "hasPrefix" : "https://sbolstandard.org/examples/milli",
+    "hasUnit" : "https://sbolstandard.org/examples/mole",
     "label" : "millimole",
     "symbol" : "mmol"
   }, {
-    "@id" : "millimolePerLitre",
-    "@type" : "om:UnitDivision",
+    "@id" : "https://sbolstandard.org/examples/millimolePerLitre",
+    "@type" : [ "sbol:TopLevel", "om:UnitDivision" ],
     "displayId" : "millimolePerLitre",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "millimolar",
-    "hasDenominator" : "litre",
-    "hasNumerator" : "millimole",
+    "hasDenominator" : "https://sbolstandard.org/examples/litre",
+    "hasNumerator" : "https://sbolstandard.org/examples/millimole",
     "label" : "millimolar",
     "symbol" : "mmol/l"
   }, {
-    "@id" : "mole",
-    "@type" : "om:SingularUnit",
+    "@id" : "https://sbolstandard.org/examples/mole",
+    "@type" : [ "sbol:TopLevel", "om:SingularUnit" ],
     "displayId" : "mole",
+    "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "mole",
     "label" : "mole",
     "symbol" : "mol"
@@ -133,6 +143,10 @@
     },
     "name" : {
       "@id" : "http://sbols.org/v3#name"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
+      "@type" : "@id"
     },
     "alternativeLabel" : {
       "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeLabel"
@@ -186,7 +200,6 @@
       "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/hasPrefix",
       "@type" : "@id"
     },
-    "@vocab" : "https://sbolstandard.org/examples/",
     "SBO" : "https://identifiers.org/SBO:",
     "CHEBI" : "https://identifiers.org/CHEBI:",
     "GO" : "https://identifiers.org/GO:",

@@ -4,6 +4,8 @@ import java.lang.reflect.Constructor;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
@@ -14,6 +16,7 @@ import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.measure.Measure;
 import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
+import org.sbolstandard.util.SBOLUtil;
 import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.MeasureDataModel;
@@ -27,6 +30,7 @@ public abstract class Identified {
 	private List<URI> wasDerivedFrom;
 	private List<URI> wasGeneratedBy;
 	private List<Measure> measures;
+	//private List<Metadata> metadataList;
 	private URI uri;
 	
 	protected Identified()
@@ -39,14 +43,14 @@ public abstract class Identified {
 		inferDisplayId(uri);
 	}
 	
-	protected Identified(Model model, URI uri, URI resourceType) throws SBOLGraphException
+	/*protected Identified(Model model, URI uri, URI resourceType) throws SBOLGraphException
 	{
 		this.uri=uri;
 		this.resource=RDFUtil.createResource(model, this.uri,resourceType);
 		inferDisplayId(uri);
-	}
+	}*/
 	
-	protected Identified(Resource resource)
+	protected Identified(Resource resource) throws SBOLGraphException
 	{
 		this.uri=URI.create(resource.getURI());
 		this.resource=resource;
@@ -132,6 +136,8 @@ public abstract class Identified {
 		this.measures=addToList(this.measures, DataModel.Identified.measure, Measure.class, MeasureDataModel.Measure.uri);
 		return measures;
 	}
+	
+	
 
 	public Measure createMeasure(URI uri, float value, URI unit) throws SBOLGraphException
 	{
@@ -147,6 +153,27 @@ public abstract class Identified {
 		return createMeasure(SBOLAPI.append(this.getUri(), displayId), value, unit);
 	}
 	
+	/*public List<Metadata> getMetadata(URI property)throws SBOLGraphException  {
+		this.metadataList=addToList(this.metadataList, property, Metadata.class, DataModel.Identified.uri);
+		return metadataList;
+	}*/
+	
+	public Metadata createMetadata(URI uri, URI dataType, URI property) throws SBOLGraphException
+	{
+		if (dataType==null)
+		{
+			throw new SBOLGraphException("Application specific types MUST have a datatype property specified. " + "Metadata URI:" + uri);
+		}
+		Metadata metadata=new Metadata(this.resource.getModel(), uri);
+		metadata.addAnnotationType(dataType);
+		this.addAnnotion(property, metadata);
+		return metadata;
+	}
+	
+	public Metadata createMetadata(String displayId, URI dataType, URI property) throws SBOLGraphException
+	{
+		return createMetadata(SBOLAPI.append(this.getUri(), displayId), dataType, property);
+	}
 	
 	public URI getUri() {
 		return uri;
@@ -268,12 +295,22 @@ public abstract class Identified {
 		RDFUtil.addProperty(resource, property, value);
 	}
 	
-	public void addAnnotion(URI property, Metadata value)
+	public void addAnnotion(URI property, Identified value)
 	{
 		RDFUtil.addProperty(resource, property, value.getUri());
 	}
 	
-	public List<Object> getAnnotion(URI propertyURI)
+	public void addAnnotion(URI property, TopLevel value)
+	{
+		RDFUtil.addProperty(resource, property, value.getUri());
+	}
+	
+	public void addAnnotationType(URI typeURI)
+	{
+		RDFUtil.addType(resource, typeURI);
+	}
+	
+	public List<Object> getAnnotion(URI propertyURI) throws SBOLGraphException
 	{
 		ArrayList<Object> values=null;
         Property property=resource.getModel().getProperty(propertyURI.toString());
@@ -294,7 +331,16 @@ public abstract class Identified {
         		}
         		else
         		{
-        			Metadata metadata=new Metadata(object.asResource());
+        			Resource metadataResource=object.asResource();
+        			Identified metadata=null;
+        			if (RDFUtil.hasType(metadataResource.getModel(), metadataResource, DataModel.TopLevel.uri))
+        			{
+        				metadata=new TopLevelMetadata(metadataResource);
+        			}
+        			else
+        			{
+        				metadata=new Metadata(metadataResource);
+        			}
         			values.add(metadata);
         		}
         	}
@@ -325,44 +371,63 @@ public abstract class Identified {
 		return result;
 	}
 	
-	private  void inferDisplayId(URI uri)
-	{
-		 /*List<URI> types=RDFUtil.getPropertiesAsURIs(this.resource, URI.create(RDF.type.getURI()));
-		 if (hasSBOLType(types))
-		 {*/
-			 if ((uri.getPath()!=null && uri.getPath().length()>0) || (uri.getFragment()!=null && uri.getFragment().length()>0))
-			 	{
-				 	displayId=getDisplayId();
-				 	if (displayId==null || displayId.length()==0)
-				 	{
-					 	String result=null;
-					 	String uriString=uri.toString();	
-					 	if (uriString.contains("://"))
-					 	{
-						 	int index=uriString.lastIndexOf("#");
-							int index2=uriString.lastIndexOf("/");
-							if (index2>index)
-							{
-								index=index2;
-							}
-							if (uriString.length()>index+1)
-							{
-								result= uriString.substring(index+1);
-							}
-							else
-							{
-								result=null;
-							}
-					 	}
-					 	if (result!=null)
-					 	{
-					 	 setDisplayId(result);	
-					 	}
-				 	}
-			 	}
-			}
-	//}
+	private void inferDisplayId(URI uri) throws SBOLGraphException {
+		displayId = getDisplayId();
+		if (StringUtils.isEmpty(displayId)) {
+			String result = null;
+			String uriString = uri.toString();
+
+			if (SBOLUtil.isURL(uriString))// .contains("://"))
+			{
+				String path=uri.getPath();
+				int index = path.lastIndexOf("/");
+				if (path.length() > index + 1) {
+					result = path.substring(index + 1);
+				} else {
+					result = null;
+				}
+				if (result != null) {
+					setDisplayId(result);
+				}
+				else
+				{
+					throw new SBOLGraphException("An SBOL URI MUST include the display id fragment. URI:" + uri);
+				}
+			}	
+		}
+	}
+	
 }
+
+/*private void inferDisplayId(URI uri) {
+	if ((uri.getPath() != null && uri.getPath().length() > 0)|| (uri.getFragment() != null && uri.getFragment().length() > 0)) {
+		displayId = getDisplayId();
+		if (StringUtils.isEmpty(displayId)) {
+			String result = null;
+			String uriString = uri.toString();
+
+			if (SBOLUtil.isURL(uriString))// .contains("://"))
+			{
+				int index = uriString.lastIndexOf("#");
+				int index2 = uriString.lastIndexOf("/");
+				if (index2 > index) {
+					index = index2;
+				}
+				if (uriString.length() > index + 1) {
+					result = uriString.substring(index + 1);
+				} else {
+					result = null;
+				}
+			}
+			if (result != null) {
+				setDisplayId(result);
+			}
+		}
+	}
+}
+// }
+}
+*/
 
 /*protected <T extends Identified>  void addToList(Resource res, List<T> items, URI property, URI entityType) throws SBOLException, SBOLGraphException
 {

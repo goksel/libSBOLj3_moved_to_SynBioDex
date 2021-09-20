@@ -15,7 +15,7 @@ public class ProvenanceDataModel {
 	{
 		public static URI uri=URINameSpace.PROV.local("Association");
 		public static URI role=URINameSpace.PROV.local("hadRole");
-		public static URI agent=URINameSpace.PROV.local("hadAgent");
+		public static URI agent=URINameSpace.PROV.local("agent");
 		public static URI plan=URINameSpace.PROV.local("hadPlan");
 	}
 	

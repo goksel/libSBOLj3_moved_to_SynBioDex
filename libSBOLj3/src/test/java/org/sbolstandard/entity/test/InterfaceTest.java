@@ -10,6 +10,7 @@ import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.Interface;
 import org.sbolstandard.entity.SBOLDocument;
 import org.sbolstandard.entity.SubComponent;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.ComponentType;
@@ -24,9 +25,9 @@ public class InterfaceTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component TetR_protein=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "TetR_protein"), ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
-        Component LacI_protein=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "LacI_protein"), ComponentType.Protein.getUrl(), "LacI", "LacI protein", Role.TF);
-        Component aTC=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "aTC"), ComponentType.SimpleChemical.getUrl(), "aTC","aTC", Role.Effector);
+        Component TetR_protein=SBOLAPI.createComponent(doc, "TetR_protein", ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
+        Component LacI_protein=SBOLAPI.createComponent(doc, "LacI_protein", ComponentType.Protein.getUrl(), "LacI", "LacI protein", Role.TF);
+        Component aTC=SBOLAPI.createComponent(doc, "aTC", ComponentType.SimpleChemical.getUrl(), "aTC","aTC", Role.Effector);
         
   
         //LacI producer
@@ -44,7 +45,7 @@ public class InterfaceTest extends TestCase {
         
         TestUtil.serialise(doc, "entity/interface", "interface");
       
-        System.out.println(SBOLIO.write(doc, "Turtle"));
+        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
     }
 

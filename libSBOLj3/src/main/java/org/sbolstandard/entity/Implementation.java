@@ -15,7 +15,7 @@ public class Implementation extends TopLevel{
 		super(model, uri);
 	}
 	
-	protected  Implementation(Resource resource)
+	protected  Implementation(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

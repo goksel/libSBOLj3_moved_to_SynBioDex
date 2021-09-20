@@ -17,7 +17,7 @@
      ] ,
     "http://parts.igem.org/twinURLs" : [ { 
       "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/BBa_J23119/twinParts"
+      "value" : "https://sbolstandard.org/examples/BBa_J23119/usage1/twinParts"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
@@ -51,37 +51,39 @@
      ]
   }
    ,
-  "https://sbolstandard.org/examples/BBa_J23119/twinParts" : { 
+  "https://sbolstandard.org/examples/iGEMRepository" : { 
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
-      "value" : "twinParts"
+      "value" : "iGEMRepository"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
-      "value" : "http://parts.igem.org/TwinPartUsage"
+      "value" : "http://parts.igem.org/Repository"
     }
     , { 
       "type" : "uri" ,
-      "value" : "http://sbols.org/v3#Identified"
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
-      "value" : "twin parts"
+      "value" : "iGEM Registry"
     }
      ] ,
-    "http://parts.igem.org/twinURL" : [ { 
+    "http://parts.igem.org/website" : [ { 
       "type" : "uri" ,
-      "value" : "http://parts.igem.org/wiki/index.php?title=Part:BBa_M1638"
+      "value" : "http://parts.igem.org/Main_Page"
     }
-    , { 
-      "type" : "uri" ,
-      "value" : "http://parts.igem.org/wiki/index.php?title=Part:BBa_J72073"
-    }
-    , { 
-      "type" : "uri" ,
-      "value" : "http://parts.igem.org/wiki/index.php?title=Part:BBa_M36800"
+     ] ,
+    "http://sbols.org/v3#description" : [ { 
+      "type" : "literal" ,
+      "value" : "Registry of Standard Biological Parts"
     }
      ]
   }
@@ -127,37 +129,45 @@
      ]
   }
    ,
-  "http://parts.igem.org" : { 
+  "https://sbolstandard.org/examples/BBa_J23119/usage1/twinParts" : { 
+    "http://sbols.org/v3#displayId" : [ { 
+      "type" : "literal" ,
+      "value" : "twinParts"
+    }
+     ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
-      "value" : "http://parts.igem.org/Repository"
+      "value" : "http://parts.igem.org/TwinPartUsage"
     }
     , { 
       "type" : "uri" ,
-      "value" : "http://sbols.org/v3#TopLevel"
+      "value" : "http://sbols.org/v3#Identified"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
-      "value" : "iGEM Registry"
+      "value" : "twin parts"
     }
      ] ,
-    "http://parts.igem.org/website" : [ { 
-      "type" : "literal" ,
-      "value" : "http://parts.igem.org/Main_Page"
+    "http://parts.igem.org/twinURL" : [ { 
+      "type" : "uri" ,
+      "value" : "http://parts.igem.org/wiki/index.php?title=Part:BBa_M1638"
     }
-     ] ,
-    "http://sbols.org/v3#description" : [ { 
-      "type" : "literal" ,
-      "value" : "Registry of Standard Biological Parts"
+    , { 
+      "type" : "uri" ,
+      "value" : "http://parts.igem.org/wiki/index.php?title=Part:BBa_J72073"
+    }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://parts.igem.org/wiki/index.php?title=Part:BBa_M36800"
     }
      ]
   }
    ,
-  "http://synbiohub.org#about" : { 
+  "https://sbolstandard.org/examples/SynBioHubRepository" : { 
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
-      "value" : "about"
+      "value" : "SynBioHubRepository"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
@@ -167,6 +177,11 @@
     , { 
       "type" : "uri" ,
       "value" : "http://sbols.org/v3#TopLevel"
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 
@@ -202,6 +217,11 @@
       "value" : "http://sbols.org/v3#Component"
     }
      ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
+    }
+     ] ,
     "http://parts.igem.org/hasInformation" : [ { 
       "type" : "uri" ,
       "value" : "https://sbolstandard.org/examples/BBa_J23119/information1"
@@ -209,11 +229,11 @@
      ] ,
     "http://parts.igem.org/belongsTo" : [ { 
       "type" : "uri" ,
-      "value" : "http://parts.igem.org"
+      "value" : "https://sbolstandard.org/examples/iGEMRepository"
     }
     , { 
       "type" : "uri" ,
-      "value" : "http://synbiohub.org#about"
+      "value" : "https://sbolstandard.org/examples/SynBioHubRepository"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 

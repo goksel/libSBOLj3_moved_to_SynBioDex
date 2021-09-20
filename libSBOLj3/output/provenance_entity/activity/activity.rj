@@ -7,7 +7,16 @@
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+    , { 
+      "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Agent"
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 
@@ -35,7 +44,16 @@
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+    , { 
+      "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Activity"
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 
@@ -66,6 +84,11 @@
       "value" : "http://sbols.org/v3#Component"
     }
      ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
+    }
+     ] ,
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
       "value" : "Toggle Switch"
@@ -93,6 +116,15 @@
       "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Plan"
     }
+    , { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
+    }
      ] ,
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
@@ -114,17 +146,26 @@
      ] ,
     "http://www.w3.org/ns/prov#endedAtTime" : [ { 
       "type" : "literal" ,
-      "value" : "2020-08-30T18:54:30.747Z"
+      "value" : "2020-08-30T11:59:52.577Z"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#TopLevel"
+    }
+    , { 
       "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Activity"
     }
      ] ,
     "http://www.w3.org/ns/prov#startedAtTime" : [ { 
       "type" : "literal" ,
-      "value" : "2019-07-29T18:54:30.747Z"
+      "value" : "2019-07-29T11:59:52.577Z"
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 
@@ -174,6 +215,11 @@
       "value" : "http://sbols.org/v3#Component"
     }
      ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
+    }
+     ] ,
     "http://sbols.org/v3#name" : [ { 
       "type" : "literal" ,
       "value" : "Toggle Switch Optimised"
@@ -197,17 +243,21 @@
   }
    ,
   "https://sbolstandard.org/examples/codon_optimization_activity/Association1" : { 
-    "http://www.w3.org/ns/prov#hadAgent" : [ { 
-      "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples/CodonOptimiserSoftware"
-    }
-     ] ,
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
       "value" : "Association1"
     }
      ] ,
+    "http://www.w3.org/ns/prov#agent" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples/CodonOptimiserSoftware"
+    }
+     ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#Identified"
+    }
+    , { 
       "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Association"
     }
@@ -232,6 +282,10 @@
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
+      "value" : "http://sbols.org/v3#Identified"
+    }
+    , { 
+      "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Usage"
     }
      ] ,
@@ -254,6 +308,10 @@
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#Identified"
+    }
+    , { 
       "type" : "uri" ,
       "value" : "http://www.w3.org/ns/prov#Usage"
     }

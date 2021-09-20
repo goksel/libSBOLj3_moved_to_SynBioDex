@@ -9,7 +9,8 @@
 @prefix prov:  <http://www.w3.org/ns/prov#> .
 @prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
 
-<urn:uuid:0c27b730-2c64-11b2-8059-acde48001122>
-        a          sbol:Component ;
-        sbol:name  "TetR" ;
-        sbol:type  SBO:0000252 .
+<urn:uuid:2f9e4374-95d0-4dbd-9f8e-bc76533a95fb>
+        a                  sbol:Component ;
+        sbol:hasNamespace  <urn:uuid:54b17376-731b-49e4-83ab-a3f7aef1e3f1> ;
+        sbol:name          "TetR" ;
+        sbol:type          SBO:0000252 .

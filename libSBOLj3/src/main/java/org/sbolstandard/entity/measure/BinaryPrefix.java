@@ -13,7 +13,7 @@ public class BinaryPrefix extends Prefix{
 		super(model, uri);
 	}
 	
-	protected  BinaryPrefix(Resource resource)
+	protected  BinaryPrefix(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

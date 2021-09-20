@@ -4,7 +4,7 @@ import java.net.URI;
 
 import org.sbolstandard.util.URINameSpace;
 
-public enum VariableComponentCardinality {
+public enum VariableFeatureCardinality {
 	
 	ZeroOrOne(URINameSpace.SBOL.local("zeroOrOne")), 
 	One(URINameSpace.SBOL.local("one")),
@@ -13,7 +13,7 @@ public enum VariableComponentCardinality {
 
 	private URI url;
 
-	VariableComponentCardinality(URI envUrl) {
+	VariableFeatureCardinality(URI envUrl) {
 		this.url = envUrl;
 	}
 

@@ -10,11 +10,10 @@ import org.sbolstandard.entity.Attachment;
 import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.Implementation;
 import org.sbolstandard.entity.SBOLDocument;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
-import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.vocabulary.ComponentType;
-import org.sbolstandard.vocabulary.ModelFramework;
 import org.sbolstandard.vocabulary.ModelLanguage;
 import org.sbolstandard.vocabulary.Role;
 
@@ -27,23 +26,23 @@ public class AttachmentTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component TetR_protein=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "TetR_protein"), ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
+        Component TetR_protein=SBOLAPI.createComponent(doc,"TetR_protein", ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
       
         
-        Attachment attachment=doc.createAttachment(SBOLAPI.append(baseUri, "attachment1"), URI.create("https://sbolstandard.org/attachment1"));
+        Attachment attachment=doc.createAttachment("attachment1", URI.create("https://sbolstandard.org/attachment1"));
         attachment.setFormat(ModelLanguage.SBML);
         attachment.setSize(1000);
         attachment.setHash("aaa");
         attachment.setHashAlgorithm("Alg1");
         
         
-        Implementation impl=doc.createImplementation(SBOLAPI.append(baseUri,"impl1"));
+        Implementation impl=doc.createImplementation("impl1");
         impl.setComponent(TetR_protein.getUri());
         impl.setAttachments(Arrays.asList(attachment.getUri()));
         
         TestUtil.serialise(doc, "entity/attachment", "attachment");
       
-        System.out.println(SBOLIO.write(doc, "Turtle"));
+        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
     }
 

@@ -9,13 +9,12 @@ import org.sbolstandard.api.SBOLAPI;
 import org.sbolstandard.entity.Component;
 import org.sbolstandard.entity.Model;
 import org.sbolstandard.entity.SBOLDocument;
+import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
-import org.sbolstandard.util.URINameSpace;
 import org.sbolstandard.vocabulary.ComponentType;
 import org.sbolstandard.vocabulary.ModelFramework;
 import org.sbolstandard.vocabulary.ModelLanguage;
-import org.sbolstandard.vocabulary.Role;
 
 import junit.framework.TestCase;
 
@@ -23,16 +22,18 @@ public class ModelTest extends TestCase {
 	
 	public void testInterface() throws SBOLGraphException, IOException
     {
-		String baseUri="https://sbolstandard.org/examples/";
-        SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
-        Component toggleSwitch=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "toggle_switch"), ComponentType.FunctionalEntity.getUrl(), "Toggle Switch", "Toggle Switch genetic circuit", null);
-       
-        Model model=doc.createModel(SBOLAPI.append(baseUri,"model1"), URI.create("http://virtualparts.org"), ModelFramework.Continuous,ModelLanguage.SBML);
+		String namespace="https://sbolstandard.org";
+		String baseUri=namespace + "/examples/";
         
+		SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
+        Component toggleSwitch=SBOLAPI.createComponent(doc, "toggle_switch", ComponentType.FunctionalEntity.getUrl(), "Toggle Switch", "Toggle Switch genetic circuit", null);
+        Model model=doc.createModel("model1", URI.create("http://virtualparts.org"), ModelFramework.Continuous,ModelLanguage.SBML);
+        model.setNamespace(URI.create(namespace));
         toggleSwitch.setModels(Arrays.asList(model.getUri()));
+        
         TestUtil.serialise(doc, "entity/model", "model");
       
-        System.out.println(SBOLIO.write(doc, "Turtle"));
+        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
     }
 

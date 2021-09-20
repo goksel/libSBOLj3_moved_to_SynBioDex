@@ -17,6 +17,7 @@
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="TetR_protein_Sequence1"/>
       </sbol:hasSequence>
+      <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>TetR_protein</sbol:displayId>
       <sbol:description>TetR protein</sbol:description>
    </sbol:Component>
@@ -27,6 +28,7 @@
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="BBa_C0062_protein_Sequence1"/>
       </sbol:hasSequence>
+      <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>BBa_C0062_protein</sbol:displayId>
       <sbol:description>LuxR protein</sbol:description>
    </sbol:Component>
@@ -37,6 +39,7 @@
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="BBa_R0040_Sequence1"/>
       </sbol:hasSequence>
+      <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>BBa_R0040</sbol:displayId>
       <sbol:description>TetR repressible promoter</sbol:description>
    </sbol:Component>
@@ -47,6 +50,7 @@
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="BBa_R0062_Sequence1"/>
       </sbol:hasSequence>
+      <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>BBa_R0062</sbol:displayId>
       <sbol:description>Promoter (luxR &amp;amp; HSL regulated -- lux pR)</sbol:description>
    </sbol:Component>
@@ -105,6 +109,7 @@
       </sbol:hasSequence>
       <sbol:displayId>BBa_F2620</sbol:displayId>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
+      <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="BBa_F2620/SubComponent5">
             <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
@@ -235,6 +240,7 @@
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="BBa_B0010_Sequence1"/>
       </sbol:hasSequence>
+      <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>BBa_B0010</sbol:displayId>
       <sbol:description>Transcriptional terminator consisting of a 64 bp stem-loop</sbol:description>
    </sbol:Component>
@@ -245,6 +251,7 @@
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="BBa_B0012_Sequence1"/>
       </sbol:hasSequence>
+      <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>BBa_B0012</sbol:displayId>
       <sbol:description>Double terminator consisting of BBa_B0010 and BBa_B0012</sbol:description>
    </sbol:Component>
@@ -255,34 +262,15 @@
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="BBa_B0034_Sequence1"/>
       </sbol:hasSequence>
+      <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>BBa_B0034</sbol:displayId>
       <sbol:description>RBS based on Elowitz repressilator</sbol:description>
    </sbol:Component>
    <sbol:Component rdf:about="BBa_B0015">
-      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
-      <sbol:role rdf:resource="https://identifiers.org/SO:0000141"/>
-      <sbol:name>BBa_B0015</sbol:name>
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="BBa_B0015_Sequence1"/>
       </sbol:hasSequence>
-      <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="BBa_B0015/SubComponent1">
-            <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
-            <sbol:instanceOf rdf:resource="BBa_B0010"/>
-            <sbol:hasLocation>
-               <sbol:Range rdf:about="BBa_B0015/SubComponent1/Range1">
-                  <sbol:start>1</sbol:start>
-                  <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
-                  <sbol:hasSequence>
-                     <sbol:Sequence rdf:about="BBa_B0015_Sequence1"/>
-                  </sbol:hasSequence>
-                  <sbol:end>79</sbol:end>
-                  <sbol:displayId>Range1</sbol:displayId>
-               </sbol:Range>
-            </sbol:hasLocation>
-            <sbol:displayId>SubComponent1</sbol:displayId>
-         </sbol:SubComponent>
-      </sbol:hasFeature>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="BBa_B0015/SubComponent2">
             <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
@@ -301,8 +289,29 @@
             <sbol:displayId>SubComponent2</sbol:displayId>
          </sbol:SubComponent>
       </sbol:hasFeature>
-      <sbol:displayId>BBa_B0015</sbol:displayId>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="BBa_B0015/SubComponent1">
+            <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+            <sbol:instanceOf rdf:resource="BBa_B0010"/>
+            <sbol:hasLocation>
+               <sbol:Range rdf:about="BBa_B0015/SubComponent1/Range1">
+                  <sbol:start>1</sbol:start>
+                  <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+                  <sbol:hasSequence>
+                     <sbol:Sequence rdf:about="BBa_B0015_Sequence1"/>
+                  </sbol:hasSequence>
+                  <sbol:end>79</sbol:end>
+                  <sbol:displayId>Range1</sbol:displayId>
+               </sbol:Range>
+            </sbol:hasLocation>
+            <sbol:displayId>SubComponent1</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
       <sbol:description>Double terminator consisting of BBa_B0010 and BBa_B0012</sbol:description>
+      <sbol:hasNamespace rdf:resource="../igem"/>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000141"/>
+      <sbol:name>BBa_B0015</sbol:name>
+      <sbol:displayId>BBa_B0015</sbol:displayId>
    </sbol:Component>
    <sbol:Component rdf:about="BBa_C0062">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
@@ -311,75 +320,86 @@
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="BBa_C0062_Sequence1"/>
       </sbol:hasSequence>
+      <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>BBa_C0062</sbol:displayId>
       <sbol:description>luxR repressor/activator,  (no LVA?)</sbol:description>
    </sbol:Component>
    <sbol:Sequence rdf:about="BBa_F2620_Sequence1">
       <sbol:name>Sequence1</sbol:name>
-      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
+      <sbol:hasNamespace rdf:resource="../igem"/>
+      <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
       <sbol:elements>tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcacaaagaggagaaaatgaaaaacataaatgccgacgacacatacagaataattaataaaattaaagcttgtagaagcaataatgatattaatcaatgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcacccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctcacactggctcaccttcgggtgggcctttctgcgtttataacctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa</sbol:elements>
       <sbol:displayId>BBa_F2620_Sequence1</sbol:displayId>
       <sbol:description>BBa_F2620 sequence</sbol:description>
    </sbol:Sequence>
    <sbol:Sequence rdf:about="BBa_B0015_Sequence1">
       <sbol:name>Sequence1</sbol:name>
-      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
+      <sbol:hasNamespace rdf:resource="../igem"/>
+      <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
       <sbol:elements>ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctcacactggctcaccttcgggtgggcctttctgcgtttata</sbol:elements>
       <sbol:displayId>BBa_B0015_Sequence1</sbol:displayId>
       <sbol:description>BBa_B0015 sequence</sbol:description>
    </sbol:Sequence>
    <sbol:Sequence rdf:about="BBa_R0062_Sequence1">
       <sbol:name>Sequence1</sbol:name>
-      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
+      <sbol:hasNamespace rdf:resource="../igem"/>
+      <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
       <sbol:elements>acctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa</sbol:elements>
       <sbol:displayId>BBa_R0062_Sequence1</sbol:displayId>
       <sbol:description>lux pR sequence</sbol:description>
    </sbol:Sequence>
    <sbol:Sequence rdf:about="BBa_B0034_Sequence1">
       <sbol:name>Sequence1</sbol:name>
-      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
+      <sbol:hasNamespace rdf:resource="../igem"/>
+      <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
       <sbol:elements>aaagaggagaaa</sbol:elements>
       <sbol:displayId>BBa_B0034_Sequence1</sbol:displayId>
       <sbol:description>BBa_B0034 sequence</sbol:description>
    </sbol:Sequence>
    <sbol:Sequence rdf:about="BBa_B0010_Sequence1">
       <sbol:name>Sequence1</sbol:name>
-      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
+      <sbol:hasNamespace rdf:resource="../igem"/>
+      <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
       <sbol:elements>ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc</sbol:elements>
       <sbol:displayId>BBa_B0010_Sequence1</sbol:displayId>
       <sbol:description>BBa_B0010 sequence</sbol:description>
    </sbol:Sequence>
    <sbol:Sequence rdf:about="TetR_protein_Sequence1">
       <sbol:name>Sequence1</sbol:name>
-      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacAminoAcid"/>
+      <sbol:hasNamespace rdf:resource="../igem"/>
+      <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1208"/>
       <sbol:elements>NNNNNNNNNNN</sbol:elements>
       <sbol:displayId>TetR_protein_Sequence1</sbol:displayId>
       <sbol:description>TetR sequence</sbol:description>
    </sbol:Sequence>
    <sbol:Sequence rdf:about="BBa_B0012_Sequence1">
       <sbol:name>Sequence1</sbol:name>
-      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
+      <sbol:hasNamespace rdf:resource="../igem"/>
+      <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
       <sbol:elements>tcacactggctcaccttcgggtgggcctttctgcgtttata</sbol:elements>
       <sbol:displayId>BBa_B0012_Sequence1</sbol:displayId>
       <sbol:description>BBa_B0012 sequence</sbol:description>
    </sbol:Sequence>
    <sbol:Sequence rdf:about="BBa_C0062_protein_Sequence1">
       <sbol:name>Sequence1</sbol:name>
-      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacAminoAcid"/>
+      <sbol:hasNamespace rdf:resource="../igem"/>
+      <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1208"/>
       <sbol:elements>NNNNNNNNNNN</sbol:elements>
       <sbol:displayId>BBa_C0062_protein_Sequence1</sbol:displayId>
       <sbol:description>LuxR sequence</sbol:description>
    </sbol:Sequence>
    <sbol:Sequence rdf:about="BBa_R0040_Sequence1">
       <sbol:name>Sequence1</sbol:name>
-      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
+      <sbol:hasNamespace rdf:resource="../igem"/>
+      <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
       <sbol:elements>tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac</sbol:elements>
       <sbol:displayId>BBa_R0040_Sequence1</sbol:displayId>
       <sbol:description>pTetR sequence</sbol:description>
    </sbol:Sequence>
    <sbol:Sequence rdf:about="BBa_C0062_Sequence1">
       <sbol:name>Sequence1</sbol:name>
-      <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
+      <sbol:hasNamespace rdf:resource="../igem"/>
+      <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
       <sbol:elements>atgaaaaacataaatgccgacgacacatacagaataattaataaaattaaagcttgtagaagcaataatgatattaatcaatgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcac</sbol:elements>
       <sbol:displayId>BBa_C0062_Sequence1</sbol:displayId>
       <sbol:description>luxR sequence</sbol:description>

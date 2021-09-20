@@ -6,9 +6,10 @@ import java.util.Map;
 import org.sbolstandard.util.URINameSpace;
 public enum Encoding
 {
-	 	NucleicAcid(URINameSpace.SBOL.local("iupacNucleicAcid")), 
-	    AminoAcid(URINameSpace.SBOL.local("iupacAminoAcid")),
-	    SMILES(URI.create("http://www.opensmiles.org/opensmiles.html"));
+	 	NucleicAcid(URINameSpace.EDAM.local("format_1207")), 
+	    AminoAcid(URINameSpace.EDAM.local("format_1208")),
+	    SMILES(URINameSpace.EDAM.local("format_1196")),
+    	INCHI(URINameSpace.EDAM.local("format_1197"));
 	 
 	    private URI uri;
 	 

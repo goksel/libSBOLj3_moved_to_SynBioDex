@@ -8,7 +8,7 @@ import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.MeasureDataModel;
 
-public class UnitExponentiation extends CompountUnit{
+public class UnitExponentiation extends CompoundUnit{
 	
 	private URI base;
 	private int exponent=Integer.MIN_VALUE;
@@ -19,7 +19,7 @@ public class UnitExponentiation extends CompountUnit{
 		super(model, uri);
 	}
 	
-	protected  UnitExponentiation(Resource resource)
+	protected  UnitExponentiation(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

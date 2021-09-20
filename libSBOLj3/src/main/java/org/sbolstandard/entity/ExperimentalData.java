@@ -13,7 +13,7 @@ public class ExperimentalData extends TopLevel{
 		super(model, uri);
 	}
 	
-	protected  ExperimentalData(Resource resource)
+	protected  ExperimentalData(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

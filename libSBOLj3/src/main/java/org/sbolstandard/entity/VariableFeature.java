@@ -10,19 +10,21 @@ import org.sbolstandard.util.RDFUtil;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.vocabulary.DataModel;
 
-public class VariableComponent extends Identified{
+public class VariableFeature extends Identified{
 	private URI cardinality=null;
-	private URI subComponent=null;
+	private URI feature=null;
 	private List<URI> variants=new ArrayList<URI>();
 	private List<URI> variantCollections=new ArrayList<URI>();
 	private List<URI> variantDerivations=new ArrayList<URI>();
+	private List<URI> variantMeasures=new ArrayList<URI>();
 	
-	protected  VariableComponent(Model model,URI uri) throws SBOLGraphException
+	
+	protected  VariableFeature(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
 	}
 	
-	protected  VariableComponent(Resource resource)
+	protected  VariableFeature(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}
@@ -40,17 +42,17 @@ public class VariableComponent extends Identified{
 		RDFUtil.setProperty(resource, DataModel.VariableComponent.cardinality, cardinality);
 	}
 	
-	public URI getSubComponent() throws SBOLGraphException {
-		if (subComponent==null)
+	public URI getFeature() throws SBOLGraphException {
+		if (feature==null)
 		{
-			subComponent=RDFUtil.getPropertyAsURI(this.resource, DataModel.VariableComponent.variable);	
+			feature=RDFUtil.getPropertyAsURI(this.resource, DataModel.VariableComponent.variable);	
 		}
-		return subComponent;
+		return feature;
 	}
 
-	public void setSubComponent(URI subComponent) {
-		this.subComponent = subComponent;
-		RDFUtil.setProperty(resource, DataModel.VariableComponent.variable, subComponent);
+	public void setFeature(URI variant) {
+		this.feature = variant;
+		RDFUtil.setProperty(resource, DataModel.VariableComponent.variable, variant);
 	}
 	
 	public List<URI> getVariants() {
@@ -91,6 +93,21 @@ public class VariableComponent extends Identified{
 		this.variantDerivations = variantDerivations;
 		RDFUtil.setProperty(resource, DataModel.VariableComponent.variantDerivation, variantDerivations);
 	}
+	
+	
+	public List<URI> getVariantMeasures() {
+		if (this.variantMeasures==null)
+		{
+			variantMeasures=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableComponent.variantMeasure);
+		}
+		return variantMeasures;
+	}
+	
+	public void setVariantMeasures(List<URI> variantMeasures) {
+		this.variantMeasures = variantMeasures;
+		RDFUtil.setProperty(resource, DataModel.VariableComponent.variantMeasure, variantMeasures);
+	}
+	
 	
 	@Override
 	public URI getResourceType() {

@@ -4,7 +4,7 @@ import java.net.URI;
 import org.sbolstandard.util.URINameSpace;
 
 public class ParticipationRole {
-	public static URI SBML = URINameSpace.SBO.local("0000020");
+	public static URI Inhibitor = URINameSpace.SBO.local("0000020");
 	public static URI Inhibited = URINameSpace.SBO.local("0000642");
 	public static URI Stimulator = URINameSpace.SBO.local("0000459");
 	public static URI Stimulated = URINameSpace.SBO.local("0000643");

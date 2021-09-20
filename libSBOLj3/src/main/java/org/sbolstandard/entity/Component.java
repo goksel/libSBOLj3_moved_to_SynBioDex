@@ -35,7 +35,7 @@ public class Component extends TopLevel {
 		super(model, uri);
 	}
 	
-	protected Component(Resource resource)
+	protected Component(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

@@ -18,7 +18,7 @@ public class Sequence extends TopLevel {
 		super(model, uri);
 	}
 	
-	protected  Sequence(Resource resource)
+	protected  Sequence(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

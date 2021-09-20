@@ -18,7 +18,7 @@ public class ComponentReference extends Feature{
 		super(model, uri);
 	}
 	
-	protected  ComponentReference(Resource resource)
+	protected  ComponentReference(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
 	}

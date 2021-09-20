@@ -14,18 +14,20 @@
         sbol:displayId   "SubComponent1" ;
         sbol:instanceOf  :LacI_protein .
 
-:TetR_protein  a          sbol:Component ;
-        sbol:description  "TetR protein" ;
-        sbol:displayId    "TetR_protein" ;
-        sbol:name         "TetR" ;
-        sbol:role         GO:0003700 ;
-        sbol:type         SBO:0000252 .
+:TetR_protein  a           sbol:Component ;
+        sbol:description   "TetR protein" ;
+        sbol:displayId     "TetR_protein" ;
+        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:name          "TetR" ;
+        sbol:role          GO:0003700 ;
+        sbol:type          SBO:0000252 .
 
 :LacI_producer  a          sbol:Component ;
         sbol:description   "LacI producer" ;
         sbol:displayId     "LacI_producer" ;
         sbol:hasFeature    <LacI_producer/SubComponent1> , <LacI_producer/SubComponent2> , <LacI_producer/SubComponent3> ;
         sbol:hasInterface  <LacI_producer/Interface1> ;
+        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
         sbol:name          "LacI produce" ;
         sbol:role          SO:0000704 ;
         sbol:type          SBO:0000251 .
@@ -42,21 +44,23 @@
         sbol:displayId   "SubComponent2" ;
         sbol:instanceOf  :TetR_protein .
 
-:LacI_protein  a          sbol:Component ;
-        sbol:description  "LacI protein" ;
-        sbol:displayId    "LacI_protein" ;
-        sbol:name         "LacI" ;
-        sbol:role         GO:0003700 ;
-        sbol:type         SBO:0000252 .
+:LacI_protein  a           sbol:Component ;
+        sbol:description   "LacI protein" ;
+        sbol:displayId     "LacI_protein" ;
+        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:name          "LacI" ;
+        sbol:role          GO:0003700 ;
+        sbol:type          SBO:0000252 .
 
 <LacI_producer/SubComponent3>
         a                sbol:SubComponent ;
         sbol:displayId   "SubComponent3" ;
         sbol:instanceOf  :aTC .
 
-:aTC    a                 sbol:Component ;
-        sbol:description  "aTC" ;
-        sbol:displayId    "aTC" ;
-        sbol:name         "aTC" ;
-        sbol:role         CHEBI:35224 ;
-        sbol:type         SBO:0000247 .
+:aTC    a                  sbol:Component ;
+        sbol:description   "aTC" ;
+        sbol:displayId     "aTC" ;
+        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:name          "aTC" ;
+        sbol:role          CHEBI:35224 ;
+        sbol:type          SBO:0000247 .

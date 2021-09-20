@@ -1,0 +1,14 @@
+<https://sbolstandard.org/examples/rbs> <http://sbols.org/v3#role> <https://identifiers.org/SO:0000139> .
+<https://sbolstandard.org/examples/rbs> <http://sbols.org/v3#description> "RBS (Elowitz 1999)" .
+<https://sbolstandard.org/examples/rbs> <http://sbols.org/v3#displayId> "B0034 rbs" .
+<https://sbolstandard.org/examples/rbs> <http://sbols.org/v3#hasNamespace> <https://sbolstandard.org/examples> .
+<https://sbolstandard.org/examples/rbs> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000251> .
+<https://sbolstandard.org/examples/rbs> <http://sbols.org/v3#name> "B0034" .
+<https://sbolstandard.org/examples/rbs> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Component> .
+<https://sbolstandard.org/examples/TetR_protein> <http://sbols.org/v3#hasNamespace> <https://sbolstandard.org/examples> .
+<https://sbolstandard.org/examples/TetR_protein> <http://sbols.org/v3#description> "TetR protein" .
+<https://sbolstandard.org/examples/TetR_protein> <http://sbols.org/v3#name> "TetR" .
+<https://sbolstandard.org/examples/TetR_protein> <http://sbols.org/v3#displayId> "1TetR" .
+<https://sbolstandard.org/examples/TetR_protein> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000252> .
+<https://sbolstandard.org/examples/TetR_protein> <http://sbols.org/v3#role> <https://identifiers.org/GO:0003700> .
+<https://sbolstandard.org/examples/TetR_protein> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Component> .
