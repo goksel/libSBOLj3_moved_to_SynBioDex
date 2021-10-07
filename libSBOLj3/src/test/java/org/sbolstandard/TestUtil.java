@@ -18,6 +18,7 @@ import org.sbolstandard.io.SBOLFormat;
 import org.sbolstandard.io.SBOLIO;
 import org.sbolstandard.util.SBOLGraphException;
 import org.sbolstandard.util.SBOLUtil;
+import org.sbolstandard.validation.SBOLComparator;
 import org.sbolstandard.vocabulary.DataModel;
 import org.sbolstandard.vocabulary.MeasureDataModel;
 import org.sbolstandard.vocabulary.ProvenanceDataModel;
@@ -26,9 +27,9 @@ import static org.junit.Assert.*;
 
 public class TestUtil {
 
+	public static final String baseOutput="output";
 	public static void serialise(SBOLDocument doc, String directory, String file) throws FileNotFoundException, IOException
 	{
-		String baseOutput="output";
 		File outputDir=new File(baseOutput +  "/" + directory);
         if (!outputDir.exists())
         {
@@ -49,7 +50,12 @@ public class TestUtil {
 	{
 		String output=SBOLIO.write(doc, SBOLFormat.TURTLE);
 	    SBOLDocument doc2=SBOLIO.read(output, SBOLFormat.TURTLE); 
-	    assertEqual(doc, doc2);
+	    String message=SBOLComparator.assertEqual(doc, doc2);
+	    if (!message.isEmpty())
+	    {
+	    	throw new SBOLGraphException(message);
+	    }
+	   // assertEqual(doc, doc2);
 	       
 	}
 	public static void assertEqual(SBOLDocument doc1, SBOLDocument doc2) throws SBOLGraphException

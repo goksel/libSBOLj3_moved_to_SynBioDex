@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:sbol="http://sbols.org/v3#"
+>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504/SequenceFeature2">
+    <sbol:displayId>SequenceFeature2</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#SequenceFeature"/>
+    <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+    <sbol:hasLocation rdf:resource="https://synbiohub.org/public/igem/i13504/SequenceFeature2/Range1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/E0040">
+    <sbol:displayId>E0040</sbol:displayId>
+    <sbol:name>gfp</sbol:name>
+    <sbol:description>gfp coding sequence</sbol:description>
+    <rdf:type rdf:resource="http://sbols.org/v3#Component"/>
+    <sbol:hasNamespace rdf:resource="https://synbiohub.org/public/igem"/>
+    <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+    <sbol:role rdf:resource="https://identifiers.org/SO:0000316"/>
+    <sbol:hasSequence rdf:resource="https://synbiohub.org/public/igem/E0040_Sequence1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504_system/Interaction1/Participation1">
+    <sbol:displayId>Participation1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#Participation"/>
+    <sbol:role rdf:resource="https://identifiers.org/SBO:0000645"/>
+    <sbol:participant rdf:resource="https://synbiohub.org/public/igem/i13504_system/ComponentReference1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/B0034">
+    <sbol:displayId>B0034</sbol:displayId>
+    <sbol:name>B0034</sbol:name>
+    <sbol:description>RBS (Elowitz 1999)</sbol:description>
+    <rdf:type rdf:resource="http://sbols.org/v3#Component"/>
+    <sbol:hasNamespace rdf:resource="https://synbiohub.org/public/igem"/>
+    <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+    <sbol:role rdf:resource="https://identifiers.org/SO:0000139"/>
+    <sbol:hasSequence rdf:resource="https://synbiohub.org/public/igem/B0034_Sequence"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504_Sequence1">
+    <sbol:displayId>i13504_Sequence1</sbol:displayId>
+    <sbol:name>Sequence1</sbol:name>
+    <sbol:description>i13504 sequence</sbol:description>
+    <rdf:type rdf:resource="http://sbols.org/v3#Sequence"/>
+    <sbol:hasNamespace rdf:resource="https://synbiohub.org/public/igem"/>
+    <sbol:elements>aaagaggagaaatactagatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataatactagagccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc</sbol:elements>
+    <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/GFP_protein">
+    <sbol:displayId>GFP_protein</sbol:displayId>
+    <sbol:name>GFP</sbol:name>
+    <sbol:description>GFP</sbol:description>
+    <rdf:type rdf:resource="http://sbols.org/v3#Component"/>
+    <sbol:hasNamespace rdf:resource="https://synbiohub.org/public/igem"/>
+    <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504/SubComponent3">
+    <sbol:displayId>SubComponent3</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#SubComponent"/>
+    <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+    <sbol:instanceOf rdf:resource="https://synbiohub.org/public/igem/B0015"/>
+    <sbol:hasLocation rdf:resource="https://synbiohub.org/public/igem/i13504/SubComponent3/Range1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/interlab16device2/SubComponent2">
+    <sbol:displayId>SubComponent2</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#SubComponent"/>
+    <sbol:instanceOf rdf:resource="https://synbiohub.org/public/igem/i13504_system"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504/SubComponent1">
+    <sbol:displayId>SubComponent1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#SubComponent"/>
+    <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+    <sbol:instanceOf rdf:resource="https://synbiohub.org/public/igem/B0034"/>
+    <sbol:hasLocation rdf:resource="https://synbiohub.org/public/igem/i13504/SubComponent1/Range1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/B0034_Sequence">
+    <sbol:displayId>B0034_Sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#Sequence"/>
+    <sbol:hasNamespace rdf:resource="https://synbiohub.org/public/igem"/>
+    <sbol:elements>aaagaggagaaa</sbol:elements>
+    <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/B0015">
+    <sbol:displayId>B0015</sbol:displayId>
+    <sbol:name>terminator</sbol:name>
+    <sbol:description>B0015 double terminator</sbol:description>
+    <rdf:type rdf:resource="http://sbols.org/v3#Component"/>
+    <sbol:hasNamespace rdf:resource="https://synbiohub.org/public/igem"/>
+    <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+    <sbol:role rdf:resource="https://identifiers.org/SO:0000141"/>
+    <sbol:hasSequence rdf:resource="https://synbiohub.org/public/igem/B0015_Sequence1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504/SubComponent1/Range1">
+    <sbol:displayId>Range1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#Range"/>
+    <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+    <sbol:hasSequence rdf:resource="https://synbiohub.org/public/igem/i13504_Sequence1"/>
+    <sbol:start>1</sbol:start>
+    <sbol:end>11</sbol:end>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/interlab16device2">
+    <sbol:displayId>interlab16device2</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#Component"/>
+    <sbol:hasNamespace rdf:resource="https://synbiohub.org/public/igem"/>
+    <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/interlab16device2/ComponentReference1"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/interlab16device2/SubComponent1"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/interlab16device2/SubComponent2"/>
+    <sbol:hasConstraint rdf:resource="https://synbiohub.org/public/igem/interlab16device2/Constraint1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/E0040_Sequence1">
+    <sbol:displayId>E0040_Sequence1</sbol:displayId>
+    <sbol:name>Sequence1</sbol:name>
+    <sbol:description>gfp sequence</sbol:description>
+    <rdf:type rdf:resource="http://sbols.org/v3#Sequence"/>
+    <sbol:hasNamespace rdf:resource="https://synbiohub.org/public/igem"/>
+    <sbol:elements>atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa</sbol:elements>
+    <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504/SubComponent2">
+    <sbol:displayId>SubComponent2</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#SubComponent"/>
+    <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+    <sbol:instanceOf rdf:resource="https://synbiohub.org/public/igem/E0040"/>
+    <sbol:hasLocation rdf:resource="https://synbiohub.org/public/igem/i13504/SubComponent2/Range1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/interlab16device1/Constraint1">
+    <sbol:displayId>Constraint1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#Constraint"/>
+    <sbol:restriction rdf:resource="http://sbols.org/v3#meets"/>
+    <sbol:subject rdf:resource="https://synbiohub.org/public/igem/interlab16device1/SubComponent1"/>
+    <sbol:object rdf:resource="https://synbiohub.org/public/igem/interlab16device1/ComponentReference1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504/SubComponent2/Range1">
+    <sbol:displayId>Range1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#Range"/>
+    <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+    <sbol:hasSequence rdf:resource="https://synbiohub.org/public/igem/i13504_Sequence1"/>
+    <sbol:start>19</sbol:start>
+    <sbol:end>738</sbol:end>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/interlab16device1/ComponentReference1">
+    <sbol:displayId>ComponentReference1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#ComponentReference"/>
+    <sbol:inChildOf rdf:resource="https://synbiohub.org/public/igem/interlab16device1/SubComponent2"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/i13504_system/SubComponent1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504">
+    <sbol:displayId>i13504</sbol:displayId>
+    <sbol:name>i13504</sbol:name>
+    <sbol:description>Screening plasmid intermediate</sbol:description>
+    <rdf:type rdf:resource="http://sbols.org/v3#Component"/>
+    <sbol:hasNamespace rdf:resource="https://synbiohub.org/public/igem"/>
+    <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+    <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
+    <sbol:hasSequence rdf:resource="https://synbiohub.org/public/igem/i13504_Sequence1"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/i13504/SubComponent3"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/i13504/SubComponent1"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/i13504/SubComponent2"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/i13504/SequenceFeature1"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/i13504/SequenceFeature2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504/SequenceFeature1">
+    <sbol:displayId>SequenceFeature1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#SequenceFeature"/>
+    <sbol:orientation rdf:resource="http://sbols.org/v3#inline"/>
+    <sbol:hasLocation rdf:resource="https://synbiohub.org/public/igem/i13504/SequenceFeature1/Range1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504_system/Interaction1">
+    <sbol:displayId>Interaction1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#Interaction"/>
+    <sbol:type rdf:resource="https://identifiers.org/SBO:0000589"/>
+    <sbol:hasParticipation rdf:resource="https://synbiohub.org/public/igem/i13504_system/Interaction1/Participation2"/>
+    <sbol:hasParticipation rdf:resource="https://synbiohub.org/public/igem/i13504_system/Interaction1/Participation1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504_system">
+    <sbol:displayId>i13504_system</sbol:displayId>
+    <sbol:name>i13504 system</sbol:name>
+    <rdf:type rdf:resource="http://sbols.org/v3#Component"/>
+    <sbol:hasNamespace rdf:resource="https://synbiohub.org/public/igem"/>
+    <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
+    <sbol:role rdf:resource="https://identifiers.org/SBO:0000289"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/i13504_system/ComponentReference1"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/i13504_system/SubComponent1"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/i13504_system/SubComponent2"/>
+    <sbol:hasInteraction rdf:resource="https://synbiohub.org/public/igem/i13504_system/Interaction1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504_system/SubComponent1">
+    <sbol:displayId>SubComponent1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#SubComponent"/>
+    <sbol:instanceOf rdf:resource="https://synbiohub.org/public/igem/i13504"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504/SubComponent3/Range1">
+    <sbol:displayId>Range1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#Range"/>
+    <sbol:hasSequence rdf:resource="https://synbiohub.org/public/igem/i13504_Sequence1"/>
+    <sbol:start>747</sbol:start>
+    <sbol:end>826</sbol:end>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/interlab16device1">
+    <sbol:displayId>interlab16device1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#Component"/>
+    <sbol:hasNamespace rdf:resource="https://synbiohub.org/public/igem"/>
+    <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/interlab16device1/ComponentReference1"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/interlab16device1/SubComponent2"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/interlab16device1/SubComponent1"/>
+    <sbol:hasConstraint rdf:resource="https://synbiohub.org/public/igem/interlab16device1/Constraint1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504_system/ComponentReference1">
+    <sbol:displayId>ComponentReference1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#ComponentReference"/>
+    <sbol:inChildOf rdf:resource="https://synbiohub.org/public/igem/i13504_system/SubComponent1"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/i13504/SubComponent2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504/SequenceFeature2/Range1">
+    <sbol:displayId>Range1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#Range"/>
+    <sbol:hasSequence rdf:resource="https://synbiohub.org/public/igem/i13504_Sequence1"/>
+    <sbol:start>739</sbol:start>
+    <sbol:end>746</sbol:end>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/B0015_Sequence1">
+    <sbol:displayId>B0015_Sequence1</sbol:displayId>
+    <sbol:name>Sequence1</sbol:name>
+    <sbol:description>terminator sequence</sbol:description>
+    <rdf:type rdf:resource="http://sbols.org/v3#Sequence"/>
+    <sbol:hasNamespace rdf:resource="https://synbiohub.org/public/igem"/>
+    <sbol:elements>ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc</sbol:elements>
+    <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/j23106">
+    <sbol:displayId>j23106</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#Component"/>
+    <sbol:hasNamespace rdf:resource="https://synbiohub.org/public/igem"/>
+    <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/interlab16device2/SubComponent1">
+    <sbol:displayId>SubComponent1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#SubComponent"/>
+    <sbol:instanceOf rdf:resource="https://synbiohub.org/public/igem/j23106"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/interlab16device2/Constraint1">
+    <sbol:displayId>Constraint1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#Constraint"/>
+    <sbol:restriction rdf:resource="http://sbols.org/v3#meets"/>
+    <sbol:subject rdf:resource="https://synbiohub.org/public/igem/interlab16device2/SubComponent1"/>
+    <sbol:object rdf:resource="https://synbiohub.org/public/igem/interlab16device2/ComponentReference1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/interlab16device1/SubComponent2">
+    <sbol:displayId>SubComponent2</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#SubComponent"/>
+    <sbol:instanceOf rdf:resource="https://synbiohub.org/public/igem/i13504_system"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/j23101">
+    <sbol:displayId>j23101</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#Component"/>
+    <sbol:hasNamespace rdf:resource="https://synbiohub.org/public/igem"/>
+    <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504_system/SubComponent2">
+    <sbol:displayId>SubComponent2</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#SubComponent"/>
+    <sbol:instanceOf rdf:resource="https://synbiohub.org/public/igem/GFP_protein"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504/SequenceFeature1/Range1">
+    <sbol:displayId>Range1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#Range"/>
+    <sbol:hasSequence rdf:resource="https://synbiohub.org/public/igem/i13504_Sequence1"/>
+    <sbol:start>13</sbol:start>
+    <sbol:end>18</sbol:end>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/i13504_system/Interaction1/Participation2">
+    <sbol:displayId>Participation2</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#Participation"/>
+    <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
+    <sbol:participant rdf:resource="https://synbiohub.org/public/igem/i13504_system/SubComponent2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/interlab16device2/ComponentReference1">
+    <sbol:displayId>ComponentReference1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#ComponentReference"/>
+    <sbol:inChildOf rdf:resource="https://synbiohub.org/public/igem/interlab16device2/SubComponent2"/>
+    <sbol:hasFeature rdf:resource="https://synbiohub.org/public/igem/i13504_system/SubComponent1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://synbiohub.org/public/igem/interlab16device1/SubComponent1">
+    <sbol:displayId>SubComponent1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#SubComponent"/>
+    <sbol:instanceOf rdf:resource="https://synbiohub.org/public/igem/j23101"/>
+  </rdf:Description>
+</rdf:RDF>

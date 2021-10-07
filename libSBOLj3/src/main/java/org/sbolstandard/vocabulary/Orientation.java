@@ -7,8 +7,8 @@ import java.util.Map;
 import org.sbolstandard.util.URINameSpace;
 
 public enum Orientation {
-	inline(URINameSpace.SBOL.local("inline")), 
-	reverseComplement(URINameSpace.SBOL.local("reverseComplement"));
+	inline(URINameSpace.SO.local("0001030")), 
+	reverseComplement(URINameSpace.SO.local("0001031"));
 
 	private URI uri;
 

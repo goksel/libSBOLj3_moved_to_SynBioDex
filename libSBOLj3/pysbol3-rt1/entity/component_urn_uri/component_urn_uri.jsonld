@@ -1,0 +1,26 @@
+{
+  "@context": {
+    "@CHEBI": "https://identifiers.org/CHEBI:",
+    "@EDAM": "https://identifiers.org/edam:",
+    "@GO": "https://identifiers.org/GO:",
+    "@SBO": "https://identifiers.org/SBO:",
+    "@SO": "https://identifiers.org/SO:",
+    "@om": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+    "@prov": "http://www.w3.org/ns/prov#",
+    "@rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "@rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "@sbol": "http://sbols.org/v3#",
+    "@vocab": "https://sbolstandard.org/examples/",
+    "@xml": "http://www.w3.org/XML/1998/namespace",
+    "@xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@id": "urn:uuid:4e4dfda9-f454-463c-a684-f735deec0cc9",
+  "@type": "http://sbols.org/v3#Component",
+  "http://sbols.org/v3#hasNamespace": {
+    "@id": "urn:uuid:5801b7d0-63dc-45d9-86b1-69869e90daa4"
+  },
+  "http://sbols.org/v3#name": "TetR",
+  "http://sbols.org/v3#type": {
+    "@id": "https://identifiers.org/SBO:0000252"
+  }
+}

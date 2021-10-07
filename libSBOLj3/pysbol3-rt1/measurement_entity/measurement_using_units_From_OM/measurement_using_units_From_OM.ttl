@@ -1,0 +1,26 @@
+@prefix : <https://sbolstandard.org/examples/> .
+@prefix CHEBI: <https://identifiers.org/CHEBI:> .
+@prefix SBO: <https://identifiers.org/SBO:> .
+@prefix om: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix sbol: <http://sbols.org/v3#> .
+
+:M9_Glucose_CAA a sbol:Component ;
+    sbol:description "M9 Glucose CAA growth media" ;
+    sbol:displayId "M9_Glucose_CAA" ;
+    sbol:hasFeature <https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1> ;
+    sbol:hasNamespace <https://sbolstandard.org/examples> ;
+    sbol:name "M9 Glucose CAA" ;
+    sbol:type SBO:0000241 .
+
+<https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1> a sbol:ExternallyDefined ;
+    sbol:definition CHEBI:3312 ;
+    sbol:displayId "ExternallyDefined1" ;
+    sbol:hasMeasure <https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1> ;
+    sbol:type SBO:0000247 .
+
+<https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1> a sbol:Identified,
+        om:Measure ;
+    sbol:displayId "measure1" ;
+    om:hasNumericalValue "0.1" ;
+    om:hasUnit om:millimolePerLitre .
+
