@@ -217,10 +217,10 @@ public class SBOLComparator {
 		{
 			output = add(output, assertEqualImplementation((Implementation)identified1, (Implementation) identified2));
 		}
-		else if (identified1 instanceof Model)
+		/*else if (identified1 instanceof Model)
 		{
 			output = add(output, assertEqualModel((Model)identified1, (Model) identified2));
-		}
+		}*/
 		else if (identified1 instanceof Model)
 		{
 			output = add(output, assertEqualModel((Model)identified1, (Model) identified2));
@@ -554,15 +554,21 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			assertEqual(entity1, entity2);
-			if (entity1.getOrientation()!=null)
+			if (entity1.getOrientation()!=null && entity2.getOrientation()!=null)
 			{
 				output = add(output, assertEqual(entity1, entity2, entity1.getOrientation().getUri(),entity2.getOrientation().getUri(), DataModel.orientation));
+			}
+			
+			else 
+			{
+				output=add(output, assertBothNullOrNotNull(entity1, entity1, entity1.getOrientation(), entity2.getOrientation(), DataModel.orientation));
 			}
 			output = add(output, assertEqual(entity1, entity2, entity1.getRoles(),entity2.getRoles(), DataModel.role));
 		}
 		return output;
 	}
 	
+	 
 	private static StringBuilder assertEqualSequenceFeature(SequenceFeature entity1, SequenceFeature entity2) throws SBOLGraphException
 	{
 		StringBuilder output=null;
@@ -781,6 +787,23 @@ public class SBOLComparator {
 		{
 			output = add(output,message);
 		}
+		return output;
+		
+	}
+	
+	private static StringBuilder assertBothNullOrNotNull(Identified identified1, Identified identified2, Object value1, Object value2, URI property)
+	{
+		StringBuilder output=null;
+		String message=null;
+		if (value1==null && value2!=null)
+		{
+			message=String.format("Could not read the %s property. Entity:%s, Value1:%s, Value2:%s", property.toString(), identified1.getUri().toString(), value1, value2);		
+		}
+		else if (value1!=null && value2==null)	
+		{
+			message=String.format("Could not read the %s property. Entity:%s, Value1:%s, Value2:%s", property.toString(), identified2.getUri().toString(), value1, value2);					
+		}
+		output = add(output,message);
 		return output;
 		
 	}

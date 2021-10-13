@@ -1,0 +1,170 @@
+{
+  "@context": {
+    "@CHEBI": "https://identifiers.org/CHEBI:",
+    "@EDAM": "https://identifiers.org/edam:",
+    "@GO": "https://identifiers.org/GO:",
+    "@SBO": "https://identifiers.org/SBO:",
+    "@SO": "https://identifiers.org/SO:",
+    "@om": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+    "@prov": "http://www.w3.org/ns/prov#",
+    "@rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "@rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "@sbol": "http://sbols.org/v3#",
+    "@vocab": "https://sbolstandard.org/examples/",
+    "@xml": "http://www.w3.org/XML/1998/namespace",
+    "@xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "https://sbolstandard.org/examples/codon_optimization_activity",
+      "@type": [
+        "http://www.w3.org/ns/prov#Activity",
+        "http://sbols.org/v3#TopLevel"
+      ],
+      "http://sbols.org/v3#description": "An activity that is used to optimise codons",
+      "http://sbols.org/v3#displayId": "codon_optimization_activity",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "Codon optimization activity",
+      "http://sbols.org/v3#type": {
+        "@id": "http://sbols.org/v3#design"
+      },
+      "http://www.w3.org/ns/prov#endedAtTime": "2020-08-30T15:42:23.277Z",
+      "http://www.w3.org/ns/prov#qualifiedAssociation": {
+        "@id": "https://sbolstandard.org/examples/codon_optimization_activity/Association1"
+      },
+      "http://www.w3.org/ns/prov#qualifiedUsage": [
+        {
+          "@id": "https://sbolstandard.org/examples/codon_optimization_activity/Usage1"
+        },
+        {
+          "@id": "https://sbolstandard.org/examples/codon_optimization_activity/Usage2"
+        }
+      ],
+      "http://www.w3.org/ns/prov#startedAtTime": "2019-07-29T15:42:23.277Z"
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/toggle_switch",
+      "@type": "http://sbols.org/v3#Component",
+      "http://sbols.org/v3#description": "Toggle Switch genetic circuit",
+      "http://sbols.org/v3#displayId": "toggle_switch",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "Toggle Switch",
+      "http://sbols.org/v3#type": {
+        "@id": "https://identifiers.org/SBO:0000241"
+      }
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/codon_optimization_activity/Association1",
+      "@type": [
+        "http://www.w3.org/ns/prov#Association",
+        "http://sbols.org/v3#Identified"
+      ],
+      "http://sbols.org/v3#displayId": "Association1",
+      "http://www.w3.org/ns/prov#agent": {
+        "@id": "https://sbolstandard.org/examples/CodonOptimiserSoftware"
+      },
+      "http://www.w3.org/ns/prov#hadPlan": {
+        "@id": "https://sbolstandard.org/examples/CodonOptimisationProtocol"
+      },
+      "http://www.w3.org/ns/prov#hadRole": {
+        "@id": "http://sbols.org/v3#design"
+      }
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/CodonOptimisationProtocol",
+      "@type": [
+        "http://www.w3.org/ns/prov#Plan",
+        "http://sbols.org/v3#TopLevel"
+      ],
+      "http://sbols.org/v3#description": "Optimisation protocol to improve the translation of mRNAs.",
+      "http://sbols.org/v3#displayId": "CodonOptimisationProtocol",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "Codon Optimisation Protocol"
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/RBS_optimisation_activity",
+      "@type": [
+        "http://www.w3.org/ns/prov#Activity",
+        "http://sbols.org/v3#TopLevel"
+      ],
+      "http://sbols.org/v3#description": "An activity that is used to RBSs",
+      "http://sbols.org/v3#displayId": "RBS_optimisation_activity",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "RBS optimization activity",
+      "http://sbols.org/v3#type": {
+        "@id": "http://sbols.org/v3#design"
+      },
+      "http://www.w3.org/ns/prov#wasInformedBy": {
+        "@id": "https://sbolstandard.org/examples/codon_optimization_activity"
+      }
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/codon_optimization_activity/Usage2",
+      "@type": [
+        "http://www.w3.org/ns/prov#Usage",
+        "http://sbols.org/v3#Identified"
+      ],
+      "http://sbols.org/v3#displayId": "Usage2",
+      "http://www.w3.org/ns/prov#entity": {
+        "@id": "https://sbolstandard.org/examples/toggle_switch_optimised"
+      },
+      "http://www.w3.org/ns/prov#hadRole": {
+        "@id": "https://identifiers.org/SBO:0000011"
+      }
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/toggle_switch_optimised",
+      "@type": "http://sbols.org/v3#Component",
+      "http://sbols.org/v3#description": "Toggle Switch genetic circuit - codon optimised",
+      "http://sbols.org/v3#displayId": "toggle_switch_optimised",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "Toggle Switch Optimised",
+      "http://sbols.org/v3#type": {
+        "@id": "https://identifiers.org/SBO:0000241"
+      },
+      "http://www.w3.org/ns/prov#wasDerivedFrom": {
+        "@id": "https://sbolstandard.org/examples/toggle_switch"
+      },
+      "http://www.w3.org/ns/prov#wasGeneratedBy": {
+        "@id": "https://sbolstandard.org/examples/codon_optimization_activity"
+      }
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/CodonOptimiserSoftware",
+      "@type": [
+        "http://www.w3.org/ns/prov#Agent",
+        "http://sbols.org/v3#TopLevel"
+      ],
+      "http://sbols.org/v3#description": "Used to optimise bacterial DNA sequences.",
+      "http://sbols.org/v3#displayId": "CodonOptimiserSoftware",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "Codon Optimiser Software"
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/codon_optimization_activity/Usage1",
+      "@type": [
+        "http://www.w3.org/ns/prov#Usage",
+        "http://sbols.org/v3#Identified"
+      ],
+      "http://sbols.org/v3#displayId": "Usage1",
+      "http://www.w3.org/ns/prov#entity": {
+        "@id": "https://sbolstandard.org/examples/toggle_switch"
+      },
+      "http://www.w3.org/ns/prov#hadRole": {
+        "@id": "https://identifiers.org/SBO:0000645"
+      }
+    }
+  ]
+}
