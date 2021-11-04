@@ -91,7 +91,7 @@
       <sbol:name>i13504 system</sbol:name>
       <sbol:hasFeature rdf:resource="i13504_system/SubComponent1"/>
       <sbol:displayId>i13504_system</sbol:displayId>
-      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
    </sbol:Component>
    <sbol:Component rdf:about="i13504">
       <sbol:hasFeature>

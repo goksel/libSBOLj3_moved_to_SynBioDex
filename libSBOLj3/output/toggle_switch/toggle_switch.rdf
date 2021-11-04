@@ -234,6 +234,7 @@
       <sbol:description>TetR repressible promoter</sbol:description>
    </sbol:Component>
    <sbol:Component rdf:about="toggle_switch">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="toggle_switch/SubComponent1">
             <sbol:instanceOf>
@@ -307,7 +308,6 @@
       </sbol:hasConstraint>
       <sbol:hasFeature rdf:resource="toggle_switch/ComponentReference1"/>
       <sbol:name>Toggle Switch</sbol:name>
-      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
       <sbol:hasFeature rdf:resource="toggle_switch/SubComponent2"/>
    </sbol:Component>
    <sbol:Component rdf:about="ter_tetR">

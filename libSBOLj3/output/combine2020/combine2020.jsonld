@@ -161,7 +161,7 @@
     "hasNamespace" : "https://synbiohub.org/public/igem",
     "name" : "i13504 system",
     "role" : "SBO:0000289",
-    "type" : "SBO:0000241"
+    "type" : "SBO:0000251"
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504_system/ComponentReference1",
     "@type" : "sbol:ComponentReference",

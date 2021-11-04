@@ -423,7 +423,7 @@
     "hasFeature" : [ "https://sbolstandard.org/examples/toggle_switch/SubComponent1", "https://sbolstandard.org/examples/toggle_switch/ComponentReference4", "https://sbolstandard.org/examples/toggle_switch/ComponentReference3", "https://sbolstandard.org/examples/toggle_switch/ComponentReference2", "https://sbolstandard.org/examples/toggle_switch/ComponentReference1", "https://sbolstandard.org/examples/toggle_switch/SubComponent2" ],
     "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "Toggle Switch",
-    "type" : "SBO:0000241"
+    "type" : "SBO:0000251"
   }, {
     "@id" : "https://sbolstandard.org/examples/toggle_switch/ComponentReference1",
     "@type" : "sbol:ComponentReference",
