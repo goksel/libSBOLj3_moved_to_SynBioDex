@@ -1,0 +1,75 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:SO="https://identifiers.org/SO:"
+    xmlns:igem="http://parts.igem.org/"
+    xmlns:EDAM="https://identifiers.org/edam:"
+    xmlns:sbol="http://sbols.org/v3#"
+    xmlns:CHEBI="https://identifiers.org/CHEBI:"
+    xmlns:prov="http://www.w3.org/ns/prov#"
+    xmlns:SBO="https://identifiers.org/SBO:"
+    xmlns:GO="https://identifiers.org/GO:"
+    xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/">
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/BBa_J23119">
+      <igem:belongsTo>
+         <sbol:TopLevel rdf:about="https://sbolstandard.org/examples/iGEMRepository"/>
+      </igem:belongsTo>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000167"/>
+      <sbol:description>Parts J23100 through J23119 are a family of constitutive promoter parts isolated from a small combinatorial library.</sbol:description>
+      <igem:hasInformation>
+         <sbol:Identified rdf:about="https://sbolstandard.org/examples/BBa_J23119/information1">
+            <igem:regulation>//regulation/second_regulation</igem:regulation>
+            <igem:regulation>//regulation/constitutive</igem:regulation>
+            <igem:sigmaFactor>//rnap/prokaryote/ecoli/sigma70</igem:sigmaFactor>
+            <rdf:type rdf:resource="http://parts.igem.org/Information"/>
+            <sbol:description>The experience page captures users' experience using the BBa_J23119 part</sbol:description>
+            <sbol:name>BBa_J23119_experience</sbol:name>
+            <sbol:displayId>information1</sbol:displayId>
+         </sbol:Identified>
+      </igem:hasInformation>
+      <igem:belongsTo>
+         <sbol:TopLevel rdf:about="https://sbolstandard.org/examples/SynBioHubRepository"/>
+      </igem:belongsTo>
+      <sbol:name>BBa_J23119 part</sbol:name>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <igem:hasUsage>
+         <sbol:Identified rdf:about="https://sbolstandard.org/examples/BBa_J23119/usage1">
+            <sbol:displayId>usage1</sbol:displayId>
+            <igem:registryStar>1</igem:registryStar>
+            <sbol:name>BBa_J23119_usage</sbol:name>
+            <igem:uses>442</igem:uses>
+            <igem:twinURLs>
+               <sbol:Identified rdf:about="https://sbolstandard.org/examples/BBa_J23119/usage1/twinParts">
+                  <igem:twinURL rdf:resource="http://parts.igem.org/wiki/index.php?title=Part:BBa_M36800"/>
+                  <igem:twinURL rdf:resource="http://parts.igem.org/wiki/index.php?title=Part:BBa_M1638"/>
+                  <igem:twinURL rdf:resource="http://parts.igem.org/wiki/index.php?title=Part:BBa_J72073"/>
+                  <rdf:type rdf:resource="http://parts.igem.org/TwinPartUsage"/>
+                  <sbol:name>twin parts</sbol:name>
+                  <sbol:displayId>twinParts</sbol:displayId>
+               </sbol:Identified>
+            </igem:twinURLs>
+            <sbol:description>BBa_J23119 usage statistics</sbol:description>
+            <rdf:type rdf:resource="http://parts.igem.org/IGEMUsage"/>
+            <igem:twins>7</igem:twins>
+            <igem:inStock>true</igem:inStock>
+         </sbol:Identified>
+      </igem:hasUsage>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <igem:experienceURL rdf:resource="http://parts.igem.org/Part:BBa_J23119:Experience"/>
+      <sbol:displayId>BBa_J23119</sbol:displayId>
+      <igem:group>iGEM2006_Berkeley</igem:group>
+   </sbol:Component>
+   <sbol:TopLevel rdf:about="https://sbolstandard.org/examples/iGEMRepository">
+      <igem:website rdf:resource="http://parts.igem.org/Main_Page"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <rdf:type rdf:resource="http://parts.igem.org/Repository"/>
+      <sbol:description>Registry of Standard Biological Parts</sbol:description>
+      <sbol:name>iGEM Registry</sbol:name>
+      <sbol:displayId>iGEMRepository</sbol:displayId>
+   </sbol:TopLevel>
+   <sbol:TopLevel rdf:about="https://sbolstandard.org/examples/SynBioHubRepository">
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <rdf:type rdf:resource="http://parts.igem.org/Repository"/>
+      <sbol:name>SynBioHub</sbol:name>
+      <sbol:displayId>SynBioHubRepository</sbol:displayId>
+   </sbol:TopLevel>
+</rdf:RDF>

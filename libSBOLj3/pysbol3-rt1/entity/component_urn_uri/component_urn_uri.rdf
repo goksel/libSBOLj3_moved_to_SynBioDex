@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:sbol="http://sbols.org/v3#"
+>
+  <rdf:Description rdf:about="urn:uuid:4e4dfda9-f454-463c-a684-f735deec0cc9">
+    <sbol:name>TetR</sbol:name>
+    <rdf:type rdf:resource="http://sbols.org/v3#Component"/>
+    <sbol:hasNamespace rdf:resource="urn:uuid:5801b7d0-63dc-45d9-86b1-69869e90daa4"/>
+    <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
+  </rdf:Description>
+</rdf:RDF>

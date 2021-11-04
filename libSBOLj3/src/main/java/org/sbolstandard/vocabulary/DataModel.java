@@ -67,7 +67,7 @@ public class DataModel {
 		{
 			public static URI uri=URINameSpace.SBOL.local("ComponentReference");
 			public static URI inChildOf=URINameSpace.SBOL.local("inChildOf");
-			public static URI feature=URINameSpace.SBOL.local("hasFeature");	
+			public static URI feature=URINameSpace.SBOL.local("refersTo");	
 		}
 		
 		public static final class LocalSubComponent

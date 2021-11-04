@@ -1,0 +1,46 @@
+{
+  "@context": {
+    "@CHEBI": "https://identifiers.org/CHEBI:",
+    "@EDAM": "https://identifiers.org/edam:",
+    "@GO": "https://identifiers.org/GO:",
+    "@SBO": "https://identifiers.org/SBO:",
+    "@SO": "https://identifiers.org/SO:",
+    "@om": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+    "@prov": "http://www.w3.org/ns/prov#",
+    "@rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "@rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "@sbol": "http://sbols.org/v3#",
+    "@vocab": "https://sbolstandard.org/examples/",
+    "@xml": "http://www.w3.org/XML/1998/namespace",
+    "@xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "https://sbolstandard.org/examples/TetR_protein",
+      "@type": "http://sbols.org/v3#Component",
+      "http://sbols.org/v3#description": "TetR protein",
+      "http://sbols.org/v3#displayId": "TetR_protein",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "TetR",
+      "http://sbols.org/v3#role": {
+        "@id": "https://identifiers.org/GO:0003700"
+      },
+      "http://sbols.org/v3#type": {
+        "@id": "https://identifiers.org/SBO:0000252"
+      }
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/impl1",
+      "@type": "http://sbols.org/v3#Implementation",
+      "http://sbols.org/v3#built": {
+        "@id": "https://sbolstandard.org/examples/TetR_protein"
+      },
+      "http://sbols.org/v3#displayId": "impl1",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      }
+    }
+  ]
+}

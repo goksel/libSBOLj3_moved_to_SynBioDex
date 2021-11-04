@@ -128,5 +128,7 @@ public class SBOLValidator {
 			throw new IOException("Could not load the sparql file " + queryFile,e);
 		}
 	}
+	
+	
 
 }

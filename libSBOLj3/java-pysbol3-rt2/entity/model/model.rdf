@@ -1,0 +1,26 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:SO="https://identifiers.org/SO:"
+    xmlns:EDAM="https://identifiers.org/edam:"
+    xmlns:sbol="http://sbols.org/v3#"
+    xmlns:CHEBI="https://identifiers.org/CHEBI:"
+    xmlns:prov="http://www.w3.org/ns/prov#"
+    xmlns:SBO="https://identifiers.org/SBO:"
+    xmlns:GO="https://identifiers.org/GO:"
+    xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/">
+   <sbol:Model rdf:about="https://sbolstandard.org/examples/model1">
+      <sbol:framework rdf:resource="https://identifiers.org/SBO:0000062"/>
+      <sbol:language rdf:resource="https://identifiers.org/edam:format_2585"/>
+      <sbol:source rdf:resource="http://virtualparts.org"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org"/>
+      <sbol:displayId>model1</sbol:displayId>
+   </sbol:Model>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/toggle_switch">
+      <sbol:hasModel rdf:resource="https://sbolstandard.org/examples/model1"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>Toggle Switch genetic circuit</sbol:description>
+      <sbol:name>Toggle Switch</sbol:name>
+      <sbol:displayId>toggle_switch</sbol:displayId>
+   </sbol:Component>
+</rdf:RDF>

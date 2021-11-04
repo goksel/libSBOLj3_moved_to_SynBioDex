@@ -64,7 +64,7 @@ public class Activity extends ControlledTopLevel{
 	public XSDDateTime getEndedAtTime() throws SBOLGraphException {
 		if (endedAtTime==null)
 		{
-			String timeString=RDFUtil.getPropertyAsString(this.resource, ProvenanceDataModel.Activity.startedAtTime);
+			String timeString=RDFUtil.getPropertyAsString(this.resource, ProvenanceDataModel.Activity.endedAtTime);
 			if (timeString!=null)
 			{
 				try

@@ -1,0 +1,37 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:SO="https://identifiers.org/SO:"
+    xmlns:EDAM="https://identifiers.org/edam:"
+    xmlns:sbol="http://sbols.org/v3#"
+    xmlns:CHEBI="https://identifiers.org/CHEBI:"
+    xmlns:prov="http://www.w3.org/ns/prov#"
+    xmlns:SBO="https://identifiers.org/SBO:"
+    xmlns:GO="https://identifiers.org/GO:"
+    xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/">
+   <sbol:Collection rdf:about="https://sbolstandard.org/examples/col1">
+      <sbol:member>
+         <sbol:Component rdf:about="https://sbolstandard.org/examples/LacI_protein"/>
+      </sbol:member>
+      <sbol:member>
+         <sbol:Component rdf:about="https://sbolstandard.org/examples/TetR_protein"/>
+      </sbol:member>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:displayId>col1</sbol:displayId>
+   </sbol:Collection>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/LacI_protein">
+      <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>LacI protein</sbol:description>
+      <sbol:name>LacI</sbol:name>
+      <sbol:displayId>LacI_protein</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/TetR_protein">
+      <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>TetR protein</sbol:description>
+      <sbol:name>TetR</sbol:name>
+      <sbol:displayId>TetR_protein</sbol:displayId>
+   </sbol:Component>
+</rdf:RDF>

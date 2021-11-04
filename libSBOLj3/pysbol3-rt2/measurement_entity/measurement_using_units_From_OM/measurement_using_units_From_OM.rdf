@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:sbol="http://sbols.org/v3#"
+>
+  <rdf:Description rdf:about="https://sbolstandard.org/examples/M9_Glucose_CAA">
+    <sbol:displayId>M9_Glucose_CAA</sbol:displayId>
+    <sbol:name>M9 Glucose CAA</sbol:name>
+    <sbol:description>M9 Glucose CAA growth media</sbol:description>
+    <rdf:type rdf:resource="http://sbols.org/v3#Component"/>
+    <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+    <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
+    <sbol:hasFeature rdf:resource="https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1">
+    <sbol:displayId>ExternallyDefined1</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v3#ExternallyDefined"/>
+    <sbol:type rdf:resource="https://identifiers.org/SBO:0000247"/>
+    <sbol:definition rdf:resource="https://identifiers.org/CHEBI:3312"/>
+    <sbol:hasMeasure rdf:resource="https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1">
+    <sbol:displayId>measure1</sbol:displayId>
+    <rdf:type rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/Measure"/>
+    <rdf:type rdf:resource="http://sbols.org/v3#Identified"/>
+    <om:hasNumericalValue>0.1</om:hasNumericalValue>
+    <om:hasUnit rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/millimolePerLitre"/>
+  </rdf:Description>
+</rdf:RDF>

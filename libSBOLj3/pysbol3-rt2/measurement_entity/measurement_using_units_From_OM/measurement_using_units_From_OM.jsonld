@@ -1,0 +1,61 @@
+{
+  "@context": {
+    "@CHEBI": "https://identifiers.org/CHEBI:",
+    "@EDAM": "https://identifiers.org/edam:",
+    "@GO": "https://identifiers.org/GO:",
+    "@SBO": "https://identifiers.org/SBO:",
+    "@SO": "https://identifiers.org/SO:",
+    "@om": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+    "@prov": "http://www.w3.org/ns/prov#",
+    "@rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "@rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "@sbol": "http://sbols.org/v3#",
+    "@vocab": "https://sbolstandard.org/examples/",
+    "@xml": "http://www.w3.org/XML/1998/namespace",
+    "@xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1",
+      "@type": [
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/Measure",
+        "http://sbols.org/v3#Identified"
+      ],
+      "http://sbols.org/v3#displayId": "measure1",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumericalValue": "0.1",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit": {
+        "@id": "http://www.ontology-of-units-of-measure.org/resource/om-2/millimolePerLitre"
+      }
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/M9_Glucose_CAA",
+      "@type": "http://sbols.org/v3#Component",
+      "http://sbols.org/v3#description": "M9 Glucose CAA growth media",
+      "http://sbols.org/v3#displayId": "M9_Glucose_CAA",
+      "http://sbols.org/v3#hasFeature": {
+        "@id": "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1"
+      },
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "M9 Glucose CAA",
+      "http://sbols.org/v3#type": {
+        "@id": "https://identifiers.org/SBO:0000241"
+      }
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1",
+      "@type": "http://sbols.org/v3#ExternallyDefined",
+      "http://sbols.org/v3#definition": {
+        "@id": "https://identifiers.org/CHEBI:3312"
+      },
+      "http://sbols.org/v3#displayId": "ExternallyDefined1",
+      "http://sbols.org/v3#hasMeasure": {
+        "@id": "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1"
+      },
+      "http://sbols.org/v3#type": {
+        "@id": "https://identifiers.org/SBO:0000247"
+      }
+    }
+  ]
+}
