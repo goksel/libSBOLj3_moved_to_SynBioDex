@@ -20,6 +20,7 @@ import org.sbolstandard.validation.SBOLValidator;
 public class RoundTripTest {
 
 	private static final String pythonOutputBase="pysbol3-rt2"; 
+	
 	@Test
 	public void validate() throws IOException, SBOLGraphException {
 		
@@ -36,7 +37,7 @@ public class RoundTripTest {
 
 	}
 	
-	public String validateFolder(String folder) throws IOException, SBOLGraphException
+	public static String validateFolder(String folder) throws IOException, SBOLGraphException
 	{
 		StringBuilder output=new StringBuilder();
 		roundTripRecursive(output, new File(folder));
@@ -44,7 +45,7 @@ public class RoundTripTest {
 		return result;
 	}
 	
-	private StringBuilder roundTripRecursive(StringBuilder output, File folder) throws IOException, SBOLGraphException
+	private static StringBuilder roundTripRecursive(StringBuilder output, File folder) throws IOException, SBOLGraphException
 	{
 		File[] files=folder.listFiles();
 		for (int i=0;i<files.length;i++)
@@ -63,9 +64,9 @@ public class RoundTripTest {
 	}
 		
 		
-		public StringBuilder validateRoundTripFile(StringBuilder output, File file) throws IOException, SBOLGraphException
+		private static StringBuilder validateRoundTripFile(StringBuilder output, File file) throws IOException, SBOLGraphException
 		{ 
-			if (file.getName().startsWith("."))
+			if (file.getName().startsWith(".") || file.getName().endsWith(".rj")  || file.getName().endsWith(".xml") )
 			{
 				return output;
 			}
@@ -81,8 +82,8 @@ public class RoundTripTest {
 			String javaOutputFile=file.getPath().replace(pythonOutputBase, TestUtil.baseOutput);
 			//String javaOutputFile=file.getPath().replace(pythonOutputBase, "java-" + pythonOutputBase);
 			File javaFile=new File(javaOutputFile);
-			SBOLDocument docPython=SBOLIO.read(file);
-			SBOLDocument docJava=SBOLIO.read(javaFile);
+			SBOLDocument docPython=SBOLIO.read(file,getFormat(file));
+			SBOLDocument docJava=SBOLIO.read(javaFile,getFormat(file));
 			
 			String message=SBOLComparator.assertEqual(docPython, docJava);
 			
@@ -93,7 +94,7 @@ public class RoundTripTest {
 				output.append(System.lineSeparator());
 				output.append(message);
 			}
-			saveFromJava(docPython, file);
+			//saveFromJava(docPython, file);
 			return output;
 			
 			
@@ -112,7 +113,7 @@ public class RoundTripTest {
 			SBOLIO.write(doc, newFile, getFormat(file));
 			
 		}
-		private SBOLFormat getFormat(File file) throws SBOLGraphException
+		private static SBOLFormat getFormat(File file) throws SBOLGraphException
 		{
 			String extension=FileNameUtils.getExtension(file.getName());
 			if (extension.equals("ttl"))
@@ -131,9 +132,14 @@ public class RoundTripTest {
 			{
 				return SBOLFormat.NTRIPLES;
 			}
+			else if (extension.equals("jsonld_expanded"))
+			{
+				return SBOLFormat.JSONLD_EXPAND;
+			}
+			
 			else
 			{
-				throw new SBOLGraphException("Unsupported file extension");
+				throw new SBOLGraphException("Unsupported file extension. File: " + file.getName());
 			}	
 		}
 }
