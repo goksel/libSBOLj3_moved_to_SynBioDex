@@ -1,30 +1,24 @@
 package org.sbolstandard.core3.util;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharSet;
-import org.sbolstandard.core3.vocabulary.DataModel;
+import org.apache.jena.rdf.model.Model;
+import org.sbolstandard.core3.entity.SBOLDocument;
 
 public class SBOLUtil {
 
@@ -80,4 +74,9 @@ public class SBOLUtil {
 			}
 	 }
 	 
+	 public static List<URI> filterItems(SBOLDocument document, List<URI> identifieds, URI property, URI value)
+	 {
+		return RDFUtil.filterItems(document.getRDFModel(), identifieds, property, value.toString());
+	 }
+	
 }

@@ -2,7 +2,6 @@ package org.sbolstandard.core3.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,8 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
-
 import org.apache.jena.datatypes.xsd.impl.XSDFloat;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
@@ -32,8 +29,6 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
-import org.apache.jena.riot.JsonLDWriteContext;
-import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
 import org.apache.jena.riot.RDFParser;
@@ -41,12 +36,8 @@ import org.apache.jena.riot.RDFParserBuilder;
 import org.apache.jena.riot.RDFWriter;
 import org.apache.jena.riot.RDFWriterBuilder;
 import org.apache.jena.riot.SysRIOT;
-import org.apache.jena.riot.writer.JsonLDWriter;
 import org.apache.jena.sparql.util.Context;
 import org.apache.jena.vocabulary.RDF;
-import org.sbolstandard.core3.entity.SBOLDocument;
-
-import com.github.jsonldjava.core.JsonLdOptions;
 
 //IO: https://jena.apache.org/documentation/io/rdf-input.html
 //https://jena.apache.org/tutorials/rdf_api.html#ch-Writing-RDF
@@ -429,7 +420,7 @@ public class RDFUtil {
 			writer.write(model, stream, base);
 	    }*/
 	    
-	    private static void writeToStreamRDFXML(Model model, OutputStream stream, String format, Resource[] topLevelResources, URI baseUri)
+	    /*private static void writeToStreamRDFXML(Model model, OutputStream stream, String format, Resource[] topLevelResources, URI baseUri)
 	    {
 	    	org.apache.jena.rdf.model.RDFWriter writer = model.getWriter(format);
 			writer.setProperty("tab", "3");
@@ -448,7 +439,8 @@ public class RDFUtil {
 			}
 			writer.write(model, stream, base);
 	    }
-		
+		*/
+	    
 	    private static void configureRDFWriter_RDFXML(RDFWriterBuilder writerBuilder, Model model, RDFFormat format, Resource[] topLevelResources, String baseUri)
 	    {
 	    	Map<String, Object> properties = new HashMap<>();
@@ -619,6 +611,39 @@ public class RDFUtil {
 	        parser.parse(model);    
 			return model;			
 		}
+	    
+	    public static List<URI> filterItems(Model model, List<URI> resources, URI property, URI value)
+		{
+			return filterItems(model, resources, property, value.toString());
+		}
+	    
+	    public static List<URI> filterItems(Model model, List<URI> resources, URI property, String value)
+		 {
+			ArrayList<URI> filtered=null; 
+	    	if (resources!=null){
+	    		Property rdfProperty=model.getProperty(property.toString());   
+				for (URI uri :resources){
+					Resource resource=model.getResource(uri.toString());
+					StmtIterator it=resource.listProperties(rdfProperty);
+					if (it!=null){
+						while (it.hasNext()){
+							Statement stmt=it.next();
+							String rdfValue=toLiteralString(stmt.getObject());
+							if (value.equals(rdfValue)){
+								if (filtered==null){
+									filtered=new ArrayList<URI>();
+								}
+								filtered.add(uri);
+								break;
+							}
+						}
+					}
+	    		}
+			 }
+	    	 return filtered; 
+		 }
+	    
+	   
 }
 
 /*

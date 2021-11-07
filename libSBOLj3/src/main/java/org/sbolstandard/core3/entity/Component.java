@@ -10,7 +10,9 @@ import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.DataModel;
+import org.sbolstandard.core3.vocabulary.Encoding;
 
 public class Component extends TopLevel {
 	
@@ -81,6 +83,11 @@ public class Component extends TopLevel {
 	public void setSequences(List<URI> sequences) {
 		this.sequences = sequences;
 		RDFUtil.setProperty(resource, DataModel.Component.sequence, sequences);
+	}
+	
+	public List<URI> getSequences(Encoding encoding)
+	{
+		return filterIdentifieds(this.getSequences(),DataModel.Sequence.encoding, encoding.getUri().toString());
 	}
 	
 	//Features

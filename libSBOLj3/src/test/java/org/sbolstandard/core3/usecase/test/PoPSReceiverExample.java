@@ -3,16 +3,20 @@ package org.sbolstandard.core3.usecase.test;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Component;
 import org.sbolstandard.core3.entity.SBOLDocument;
+import org.sbolstandard.core3.entity.Sequence;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.ComponentType;
+import org.sbolstandard.core3.vocabulary.DataModel;
+import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.InteractionType;
 import org.sbolstandard.core3.vocabulary.ParticipationRole;
 import org.sbolstandard.core3.vocabulary.Role;
@@ -69,6 +73,15 @@ public class PoPSReceiverExample extends TestCase {
         System.out.print(SBOLIO.write(doc2, SBOLFormat.JSONLD));
         
         TestUtil.assertDNARootComponents(doc2, 1);
+        
+        List<URI> pLuxRSeqs=pLuxR.getSequences(Encoding.NucleicAcid);
+        assertTrue("Could not filter sequences by encoding type", pLuxRSeqs!=null && pLuxRSeqs.size()==1);
+        System.out.println("Sequence URI:" + pLuxRSeqs.get(0));
+        
+        List<Sequence> naSequences=doc2.getSequences(Encoding.NucleicAcid);
+        assertTrue("Could not filter document sequences by encoding type", naSequences!=null && naSequences.size()==8);
+         
+        
 	  
         System.out.println("done");   
     }

@@ -31,6 +31,7 @@ import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.vocabulary.DataModel;
+import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
@@ -149,6 +150,74 @@ public class SBOLDocument {
 	public List<Sequence> getSequences() throws SBOLGraphException {
 		this.sequences=addToList(model, this.sequences, DataModel.Sequence.uri,Sequence.class);
 		return sequences;
+	}
+	
+	/*public List<Sequence> getSequences(Encoding encoding) throws SBOLGraphException {
+		List<Sequence> filteredSequences=null;		
+		getSequences();
+		if (sequences!=null)
+		{
+			List<URI> uris=getURIs(sequences);
+			List<URI> filteredUris=this.filterIdentifieds(uris, DataModel.Sequence.encoding, encoding.getUri().toString());
+			for (Sequence sequence:sequences)
+			{
+				if (filteredUris.contains(sequence.getUri()))
+				{
+					if (filteredSequences==null)
+					{
+						filteredSequences=new ArrayList<Sequence>();
+					}
+					filteredSequences.add(sequence);
+				}
+			}
+		}
+		return filteredSequences;
+	}*/
+	
+	public List<Sequence> getSequences(Encoding encoding) throws SBOLGraphException {
+		getSequences();
+		
+		List<Sequence> filteredSequences=filterIdentifiedItems(this.sequences, DataModel.Sequence.encoding, encoding.getUri().toString());
+		return filteredSequences;
+	}
+	
+	public <T extends Identified> List<T> filterIdentifiedItems(List<T> identifieds, URI property, String value) throws SBOLGraphException {
+		List<T> filteredIdentifieds=null;		
+		if (identifieds!=null)
+		{
+			List<URI> uris=getURIs(identifieds);
+			List<URI> filteredUris=this.filterIdentifieds(uris, property, value);
+			for (T identified:identifieds)
+			{
+				if (filteredUris.contains(identified.getUri()))
+				{
+					if (filteredIdentifieds==null)
+					{
+						filteredIdentifieds=new ArrayList<T>();
+					}
+					filteredIdentifieds.add(identified);
+				}
+				/*else
+				{
+					throw new SBOLGraphException(String.format("Could not filter items. Property:%s Value:%s", property, value));
+				}*/
+			}
+		}
+		return filteredIdentifieds;
+	}
+	
+	private <T extends Identified>  List<URI> getURIs(List<T> identifieds)
+	{
+		ArrayList<URI> uris=null;
+		if (identifieds!=null)
+		{
+			uris=new ArrayList<URI>();
+			for (Identified identified:identifieds)
+			{
+				uris.add(identified.getUri());
+			}
+		}
+		return uris;
 	}
 	
 	public Sequence createSequence(URI namespace, URI uri) throws SBOLGraphException {
@@ -780,6 +849,7 @@ public class SBOLDocument {
 		return items;
 	}
 	
+	
 	private <T extends Identified> void addToInMemoryList(T item, List<T> list)
 	{
 		if (list == null) {
@@ -827,4 +897,10 @@ public class SBOLDocument {
 			topLevelResourceTypes.add(type);
 		}
 	}	
+	
+	public List<URI> filterIdentifieds(List<URI> identifieds, URI property, String value)
+	{
+		return RDFUtil.filterItems(this.getRDFModel(), identifieds, property, value);
+	}
+	
 }

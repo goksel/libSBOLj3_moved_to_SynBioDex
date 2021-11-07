@@ -397,6 +397,13 @@ public abstract class Identified {
 		}
 	}
 	
+	
+	public List<URI> filterIdentifieds(List<URI> identifieds, URI property, String value)
+	{
+		return RDFUtil.filterItems(this.resource.getModel(), identifieds, property, value);
+	}
+	
+	
 }
 
 /*private void inferDisplayId(URI uri) {
