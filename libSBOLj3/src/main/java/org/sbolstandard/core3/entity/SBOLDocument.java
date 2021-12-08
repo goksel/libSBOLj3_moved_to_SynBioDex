@@ -717,7 +717,12 @@ public class SBOLDocument {
 		return measures;
 	}
 	*/
-	public <T extends Identified>Identified getIdentified(URI uri, Class<T> identified) throws SBOLGraphException
+	
+	
+	/*Keep this for now. The usage: 	
+	 * Sequence i13504Sequence1= (Sequence)doc.getIdentified(device.getSequences().get(0),Sequence.class);
+	
+	 * public <T extends Identified>Identified getIdentified(URI uri, Class<T> identified) throws SBOLGraphException
 	{
 		Resource res=this.model.getResource(uri.toString());
 		try
@@ -735,7 +740,30 @@ public class SBOLDocument {
 			throw new SBOLGraphException(ex.getMessage());
 		}
 
+	}*/
+	
+	
+	public <T extends Identified> T getIdentified(URI uri, Class<T> identified) throws SBOLGraphException
+	{
+		Resource res=this.model.getResource(uri.toString());
+		try
+		{
+			Constructor<T> constructor = identified.getDeclaredConstructor( new Class[] {Resource.class});
+			if (!constructor.isAccessible())
+			{
+				constructor.setAccessible(true);
+			}
+			Identified entity= (Identified)constructor.newInstance(new Object[]{res});
+			return (T)entity;
+		}
+		catch (Exception ex)
+		{
+			throw new SBOLGraphException(ex.getMessage());
+		}
+
 	}
+	
+	
 	
 	/*public <T extends Identified>Identified getIdentified2(URI uri) throws SBOLGraphException
 	{

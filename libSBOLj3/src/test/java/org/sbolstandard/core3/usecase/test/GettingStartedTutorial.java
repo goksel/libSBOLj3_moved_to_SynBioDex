@@ -86,7 +86,9 @@ public class GettingStartedTutorial {
 		//Add the terminator as a subcomponent. This time we will be using low level API methods, which can be used to create features and locations.
 		SubComponent termSubComponent=device.createSubComponent(term.getUri());
 		termSubComponent.setOrientation(Orientation.inline);
-		Sequence i13504Sequence= (Sequence)doc.getIdentified(device.getSequences().get(0),Sequence.class);
+		Sequence i13504Sequence= doc.getIdentified(device.getSequences().get(0),Sequence.class);
+		
+		
 		
 		int start=i13504Sequence.getElements().length() + 1;
 		int end=start + term_na.length()-1;

@@ -18,6 +18,7 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.jena.rdf.model.Model;
+import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.entity.SBOLDocument;
 
 public class SBOLUtil {
@@ -74,9 +75,14 @@ public class SBOLUtil {
 			}
 	 }
 	 
-	 public static List<URI> filterItems(SBOLDocument document, List<URI> identifieds, URI property, URI value)
+	 public static List<URI> filterItems2(SBOLDocument document, List<URI> identifieds, URI property, URI value)
 	 {
 		return RDFUtil.filterItems(document.getRDFModel(), identifieds, property, value.toString());
 	 }
+	 
+	 /*public static List<URI> filterItems(Identified identified, List<URI> identifieds, URI property, URI value)
+	 {
+		return RDFUtil.filterItems(identified.resource.getRDFModel(), identifieds, property, value.toString());
+	 }*/
 	
 }

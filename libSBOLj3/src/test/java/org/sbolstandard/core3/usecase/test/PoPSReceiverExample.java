@@ -81,6 +81,9 @@ public class PoPSReceiverExample extends TestCase {
         List<Sequence> naSequences=doc2.getSequences(Encoding.NucleicAcid);
         assertTrue("Could not filter document sequences by encoding type", naSequences!=null && naSequences.size()==8);
          
+        Component comp=doc2.getIdentified(pTetR.getUri(), Component.class);
+        TestUtil.assertEqualEntity(pTetR, comp);
+        
         
 	  
         System.out.println("done");   

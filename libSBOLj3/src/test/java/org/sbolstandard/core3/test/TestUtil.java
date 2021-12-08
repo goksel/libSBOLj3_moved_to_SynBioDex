@@ -134,7 +134,7 @@ public class TestUtil {
 		}
 	}
 	
-	private static void assertEqualEntity(Identified identified1, Identified identified2)  throws SBOLGraphException
+	public static void assertEqualEntity(Identified identified1, Identified identified2)  throws SBOLGraphException
 	{
 		if (identified1!=null && identified2==null)
 		{
