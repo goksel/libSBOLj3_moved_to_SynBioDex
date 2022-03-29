@@ -174,6 +174,7 @@ public class SBOLDocument {
 		return filteredSequences;
 	}*/
 	
+	
 	public List<Sequence> getSequences(Encoding encoding) throws SBOLGraphException {
 		getSequences();
 		

@@ -617,6 +617,7 @@ public class RDFUtil {
 			return filterItems(model, resources, property, value.toString());
 		}
 	    
+	    
 	    public static List<URI> filterItems(Model model, List<URI> resources, URI property, String value)
 		 {
 			ArrayList<URI> filtered=null; 
