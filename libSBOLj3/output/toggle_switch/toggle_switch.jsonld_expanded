@@ -941,6 +941,9 @@
   "@type" : [ "http://sbols.org/v3#Component" ]
 }, {
   "@id" : "https://sbolstandard.org/examples/toggle_switch",
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000251"
+  } ],
   "http://sbols.org/v3#hasFeature" : [ {
     "@id" : "https://sbolstandard.org/examples/toggle_switch/SubComponent1"
   }, {
@@ -971,9 +974,6 @@
   "@type" : [ "http://sbols.org/v3#Component" ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "Toggle Switch"
-  } ],
-  "http://sbols.org/v3#type" : [ {
-    "@id" : "https://identifiers.org/SBO:0000241"
   } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/toggle_switch/ComponentReference1",

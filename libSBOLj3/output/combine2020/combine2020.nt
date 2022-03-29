@@ -133,7 +133,7 @@
 <https://synbiohub.org/public/igem/i13504_system> <http://sbols.org/v3#name> "i13504 system" .
 <https://synbiohub.org/public/igem/i13504_system> <http://sbols.org/v3#hasFeature> <https://synbiohub.org/public/igem/i13504_system/SubComponent1> .
 <https://synbiohub.org/public/igem/i13504_system> <http://sbols.org/v3#displayId> "i13504_system" .
-<https://synbiohub.org/public/igem/i13504_system> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000241> .
+<https://synbiohub.org/public/igem/i13504_system> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000251> .
 <https://synbiohub.org/public/igem/i13504/SubComponent3/Range1> <http://sbols.org/v3#end> "826" .
 <https://synbiohub.org/public/igem/i13504/SubComponent3/Range1> <http://sbols.org/v3#start> "747" .
 <https://synbiohub.org/public/igem/i13504/SubComponent3/Range1> <http://sbols.org/v3#hasSequence> <https://synbiohub.org/public/igem/i13504_Sequence1> .

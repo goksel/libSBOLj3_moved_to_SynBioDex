@@ -377,7 +377,7 @@
     "@value" : "i13504_system"
   } ],
   "http://sbols.org/v3#type" : [ {
-    "@id" : "https://identifiers.org/SBO:0000241"
+    "@id" : "https://identifiers.org/SBO:0000251"
   } ]
 }, {
   "@id" : "https://synbiohub.org/public/igem/i13504_system/ComponentReference1",

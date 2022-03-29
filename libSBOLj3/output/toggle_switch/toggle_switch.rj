@@ -1994,7 +1994,7 @@
      ] ,
     "http://sbols.org/v3#type" : [ { 
       "type" : "uri" ,
-      "value" : "https://identifiers.org/SBO:0000241"
+      "value" : "https://identifiers.org/SBO:0000251"
     }
      ]
   }
