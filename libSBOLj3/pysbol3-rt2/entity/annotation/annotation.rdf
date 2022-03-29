@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:igem="http://parts.igem.org/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:sbol="http://sbols.org/v3#"
+>
+  <rdf:Description rdf:about="https://sbolstandard.org/examples/BBa_J23119">
+    <sbol:displayId>BBa_J23119</sbol:displayId>
+    <sbol:name>BBa_J23119 part</sbol:name>
+    <sbol:description>Parts J23100 through J23119 are a family of constitutive promoter parts isolated from a small combinatorial library.</sbol:description>
+    <rdf:type rdf:resource="http://sbols.org/v3#Component"/>
+    <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+    <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+    <sbol:role rdf:resource="https://identifiers.org/SO:0000167"/>
+    <igem:hasUsage rdf:resource="https://sbolstandard.org/examples/BBa_J23119/usage1"/>
+    <igem:hasInformation rdf:resource="https://sbolstandard.org/examples/BBa_J23119/information1"/>
+    <igem:belongsTo rdf:resource="https://sbolstandard.org/examples/iGEMRepository"/>
+    <igem:belongsTo rdf:resource="https://sbolstandard.org/examples/SynBioHubRepository"/>
+    <igem:experienceURL rdf:resource="http://parts.igem.org/Part:BBa_J23119:Experience"/>
+    <igem:group>iGEM2006_Berkeley</igem:group>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://sbolstandard.org/examples/SynBioHubRepository">
+    <sbol:displayId>SynBioHubRepository</sbol:displayId>
+    <sbol:name>SynBioHub</sbol:name>
+    <rdf:type rdf:resource="http://parts.igem.org/Repository"/>
+    <rdf:type rdf:resource="http://sbols.org/v3#TopLevel"/>
+    <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://sbolstandard.org/examples/BBa_J23119/information1">
+    <sbol:displayId>information1</sbol:displayId>
+    <sbol:name>BBa_J23119_experience</sbol:name>
+    <sbol:description>The experience page captures users' experience using the BBa_J23119 part</sbol:description>
+    <rdf:type rdf:resource="http://parts.igem.org/Information"/>
+    <rdf:type rdf:resource="http://sbols.org/v3#Identified"/>
+    <igem:sigmaFactor>//rnap/prokaryote/ecoli/sigma70</igem:sigmaFactor>
+    <igem:regulation>//regulation/constitutive</igem:regulation>
+    <igem:regulation>//regulation/second_regulation</igem:regulation>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://sbolstandard.org/examples/BBa_J23119/usage1/twinParts">
+    <sbol:displayId>twinParts</sbol:displayId>
+    <sbol:name>twin parts</sbol:name>
+    <rdf:type rdf:resource="http://parts.igem.org/TwinPartUsage"/>
+    <rdf:type rdf:resource="http://sbols.org/v3#Identified"/>
+    <igem:twinURL rdf:resource="http://parts.igem.org/wiki/index.php?title=Part:BBa_J72073"/>
+    <igem:twinURL rdf:resource="http://parts.igem.org/wiki/index.php?title=Part:BBa_M1638"/>
+    <igem:twinURL rdf:resource="http://parts.igem.org/wiki/index.php?title=Part:BBa_M36800"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://sbolstandard.org/examples/BBa_J23119/usage1">
+    <sbol:displayId>usage1</sbol:displayId>
+    <sbol:name>BBa_J23119_usage</sbol:name>
+    <sbol:description>BBa_J23119 usage statistics</sbol:description>
+    <rdf:type rdf:resource="http://parts.igem.org/IGEMUsage"/>
+    <rdf:type rdf:resource="http://sbols.org/v3#Identified"/>
+    <igem:uses>442</igem:uses>
+    <igem:twinURLs rdf:resource="https://sbolstandard.org/examples/BBa_J23119/usage1/twinParts"/>
+    <igem:inStock>true</igem:inStock>
+    <igem:registryStar>1</igem:registryStar>
+    <igem:twins>7</igem:twins>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://sbolstandard.org/examples/iGEMRepository">
+    <sbol:displayId>iGEMRepository</sbol:displayId>
+    <sbol:name>iGEM Registry</sbol:name>
+    <sbol:description>Registry of Standard Biological Parts</sbol:description>
+    <rdf:type rdf:resource="http://parts.igem.org/Repository"/>
+    <rdf:type rdf:resource="http://sbols.org/v3#TopLevel"/>
+    <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+    <igem:website rdf:resource="http://parts.igem.org/Main_Page"/>
+  </rdf:Description>
+</rdf:RDF>

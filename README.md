@@ -18,7 +18,7 @@ Use this option if you are developing a Java application using [Maven](https://m
    <dependency>
       <groupId>org.sbolstandard</groupId>
       <artifactId>libSBOLj3</artifactId>
-      <version>1.1-SNAPSHOT</version>
+      <version>1.3-SNAPSHOT</version>
    </dependency>
    ...
 </dependencies>
@@ -118,8 +118,8 @@ The following constants can be used to set the RDF serialisation type:
 ### Looking up for SBOL entities
 SBOL utilises URIs to link different entities. An SBOL entity may store a reference to another entity for more details. These additional details can be retrieved using the ```getIdentified``` method which expects the URI of the entity to retrieve, and its type. The followig example shows retrieving nucleotide sequences of the rbs component. The Sequence entity, the URI of which is referenced in the rbs component, is retrieved first. Its elements property is then used to read the nucleotides information.
 ```java
-Sequence rbsSeq=(Sequence)doc.getIdentified(rbs.getSequences().get(0), Sequence.class);
-String nucleotides=rbsSeq.getElements();	
+Sequence rbsSeq = doc.getIdentified(sequenceURI, Sequence.class);
+String nucleotides = rbsSeq.getElements();	
 ```
 
 ### Looking up (Querying) using graph pattern matching

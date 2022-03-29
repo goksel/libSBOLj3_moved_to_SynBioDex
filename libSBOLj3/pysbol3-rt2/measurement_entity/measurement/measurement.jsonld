@@ -1,0 +1,241 @@
+{
+  "@context": {
+    "@CHEBI": "https://identifiers.org/CHEBI:",
+    "@EDAM": "https://identifiers.org/edam:",
+    "@GO": "https://identifiers.org/GO:",
+    "@SBO": "https://identifiers.org/SBO:",
+    "@SO": "https://identifiers.org/SO:",
+    "@om": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+    "@prov": "http://www.w3.org/ns/prov#",
+    "@rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "@rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "@sbol": "http://sbols.org/v3#",
+    "@vocab": "https://sbolstandard.org/examples/",
+    "@xml": "http://www.w3.org/XML/1998/namespace",
+    "@xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "https://sbolstandard.org/examples/kelvin",
+      "@type": [
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit",
+        "http://sbols.org/v3#TopLevel"
+      ],
+      "http://sbols.org/v3#displayId": "kelvin",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "kelvin",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/label": "kelvin",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol": "kelvin"
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/millimolePerLitre",
+      "@type": [
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitDivision",
+        "http://sbols.org/v3#TopLevel"
+      ],
+      "http://sbols.org/v3#displayId": "millimolePerLitre",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "millimolar",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/hasDenominator": {
+        "@id": "https://sbolstandard.org/examples/litre"
+      },
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumerator": {
+        "@id": "https://sbolstandard.org/examples/millimole"
+      },
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/label": "millimolar",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol": "mmol/l"
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/mole",
+      "@type": [
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit",
+        "http://sbols.org/v3#TopLevel"
+      ],
+      "http://sbols.org/v3#displayId": "mole",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "mole",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/label": "mole",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol": "mol"
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/M9_Glucose_CAA",
+      "@type": "http://sbols.org/v3#Component",
+      "http://sbols.org/v3#description": "M9 Glucose CAA growth media",
+      "http://sbols.org/v3#displayId": "M9_Glucose_CAA",
+      "http://sbols.org/v3#hasFeature": {
+        "@id": "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1"
+      },
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "M9 Glucose CAA",
+      "http://sbols.org/v3#type": {
+        "@id": "https://identifiers.org/SBO:0000241"
+      }
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/millimole",
+      "@type": [
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/PrefixedUnit",
+        "http://sbols.org/v3#TopLevel"
+      ],
+      "http://sbols.org/v3#displayId": "millimole",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "millimole",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/hasPrefix": {
+        "@id": "https://sbolstandard.org/examples/milli"
+      },
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit": {
+        "@id": "https://sbolstandard.org/examples/mole"
+      },
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/label": "millimole",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol": "mmol"
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1",
+      "@type": [
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/Measure",
+        "http://sbols.org/v3#Identified"
+      ],
+      "http://sbols.org/v3#displayId": "measure1",
+      "http://sbols.org/v3#type": [
+        {
+          "@id": "https://identifiers.org/SBO:0000196"
+        },
+        {
+          "@id": "https://identifiers.org/SBO:0000197"
+        }
+      ],
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumericalValue": "0.1",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit": {
+        "@id": "https://sbolstandard.org/examples/millimolePerLitre"
+      }
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/kelvinMole",
+      "@type": [
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitMultiplication",
+        "http://sbols.org/v3#TopLevel"
+      ],
+      "http://sbols.org/v3#displayId": "kelvinMole",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "kelvinMole",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/hasTerm1": {
+        "@id": "https://sbolstandard.org/examples/kelvin"
+      },
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/hasTerm2": {
+        "@id": "https://sbolstandard.org/examples/mole"
+      },
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/label": "kelvinMole",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol": "K mol"
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1",
+      "@type": "http://sbols.org/v3#ExternallyDefined",
+      "http://sbols.org/v3#definition": {
+        "@id": "https://identifiers.org/CHEBI:3312"
+      },
+      "http://sbols.org/v3#displayId": "ExternallyDefined1",
+      "http://sbols.org/v3#hasMeasure": {
+        "@id": "https://sbolstandard.org/examples/M9_Glucose_CAA/ExternallyDefined1/measure1"
+      },
+      "http://sbols.org/v3#type": {
+        "@id": "https://identifiers.org/SBO:0000247"
+      }
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/cubicMeter",
+      "@type": [
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/UnitExponentiation",
+        "http://sbols.org/v3#TopLevel"
+      ],
+      "http://sbols.org/v3#displayId": "cubicMeter",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "cubicMeter",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/hasBase": {
+        "@id": "https://sbolstandard.org/examples/meter"
+      },
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/hasExponent": "3",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/label": "cubicMeter",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol": "m3"
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/litre",
+      "@type": [
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit",
+        "http://sbols.org/v3#TopLevel"
+      ],
+      "http://sbols.org/v3#description": "The litre is a unit of volume defined as 1.0e-3 cubic metre.",
+      "http://sbols.org/v3#displayId": "litre",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "liter",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeLabel": [
+        "liter",
+        "litre2"
+      ],
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeSymbol": [
+        "L",
+        "L2"
+      ],
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/comment": "The litre is a unit of volume defined as 1.0e-3 cubic metre.",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor": "0.001",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/label": "liter",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/longcomment": "This is an example long comment.",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol": "l"
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/meter",
+      "@type": [
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/SingularUnit",
+        "http://sbols.org/v3#TopLevel"
+      ],
+      "http://sbols.org/v3#displayId": "meter",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "meter",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/label": "meter",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol": "m"
+    },
+    {
+      "@id": "https://sbolstandard.org/examples/milli",
+      "@type": [
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/SIPrefix",
+        "http://sbols.org/v3#TopLevel"
+      ],
+      "http://sbols.org/v3#description": "Comment for the milli prefix.",
+      "http://sbols.org/v3#displayId": "milli",
+      "http://sbols.org/v3#hasNamespace": {
+        "@id": "https://sbolstandard.org/examples"
+      },
+      "http://sbols.org/v3#name": "milli",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeLabel": [
+        "milli1",
+        "milli2"
+      ],
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/alternativeSymbol": [
+        "m1",
+        "m2"
+      ],
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/comment": "Comment for the milli prefix.",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor": "0.001",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/label": "milli",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/longcomment": "This is an example long comment for the milli prefix.",
+      "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol": "m"
+    }
+  ]
+}

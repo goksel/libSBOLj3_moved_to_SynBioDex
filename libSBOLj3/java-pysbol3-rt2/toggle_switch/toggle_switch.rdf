@@ -1,0 +1,519 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:SO="https://identifiers.org/SO:"
+    xmlns:EDAM="https://identifiers.org/edam:"
+    xmlns:sbol="http://sbols.org/v3#"
+    xmlns:CHEBI="https://identifiers.org/CHEBI:"
+    xmlns:prov="http://www.w3.org/ns/prov#"
+    xmlns:SBO="https://identifiers.org/SBO:"
+    xmlns:GO="https://identifiers.org/GO:"
+    xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/">
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/rbs_tetR">
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000139"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>tetR RBS</sbol:description>
+      <sbol:name>rbs</sbol:name>
+      <sbol:displayId>rbs_tetR</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/tetR">
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000316"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>tetR coding sequence</sbol:description>
+      <sbol:name>tetR</sbol:name>
+      <sbol:displayId>tetR</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/IPTG">
+      <sbol:role rdf:resource="https://identifiers.org/CHEBI:35224"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000247"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>IPTG</sbol:description>
+      <sbol:name>IPTG</sbol:name>
+      <sbol:displayId>IPTG</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/GFP_protein">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>GFP</sbol:description>
+      <sbol:name>GFP</sbol:name>
+      <sbol:displayId>GFP_protein</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/ter_lacI">
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000141"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>Terminator</sbol:description>
+      <sbol:name>lacI terminator</sbol:name>
+      <sbol:displayId>ter_lacI</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/TetR_producer">
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/TetR_producer/SubComponent2">
+            <sbol:instanceOf rdf:resource="https://sbolstandard.org/examples/rbs_tetR"/>
+            <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
+            <sbol:displayId>SubComponent2</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/TetR_producer/SubComponent7">
+            <sbol:instanceOf rdf:resource="https://sbolstandard.org/examples/IPTG"/>
+            <sbol:displayId>SubComponent7</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/TetR_producer/SubComponent5">
+            <sbol:instanceOf>
+               <sbol:Component rdf:about="https://sbolstandard.org/examples/TetR_protein"/>
+            </sbol:instanceOf>
+            <sbol:displayId>SubComponent5</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/TetR_producer/SubComponent3">
+            <sbol:instanceOf rdf:resource="https://sbolstandard.org/examples/tetR"/>
+            <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
+            <sbol:displayId>SubComponent3</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:displayId>TetR_producer</sbol:displayId>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/TetR_producer/SubComponent8">
+            <sbol:instanceOf>
+               <sbol:Component rdf:about="https://sbolstandard.org/examples/IPTG_LacI"/>
+            </sbol:instanceOf>
+            <sbol:displayId>SubComponent8</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="https://sbolstandard.org/examples/TetR_producer/Interaction2">
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/TetR_producer/Interaction2/Participation2">
+                  <sbol:participant>
+                     <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/TetR_producer/SubComponent6">
+                        <sbol:instanceOf>
+                           <sbol:Component rdf:about="https://sbolstandard.org/examples/LacI_protein"/>
+                        </sbol:instanceOf>
+                        <sbol:displayId>SubComponent6</sbol:displayId>
+                     </sbol:SubComponent>
+                  </sbol:participant>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000019"/>
+                  <sbol:displayId>Participation2</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/TetR_producer/Interaction2/Participation1">
+                  <sbol:participant>
+                     <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/TetR_producer/SubComponent1">
+                        <sbol:instanceOf>
+                           <sbol:Component rdf:about="https://sbolstandard.org/examples/pLacI"/>
+                        </sbol:instanceOf>
+                        <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
+                        <sbol:displayId>SubComponent1</sbol:displayId>
+                     </sbol:SubComponent>
+                  </sbol:participant>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000642"/>
+                  <sbol:displayId>Participation1</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000169"/>
+            <sbol:displayId>Interaction2</sbol:displayId>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
+      <sbol:hasFeature rdf:resource="https://sbolstandard.org/examples/TetR_producer/SubComponent1"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:hasFeature rdf:resource="https://sbolstandard.org/examples/TetR_producer/SubComponent6"/>
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="https://sbolstandard.org/examples/TetR_producer/Interaction1">
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/TetR_producer/Interaction1/Participation2">
+                  <sbol:participant rdf:resource="https://sbolstandard.org/examples/TetR_producer/SubComponent5"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
+                  <sbol:displayId>Participation2</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/TetR_producer/Interaction1/Participation1">
+                  <sbol:participant rdf:resource="https://sbolstandard.org/examples/TetR_producer/SubComponent3"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000645"/>
+                  <sbol:displayId>Participation1</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000589"/>
+            <sbol:displayId>Interaction1</sbol:displayId>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
+      <sbol:description>TetR producer</sbol:description>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/TetR_producer/SubComponent4">
+            <sbol:instanceOf>
+               <sbol:Component rdf:about="https://sbolstandard.org/examples/ter_tetR"/>
+            </sbol:instanceOf>
+            <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
+            <sbol:displayId>SubComponent4</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="https://sbolstandard.org/examples/TetR_producer/Interaction3">
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/TetR_producer/Interaction3/Participation3">
+                  <sbol:participant rdf:resource="https://sbolstandard.org/examples/TetR_producer/SubComponent8"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
+                  <sbol:displayId>Participation3</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/TetR_producer/Interaction3/Participation1">
+                  <sbol:participant rdf:resource="https://sbolstandard.org/examples/TetR_producer/SubComponent6"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000010"/>
+                  <sbol:displayId>Participation1</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/TetR_producer/Interaction3/Participation2">
+                  <sbol:participant rdf:resource="https://sbolstandard.org/examples/TetR_producer/SubComponent7"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000010"/>
+                  <sbol:displayId>Participation2</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000177"/>
+            <sbol:displayId>Interaction3</sbol:displayId>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
+      <sbol:name>TetR device</sbol:name>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/TetR_producer/SubComponent9">
+            <sbol:instanceOf>
+               <sbol:Component rdf:about="https://sbolstandard.org/examples/atC_TetR"/>
+            </sbol:instanceOf>
+            <sbol:displayId>SubComponent9</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/rbs_gfp">
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000139"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>RBS</sbol:description>
+      <sbol:name>rbs</sbol:name>
+      <sbol:displayId>rbs_gfp</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/LacI_protein">
+      <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>LacI protein</sbol:description>
+      <sbol:name>LacI</sbol:name>
+      <sbol:displayId>LacI_protein</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/atC_TetR">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000253"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>atC_TetR complex</sbol:description>
+      <sbol:name>atC_TetR</sbol:name>
+      <sbol:displayId>atC_TetR</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/aTC">
+      <sbol:role rdf:resource="https://identifiers.org/CHEBI:35224"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000247"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>aTC</sbol:description>
+      <sbol:name>aTC</sbol:name>
+      <sbol:displayId>aTC</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/pTetR">
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000167"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>TetR repressible promoter</sbol:description>
+      <sbol:name>pTetR</sbol:name>
+      <sbol:displayId>pTetR</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/toggle_switch">
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/toggle_switch/SubComponent1">
+            <sbol:instanceOf>
+               <sbol:Component rdf:about="https://sbolstandard.org/examples/LacI_producer"/>
+            </sbol:instanceOf>
+            <sbol:displayId>SubComponent1</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:hasFeature>
+         <sbol:ComponentReference rdf:about="https://sbolstandard.org/examples/toggle_switch/ComponentReference4">
+            <sbol:refersTo rdf:resource="https://sbolstandard.org/examples/TetR_producer/SubComponent5"/>
+            <sbol:inChildOf>
+               <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/toggle_switch/SubComponent2">
+                  <sbol:instanceOf rdf:resource="https://sbolstandard.org/examples/TetR_producer"/>
+                  <sbol:displayId>SubComponent2</sbol:displayId>
+               </sbol:SubComponent>
+            </sbol:inChildOf>
+            <sbol:displayId>ComponentReference4</sbol:displayId>
+         </sbol:ComponentReference>
+      </sbol:hasFeature>
+      <sbol:displayId>toggle_switch</sbol:displayId>
+      <sbol:description>Toggle Switch genetic circuit</sbol:description>
+      <sbol:hasFeature>
+         <sbol:ComponentReference rdf:about="https://sbolstandard.org/examples/toggle_switch/ComponentReference3">
+            <sbol:refersTo>
+               <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/LacI_producer/SubComponent9">
+                  <sbol:instanceOf>
+                     <sbol:Component rdf:about="https://sbolstandard.org/examples/TetR_protein"/>
+                  </sbol:instanceOf>
+                  <sbol:displayId>SubComponent9</sbol:displayId>
+               </sbol:SubComponent>
+            </sbol:refersTo>
+            <sbol:inChildOf rdf:resource="https://sbolstandard.org/examples/toggle_switch/SubComponent1"/>
+            <sbol:displayId>ComponentReference3</sbol:displayId>
+         </sbol:ComponentReference>
+      </sbol:hasFeature>
+      <sbol:hasConstraint>
+         <sbol:Constraint rdf:about="https://sbolstandard.org/examples/toggle_switch/Constraint1">
+            <sbol:object>
+               <sbol:ComponentReference rdf:about="https://sbolstandard.org/examples/toggle_switch/ComponentReference2">
+                  <sbol:refersTo rdf:resource="https://sbolstandard.org/examples/TetR_producer/SubComponent6"/>
+                  <sbol:inChildOf rdf:resource="https://sbolstandard.org/examples/toggle_switch/SubComponent2"/>
+                  <sbol:displayId>ComponentReference2</sbol:displayId>
+               </sbol:ComponentReference>
+            </sbol:object>
+            <sbol:subject>
+               <sbol:ComponentReference rdf:about="https://sbolstandard.org/examples/toggle_switch/ComponentReference1">
+                  <sbol:refersTo>
+                     <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/LacI_producer/SubComponent7">
+                        <sbol:instanceOf rdf:resource="https://sbolstandard.org/examples/LacI_protein"/>
+                        <sbol:displayId>SubComponent7</sbol:displayId>
+                     </sbol:SubComponent>
+                  </sbol:refersTo>
+                  <sbol:inChildOf rdf:resource="https://sbolstandard.org/examples/toggle_switch/SubComponent1"/>
+                  <sbol:displayId>ComponentReference1</sbol:displayId>
+               </sbol:ComponentReference>
+            </sbol:subject>
+            <sbol:restriction rdf:resource="http://sbols.org/v3#verifyIdentical"/>
+            <sbol:displayId>Constraint1</sbol:displayId>
+         </sbol:Constraint>
+      </sbol:hasConstraint>
+      <sbol:hasFeature rdf:resource="https://sbolstandard.org/examples/toggle_switch/ComponentReference2"/>
+      <sbol:hasConstraint>
+         <sbol:Constraint rdf:about="https://sbolstandard.org/examples/toggle_switch/Constraint2">
+            <sbol:object rdf:resource="https://sbolstandard.org/examples/toggle_switch/ComponentReference4"/>
+            <sbol:subject rdf:resource="https://sbolstandard.org/examples/toggle_switch/ComponentReference3"/>
+            <sbol:restriction rdf:resource="http://sbols.org/v3#verifyIdentical"/>
+            <sbol:displayId>Constraint2</sbol:displayId>
+         </sbol:Constraint>
+      </sbol:hasConstraint>
+      <sbol:hasFeature rdf:resource="https://sbolstandard.org/examples/toggle_switch/ComponentReference1"/>
+      <sbol:name>Toggle Switch</sbol:name>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
+      <sbol:hasFeature rdf:resource="https://sbolstandard.org/examples/toggle_switch/SubComponent2"/>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/ter_tetR">
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000141"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>Terminator</sbol:description>
+      <sbol:name>tetR terminator</sbol:name>
+      <sbol:displayId>ter_tetR</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/rbs_lacI">
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000139"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>RBS</sbol:description>
+      <sbol:name>rbs</sbol:name>
+      <sbol:displayId>rbs_lacI</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/lacI">
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000316"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>lacI coding sequence</sbol:description>
+      <sbol:name>lacI</sbol:name>
+      <sbol:displayId>lacI</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/pLacI">
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000167"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>LacI repressible promoter</sbol:description>
+      <sbol:name>pLacI promoter</sbol:name>
+      <sbol:displayId>pLacI</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/TetR_protein">
+      <sbol:role rdf:resource="https://identifiers.org/GO:0003700"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>TetR protein</sbol:description>
+      <sbol:name>TetR</sbol:name>
+      <sbol:displayId>TetR_protein</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/LacI_producer">
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="https://sbolstandard.org/examples/LacI_producer/Interaction3">
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/LacI_producer/Interaction3/Participation1">
+                  <sbol:participant>
+                     <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/LacI_producer/SubComponent1">
+                        <sbol:instanceOf rdf:resource="https://sbolstandard.org/examples/pTetR"/>
+                        <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
+                        <sbol:displayId>SubComponent1</sbol:displayId>
+                     </sbol:SubComponent>
+                  </sbol:participant>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000642"/>
+                  <sbol:displayId>Participation1</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/LacI_producer/Interaction3/Participation2">
+                  <sbol:participant rdf:resource="https://sbolstandard.org/examples/LacI_producer/SubComponent9"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000019"/>
+                  <sbol:displayId>Participation2</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000169"/>
+            <sbol:displayId>Interaction3</sbol:displayId>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
+      <sbol:hasFeature rdf:resource="https://sbolstandard.org/examples/LacI_producer/SubComponent1"/>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/LacI_producer/SubComponent5">
+            <sbol:instanceOf>
+               <sbol:Component rdf:about="https://sbolstandard.org/examples/gfp"/>
+            </sbol:instanceOf>
+            <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
+            <sbol:displayId>SubComponent5</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="https://sbolstandard.org/examples/LacI_producer/Interaction2">
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/LacI_producer/Interaction2/Participation2">
+                  <sbol:participant>
+                     <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/LacI_producer/SubComponent8">
+                        <sbol:instanceOf rdf:resource="https://sbolstandard.org/examples/GFP_protein"/>
+                        <sbol:displayId>SubComponent8</sbol:displayId>
+                     </sbol:SubComponent>
+                  </sbol:participant>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
+                  <sbol:displayId>Participation2</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/LacI_producer/Interaction2/Participation1">
+                  <sbol:participant rdf:resource="https://sbolstandard.org/examples/LacI_producer/SubComponent5"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000645"/>
+                  <sbol:displayId>Participation1</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000589"/>
+            <sbol:displayId>Interaction2</sbol:displayId>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
+      <sbol:description>LacI producer</sbol:description>
+      <sbol:displayId>LacI_producer</sbol:displayId>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/LacI_producer/SubComponent10">
+            <sbol:instanceOf rdf:resource="https://sbolstandard.org/examples/aTC"/>
+            <sbol:displayId>SubComponent10</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/LacI_producer/SubComponent2">
+            <sbol:instanceOf rdf:resource="https://sbolstandard.org/examples/rbs_lacI"/>
+            <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
+            <sbol:displayId>SubComponent2</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:hasFeature rdf:resource="https://sbolstandard.org/examples/LacI_producer/SubComponent8"/>
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="https://sbolstandard.org/examples/LacI_producer/Interaction4">
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/LacI_producer/Interaction4/Participation2">
+                  <sbol:participant rdf:resource="https://sbolstandard.org/examples/LacI_producer/SubComponent10"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000010"/>
+                  <sbol:displayId>Participation2</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/LacI_producer/Interaction4/Participation1">
+                  <sbol:participant rdf:resource="https://sbolstandard.org/examples/LacI_producer/SubComponent9"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000010"/>
+                  <sbol:displayId>Participation1</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/LacI_producer/Interaction4/Participation3">
+                  <sbol:participant rdf:resource="https://sbolstandard.org/examples/TetR_producer/SubComponent9"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
+                  <sbol:displayId>Participation3</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000177"/>
+            <sbol:displayId>Interaction4</sbol:displayId>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="https://sbolstandard.org/examples/LacI_producer/Interaction1">
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/LacI_producer/Interaction1/Participation1">
+                  <sbol:participant>
+                     <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/LacI_producer/SubComponent3">
+                        <sbol:instanceOf rdf:resource="https://sbolstandard.org/examples/lacI"/>
+                        <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
+                        <sbol:displayId>SubComponent3</sbol:displayId>
+                     </sbol:SubComponent>
+                  </sbol:participant>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000645"/>
+                  <sbol:displayId>Participation1</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="https://sbolstandard.org/examples/LacI_producer/Interaction1/Participation2">
+                  <sbol:participant rdf:resource="https://sbolstandard.org/examples/LacI_producer/SubComponent7"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
+                  <sbol:displayId>Participation2</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000589"/>
+            <sbol:displayId>Interaction1</sbol:displayId>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
+      <sbol:hasFeature rdf:resource="https://sbolstandard.org/examples/LacI_producer/SubComponent9"/>
+      <sbol:hasFeature rdf:resource="https://sbolstandard.org/examples/LacI_producer/SubComponent3"/>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/LacI_producer/SubComponent6">
+            <sbol:instanceOf rdf:resource="https://sbolstandard.org/examples/ter_lacI"/>
+            <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
+            <sbol:displayId>SubComponent6</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:name>LacI producer</sbol:name>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
+      <sbol:hasFeature rdf:resource="https://sbolstandard.org/examples/LacI_producer/SubComponent7"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="https://sbolstandard.org/examples/LacI_producer/SubComponent4">
+            <sbol:instanceOf rdf:resource="https://sbolstandard.org/examples/rbs_gfp"/>
+            <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
+            <sbol:displayId>SubComponent4</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/gfp">
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000316"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>gfp coding sequence</sbol:description>
+      <sbol:name>gfp</sbol:name>
+      <sbol:displayId>gfp</sbol:displayId>
+   </sbol:Component>
+   <sbol:Component rdf:about="https://sbolstandard.org/examples/IPTG_LacI">
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000253"/>
+      <sbol:hasNamespace rdf:resource="https://sbolstandard.org/examples"/>
+      <sbol:description>IPTG_LacI complex</sbol:description>
+      <sbol:name>IPTG_LacI</sbol:name>
+      <sbol:displayId>IPTG_LacI</sbol:displayId>
+   </sbol:Component>
+</rdf:RDF>

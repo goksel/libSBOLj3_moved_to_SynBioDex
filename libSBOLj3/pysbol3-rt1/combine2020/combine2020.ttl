@@ -1,0 +1,250 @@
+@prefix : <https://synbiohub.org/public/igem/> .
+@prefix EDAM: <https://identifiers.org/edam:> .
+@prefix SBO: <https://identifiers.org/SBO:> .
+@prefix SO: <https://identifiers.org/SO:> .
+@prefix sbol: <http://sbols.org/v3#> .
+
+:interlab16device1 a sbol:Component ;
+    sbol:displayId "interlab16device1" ;
+    sbol:hasConstraint <https://synbiohub.org/public/igem/interlab16device1/Constraint1> ;
+    sbol:hasFeature <https://synbiohub.org/public/igem/interlab16device1/ComponentReference1>,
+        <https://synbiohub.org/public/igem/interlab16device1/SubComponent1>,
+        <https://synbiohub.org/public/igem/interlab16device1/SubComponent2> ;
+    sbol:hasNamespace <https://synbiohub.org/public/igem> ;
+    sbol:type SBO:0000251 .
+
+:interlab16device2 a sbol:Component ;
+    sbol:displayId "interlab16device2" ;
+    sbol:hasConstraint <https://synbiohub.org/public/igem/interlab16device2/Constraint1> ;
+    sbol:hasFeature <https://synbiohub.org/public/igem/interlab16device2/ComponentReference1>,
+        <https://synbiohub.org/public/igem/interlab16device2/SubComponent1>,
+        <https://synbiohub.org/public/igem/interlab16device2/SubComponent2> ;
+    sbol:hasNamespace <https://synbiohub.org/public/igem> ;
+    sbol:type SBO:0000251 .
+
+:B0015 a sbol:Component ;
+    sbol:description "B0015 double terminator" ;
+    sbol:displayId "B0015" ;
+    sbol:hasNamespace <https://synbiohub.org/public/igem> ;
+    sbol:hasSequence :B0015_Sequence1 ;
+    sbol:name "terminator" ;
+    sbol:role SO:0000141 ;
+    sbol:type SBO:0000251 .
+
+:B0015_Sequence1 a sbol:Sequence ;
+    sbol:description "terminator sequence" ;
+    sbol:displayId "B0015_Sequence1" ;
+    sbol:elements "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc" ;
+    sbol:encoding EDAM:format_1207 ;
+    sbol:hasNamespace <https://synbiohub.org/public/igem> ;
+    sbol:name "Sequence1" .
+
+:B0034 a sbol:Component ;
+    sbol:description "RBS (Elowitz 1999)" ;
+    sbol:displayId "B0034" ;
+    sbol:hasNamespace <https://synbiohub.org/public/igem> ;
+    sbol:hasSequence :B0034_Sequence ;
+    sbol:name "B0034" ;
+    sbol:role SO:0000139 ;
+    sbol:type SBO:0000251 .
+
+:B0034_Sequence a sbol:Sequence ;
+    sbol:displayId "B0034_Sequence" ;
+    sbol:elements "aaagaggagaaa" ;
+    sbol:encoding EDAM:format_1207 ;
+    sbol:hasNamespace <https://synbiohub.org/public/igem> .
+
+:E0040 a sbol:Component ;
+    sbol:description "gfp coding sequence" ;
+    sbol:displayId "E0040" ;
+    sbol:hasNamespace <https://synbiohub.org/public/igem> ;
+    sbol:hasSequence :E0040_Sequence1 ;
+    sbol:name "gfp" ;
+    sbol:role SO:0000316 ;
+    sbol:type SBO:0000251 .
+
+:E0040_Sequence1 a sbol:Sequence ;
+    sbol:description "gfp sequence" ;
+    sbol:displayId "E0040_Sequence1" ;
+    sbol:elements "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa" ;
+    sbol:encoding EDAM:format_1207 ;
+    sbol:hasNamespace <https://synbiohub.org/public/igem> ;
+    sbol:name "Sequence1" .
+
+:GFP_protein a sbol:Component ;
+    sbol:description "GFP" ;
+    sbol:displayId "GFP_protein" ;
+    sbol:hasNamespace <https://synbiohub.org/public/igem> ;
+    sbol:name "GFP" ;
+    sbol:type SBO:0000252 .
+
+:i13504 a sbol:Component ;
+    sbol:description "Screening plasmid intermediate" ;
+    sbol:displayId "i13504" ;
+    sbol:hasFeature <https://synbiohub.org/public/igem/i13504/SequenceFeature1>,
+        <https://synbiohub.org/public/igem/i13504/SequenceFeature2>,
+        <https://synbiohub.org/public/igem/i13504/SubComponent1>,
+        <https://synbiohub.org/public/igem/i13504/SubComponent2>,
+        <https://synbiohub.org/public/igem/i13504/SubComponent3> ;
+    sbol:hasNamespace <https://synbiohub.org/public/igem> ;
+    sbol:hasSequence :i13504_Sequence1 ;
+    sbol:name "i13504" ;
+    sbol:role SO:0000704 ;
+    sbol:type SBO:0000251 .
+
+<https://synbiohub.org/public/igem/i13504/SequenceFeature1> a sbol:SequenceFeature ;
+    sbol:displayId "SequenceFeature1" ;
+    sbol:hasLocation <https://synbiohub.org/public/igem/i13504/SequenceFeature1/Range1> ;
+    sbol:orientation sbol:inline .
+
+<https://synbiohub.org/public/igem/i13504/SequenceFeature1/Range1> a sbol:Range ;
+    sbol:displayId "Range1" ;
+    sbol:end "18" ;
+    sbol:hasSequence :i13504_Sequence1 ;
+    sbol:start "13" .
+
+<https://synbiohub.org/public/igem/i13504/SequenceFeature2> a sbol:SequenceFeature ;
+    sbol:displayId "SequenceFeature2" ;
+    sbol:hasLocation <https://synbiohub.org/public/igem/i13504/SequenceFeature2/Range1> ;
+    sbol:orientation sbol:inline .
+
+<https://synbiohub.org/public/igem/i13504/SequenceFeature2/Range1> a sbol:Range ;
+    sbol:displayId "Range1" ;
+    sbol:end "746" ;
+    sbol:hasSequence :i13504_Sequence1 ;
+    sbol:start "739" .
+
+<https://synbiohub.org/public/igem/i13504/SubComponent1> a sbol:SubComponent ;
+    sbol:displayId "SubComponent1" ;
+    sbol:hasLocation <https://synbiohub.org/public/igem/i13504/SubComponent1/Range1> ;
+    sbol:instanceOf :B0034 ;
+    sbol:orientation sbol:inline .
+
+<https://synbiohub.org/public/igem/i13504/SubComponent1/Range1> a sbol:Range ;
+    sbol:displayId "Range1" ;
+    sbol:end "11" ;
+    sbol:hasSequence :i13504_Sequence1 ;
+    sbol:orientation sbol:inline ;
+    sbol:start "1" .
+
+<https://synbiohub.org/public/igem/i13504/SubComponent2/Range1> a sbol:Range ;
+    sbol:displayId "Range1" ;
+    sbol:end "738" ;
+    sbol:hasSequence :i13504_Sequence1 ;
+    sbol:orientation sbol:inline ;
+    sbol:start "19" .
+
+<https://synbiohub.org/public/igem/i13504/SubComponent3> a sbol:SubComponent ;
+    sbol:displayId "SubComponent3" ;
+    sbol:hasLocation <https://synbiohub.org/public/igem/i13504/SubComponent3/Range1> ;
+    sbol:instanceOf :B0015 ;
+    sbol:orientation sbol:inline .
+
+<https://synbiohub.org/public/igem/i13504/SubComponent3/Range1> a sbol:Range ;
+    sbol:displayId "Range1" ;
+    sbol:end "826" ;
+    sbol:hasSequence :i13504_Sequence1 ;
+    sbol:start "747" .
+
+<https://synbiohub.org/public/igem/i13504_system/Interaction1> a sbol:Interaction ;
+    sbol:displayId "Interaction1" ;
+    sbol:hasParticipation <https://synbiohub.org/public/igem/i13504_system/Interaction1/Participation1>,
+        <https://synbiohub.org/public/igem/i13504_system/Interaction1/Participation2> ;
+    sbol:type SBO:0000589 .
+
+<https://synbiohub.org/public/igem/i13504_system/Interaction1/Participation1> a sbol:Participation ;
+    sbol:displayId "Participation1" ;
+    sbol:participant <https://synbiohub.org/public/igem/i13504_system/ComponentReference1> ;
+    sbol:role SBO:0000645 .
+
+<https://synbiohub.org/public/igem/i13504_system/Interaction1/Participation2> a sbol:Participation ;
+    sbol:displayId "Participation2" ;
+    sbol:participant <https://synbiohub.org/public/igem/i13504_system/SubComponent2> ;
+    sbol:role SBO:0000011 .
+
+<https://synbiohub.org/public/igem/interlab16device1/Constraint1> a sbol:Constraint ;
+    sbol:displayId "Constraint1" ;
+    sbol:object <https://synbiohub.org/public/igem/interlab16device1/ComponentReference1> ;
+    sbol:restriction sbol:meets ;
+    sbol:subject <https://synbiohub.org/public/igem/interlab16device1/SubComponent1> .
+
+<https://synbiohub.org/public/igem/interlab16device2/Constraint1> a sbol:Constraint ;
+    sbol:displayId "Constraint1" ;
+    sbol:object <https://synbiohub.org/public/igem/interlab16device2/ComponentReference1> ;
+    sbol:restriction sbol:meets ;
+    sbol:subject <https://synbiohub.org/public/igem/interlab16device2/SubComponent1> .
+
+:j23101 a sbol:Component ;
+    sbol:displayId "j23101" ;
+    sbol:hasNamespace <https://synbiohub.org/public/igem> ;
+    sbol:type SBO:0000251 .
+
+:j23106 a sbol:Component ;
+    sbol:displayId "j23106" ;
+    sbol:hasNamespace <https://synbiohub.org/public/igem> ;
+    sbol:type SBO:0000251 .
+
+<https://synbiohub.org/public/igem/i13504/SubComponent2> a sbol:SubComponent ;
+    sbol:displayId "SubComponent2" ;
+    sbol:hasLocation <https://synbiohub.org/public/igem/i13504/SubComponent2/Range1> ;
+    sbol:instanceOf :E0040 ;
+    sbol:orientation sbol:inline .
+
+:i13504_system a sbol:Component ;
+    sbol:displayId "i13504_system" ;
+    sbol:hasFeature <https://synbiohub.org/public/igem/i13504_system/ComponentReference1>,
+        <https://synbiohub.org/public/igem/i13504_system/SubComponent1>,
+        <https://synbiohub.org/public/igem/i13504_system/SubComponent2> ;
+    sbol:hasInteraction <https://synbiohub.org/public/igem/i13504_system/Interaction1> ;
+    sbol:hasNamespace <https://synbiohub.org/public/igem> ;
+    sbol:name "i13504 system" ;
+    sbol:role SBO:0000289 ;
+    sbol:type SBO:0000241 .
+
+<https://synbiohub.org/public/igem/i13504_system/ComponentReference1> a sbol:ComponentReference ;
+    sbol:displayId "ComponentReference1" ;
+    sbol:hasFeature <https://synbiohub.org/public/igem/i13504/SubComponent2> ;
+    sbol:inChildOf <https://synbiohub.org/public/igem/i13504_system/SubComponent1> .
+
+<https://synbiohub.org/public/igem/i13504_system/SubComponent2> a sbol:SubComponent ;
+    sbol:displayId "SubComponent2" ;
+    sbol:instanceOf :GFP_protein .
+
+<https://synbiohub.org/public/igem/interlab16device1/ComponentReference1> a sbol:ComponentReference ;
+    sbol:displayId "ComponentReference1" ;
+    sbol:hasFeature <https://synbiohub.org/public/igem/i13504_system/SubComponent1> ;
+    sbol:inChildOf <https://synbiohub.org/public/igem/interlab16device1/SubComponent2> .
+
+<https://synbiohub.org/public/igem/interlab16device1/SubComponent1> a sbol:SubComponent ;
+    sbol:displayId "SubComponent1" ;
+    sbol:instanceOf :j23101 .
+
+<https://synbiohub.org/public/igem/interlab16device1/SubComponent2> a sbol:SubComponent ;
+    sbol:displayId "SubComponent2" ;
+    sbol:instanceOf :i13504_system .
+
+<https://synbiohub.org/public/igem/interlab16device2/ComponentReference1> a sbol:ComponentReference ;
+    sbol:displayId "ComponentReference1" ;
+    sbol:hasFeature <https://synbiohub.org/public/igem/i13504_system/SubComponent1> ;
+    sbol:inChildOf <https://synbiohub.org/public/igem/interlab16device2/SubComponent2> .
+
+<https://synbiohub.org/public/igem/interlab16device2/SubComponent1> a sbol:SubComponent ;
+    sbol:displayId "SubComponent1" ;
+    sbol:instanceOf :j23106 .
+
+<https://synbiohub.org/public/igem/interlab16device2/SubComponent2> a sbol:SubComponent ;
+    sbol:displayId "SubComponent2" ;
+    sbol:instanceOf :i13504_system .
+
+<https://synbiohub.org/public/igem/i13504_system/SubComponent1> a sbol:SubComponent ;
+    sbol:displayId "SubComponent1" ;
+    sbol:instanceOf :i13504 .
+
+:i13504_Sequence1 a sbol:Sequence ;
+    sbol:description "i13504 sequence" ;
+    sbol:displayId "i13504_Sequence1" ;
+    sbol:elements "aaagaggagaaatactagatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataatactagagccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc" ;
+    sbol:encoding EDAM:format_1207 ;
+    sbol:hasNamespace <https://synbiohub.org/public/igem> ;
+    sbol:name "Sequence1" .
+
