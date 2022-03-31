@@ -9,6 +9,8 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class CombinatorialDerivation extends TopLevel{
@@ -29,7 +31,7 @@ public class CombinatorialDerivation extends TopLevel{
 	public URI getTemplate() throws SBOLGraphException {
 		if (template==null)
 		{
-			template=RDFUtil.getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.template);	
+			template=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.template);	
 		}
 		return template;
 	}
@@ -39,10 +41,10 @@ public class CombinatorialDerivation extends TopLevel{
 		RDFUtil.setProperty(resource, DataModel.CombinatorialDerivation.template, template);
 	}
 	
-	public URI getStrategy() {
+	public URI getStrategy() throws SBOLGraphException {
 		if (strategy==null)
 		{
-			strategy=RDFUtil.getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.strategy);	
+			strategy=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.strategy);	
 		}
 		return strategy;
 	}

@@ -18,6 +18,7 @@ import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.util.URINameSpace;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
@@ -63,10 +64,10 @@ public abstract class Identified {
 		this.resource=ResourceFactory.createResource();	
 	}*/
 	
-	public String getDisplayId() {
+	public String getDisplayId() throws SBOLGraphException{
 		if (displayId==null)
 		{
-			displayId=RDFUtil.getPropertyAsString(this.resource, DataModel.Identified.displayId);
+			displayId=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.displayId);
 		}
 		return displayId;
 	}
@@ -76,10 +77,10 @@ public abstract class Identified {
 		RDFUtil.setProperty(resource, DataModel.Identified.displayId, displayId);		
 	}
 	
-	public String getName() {
+	public String getName() throws SBOLGraphException {
 		if (name==null)
 		{
-			name=RDFUtil.getPropertyAsString(this.resource, DataModel.Identified.name);
+			name=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.name);
 		}
 		return name;
 	}
@@ -89,10 +90,10 @@ public abstract class Identified {
 			RDFUtil.setProperty(resource, DataModel.Identified.name, name);	
 		}
 	}
-	public String getDescription() {
+	public String getDescription() throws SBOLGraphException {
 		if (description==null)
 		{
-			description=RDFUtil.getPropertyAsString(this.resource, DataModel.Identified.description);
+			description=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.description);
 		}
 		return description;
 	}

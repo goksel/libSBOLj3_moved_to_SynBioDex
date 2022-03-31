@@ -5,6 +5,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 public class SingularUnit extends Unit{
@@ -32,7 +33,7 @@ public class SingularUnit extends Unit{
 	public float getFactor() throws SBOLGraphException {
 		if (Float.isNaN(this.factor))
 		{
-			String factorString=RDFUtil.getPropertyAsString(this.resource, MeasureDataModel.SingularUnit.factor);
+			String factorString=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.SingularUnit.factor);
 			if (factorString!=null)
 			{
 				try
@@ -49,10 +50,10 @@ public class SingularUnit extends Unit{
 		return factor;
 	}
 	
-	public URI getUnit() {
+	public URI getUnit() throws SBOLGraphException {
 		if (unit==null)
 		{
-			unit=RDFUtil.getPropertyAsURI(this.resource, MeasureDataModel.SingularUnit.unit);	
+			unit=IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.SingularUnit.unit);	
 		}
 		return unit;
 	}

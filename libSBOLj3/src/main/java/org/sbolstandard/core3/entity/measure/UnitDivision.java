@@ -5,6 +5,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 public class UnitDivision extends CompoundUnit{
@@ -23,10 +24,10 @@ public class UnitDivision extends CompoundUnit{
 		super(resource);
 	}
 	
-	public URI getNumerator() {
+	public URI getNumerator() throws SBOLGraphException{
 		if (numerator==null)
 		{
-			numerator=RDFUtil.getPropertyAsURI(this.resource, MeasureDataModel.UnitDivision.numerator);	
+			numerator=IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitDivision.numerator);	
 		}
 		return numerator;
 	}
@@ -36,10 +37,10 @@ public class UnitDivision extends CompoundUnit{
 		RDFUtil.setProperty(resource, MeasureDataModel.UnitDivision.numerator, numerator);
 	}
 	
-	public URI getDenominator() {
+	public URI getDenominator() throws SBOLGraphException {
 		if (denominator==null)
 		{
-			denominator=RDFUtil.getPropertyAsURI(this.resource, MeasureDataModel.UnitDivision.denominator);	
+			denominator=IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitDivision.denominator);	
 		}
 		return denominator;
 	}

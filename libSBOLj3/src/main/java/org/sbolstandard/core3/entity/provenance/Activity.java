@@ -11,6 +11,7 @@ import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.ControlledTopLevel;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
 public class Activity extends ControlledTopLevel{
@@ -34,7 +35,7 @@ public class Activity extends ControlledTopLevel{
 	public XSDDateTime getStartedAtTime() throws SBOLGraphException {
 		if (startedAtTime==null)
 		{
-			String startedAtTimeString=RDFUtil.getPropertyAsString(this.resource, ProvenanceDataModel.Activity.startedAtTime);
+			String startedAtTimeString=IdentityValidator.getValidator().getPropertyAsString(this.resource, ProvenanceDataModel.Activity.startedAtTime);
 			if (startedAtTimeString!=null)
 			{
 				try
@@ -64,7 +65,7 @@ public class Activity extends ControlledTopLevel{
 	public XSDDateTime getEndedAtTime() throws SBOLGraphException {
 		if (endedAtTime==null)
 		{
-			String timeString=RDFUtil.getPropertyAsString(this.resource, ProvenanceDataModel.Activity.endedAtTime);
+			String timeString=IdentityValidator.getValidator().getPropertyAsString(this.resource, ProvenanceDataModel.Activity.endedAtTime);
 			if (timeString!=null)
 			{
 				try

@@ -6,6 +6,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class Cut extends Location {
@@ -26,10 +27,10 @@ public class Cut extends Location {
 
 	
 	
-	public int getAt() {
+	public int getAt() throws SBOLGraphException {
 		if (at==Integer.MIN_VALUE)
 		{
-			String value=RDFUtil.getPropertyAsString(this.resource, DataModel.Cut.at);
+			String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Cut.at);
 			if (value!=null)
 			{
 				at=Integer.valueOf(value);

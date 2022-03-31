@@ -7,6 +7,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.ControlledIdentified;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
 public class Usage extends ControlledIdentified{
@@ -24,10 +25,10 @@ public class Usage extends ControlledIdentified{
 		super(resource);
 	}
 	
-	public URI getEntity() {
+	public URI getEntity() throws SBOLGraphException {
 		if (entity==null)
 		{
-			entity=RDFUtil.getPropertyAsURI(this.resource, ProvenanceDataModel.Usage.entity);
+			entity=IdentityValidator.getValidator().getPropertyAsURI(this.resource, ProvenanceDataModel.Usage.entity);
 		}
 		return entity;
 	}

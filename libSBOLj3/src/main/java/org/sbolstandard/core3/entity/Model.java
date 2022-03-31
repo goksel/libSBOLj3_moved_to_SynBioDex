@@ -5,6 +5,7 @@ import java.net.URI;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class Model extends TopLevel{
@@ -25,7 +26,7 @@ public class Model extends TopLevel{
 	public URI getSource() throws SBOLGraphException {
 		if (source==null)
 		{
-			source=RDFUtil.getPropertyAsURI(this.resource, DataModel.Model.source);	
+			source=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);	
 		}
 		return source;
 	}
@@ -36,10 +37,10 @@ public class Model extends TopLevel{
 	}
 
 	
-	public URI getFramework() {
+	public URI getFramework() throws SBOLGraphException {
 		if (framework==null)
 		{
-			framework=RDFUtil.getPropertyAsURI(this.resource, DataModel.Model.framework);	
+			framework=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.framework);	
 		}
 		return framework;
 	}
@@ -49,10 +50,10 @@ public class Model extends TopLevel{
 		RDFUtil.setProperty(resource, DataModel.Model.framework, framework);
 	}
 
-	public URI getLanguage() {
+	public URI getLanguage() throws SBOLGraphException {
 		if (language==null)
 		{
-			language=RDFUtil.getPropertyAsURI(this.resource, DataModel.Model.language);	
+			language=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.language);	
 		}
 		return language;
 	}

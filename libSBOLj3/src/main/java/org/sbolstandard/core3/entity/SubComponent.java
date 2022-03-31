@@ -11,6 +11,7 @@ import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.entity.Location.LocationFactory;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class SubComponent extends Feature{
@@ -31,10 +32,10 @@ public class SubComponent extends Feature{
 	}
 
 	
-	public URI getRoleIntegration() {
+	public URI getRoleIntegration() throws SBOLGraphException {
 		if (roleIntegration==null)
 		{
-			roleIntegration=RDFUtil.getPropertyAsURI(this.resource, DataModel.SubComponent.roleIntegration);
+			roleIntegration=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.roleIntegration);
 		}
 		return roleIntegration;
 	}
@@ -45,10 +46,10 @@ public class SubComponent extends Feature{
 	}
 
 	
-	public URI getIsInstanceOf() {
+	public URI getIsInstanceOf() throws SBOLGraphException {
 		if (isInstanceOf==null)
 		{
-			isInstanceOf=RDFUtil.getPropertyAsURI(this.resource, DataModel.SubComponent.instanceOf);
+			isInstanceOf=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.instanceOf);
 		}
 		return isInstanceOf;
 	}

@@ -12,6 +12,7 @@ import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.util.URINameSpace;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public abstract class TopLevel extends Identified {
@@ -47,10 +48,10 @@ public abstract class TopLevel extends Identified {
 		RDFUtil.setProperty(resource, DataModel.TopLevel.attachment, attachments);
 	}
 	
-	public URI getNamespace() {
+	public URI getNamespace() throws SBOLGraphException{
 		if (namespace==null)
 		{
-			namespace=RDFUtil.getPropertyAsURI(this.resource, DataModel.TopLevel.namespace);	
+			namespace=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.TopLevel.namespace);	
 		}
 		return namespace;
 	}

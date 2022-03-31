@@ -8,6 +8,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.ControlledIdentified;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
 public class Association extends ControlledIdentified{
@@ -40,10 +41,10 @@ public class Association extends ControlledIdentified{
 		RDFUtil.setProperty(resource, ProvenanceDataModel.Association.role, roles);
 	}
 	
-	public URI getPlan() {
+	public URI getPlan() throws SBOLGraphException {
 		if (plan==null)
 		{
-			plan=RDFUtil.getPropertyAsURI(this.resource, ProvenanceDataModel.Association.plan);
+			plan=IdentityValidator.getValidator().getPropertyAsURI(this.resource, ProvenanceDataModel.Association.plan);
 		}
 		return plan;
 	}
@@ -53,10 +54,10 @@ public class Association extends ControlledIdentified{
 		RDFUtil.setProperty(resource, ProvenanceDataModel.Association.plan, plan);
 	}
 	
-	public URI getAgent() {
+	public URI getAgent() throws SBOLGraphException{
 		if (agent==null)
 		{
-			agent=RDFUtil.getPropertyAsURI(this.resource, ProvenanceDataModel.Association.agent);
+			agent=IdentityValidator.getValidator().getPropertyAsURI(this.resource, ProvenanceDataModel.Association.agent);
 		}
 		return agent;
 	}

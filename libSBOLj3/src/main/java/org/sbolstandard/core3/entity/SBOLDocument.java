@@ -35,6 +35,9 @@ import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 public class SBOLDocument {
 	protected Model model = null;
 	
@@ -46,7 +49,7 @@ public class SBOLDocument {
 	private List<org.sbolstandard.core3.entity.Model> models;
 	private List<Collection> collections;
 	private List<Experiment> experiments;
-	private List<Attachment> attachments;
+	private List<@Valid Attachment> attachments;
 	private List<Agent> agents;
 	private List<Plan> plans;
 	private List<Activity> activities;
@@ -480,7 +483,7 @@ public class SBOLDocument {
 		return activities;
 	}
 	
-	private void initialisePrefix(Prefix prefix, String symbol, String name, float factor){
+	private void initialisePrefix(Prefix prefix, String symbol, String name, float factor) throws SBOLGraphException{
 		prefix.setSymbol(symbol);
 		prefix.setLabel(name);
 		prefix.setFactor(factor);

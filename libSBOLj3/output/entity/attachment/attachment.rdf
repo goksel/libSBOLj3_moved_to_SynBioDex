@@ -29,11 +29,11 @@
       <sbol:displayId>TetR_protein</sbol:displayId>
    </sbol:Component>
    <sbol:Attachment rdf:about="attachment1">
+      <sbol:size>1000</sbol:size>
       <sbol:hashAlgorithm>Alg1</sbol:hashAlgorithm>
       <sbol:hash>aaa</sbol:hash>
-      <sbol:size>1000</sbol:size>
-      <sbol:format rdf:resource="https://identifiers.org/edam:format_2585"/>
       <sbol:source rdf:resource="/attachment1"/>
+      <sbol:format rdf:resource="https://identifiers.org/edam:format_2585"/>
       <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>attachment1</sbol:displayId>
    </sbol:Attachment>

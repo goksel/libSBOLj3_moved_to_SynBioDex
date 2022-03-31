@@ -7,6 +7,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.ControlledTopLevel;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 public abstract class Unit extends ControlledTopLevel{
@@ -29,10 +30,10 @@ public abstract class Unit extends ControlledTopLevel{
 		super(resource);
 	}
 	
-	public String getSymbol() {
+	public String getSymbol() throws SBOLGraphException{
 		if (symbol==null)
 		{
-			symbol=RDFUtil.getPropertyAsString(this.resource, MeasureDataModel.Unit.symbol);
+			symbol=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.symbol);
 		}
 		return symbol;
 	}
@@ -56,19 +57,19 @@ public abstract class Unit extends ControlledTopLevel{
 	}
 	
 	
-	public String getLabel() {
+	public String getLabel() throws SBOLGraphException {
 		if (label==null)
 		{
-			label=RDFUtil.getPropertyAsString(this.resource, MeasureDataModel.Unit.label);
+			label=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.label);
 		}
 		return label;
 	}
 	
-	public void setLabel(String label) {
+	public void setLabel(String label) throws SBOLGraphException{
 		this.label = label;
 		RDFUtil.setProperty(resource, MeasureDataModel.Unit.label, label);
-		if (!label.equals(getName()))
-		{
+		
+		if (!label.equals(getName())){
 			setName(label);
 		}
 	}
@@ -90,9 +91,16 @@ public abstract class Unit extends ControlledTopLevel{
 	public void setName(String name)
 	{
 		super.setName(name);
-		if (!name.equals(getLabel()))
+		try
 		{
-			setLabel(name);
+			if (!name.equals(getLabel()))
+			{
+				setLabel(name);
+			}
+		}
+		catch (SBOLGraphException ex)
+		{
+			throw new Error(ex);
 		}
 	}
 	
@@ -100,22 +108,29 @@ public abstract class Unit extends ControlledTopLevel{
 	public void setDescription(String description)
 	{
 		super.setDescription(description);
-		if (!description.equals(getComment()))
+		try
 		{
-			setComment(description);
+			if (!description.equals(getComment()))
+			{
+				setComment(description);
+			}
+		}
+		catch (SBOLGraphException ex)
+		{
+			throw new Error(ex);
 		}
 	}
 	
-	public String getComment() {
+	public String getComment() throws SBOLGraphException {
 		if (comment==null)
 		{
-			comment=RDFUtil.getPropertyAsString(this.resource, MeasureDataModel.Unit.comment);
+			comment=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.comment);
 		}
 		return comment;
 	}
 	
 	
-	public void setComment(String comment) {
+	public void setComment(String comment) throws SBOLGraphException {
 		this.comment = comment;
 		RDFUtil.setProperty(resource, MeasureDataModel.Unit.comment, comment);
 		if (!comment.equals(getDescription()))
@@ -124,10 +139,10 @@ public abstract class Unit extends ControlledTopLevel{
 		}	
 	}
 	
-	public String getLongComment() {
+	public String getLongComment() throws SBOLGraphException {
 		if (longComment==null)
 		{
-			longComment=RDFUtil.getPropertyAsString(this.resource, MeasureDataModel.Unit.longComment);
+			longComment=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.longComment);
 		}
 		return longComment;
 	}

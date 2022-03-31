@@ -124,7 +124,7 @@ public class ActivityTest extends TestCase {
 		}	
 	}
 
-	 private void printMetadata(Identified identified, int count)
+	 private void printMetadata(Identified identified, int count) throws SBOLGraphException
 	 {
 		 String space="";
 		 if (count>0)

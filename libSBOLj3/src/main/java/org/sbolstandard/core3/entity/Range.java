@@ -6,6 +6,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class Range extends Location {
@@ -28,10 +29,10 @@ public class Range extends Location {
 		super(displayId);
 	}*/
 	
-	public int getStart() {
+	public int getStart() throws SBOLGraphException{
 		if (start==Integer.MIN_VALUE)
 		{
-			String value=RDFUtil.getPropertyAsString(this.resource, DataModel.Range.start);
+			String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Range.start);
 			if (value!=null)
 			{
 				start=Integer.valueOf(value);
@@ -45,10 +46,10 @@ public class Range extends Location {
 		RDFUtil.setProperty(this.resource, DataModel.Range.start, String.valueOf(this.start));
 	}
 	
-	public int getEnd() {
+	public int getEnd() throws SBOLGraphException {
 		if (end==Integer.MIN_VALUE)
 		{
-			String value=RDFUtil.getPropertyAsString(this.resource, DataModel.Range.end);
+			String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Range.end);
 			if (value!=null)
 			{
 				end=Integer.valueOf(value);

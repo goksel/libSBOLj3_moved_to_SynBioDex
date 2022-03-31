@@ -7,6 +7,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.ControlledIdentified;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
@@ -55,7 +56,7 @@ public class Measure extends ControlledIdentified{
 	public float getValue() throws SBOLGraphException {
 		if (Float.isNaN(this.value))
 		{
-			String valueString=RDFUtil.getPropertyAsString(this.resource, MeasureDataModel.Measure.value);
+			String valueString=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Measure.value);
 			if (valueString!=null)
 			{
 				try
@@ -72,10 +73,10 @@ public class Measure extends ControlledIdentified{
 	}
 	
 	
-	public URI getUnit() {
+	public URI getUnit() throws SBOLGraphException {
 		if (unit==null)
 		{
-			unit=RDFUtil.getPropertyAsURI(this.resource, MeasureDataModel.Measure.unit);	
+			unit=IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.Measure.unit);	
 		}
 		return unit;
 	}

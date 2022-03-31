@@ -5,6 +5,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 public abstract class Prefix extends Unit{
@@ -34,7 +35,7 @@ public abstract class Prefix extends Unit{
 	public float getFactor() throws SBOLGraphException {
 		if (Float.isNaN(this.factor))
 		{
-			String factorString=RDFUtil.getPropertyAsString(this.resource, MeasureDataModel.Prefix.factor);
+			String factorString=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Prefix.factor);
 			if (factorString!=null)
 			{
 				try

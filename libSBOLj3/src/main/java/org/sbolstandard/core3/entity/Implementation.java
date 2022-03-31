@@ -5,6 +5,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class Implementation extends TopLevel{
@@ -23,7 +24,7 @@ public class Implementation extends TopLevel{
 	public URI getComponent() throws SBOLGraphException {
 		if (component==null)
 		{
-			component=RDFUtil.getPropertyAsURI(this.resource, DataModel.Implementation.built);	
+			component=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Implementation.built);	
 		}
 		return component;
 	}

@@ -373,7 +373,7 @@ public class SBOLComparator {
 			output = add(output, assertEqual(entity1, entity2, entity1.getHash(),entity2.getHash(), DataModel.Attachment.hash));
 			output = add(output, assertEqual(entity1, entity2, entity1.getHashAlgorithm(),entity2.getHashAlgorithm(), DataModel.Attachment.hashAlgorithm));
 			output = add(output, assertEqual(entity1, entity2, entity1.getSource(),entity2.getSource(), DataModel.Attachment.source));
-			output = add(output, assertEqual(entity1, entity2, entity1.getSize(),entity2.getSize(), DataModel.Attachment.size));
+			output = add(output, assertEqual(entity1, entity2, entity1.getSize().toString(),entity2.getSize().toString(), DataModel.Attachment.size));
 		}
 		return output;
 	}

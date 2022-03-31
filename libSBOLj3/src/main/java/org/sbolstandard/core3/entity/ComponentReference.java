@@ -6,6 +6,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class ComponentReference extends Feature{
@@ -24,10 +25,10 @@ public class ComponentReference extends Feature{
 	}
 
 	
-	public URI getFeature() {
+	public URI getFeature() throws SBOLGraphException {
 		if (this.feature==null)
 		{
-			this.feature=RDFUtil.getPropertyAsURI(this.resource, DataModel.ComponentReference.feature);
+			this.feature=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.feature);
 		}
 		return this.feature;
 	}
@@ -36,12 +37,11 @@ public class ComponentReference extends Feature{
 		this.feature = feature;
 		RDFUtil.setProperty(this.resource, DataModel.ComponentReference.feature, this.feature);
 	}
-
 	
-	public URI getInChildOf() {
+	public URI getInChildOf() throws SBOLGraphException{
 		if (this.inChildOf==null)
 		{
-			this.inChildOf=RDFUtil.getPropertyAsURI(this.resource, DataModel.ComponentReference.inChildOf);
+			this.inChildOf=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.inChildOf);
 		}
 		return this.inChildOf;
 	}
@@ -56,6 +56,5 @@ public class ComponentReference extends Feature{
 	public URI getResourceType() {
 		return DataModel.ComponentReference.uri;
 	}
-	
 	
 }

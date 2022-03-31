@@ -8,6 +8,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class ExternallyDefined extends Feature{
@@ -39,10 +40,10 @@ public class ExternallyDefined extends Feature{
 	}
 	
 	
-	public URI getDefinition() {
+	public URI getDefinition() throws SBOLGraphException {
 		if (this.definition==null)
 		{
-			this.definition=RDFUtil.getPropertyAsURI(this.resource, DataModel.ExternalyDefined.definition);
+			this.definition=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ExternalyDefined.definition);
 		}
 		return this.definition;
 	}

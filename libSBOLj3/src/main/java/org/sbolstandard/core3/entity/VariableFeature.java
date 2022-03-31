@@ -8,6 +8,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class VariableFeature extends Identified{
@@ -32,7 +33,7 @@ public class VariableFeature extends Identified{
 	public URI getCardinality() throws SBOLGraphException {
 		if (cardinality==null)
 		{
-			cardinality=RDFUtil.getPropertyAsURI(this.resource, DataModel.VariableComponent.cardinality);	
+			cardinality=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableComponent.cardinality);	
 		}
 		return cardinality;
 	}
@@ -45,7 +46,7 @@ public class VariableFeature extends Identified{
 	public URI getFeature() throws SBOLGraphException {
 		if (feature==null)
 		{
-			feature=RDFUtil.getPropertyAsURI(this.resource, DataModel.VariableComponent.variable);	
+			feature=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableComponent.variable);	
 		}
 		return feature;
 	}

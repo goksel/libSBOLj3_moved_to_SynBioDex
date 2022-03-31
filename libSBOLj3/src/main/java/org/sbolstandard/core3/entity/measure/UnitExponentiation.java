@@ -6,6 +6,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 public class UnitExponentiation extends CompoundUnit{
@@ -24,10 +25,10 @@ public class UnitExponentiation extends CompoundUnit{
 		super(resource);
 	}
 	
-	public URI getBase() {
+	public URI getBase() throws SBOLGraphException{
 		if (base==null)
 		{
-			base=RDFUtil.getPropertyAsURI(this.resource, MeasureDataModel.UnitExponentiation.base);	
+			base=IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitExponentiation.base);	
 		}
 		return base;
 	}
@@ -37,10 +38,10 @@ public class UnitExponentiation extends CompoundUnit{
 		RDFUtil.setProperty(resource, MeasureDataModel.UnitExponentiation.base, base);
 	}
 	
-	public int getExponent() {
+	public int getExponent() throws SBOLGraphException {
 		if (exponent==Integer.MIN_VALUE)
 		{
-			String value=RDFUtil.getPropertyAsString(this.resource, MeasureDataModel.UnitExponentiation.exponent);
+			String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.UnitExponentiation.exponent);
 			if (value!=null)
 			{
 				exponent=Integer.valueOf(value);

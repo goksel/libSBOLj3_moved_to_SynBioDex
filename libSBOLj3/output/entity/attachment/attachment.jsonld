@@ -27,21 +27,21 @@
     "hasNamespace" : "https://sbolstandard.org/examples"
   } ],
   "@context" : {
+    "size" : {
+      "@id" : "http://sbols.org/v3#size"
+    },
     "hashAlgorithm" : {
       "@id" : "http://sbols.org/v3#hashAlgorithm"
     },
     "hash" : {
       "@id" : "http://sbols.org/v3#hash"
     },
-    "size" : {
-      "@id" : "http://sbols.org/v3#size"
+    "source" : {
+      "@id" : "http://sbols.org/v3#source",
+      "@type" : "@id"
     },
     "format" : {
       "@id" : "http://sbols.org/v3#format",
-      "@type" : "@id"
-    },
-    "source" : {
-      "@id" : "http://sbols.org/v3#source",
       "@type" : "@id"
     },
     "hasNamespace" : {

@@ -5,6 +5,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class Constraint extends Identified{
@@ -25,7 +26,7 @@ public class Constraint extends Identified{
 	public URI getRestriction() throws SBOLGraphException {
 		if (restriction==null)
 		{
-			restriction=RDFUtil.getPropertyAsURI(this.resource, DataModel.Constraint.restriction);	
+			restriction=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Constraint.restriction);	
 		}
 		return restriction;
 	}
@@ -36,10 +37,10 @@ public class Constraint extends Identified{
 	}
 
 	
-	public URI getSubject() {
+	public URI getSubject() throws SBOLGraphException{
 		if (subject==null)
 		{
-			subject=RDFUtil.getPropertyAsURI(this.resource, DataModel.Constraint.subject);	
+			subject=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Constraint.subject);	
 		}
 		return subject;
 	}
@@ -49,10 +50,10 @@ public class Constraint extends Identified{
 		RDFUtil.setProperty(resource, DataModel.Constraint.subject, subject);
 	}
 
-	public URI getObject() {
+	public URI getObject() throws SBOLGraphException {
 		if (object==null)
 		{
-			object=RDFUtil.getPropertyAsURI(this.resource, DataModel.Constraint.object);	
+			object=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Constraint.object);	
 		}
 		return object;
 	}
