@@ -15,10 +15,10 @@ import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class SubComponent extends Feature{
-	private URI roleIntegration=null;
+	/*private URI roleIntegration=null;
 	private URI isInstanceOf=null;
 	private List<Location> locations=null;
-	private List<Location> sourceLocations=null;
+	private List<Location> sourceLocations=null;*/
 	
 
 	protected  SubComponent(Model model,URI uri) throws SBOLGraphException
@@ -31,112 +31,82 @@ public class SubComponent extends Feature{
 		super(resource);
 	}
 
-	
 	public URI getRoleIntegration() throws SBOLGraphException {
-		if (roleIntegration==null)
-		{
-			roleIntegration=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.roleIntegration);
-		}
-		return roleIntegration;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.roleIntegration);
 	}
 	
 	public void setRoleIntegration(URI roleIntegration) {
-		this.roleIntegration = roleIntegration;
-		RDFUtil.setProperty(this.resource, DataModel.SubComponent.roleIntegration, this.roleIntegration);
+		RDFUtil.setProperty(this.resource, DataModel.SubComponent.roleIntegration, roleIntegration);
 	}
 
 	
 	public URI getIsInstanceOf() throws SBOLGraphException {
-		if (isInstanceOf==null)
-		{
-			isInstanceOf=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.instanceOf);
-		}
-		return isInstanceOf;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.instanceOf);
 	}
 
 	public void setIsInstanceOf(URI isInstanceOf) {
-		this.isInstanceOf = isInstanceOf;
-		RDFUtil.setProperty(this.resource, DataModel.SubComponent.instanceOf, this.isInstanceOf);	
+		RDFUtil.setProperty(this.resource, DataModel.SubComponent.instanceOf, isInstanceOf);	
 	}
 	
 
 	public List<Location> getLocations() throws SBOLGraphException {
-		if (locations==null)
-		{
-			List<Resource> resources=RDFUtil.getResourcesWithProperty (resource, DataModel.SubComponent.location);
-			if (resources!=null)
-			{
-				for (Resource res:resources)
-				{
-					Location location= LocationFactory.create(res);	
-					locations.add(location);			
+		return getLocations(DataModel.SubComponent.location);
+	}
+	
+	private List<Location> getLocations(URI property) throws SBOLGraphException
+	{
+		List<Location> locations=null;
+		List<Resource> resources=RDFUtil.getResourcesWithProperty (resource, property);
+		if (resources!=null){
+			for (Resource res:resources){
+				if (locations==null){
+					locations=new ArrayList<Location>();
 				}
+				Location location= LocationFactory.create(res);	
+				locations.add(location);			
 			}
 		}
 		return locations;
 	}
 
-
-	public Location createLocation(LocationBuilder builder ) throws SBOLGraphException
+	public Location createLocation(LocationBuilder builder) throws SBOLGraphException
 	{
-		//URI locationUri=SBOLAPI.createLocalUri(this,DataModel.Location.uri,getLocations());
-		List<Location> allLocations=new ArrayList<Location>();
-		if (getLocations()!=null)
-		{
-			allLocations.addAll(getLocations());
-		}
-		if (sourceLocations!=null)
-		{
-			allLocations.addAll(getSourceLocations());
-		}
+		return createLocation(builder, DataModel.SubComponent.location);
+	}
+	
+	private Location createLocation(LocationBuilder builder, URI property) throws SBOLGraphException
+	{
+		List<Location> allLocations=getAllLocations();
 		URI locationUri=SBOLAPI.createLocalUri(this,builder.getLocationTypeUri(),allLocations,builder.getLocationClass());
 		Location location=builder.build(this.resource.getModel(), locationUri);
-		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
+		addToList(location, property);
 		return location;
 	}
 	
 	
 	public List<Location> getSourceLocations() throws SBOLGraphException {
-		if (sourceLocations==null)
-		{
-			List<Resource> resources=RDFUtil.getResourcesWithProperty (resource, DataModel.SubComponent.sourceLocation);
-			if (resources!=null)
-			{
-				for (Resource res:resources)
-				{
-					Location location= LocationFactory.create(res);	
-					sourceLocations.add(location);			
-				}
-			}
-				
-		}
-		return sourceLocations;
+		return getLocations(DataModel.SubComponent.sourceLocation);
 	}
 
-
-	public Location createSourceLocation(LocationBuilder builder ) throws SBOLGraphException
+	private List<Location> getAllLocations() throws SBOLGraphException
 	{
-		//URI locationUri=SBOLAPI.createLocalUri(this,DataModel.Location.uri,getSourceLocations());
 		List<Location> allLocations=new ArrayList<Location>();
-		if (getLocations()!=null)
+		List<Location> locations=getLocations();
+		List<Location> sourceLocations=getSourceLocations();
+		if (locations!=null)
 		{
-			allLocations.addAll(getLocations());
+			allLocations.addAll(locations);
 		}
 		if (sourceLocations!=null)
 		{
-			allLocations.addAll(getSourceLocations());
+			allLocations.addAll(sourceLocations);
 		}
-		URI locationUri=SBOLAPI.createLocalUri(this,builder.getLocationTypeUri(),allLocations,builder.getLocationClass());
-		
-		Location sourceLocation=builder.build(this.resource.getModel(),locationUri);
-		RDFUtil.setProperty(resource, DataModel.SubComponent.sourceLocation, sourceLocation.getUri());
-		
-		if (sourceLocations==null)
-		{	
-			sourceLocations=new ArrayList<Location>();
-			sourceLocations.add(sourceLocation);
-		}
-		return sourceLocation;
+		return allLocations;
+	}
+
+	public Location createSourceLocation(LocationBuilder builder ) throws SBOLGraphException
+	{
+		return createLocation(builder, DataModel.SubComponent.sourceLocation);
 	}
 	
 	

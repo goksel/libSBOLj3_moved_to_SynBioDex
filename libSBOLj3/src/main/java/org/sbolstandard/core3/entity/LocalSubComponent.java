@@ -13,8 +13,8 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class LocalSubComponent extends Feature{
-	private List<URI> types=new ArrayList<URI>();
-	private List<Location> locations=null;
+	/*private List<URI> types=new ArrayList<URI>();
+	private List<Location> locations=null;*/
 
 	protected  LocalSubComponent(Model model,URI uri) throws SBOLGraphException
 	{
@@ -28,25 +28,24 @@ public class LocalSubComponent extends Feature{
 
 	
 	public List<URI> getTypes() {
-		if (types==null)
-		{
-			types=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.type);
-		}
-		return types;
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.type);
 	}
 	
 	public void setTypes(List<URI> types) {
-		this.types = types;
 		RDFUtil.setProperty(resource, DataModel.type, types);
 	}
 	
 	
 	public List<Location> getLocations() throws SBOLGraphException {		
-		if (locations==null)
+		List<Location> locations=null;
 		{
 			List<Resource> resources=RDFUtil.getResourcesWithProperty (resource, DataModel.SubComponent.location);
 			for (Resource res:resources)
 			{
+				if (locations==null)
+				{
+					locations=new ArrayList<Location>();
+				}
 				Location location= LocationFactory.create(res);	
 				locations.add(location);			
 			}
@@ -57,7 +56,7 @@ public class LocalSubComponent extends Feature{
 
 	public Location createLocation(LocationBuilder builder ) throws SBOLGraphException {
 		Location location=builder.build(this.resource.getModel(),this.getUri());
-		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
+		addToList(location, DataModel.SubComponent.location);
 		return location;
 	}
 	
@@ -65,6 +64,4 @@ public class LocalSubComponent extends Feature{
 	public URI getResourceType() {
 		return DataModel.LocalSubComponent.uri;
 	}
-	
-	
 }

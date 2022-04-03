@@ -30,10 +30,10 @@
    </sbol:Component>
    <sbol:Attachment rdf:about="attachment1">
       <sbol:size>1000</sbol:size>
-      <sbol:hashAlgorithm>Alg1</sbol:hashAlgorithm>
-      <sbol:hash>aaa</sbol:hash>
-      <sbol:source rdf:resource="/attachment1"/>
       <sbol:format rdf:resource="https://identifiers.org/edam:format_2585"/>
+      <sbol:hash>bbb</sbol:hash>
+      <sbol:source rdf:resource="/attachment1"/>
+      <sbol:hashAlgorithm>Alg1</sbol:hashAlgorithm>
       <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>attachment1</sbol:displayId>
    </sbol:Attachment>

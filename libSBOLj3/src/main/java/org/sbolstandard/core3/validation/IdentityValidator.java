@@ -4,6 +4,7 @@ package org.sbolstandard.core3.validation;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalInt;
 import java.util.Set;
 
 import org.apache.jena.rdf.model.Resource;
@@ -11,6 +12,8 @@ import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.vocabulary.DataModel;
+import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -89,8 +92,7 @@ public class IdentityValidator {
 		{
 			result=RDFUtil.getPropertyAsURI(resource, property);
 		}
-		return result;
-		
+		return result;	
 	}
 	
 	public String getPropertyAsString(Resource resource, URI property) throws SBOLGraphException
@@ -119,5 +121,38 @@ public class IdentityValidator {
 		return result;
 		
 	}
+	
+	public OptionalInt getPropertyAsOptionalInt(Resource resource, URI property) throws SBOLGraphException
+	{
+		OptionalInt result=OptionalInt.empty();
+		String value=IdentityValidator.getValidator().getPropertyAsString(resource, property);
+		if (value!=null){
+			result=OptionalInt.of(Integer.valueOf(value));
+		}
+		return result;
+	}
+	
+	public void setPropertyAsOptionalInt(Resource resource, URI property, OptionalInt value)
+	{
+		String stringValue=null;
+		if (value.isPresent())
+		{
+			stringValue= String.valueOf(value.getAsInt());
+		}
+		RDFUtil.setProperty(resource, property, stringValue);	
+	}
+	
+	/*
+	public String getRequiredPropertyAsString(Resource resource, URI property) throws SBOLGraphException
+	{
+		String value=getPropertyAsString(resource, property);
+		if (value==null)
+		{
+			throw new SBOLGraphException("Cannot read the value. Property:" + property+ " Uri:+ " +  resource.getURI());
+			
+		}
+		return value;
+		
+	}*/
 
 }

@@ -13,12 +13,12 @@ import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 public abstract class Unit extends ControlledTopLevel{
 	
 	
-	private String symbol;
+	/*private String symbol;
 	private List<String> alternativeSymbols;
 	private String label;
 	private List<String> alternativeLabels;
 	private String comment;
-	private String longComment;
+	private String longComment;*/
 		
 	protected  Unit(Model model,URI uri) throws SBOLGraphException
 	{
@@ -31,42 +31,27 @@ public abstract class Unit extends ControlledTopLevel{
 	}
 	
 	public String getSymbol() throws SBOLGraphException{
-		if (symbol==null)
-		{
-			symbol=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.symbol);
-		}
-		return symbol;
+		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.symbol);
 	}
 	
 	public void setSymbol(String symbol) {
-		this.symbol = symbol;
 		RDFUtil.setProperty(resource, MeasureDataModel.Unit.symbol, symbol);	
 	}
 	
 	public List<String> getAlternativeSymbols() {
-		if (alternativeSymbols==null)
-		{
-			alternativeSymbols=RDFUtil.getPropertiesAsStrings(this.resource, MeasureDataModel.Unit.alternativeSymbol);
-		}
-		return alternativeSymbols;
+		return RDFUtil.getPropertiesAsStrings(this.resource, MeasureDataModel.Unit.alternativeSymbol);
 	}
 	
 	public void setAlternativeSymbols(List<String> alternativeSymbols) {
-		this.alternativeSymbols = alternativeSymbols;
 		RDFUtil.setPropertyAsStrings(resource, MeasureDataModel.Unit.alternativeSymbol, alternativeSymbols);	
 	}
 	
 	
 	public String getLabel() throws SBOLGraphException {
-		if (label==null)
-		{
-			label=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.label);
-		}
-		return label;
+		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.label);
 	}
 	
 	public void setLabel(String label) throws SBOLGraphException{
-		this.label = label;
 		RDFUtil.setProperty(resource, MeasureDataModel.Unit.label, label);
 		
 		if (!label.equals(getName())){
@@ -75,15 +60,10 @@ public abstract class Unit extends ControlledTopLevel{
 	}
 	
 	public List<String> getAlternativeLabels() {
-		if (alternativeLabels==null)
-		{
-			alternativeLabels=RDFUtil.getPropertiesAsStrings(this.resource, MeasureDataModel.Unit.alternativeLabel);
-		}
-		return alternativeLabels;
+		return RDFUtil.getPropertiesAsStrings(this.resource, MeasureDataModel.Unit.alternativeLabel);
 	}
 	
 	public void setAlternativeLabels(List<String> alternativeLabels) {
-		this.alternativeLabels = alternativeLabels;
 		RDFUtil.setPropertyAsStrings(resource, MeasureDataModel.Unit.alternativeLabel, alternativeLabels);
 	}
 	
@@ -122,16 +102,11 @@ public abstract class Unit extends ControlledTopLevel{
 	}
 	
 	public String getComment() throws SBOLGraphException {
-		if (comment==null)
-		{
-			comment=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.comment);
-		}
-		return comment;
+		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.comment);
 	}
 	
 	
 	public void setComment(String comment) throws SBOLGraphException {
-		this.comment = comment;
 		RDFUtil.setProperty(resource, MeasureDataModel.Unit.comment, comment);
 		if (!comment.equals(getDescription()))
 		{
@@ -140,15 +115,10 @@ public abstract class Unit extends ControlledTopLevel{
 	}
 	
 	public String getLongComment() throws SBOLGraphException {
-		if (longComment==null)
-		{
-			longComment=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.longComment);
-		}
-		return longComment;
+		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.longComment);
 	}
 	
 	public void setLongComment(String longComment) {
-		this.longComment = longComment;
 		RDFUtil.setProperty(resource, MeasureDataModel.Unit.longComment, longComment);		
 	}
 	
@@ -156,5 +126,4 @@ public abstract class Unit extends ControlledTopLevel{
 	public URI getResourceType() {
 		return MeasureDataModel.Unit.uri;
 	}
-	
 }

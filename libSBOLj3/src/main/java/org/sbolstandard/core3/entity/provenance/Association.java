@@ -13,11 +13,9 @@ import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
 public class Association extends ControlledIdentified{
 	
-	private List<URI> roles=null;
+	/*private List<URI> roles=null;
 	private URI plan=null;
-	private URI agent=null;
-	
-	
+	private URI agent=null;*/
 	protected  Association(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
@@ -29,48 +27,31 @@ public class Association extends ControlledIdentified{
 	}
 	
 	public List<URI> getRoles() {
-		if (roles==null)
-		{
-			roles=RDFUtil.getPropertiesAsURIs(this.resource, ProvenanceDataModel.Association.role);
-		}
-		return roles;
+		return RDFUtil.getPropertiesAsURIs(this.resource, ProvenanceDataModel.Association.role);
 	}
 	
 	public void setRoles(List<URI> roles) {
-		this.roles = roles;
 		RDFUtil.setProperty(resource, ProvenanceDataModel.Association.role, roles);
 	}
 	
 	public URI getPlan() throws SBOLGraphException {
-		if (plan==null)
-		{
-			plan=IdentityValidator.getValidator().getPropertyAsURI(this.resource, ProvenanceDataModel.Association.plan);
-		}
-		return plan;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, ProvenanceDataModel.Association.plan);
 	}
 	
 	public void setPlan(URI plan) {
-		this.plan = plan;
 		RDFUtil.setProperty(resource, ProvenanceDataModel.Association.plan, plan);
 	}
 	
 	public URI getAgent() throws SBOLGraphException{
-		if (agent==null)
-		{
-			agent=IdentityValidator.getValidator().getPropertyAsURI(this.resource, ProvenanceDataModel.Association.agent);
-		}
-		return agent;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, ProvenanceDataModel.Association.agent);
 	}
 	
 	public void setAgent(URI agent) {
-		this.agent = agent;
 		RDFUtil.setProperty(resource, ProvenanceDataModel.Association.agent, agent);
 	}
-	
 	
 	@Override
 	public URI getResourceType() {
 		return ProvenanceDataModel.Association.uri;
 	}
-	
 }

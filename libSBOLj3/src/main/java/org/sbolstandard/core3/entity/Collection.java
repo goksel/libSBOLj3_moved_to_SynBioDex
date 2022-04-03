@@ -9,7 +9,7 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class Collection extends TopLevel{
-	private List<URI> members=null;
+	//private List<URI> members=null;
 	
 	protected  Collection(Model model,URI uri) throws SBOLGraphException
 	{
@@ -22,15 +22,10 @@ public class Collection extends TopLevel{
 	}
 	
 	public List<URI> getTopLevels() throws SBOLGraphException {
-		if (members==null)
-		{
-			members=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Collection.member);	
-		}
-		return members;
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Collection.member);	
 	}
 
 	public void setTopLevels(List<URI> members) {
-		this.members = members;
 		RDFUtil.setProperty(resource, DataModel.Collection.member, members);
 	}	
 

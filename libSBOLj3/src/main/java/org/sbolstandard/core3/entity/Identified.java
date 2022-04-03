@@ -25,22 +25,22 @@ import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 public abstract class Identified {
 	protected Resource resource=null;
 	
-	private String displayId;
+	/*private String displayId;
 	private String name;
 	private String description;
 	private List<URI> wasDerivedFrom;
 	private List<URI> wasGeneratedBy;
 	private List<Measure> measures;
 	//private List<Metadata> metadataList;
-	private URI uri;
+	private URI uri;*/
 	
 	protected Identified()
 	{}
 	
 	protected Identified(Model model, URI uri) throws SBOLGraphException
 	{
-		this.uri=uri;
-		this.resource=RDFUtil.createResource(model, this.uri,this.getResourceType());
+		//this.uri=uri;
+		this.resource=RDFUtil.createResource(model, uri,this.getResourceType());
 		inferDisplayId(uri);
 	}
 	
@@ -53,9 +53,9 @@ public abstract class Identified {
 	
 	protected Identified(Resource resource) throws SBOLGraphException
 	{
-		this.uri=URI.create(resource.getURI());
+		//this.uri=URI.create(resource.getURI());
 		this.resource=resource;
-		inferDisplayId(this.uri);
+		inferDisplayId(URI.create(resource.getURI()));
 	}
 	
 	/*public Identified (String displayId)
@@ -65,87 +65,56 @@ public abstract class Identified {
 	}*/
 	
 	public String getDisplayId() throws SBOLGraphException{
-		if (displayId==null)
-		{
-			displayId=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.displayId);
-		}
-		return displayId;
+		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.displayId);
 	}
 	
 	public void setDisplayId(String displayId) {
-		this.displayId = displayId;
 		RDFUtil.setProperty(resource, DataModel.Identified.displayId, displayId);		
 	}
 	
 	public String getName() throws SBOLGraphException {
-		if (name==null)
-		{
-			name=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.name);
-		}
-		return name;
+		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.name);
 	}
+	
 	public void setName(String name) {
-		if (name!=null){
-			this.name = name;
-			RDFUtil.setProperty(resource, DataModel.Identified.name, name);	
-		}
-	}
-	public String getDescription() throws SBOLGraphException {
-		if (description==null)
-		{
-			description=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.description);
-		}
-		return description;
-	}
-	public void setDescription(String description) {
-		if (description!=null)
-		{
-			this.description = description;
-			RDFUtil.setProperty(resource, DataModel.Identified.description, description);
-		}
+		RDFUtil.setProperty(resource, DataModel.Identified.name, name);	
 		
 	}
 	
+	public String getDescription() throws SBOLGraphException {
+		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.description);
+	}
+	
+	public void setDescription(String description) {
+		RDFUtil.setProperty(resource, DataModel.Identified.description, description);
+	}
+	
 	public List<URI> getWasDerivedFrom() {
-		if (wasDerivedFrom==null)
-		{
-			wasDerivedFrom=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Identified.wasDerivedFrom);
-		}
-		return wasDerivedFrom;
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Identified.wasDerivedFrom);
 	}
 	
 	public void setWasDerivedFrom(List<URI> wasDerivedFrom) {
-		this.wasDerivedFrom = wasDerivedFrom;
-		RDFUtil.setProperty(resource, DataModel.Identified.wasDerivedFrom, this.wasDerivedFrom);
+		RDFUtil.setProperty(resource, DataModel.Identified.wasDerivedFrom, wasDerivedFrom);
 	}
 	
 	public List<URI> getWasGeneratedBy() {
-		if (wasGeneratedBy==null)
-		{
-			wasGeneratedBy=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Identified.wasGeneratedBy);
-		}
-		return wasGeneratedBy;
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Identified.wasGeneratedBy);
 	}
 	
 	public void setWasGeneratedBy(List<URI> wasGeneratedBy) {
-		this.wasGeneratedBy = wasGeneratedBy;
-		RDFUtil.setProperty(resource, DataModel.Identified.wasGeneratedBy, this.wasGeneratedBy);
-
+		RDFUtil.setProperty(resource, DataModel.Identified.wasGeneratedBy, wasGeneratedBy);
 	}
 	
 	public List<Measure> getMeasures()throws SBOLGraphException  {
-		this.measures=addToList(this.measures, DataModel.Identified.measure, Measure.class, MeasureDataModel.Measure.uri);
-		return measures;
+		return addToList(DataModel.Identified.measure, Measure.class, MeasureDataModel.Measure.uri);
 	}
 	
-	
-
 	public Measure createMeasure(URI uri, float value, URI unit) throws SBOLGraphException
 	{
 		Measure measure = new Measure(this.resource.getModel(), uri) {};
 		measure.setValue(value);
 		measure.setUnit(unit);		
-		this.measures=addToList(this.measures, measure, DataModel.Identified.measure);
+		addToList(measure, DataModel.Identified.measure);
 		return measure;	
 	}
 	
@@ -177,7 +146,7 @@ public abstract class Identified {
 	}
 	
 	public URI getUri() {
-		return uri;
+		return URI.create(this.resource.getURI());
 	}
 	
 	abstract public URI getResourceType();
@@ -208,7 +177,22 @@ public abstract class Identified {
 	 * @return
 	 * @throws SBOLGraphException
 	 */
-	protected <T extends Identified>  List<T> addToList(List<T> items, URI property, Class<T> identifiedClass) throws SBOLGraphException
+	protected <T extends Identified>  List<T> addToList(URI property, Class<T> identifiedClass) throws SBOLGraphException
+	{
+		List<T> items=null;
+	
+		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property);
+		if (resources!=null && resources.size()>0){
+			items=new ArrayList<T>();
+			for (Resource res:resources){
+				Identified identified=createIdentified(res, identifiedClass);
+				items.add((T)identified);
+			}
+		}
+		return items;
+	}
+	
+	/*protected <T extends Identified>  List<T> addToList(List<T> items, URI property, Class<T> identifiedClass) throws SBOLGraphException
 	{
 		if (items==null)
 		{
@@ -225,7 +209,7 @@ public abstract class Identified {
 			
 		}
 		return items;
-	}
+	}*/
 	
 	protected <T extends Identified>  T contsructIdentified(URI property, Class<T> identifiedClass) throws SBOLGraphException
 	{
@@ -254,7 +238,13 @@ public abstract class Identified {
 	 * @param property
 	 * @return
 	 */
-	protected <T extends Identified> List<T> addToList(List<T> items, Identified identified, URI property)
+	protected <T extends Identified> void addToList(Identified identified, URI property)
+	{
+		RDFUtil.addProperty(this.resource,property, identified.getUri());
+	}
+	
+	
+	/*protected <T extends Identified> List<T> addToList(List<T> items, Identified identified, URI property)
 	{
 		RDFUtil.addProperty(this.resource,property, identified.getUri());
 		
@@ -264,10 +254,11 @@ public abstract class Identified {
 		}
 		items.add((T)identified);
 		return items;
-	}
+	}*/
 	
 	
-	protected <T extends Identified> List<T> addToList(List<T> items, URI property, Class<T> identifiedClass, URI identifiedResourceType) throws SBOLGraphException
+	
+	/*protected <T extends Identified> List<T> addToList(List<T> items, URI property, Class<T> identifiedClass, URI identifiedResourceType) throws SBOLGraphException
 	{
 		if (items==null)
 		{
@@ -282,6 +273,21 @@ public abstract class Identified {
 				}
 			}
 			
+		}
+		return items;
+	}*/
+	
+	protected <T extends Identified> List<T> addToList(URI property, Class<T> identifiedClass, URI identifiedResourceType) throws SBOLGraphException
+	{
+		List<T> items=null;
+		
+		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property, identifiedResourceType);
+		if (resources!=null && resources.size()>0){
+			items=new ArrayList<T>();
+			for (Resource res:resources){
+				Identified identified=createIdentified(res, identifiedClass);
+				items.add((T)identified);
+			}
 		}
 		return items;
 	}
@@ -373,7 +379,7 @@ public abstract class Identified {
 	}
 	
 	private void inferDisplayId(URI uri) throws SBOLGraphException {
-		displayId = getDisplayId();
+		String displayId = getDisplayId();
 		if (StringUtils.isEmpty(displayId)) {
 			String result = null;
 			String uriString = uri.toString();

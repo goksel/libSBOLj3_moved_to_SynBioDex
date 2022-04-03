@@ -9,8 +9,6 @@ import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class EntireSequence extends Location {
 
-	
-
 	protected EntireSequence(Model model, URI uri) throws SBOLGraphException {
 		super(model, uri);
 	}
@@ -20,11 +18,8 @@ public class EntireSequence extends Location {
 		super(resource);
 	}
 	
-	
 	public URI getResourceType()
 	{
 		return DataModel.EntireSequenceLocation.uri;
 	}
-	
-	
 }

@@ -13,9 +13,9 @@ import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 public class Measure extends ControlledIdentified{
 	
-	private float value=Float.NaN;
+	/*private float value=Float.NaN;
 	private List<URI> types;
-	private URI unit;
+	private URI unit;*/
 	
 	protected  Measure(Model model,URI uri) throws SBOLGraphException
 	{
@@ -28,7 +28,6 @@ public class Measure extends ControlledIdentified{
 	}
 	
 	public void setValue(float value) {
-		this.value = value;
 		String valueString=String.valueOf(value);
 		RDFUtil.setProperty(resource, MeasureDataModel.Measure.value, valueString);	
 	}
@@ -54,19 +53,15 @@ public class Measure extends ControlledIdentified{
 	*/
 	
 	public float getValue() throws SBOLGraphException {
-		if (Float.isNaN(this.value))
-		{
-			String valueString=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Measure.value);
-			if (valueString!=null)
+		float value=Float.NaN;
+		String valueString=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Measure.value);
+		if (valueString!=null){
+			try{
+				value= Float.parseFloat(valueString);
+			}
+			catch (Exception e)
 			{
-				try
-				{
-					value= Float.parseFloat(valueString);
-				}
-				catch (Exception e)
-				{
-					throw new SBOLGraphException("Cannot read the value. Property:" + MeasureDataModel.Measure.value + " Uri:+ " +  this.getUri(), e);
-				}
+				throw new SBOLGraphException("Cannot read the value. Property:" + MeasureDataModel.Measure.value + " Uri:+ " +  this.getUri(), e);
 			}
 		}
 		return value;
@@ -74,31 +69,20 @@ public class Measure extends ControlledIdentified{
 	
 	
 	public URI getUnit() throws SBOLGraphException {
-		if (unit==null)
-		{
-			unit=IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.Measure.unit);	
-		}
-		return unit;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.Measure.unit);	
 	}
 
 	public void setUnit(URI unit) {
-		this.unit = unit;
 		RDFUtil.setProperty(resource, MeasureDataModel.Measure.unit, unit);
 	}
 
 	public List<URI> getTypes() {
-		if (types==null)
-		{
-			types=RDFUtil.getPropertiesAsURIs(this.resource,DataModel.type);
-		}
-		return types;
+		return RDFUtil.getPropertiesAsURIs(this.resource,DataModel.type);
 	}
 	
 	public void setTypes(List<URI> types) {
-		this.types = types;
 		RDFUtil.setProperty(resource, DataModel.type, types);
 	}
-	
 	
 	@Override
 	public URI getResourceType() {

@@ -10,7 +10,7 @@ import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 public class SingularUnit extends Unit{
 	
-	private float factor=Float.NaN;
+	//private float factor=Float.NaN;
 	private URI unit;
 	
 	protected  SingularUnit(Model model,URI uri) throws SBOLGraphException
@@ -24,49 +24,37 @@ public class SingularUnit extends Unit{
 	}
 	
 	public void setFactor(float factor) {
-		this.factor = factor;
 		String factorString=String.valueOf(factor);
 		RDFUtil.setProperty(resource, MeasureDataModel.SingularUnit.factor, factorString);
 		//RDFUtil.setProperty(resource, MeasureDataModel.Prefix.factor, factor);
 	}
 	
 	public float getFactor() throws SBOLGraphException {
-		if (Float.isNaN(this.factor))
-		{
-			String factorString=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.SingularUnit.factor);
-			if (factorString!=null)
+		float factor=Float.NaN;
+		String factorString=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.SingularUnit.factor);
+		if (factorString!=null){
+			try{
+				factor= Float.parseFloat(factorString);
+				//(XSDFloat) XSDDatatype.XSDfloat.parse(factorString);
+			}
+			catch (Exception e)
 			{
-				try
-				{
-					factor= Float.parseFloat(factorString);
-					//(XSDFloat) XSDDatatype.XSDfloat.parse(factorString);
-				}
-				catch (Exception e)
-				{
-					throw new SBOLGraphException("Cannot read the factor value. Property:" + MeasureDataModel.SingularUnit.factor + " Uri:+ " +  this.getUri(), e);
-				}
+				throw new SBOLGraphException("Cannot read the factor value. Property:" + MeasureDataModel.SingularUnit.factor + " Uri:+ " +  this.getUri(), e);
 			}
 		}
 		return factor;
 	}
 	
 	public URI getUnit() throws SBOLGraphException {
-		if (unit==null)
-		{
-			unit=IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.SingularUnit.unit);	
-		}
-		return unit;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.SingularUnit.unit);	
 	}
 
 	public void setUnit(URI unit) {
-		this.unit = unit;
 		RDFUtil.setProperty(resource, MeasureDataModel.SingularUnit.unit, unit);
 	}
-
 	
 	@Override
 	public URI getResourceType() {
 		return MeasureDataModel.SingularUnit.uri;
 	}
-	
 }

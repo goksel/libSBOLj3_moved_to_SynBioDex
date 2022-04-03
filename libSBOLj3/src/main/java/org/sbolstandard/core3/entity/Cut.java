@@ -1,6 +1,7 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.OptionalInt;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
@@ -10,9 +11,7 @@ import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class Cut extends Location {
-
-	private int at=Integer.MIN_VALUE;
-	
+	//private int at=Integer.MIN_VALUE;
 
 	protected Cut(Model model, URI uri) throws SBOLGraphException {
 		super(model, uri);
@@ -23,32 +22,16 @@ public class Cut extends Location {
 		super(resource);
 	}
 	
-	
-
-	
-	
-	public int getAt() throws SBOLGraphException {
-		if (at==Integer.MIN_VALUE)
-		{
-			String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Cut.at);
-			if (value!=null)
-			{
-				at=Integer.valueOf(value);
-			}
-		}
-		return at;
+	public OptionalInt getAt() throws SBOLGraphException {
+		return IdentityValidator.getValidator().getPropertyAsOptionalInt(this.resource, DataModel.Cut.at);
 	}
 	
-	public void setAt(int at) {
-		this.at = at;
-		RDFUtil.setProperty(this.resource, DataModel.Cut.at, String.valueOf(this.at));
+	public void setAt(OptionalInt at) {
+		IdentityValidator.getValidator().setPropertyAsOptionalInt(this.resource, DataModel.Cut.at, at);
 	}
-	
 	
 	public URI getResourceType()
 	{
 		return DataModel.Cut.uri;
 	}
-	
-	
 }

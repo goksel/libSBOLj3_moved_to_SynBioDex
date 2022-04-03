@@ -9,11 +9,8 @@ import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 public class UnitMultiplication extends CompoundUnit{
-	
-	private URI term1;
-	private URI term2;
-	
-	
+	/*private URI term1;
+	private URI term2;*/
 	protected  UnitMultiplication(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
@@ -25,35 +22,23 @@ public class UnitMultiplication extends CompoundUnit{
 	}
 	
 	public URI getTerm1() throws SBOLGraphException {
-		if (term1==null)
-		{
-			term1=IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitMultiplication.term1);	
-		}
-		return term1;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitMultiplication.term1);	
 	}
 
 	public void setTerm1(URI term1) {
-		this.term1 = term1;
 		RDFUtil.setProperty(resource, MeasureDataModel.UnitMultiplication.term1, term1);
 	}
 	
 	public URI getTerm2() throws SBOLGraphException {
-		if (term2==null)
-		{
-			term2=IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitMultiplication.term2);	
-		}
-		return term2;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitMultiplication.term2);	
 	}
 
 	public void setTerm2(URI term2) {
-		this.term2 = term2;
 		RDFUtil.setProperty(resource, MeasureDataModel.UnitMultiplication.term2, term2);
 	}
-	
 	
 	@Override
 	public URI getResourceType() {
 		return MeasureDataModel.UnitMultiplication.uri;
 	}
-	
 }

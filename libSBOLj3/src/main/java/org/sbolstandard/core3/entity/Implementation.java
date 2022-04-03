@@ -9,7 +9,7 @@ import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class Implementation extends TopLevel{
-	private URI component=null;
+	//private URI component=null;
 	
 	protected  Implementation(Model model,URI uri) throws SBOLGraphException
 	{
@@ -22,15 +22,10 @@ public class Implementation extends TopLevel{
 	}
 	
 	public URI getComponent() throws SBOLGraphException {
-		if (component==null)
-		{
-			component=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Implementation.built);	
-		}
-		return component;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Implementation.built);
 	}
 
 	public void setComponent(URI component) {
-		this.component = component;
 		RDFUtil.setProperty(resource, DataModel.Implementation.built, component);
 	}	
 
@@ -38,5 +33,4 @@ public class Implementation extends TopLevel{
 	public URI getResourceType() {
 		return DataModel.Implementation.uri;
 	}
-	
 }

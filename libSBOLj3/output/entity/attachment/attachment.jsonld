@@ -14,7 +14,7 @@
     "displayId" : "attachment1",
     "format" : "EDAM:format_2585",
     "hasNamespace" : "https://sbolstandard.org/examples",
-    "hash" : "aaa",
+    "hash" : "bbb",
     "hashAlgorithm" : "Alg1",
     "size" : "1000",
     "source" : "https://sbolstandard.org/attachment1"
@@ -30,8 +30,9 @@
     "size" : {
       "@id" : "http://sbols.org/v3#size"
     },
-    "hashAlgorithm" : {
-      "@id" : "http://sbols.org/v3#hashAlgorithm"
+    "format" : {
+      "@id" : "http://sbols.org/v3#format",
+      "@type" : "@id"
     },
     "hash" : {
       "@id" : "http://sbols.org/v3#hash"
@@ -40,9 +41,8 @@
       "@id" : "http://sbols.org/v3#source",
       "@type" : "@id"
     },
-    "format" : {
-      "@id" : "http://sbols.org/v3#format",
-      "@type" : "@id"
+    "hashAlgorithm" : {
+      "@id" : "http://sbols.org/v3#hashAlgorithm"
     },
     "hasNamespace" : {
       "@id" : "http://sbols.org/v3#hasNamespace",

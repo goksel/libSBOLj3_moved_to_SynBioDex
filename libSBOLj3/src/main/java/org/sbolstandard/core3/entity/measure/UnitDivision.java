@@ -9,10 +9,8 @@ import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 public class UnitDivision extends CompoundUnit{
-	
-	private URI numerator;
-	private URI denominator;
-	
+	/*private URI numerator;
+	private URI denominator;*/
 	
 	protected  UnitDivision(Model model,URI uri) throws SBOLGraphException
 	{
@@ -25,35 +23,23 @@ public class UnitDivision extends CompoundUnit{
 	}
 	
 	public URI getNumerator() throws SBOLGraphException{
-		if (numerator==null)
-		{
-			numerator=IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitDivision.numerator);	
-		}
-		return numerator;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitDivision.numerator);	
 	}
 
 	public void setNumerator(URI numerator) {
-		this.numerator = numerator;
 		RDFUtil.setProperty(resource, MeasureDataModel.UnitDivision.numerator, numerator);
 	}
 	
 	public URI getDenominator() throws SBOLGraphException {
-		if (denominator==null)
-		{
-			denominator=IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitDivision.denominator);	
-		}
-		return denominator;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitDivision.denominator);	
 	}
 
 	public void setDenominator(URI denominator) {
-		this.denominator = denominator;
 		RDFUtil.setProperty(resource, MeasureDataModel.UnitDivision.denominator, denominator);
 	}
-	
 	
 	@Override
 	public URI getResourceType() {
 		return MeasureDataModel.UnitDivision.uri;
-	}
-	
+	}	
 }

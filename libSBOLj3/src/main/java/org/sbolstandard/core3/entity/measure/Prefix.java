@@ -10,8 +10,7 @@ import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 public abstract class Prefix extends Unit{
 	
-	private float factor=Float.NaN;
-	
+	//private float factor=Float.NaN;
 	protected  Prefix(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
@@ -22,10 +21,7 @@ public abstract class Prefix extends Unit{
 		super(resource);
 	}
 	
-	
-	
 	public void setFactor(float factor) {
-		this.factor = factor;
 		String factorString=String.valueOf(factor);
 		RDFUtil.setProperty(resource, MeasureDataModel.Prefix.factor, factorString);
 		//RDFUtil.setProperty(resource, MeasureDataModel.Prefix.factor, factor);
@@ -33,20 +29,16 @@ public abstract class Prefix extends Unit{
 	}
 	
 	public float getFactor() throws SBOLGraphException {
-		if (Float.isNaN(this.factor))
-		{
-			String factorString=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Prefix.factor);
-			if (factorString!=null)
-			{
-				try
-				{
-					factor= Float.parseFloat(factorString);
-					//(XSDFloat) XSDDatatype.XSDfloat.parse(factorString);
-				}
-				catch (Exception e)
-				{
-					throw new SBOLGraphException("Cannot read the factor value. Property:" + MeasureDataModel.Prefix.factor + " Uri:+ " +  this.getUri(), e);
-				}
+		float factor=Float.NaN;
+
+		String factorString=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Prefix.factor);
+		if (factorString!=null){
+			try{
+				factor= Float.parseFloat(factorString);
+				//(XSDFloat) XSDDatatype.XSDfloat.parse(factorString);
+			}
+			catch (Exception e){
+				throw new SBOLGraphException("Cannot read the factor value. Property:" + MeasureDataModel.Prefix.factor + " Uri:+ " +  this.getUri(), e);
 			}
 		}
 		return factor;
@@ -55,6 +47,5 @@ public abstract class Prefix extends Unit{
 	@Override
 	public URI getResourceType() {
 		return MeasureDataModel.Prefix.uri;
-	}
-	
+	}	
 }

@@ -10,11 +10,10 @@ import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class Participation extends Identified{
-	private List<URI> roles=null;
+	/*private List<URI> roles=null;
 	private URI participant=null;
-	private URI higherOrderParticipant=null;
+	private URI higherOrderParticipant=null;*/
 	
-
 	protected  Participation(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
@@ -26,52 +25,32 @@ public class Participation extends Identified{
 	}
 	
 	public List<URI> getRoles() {
-		if (roles==null)
-		{
-			roles=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.role);
-		}
-		return roles;
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.role);
 	}
 	
 	public void setRoles(List<URI> roles) {
-		this.roles = roles;
 		RDFUtil.setProperty(resource, DataModel.role, roles);
 	}
 	
-	
 	public URI getParticipant() throws SBOLGraphException {
-		if (participant==null)
-		{
-			participant=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Participation.participant);	
-		}
-		return participant;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Participation.participant);	
 	}
 
 	public void setParticipant(URI participant) {
-		this.participant = participant;
 		RDFUtil.setProperty(resource, DataModel.Participation.participant, participant);
 	}
 	
 	public URI getHigherOrderParticipant() throws SBOLGraphException {
-		if (higherOrderParticipant==null)
-		{
-			higherOrderParticipant=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Participation.higherOrderParticipant);	
-		}
-		return participant;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Participation.higherOrderParticipant);	
 	}
 
 	public void setHigherOrderParticipant(URI higherOrderParticipant) {
-		this.higherOrderParticipant = higherOrderParticipant;
 		RDFUtil.setProperty(resource, DataModel.Participation.higherOrderParticipant, higherOrderParticipant);
 	}
-	
-
-	
 	
 	@Override
 	public URI getResourceType() {
 		return DataModel.Participation.uri;
 	}
-	
 	
 }

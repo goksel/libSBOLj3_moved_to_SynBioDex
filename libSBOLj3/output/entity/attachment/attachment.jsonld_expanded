@@ -24,17 +24,17 @@
   "http://sbols.org/v3#size" : [ {
     "@value" : "1000"
   } ],
-  "http://sbols.org/v3#hashAlgorithm" : [ {
-    "@value" : "Alg1"
+  "http://sbols.org/v3#format" : [ {
+    "@id" : "https://identifiers.org/edam:format_2585"
   } ],
   "http://sbols.org/v3#hash" : [ {
-    "@value" : "aaa"
+    "@value" : "bbb"
   } ],
   "http://sbols.org/v3#source" : [ {
     "@id" : "https://sbolstandard.org/attachment1"
   } ],
-  "http://sbols.org/v3#format" : [ {
-    "@id" : "https://identifiers.org/edam:format_2585"
+  "http://sbols.org/v3#hashAlgorithm" : [ {
+    "@value" : "Alg1"
   } ],
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://sbolstandard.org/examples"

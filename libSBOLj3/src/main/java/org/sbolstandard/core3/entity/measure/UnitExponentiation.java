@@ -11,8 +11,8 @@ import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 public class UnitExponentiation extends CompoundUnit{
 	
-	private URI base;
-	private int exponent=Integer.MIN_VALUE;
+	/*private URI base;
+	private int exponent=Integer.MIN_VALUE;*/
 	
 	
 	protected  UnitExponentiation(Model model,URI uri) throws SBOLGraphException
@@ -26,32 +26,26 @@ public class UnitExponentiation extends CompoundUnit{
 	}
 	
 	public URI getBase() throws SBOLGraphException{
-		if (base==null)
-		{
-			base=IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitExponentiation.base);	
-		}
-		return base;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitExponentiation.base);
 	}
 
 	public void setBase(URI base) {
-		this.base = base;
 		RDFUtil.setProperty(resource, MeasureDataModel.UnitExponentiation.base, base);
 	}
 	
 	public int getExponent() throws SBOLGraphException {
-		if (exponent==Integer.MIN_VALUE)
+		int exponent=Integer.MIN_VALUE;
+
+		String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.UnitExponentiation.exponent);
+		if (value!=null)
 		{
-			String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.UnitExponentiation.exponent);
-			if (value!=null)
-			{
-				exponent=Integer.valueOf(value);
-			}
+			exponent=Integer.valueOf(value);
 		}
+		
 		return exponent;
 	}
 
 	public void setExponent(int exponent) {
-		this.exponent = exponent;
 		RDFUtil.setProperty(resource, MeasureDataModel.UnitExponentiation.exponent, String.valueOf(exponent));
 	}
 	

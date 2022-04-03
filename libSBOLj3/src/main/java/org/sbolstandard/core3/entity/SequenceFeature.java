@@ -15,7 +15,7 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class SequenceFeature extends Feature{
-	private List<Location> locations=null;
+	/*private List<Location> locations=null;*/
 
 	protected  SequenceFeature(Model model,URI uri) throws SBOLGraphException
 	{
@@ -28,28 +28,14 @@ public class SequenceFeature extends Feature{
 	}
 
 	public List<Location> getLocations() throws SBOLGraphException {
-		/*this.locations=addToList(this.locations, DataModel.SubComponent.location, Location.class, DataModel.Location.uri);
-		return locations;*/
-		if (locations==null)
-		{
-			List<Resource> resources=RDFUtil.getResourcesWithProperty (resource, DataModel.SubComponent.location);
-			if (resources!=null)
-			{
-				for (Resource res:resources)
-				{
-					Location location= LocationFactory.create(res);	
-					locations.add(location);			
-				}		
-			}
-		}
-		return locations;
+		return addToList(DataModel.SubComponent.location, Location.class, DataModel.Location.uri);
 	}
 
 	public Location createLocation(LocationBuilder builder ) throws SBOLGraphException
 	{
 		URI locationUri=SBOLAPI.createLocalUri(this,builder.getLocationTypeUri(),getLocations(),builder.getLocationClass());
 		Location location=builder.build(this.resource.getModel(),locationUri);
-		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
+		addToList(location, DataModel.SubComponent.location);
 		return location;
 	}
 	
@@ -65,7 +51,7 @@ public class SequenceFeature extends Feature{
 			location.resource.addProperty(stmt.getPredicate(), stmt.getObject());
 		}
 		
-		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
+		addToList(location, DataModel.SubComponent.location);
 		return location;
 	}
 	

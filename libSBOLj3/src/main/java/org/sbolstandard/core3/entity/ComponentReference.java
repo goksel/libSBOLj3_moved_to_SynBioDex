@@ -10,10 +10,9 @@ import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class ComponentReference extends Feature{
-	private URI feature=null;
-	private URI inChildOf=null;
+	/*private URI feature=null;
+	private URI inChildOf=null;*/
 	
-
 	protected  ComponentReference(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
@@ -24,37 +23,24 @@ public class ComponentReference extends Feature{
 		super(resource);
 	}
 
-	
 	public URI getFeature() throws SBOLGraphException {
-		if (this.feature==null)
-		{
-			this.feature=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.feature);
-		}
-		return this.feature;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.feature);
 	}
 	
 	public void setFeature(URI feature) {
-		this.feature = feature;
-		RDFUtil.setProperty(this.resource, DataModel.ComponentReference.feature, this.feature);
+		RDFUtil.setProperty(this.resource, DataModel.ComponentReference.feature, feature);
 	}
 	
 	public URI getInChildOf() throws SBOLGraphException{
-		if (this.inChildOf==null)
-		{
-			this.inChildOf=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.inChildOf);
-		}
-		return this.inChildOf;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.inChildOf);
 	}
 
 	public void setInChildOf(URI inChildOf) {
-		this.inChildOf = inChildOf;
-		RDFUtil.setProperty(this.resource, DataModel.ComponentReference.inChildOf, this.inChildOf);	
+		RDFUtil.setProperty(this.resource, DataModel.ComponentReference.inChildOf, inChildOf);	
 	}
 	
-
 	@Override
 	public URI getResourceType() {
 		return DataModel.ComponentReference.uri;
 	}
-	
 }

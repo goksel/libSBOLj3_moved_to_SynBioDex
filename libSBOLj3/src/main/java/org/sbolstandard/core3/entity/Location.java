@@ -1,6 +1,7 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.OptionalInt;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
@@ -11,9 +12,9 @@ import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Orientation;
 
 public abstract class  Location extends Identified {
-	private Orientation orientation;
+	/*private Orientation orientation;
 	private int order=Integer.MIN_VALUE;
-	protected URI sequence;
+	protected URI sequence;*/
 
 	protected Location(Model model,URI uri) throws SBOLGraphException
 	{
@@ -31,52 +32,48 @@ public abstract class  Location extends Identified {
 	}*/
 
 	public Orientation getOrientation() throws SBOLGraphException{
-		if (orientation==null)
-		{
-			URI value=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.orientation);
-			if (value!=null)
-			{
-				orientation=Orientation.get(value); 
-			}
+		Orientation orientation=null;
+		URI value=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.orientation);
+		if (value!=null){
+			orientation=Orientation.get(value); 
 		}
 		return orientation;
 	}
 	
 	public void setOrientation(Orientation orientation) {
-		this.orientation = orientation;
-		RDFUtil.setProperty(this.resource, DataModel.orientation, this.orientation.getUri());
+		URI orientationURI=null;
+		if (orientation!=null)
+		{
+			orientationURI=orientation.getUri();
+		}
+		RDFUtil.setProperty(this.resource, DataModel.orientation, orientationURI);
 	}
 	
 	
-	public int getOrder() throws SBOLGraphException {
-		if (order==Integer.MIN_VALUE)
-		{
-			String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Location.order);
-			if (value!=null)
-			{
-				order=Integer.valueOf(value);
-			}
+	public OptionalInt getOrder() throws SBOLGraphException {
+		OptionalInt order=OptionalInt.empty();
+		String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Location.order);
+		if (value!=null){
+			order=OptionalInt.of(Integer.valueOf(value));
 		}
 		return order;
 	}
 	
-	public void setOrder(int order) {
-		this.order = order;
-		RDFUtil.setProperty(this.resource, DataModel.Location.order, String.valueOf(this.order));
+	public void setOrder(OptionalInt order) {
+		String stringValue=null;
+		if (order.isPresent())
+		{
+			stringValue= String.valueOf(order.getAsInt());
+		}
+		RDFUtil.setProperty(this.resource, DataModel.Location.order, stringValue);
 	}
 	
-	
 	public URI getSequence() throws SBOLGraphException {
-		if (sequence==null)
-		{
-			sequence=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Location.sequence);
-		}
-		return sequence;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Location.sequence);
 	}
 
 	public void setSequence(URI sequence) {
-		this.sequence = sequence;
-		RDFUtil.setProperty(this.resource, DataModel.Location.sequence, this.sequence);	
+		RDFUtil.setProperty(this.resource, DataModel.Location.sequence, sequence);	
 	}
 	
 	public URI getResourceType()
@@ -146,7 +143,7 @@ public abstract class  Location extends Identified {
 		{
 			Cut location= new Cut(model, uri);
 			location.setSequence(sequence);
-			location.setAt(at);
+			location.setAt(OptionalInt.of(at));
 			return location;
 		}
 		
@@ -177,8 +174,8 @@ public abstract class  Location extends Identified {
 		{
 			Range location= new Range(model, uri);
 			location.setSequence(sequence);
-			location.setStart(start);
-			location.setEnd(end);
+			location.setStart(OptionalInt.of(start));
+			location.setEnd(OptionalInt.of(end));
 			return location;
 		}
 		

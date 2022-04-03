@@ -10,9 +10,8 @@ import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 public class PrefixedUnit extends Unit{
 	
-	private URI prefix;
-	private URI unit;
-	
+	/*private URI prefix;
+	private URI unit;*/
 	
 	protected  PrefixedUnit(Model model,URI uri) throws SBOLGraphException
 	{
@@ -25,29 +24,19 @@ public class PrefixedUnit extends Unit{
 	}
 	
 	public URI getPrefix() throws SBOLGraphException {
-		if (prefix==null)
-		{
-			prefix=IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.PrefixedUnit.prefix);	
-		}
-		return prefix;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.PrefixedUnit.prefix);	
 	}
 
-	public void setPrefix(URI subject) {
-		this.prefix = subject;
+	public void setPrefix(URI prefix) {
 		RDFUtil.setProperty(resource, MeasureDataModel.PrefixedUnit.prefix, prefix);
 	}
 	
 	
 	public URI getUnit() throws SBOLGraphException{
-		if (unit==null)
-		{
-			unit=IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.PrefixedUnit.unit);	
-		}
-		return unit;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.PrefixedUnit.unit);
 	}
 
 	public void setUnit(URI unit) {
-		this.unit = unit;
 		RDFUtil.setProperty(resource, MeasureDataModel.PrefixedUnit.unit, unit);
 	}
 	
@@ -55,5 +44,4 @@ public class PrefixedUnit extends Unit{
 	public URI getResourceType() {
 		return MeasureDataModel.PrefixedUnit.uri;
 	}
-	
 }
