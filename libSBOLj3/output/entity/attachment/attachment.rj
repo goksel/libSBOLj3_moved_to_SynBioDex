@@ -45,7 +45,7 @@
      ] ,
     "http://sbols.org/v3#hash" : [ { 
       "type" : "literal" ,
-      "value" : "bbb"
+      "value" : "aaa"
     }
      ] ,
     "http://sbols.org/v3#hasNamespace" : [ { 

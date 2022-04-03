@@ -13,7 +13,7 @@
         sbol:displayId      "attachment1" ;
         sbol:format         EDAM:format_2585 ;
         sbol:hasNamespace   <https://sbolstandard.org/examples> ;
-        sbol:hash           "bbb" ;
+        sbol:hash           "aaa" ;
         sbol:hashAlgorithm  "Alg1" ;
         sbol:size           "1000" ;
         sbol:source         <https://sbolstandard.org/attachment1> .

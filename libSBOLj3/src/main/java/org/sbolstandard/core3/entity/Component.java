@@ -14,6 +14,8 @@ import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
 
+import jakarta.validation.constraints.NotNull;
+
 public class Component extends TopLevel {
 	
 	/*private List<URI> roles=null;
@@ -44,6 +46,7 @@ public class Component extends TopLevel {
 	}
 	
 	
+	@NotNull(message = "Component.type cannot be empty")
 	public List<URI> getTypes() {
 		return RDFUtil.getPropertiesAsURIs(this.resource,DataModel.type);
 	}
@@ -147,7 +150,7 @@ public class Component extends TopLevel {
 	
 	public ComponentReference createComponentReference(URI uri, URI feature, URI inChildOf) throws SBOLGraphException {
 		ComponentReference componentReference= new ComponentReference(this.resource.getModel(), uri);
-		componentReference.setFeature(feature);
+		componentReference.setRefersTo(feature);
 		componentReference.setInChildOf(inChildOf);
 		addToList(componentReference, DataModel.Component.feature);
 		return componentReference;	

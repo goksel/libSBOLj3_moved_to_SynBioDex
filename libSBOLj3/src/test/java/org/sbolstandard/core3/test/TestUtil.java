@@ -20,6 +20,7 @@ import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.validation.SBOLComparator;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
@@ -442,7 +443,7 @@ public class TestUtil {
 		if (entity1!=null)
 		{
 			assertEqualFeature(entity1, entity2);
-			assertEqual(entity1, entity2, entity1.getFeature(),entity2.getFeature(), DataModel.ComponentReference.feature);
+			assertEqual(entity1, entity2, entity1.getRefersTo(),entity2.getRefersTo(), DataModel.ComponentReference.refersTo);
 			assertEqual(entity1, entity2, entity1.getInChildOf(),entity2.getInChildOf(), DataModel.ComponentReference.inChildOf);
 		}
 	}
@@ -719,5 +720,21 @@ public class TestUtil {
 		for (Component comp : roots) {
 			System.out.println("Root:" + comp.getUri());
 		}
+	}
+	
+	private static void printMessages(List<String> messages)
+	{	 
+        for (String message: messages){
+        	System.out.println("Validation test: " + message);
+        }
+        if (messages!=null && messages.size()>0)
+        System.out.println("--------------------");
+	}
+	
+	public static void validateIdentified(Identified identified,int numberOfExpectedErrors)
+	{	 
+		 List<String> messages=IdentityValidator.getValidator().validate(identified);
+		 printMessages(messages);
+		 assertEquals(numberOfExpectedErrors, messages.size());
 	}
 }

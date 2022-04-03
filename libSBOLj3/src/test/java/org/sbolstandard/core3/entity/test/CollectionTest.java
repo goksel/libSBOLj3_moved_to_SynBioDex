@@ -3,7 +3,6 @@ package org.sbolstandard.core3.entity.test;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
-
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Collection;
 import org.sbolstandard.core3.entity.Component;
@@ -28,7 +27,13 @@ public class CollectionTest extends TestCase {
         Component LacI_protein=SBOLAPI.createComponent(doc, "LacI_protein", ComponentType.Protein.getUrl(), "LacI", "LacI protein", Role.TF);
       
         Collection col=doc.createCollection("col1");
+        //Collections can be empty
+        TestUtil.validateIdentified(col,0);
+        
         col.setTopLevels(Arrays.asList(TetR_protein.getUri(), LacI_protein.getUri()));
+        //Collections can have members
+        TestUtil.validateIdentified(col,0);
+        
         TestUtil.serialise(doc, "entity/collection", "collection");
       
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));

@@ -28,7 +28,7 @@
     "@id" : "https://identifiers.org/edam:format_2585"
   } ],
   "http://sbols.org/v3#hash" : [ {
-    "@value" : "bbb"
+    "@value" : "aaa"
   } ],
   "http://sbols.org/v3#source" : [ {
     "@id" : "https://sbolstandard.org/attachment1"

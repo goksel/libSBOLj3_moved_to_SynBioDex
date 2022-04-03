@@ -1,6 +1,6 @@
 <https://sbolstandard.org/examples/attachment1> <http://sbols.org/v3#size> "1000" .
 <https://sbolstandard.org/examples/attachment1> <http://sbols.org/v3#format> <https://identifiers.org/edam:format_2585> .
-<https://sbolstandard.org/examples/attachment1> <http://sbols.org/v3#hash> "bbb" .
+<https://sbolstandard.org/examples/attachment1> <http://sbols.org/v3#hash> "aaa" .
 <https://sbolstandard.org/examples/attachment1> <http://sbols.org/v3#source> <https://sbolstandard.org/attachment1> .
 <https://sbolstandard.org/examples/attachment1> <http://sbols.org/v3#hashAlgorithm> "Alg1" .
 <https://sbolstandard.org/examples/attachment1> <http://sbols.org/v3#hasNamespace> <https://sbolstandard.org/examples> .

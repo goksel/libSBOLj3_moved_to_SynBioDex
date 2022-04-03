@@ -14,7 +14,7 @@
     "displayId" : "attachment1",
     "format" : "EDAM:format_2585",
     "hasNamespace" : "https://sbolstandard.org/examples",
-    "hash" : "bbb",
+    "hash" : "aaa",
     "hashAlgorithm" : "Alg1",
     "size" : "1000",
     "source" : "https://sbolstandard.org/attachment1"

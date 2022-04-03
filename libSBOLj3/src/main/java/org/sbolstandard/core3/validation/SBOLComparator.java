@@ -506,7 +506,7 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqualFeature(entity1, entity2));
-			output = add(output, assertEqual(entity1, entity2, entity1.getFeature(),entity2.getFeature(), DataModel.ComponentReference.feature));
+			output = add(output, assertEqual(entity1, entity2, entity1.getRefersTo(),entity2.getRefersTo(), DataModel.ComponentReference.refersTo));
 			output = add(output, assertEqual(entity1, entity2, entity1.getInChildOf(),entity2.getInChildOf(), DataModel.ComponentReference.inChildOf));
 		}
 		return output;

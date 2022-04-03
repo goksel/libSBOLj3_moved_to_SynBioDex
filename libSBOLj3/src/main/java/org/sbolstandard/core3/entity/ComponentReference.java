@@ -9,6 +9,8 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.constraints.NotNull;
+
 public class ComponentReference extends Feature{
 	/*private URI feature=null;
 	private URI inChildOf=null;*/
@@ -23,14 +25,16 @@ public class ComponentReference extends Feature{
 		super(resource);
 	}
 
-	public URI getFeature() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.feature);
+	@NotNull(message = "ComponentReference.refersTo cannot be null")
+	public URI getRefersTo() throws SBOLGraphException {
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.refersTo);
 	}
 	
-	public void setFeature(URI feature) {
-		RDFUtil.setProperty(this.resource, DataModel.ComponentReference.feature, feature);
+	public void setRefersTo(URI feature) {
+		RDFUtil.setProperty(this.resource, DataModel.ComponentReference.refersTo, feature);
 	}
 	
+	@NotNull(message = "ComponentReference.childOf cannot be null")
 	public URI getInChildOf() throws SBOLGraphException{
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.inChildOf);
 	}

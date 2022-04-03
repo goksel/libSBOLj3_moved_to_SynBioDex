@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.OptionalInt;
+
 import org.apache.jena.datatypes.xsd.impl.XSDFloat;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
@@ -38,6 +40,8 @@ import org.apache.jena.riot.RDFWriterBuilder;
 import org.apache.jena.riot.SysRIOT;
 import org.apache.jena.sparql.util.Context;
 import org.apache.jena.vocabulary.RDF;
+import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.vocabulary.DataModel;
 
 //IO: https://jena.apache.org/documentation/io/rdf-input.html
 //https://jena.apache.org/tutorials/rdf_api.html#ch-Writing-RDF
@@ -137,13 +141,11 @@ public class RDFUtil {
 	
 	public static void setProperty(Resource resource, URI property, List<URI> values)
 	{
-		if (values!=null && values.size()>0)
-		{
-			Property p=resource.getModel().createProperty(property.toString());
-			removeIfExists(resource,p);
 		
-			for (URI uri:values)
-			{
+		Property p=resource.getModel().createProperty(property.toString());
+		removeIfExists(resource,p);
+		if (values!=null && values.size()>0){
+			for (URI uri:values){
 				addProperty (resource, property, uri);
 			}
 		}
@@ -151,13 +153,10 @@ public class RDFUtil {
 	
 	public static void setPropertyAsStrings(Resource resource, URI property, List<String> values)
 	{
-		if (values!=null && values.size()>0)
-		{
-			Property p=resource.getModel().createProperty(property.toString());
-			removeIfExists(resource,p);
-		
-			for (String value:values)
-			{
+		Property p=resource.getModel().createProperty(property.toString());
+		removeIfExists(resource,p);
+		if (values!=null && values.size()>0){
+			for (String value:values){
 				addProperty (resource, property, value);
 			}
 		}
