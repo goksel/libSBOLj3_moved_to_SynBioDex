@@ -27,6 +27,12 @@
     "hasNamespace" : "https://sbolstandard.org/examples"
   } ],
   "@context" : {
+    "hash" : {
+      "@id" : "http://sbols.org/v3#hash"
+    },
+    "hashAlgorithm" : {
+      "@id" : "http://sbols.org/v3#hashAlgorithm"
+    },
     "size" : {
       "@id" : "http://sbols.org/v3#size"
     },
@@ -34,15 +40,9 @@
       "@id" : "http://sbols.org/v3#format",
       "@type" : "@id"
     },
-    "hash" : {
-      "@id" : "http://sbols.org/v3#hash"
-    },
     "source" : {
       "@id" : "http://sbols.org/v3#source",
       "@type" : "@id"
-    },
-    "hashAlgorithm" : {
-      "@id" : "http://sbols.org/v3#hashAlgorithm"
     },
     "hasNamespace" : {
       "@id" : "http://sbols.org/v3#hasNamespace",

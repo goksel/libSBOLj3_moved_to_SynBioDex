@@ -28,11 +28,11 @@ public class CollectionTest extends TestCase {
       
         Collection col=doc.createCollection("col1");
         //Collections can be empty
-        TestUtil.validateIdentified(col,0);
-        
+        TestUtil.validateIdentified(col,doc,0);
+                
         col.setTopLevels(Arrays.asList(TetR_protein.getUri(), LacI_protein.getUri()));
         //Collections can have members
-        TestUtil.validateIdentified(col,0);
+        TestUtil.validateIdentified(col,doc,0); 
         
         TestUtil.serialise(doc, "entity/collection", "collection");
       

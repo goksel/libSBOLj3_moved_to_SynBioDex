@@ -40,8 +40,9 @@ import jakarta.validation.constraints.NotNull;
 
 public class SBOLDocument {
 	protected Model model = null;
-	
-	private List<Component> components;
+	/*@NotNull (message="SBOLDocument.test cannot be null")
+	private URI test=null;*/
+	private List<@Valid Component> components;
 	private List<Sequence> sequences;
 	private List<CombinatorialDerivation> combinatorialDerivations;
 	private List<Implementation> implementations;

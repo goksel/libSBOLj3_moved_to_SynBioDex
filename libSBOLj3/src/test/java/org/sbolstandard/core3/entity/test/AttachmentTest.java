@@ -39,54 +39,55 @@ public class AttachmentTest extends TestCase {
         impl.setComponent(TetR_protein.getUri());
         impl.setAttachments(Arrays.asList(attachment.getUri()));
         
+        TestUtil.serialise(doc, "entity/attachment", "attachment");
+        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
+        TestUtil.assertReadWrite(doc); 
+        
         URI temp=attachment.getSource();
         attachment.setSource(URI.create("https://sbolstandard.org/attachment1_source2"));
-        TestUtil.validateIdentified(attachment,0);
+        TestUtil.validateIdentified(attachment,doc,0);
         attachment.setSource(temp);
         
         //Attachment.source: exactly one.
         attachment.setSource(null);
-        TestUtil.validateIdentified(attachment,1);
+        TestUtil.validateIdentified(attachment,doc,1);
         attachment.setSource(temp);
         
         //Attachment.source: optional
         temp=attachment.getFormat();
         attachment.setFormat(null);
-        TestUtil.validateIdentified(attachment,0);
+        TestUtil.validateIdentified(attachment, doc,0);
         attachment.setFormat(temp);
         
         //Attachment.hashAlgorithm: optional
         String tempString=attachment.getHashAlgorithm();
         attachment.setHashAlgorithm(null);
-        TestUtil.validateIdentified(attachment,0);
+        TestUtil.validateIdentified(attachment,doc,0);
         attachment.setHashAlgorithm(tempString);
         
         //Attachment.hash: optional
         tempString=attachment.getHash();
         attachment.setHash(null);
-        TestUtil.validateIdentified(attachment,0);
+        TestUtil.validateIdentified(attachment,doc,0);
         attachment.setHash(tempString);
         
         //Attachment size can't be negative
         OptionalLong tempLong=attachment.getSize();
         attachment.setSize(OptionalLong.of(-1));
-        TestUtil.validateIdentified(attachment,1);
+        TestUtil.validateIdentified(attachment,doc,1);
         
         //Attachment size can be empty
         attachment.setSize(OptionalLong.empty());
-        TestUtil.validateIdentified(attachment,0);
-        
+        TestUtil.validateIdentified(attachment,doc,0);
+              
         //Attachment size can be zero
         attachment.setSize(OptionalLong.of(0));
-        TestUtil.validateIdentified(attachment,0);
+        TestUtil.validateIdentified(attachment,doc,0);
         
         //Attachment size can be bigger than zero
         attachment.setSize(tempLong);
-        TestUtil.validateIdentified(attachment,0);
-          
-        TestUtil.serialise(doc, "entity/attachment", "attachment");
-        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
-        TestUtil.assertReadWrite(doc); 
+        TestUtil.validateIdentified(attachment,doc,0);
+      
     }
 	
 	

@@ -19,6 +19,7 @@ import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.SBOLComparator;
 import org.sbolstandard.core3.vocabulary.ActivityType;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.ParticipationRole;
@@ -86,7 +87,7 @@ public class ActivityTest extends TestCase {
         	printActivity(doc2, act);
         	
         }
-        TestUtil.assertEqual(doc, doc2);
+        SBOLComparator.assertEqual(doc, doc2);
     }
 	
 	private void printActivity(SBOLDocument document, Activity activity) throws SBOLGraphException

@@ -14,6 +14,7 @@ import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
 public class Component extends TopLevel {
@@ -37,7 +38,6 @@ public class Component extends TopLevel {
 	protected Component(Model model, URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
-		
 	}
 	
 	protected Component(Resource resource) throws SBOLGraphException
@@ -45,7 +45,7 @@ public class Component extends TopLevel {
 		super(resource);
 	}
 	
-	
+	@Valid
 	@NotNull(message = "Component.type cannot be empty")
 	public List<URI> getTypes() {
 		return RDFUtil.getPropertiesAsURIs(this.resource,DataModel.type);
@@ -99,13 +99,21 @@ public class Component extends TopLevel {
 	}
 	*/
 	
+	private void addToList(List<Feature> listA, List<? extends Feature> listB)
+	{
+		if (listB!=null && listB.size()>0)
+		{
+			listA.addAll(listB);
+		}
+	}
+	
 	public List<Feature> getFeatures() throws SBOLGraphException{
 		List<Feature> features=new ArrayList<Feature>();
-		features.addAll(this.getSubComponents());
-		features.addAll(this.getComponentReferences());
-		features.addAll(this.getLocalSubComponents());
-		features.addAll(this.getExternallyDefineds());
-		features.addAll(this.getSequenceFeatures());	
+		addToList(features, getSubComponents());
+		addToList(features, getComponentReferences());
+		addToList(features, getLocalSubComponents());
+		addToList(features, getExternallyDefineds());
+		addToList(features, getSequenceFeatures());	
 		return features;
 	}
 	
@@ -143,7 +151,7 @@ public class Component extends TopLevel {
 		return createSubComponent(displayId, isInstanceOf);
 	}
 	
-	//Component References
+	@Valid
 	public List<ComponentReference> getComponentReferences() throws SBOLGraphException {
 		return addToList(DataModel.Component.feature, ComponentReference.class, DataModel.ComponentReference.uri);
 	}
@@ -309,6 +317,7 @@ public class Component extends TopLevel {
 		return createConstraint(displayId, restriction, subject, object);
 	}
 	
+	@Valid
 	public List<Constraint> getConstraints() throws SBOLGraphException {
 		return addToList(DataModel.Component.constraint, Constraint.class);
 	}

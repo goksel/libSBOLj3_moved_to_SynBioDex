@@ -1,0 +1,45 @@
+@base          <https://synbiohub.org/public/igem/> .
+@prefix :      <https://synbiohub.org/public/igem/> .
+@prefix CHEBI: <https://identifiers.org/CHEBI:> .
+@prefix EDAM:  <https://identifiers.org/edam:> .
+@prefix GO:    <https://identifiers.org/GO:> .
+@prefix SBO:   <https://identifiers.org/SBO:> .
+@prefix SO:    <https://identifiers.org/SO:> .
+@prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix sbol:  <http://sbols.org/v3#> .
+
+:i13504  a                 sbol:Component ;
+        sbol:displayId     "i13504" ;
+        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:type          SBO:0000251 .
+
+:interlab16device1  a      sbol:Component ;
+        sbol:displayId     "interlab16device1" ;
+        sbol:hasFeature    <interlab16device1/ComponentReference1> , <interlab16device1/SubComponent1> ;
+        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:type          SBO:0000251 .
+
+<interlab16device1/ComponentReference1>
+        a               sbol:ComponentReference ;
+        sbol:displayId  "ComponentReference1" ;
+        sbol:inChildOf  <interlab16device1/SubComponent1> ;
+        sbol:refersTo   <i13504_system/SubComponent1> .
+
+<interlab16device1/SubComponent1>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent1" ;
+        sbol:instanceOf  :i13504_system .
+
+<i13504_system/SubComponent1>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent1" ;
+        sbol:instanceOf  :i13504 .
+
+:i13504_system  a          sbol:Component ;
+        sbol:displayId     "i13504_system" ;
+        sbol:hasFeature    <i13504_system/SubComponent1> ;
+        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:name          "i13504 system" ;
+        sbol:role          SBO:0000289 ;
+        sbol:type          SBO:0000251 .

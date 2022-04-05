@@ -9,7 +9,9 @@ import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Collection;
 import org.sbolstandard.core3.entity.Component;
 import org.sbolstandard.core3.entity.ComponentReference;
+import org.sbolstandard.core3.entity.Feature;
 import org.sbolstandard.core3.entity.SBOLDocument;
+import org.sbolstandard.core3.entity.SequenceFeature;
 import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
@@ -29,27 +31,30 @@ public class ComponentTest extends TestCase {
 		SBOLDocument doc=new SBOLDocument(base);
 		
 		Component popsReceiver=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_F2620"), "BBa_F2620", "PoPS Receiver", Role.EngineeredGene, null); 
-       
-		TestUtil.validateIdentified(popsReceiver,0);
+	    TestUtil.serialise(doc, "entity_additional/component", "component");
+        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
+        TestUtil.assertReadWrite(doc);
+        
+		//Component.hasSequence can have zero values
+		TestUtil.validateIdentified(popsReceiver,doc,0);
 		
 		Component pTetR=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_R0040"), "pTetR", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
-		TestUtil.validateIdentified(pTetR,0);
+		TestUtil.validateIdentified(pTetR,doc,0);
 		
 		//Component.hasSequence can have multiple values
 		List<URI> tempList=pTetR.getSequences();
 		SBOLAPI.addSequence(doc, pTetR, Encoding.NucleicAcid, "aaaa");
-		TestUtil.validateIdentified(pTetR,0);
+		TestUtil.validateIdentified(pTetR,doc,0);
 		pTetR.setSequences(tempList);
 		
 		//Component.type is required
+		tempList=pTetR.getTypes();
 		pTetR.setTypes(null);
 		System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
-		TestUtil.validateIdentified(pTetR,1);
+		TestUtil.validateIdentified(pTetR,doc,1);
+		pTetR.setTypes(tempList);
 		
-	    //TestUtil.serialise(doc, "entity/component", "component");
-      
-        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
-        TestUtil.assertReadWrite(doc);
+
     }
 
 }

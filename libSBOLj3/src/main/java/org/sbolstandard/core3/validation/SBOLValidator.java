@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.apache.commons.compress.utils.FileNameUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.Syntax;
@@ -20,6 +21,7 @@ import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.util.RDFUtil;
+import org.sbolstandard.core3.util.SBOLGraphException;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -29,8 +31,58 @@ import jakarta.validation.ValidatorFactory;
 
 public class SBOLValidator {
 
+	private static SBOLValidator sbolValidator = null;
+	protected Validator validator;
 	
-	public static List<String> validateSBOLDocument(SBOLDocument document)
+	private SBOLValidator()
+	{	
+	}
+	
+	public static SBOLValidator getValidator()
+	{
+		if (sbolValidator == null)
+		{
+			try
+			{
+				sbolValidator=new SBOLValidator();
+				ValidatorFactory factory = Validation.byDefaultProvider()
+		 	            .configure()
+		 	            //.addValueExtractor(new ...ValueExtractor())
+		 	            .buildValidatorFactory();
+				sbolValidator.validator = factory.getValidator();	
+			}
+			catch (Exception exception)
+			{
+				throw new Error(new SBOLGraphException("Could not initialize the validator", exception));
+			}
+		}
+		return sbolValidator;
+	}
+	
+	public List<String> validate(SBOLDocument document)
+	{
+	    Set<ConstraintViolation<SBOLDocument>> violations = validator.validate(document);
+	    List<String> messages=new ArrayList<String>();
+	    for (ConstraintViolation<SBOLDocument> violation : violations) {
+	    	List<String> fragments=new ArrayList<String>();
+	    	fragments.add(violation.getMessage());
+	    	fragments.add(String.format("Property: %s",violation.getPropertyPath().toString()));
+	    	if (violation.getLeafBean()!=null && violation.getLeafBean() instanceof Identified ){
+	    	    Identified identified= (Identified) violation.getLeafBean();
+	    	    fragments.add(String.format("Entity URI: %s",identified.getUri().toString()));
+	    	    fragments.add(String.format("Entity type: %s",identified.getClass()));    
+	    	}
+	    	if (violation.getInvalidValue()!=null){
+	    		fragments.add("Value:" + violation.getInvalidValue().toString());
+	    	}
+	    	String message=StringUtils.join(fragments, ",\r\n\t");
+	    	messages.add(message);
+	    }
+	    return messages;
+	}
+	
+	
+	public static List<String> validateSBOLDocument2(SBOLDocument document)
 	{
 		Validator validator=null; 
 		ValidatorFactory factory = Validation.byDefaultProvider()

@@ -14,6 +14,7 @@ import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.SBOLComparator;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
@@ -82,7 +83,7 @@ public class PoPSReceiverExample extends TestCase {
         assertTrue("Could not filter document sequences by encoding type", naSequences!=null && naSequences.size()==8);
          
         Component comp=doc2.getIdentified(pTetR.getUri(), Component.class);
-        TestUtil.assertEqualEntity(pTetR, comp);
+        SBOLComparator.assertEqualEntity(pTetR, comp);
         
         
 	  

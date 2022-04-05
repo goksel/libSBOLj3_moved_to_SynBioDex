@@ -168,7 +168,7 @@ public class SBOLComparator {
 		return output;
 	}
 	
-	private static StringBuilder assertEqualEntity(Identified identified1, Identified identified2)  throws SBOLGraphException
+	public static StringBuilder assertEqualEntity(Identified identified1, Identified identified2)  throws SBOLGraphException
 	{
 		StringBuilder output=null;
 		if (identified1!=null && identified2==null)

@@ -1,6 +1,7 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
@@ -27,8 +28,31 @@ public class SequenceFeature extends Feature{
 		super(resource);
 	}
 
+	private void addToList(List<Location> listA, List<? extends Location> listB)
+	{
+		if (listB!=null && listB.size()>0)
+		{
+			listA.addAll(listB);
+		}
+	}
 	public List<Location> getLocations() throws SBOLGraphException {
-		return addToList(DataModel.SubComponent.location, Location.class, DataModel.Location.uri);
+		List<Location> locations=new ArrayList<Location>();
+		addToList(locations,getCutLocations());
+		addToList(locations,this.getRangeLocations());
+		addToList(locations,getEntireSequenceLocations());
+		return locations;		
+	}
+
+	public List<Cut> getCutLocations() throws SBOLGraphException {
+		return addToList(DataModel.SubComponent.location, Cut.class, DataModel.Cut.uri);
+	}
+	
+	public List<Range> getRangeLocations() throws SBOLGraphException {
+		return addToList(DataModel.SubComponent.location, Range.class, DataModel.Range.uri);
+	}
+	
+	public List<EntireSequence> getEntireSequenceLocations() throws SBOLGraphException {
+		return addToList(DataModel.SubComponent.location, EntireSequence.class, DataModel.EntireSequenceLocation.uri);
 	}
 
 	public Location createLocation(LocationBuilder builder ) throws SBOLGraphException

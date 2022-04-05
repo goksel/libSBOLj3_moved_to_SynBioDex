@@ -13,6 +13,7 @@ import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.Role;
 
@@ -33,24 +34,25 @@ public class ComponentReferenceTest extends TestCase {
 		 
 		ComponentReference compRef=ilab16_dev1.createComponentReference(i13504SubComponent, sc_i13504_system);
 		
-		TestUtil.validateIdentified(compRef,0);
+	    TestUtil.serialise(doc, "entity_additonal/componentreference", "componentreference");
+        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
+        TestUtil.assertReadWrite(doc);
+        
+		TestUtil.validateIdentified(compRef,doc,0);
 		
 		//refersTo is required
 		URI temp=compRef.getRefersTo();
 		compRef.setRefersTo(null);
-		TestUtil.validateIdentified(compRef,1);
+		TestUtil.validateIdentified(compRef,doc,1);
 		compRef.setRefersTo(temp);
 		
 		//inChildOf is required
 		temp=compRef.getInChildOf();
 		compRef.setInChildOf(null);
-		TestUtil.validateIdentified(compRef,1);
+		TestUtil.validateIdentified(compRef,doc,1);
 		compRef.setInChildOf(temp);
 		
-	    //TestUtil.serialise(doc, "entity/componentreference", "componentreference");
-      
-        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
-        TestUtil.assertReadWrite(doc);
+
     }
 
 }

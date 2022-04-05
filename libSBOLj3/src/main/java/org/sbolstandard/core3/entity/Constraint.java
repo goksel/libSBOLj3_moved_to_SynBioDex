@@ -8,6 +8,8 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.constraints.NotNull;
+
 public class Constraint extends Identified{
 	/*private URI restriction=null;
 	private URI subject=null;
@@ -23,6 +25,7 @@ public class Constraint extends Identified{
 		super(resource);
 	}
 	
+	@NotNull(message = "Constraint.restriction cannot be null")
 	public URI getRestriction() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Constraint.restriction);	
 	}
@@ -31,6 +34,7 @@ public class Constraint extends Identified{
 		RDFUtil.setProperty(resource, DataModel.Constraint.restriction, restriction);
 	}
 	
+	@NotNull(message = "Constraint.subject cannot be null")	
 	public URI getSubject() throws SBOLGraphException{
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Constraint.subject);	
 	}
@@ -39,6 +43,7 @@ public class Constraint extends Identified{
 		RDFUtil.setProperty(resource, DataModel.Constraint.subject, subject);
 	}
 
+	@NotNull(message = "Constraint.object cannot be null")
 	public URI getObject() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Constraint.object);	
 	}

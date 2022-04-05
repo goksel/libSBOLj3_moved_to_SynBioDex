@@ -10,6 +10,9 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+
 public class Cut extends Location {
 	//private int at=Integer.MIN_VALUE;
 
@@ -22,6 +25,8 @@ public class Cut extends Location {
 		super(resource);
 	}
 	
+	@NotNull(message = "Cut.at cannot be null")
+	@PositiveOrZero(message="Cut.at can have positive or zero values")
 	public OptionalInt getAt() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsOptionalInt(this.resource, DataModel.Cut.at);
 	}

@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.OptionalInt;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.Identified;
+import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
@@ -25,8 +27,7 @@ public class IdentityValidator {
 	protected Validator validator;
 	
 	private IdentityValidator()
-	{
-		
+	{	
 	}
 	
 	public static IdentityValidator getValidator()
@@ -53,12 +54,39 @@ public class IdentityValidator {
 	public List<String> validate(Identified identified)
 	{
 	    Set<ConstraintViolation<Identified>> violations = validator.validate(identified);
+	    List<String> messages=new ArrayList<String>();
+	    for (ConstraintViolation<Identified> violation : violations) {
+	    	List<String> fragments=new ArrayList<String>();
+	    	fragments.add(violation.getMessage());
+	    	fragments.add(String.format("Property: %s",violation.getPropertyPath().toString()));
+	    	if (violation.getLeafBean()!=null && violation.getLeafBean() instanceof Identified ){
+	    	    Identified identifiedLeaf= (Identified) violation.getLeafBean();
+	    	    fragments.add(String.format("Entity URI: %s",identifiedLeaf.getUri().toString()));
+	    	    fragments.add(String.format("Entity type: %s",identifiedLeaf.getClass()));    
+	    	}
+	    	if (violation.getRootBean()!=null && violation.getRootBean() instanceof Identified ){
+	    	    Identified identifiedRoot= (Identified) violation.getLeafBean();
+	    	    fragments.add(String.format("Parent entity URI: %s",identifiedRoot.getUri().toString()));
+	    	    fragments.add(String.format("Parent entity type: %s",identifiedRoot.getClass()));    
+	    	}
+	    	if (violation.getInvalidValue()!=null){
+	    		fragments.add("Value:" + violation.getInvalidValue().toString());
+	    	}
+	    	String message=StringUtils.join(fragments, ",\r\n\t");
+	    	messages.add(message);
+	    }
+	    return messages;
+	}
+	
+	public List<String> validate2(Identified identified)
+	{
+	    Set<ConstraintViolation<Identified>> violations = validator.validate(identified);
 	      List<String> messages=new ArrayList<String>();
 	      for (ConstraintViolation<Identified> violation : violations) {
 	    	    String propertyMessage=String.format("Property: %s",violation.getPropertyPath().toString());
 	    	    String entityMessage =String.format("Entity Type: %s",violation.getRootBeanClass().getName());
 	    	    String uriMessage="";
-	    	    if (violation.getLeafBean()!=null)
+	    	    if (violation.getRootBeanClass()!=null)
 	    	    {
 	    	    	URI uri=((Identified) violation.getRootBean()).getUri();
 	    	    	uriMessage =String.format("Entity: %s",uri.toString());
