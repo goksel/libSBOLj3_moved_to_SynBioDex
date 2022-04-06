@@ -12,6 +12,9 @@ import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 public class LocalSubComponent extends Feature{
 	/*private List<URI> types=new ArrayList<URI>();
 	private List<Location> locations=null;*/
@@ -26,7 +29,8 @@ public class LocalSubComponent extends Feature{
 		super(resource);
 	}
 
-	
+	@Valid
+	@NotNull(message = "LocalSubComponent.type cannot be empty")
 	public List<URI> getTypes() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.type);
 	}
@@ -34,7 +38,6 @@ public class LocalSubComponent extends Feature{
 	public void setTypes(List<URI> types) {
 		RDFUtil.setProperty(resource, DataModel.type, types);
 	}
-	
 	
 	public List<Location> getLocations() throws SBOLGraphException {		
 		List<Location> locations=null;

@@ -14,6 +14,8 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
+import jakarta.validation.Valid;
+
 public class Activity extends ControlledTopLevel{
 	/*private XSDDateTime startedAtTime=null;
 	private XSDDateTime endedAtTime=null;
@@ -95,7 +97,7 @@ public class Activity extends ControlledTopLevel{
 		RDFUtil.setProperty(resource, ProvenanceDataModel.Activity.wasInformedBy, wasInformedBys);
 	}
 	
-	
+	@Valid
 	public List<Usage> getUsages() throws SBOLGraphException {
 		return addToList(ProvenanceDataModel.Activity.qualifiedUsage, Usage.class, ProvenanceDataModel.Usage.uri);
 	}
@@ -114,6 +116,7 @@ public class Activity extends ControlledTopLevel{
 		return createUsage(childUri, entity);
 	}
 	
+	@Valid
 	public List<Association> getAssociations() throws SBOLGraphException {
 		return addToList(ProvenanceDataModel.Activity.qualifiedAssociation, Association.class, ProvenanceDataModel.Association.uri);
 	}

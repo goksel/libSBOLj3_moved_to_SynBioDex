@@ -3,6 +3,9 @@ package org.sbolstandard.core3.validation;
 import java.net.URI;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
+
 import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.sbolstandard.core3.entity.Attachment;
 import org.sbolstandard.core3.entity.Collection;
@@ -404,7 +407,7 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqualUnit(entity1, entity2));
-			output = add(output, assertEqual(entity1, entity2, entity1.getFactor(),entity2.getFactor(), MeasureDataModel.Prefix.factor));
+			output = add(output, assertEqual(entity1, entity2, entity1.getFactor().toString(),entity2.getFactor().toString(), MeasureDataModel.Prefix.factor));
 		}
 		return output;
 	}
@@ -432,7 +435,7 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqual(entity1, entity2));
-			output = add(output, assertEqual(entity1, entity2, entity1.getTopLevels(),entity2.getTopLevels(), DataModel.Collection.member));
+			output = add(output, assertEqual(entity1, entity2, entity1.getMembers(),entity2.getMembers(), DataModel.Collection.member));
 		}
 		return output;
 	}
@@ -456,7 +459,7 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqual(entity1, entity2));
-			output = add(output, assertEqual(entity1, entity2, entity1.getCardinality(),entity2.getCardinality(), DataModel.VariableComponent.cardinality));
+			output = add(output, assertEqual(entity1, entity2, entity1.getCardinality().getUri(),entity2.getCardinality().getUri(), DataModel.VariableComponent.cardinality));
 			output = add(output, assertEqual(entity1, entity2, entity1.getFeature(),entity2.getFeature(), DataModel.VariableComponent.variable));
 			output = add(output, assertEqual(entity1, entity2, entity1.getVariantCollections(),entity2.getVariantCollections(), DataModel.VariableComponent.variantCollection));
 			output = add(output, assertEqual(entity1, entity2, entity1.getVariantDerivations(),entity2.getVariantDerivations(), DataModel.VariableComponent.variantDerivation));
@@ -680,7 +683,7 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqualUnit(entity1, entity2));		
-			output = add(output, assertEqual(entity1, entity2, entity1.getFactor(), entity2.getFactor(),MeasureDataModel.SingularUnit.factor));
+			output = add(output, assertEqual(entity1, entity2, entity1.getFactor().toString(), entity2.getFactor().toString(),MeasureDataModel.SingularUnit.factor));
 			output = add(output, assertEqual(entity1, entity2, entity1.getUnit(), entity2.getUnit(),MeasureDataModel.SingularUnit.unit));
 		}
 		return output;
@@ -717,7 +720,7 @@ public class SBOLComparator {
 		{
 			output = add(output, assertEqualUnit(entity1, entity2));		
 			output = add(output, assertEqual(entity1, entity2, entity1.getBase(), entity2.getBase(),MeasureDataModel.UnitExponentiation.base));
-			output = add(output, assertEqual(entity1, entity2, entity1.getExponent(), entity2.getExponent(),MeasureDataModel.UnitExponentiation.base));		
+			output = add(output, assertEqual(entity1, entity2, entity1.getExponent().toString(), entity2.getExponent().toString(),MeasureDataModel.UnitExponentiation.base));		
 		}
 		return output;
 	}
@@ -751,7 +754,7 @@ public class SBOLComparator {
 		{
 			output = add(output, assertEqual(entity1, entity2));
 			output = add(output, assertEqual(entity1, entity2, entity1.getUnit(),entity2.getUnit(), MeasureDataModel.Measure.unit));
-			output = add(output, assertEqual(entity1, entity2, entity1.getValue(),entity2.getValue(), MeasureDataModel.Measure.value));
+			output = add(output, assertEqual(entity1, entity2, entity1.getValue().toString(),entity2.getValue().toString(), MeasureDataModel.Measure.value));
 			output = add(output, assertEqual(entity1, entity2, entity1.getTypes(),entity2.getTypes(), MeasureDataModel.Measure.type));	
 		}
 		return output;
@@ -834,7 +837,18 @@ public class SBOLComparator {
 		return output;
 	}
 	
-	private static StringBuilder assertEqual(Identified identified1, Identified identified2, float value1, float value2, URI property)
+	/*private static StringBuilder assertEqual(Identified identified1, Identified identified2, Optional<Float> value1, Optional<Float> value2, URI property)
+	{
+		StringBuilder output=null;
+		String message=String.format("Could not read the %s property. Entity:%s, Value1:%s, Value2:%s", property.toString(), identified1.getUri().toString(), String.valueOf(value1), String.valueOf(value2));
+		if (!stringEquals(String.valueOf(value1),String.valueOf(value2)))
+		{
+			output = add(output,message);
+		}
+		return output;
+	}*/
+	
+	/*private static StringBuilder assertEqual(Identified identified1, Identified identified2, Optional<?> value1, Optional<?> value2, URI property)
 	{
 		StringBuilder output=null;
 		String message=String.format("Could not read the %s property. Entity:%s, Value1:%s, Value2:%s", property.toString(), identified1.getUri().toString(), String.valueOf(value1), String.valueOf(value2));
@@ -844,6 +858,17 @@ public class SBOLComparator {
 		}
 		return output;
 	}
+	
+	private static StringBuilder assertEqual(Identified identified1, Identified identified2, OptionalInt value1, OptionalInt value2, URI property)
+	{
+		StringBuilder output=null;
+		String message=String.format("Could not read the %s property. Entity:%s, Value1:%s, Value2:%s", property.toString(), identified1.getUri().toString(), String.valueOf(value1), String.valueOf(value2));
+		if (!stringEquals(String.valueOf(value1),String.valueOf(value2)))
+		{
+			output = add(output,message);
+		}
+		return output;
+	}*/
 	
 	private static StringBuilder assertEqual(Identified identified1, Identified identified2, XSDDateTime value1, XSDDateTime value2, URI property)
 	{

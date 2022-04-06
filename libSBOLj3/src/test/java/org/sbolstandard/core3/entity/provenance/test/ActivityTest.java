@@ -2,8 +2,10 @@ package org.sbolstandard.core3.entity.provenance.test;
 
 import java.io.IOException;
 import java.net.URI;
+import java.time.Month;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 
 import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.sbolstandard.core3.api.SBOLAPI;
@@ -20,6 +22,7 @@ import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.SBOLComparator;
+import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.ActivityType;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.ParticipationRole;
@@ -44,18 +47,17 @@ public class ActivityTest extends TestCase {
         plan.setName("Codon Optimisation Protocol");
         plan.setDescription("Optimisation protocol to improve the translation of mRNAs.");
         
-         
         Activity activity=doc.createActivity("codon_optimization_activity");
         activity.setTypes(Arrays.asList(ActivityType.Design.getUrl()));
         activity.setName("Codon optimization activity");
         activity.setDescription("An activity that is used to optimise codons");
         Calendar calendar=Calendar.getInstance();
-        calendar.set(2019, 6,29); 
+        calendar.set(2019,Calendar.JULY,29); 
+        
         activity.setStartedAtTime(new XSDDateTime(calendar));
-        calendar.set(2020, 7,30);
+        calendar.set(2020,Calendar.AUGUST,30);
         activity.setEndedAtTime(new XSDDateTime(calendar));
            
-        
         Usage usage1=activity.createUsage(toggleSwitch.getUri());
         usage1.setRoles(Arrays.asList(ParticipationRole.Template));
         Usage usage2=activity.createUsage(toggleSwitchOptimised.getUri());
@@ -88,6 +90,14 @@ public class ActivityTest extends TestCase {
         	
         }
         SBOLComparator.assertEqual(doc, doc2);
+        
+        TestUtil.validateDocument(doc, 0);
+        association.setAgent(null);
+        TestUtil.validateIdentified(association,doc, 1);
+        usage1.setEntity(null);
+        TestUtil.validateIdentified(usage1,doc, 1,2);
+        
+        
     }
 	
 	private void printActivity(SBOLDocument document, Activity activity) throws SBOLGraphException

@@ -1,0 +1,28 @@
+@base          <https://sbolstandard.org/examples/> .
+@prefix :      <https://sbolstandard.org/examples/> .
+@prefix CHEBI: <https://identifiers.org/CHEBI:> .
+@prefix EDAM:  <https://identifiers.org/edam:> .
+@prefix GO:    <https://identifiers.org/GO:> .
+@prefix SBO:   <https://identifiers.org/SBO:> .
+@prefix SO:    <https://identifiers.org/SO:> .
+@prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix sbol:  <http://sbols.org/v3#> .
+
+<interlab16device1/ExternallyDefined2>
+        a                sbol:ExternallyDefined ;
+        sbol:definition  <http://uniprot.org/rfp> ;
+        sbol:displayId   "ExternallyDefined2" ;
+        sbol:type        SBO:0000252 .
+
+<interlab16device1/ExternallyDefined1>
+        a                sbol:ExternallyDefined ;
+        sbol:definition  <http://uniprot.org/gfp> ;
+        sbol:displayId   "ExternallyDefined1" ;
+        sbol:type        SBO:0000252 .
+
+:interlab16device1  a      sbol:Component ;
+        sbol:displayId     "interlab16device1" ;
+        sbol:hasFeature    <interlab16device1/ExternallyDefined2> , <interlab16device1/ExternallyDefined1> ;
+        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:type          SBO:0000241 .

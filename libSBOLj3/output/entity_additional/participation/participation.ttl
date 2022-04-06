@@ -1,0 +1,107 @@
+@base          <https://sbolstandard.org/examples/> .
+@prefix :      <https://sbolstandard.org/examples/> .
+@prefix CHEBI: <https://identifiers.org/CHEBI:> .
+@prefix EDAM:  <https://identifiers.org/edam:> .
+@prefix GO:    <https://identifiers.org/GO:> .
+@prefix SBO:   <https://identifiers.org/SBO:> .
+@prefix SO:    <https://identifiers.org/SO:> .
+@prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix sbol:  <http://sbols.org/v3#> .
+
+:GFP_protein  a            sbol:Component ;
+        sbol:description   "GFP" ;
+        sbol:displayId     "GFP_protein" ;
+        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:name          "GFP" ;
+        sbol:type          SBO:0000252 .
+
+<i13504_system/ComponentReference1>
+        a               sbol:ComponentReference ;
+        sbol:displayId  "ComponentReference1" ;
+        sbol:inChildOf  <i13504_system/SubComponent1> ;
+        sbol:refersTo   <i13504/SubComponent1> .
+
+<i13504/SubComponent1>
+        a                 sbol:SubComponent ;
+        sbol:displayId    "SubComponent1" ;
+        sbol:hasLocation  <i13504/SubComponent1/Range1> ;
+        sbol:instanceOf   :E0040 ;
+        sbol:orientation  SO:0001030 .
+
+:E0040_Sequence1  a        sbol:Sequence ;
+        sbol:description   "gfp sequence" ;
+        sbol:displayId     "E0040_Sequence1" ;
+        sbol:elements      "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa" ;
+        sbol:encoding      EDAM:format_1207 ;
+        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:name          "Sequence1" .
+
+<i13504_system/SubComponent1>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent1" ;
+        sbol:instanceOf  :i13504 .
+
+<i13504_system/Interaction1/Participation2>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation2" ;
+        sbol:participant  <i13504_system/SubComponent2> ;
+        sbol:role         SBO:0000011 .
+
+:i13504_system  a            sbol:Component ;
+        sbol:displayId       "i13504_system" ;
+        sbol:hasFeature      <i13504_system/SubComponent2> , <i13504_system/SubComponent1> , <i13504_system/ComponentReference1> ;
+        sbol:hasInteraction  <i13504_system/Interaction1> ;
+        sbol:hasNamespace    <https://sbolstandard.org/examples> ;
+        sbol:name            "i13504 system" ;
+        sbol:role            SBO:0000289 ;
+        sbol:type            SBO:0000251 .
+
+:i13504  a                 sbol:Component ;
+        sbol:displayId     "i13504" ;
+        sbol:hasFeature    <i13504/SubComponent1> ;
+        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasSequence   :i13504_Sequence1 ;
+        sbol:type          SBO:0000251 .
+
+:E0040  a                  sbol:Component ;
+        sbol:description   "gfp coding sequence" ;
+        sbol:displayId     "E0040" ;
+        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasSequence   :E0040_Sequence1 ;
+        sbol:name          "gfp" ;
+        sbol:role          SO:0000316 ;
+        sbol:type          SBO:0000251 .
+
+<i13504_system/Interaction1>
+        a                      sbol:Interaction ;
+        sbol:displayId         "Interaction1" ;
+        sbol:hasParticipation  <i13504_system/Interaction1/Participation2> , <i13504_system/Interaction1/Participation1> ;
+        sbol:type              SBO:0000589 .
+
+<i13504_system/SubComponent2>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent2" ;
+        sbol:instanceOf  :GFP_protein .
+
+<i13504/SubComponent1/Range1>
+        a                 sbol:Range ;
+        sbol:displayId    "Range1" ;
+        sbol:end          "719" ;
+        sbol:hasSequence  :i13504_Sequence1 ;
+        sbol:orientation  SO:0001030 ;
+        sbol:start        "1" .
+
+<i13504_system/Interaction1/Participation1>
+        a                 sbol:Participation ;
+        sbol:displayId    "Participation1" ;
+        sbol:participant  <i13504_system/ComponentReference1> ;
+        sbol:role         SBO:0000645 .
+
+:i13504_Sequence1  a       sbol:Sequence ;
+        sbol:description   "null sequence" ;
+        sbol:displayId     "i13504_Sequence1" ;
+        sbol:elements      "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa" ;
+        sbol:encoding      EDAM:format_1207 ;
+        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:name          "Sequence1" .

@@ -44,9 +44,10 @@ public class InterfaceTest extends TestCase {
         compInterface.setNonDirectionals(Arrays.asList(aTCSubComponent.getUri()));
         
         TestUtil.serialise(doc, "entity/interface", "interface");
-      
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
+        
+        TestUtil.validateIdentified(compInterface,doc,0);
     }
 
 }

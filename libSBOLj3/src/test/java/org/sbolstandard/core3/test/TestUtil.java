@@ -739,7 +739,13 @@ public class TestUtil {
 		validateDocument(doc, numberOfExpectedErrors);
 	}
 	
-	private static void validateIdentified(Identified identified,int numberOfExpectedErrors)
+	public static void validateIdentified(Identified identified, SBOLDocument doc, int numberOfExpectedErrorsInIdentified, int numberOfExpectedErrorsInDocument)
+	{	 
+		validateIdentified(identified, numberOfExpectedErrorsInIdentified);
+		validateDocument(doc, numberOfExpectedErrorsInDocument);
+	}
+	
+	public static void validateIdentified(Identified identified,int numberOfExpectedErrors)
 	{	 
 		 List<String> messages=IdentityValidator.getValidator().validate(identified);
 		 printMessages(messages, "Identified");

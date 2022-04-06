@@ -15,6 +15,9 @@ import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 public class SequenceFeature extends Feature{
 	/*private List<Location> locations=null;*/
 
@@ -35,6 +38,8 @@ public class SequenceFeature extends Feature{
 			listA.addAll(listB);
 		}
 	}
+	
+	@NotNull(message = "SequenceFeature.locations cannot be empty")
 	public List<Location> getLocations() throws SBOLGraphException {
 		List<Location> locations=new ArrayList<Location>();
 		addToList(locations,getCutLocations());
@@ -42,20 +47,23 @@ public class SequenceFeature extends Feature{
 		addToList(locations,getEntireSequenceLocations());
 		return locations;		
 	}
-
+	
+	@Valid
 	public List<Cut> getCutLocations() throws SBOLGraphException {
 		return addToList(DataModel.SubComponent.location, Cut.class, DataModel.Cut.uri);
 	}
 	
+	@Valid
 	public List<Range> getRangeLocations() throws SBOLGraphException {
 		return addToList(DataModel.SubComponent.location, Range.class, DataModel.Range.uri);
 	}
 	
+	@Valid
 	public List<EntireSequence> getEntireSequenceLocations() throws SBOLGraphException {
 		return addToList(DataModel.SubComponent.location, EntireSequence.class, DataModel.EntireSequenceLocation.uri);
 	}
 
-	public Location createLocation(LocationBuilder builder ) throws SBOLGraphException
+	public Location createLocation(LocationBuilder builder) throws SBOLGraphException
 	{
 		URI locationUri=SBOLAPI.createLocalUri(this,builder.getLocationTypeUri(),getLocations(),builder.getLocationClass());
 		Location location=builder.build(this.resource.getModel(),locationUri);

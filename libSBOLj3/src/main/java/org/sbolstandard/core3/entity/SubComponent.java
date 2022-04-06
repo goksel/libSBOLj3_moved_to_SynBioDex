@@ -14,6 +14,9 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 public class SubComponent extends Feature{
 	/*private URI roleIntegration=null;
 	private URI isInstanceOf=null;
@@ -39,7 +42,7 @@ public class SubComponent extends Feature{
 		RDFUtil.setProperty(this.resource, DataModel.SubComponent.roleIntegration, roleIntegration);
 	}
 
-	
+	@NotNull(message = "SubComponent.isInstanceOf cannot be null")
 	public URI getIsInstanceOf() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.instanceOf);
 	}
@@ -48,7 +51,7 @@ public class SubComponent extends Feature{
 		RDFUtil.setProperty(this.resource, DataModel.SubComponent.instanceOf, isInstanceOf);	
 	}
 	
-
+	@Valid
 	public List<Location> getLocations() throws SBOLGraphException {
 		return getLocations(DataModel.SubComponent.location);
 	}
@@ -83,7 +86,7 @@ public class SubComponent extends Feature{
 		return location;
 	}
 	
-	
+	@Valid
 	public List<Location> getSourceLocations() throws SBOLGraphException {
 		return getLocations(DataModel.SubComponent.sourceLocation);
 	}

@@ -22,7 +22,7 @@ import junit.framework.TestCase;
 
 public class AttachmentTest extends TestCase {
 	
-	public void testAtatchment() throws SBOLGraphException, IOException
+	public void testAttachment() throws SBOLGraphException, IOException
     {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
@@ -41,7 +41,7 @@ public class AttachmentTest extends TestCase {
         
         TestUtil.serialise(doc, "entity/attachment", "attachment");
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
-        TestUtil.assertReadWrite(doc); 
+        TestUtil.assertReadWrite(doc);
         
         URI temp=attachment.getSource();
         attachment.setSource(URI.create("https://sbolstandard.org/attachment1_source2"));

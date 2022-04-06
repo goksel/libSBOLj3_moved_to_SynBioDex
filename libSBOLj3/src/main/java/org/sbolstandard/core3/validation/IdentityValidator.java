@@ -4,6 +4,7 @@ package org.sbolstandard.core3.validation;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.Set;
 
@@ -107,7 +108,7 @@ public class IdentityValidator {
 			{
 				if (uris.size()>1)
 				{
-					 String message=String.format("Multiple values are included for property %s. URI:%s", property.toString(), resource.getURI());
+					 String message=String.format("Multiple values are included for property %s. Entity URI:%s", property.toString(), resource.getURI());
 					 throw new SBOLGraphException(message);
 				}
 				else
@@ -160,6 +161,8 @@ public class IdentityValidator {
 		return result;
 	}
 	
+	
+	
 	public void setPropertyAsOptionalInt(Resource resource, URI property, OptionalInt value)
 	{
 		String stringValue=null;
@@ -169,6 +172,55 @@ public class IdentityValidator {
 		}
 		RDFUtil.setProperty(resource, property, stringValue);	
 	}
+	
+	public Optional<Float> getPropertyAsOptionalFloat(Resource resource, URI property) throws SBOLGraphException
+	{
+		Optional<Float> result=Optional.empty();
+		String value=IdentityValidator.getValidator().getPropertyAsString(resource, property);
+		if (value!=null){
+			try
+			{
+			result=Optional.of(Float.parseFloat(value));
+			}
+			catch (Exception e)
+			{
+				throw new SBOLGraphException("Cannot read the value. Property:" + MeasureDataModel.Measure.value + " Uri:+ " +  resource.getURI(), e);
+			}
+		}
+		return result;
+	}
+	
+	public void setPropertyAsOptionalFloat(Resource resource, URI property, Optional<Float> value)
+	{
+		String stringValue=null;
+		if (value.isPresent())
+		{
+			stringValue= String.valueOf(value.get());
+		}
+		RDFUtil.setProperty(resource, property, stringValue);	
+	}
+		
+	
+	
+	/*public Optional<?> getPropertyAsOptional(Resource resource, URI property) throws SBOLGraphException
+	{
+		Optional<?> result=Optional.empty();
+		String value=IdentityValidator.getValidator().getPropertyAsString(resource, property);
+		if (value!=null){
+			result=Optional.of(value);
+		}
+		return result;
+	}
+	
+	public void setPropertyAsOptional(Resource resource, URI property, Optional<?> value)
+	{
+		String stringValue=null;
+		if (value.isPresent())
+		{
+			stringValue= String.valueOf(value.get());
+		}
+		RDFUtil.setProperty(resource, property, stringValue);	
+	}*/ 
 	
 	/*
 	public String getRequiredPropertyAsString(Resource resource, URI property) throws SBOLGraphException

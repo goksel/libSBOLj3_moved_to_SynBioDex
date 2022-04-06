@@ -64,7 +64,10 @@ public class CutTest extends TestCase {
     	
     	cut.setAt(OptionalInt.of(5));
     	TestUtil.validateIdentified(cut,doc,0);
-	
-    }
+    	
+    	//Location.sequence can't be null
+    	cut.setSequence(null);
+    	TestUtil.validateIdentified(cut,doc,1);
 
+    }
 }

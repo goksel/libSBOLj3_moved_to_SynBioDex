@@ -10,6 +10,10 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+
 public class Range extends Location {
 
 	/*private int start=Integer.MIN_VALUE;
@@ -30,6 +34,8 @@ public class Range extends Location {
 		super(displayId);
 	}*/
 	
+	@NotNull(message = "Range.start cannot be empty")
+	@Positive(message="Range.start must be bigger than zero")
 	public OptionalInt getStart() throws SBOLGraphException{
 		return IdentityValidator.getValidator().getPropertyAsOptionalInt(this.resource, DataModel.Range.start);
 	}
@@ -38,6 +44,8 @@ public class Range extends Location {
 		IdentityValidator.getValidator().setPropertyAsOptionalInt(this.resource, DataModel.Range.start, start);
 	}
 	
+	@NotNull(message = "Range.end cannot be empty")
+	@Positive(message="Range.end must be bigger than zero")	
 	public OptionalInt getEnd() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsOptionalInt(this.resource, DataModel.Range.end);
 	}

@@ -11,6 +11,9 @@ import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Orientation;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 public abstract class  Location extends Identified {
 	/*private Orientation orientation;
 	private int order=Integer.MIN_VALUE;
@@ -68,6 +71,8 @@ public abstract class  Location extends Identified {
 		RDFUtil.setProperty(this.resource, DataModel.Location.order, stringValue);
 	}
 	
+	@Valid
+	@NotNull(message = "Location.sequence cannot be null")
 	public URI getSequence() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Location.sequence);
 	}
@@ -89,9 +94,17 @@ public abstract class  Location extends Identified {
 			{
 				return new Cut(resource);
 			}
+			else if (RDFUtil.hasType(resource.getModel(), resource, DataModel.Range.uri))
+			{
+				return new Range(resource);
+			}
+			else if (RDFUtil.hasType(resource.getModel(), resource, DataModel.EntireSequenceLocation.uri))
+			{
+				return new EntireSequence(resource);
+			}
 			else
 			{
-				return null;
+				throw new SBOLGraphException ("Could not initialise the location entity. URI:" + resource.getURI());
 			}
 		}
 	}

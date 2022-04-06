@@ -117,6 +117,7 @@ public class Component extends TopLevel {
 		return features;
 	}
 	
+	@Valid
 	public List<SubComponent> getSubComponents() throws SBOLGraphException {
 		return addToList(DataModel.Component.feature, SubComponent.class, DataModel.SubComponent.uri);
 		/*
@@ -182,6 +183,7 @@ public class Component extends TopLevel {
 	}
 
 	//Local sub components
+	@Valid
 	public List<LocalSubComponent> getLocalSubComponents() throws SBOLGraphException {
 		return addToList(DataModel.Component.feature, LocalSubComponent.class, DataModel.LocalSubComponent.uri);
 	}
@@ -206,6 +208,7 @@ public class Component extends TopLevel {
 	}
 	
 	//Externally Defined 
+	@Valid
 	public List<ExternallyDefined> getExternallyDefineds() throws SBOLGraphException {
 		return addToList(DataModel.Component.feature, ExternallyDefined.class, DataModel.ExternalyDefined.uri);
 	}
@@ -231,6 +234,7 @@ public class Component extends TopLevel {
 	}
 	
 	//Sequence features
+	@Valid
 	public List<SequenceFeature> getSequenceFeatures() throws SBOLGraphException {
 		return addToList(DataModel.Component.feature, SequenceFeature.class, DataModel.SequenceFeature.uri);
 	}
@@ -294,6 +298,7 @@ public class Component extends TopLevel {
 		return createInteraction(displayId, types);
 	}
 	
+	@Valid
 	public List<Interaction> getInteractions() throws SBOLGraphException {
 		return addToList(DataModel.Component.interaction, Interaction.class);
 	}

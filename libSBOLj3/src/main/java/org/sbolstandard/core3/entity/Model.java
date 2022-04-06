@@ -8,6 +8,8 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.constraints.NotNull;
+
 public class Model extends TopLevel{
 	/*private URI source=null;
 	private URI framework=null;
@@ -23,6 +25,7 @@ public class Model extends TopLevel{
 		super(resource);
 	}
 	
+	@NotNull(message = "Model.source cannot be null")
 	public URI getSource() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);	
 	}
@@ -31,7 +34,7 @@ public class Model extends TopLevel{
 		RDFUtil.setProperty(resource, DataModel.Model.source, source);
 	}
 
-	
+	@NotNull(message = "Model.framework cannot be null")
 	public URI getFramework() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.framework);	
 	}
@@ -40,6 +43,7 @@ public class Model extends TopLevel{
 		RDFUtil.setProperty(resource, DataModel.Model.framework, framework);
 	}
 
+	@NotNull(message = "Model.language cannot be null")
 	public URI getLanguage() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.language);	
 	}

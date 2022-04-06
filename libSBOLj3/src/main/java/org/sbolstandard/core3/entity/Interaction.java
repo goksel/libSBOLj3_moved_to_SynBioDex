@@ -9,6 +9,9 @@ import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 public class Interaction extends Identified{
 	/*private List<URI> types=null;
 	private List<Participation> participations=null;*/
@@ -23,6 +26,7 @@ public class Interaction extends Identified{
 		super(resource);
 	}
 	
+	@NotNull(message = "Interaction.types cannot be empty")
 	public List<URI> getTypes() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.type);
 	}
@@ -31,7 +35,7 @@ public class Interaction extends Identified{
 		RDFUtil.setProperty(resource, DataModel.type, types);
 	}
 	
-	
+	@Valid
 	public List<Participation> getParticipations() throws SBOLGraphException {
 		return addToList(DataModel.Interaction.participation, Participation.class);
 	}

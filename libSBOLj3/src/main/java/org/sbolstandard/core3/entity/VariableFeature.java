@@ -10,14 +10,18 @@ import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
+import org.sbolstandard.core3.vocabulary.Orientation;
+import org.sbolstandard.core3.vocabulary.VariableFeatureCardinality;
+
+import jakarta.validation.constraints.NotNull;
 
 public class VariableFeature extends Identified{
-	private URI cardinality=null;
+	/*private URI cardinality=null;
 	private URI feature=null;
 	private List<URI> variants=new ArrayList<URI>();
 	private List<URI> variantCollections=new ArrayList<URI>();
 	private List<URI> variantDerivations=new ArrayList<URI>();
-	private List<URI> variantMeasures=new ArrayList<URI>();
+	private List<URI> variantMeasures=new ArrayList<URI>();*/
 	
 	
 	protected  VariableFeature(Model model,URI uri) throws SBOLGraphException
@@ -30,85 +34,66 @@ public class VariableFeature extends Identified{
 		super(resource);
 	}
 	
-	public URI getCardinality() throws SBOLGraphException {
-		if (cardinality==null)
+	@NotNull(message = "VariableFeature.cardinality cannot be null")
+	public VariableFeatureCardinality getCardinality() throws SBOLGraphException {
+		VariableFeatureCardinality cardinality=null;
+		URI value= IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableComponent.cardinality);	
+		if (value!=null)
 		{
-			cardinality=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableComponent.cardinality);	
+			cardinality=VariableFeatureCardinality.get(value);
 		}
 		return cardinality;
 	}
 
-	public void setCardinality(URI cardinality) {
-		this.cardinality = cardinality;
-		RDFUtil.setProperty(resource, DataModel.VariableComponent.cardinality, cardinality);
+	public void setCardinality(VariableFeatureCardinality cardinality) {
+		URI uri=null;
+		if (cardinality!=null)
+		{
+			uri=cardinality.getUri();
+		}
+		RDFUtil.setProperty(resource, DataModel.VariableComponent.cardinality, uri);
 	}
 	
+	@NotNull(message = "VariableFeature.feature cannot be null")
 	public URI getFeature() throws SBOLGraphException {
-		if (feature==null)
-		{
-			feature=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableComponent.variable);	
-		}
-		return feature;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableComponent.variable);	
 	}
 
-	public void setFeature(URI variant) {
-		this.feature = variant;
-		RDFUtil.setProperty(resource, DataModel.VariableComponent.variable, variant);
+	public void setFeature(URI feature) {
+		RDFUtil.setProperty(resource, DataModel.VariableComponent.variable, feature);
 	}
 	
 	public List<URI> getVariants() {
-		if (variants==null)
-		{
-			variants=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableComponent.variant);
-		}
-		return variants;
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableComponent.variant);
 	}
 	
 	public void setVariants(List<URI> variants) {
-		this.variants = variants;
 		RDFUtil.setProperty(resource, DataModel.VariableComponent.variant, variants);
 	}
 	
 	public List<URI> getVariantCollections() {
-		if (variantCollections==null)
-		{
-			variantCollections=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableComponent.variantCollection);
-		}
-		return variantCollections;
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableComponent.variantCollection);
 	}
 	
 	public void setVariantCollections(List<URI> variantCollections) {
-		this.variantCollections = variantCollections;
 		RDFUtil.setProperty(resource, DataModel.VariableComponent.variantCollection, variantCollections);
 	}
 	
 	public List<URI> getVariantDerivations() {
-		if (variantDerivations==null)
-		{
-			variantDerivations=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableComponent.variantDerivation);
-		}
-		return variantDerivations;
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableComponent.variantDerivation);
 	}
 	
 	public void setVariantDerivations(List<URI> variantDerivations) {
-		this.variantDerivations = variantDerivations;
 		RDFUtil.setProperty(resource, DataModel.VariableComponent.variantDerivation, variantDerivations);
 	}
 	
-	
 	public List<URI> getVariantMeasures() {
-		if (this.variantMeasures==null)
-		{
-			variantMeasures=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableComponent.variantMeasure);
-		}
-		return variantMeasures;
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableComponent.variantMeasure);
 	}
 	
 	public void setVariantMeasures(List<URI> variantMeasures) {
-		this.variantMeasures = variantMeasures;
 		RDFUtil.setProperty(resource, DataModel.VariableComponent.variantMeasure, variantMeasures);
 	}
-	
 	
 	@Override
 	public URI getResourceType() {

@@ -11,6 +11,9 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 public class ExternallyDefined extends Feature{
 	/*private List<URI> types=new ArrayList<URI>();
 	private URI definition=null;*/
@@ -25,6 +28,8 @@ public class ExternallyDefined extends Feature{
 		super(resource);
 	}
 
+	@Valid
+	@NotNull(message = "ExternallyDefined.type cannot be empty")
 	public List<URI> getTypes() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.type);
 	}
@@ -33,6 +38,7 @@ public class ExternallyDefined extends Feature{
 		RDFUtil.setProperty(resource, DataModel.type, types);
 	}
 	
+	@NotNull(message = "ExternallyDefined.definition cannot be null")
 	public URI getDefinition() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ExternalyDefined.definition);
 	}

@@ -11,6 +11,8 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
+import jakarta.validation.constraints.NotNull;
+
 public class Association extends ControlledIdentified{
 	
 	/*private List<URI> roles=null;
@@ -42,6 +44,7 @@ public class Association extends ControlledIdentified{
 		RDFUtil.setProperty(resource, ProvenanceDataModel.Association.plan, plan);
 	}
 	
+	@NotNull(message = "Association.agent cannot be null")
 	public URI getAgent() throws SBOLGraphException{
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, ProvenanceDataModel.Association.agent);
 	}

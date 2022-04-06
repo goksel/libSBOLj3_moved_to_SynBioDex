@@ -25,14 +25,14 @@ public class ImplementationTest extends TestCase {
         
         Component TetR_protein=SBOLAPI.createComponent(doc, "TetR_protein", ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
         
-        
         Implementation impl=doc.createImplementation("impl1");
         impl.setComponent(TetR_protein.getUri());
         
         TestUtil.serialise(doc, "entity/implementation", "implementation");
-      
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
+        
+        TestUtil.validateIdentified(impl,doc,0); 
     }
 
 

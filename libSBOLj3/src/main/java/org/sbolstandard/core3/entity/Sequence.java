@@ -38,7 +38,6 @@ public class Sequence extends TopLevel {
 		if (encodingValue!=null){
 			encoding=Encoding.get(encodingValue); 
 		}
-		
 		return encoding;
 	}
 	

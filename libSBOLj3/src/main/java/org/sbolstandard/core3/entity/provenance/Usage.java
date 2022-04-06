@@ -10,11 +10,12 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
+import jakarta.validation.constraints.NotNull;
+
 public class Usage extends ControlledIdentified{
 	/*private URI entity=null;
 	private List<URI> roles=null;*/
 		
-	
 	protected  Usage(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
@@ -25,6 +26,7 @@ public class Usage extends ControlledIdentified{
 		super(resource);
 	}
 	
+	@NotNull(message = "Usage.entity cannot be null")
 	public URI getEntity() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, ProvenanceDataModel.Usage.entity);
 	}

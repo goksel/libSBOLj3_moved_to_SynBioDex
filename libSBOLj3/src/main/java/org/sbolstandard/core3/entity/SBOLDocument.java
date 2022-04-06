@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -42,7 +44,7 @@ public class SBOLDocument {
 	protected Model model = null;
 	/*@NotNull (message="SBOLDocument.test cannot be null")
 	private URI test=null;*/
-	private List<@Valid Component> components;
+	private List<Component> components;
 	private List<Sequence> sequences;
 	private List<CombinatorialDerivation> combinatorialDerivations;
 	private List<Implementation> implementations;
@@ -50,7 +52,7 @@ public class SBOLDocument {
 	private List<org.sbolstandard.core3.entity.Model> models;
 	private List<Collection> collections;
 	private List<Experiment> experiments;
-	private List<@Valid Attachment> attachments;
+	private List<Attachment> attachments;
 	private List<Agent> agents;
 	private List<Plan> plans;
 	private List<Activity> activities;
@@ -126,6 +128,7 @@ public class SBOLDocument {
 		RDFUtil.setBaseURI(this.model, base);
 	}
 	
+	@Valid
 	public List<Component> getComponents() throws SBOLGraphException {
 		this.components=addToList(model, this.components, DataModel.Component.uri,Component.class);
 		return components;
@@ -243,6 +246,7 @@ public class SBOLDocument {
 		}
 	}
 
+	@Valid
 	public List<CombinatorialDerivation> getCombinatorialDerivations() throws SBOLGraphException {
 		this.combinatorialDerivations=addToList(model, this.combinatorialDerivations, DataModel.CombinatorialDerivation.uri,CombinatorialDerivation.class);
 		return combinatorialDerivations;
@@ -314,7 +318,8 @@ public class SBOLDocument {
 			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
 		}
 	}
-		
+	
+	@Valid
 	public List<org.sbolstandard.core3.entity.Model> getModels() throws SBOLGraphException {
 		this.models=addToList(model, this.models, DataModel.Model.uri,org.sbolstandard.core3.entity.Model.class);
 		return models;
@@ -386,7 +391,8 @@ public class SBOLDocument {
 			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
 		}
 	}
-		
+	
+	@Valid
 	public List<Attachment> getAttachments() throws SBOLGraphException {
 		this.attachments=addToList(model, this.attachments, DataModel.Attachment.uri,Attachment.class);
 		return attachments;
@@ -479,6 +485,7 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<Activity> getActivities() throws SBOLGraphException {
 		this.activities=addToList(model, this.activities, ProvenanceDataModel.Activity.uri,Activity.class);
 		return activities;
@@ -487,7 +494,7 @@ public class SBOLDocument {
 	private void initialisePrefix(Prefix prefix, String symbol, String name, float factor) throws SBOLGraphException{
 		prefix.setSymbol(symbol);
 		prefix.setLabel(name);
-		prefix.setFactor(factor);
+		prefix.setFactor(Optional.of(factor));
 	}
 	
 	public SIPrefix createSIPrefix(URI namespace, URI uri, String symbol, String name, float factor) throws SBOLGraphException {		
@@ -630,7 +637,7 @@ public class SBOLDocument {
 		unit.setSymbol(symbol);
 		unit.setLabel(name);
 		unit.setBase(baseUnit);
-		unit.setExponent(exponent);
+		unit.setExponent(OptionalInt.of(exponent));
 		addToInMemoryList(unit, unitExponentiations);
 		return unit;
 	}

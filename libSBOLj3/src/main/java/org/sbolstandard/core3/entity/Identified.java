@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.OptionalInt;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,6 +23,8 @@ import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
+
+import jakarta.validation.Valid;
 
 public abstract class Identified {
 	protected Resource resource=null;
@@ -106,6 +109,7 @@ public abstract class Identified {
 		RDFUtil.setProperty(resource, DataModel.Identified.wasGeneratedBy, wasGeneratedBy);
 	}
 	
+	@Valid
 	public List<Measure> getMeasures()throws SBOLGraphException  {
 		return addToList(DataModel.Identified.measure, Measure.class, MeasureDataModel.Measure.uri);
 	}
@@ -113,7 +117,7 @@ public abstract class Identified {
 	public Measure createMeasure(URI uri, float value, URI unit) throws SBOLGraphException
 	{
 		Measure measure = new Measure(this.resource.getModel(), uri) {};
-		measure.setValue(value);
+		measure.setValue(Optional.of(value));
 		measure.setUnit(unit);		
 		addToList(measure, DataModel.Identified.measure);
 		return measure;	

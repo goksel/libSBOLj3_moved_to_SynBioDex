@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Component;
@@ -40,7 +42,7 @@ public class MeasureTest extends TestCase {
         liter.setComment("The litre is a unit of volume defined as 1.0e-3 cubic metre.");
         liter.setAlternativeSymbols(Arrays.asList("L", "L2"));
         liter.setLongComment("This is an example long comment.");
-        liter.setFactor(0.001f);
+        liter.setFactor(Optional.of(0.001f));
        
         SingularUnit mole=doc.createSingularUnit("mole", "mol", "mole");
         
@@ -89,10 +91,31 @@ public class MeasureTest extends TestCase {
         	}
         }
         
+        //TestUtil.assertReadWrite(doc);
         
-        TestUtil.assertReadWrite(doc);
+        
+        //measure.setTest(Optional.of(5));
+        //CaCl2.g
+        //TestUtil.validateIdentified(measure, 0);
+        //TestUtil.validateDocument(doc, 0);
+        
+        /*URI tmp=measure.getUnit();
+        measure.setUnit(null);
+        TestUtil.validateIdentified(measure, doc, 1);
+        measure.setUnit(tmp);
+        TestUtil.validateIdentified(measure, doc, 0);
+       */ 
+        measure.setValue(Optional.of(4f));
+        TestUtil.validateIdentified(measure,doc,  0);  
+        
+        measure.setValue(Optional.empty());
+        TestUtil.validateIdentified(measure, doc, 1);  
+      
+        TestUtil.validateIdentified(CaCl2, 1);  
+        
+         
+        
     }
-
 }
 
 //        om:hasFactor          "0.001"^^<http://www.w3.org/2001/XMLSchema#float> ;

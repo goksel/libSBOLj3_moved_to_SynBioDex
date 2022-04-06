@@ -1,0 +1,31 @@
+[ {
+  "@id" : "https://sbolstandard.org/examples/i13504_system",
+  "http://sbols.org/v3#hasFeature" : [ {
+    "@id" : "https://sbolstandard.org/examples/i13504_system/LocalSubComponent1"
+  } ],
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000289"
+  } ],
+  "http://sbols.org/v3#name" : [ {
+    "@value" : "i13504 system"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000251"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "i13504_system"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Component" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/i13504_system/LocalSubComponent1",
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000251"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "LocalSubComponent1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#LocalSubComponent" ]
+} ]

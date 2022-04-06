@@ -2,6 +2,7 @@ package org.sbolstandard.core3.entity;
 
 import java.net.URI;
 import java.util.OptionalLong;
+import java.util.Set;
 
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
@@ -9,8 +10,12 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.ValidatorFactory;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.executable.ExecutableValidator;
 
 public class Attachment extends TopLevel{
 	/*private URI source=null;
@@ -40,8 +45,27 @@ public class Attachment extends TopLevel{
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);
 	}
 
-	public void setSource(URI source) {
+	public void setSource(@NotNull (message="gmgm") URI source) {
 		//this.source = source;
+		/*try {
+	
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		ExecutableValidator executableValidator = factory.getValidator().forExecutables();
+		Object[] parameterValues = { source };
+		Set<ConstraintViolation<Identified>> violations = executableValidator.validateParameters(
+				  this,
+				  Attachment.class.getMethod( "setSource", URI.class),
+				  parameterValues
+				);
+			if (violations.size()>0)
+			{
+				throw new Error ("source is null - gmgm");
+			}
+		}
+		catch (Exception e)
+		{
+			throw new Error(e);
+		}*/
 		RDFUtil.setProperty(resource, DataModel.Model.source, source);
 	}
 

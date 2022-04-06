@@ -2,6 +2,9 @@ package org.sbolstandard.core3.entity.measure;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
+
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.ControlledIdentified;
@@ -10,6 +13,11 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public class Measure extends ControlledIdentified{
 	
@@ -27,9 +35,10 @@ public class Measure extends ControlledIdentified{
 		super(resource);
 	}
 	
-	public void setValue(float value) {
-		String valueString=String.valueOf(value);
-		RDFUtil.setProperty(resource, MeasureDataModel.Measure.value, valueString);	
+	public void setValue(Optional<Float> value) {
+		//String valueString=String.valueOf(value);
+		//RDFUtil.setProperty(resource, MeasureDataModel.Measure.value, valueString);	
+		IdentityValidator.getValidator().setPropertyAsOptionalFloat(this.resource, MeasureDataModel.Measure.value, value);
 	}
 	
 	/*public XSDFloat getFactor() throws SBOLGraphException {
@@ -52,7 +61,7 @@ public class Measure extends ControlledIdentified{
 	}
 	*/
 	
-	public float getValue() throws SBOLGraphException {
+	/*public float getValue() throws SBOLGraphException {
 		float value=Float.NaN;
 		String valueString=IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Measure.value);
 		if (valueString!=null){
@@ -65,9 +74,28 @@ public class Measure extends ControlledIdentified{
 			}
 		}
 		return value;
+	}*/
+	
+	//@Valid
+	//@NotNull(message = "Measure.value cannot be null")	
+	public Optional<@NotNull (message = "Measure.value cannot be null") Float> getValue() throws SBOLGraphException {
+		Optional<Float> value= IdentityValidator.getValidator().getPropertyAsOptionalFloat(this.resource, MeasureDataModel.Measure.value);
+		return value;
 	}
 	
+	/*
+	private Optional<Integer> test;
+	@NotNull(message = "Measure.test cannot be null")	
+	public Optional<@NotNull Integer> getTest() throws SBOLGraphException {
+		return test;
+	}
 	
+	public void setTest(Optional<Integer> value)
+	{
+		this.test=value;
+	}
+	*/
+	@NotNull(message = "Measure.unit cannot be null")	
 	public URI getUnit() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.Measure.unit);	
 	}

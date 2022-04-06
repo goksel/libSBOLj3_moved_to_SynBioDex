@@ -9,6 +9,8 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.constraints.NotNull;
+
 public class Participation extends Identified{
 	/*private List<URI> roles=null;
 	private URI participant=null;
@@ -24,6 +26,7 @@ public class Participation extends Identified{
 		super(resource);
 	}
 	
+	@NotNull(message = "Participation.roles cannot be empty")
 	public List<URI> getRoles() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.role);
 	}

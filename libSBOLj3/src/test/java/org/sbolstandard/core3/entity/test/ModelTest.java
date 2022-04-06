@@ -32,9 +32,16 @@ public class ModelTest extends TestCase {
         toggleSwitch.setModels(Arrays.asList(model.getUri()));
         
         TestUtil.serialise(doc, "entity/model", "model");
-      
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
+        
+        TestUtil.validateIdentified(model,doc,0);
+		model.setSource(null);
+		TestUtil.validateIdentified(model,doc,1);
+		model.setFramework(null);
+		TestUtil.validateIdentified(model,doc,2);
+		model.setLanguage(null);
+		TestUtil.validateIdentified(model,doc,3);
     }
 
 }

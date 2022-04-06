@@ -37,10 +37,15 @@ public class SequenceFeatureTest extends TestCase {
 		Sequence seq= (Sequence)doc.getIdentified(gfp.getSequences().get(0),Sequence.class);
 		
 		RangeLocationBuilder location=new RangeLocationBuilder(1, 3, seq.getUri());
-		gfp.createSequenceFeature(Arrays.asList(location));
+		SequenceFeature feature=gfp.createSequenceFeature(Arrays.asList(location));
 		
-		System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
-        
+		
+		TestUtil.serialise(doc, "entity_additional/sequencefeature", "sequencefeature");
+	    System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
+	    TestUtil.assertReadWrite(doc); 
+	    
+	    TestUtil.validateIdentified(feature,doc,0);
+	    
     }
 
 }

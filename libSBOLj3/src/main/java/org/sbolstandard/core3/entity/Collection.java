@@ -21,11 +21,11 @@ public class Collection extends TopLevel{
 		super(resource);
 	}
 	
-	public List<URI> getTopLevels() throws SBOLGraphException {
+	public List<URI> getMembers() throws SBOLGraphException {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Collection.member);	
 	}
 
-	public void setTopLevels(List<URI> members) {
+	public void setMembers(List<URI> members) {
 		RDFUtil.setProperty(resource, DataModel.Collection.member, members);
 	}	
 
