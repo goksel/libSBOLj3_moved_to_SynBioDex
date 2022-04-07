@@ -8,6 +8,8 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
+import jakarta.validation.constraints.NotNull;
+
 public class UnitMultiplication extends CompoundUnit{
 	/*private URI term1;
 	private URI term2;*/
@@ -21,6 +23,7 @@ public class UnitMultiplication extends CompoundUnit{
 		super(resource);
 	}
 	
+	@NotNull(message = "UnitMultiplication.term1 cannot be null")	
 	public URI getTerm1() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitMultiplication.term1);	
 	}
@@ -29,6 +32,7 @@ public class UnitMultiplication extends CompoundUnit{
 		RDFUtil.setProperty(resource, MeasureDataModel.UnitMultiplication.term1, term1);
 	}
 	
+	@NotNull(message = "UnitMultiplication.term2 cannot be null")	
 	public URI getTerm2() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitMultiplication.term2);	
 	}

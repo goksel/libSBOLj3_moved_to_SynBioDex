@@ -8,6 +8,8 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
+import jakarta.validation.constraints.NotNull;
+
 public class UnitDivision extends CompoundUnit{
 	/*private URI numerator;
 	private URI denominator;*/
@@ -22,6 +24,7 @@ public class UnitDivision extends CompoundUnit{
 		super(resource);
 	}
 	
+	@NotNull(message = "UnitDivision.numerator cannot be null")	
 	public URI getNumerator() throws SBOLGraphException{
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitDivision.numerator);	
 	}
@@ -30,6 +33,7 @@ public class UnitDivision extends CompoundUnit{
 		RDFUtil.setProperty(resource, MeasureDataModel.UnitDivision.numerator, numerator);
 	}
 	
+	@NotNull(message = "UnitDivision.denominator cannot be null")	
 	public URI getDenominator() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitDivision.denominator);	
 	}

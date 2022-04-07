@@ -24,14 +24,11 @@ public class InvalidDisplayIdTest extends TestCase {
     {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
-        
        
-		
         Component TetR_protein=SBOLAPI.createComponent(doc, "TetR_protein", ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
         TetR_protein.setDisplayId("1TetR");
         //Component LacI_protein=SBOLAPI.createComponent(doc, "LacI_protein", ComponentType.Protein.getUrl(), "LacI", "LacI protein", Role.TF);
         TetR_protein.setNamespace(URI.create("https://sbolstandard.org/examples/"));
-		
         
         Component rbs=doc.createComponent(URI.create("https://sbolstandard.org/examples"),URI.create("https://sbolstandard.org/examples/rbs"), Arrays.asList(ComponentType.DNA.getUrl())); 
 		rbs.setName("B0034");
@@ -41,8 +38,7 @@ public class InvalidDisplayIdTest extends TestCase {
 		
         TestUtil.serialise(doc, "invalid/displayid", "displayid");
       
-        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
-       
+        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));  
     }
 }
 

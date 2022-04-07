@@ -9,8 +9,8 @@
 @prefix prov:  <http://www.w3.org/ns/prov#> .
 @prefix sbol:  <http://sbols.org/v3#> .
 
-<urn:uuid:69699674-cc88-42b7-873b-825367e199eb>
+<urn:uuid:9a79a86d-54c2-451b-947e-166cd1e33488>
         a                  sbol:Component ;
-        sbol:hasNamespace  <urn:uuid:09024ac5-7a6a-418d-99b2-08884581ad65> ;
+        sbol:hasNamespace  <urn:uuid:857e7864-01f2-40bf-b0ca-61e27a742874> ;
         sbol:name          "TetR" ;
         sbol:type          SBO:0000252 .

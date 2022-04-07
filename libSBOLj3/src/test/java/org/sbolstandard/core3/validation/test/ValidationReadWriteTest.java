@@ -1,4 +1,4 @@
-package org.sbolstandard.core3.measure.test;
+package org.sbolstandard.core3.validation.test;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +30,7 @@ import org.sbolstandard.core3.vocabulary.ComponentType;
 
 import junit.framework.TestCase;
 
-public class MeasureTest extends TestCase {
+public class ValidationReadWriteTest extends TestCase {
 	
 	public void test() throws SBOLGraphException, IOException
     {
@@ -95,20 +95,6 @@ public class MeasureTest extends TestCase {
         	}
         }
         
-        //TestUtil.assertReadWrite(doc);
-        
-        
-        //measure.setTest(Optional.of(5));
-        //CaCl2.g
-        //TestUtil.validateIdentified(measure, 0);
-        //TestUtil.validateDocument(doc, 0);
-        
-        /*URI tmp=measure.getUnit();
-        measure.setUnit(null);
-        TestUtil.validateIdentified(measure, doc, 1);
-        measure.setUnit(tmp);
-        TestUtil.validateIdentified(measure, doc, 0);
-       */ 
         Optional<Float> temp=measure.getValue();
         measure.setValue(Optional.of(4f));
         TestUtil.validateIdentified(measure,doc,  0);  
@@ -143,7 +129,80 @@ public class MeasureTest extends TestCase {
         um.setTerm1(null);
         um.setTerm2(null);
         TestUtil.validateIdentified(um,doc,2,11);  
-                
+        
+        
+        //Validating the invalid SBOL document will throw exceptions	   
+        boolean exception=false;
+        try
+ 	    {
+        	  boolean isValid=SBOLValidator.getValidator().isValid(doc);
+ 	    }
+ 	    catch (SBOLGraphException e)
+ 	    {
+ 	    	exception=true;
+ 	    	System.out.print("Validaton exception message:" + e.getMessage());
+ 	    }
+ 	    assertTrue(exception);
+ 	    
+     
+ 	    String output=null;
+       
+ 	   	//Writing the invalid SBOL document will fail	   
+        exception=false;
+	    try
+	    {
+	    	 output=SBOLIO.write(doc, SBOLFormat.TURTLE);
+	    }
+	    catch (SBOLGraphException e)
+	    {
+	    	exception=true;
+	    }
+	    assertTrue(exception);
+	    
+       
+	    //Write the invalid SBOL document
+	    Configuration.getConfiguration().setValidateBeforeSavingSBODocuments(false);
+	    exception=false;
+	    try
+	    {
+	    	output=SBOLIO.write(doc, SBOLFormat.TURTLE);
+	    }
+	    catch (SBOLGraphException e)
+	    {
+	    	exception=true;
+	    }
+	    assertTrue(!exception);
+	    
+	    
+	    //Reading the invalid SBOL document will fail	   
+	    SBOLDocument doc3=null;
+	    exception=false;
+	    try
+	    {
+	    	doc3=SBOLIO.read(output, SBOLFormat.TURTLE);
+	    }
+	    catch (SBOLGraphException e)
+	    {
+	    	exception=true;
+	    }
+	    assertTrue(exception);
+	   
+	    
+	    //Read the invalid SBOL document with errors and validate programmatically
+	    Configuration.getConfiguration().setValidateAfterReadingSBOLDocuments(false);
+	    exception=false;
+	    try
+	    {
+	    	doc3=SBOLIO.read(output, SBOLFormat.TURTLE);
+	    }
+	    catch (SBOLGraphException e)
+	    {
+	    	exception=true;
+	    }
+	    assertTrue(!exception);
+	  
+	   TestUtil.validateDocument(doc3,11);  
+        
     }
 }
 

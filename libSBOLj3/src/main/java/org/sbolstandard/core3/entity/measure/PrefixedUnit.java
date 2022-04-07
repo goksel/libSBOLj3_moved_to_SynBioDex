@@ -8,6 +8,8 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
+import jakarta.validation.constraints.NotNull;
+
 public class PrefixedUnit extends Unit{
 	
 	/*private URI prefix;
@@ -23,6 +25,7 @@ public class PrefixedUnit extends Unit{
 		super(resource);
 	}
 	
+	@NotNull(message = "PrefixedUnit.prefix cannot be null")	
 	public URI getPrefix() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.PrefixedUnit.prefix);	
 	}
@@ -31,7 +34,7 @@ public class PrefixedUnit extends Unit{
 		RDFUtil.setProperty(resource, MeasureDataModel.PrefixedUnit.prefix, prefix);
 	}
 	
-	
+	@NotNull(message = "PrefixedUnit.unit cannot be null")	
 	public URI getUnit() throws SBOLGraphException{
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.PrefixedUnit.unit);
 	}

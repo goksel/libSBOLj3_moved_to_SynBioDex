@@ -75,12 +75,23 @@ public class SBOLValidator {
 	    	if (violation.getInvalidValue()!=null){
 	    		fragments.add("Value:" + violation.getInvalidValue().toString());
 	    	}
-	    	String message=StringUtils.join(fragments, ",\r\n\t");
+	    	String message=StringUtils.join(fragments, String.format(",%s\t", System.lineSeparator()));
 	    	messages.add(message);
 	    }
 	    return messages;
 	}
 	
+	public boolean isValid(SBOLDocument document) throws SBOLGraphException
+	{
+		String CRLF=System.lineSeparator(); 	
+		List<String> messages=validate(document);
+		if (messages!=null && messages.size()>0)
+		{
+			String message=StringUtils.join(messages, CRLF + CRLF);
+			throw new SBOLGraphException("Could not validate the SBOL document:" + CRLF + message);
+		}
+		return true; 
+	}
 	
 	public static List<String> validateSBOLDocument2(SBOLDocument document)
 	{
@@ -109,7 +120,7 @@ public class SBOLValidator {
  	       return messages;
 	}
 	
-	public static String validateFolder(String folder, String extension) throws IOException
+	public static String validateFolder(String folder, String extension) throws IOException, SBOLGraphException
 	{
 		StringBuilder output=new StringBuilder();
 		validateFolderRecursive(output, new File(folder), extension);
@@ -117,12 +128,12 @@ public class SBOLValidator {
 		return result;
 	}
 	
-	public static String validateFolder(String folder) throws IOException
+	public static String validateFolder(String folder) throws IOException, SBOLGraphException
 	{
 		return validateFolder(folder,null);
 	}
 
-	private static void validateFolderRecursive(StringBuilder output, File folder, String extension) throws IOException
+	private static void validateFolderRecursive(StringBuilder output, File folder, String extension) throws IOException, SBOLGraphException
 	{
 		File[] files=folder.listFiles();
 		for (int i=0;i<files.length;i++)
@@ -152,7 +163,7 @@ public class SBOLValidator {
 	}
 	
 	
-	public static void validateFile(StringBuilder output, File file) throws IOException
+	public static void validateFile(StringBuilder output, File file) throws IOException, SBOLGraphException
 	{ 
 		SBOLDocument doc=SBOLIO.read(file);
 		String folder=SBOLAPI.class.getClassLoader().getResource("validation").getFile();

@@ -91,14 +91,13 @@
       <sbol:name>i13504 system</sbol:name>
       <sbol:hasFeature rdf:resource="i13504_system/SubComponent1"/>
       <sbol:displayId>i13504_system</sbol:displayId>
-      <sbol:type rdf:resource="https://identifiers.org/SBO:0000241"/>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
    </sbol:Component>
    <sbol:Component rdf:about="i13504">
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="i13504/SubComponent3">
             <sbol:hasLocation>
                <sbol:Range rdf:about="i13504/SubComponent3/Range1">
-                  <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
                   <sbol:end>826</sbol:end>
                   <sbol:start>747</sbol:start>
                   <sbol:hasSequence>
@@ -132,6 +131,7 @@
             <sbol:displayId>SequenceFeature2</sbol:displayId>
          </sbol:SequenceFeature>
       </sbol:hasFeature>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="i13504_Sequence1"/>
       </sbol:hasSequence>
@@ -173,7 +173,6 @@
          </sbol:SubComponent>
       </sbol:hasFeature>
       <sbol:displayId>i13504</sbol:displayId>
-      <sbol:role rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:description>Screening plasmid intermediate</sbol:description>
    </sbol:Component>
@@ -224,11 +223,11 @@
    </sbol:Component>
    <sbol:Component rdf:about="B0034">
       <sbol:hasSequence>
-         <sbol:Sequence rdf:about="B0034_Sequence1"/>
+         <sbol:Sequence rdf:about="B0034_Sequence"/>
       </sbol:hasSequence>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000139"/>
       <sbol:description>RBS (Elowitz 1999)</sbol:description>
-      <sbol:name>rbs</sbol:name>
+      <sbol:name>B0034</sbol:name>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:displayId>B0034</sbol:displayId>
@@ -277,6 +276,12 @@
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000252"/>
       <sbol:displayId>GFP_protein</sbol:displayId>
    </sbol:Component>
+   <sbol:Sequence rdf:about="B0034_Sequence">
+      <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
+      <sbol:elements>aaagaggagaaa</sbol:elements>
+      <sbol:hasNamespace rdf:resource="../igem"/>
+      <sbol:displayId>B0034_Sequence</sbol:displayId>
+   </sbol:Sequence>
    <sbol:Sequence rdf:about="i13504_Sequence1">
       <sbol:elements>aaagaggagaaatactagatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataatactagagccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc</sbol:elements>
       <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
@@ -300,13 +305,5 @@
       <sbol:name>Sequence1</sbol:name>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>E0040_Sequence1</sbol:displayId>
-   </sbol:Sequence>
-   <sbol:Sequence rdf:about="B0034_Sequence1">
-      <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
-      <sbol:elements>aaagaggagaaa</sbol:elements>
-      <sbol:description>rbs sequence</sbol:description>
-      <sbol:name>Sequence1</sbol:name>
-      <sbol:hasNamespace rdf:resource="../igem"/>
-      <sbol:displayId>B0034_Sequence1</sbol:displayId>
    </sbol:Sequence>
 </rdf:RDF>

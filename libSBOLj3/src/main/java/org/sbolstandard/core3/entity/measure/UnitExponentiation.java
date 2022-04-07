@@ -11,6 +11,8 @@ import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
+import jakarta.validation.constraints.NotNull;
+
 public class UnitExponentiation extends CompoundUnit{
 	
 	/*private URI base;
@@ -27,6 +29,7 @@ public class UnitExponentiation extends CompoundUnit{
 		super(resource);
 	}
 	
+	@NotNull(message = "UnitExponentiation.base cannot be null")	
 	public URI getBase() throws SBOLGraphException{
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitExponentiation.base);
 	}
@@ -35,6 +38,7 @@ public class UnitExponentiation extends CompoundUnit{
 		RDFUtil.setProperty(resource, MeasureDataModel.UnitExponentiation.base, base);
 	}
 	
+	@NotNull(message = "UnitExponentiation.exponent cannot be empty")	
 	public OptionalInt getExponent() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsOptionalInt(this.resource, MeasureDataModel.UnitExponentiation.exponent);
 	}

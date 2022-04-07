@@ -10,6 +10,8 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
+import jakarta.validation.constraints.NotNull;
+
 public abstract class Unit extends ControlledTopLevel{
 	
 	
@@ -30,6 +32,7 @@ public abstract class Unit extends ControlledTopLevel{
 		super(resource);
 	}
 	
+	@NotNull(message = "Unit.symbol cannot be null")	
 	public String getSymbol() throws SBOLGraphException{
 		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.symbol);
 	}
@@ -46,7 +49,7 @@ public abstract class Unit extends ControlledTopLevel{
 		RDFUtil.setPropertyAsStrings(resource, MeasureDataModel.Unit.alternativeSymbol, alternativeSymbols);	
 	}
 	
-	
+	@NotNull(message = "Unit.label cannot be null")	
 	public String getLabel() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.label);
 	}
@@ -54,7 +57,7 @@ public abstract class Unit extends ControlledTopLevel{
 	public void setLabel(String label) throws SBOLGraphException{
 		RDFUtil.setProperty(resource, MeasureDataModel.Unit.label, label);
 		
-		if (!label.equals(getName())){
+		if (label!=null && !label.equals(getName())){
 			setName(label);
 		}
 	}
@@ -73,7 +76,7 @@ public abstract class Unit extends ControlledTopLevel{
 		super.setName(name);
 		try
 		{
-			if (!name.equals(getLabel()))
+			if (name!=null && !name.equals(getLabel()))
 			{
 				setLabel(name);
 			}
@@ -90,7 +93,7 @@ public abstract class Unit extends ControlledTopLevel{
 		super.setDescription(description);
 		try
 		{
-			if (!description.equals(getComment()))
+			if (description!=null && !description.equals(getComment()))
 			{
 				setComment(description);
 			}
@@ -108,7 +111,7 @@ public abstract class Unit extends ControlledTopLevel{
 	
 	public void setComment(String comment) throws SBOLGraphException {
 		RDFUtil.setProperty(resource, MeasureDataModel.Unit.comment, comment);
-		if (!comment.equals(getDescription()))
+		if (comment!=null && !comment.equals(getDescription()))
 		{
 			setDescription(comment);
 		}	

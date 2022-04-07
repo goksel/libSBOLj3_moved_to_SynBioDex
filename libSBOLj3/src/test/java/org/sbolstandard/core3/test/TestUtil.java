@@ -33,7 +33,7 @@ import static org.junit.Assert.*;
 public class TestUtil {
 
 	public static final String baseOutput="output";
-	public static void serialise(SBOLDocument doc, String directory, String file) throws FileNotFoundException, IOException
+	public static void serialise(SBOLDocument doc, String directory, String file) throws FileNotFoundException, IOException, SBOLGraphException
 	{
 		File outputDir=new File(baseOutput +  "/" + directory);
         if (!outputDir.exists())

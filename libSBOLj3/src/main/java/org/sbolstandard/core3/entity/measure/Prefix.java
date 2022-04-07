@@ -9,6 +9,8 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
+import jakarta.validation.constraints.NotNull;
+
 public abstract class Prefix extends Unit{
 	
 	//private float factor=Float.NaN;
@@ -26,7 +28,7 @@ public abstract class Prefix extends Unit{
 		IdentityValidator.getValidator().setPropertyAsOptionalFloat(this.resource, MeasureDataModel.Prefix.factor, factor);		
 	}
 	
-	public Optional<Float> getFactor() throws SBOLGraphException {
+	public Optional<@NotNull (message = "Prefix.factor cannot be null") Float> getFactor() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsOptionalFloat(this.resource, MeasureDataModel.Prefix.factor);
 	}
 

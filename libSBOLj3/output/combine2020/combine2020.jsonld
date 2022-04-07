@@ -24,19 +24,17 @@
     "description" : "RBS (Elowitz 1999)",
     "displayId" : "B0034",
     "hasNamespace" : "https://synbiohub.org/public/igem",
-    "hasSequence" : "https://synbiohub.org/public/igem/B0034_Sequence1",
-    "name" : "rbs",
+    "hasSequence" : "https://synbiohub.org/public/igem/B0034_Sequence",
+    "name" : "B0034",
     "role" : "SO:0000139",
     "type" : "SBO:0000251"
   }, {
-    "@id" : "https://synbiohub.org/public/igem/B0034_Sequence1",
+    "@id" : "https://synbiohub.org/public/igem/B0034_Sequence",
     "@type" : "sbol:Sequence",
-    "description" : "rbs sequence",
-    "displayId" : "B0034_Sequence1",
+    "displayId" : "B0034_Sequence",
     "elements" : "aaagaggagaaa",
     "encoding" : "EDAM:format_1207",
-    "hasNamespace" : "https://synbiohub.org/public/igem",
-    "name" : "Sequence1"
+    "hasNamespace" : "https://synbiohub.org/public/igem"
   }, {
     "@id" : "https://synbiohub.org/public/igem/E0040",
     "@type" : "sbol:Component",
@@ -73,7 +71,7 @@
     "hasNamespace" : "https://synbiohub.org/public/igem",
     "hasSequence" : "https://synbiohub.org/public/igem/i13504_Sequence1",
     "name" : "i13504",
-    "role" : "SBO:0000251",
+    "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504/SequenceFeature1",
@@ -144,7 +142,6 @@
     "displayId" : "Range1",
     "end" : "826",
     "hasSequence" : "https://synbiohub.org/public/igem/i13504_Sequence1",
-    "orientation" : "SO:0001030",
     "start" : "747"
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504_Sequence1",
@@ -164,7 +161,7 @@
     "hasNamespace" : "https://synbiohub.org/public/igem",
     "name" : "i13504 system",
     "role" : "SBO:0000289",
-    "type" : "SBO:0000241"
+    "type" : "SBO:0000251"
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504_system/ComponentReference1",
     "@type" : "sbol:ComponentReference",
@@ -312,6 +309,18 @@
       "@id" : "http://sbols.org/v3#hasNamespace",
       "@type" : "@id"
     },
+    "participant" : {
+      "@id" : "http://sbols.org/v3#participant",
+      "@type" : "@id"
+    },
+    "role" : {
+      "@id" : "http://sbols.org/v3#role",
+      "@type" : "@id"
+    },
+    "hasLocation" : {
+      "@id" : "http://sbols.org/v3#hasLocation",
+      "@type" : "@id"
+    },
     "encoding" : {
       "@id" : "http://sbols.org/v3#encoding",
       "@type" : "@id"
@@ -324,18 +333,6 @@
     },
     "name" : {
       "@id" : "http://sbols.org/v3#name"
-    },
-    "participant" : {
-      "@id" : "http://sbols.org/v3#participant",
-      "@type" : "@id"
-    },
-    "role" : {
-      "@id" : "http://sbols.org/v3#role",
-      "@type" : "@id"
-    },
-    "hasLocation" : {
-      "@id" : "http://sbols.org/v3#hasLocation",
-      "@type" : "@id"
     },
     "instanceOf" : {
       "@id" : "http://sbols.org/v3#instanceOf",

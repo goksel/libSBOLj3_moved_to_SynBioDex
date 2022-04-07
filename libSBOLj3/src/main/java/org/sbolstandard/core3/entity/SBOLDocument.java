@@ -516,6 +516,7 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<SIPrefix> getSIPrefixes() throws SBOLGraphException {
 		this.siPrefixes=addToList(model, this.siPrefixes, MeasureDataModel.SIPrefix.uri,SIPrefix.class);
 		return siPrefixes;
@@ -541,7 +542,7 @@ public class SBOLDocument {
 		}
 	}
 	
-	
+	@Valid
 	public List<BinaryPrefix> getBinaryPrefixes() throws SBOLGraphException {
 		this.binaryPrefixes=addToList(model, this.binaryPrefixes, MeasureDataModel.BinaryPrefix.uri,BinaryPrefix.class);
 		return binaryPrefixes;
@@ -596,6 +597,7 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<UnitMultiplication> getUnitMultiplications() throws SBOLGraphException {
 		this.unitMultiplications=addToList(model, this.unitMultiplications, MeasureDataModel.UnitMultiplication.uri,UnitMultiplication.class);
 		return unitMultiplications;
@@ -613,7 +615,6 @@ public class SBOLDocument {
 		return unit;
 	}
 	
-
 	public UnitDivision createUnitDivision(String displayId, String symbol, String name, URI numerator, URI denominator) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
@@ -625,6 +626,7 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<UnitDivision> getUnitDivisions() throws SBOLGraphException {
 		this.unitDivisions=addToList(model, this.unitDivisions, MeasureDataModel.UnitDivision.uri,UnitDivision.class);
 		return unitDivisions;
@@ -653,11 +655,11 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<UnitExponentiation> getUnitExponentiations() throws SBOLGraphException {
 		this.unitExponentiations=addToList(model, this.unitExponentiations, MeasureDataModel.UnitExponentiation.uri,UnitExponentiation.class);
 		return unitExponentiations;
 	}
-	
 	
 	public PrefixedUnit createPrexiedUnit(URI namespace, URI uri, String symbol, String name, URI unitURI, URI prefix) throws SBOLGraphException {
 
@@ -682,6 +684,7 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<PrefixedUnit> getPrefixedUnits() throws SBOLGraphException {
 		this.prefixedUnits=addToList(model, this.prefixedUnits, MeasureDataModel.PrefixedUnit.uri,PrefixedUnit.class);
 		return prefixedUnits;

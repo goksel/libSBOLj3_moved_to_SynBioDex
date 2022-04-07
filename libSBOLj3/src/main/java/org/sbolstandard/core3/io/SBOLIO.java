@@ -8,45 +8,78 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.core3.entity.SBOLDocument;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
+import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.SBOLValidator;
 
 public class SBOLIO{
 
-	public static String write(SBOLDocument doc, SBOLFormat format) throws IOException
+	public static String write(SBOLDocument doc, SBOLFormat format) throws IOException, SBOLGraphException
 	{
 		return write(doc, format.getFormat());
 	}
 	
-	public static String write(SBOLDocument doc, RDFFormat format) throws IOException
+	private static boolean isValid(SBOLDocument doc) throws SBOLGraphException
 	{
-		String output=RDFUtil.write(doc.getRDFModel(), format, getTopLevelResources(doc));				
+		boolean isValid=true;
+		if (Configuration.getConfiguration().validateBeforeSavingSBOLDocuments())
+		{
+			isValid=SBOLValidator.getValidator().isValid(doc);
+		}
+		return isValid;
+	}
+	
+	private static void assertValid(SBOLDocument doc) throws SBOLGraphException
+	{
+		if (Configuration.getConfiguration().validateAfterReadingSBOLDocuments())
+		{
+			SBOLValidator.getValidator().isValid(doc);
+		}
+	}
+	
+	public static String write(SBOLDocument doc, RDFFormat format) throws IOException, SBOLGraphException
+	{
+		String output=null;
+		if (isValid(doc))
+		{
+			output=RDFUtil.write(doc.getRDFModel(), format, getTopLevelResources(doc));				
+		}
 		return output;
 	}
 	
-	public static void write(SBOLDocument doc, File file, SBOLFormat format) throws FileNotFoundException, IOException
+	public static void write(SBOLDocument doc, File file, SBOLFormat format) throws FileNotFoundException, IOException, SBOLGraphException
 	{
 		write(doc, file, format.getFormat());			
 	}
 	
-	public static void write(SBOLDocument doc, File file, RDFFormat format) throws FileNotFoundException, IOException
+	public static void write(SBOLDocument doc, File file, RDFFormat format) throws FileNotFoundException, IOException, SBOLGraphException
 	{
-		RDFUtil.write(doc.getRDFModel(), file, format, getTopLevelResources(doc));				
+		if (isValid(doc))
+		{
+			RDFUtil.write(doc.getRDFModel(), file, format, getTopLevelResources(doc));	
+		}
 	}
 
 	
-	public static void write(SBOLDocument doc, OutputStream stream, SBOLFormat format) throws FileNotFoundException, IOException
+	public static void write(SBOLDocument doc, OutputStream stream, SBOLFormat format) throws FileNotFoundException, IOException, SBOLGraphException
 	{
 		write(doc, stream, format.getFormat());			
 	}
 	
-	public static void write(SBOLDocument doc, OutputStream stream, RDFFormat format) throws FileNotFoundException, IOException
+	public static void write(SBOLDocument doc, OutputStream stream, RDFFormat format) throws FileNotFoundException, IOException, SBOLGraphException
 	{
-		RDFUtil.write(doc.getRDFModel(), stream, format, getTopLevelResources(doc));				
+		if (isValid(doc))
+		{
+			RDFUtil.write(doc.getRDFModel(), stream, format, getTopLevelResources(doc));	
+		}
 	}
 
 	/*private static Resource[] getTopLevelResources()
@@ -99,41 +132,45 @@ public class SBOLIO{
 		return doc;
 	}*/
 	
-	public static SBOLDocument read(File file, SBOLFormat format) throws FileNotFoundException
+	public static SBOLDocument read(File file, SBOLFormat format) throws FileNotFoundException, SBOLGraphException
 	{
 		return read(file, format.getFormat());
 	}
 	
-	public static SBOLDocument read(File file, RDFFormat format) throws FileNotFoundException
+	public static SBOLDocument read(File file, RDFFormat format) throws FileNotFoundException, SBOLGraphException
 	{
 		Model model = RDFUtil.read(file,format) ;
 		SBOLDocument doc=new SBOLDocument(model);
+		assertValid(doc);
 		return doc;
 	}
-	public static SBOLDocument read(File file) throws FileNotFoundException
+	public static SBOLDocument read(File file) throws FileNotFoundException, SBOLGraphException
 	{
 		Model model = RDFUtil.read(file) ;
 		SBOLDocument doc=new SBOLDocument(model);
+		assertValid(doc);
 		return doc;
 	}
 	
-	public static SBOLDocument read(URI uri, SBOLFormat format) throws FileNotFoundException
+	public static SBOLDocument read(URI uri, SBOLFormat format) throws FileNotFoundException, SBOLGraphException
 	{
 		return read(uri, format.getFormat());
 	}
 	
 	
-	public static SBOLDocument read(URI uri, RDFFormat format) throws FileNotFoundException
+	public static SBOLDocument read(URI uri, RDFFormat format) throws FileNotFoundException, SBOLGraphException
 	{
 		Model model = RDFUtil.read(uri,format) ;
 		SBOLDocument doc=new SBOLDocument(model);
+		assertValid(doc);
 		return doc;
 	}
 	
-	public static SBOLDocument read(URI uri) throws FileNotFoundException
+	public static SBOLDocument read(URI uri) throws FileNotFoundException, SBOLGraphException
 	{
 		Model model = RDFUtil.read(uri) ;
 		SBOLDocument doc=new SBOLDocument(model);
+		assertValid(doc);
 		return doc;
 	}
 	
@@ -144,15 +181,16 @@ public class SBOLIO{
 		return doc;
 	}*/
 	
-	public static SBOLDocument read(String input, SBOLFormat format) throws FileNotFoundException
+	public static SBOLDocument read(String input, SBOLFormat format) throws FileNotFoundException, SBOLGraphException
 	{
 		return read(input, format.getFormat());
 	}
 	
-	public static SBOLDocument read(String input, RDFFormat format) throws FileNotFoundException
+	public static SBOLDocument read(String input, RDFFormat format) throws FileNotFoundException, SBOLGraphException
 	{
 		Model model = RDFUtil.read(input, format) ;
 		SBOLDocument doc=new SBOLDocument(model);
+		assertValid(doc);
 		return doc;
 	}
 	
@@ -163,18 +201,18 @@ public class SBOLIO{
 		return doc;
 	}*/
 	
-	public static SBOLDocument read(InputStream stream, SBOLFormat format) throws FileNotFoundException
+	public static SBOLDocument read(InputStream stream, SBOLFormat format) throws FileNotFoundException, SBOLGraphException
 	{
 		return read(stream, format.getFormat());
 	}
 	
-	public static SBOLDocument read(InputStream stream, RDFFormat format) throws FileNotFoundException
+	public static SBOLDocument read(InputStream stream, RDFFormat format) throws FileNotFoundException, SBOLGraphException
 	{
 		Model model = RDFUtil.read(stream, format) ;
 		SBOLDocument doc=new SBOLDocument(model);
+		assertValid(doc);
 		return doc;
 	}
-	
 	
 	/*private static Object createChildEntity(Object parent, String childEntityType, String uri) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException
 	{
@@ -209,9 +247,5 @@ public class SBOLIO{
 		return populateSBOLDocument(model);
 		
 	}*/
-	
-	
-	
-	
 
 }
