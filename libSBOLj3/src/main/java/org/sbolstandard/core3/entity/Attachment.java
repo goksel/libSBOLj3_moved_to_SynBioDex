@@ -8,6 +8,8 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.Message;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 import jakarta.validation.ConstraintViolation;
@@ -45,7 +47,7 @@ public class Attachment extends TopLevel{
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);
 	}
 
-	public void setSource(@NotNull (message="gmgm") URI source) {
+	public void setSource(@NotNull (message="test") URI source) throws SBOLGraphException {
 		//this.source = source;
 		/*try {
 	
@@ -66,6 +68,7 @@ public class Attachment extends TopLevel{
 		{
 			throw new Error(e);
 		}*/
+		PropertyValidator.getValidator().validate(this, "setSource", new Object[] {source}, URI.class);
 		RDFUtil.setProperty(resource, DataModel.Model.source, source);
 	}
 

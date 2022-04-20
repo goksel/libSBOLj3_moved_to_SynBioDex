@@ -7,8 +7,18 @@ public class Configuration {
 	private boolean enforceOneToOneRelationships=true;
 	private boolean validateBeforeSavingSBOLDocuments=true;
 	private boolean validateAfterReadingSBOLDocuments=true;
+	private boolean validateAfterSettingProperties=true;
 	
 	
+	
+	public boolean validateAfterSettingProperties() {
+		return validateAfterSettingProperties;
+	}
+
+	public void setValidateAfterSettingProperties(boolean validateAfterSettingProperties) {
+		this.validateAfterSettingProperties = validateAfterSettingProperties;
+	}
+
 	public boolean validateAfterReadingSBOLDocuments() {
 		return validateAfterReadingSBOLDocuments;
 	}

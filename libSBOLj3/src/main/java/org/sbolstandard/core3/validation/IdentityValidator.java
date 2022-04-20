@@ -65,11 +65,11 @@ public class IdentityValidator {
 	    	    fragments.add(String.format("Entity URI: %s",identifiedLeaf.getUri().toString()));
 	    	    fragments.add(String.format("Entity type: %s",identifiedLeaf.getClass()));    
 	    	}
-	    	if (violation.getRootBean()!=null && violation.getRootBean() instanceof Identified ){
+	    	/*if (violation.getRootBean()!=null && violation.getRootBean() instanceof Identified ){
 	    	    Identified identifiedRoot= (Identified) violation.getLeafBean();
 	    	    fragments.add(String.format("Parent entity URI: %s",identifiedRoot.getUri().toString()));
 	    	    fragments.add(String.format("Parent entity type: %s",identifiedRoot.getClass()));    
-	    	}
+	    	}*/
 	    	if (violation.getInvalidValue()!=null){
 	    		fragments.add("Value:" + violation.getInvalidValue().toString());
 	    	}
