@@ -1,6 +1,7 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.Optional;
 import java.util.OptionalInt;
 
 import org.apache.jena.rdf.model.Model;
@@ -8,6 +9,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Orientation;
 
@@ -72,12 +74,13 @@ public abstract class  Location extends Identified {
 	}
 	
 	@Valid
-	@NotNull(message = "Location.sequence cannot be null")
+	@NotNull(message = "{LOCATION_SEQUENCE_NOT_NULL}")
 	public URI getSequence() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Location.sequence);
 	}
 
-	public void setSequence(URI sequence) {
+	public void setSequence(@NotNull(message = "{LOCATION_SEQUENCE_NOT_NULL}") URI sequence) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setSequence", new Object[] {sequence}, URI.class);
 		RDFUtil.setProperty(this.resource, DataModel.Location.sequence, sequence);	
 	}
 	
@@ -156,7 +159,7 @@ public abstract class  Location extends Identified {
 		{
 			Cut location= new Cut(model, uri);
 			location.setSequence(sequence);
-			location.setAt(OptionalInt.of(at));
+			location.setAt(Optional.of(at));
 			return location;
 		}
 		
@@ -187,8 +190,8 @@ public abstract class  Location extends Identified {
 		{
 			Range location= new Range(model, uri);
 			location.setSequence(sequence);
-			location.setStart(OptionalInt.of(start));
-			location.setEnd(OptionalInt.of(end));
+			location.setStart(Optional.of(start));
+			location.setEnd(Optional.of(end));
 			return location;
 		}
 		

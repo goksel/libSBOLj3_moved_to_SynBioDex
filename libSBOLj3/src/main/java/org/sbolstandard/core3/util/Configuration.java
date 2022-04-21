@@ -5,18 +5,21 @@ public class Configuration {
 	private static Configuration configuration = null;
 	
 	private boolean enforceOneToOneRelationships=true;
-	private boolean validateBeforeSavingSBOLDocuments=true;
+	private PropertyValidationType validationActionTypeToSave=PropertyValidationType.ValidateAfterSettingProperties;
 	private boolean validateAfterReadingSBOLDocuments=true;
-	private boolean validateAfterSettingProperties=true;
 	
 	
 	
-	public boolean validateAfterSettingProperties() {
-		return validateAfterSettingProperties;
+	public PropertyValidationType getPropertyValidationType() {
+		return validationActionTypeToSave;
 	}
 
-	public void setValidateAfterSettingProperties(boolean validateAfterSettingProperties) {
-		this.validateAfterSettingProperties = validateAfterSettingProperties;
+	/***
+	 * Set this parameter to enforce validating SBOL graphs before writing to the disk.
+	 * @param validationActionTypeToSave
+	 */
+	public void setPropertyValidationType(PropertyValidationType validationActionTypeToSave) {
+		this.validationActionTypeToSave = validationActionTypeToSave;
 	}
 
 	public boolean validateAfterReadingSBOLDocuments() {
@@ -25,18 +28,6 @@ public class Configuration {
 
 	public void setValidateAfterReadingSBOLDocuments(boolean validateAfterReadingSBOLDocuments) {
 		this.validateAfterReadingSBOLDocuments = validateAfterReadingSBOLDocuments;
-	}
-
-	public boolean validateBeforeSavingSBOLDocuments() {
-		return this.validateBeforeSavingSBOLDocuments;
-	}
-	
-	/***
-	 * Set this parameter to enforce validating SBOL graphs before writing to the disk.
-	 * @param validateBeforeSavingSBODocuments
-	 */
-	public void setValidateBeforeSavingSBODocuments(boolean validateBeforeSavingSBOLDocuments) {
-		this.validateBeforeSavingSBOLDocuments = validateBeforeSavingSBOLDocuments;
 	}
 
 	public boolean enforceOneToOneRelationships() {
@@ -64,5 +55,11 @@ public class Configuration {
 			configuration=new Configuration();
 		}
 		return configuration;
+	}
+	
+	public enum PropertyValidationType{
+		ValidateBeforeSavingSBOLDocuments,
+		ValidateAfterSettingProperties,
+		NoValidation
 	}
 }

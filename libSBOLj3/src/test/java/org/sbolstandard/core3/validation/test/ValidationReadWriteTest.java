@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
-
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Component;
 import org.sbolstandard.core3.entity.ExternallyDefined;
@@ -23,6 +22,7 @@ import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.validation.SBOLValidator;
@@ -122,7 +122,7 @@ public class ValidationReadWriteTest extends TestCase {
         milliMolePerLiter.setNumerator(null);
         TestUtil.validateIdentified(milliMolePerLiter,doc,2,7);  
         
-        m3.setExponent(OptionalInt.empty());
+        m3.setExponent(Optional.empty());
         m3.setBase(null);
         TestUtil.validateIdentified(m3,doc,2,9);  
         
@@ -161,7 +161,7 @@ public class ValidationReadWriteTest extends TestCase {
 	    
        
 	    //Write the invalid SBOL document
-	    Configuration.getConfiguration().setValidateBeforeSavingSBODocuments(false);
+	    Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.NoValidation);
 	    exception=false;
 	    try
 	    {

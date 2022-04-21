@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.OptionalInt;
 
 import org.sbolstandard.core3.api.SBOLAPI;
@@ -22,7 +23,9 @@ import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.Orientation;
@@ -34,7 +37,7 @@ import junit.framework.TestCase;
 
 public class RangeTest extends TestCase {
 	
-	public void testRange() throws SBOLGraphException, IOException
+	public void testRange() throws SBOLGraphException, IOException, Exception
     {
 		URI base=URI.create("https://synbiohub.org/public/igem/");
 		SBOLDocument doc=new SBOLDocument(base);
@@ -61,27 +64,31 @@ public class RangeTest extends TestCase {
 		TestUtil.serialise(doc, "entity_additional/range", "range");
 	    System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
 	    TestUtil.assertReadWrite(doc); 
-	        
+	    
+		Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+	     
 	    TestUtil.validateIdentified(range,doc,0);
 	    
 	    //Range.start cannot be empty
-	    range.setStart(OptionalInt.empty());
-	    range.setEnd(OptionalInt.empty());
+	    TestUtil.validateProperty(range, "setStart", new Object[] {Optional.empty()}, Optional.class);        
+	    TestUtil.validateProperty(range, "setEnd", new Object[] {Optional.empty()}, Optional.class);        
+	    range.setStart(Optional.empty());
+	    range.setEnd(Optional.empty());
 	    TestUtil.validateIdentified(range,doc,2);
 	    
 	    //Range.start cannot be negative
-	    range.setStart(OptionalInt.of(-1));
-	    range.setEnd(OptionalInt.of(-1));
+	    range.setStart(Optional.of(-1));
+	    range.setEnd(Optional.of(-1));
 	    TestUtil.validateIdentified(range,doc,2);
 	    
 	    //Range.start cannot be negative
-	    range.setStart(OptionalInt.of(0));
-	    range.setEnd(OptionalInt.of(0));
+	    range.setStart(Optional.of(0));
+	    range.setEnd(Optional.of(0));
 		TestUtil.validateIdentified(range,doc,2);
 	    
 	   //Range.start cannot be negative
-	    range.setStart(OptionalInt.of(1));
-	    range.setEnd(OptionalInt.of(2));
+	    range.setStart(Optional.of(1));
+	    range.setEnd(Optional.of(2));
 	    TestUtil.validateIdentified(range,doc,0);
 	    
 

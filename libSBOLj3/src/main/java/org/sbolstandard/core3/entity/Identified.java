@@ -80,7 +80,7 @@ public abstract class Identified {
 		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.name);
 	}
 	
-	public void setName(String name) {
+	public void setName(String name) throws SBOLGraphException {
 		RDFUtil.setProperty(resource, DataModel.Identified.name, name);	
 		
 	}
@@ -89,7 +89,7 @@ public abstract class Identified {
 		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.description);
 	}
 	
-	public void setDescription(String description) {
+	public void setDescription(String description) throws SBOLGraphException {
 		RDFUtil.setProperty(resource, DataModel.Identified.description, description);
 	}
 	

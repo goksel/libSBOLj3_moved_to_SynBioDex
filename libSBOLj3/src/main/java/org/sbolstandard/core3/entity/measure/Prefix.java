@@ -7,6 +7,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 import jakarta.validation.constraints.NotNull;
@@ -23,12 +24,14 @@ public abstract class Prefix extends Unit{
 	{
 		super(resource);
 	}
-	
-	public void setFactor(Optional<Float> factor) {
-		IdentityValidator.getValidator().setPropertyAsOptionalFloat(this.resource, MeasureDataModel.Prefix.factor, factor);		
+	 
+	public void setFactor(@NotNull (message = "{PREFIX_FACTOR_NOT_NULL}") Optional<@NotNull (message = "{PREFIX_FACTOR_NOT_NULL}") Float> factor) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setFactor", new Object[] {factor}, Optional.class);
+		IdentityValidator.getValidator().setPropertyAsOptional(this.resource, MeasureDataModel.Prefix.factor, factor);		
 	}
 	
-	public Optional<@NotNull (message = "Prefix.factor cannot be null") Float> getFactor() throws SBOLGraphException {
+	@NotNull (message = "{PREFIX_FACTOR_NOT_NULL}") 
+	public Optional<@NotNull (message = "{PREFIX_FACTOR_NOT_NULL}") Float> getFactor() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsOptionalFloat(this.resource, MeasureDataModel.Prefix.factor);
 	}
 

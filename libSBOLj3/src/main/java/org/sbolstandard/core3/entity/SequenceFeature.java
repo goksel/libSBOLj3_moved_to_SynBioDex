@@ -16,6 +16,7 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public class SequenceFeature extends Feature{
@@ -39,7 +40,7 @@ public class SequenceFeature extends Feature{
 		}
 	}
 	
-	@NotNull(message = "SequenceFeature.locations cannot be empty")
+	@NotEmpty(message = "{SEQUENCEFEATURE_LOCATIONS_NOT_EMPTY}")
 	public List<Location> getLocations() throws SBOLGraphException {
 		List<Location> locations=new ArrayList<Location>();
 		addToList(locations,getCutLocations());

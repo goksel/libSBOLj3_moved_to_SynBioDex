@@ -13,7 +13,9 @@ import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.ModelLanguage;
 import org.sbolstandard.core3.vocabulary.Role;
@@ -22,7 +24,7 @@ import junit.framework.TestCase;
 
 public class AttachmentTest extends TestCase {
 	
-	public void testAttachment() throws SBOLGraphException, IOException
+	public void testAttachment() throws SBOLGraphException, IOException, Exception
     {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
@@ -43,17 +45,21 @@ public class AttachmentTest extends TestCase {
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
         
+        Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+     	
         URI temp=attachment.getSource();
         attachment.setSource(URI.create("https://sbolstandard.org/attachment1_source2"));
         TestUtil.validateIdentified(attachment,doc,0);
         attachment.setSource(temp);
         
         //Attachment.source: exactly one.
+        
+        TestUtil.validateProperty(attachment, "setSource", new Object[] {null}, URI.class);
         attachment.setSource(null);
         TestUtil.validateIdentified(attachment,doc,1);
         attachment.setSource(temp);
         
-        //Attachment.source: optional
+        //Attachment.format: optional
         temp=attachment.getFormat();
         attachment.setFormat(null);
         TestUtil.validateIdentified(attachment, doc,0);
@@ -73,6 +79,7 @@ public class AttachmentTest extends TestCase {
         
         //Attachment size can't be negative
         OptionalLong tempLong=attachment.getSize();
+        TestUtil.validateProperty(attachment, "setSize", new Object[] {OptionalLong.of(-1)}, OptionalLong.class);
         attachment.setSize(OptionalLong.of(-1));
         TestUtil.validateIdentified(attachment,doc,1);
         
@@ -89,9 +96,7 @@ public class AttachmentTest extends TestCase {
         TestUtil.validateIdentified(attachment,doc,0);
       
     }
-	
-	
-	
+
 	/*public  List<String> validateAttachment32(Attachment attachment)
 	{
 		Validator validator=null; 

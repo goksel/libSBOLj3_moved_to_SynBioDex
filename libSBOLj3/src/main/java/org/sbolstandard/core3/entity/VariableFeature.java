@@ -9,6 +9,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Orientation;
 import org.sbolstandard.core3.vocabulary.VariableFeatureCardinality;
@@ -34,7 +35,7 @@ public class VariableFeature extends Identified{
 		super(resource);
 	}
 	
-	@NotNull(message = "VariableFeature.cardinality cannot be null")
+	@NotNull(message = "{VARIABLEFEATURE_CARDINALITY_NOT_NULL}")
 	public VariableFeatureCardinality getCardinality() throws SBOLGraphException {
 		VariableFeatureCardinality cardinality=null;
 		URI value= IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableComponent.cardinality);	
@@ -45,7 +46,8 @@ public class VariableFeature extends Identified{
 		return cardinality;
 	}
 
-	public void setCardinality(VariableFeatureCardinality cardinality) {
+	public void setCardinality(@NotNull(message = "{VARIABLEFEATURE_CARDINALITY_NOT_NULL}") VariableFeatureCardinality cardinality) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setCardinality", new Object[] {cardinality}, VariableFeatureCardinality.class);
 		URI uri=null;
 		if (cardinality!=null)
 		{
@@ -54,12 +56,13 @@ public class VariableFeature extends Identified{
 		RDFUtil.setProperty(resource, DataModel.VariableComponent.cardinality, uri);
 	}
 	
-	@NotNull(message = "VariableFeature.feature cannot be null")
+	@NotNull(message = "{VARIABLEFEATURE_FEATURE_NOT_NULL}")
 	public URI getFeature() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableComponent.variable);	
 	}
 
-	public void setFeature(URI feature) {
+	public void setFeature(@NotNull(message = "{VARIABLEFEATURE_FEATURE_NOT_NULL}") URI feature) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setFeature", new Object[] {feature}, URI.class);
 		RDFUtil.setProperty(resource, DataModel.VariableComponent.variable, feature);
 	}
 	

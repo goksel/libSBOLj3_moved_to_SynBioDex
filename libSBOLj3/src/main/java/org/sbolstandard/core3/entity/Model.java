@@ -1,11 +1,13 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.List;
 
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 import jakarta.validation.constraints.NotNull;
@@ -25,30 +27,33 @@ public class Model extends TopLevel{
 		super(resource);
 	}
 	
-	@NotNull(message = "Model.source cannot be null")
+	@NotNull(message = "{MODEL_SOURCE_NOT_NULL}")
 	public URI getSource() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);	
 	}
 
-	public void setSource(URI source) {
+	public void setSource(@NotNull(message = "{MODEL_SOURCE_NOT_NULL}") URI source) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setSource", new Object[] {source}, URI.class);
 		RDFUtil.setProperty(resource, DataModel.Model.source, source);
 	}
 
-	@NotNull(message = "Model.framework cannot be null")
+	@NotNull(message = "{MODEL_FRAMEWORK_NOT_NULL}")
 	public URI getFramework() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.framework);	
 	}
 
-	public void setFramework(URI framework) {
+	public void setFramework(@NotNull(message = "{MODEL_FRAMEWORK_NOT_NULL}") URI framework) throws SBOLGraphException{
+		PropertyValidator.getValidator().validate(this, "setFramework", new Object[] {framework}, URI.class);
 		RDFUtil.setProperty(resource, DataModel.Model.framework, framework);
 	}
 
-	@NotNull(message = "Model.language cannot be null")
+	@NotNull(message = "{MODEL_LANGUAGE_NOT_NULL}")
 	public URI getLanguage() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.language);	
 	}
 
-	public void setLanguage(URI language) {
+	public void setLanguage(@NotNull(message = "{MODEL_LANGUAGE_NOT_NULL}") URI language) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setLanguage", new Object[] {language}, URI.class);
 		RDFUtil.setProperty(resource, DataModel.Model.language, language);
 	}
 

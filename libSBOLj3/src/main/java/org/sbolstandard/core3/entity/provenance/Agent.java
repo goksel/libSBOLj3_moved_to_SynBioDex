@@ -19,7 +19,6 @@ public class Agent extends ControlledTopLevel{
 		super(resource);
 	}
 	
-	
 	@Override
 	public URI getResourceType() {
 		return ProvenanceDataModel.Agent.uri;

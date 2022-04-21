@@ -10,9 +10,11 @@ import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.entity.Location.LocationFactory;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public class LocalSubComponent extends Feature{
@@ -30,12 +32,13 @@ public class LocalSubComponent extends Feature{
 	}
 
 	@Valid
-	@NotNull(message = "LocalSubComponent.type cannot be empty")
+	@NotEmpty(message = "{LOCALSUBCOMPONENT_TYPES_NOT_EMPTY}")
 	public List<URI> getTypes() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.type);
 	}
 	
-	public void setTypes(List<URI> types) {
+	public void setTypes(@NotEmpty(message = "{LOCALSUBCOMPONENT_TYPES_NOT_EMPTY}") List<URI> types) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setTypes", new Object[] {types}, List.class);
 		RDFUtil.setProperty(resource, DataModel.type, types);
 	}
 	

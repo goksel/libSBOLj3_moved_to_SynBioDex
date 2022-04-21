@@ -8,8 +8,10 @@ import org.sbolstandard.core3.entity.ControlledTopLevel;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public abstract class Unit extends ControlledTopLevel{
@@ -32,12 +34,13 @@ public abstract class Unit extends ControlledTopLevel{
 		super(resource);
 	}
 	
-	@NotNull(message = "Unit.symbol cannot be null")	
+	@NotEmpty(message = "{UNIT_SYMBOL_NOT_EMPTY}")	
 	public String getSymbol() throws SBOLGraphException{
 		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.symbol);
 	}
 	
-	public void setSymbol(String symbol) {
+	public void setSymbol(@NotEmpty(message = "{UNIT_SYMBOL_NOT_EMPTY}") String symbol) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setSymbol", new Object[] {symbol}, String.class);
 		RDFUtil.setProperty(resource, MeasureDataModel.Unit.symbol, symbol);	
 	}
 	
@@ -49,15 +52,16 @@ public abstract class Unit extends ControlledTopLevel{
 		RDFUtil.setPropertyAsStrings(resource, MeasureDataModel.Unit.alternativeSymbol, alternativeSymbols);	
 	}
 	
-	@NotNull(message = "Unit.label cannot be null")	
+	@NotEmpty(message = "{UNIT_LABEL_NOT_EMPTY}")	
 	public String getLabel() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.label);
 	}
 	
-	public void setLabel(String label) throws SBOLGraphException{
+	public void setLabel(@NotEmpty(message = "{UNIT_LABEL_NOT_EMPTY}") String label) throws SBOLGraphException{
+		PropertyValidator.getValidator().validate(this, "setLabel", new Object[] {label}, String.class);
 		RDFUtil.setProperty(resource, MeasureDataModel.Unit.label, label);
 		
-		if (label!=null && !label.equals(getName())){
+		if (label!=null && !label.isEmpty() && !label.equals(getName())){
 			setName(label);
 		}
 	}
@@ -71,36 +75,24 @@ public abstract class Unit extends ControlledTopLevel{
 	}
 	
 	@Override 
-	public void setName(String name)
+	public void setName(String name) throws SBOLGraphException
 	{
 		super.setName(name);
-		try
+		
+		if (name!=null && !name.equals(getLabel()))
 		{
-			if (name!=null && !name.equals(getLabel()))
-			{
-				setLabel(name);
-			}
-		}
-		catch (SBOLGraphException ex)
-		{
-			throw new Error(ex);
+			setLabel(name);
 		}
 	}
 	
 	@Override 
-	public void setDescription(String description)
+	public void setDescription(String description) throws SBOLGraphException
 	{
 		super.setDescription(description);
-		try
+		
+		if (description!=null && !description.equals(getComment()))
 		{
-			if (description!=null && !description.equals(getComment()))
-			{
-				setComment(description);
-			}
-		}
-		catch (SBOLGraphException ex)
-		{
-			throw new Error(ex);
+			setComment(description);
 		}
 	}
 	

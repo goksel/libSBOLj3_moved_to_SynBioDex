@@ -639,7 +639,7 @@ public class SBOLDocument {
 		unit.setSymbol(symbol);
 		unit.setLabel(name);
 		unit.setBase(baseUnit);
-		unit.setExponent(OptionalInt.of(exponent));
+		unit.setExponent(Optional.of(exponent));
 		addToInMemoryList(unit, unitExponentiations);
 		return unit;
 	}

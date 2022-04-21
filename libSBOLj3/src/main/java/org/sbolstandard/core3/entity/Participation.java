@@ -7,8 +7,10 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public class Participation extends Identified{
@@ -26,12 +28,13 @@ public class Participation extends Identified{
 		super(resource);
 	}
 	
-	@NotNull(message = "Participation.roles cannot be empty")
+	@NotEmpty(message = "{PARTICIPANT_ROLES_NOT_EMPTY}")
 	public List<URI> getRoles() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.role);
 	}
 	
-	public void setRoles(List<URI> roles) {
+	public void setRoles(@NotEmpty(message = "{PARTICIPANT_ROLES_NOT_EMPTY}") List<URI> roles) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setRoles", new Object[] {roles}, List.class);
 		RDFUtil.setProperty(resource, DataModel.role, roles);
 	}
 	

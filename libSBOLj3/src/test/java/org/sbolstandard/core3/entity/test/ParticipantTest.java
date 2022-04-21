@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Component;
@@ -15,7 +16,9 @@ import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.InteractionType;
 import org.sbolstandard.core3.vocabulary.Orientation;
@@ -26,7 +29,7 @@ import junit.framework.TestCase;
 
 public class ParticipantTest extends TestCase {
 	
-	public void testParticipation() throws SBOLGraphException, IOException
+	public void testParticipation() throws SBOLGraphException, IOException, Exception
     {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
@@ -52,7 +55,13 @@ public class ParticipantTest extends TestCase {
 	    System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
 	    TestUtil.assertReadWrite(doc); 
 	    
+		Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+	     
 	    TestUtil.validateIdentified(participation,doc,0);
+	    
+	    TestUtil.validateProperty(participation, "setRoles", new Object[] {null}, List.class);
+	    TestUtil.validateProperty(participation, "setRoles", new Object[] {new ArrayList<URI>()}, List.class);
+	    
 	    participation.setRoles(null);
 	    TestUtil.validateIdentified(participation,doc,1);
 		

@@ -5,6 +5,7 @@ import java.util.OptionalLong;
 import java.util.Set;
 
 import org.apache.jena.rdf.model.Resource;
+import org.hibernate.validator.internal.util.logging.Messages;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
@@ -37,7 +38,8 @@ public class Attachment extends TopLevel{
 		super(resource);
 	}
 	
-	@NotNull(message = "Attachment.source cannot be null")
+	//@NotNull(message = "Attachment.source cannot be null")
+	@NotNull(message = "{ATTACHMENT_SOURCE_NOT_NULL}")
 	public URI getSource() throws SBOLGraphException {
 		/*if (source==null)
 		{
@@ -47,7 +49,7 @@ public class Attachment extends TopLevel{
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);
 	}
 
-	public void setSource(@NotNull (message="test") URI source) throws SBOLGraphException {
+	public void setSource(@NotNull (message="{ATTACHMENT_SOURCE_NOT_NULL}") URI source) throws SBOLGraphException {
 		//this.source = source;
 		/*try {
 	
@@ -88,7 +90,7 @@ public class Attachment extends TopLevel{
 		RDFUtil.setProperty(resource, DataModel.Attachment.format, format);
 	}
 	
-	@PositiveOrZero(message="Attachment.size can have positive or zero values")
+	@PositiveOrZero(message="{ATTACHMENT_SIZE_POSITIVE_OR_ZERO}")
 	public OptionalLong getSize() throws SBOLGraphException{
 		/*if (size.isEmpty())
 		{
@@ -108,13 +110,14 @@ public class Attachment extends TopLevel{
 		return size;
 	}
 
-	public void setSize(OptionalLong sizeValue) {
+	public void setSize(@PositiveOrZero(message="{ATTACHMENT_SIZE_POSITIVE_OR_ZERO}") OptionalLong sizeValue) throws SBOLGraphException {
 		//this.size = sizeValue;
 		String stringValue=null;
 		if (sizeValue.isPresent())
 		{
 			stringValue= String.valueOf(sizeValue.getAsLong());
 		}
+		PropertyValidator.getValidator().validate(this, "setSize", new Object[] {sizeValue}, OptionalLong.class);
 		RDFUtil.setProperty(resource, DataModel.Attachment.size, stringValue);
 	}
 

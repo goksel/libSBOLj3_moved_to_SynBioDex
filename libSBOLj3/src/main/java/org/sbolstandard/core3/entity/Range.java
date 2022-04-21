@@ -1,6 +1,7 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.Optional;
 import java.util.OptionalInt;
 
 import org.apache.jena.rdf.model.Model;
@@ -8,6 +9,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 import jakarta.validation.constraints.NotNull;
@@ -34,24 +36,24 @@ public class Range extends Location {
 		super(displayId);
 	}*/
 	
-	@NotNull(message = "Range.start cannot be empty")
-	@Positive(message="Range.start must be bigger than zero")
-	public OptionalInt getStart() throws SBOLGraphException{
-		return IdentityValidator.getValidator().getPropertyAsOptionalInt(this.resource, DataModel.Range.start);
+	@NotNull(message = "{RANGE_START_NOT_NULL}")
+	public Optional<@NotNull(message = "{RANGE_START_NOT_NULL}") @Positive(message="{RANGE_START_POSITIVE_OR_ZERO}") Integer> getStart() throws SBOLGraphException{
+		return IdentityValidator.getValidator().getPropertyAsOptionalInteger(this.resource, DataModel.Range.start);
 	}
 	
-	public void setStart(OptionalInt start) {
-		IdentityValidator.getValidator().setPropertyAsOptionalInt(this.resource, DataModel.Range.start, start);
+	public void setStart(@NotNull(message = "{RANGE_START_NOT_NULL}") Optional<@NotNull(message = "{RANGE_START_NOT_NULL}") @Positive(message="{RANGE_START_POSITIVE_OR_ZERO}") Integer> start) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setStart", new Object[] {start}, Optional.class);
+		IdentityValidator.getValidator().setPropertyAsOptional(this.resource, DataModel.Range.start, start);
 	}
 	
-	@NotNull(message = "Range.end cannot be empty")
-	@Positive(message="Range.end must be bigger than zero")	
-	public OptionalInt getEnd() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsOptionalInt(this.resource, DataModel.Range.end);
+	@NotNull(message = "{RANGE_END_NOT_NULL}")
+	public Optional<@NotNull(message = "{RANGE_END_NOT_NULL}") @Positive(message="{RANGE_END_POSITIVE_OR_ZERO}")Integer> getEnd() throws SBOLGraphException {
+		return IdentityValidator.getValidator().getPropertyAsOptionalInteger(this.resource, DataModel.Range.end);
 	}
 	
-	public void setEnd(OptionalInt end) {
-		IdentityValidator.getValidator().setPropertyAsOptionalInt(this.resource, DataModel.Range.end, end);
+	public void setEnd(@NotNull(message = "{RANGE_END_NOT_NULL}") Optional< @NotNull(message = "{RANGE_END_NOT_NULL}") @Positive(message="{RANGE_START_POSITIVE_OR_ZERO}") Integer> end) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setEnd", new Object[] {end}, Optional.class);
+		IdentityValidator.getValidator().setPropertyAsOptional(this.resource, DataModel.Range.end, end);
 	}	
 	
 	public URI getResourceType()

@@ -3,6 +3,8 @@ package org.sbolstandard.core3.entity.test;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
+import java.util.OptionalLong;
+
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Collection;
 import org.sbolstandard.core3.entity.Component;
@@ -12,7 +14,9 @@ import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.Role;
@@ -21,7 +25,7 @@ import junit.framework.TestCase;
 
 public class ComponentReferenceTest extends TestCase {
 	
-	public void testComponentReference() throws SBOLGraphException, IOException
+	public void testComponentReference() throws SBOLGraphException, IOException, Exception
     {
 		URI base=URI.create("https://synbiohub.org/public/igem/");
 		SBOLDocument doc=new SBOLDocument(base);
@@ -38,15 +42,19 @@ public class ComponentReferenceTest extends TestCase {
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
         
+    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+        
 		TestUtil.validateIdentified(compRef,doc,0);
 		
 		//refersTo is required
+		TestUtil.validateProperty(compRef, "setRefersTo", new Object[] {null}, URI.class);
 		URI temp=compRef.getRefersTo();
 		compRef.setRefersTo(null);
 		TestUtil.validateIdentified(compRef,doc,1);
 		compRef.setRefersTo(temp);
 		
 		//inChildOf is required
+		TestUtil.validateProperty(compRef, "setInChildOf", new Object[] {null}, URI.class);
 		temp=compRef.getInChildOf();
 		compRef.setInChildOf(null);
 		TestUtil.validateIdentified(compRef,doc,1);

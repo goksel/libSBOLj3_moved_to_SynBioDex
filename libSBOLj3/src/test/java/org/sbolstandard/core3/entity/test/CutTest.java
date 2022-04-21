@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.OptionalInt;
 
 import org.sbolstandard.core3.api.SBOLAPI;
@@ -21,7 +22,9 @@ import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.RestrictionType;
@@ -32,7 +35,7 @@ import junit.framework.TestCase;
 
 public class CutTest extends TestCase {
 	
-	public void testConstraintReference() throws SBOLGraphException, IOException
+	public void testConstraintReference() throws SBOLGraphException, IOException, Exception
     {
 		URI base=URI.create("https://synbiohub.org/public/igem/");
 		SBOLDocument doc=new SBOLDocument(base);
@@ -52,20 +55,26 @@ public class CutTest extends TestCase {
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc); 
         
+    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+        
     	Cut cut=(Cut)feature.getLocations().get(0);
     	TestUtil.validateIdentified(cut,doc,0);
+    	
     	//Cut.at can't be null
-    	cut.setAt(OptionalInt.empty());
+    	TestUtil.validateProperty(cut, "setAt", new Object[] {Optional.empty()}, Optional.class);
+    	cut.setAt(Optional.empty());
     	TestUtil.validateIdentified(cut,doc,1);
     	
     	//Cut.at can't be negative
-    	cut.setAt(OptionalInt.of(-5));
+    	TestUtil.validateProperty(cut, "setAt", new Object[] {Optional.of(-5)}, Optional.class);
+    	cut.setAt(Optional.of(-5));
     	TestUtil.validateIdentified(cut,doc,1);
     	
-    	cut.setAt(OptionalInt.of(5));
+    	cut.setAt(Optional.of(5));
     	TestUtil.validateIdentified(cut,doc,0);
     	
     	//Location.sequence can't be null
+    	TestUtil.validateProperty(cut, "setSequence", new Object[] {null}, URI.class);
     	cut.setSequence(null);
     	TestUtil.validateIdentified(cut,doc,1);
 

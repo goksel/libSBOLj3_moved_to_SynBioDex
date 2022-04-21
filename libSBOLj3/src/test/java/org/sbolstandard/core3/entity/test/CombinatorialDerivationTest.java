@@ -20,7 +20,9 @@ import org.sbolstandard.core3.entity.VariableFeature;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.ModelLanguage;
@@ -31,7 +33,7 @@ import junit.framework.TestCase;
 
 public class CombinatorialDerivationTest extends TestCase {
 	
-	public void testCombinatorialDerivation() throws SBOLGraphException, IOException
+	public void testCombinatorialDerivation() throws SBOLGraphException, IOException, Exception
     {
 		URI base=URI.create("https://synbiohub.org/public/igem/");
 		SBOLDocument doc=new SBOLDocument(base);
@@ -45,8 +47,13 @@ public class CombinatorialDerivationTest extends TestCase {
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
         
+    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+        
         TestUtil.validateIdentified(cd, doc, 0);
+        
+        //template is required.
         URI tmpURI=cd.getTemplate();
+        TestUtil.validateProperty(cd, "setTemplate", new Object[] {null}, URI.class);
         cd.setTemplate(null);
         TestUtil.validateIdentified(cd, doc, 1);
         cd.setTemplate(tmpURI);
@@ -55,22 +62,14 @@ public class CombinatorialDerivationTest extends TestCase {
 		
         pTetR.createSubComponent(start.getUri());
         VariableFeature vf=cd.createVariableFeature(VariableFeatureCardinality.One,start.getUri());
+        
+        TestUtil.validateProperty(vf, "setCardinality", new Object[] {null}, VariableFeatureCardinality.class);
         vf.setCardinality(null);
         TestUtil.validateIdentified(vf, doc, 1);
+        
+        TestUtil.validateProperty(vf, "setFeature", new Object[] {null}, URI.class);
         vf.setFeature(null);
         TestUtil.validateIdentified(vf, doc, 2);
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-		
-
     }
 
 }

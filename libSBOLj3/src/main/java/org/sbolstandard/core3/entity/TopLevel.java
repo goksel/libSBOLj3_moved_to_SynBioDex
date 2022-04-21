@@ -8,6 +8,7 @@ import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 import jakarta.validation.Valid;
@@ -41,25 +42,31 @@ public abstract class TopLevel extends Identified {
 		RDFUtil.setProperty(resource, DataModel.TopLevel.attachment, attachments);
 	}
 	
-	@NotNull(message = "TopLevel.namespace cannot be null")
+	@NotNull(message = "{TOPLEVEL_NAMESPACE_NOT_NULL}")
 	public URI getNamespace() throws SBOLGraphException{
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.TopLevel.namespace);	
 	}
 
-	public void setNamespace(URI namespace) throws SBOLGraphException {
-		if (namespace==null)
+	public void setNamespace(@NotNull(message = "{TOPLEVEL_NAMESPACE_NOT_NULL}") URI namespace) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setNamespace", new Object[] {namespace}, URI.class);
+		/*if (namespace==null)
 		{
 			throw new SBOLGraphException("Namespace cannot be null. URI:" + this.resource.getURI());
-		}
-		String uriString=namespace.toString();
-		if (SBOLUtil.isURL(uriString))
-		{
-			if (uriString.endsWith("/") || uriString.endsWith("#"))
+		}*/
+		URI newURI=null;
+		if (namespace!=null){
+			String uriString= namespace.toString();
+			
+			if (SBOLUtil.isURL(uriString))
 			{
-				uriString=uriString.substring(0, uriString.length()-1);
+				if (uriString.endsWith("/") || uriString.endsWith("#"))
+				{
+					uriString=uriString.substring(0, uriString.length()-1);
+				}
 			}
+			newURI=URI.create(uriString);
 		}
-		RDFUtil.setProperty(resource, DataModel.TopLevel.namespace, URI.create(uriString));
+		RDFUtil.setProperty(resource, DataModel.TopLevel.namespace, newURI);
 	}
 	
 	

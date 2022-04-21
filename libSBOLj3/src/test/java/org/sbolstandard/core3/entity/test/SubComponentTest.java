@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.OptionalInt;
 
 import org.sbolstandard.core3.api.SBOLAPI;
@@ -22,7 +23,9 @@ import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.Orientation;
@@ -34,7 +37,7 @@ import junit.framework.TestCase;
 
 public class SubComponentTest extends TestCase {
 	
-	public void testRange() throws SBOLGraphException, IOException
+	public void testRange() throws SBOLGraphException, IOException, Exception
     {
 		URI base=URI.create("https://synbiohub.org/public/igem/");
 		SBOLDocument doc=new SBOLDocument(base);
@@ -63,13 +66,15 @@ public class SubComponentTest extends TestCase {
 		TestUtil.serialise(doc, "entity_additional/subcomponent", "subcomponent");
 	    System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
 	    TestUtil.assertReadWrite(doc); 
-	        
-	    TestUtil.validateIdentified(termSubComponent,doc,0);
-	    termSubComponent.setIsInstanceOf(null);	    
-	    range.setEnd(OptionalInt.empty());
-	    range2.setEnd(OptionalInt.empty());
-	    TestUtil.validateIdentified(termSubComponent,doc,3);
 	    
-
+		Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+	     
+	    TestUtil.validateIdentified(termSubComponent,doc,0);
+	    
+	    TestUtil.validateProperty(termSubComponent, "setIsInstanceOf", new Object[] {null}, URI.class);
+	    termSubComponent.setIsInstanceOf(null);	    
+	    range.setEnd(Optional.empty());
+	    range2.setEnd(Optional.empty());
+	    TestUtil.validateIdentified(termSubComponent,doc,3);
     }
 }

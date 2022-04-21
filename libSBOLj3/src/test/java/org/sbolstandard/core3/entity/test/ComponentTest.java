@@ -19,7 +19,9 @@ import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.ModelLanguage;
@@ -29,7 +31,7 @@ import junit.framework.TestCase;
 
 public class ComponentTest extends TestCase {
 	
-	public void testComponentReference() throws SBOLGraphException, IOException
+	public void testComponentReference() throws SBOLGraphException, IOException, Exception
     {
 		URI base=URI.create("https://synbiohub.org/public/igem/");
 		SBOLDocument doc=new SBOLDocument(base);
@@ -38,6 +40,8 @@ public class ComponentTest extends TestCase {
 	    TestUtil.serialise(doc, "entity_additional/component", "component");
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
+        
+    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
         
 		//Component.hasSequence can have zero values
 		TestUtil.validateIdentified(popsReceiver,doc,0);
@@ -52,6 +56,7 @@ public class ComponentTest extends TestCase {
 		pTetR.setSequences(tempList);
 		
 		//Component.type is required
+		TestUtil.validateProperty(pTetR, "setTypes", new Object[] {null}, List.class);
 		tempList=pTetR.getTypes();
 		pTetR.setTypes(null);
 		TestUtil.validateIdentified(pTetR,doc,1);
@@ -71,18 +76,9 @@ public class ComponentTest extends TestCase {
 	    TestUtil.validateDocument(doc,1);
 	    attachment.setSize(OptionalLong.of(100));
 	    
-	    //Namespace cannot be null
-	    boolean exception=false;
-	    try
-	    {
-	    	pTetR.setNamespace(null);
-	    }
-	    catch (SBOLGraphException e)
-	    {
-	    	exception=true;
-	    }
-	    assertTrue(exception);
-
+	    TestUtil.validateProperty(pTetR, "setNamespace", new Object[] {null}, URI.class);
+	    pTetR.setNamespace(null);
+	    TestUtil.validateIdentified(pTetR,doc,1);
     }
 
 }

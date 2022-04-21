@@ -31,7 +31,7 @@ public class IdentityValidator {
 	{	
 	}
 	
-	public static IdentityValidator getValidator()
+	public static IdentityValidator getValidator() throws SBOLGraphException
 	{
 		if (idendityValidator == null)
 		{
@@ -46,7 +46,7 @@ public class IdentityValidator {
 			}
 			catch (Exception exception)
 			{
-				throw new Error(new SBOLGraphException("Could not initialize the validator", exception));
+				throw new SBOLGraphException("Could not initialize the validator", exception);
 			}
 		}
 		return idendityValidator;
@@ -151,7 +151,7 @@ public class IdentityValidator {
 		
 	}
 	
-	public OptionalInt getPropertyAsOptionalInt(Resource resource, URI property) throws SBOLGraphException
+	/*public OptionalInt getPropertyAsOptionalInt(Resource resource, URI property) throws SBOLGraphException
 	{
 		OptionalInt result=OptionalInt.empty();
 		String value=IdentityValidator.getValidator().getPropertyAsString(resource, property);
@@ -159,19 +159,29 @@ public class IdentityValidator {
 			result=OptionalInt.of(Integer.valueOf(value));
 		}
 		return result;
+	}*/
+	
+	public Optional<Integer> getPropertyAsOptionalInteger(Resource resource, URI property) throws SBOLGraphException
+	{
+		Optional<Integer> result=Optional.empty();
+		String value=IdentityValidator.getValidator().getPropertyAsString(resource, property);
+		if (value!=null){
+			result=Optional.of(Integer.valueOf(value));
+		}
+		return result;
 	}
 	
 	
 	
-	public void setPropertyAsOptionalInt(Resource resource, URI property, OptionalInt value)
+	/*public void setPropertyAsOptionalInt(Resource resource, URI property, OptionalInt value)
 	{
 		String stringValue=null;
-		if (value.isPresent())
+		if (value!=null && value.isPresent())
 		{
 			stringValue= String.valueOf(value.getAsInt());
 		}
 		RDFUtil.setProperty(resource, property, stringValue);	
-	}
+	}*/
 	
 	public Optional<Float> getPropertyAsOptionalFloat(Resource resource, URI property) throws SBOLGraphException
 	{
@@ -190,16 +200,25 @@ public class IdentityValidator {
 		return result;
 	}
 	
-	public void setPropertyAsOptionalFloat(Resource resource, URI property, Optional<Float> value)
+	/*public void setPropertyAsOptionalFloat(Resource resource, URI property, Optional<Float> value)
 	{
 		String stringValue=null;
-		if (value.isPresent())
+		if (value!=null && value.isPresent())
+		{
+			stringValue= String.valueOf(value.get());
+		}
+		RDFUtil.setProperty(resource, property, stringValue);	
+	}*/
+		
+	public void setPropertyAsOptional(Resource resource, URI property, Optional<?> value)
+	{
+		String stringValue=null;
+		if (value!=null && value.isPresent())
 		{
 			stringValue= String.valueOf(value.get());
 		}
 		RDFUtil.setProperty(resource, property, stringValue);	
 	}
-		
 	
 	
 	/*public Optional<?> getPropertyAsOptional(Resource resource, URI property) throws SBOLGraphException

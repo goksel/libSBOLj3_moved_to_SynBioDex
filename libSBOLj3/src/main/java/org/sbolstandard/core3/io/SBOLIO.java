@@ -8,14 +8,13 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.SBOLValidator;
@@ -30,7 +29,7 @@ public class SBOLIO{
 	private static boolean isValid(SBOLDocument doc) throws SBOLGraphException
 	{
 		boolean isValid=true;
-		if (Configuration.getConfiguration().validateBeforeSavingSBOLDocuments())
+		if (Configuration.getConfiguration().getPropertyValidationType()==PropertyValidationType.ValidateBeforeSavingSBOLDocuments)
 		{
 			isValid=SBOLValidator.getValidator().isValid(doc);
 		}

@@ -3,6 +3,7 @@ package org.sbolstandard.core3.test;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.util.Collections;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.CharSet;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.core3.api.SBOLAPI;
@@ -18,8 +20,10 @@ import org.sbolstandard.core3.entity.measure.*;
 import org.sbolstandard.core3.entity.provenance.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.validation.SBOLComparator;
 import org.sbolstandard.core3.validation.SBOLValidator;
@@ -733,29 +737,70 @@ public class TestUtil {
         System.out.println("--------------------");
 	}
 	
-	public static void validateIdentified(Identified identified, SBOLDocument doc, int numberOfExpectedErrors)
+	public static void validateIdentified(Identified identified, SBOLDocument doc, int numberOfExpectedErrors) throws SBOLGraphException
 	{	 
 		validateIdentified(identified, numberOfExpectedErrors);
 		validateDocument(doc, numberOfExpectedErrors);
 	}
 	
-	public static void validateIdentified(Identified identified, SBOLDocument doc, int numberOfExpectedErrorsInIdentified, int numberOfExpectedErrorsInDocument)
+	public static void validateIdentified(Identified identified, SBOLDocument doc, int numberOfExpectedErrorsInIdentified, int numberOfExpectedErrorsInDocument) throws SBOLGraphException
 	{	 
 		validateIdentified(identified, numberOfExpectedErrorsInIdentified);
 		validateDocument(doc, numberOfExpectedErrorsInDocument);
 	}
 	
-	public static void validateIdentified(Identified identified,int numberOfExpectedErrors)
+	public static void validateIdentified(Identified identified,int numberOfExpectedErrors) throws SBOLGraphException
 	{	 
-		 List<String> messages=IdentityValidator.getValidator().validate(identified);
-		 printMessages(messages, "Identified");
-		 assertEquals(numberOfExpectedErrors, messages.size());
+		PropertyValidationType validationType=Configuration.getConfiguration().getPropertyValidationType();
+		Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+		List<String> messages=IdentityValidator.getValidator().validate(identified);
+		printMessages(messages, "Identified");
+		assertEquals(numberOfExpectedErrors, messages.size());
+	    Configuration.getConfiguration().setPropertyValidationType(validationType);    
 	}
 	
-	public static void validateDocument(SBOLDocument document ,int numberOfExpectedErrors)
+	public static void validateDocument(SBOLDocument document ,int numberOfExpectedErrors) throws SBOLGraphException
 	{	 
-		 List<String> messages=SBOLValidator.getValidator().validate(document);
-		 printMessages(messages, "Document");
-		 assertEquals(numberOfExpectedErrors, messages.size());
+		PropertyValidationType validationType=Configuration.getConfiguration().getPropertyValidationType();
+		Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+    
+		List<String> messages=SBOLValidator.getValidator().validate(document);
+		printMessages(messages, "Document");
+		assertEquals(numberOfExpectedErrors, messages.size());
+	    Configuration.getConfiguration().setPropertyValidationType(validationType);
+	        
+	}
+	
+	public static void validateProperty(Identified identified, String methodName, Object[] parameterValues, Class<?>... parameterTypes) throws SBOLGraphException, Exception
+	{
+		PropertyValidationType validationType=Configuration.getConfiguration().getPropertyValidationType();
+		boolean validEx=false;   
+		Method method;
+		try {
+	    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateAfterSettingProperties);
+			method = identified.getClass().getMethod(methodName, parameterTypes);
+			method.invoke(identified, parameterValues);
+		} 
+		catch (NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+			throw new Exception(e.getMessage(),e);
+		}
+		 catch (Exception ex)
+        {
+        	if (ex.getCause() instanceof SBOLGraphException)
+        	{
+        		validEx=true;
+        	}
+        	else
+        	{
+        		throw ex;
+        	}
+        }
+        finally 
+        {
+        	String message=String.format("Property validation fails. Entity: %s, property: %s, values:", identified.getUri(), methodName, StringUtils.join(parameterValues,","));
+        	assertTrue(message,validEx);
+        	Configuration.getConfiguration().setPropertyValidationType(validationType);
+        }
 	}
 }

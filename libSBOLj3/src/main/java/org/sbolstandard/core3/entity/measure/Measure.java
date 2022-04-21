@@ -11,6 +11,7 @@ import org.sbolstandard.core3.entity.ControlledIdentified;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
@@ -35,10 +36,12 @@ public class Measure extends ControlledIdentified{
 		super(resource);
 	}
 	
-	public void setValue(Optional<Float> value) {
+	//The first NotNull: value is not null, the second NotNull: Not empty.
+	public void setValue(@NotNull (message = "{MEASURE_VALUE_NOT_NULL}") Optional<@NotNull (message = "{MEASURE_VALUE_NOT_NULL}") Float> value) throws SBOLGraphException{
 		//String valueString=String.valueOf(value);
 		//RDFUtil.setProperty(resource, MeasureDataModel.Measure.value, valueString);	
-		IdentityValidator.getValidator().setPropertyAsOptionalFloat(this.resource, MeasureDataModel.Measure.value, value);
+		PropertyValidator.getValidator().validate(this, "setValue", new Object[] {value}, Optional.class);
+		IdentityValidator.getValidator().setPropertyAsOptional(this.resource, MeasureDataModel.Measure.value, value);
 	}
 	
 	/*public XSDFloat getFactor() throws SBOLGraphException {
@@ -78,7 +81,8 @@ public class Measure extends ControlledIdentified{
 	
 	//@Valid
 	//@NotNull(message = "Measure.value cannot be null")	
-	public Optional<@NotNull (message = "Measure.value cannot be null") Float> getValue() throws SBOLGraphException {
+	@NotNull (message = "{MEASURE_VALUE_NOT_NULL}")
+	public Optional<@NotNull (message = "{MEASURE_VALUE_NOT_NULL}") Float> getValue() throws SBOLGraphException {
 		Optional<Float> value= IdentityValidator.getValidator().getPropertyAsOptionalFloat(this.resource, MeasureDataModel.Measure.value);
 		return value;
 	}
@@ -95,12 +99,13 @@ public class Measure extends ControlledIdentified{
 		this.test=value;
 	}
 	*/
-	@NotNull(message = "Measure.unit cannot be null")	
+	@NotNull(message = "{MEASURE_UNIT_NOT_NULL}")	
 	public URI getUnit() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.Measure.unit);	
 	}
 
-	public void setUnit(URI unit) {
+	public void setUnit(@NotNull(message = "{MEASURE_UNIT_NOT_NULL}") URI unit) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setUnit", new Object[] {unit}, URI.class);
 		RDFUtil.setProperty(resource, MeasureDataModel.Measure.unit, unit);
 	}
 

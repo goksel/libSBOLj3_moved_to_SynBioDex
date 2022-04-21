@@ -8,6 +8,7 @@ import org.sbolstandard.core3.entity.ControlledIdentified;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
 import jakarta.validation.constraints.NotNull;
@@ -26,12 +27,13 @@ public class Usage extends ControlledIdentified{
 		super(resource);
 	}
 	
-	@NotNull(message = "Usage.entity cannot be null")
+	@NotNull(message = "{USAGE_ENTITY_NOT_NULL}")
 	public URI getEntity() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, ProvenanceDataModel.Usage.entity);
 	}
 	
-	public void setEntity(URI entity) {
+	public void setEntity(@NotNull(message = "{USAGE_ENTITY_NOT_NULL}") URI entity) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setEntity", new Object[] {entity}, URI.class);
 		RDFUtil.setProperty(resource, ProvenanceDataModel.Usage.entity, entity);
 	}
 	

@@ -20,7 +20,9 @@ import org.sbolstandard.core3.entity.provenance.Usage;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.validation.SBOLComparator;
 import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.ActivityType;
@@ -31,7 +33,7 @@ import junit.framework.TestCase;
 
 public class ActivityTest extends TestCase {
 	
-	public void test() throws SBOLGraphException, IOException
+	public void test() throws SBOLGraphException, IOException, Exception
     {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
@@ -91,13 +93,15 @@ public class ActivityTest extends TestCase {
         }
         SBOLComparator.assertEqual(doc, doc2);
         
+    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+        
+    	TestUtil.validateProperty(association, "setAgent", new Object[] {null}, URI.class); 
+        TestUtil.validateProperty(usage1, "setEntity", new Object[] {null}, URI.class); 
         TestUtil.validateDocument(doc, 0);
         association.setAgent(null);
         TestUtil.validateIdentified(association,doc, 1);
         usage1.setEntity(null);
         TestUtil.validateIdentified(usage1,doc, 1,2);
-        
-        
     }
 	
 	private void printActivity(SBOLDocument document, Activity activity) throws SBOLGraphException

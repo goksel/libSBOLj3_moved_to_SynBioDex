@@ -9,6 +9,7 @@ import org.sbolstandard.core3.entity.ControlledIdentified;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
 import jakarta.validation.constraints.NotNull;
@@ -44,12 +45,13 @@ public class Association extends ControlledIdentified{
 		RDFUtil.setProperty(resource, ProvenanceDataModel.Association.plan, plan);
 	}
 	
-	@NotNull(message = "Association.agent cannot be null")
+	@NotNull(message = "{ASSOCIATION_AGENT_NOT_NULL}")
 	public URI getAgent() throws SBOLGraphException{
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, ProvenanceDataModel.Association.agent);
 	}
 	
-	public void setAgent(URI agent) {
+	public void setAgent(@NotNull(message = "{ASSOCIATION_AGENT_NOT_NULL}") URI agent) throws SBOLGraphException{
+		PropertyValidator.getValidator().validate(this, "setAgent", new Object[] {agent}, URI.class);
 		RDFUtil.setProperty(resource, ProvenanceDataModel.Association.agent, agent);
 	}
 	

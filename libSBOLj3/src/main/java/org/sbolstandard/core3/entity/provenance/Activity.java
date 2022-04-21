@@ -57,8 +57,6 @@ public class Activity extends ControlledTopLevel{
 		}
 	}
 	
-	
-	
 	public XSDDateTime getEndedAtTime() throws SBOLGraphException {
 		XSDDateTime endedAtTime=null;
 		

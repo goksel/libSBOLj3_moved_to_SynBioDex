@@ -1,26 +1,16 @@
 package org.sbolstandard.core3.validation;
 
 import java.lang.reflect.Method;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
 import java.util.Set;
-
 import org.apache.commons.lang3.StringUtils;
-import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.Identified;
-import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.util.Configuration;
-import org.sbolstandard.core3.util.RDFUtil;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.vocabulary.DataModel;
-import org.sbolstandard.core3.vocabulary.MeasureDataModel;
-
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
-import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import jakarta.validation.executable.ExecutableValidator;
 
@@ -32,7 +22,7 @@ public class PropertyValidator {
 	{	
 	}
 	
-	public static PropertyValidator getValidator()
+	public static PropertyValidator getValidator() throws SBOLGraphException
 	{
 		if (propertyValidator == null)
 		{
@@ -46,7 +36,7 @@ public class PropertyValidator {
 			}
 			catch (Exception exception)
 			{
-				throw new Error(new SBOLGraphException("Could not initialize the property validator", exception));
+				throw new SBOLGraphException("Could not initialize the property validator", exception);
 			}
 		}
 		return propertyValidator;
@@ -54,7 +44,7 @@ public class PropertyValidator {
 
 	public void validate(Identified identified, String methodName, Object[] parameterValues, Class<?>... parameterTypes) throws SBOLGraphException
 	{
-		if (Configuration.getConfiguration().validateAfterSettingProperties())
+		if (Configuration.getConfiguration().getPropertyValidationType()==PropertyValidationType.ValidateAfterSettingProperties)
 		{
 			Method method;
 			try {
@@ -89,7 +79,7 @@ public class PropertyValidator {
 				}
 				
 				String errorMessage= StringUtils.join(messages, ",\r\n\t");
-				throw new Error (errorMessage);
+				throw new SBOLGraphException(errorMessage);
 			}
 		}
 	}

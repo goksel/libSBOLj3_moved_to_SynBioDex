@@ -14,7 +14,9 @@ import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.RestrictionType;
@@ -25,7 +27,7 @@ import junit.framework.TestCase;
 
 public class ConstraintTest extends TestCase {
 	
-	public void testConstraintReference() throws SBOLGraphException, IOException
+	public void testConstraintReference() throws SBOLGraphException, IOException, Exception
     {
 		URI base=URI.create("https://synbiohub.org/public/igem/");
 		SBOLDocument doc=new SBOLDocument(base);
@@ -48,11 +50,18 @@ public class ConstraintTest extends TestCase {
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
         
+    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+        
         TestUtil.validateIdentified(constraint,doc,0);
+        TestUtil.validateProperty(constraint, "setRestriction", new Object[] {null}, URI.class);
 		constraint.setRestriction(null);
 		TestUtil.validateIdentified(constraint,doc,1);
+		
+		TestUtil.validateProperty(constraint, "setObject", new Object[] {null}, URI.class);
 		constraint.setObject(null);
 		TestUtil.validateIdentified(constraint,doc,2);
+		
+		TestUtil.validateProperty(constraint, "setSubject", new Object[] {null}, URI.class);
 		constraint.setSubject(null);
 		TestUtil.validateIdentified(constraint,doc,3);
     }

@@ -10,6 +10,7 @@ import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.VariableFeatureCardinality;
@@ -32,13 +33,13 @@ public class CombinatorialDerivation extends TopLevel{
 		super(resource);
 	}
 	
-	
-	@NotNull(message = "CombinatorialDerivation.template cannot be null")
+	@NotNull(message = "{COMBINATORIALDERIVATION_TEMPLATE_NOT_NULL}")
 	public URI getTemplate() throws SBOLGraphException {
 		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.template);
 	}
 
-	public void setTemplate(URI template) {
+	public void setTemplate(@NotNull(message = "{COMBINATORIALDERIVATION_TEMPLATE_NOT_NULL}") URI template) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setTemplate", new Object[] {template}, URI.class);
 		RDFUtil.setProperty(resource, DataModel.CombinatorialDerivation.template, template);
 	}
 	
@@ -60,7 +61,6 @@ public class CombinatorialDerivation extends TopLevel{
 		VariableFeature variableComponent= new VariableFeature(this.resource.getModel(), uri);
 		variableComponent.setCardinality(cardinality);
 		variableComponent.setFeature(subComponent);
-		//this.variableFeatures=addToList(this.variableFeatures, variableComponent, DataModel.CombinatorialDerivation.variableFeature);
 		addToList(variableComponent, DataModel.CombinatorialDerivation.variableFeature);
 		return variableComponent;	
 	}

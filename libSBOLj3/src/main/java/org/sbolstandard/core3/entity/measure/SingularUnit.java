@@ -25,8 +25,8 @@ public class SingularUnit extends Unit{
 		super(resource);
 	}
 	
-	public void setFactor(Optional<Float>factor) {
-		IdentityValidator.getValidator().setPropertyAsOptionalFloat(this.resource, MeasureDataModel.SingularUnit.factor, factor);
+	public void setFactor(Optional<Float>factor) throws SBOLGraphException {
+		IdentityValidator.getValidator().setPropertyAsOptional(this.resource, MeasureDataModel.SingularUnit.factor, factor);
 	}
 	
 	public Optional<Float> getFactor() throws SBOLGraphException {

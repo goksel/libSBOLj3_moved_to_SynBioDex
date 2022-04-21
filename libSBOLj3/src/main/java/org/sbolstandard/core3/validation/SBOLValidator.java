@@ -38,7 +38,7 @@ public class SBOLValidator {
 	{	
 	}
 	
-	public static SBOLValidator getValidator()
+	public static SBOLValidator getValidator() throws SBOLGraphException
 	{
 		if (sbolValidator == null)
 		{
@@ -53,7 +53,7 @@ public class SBOLValidator {
 			}
 			catch (Exception exception)
 			{
-				throw new Error(new SBOLGraphException("Could not initialize the validator", exception));
+				throw new SBOLGraphException("Could not initialize the validator", exception);
 			}
 		}
 		return sbolValidator;
