@@ -395,6 +395,23 @@ public class SBOLAPI {
 	    	component.setSequences(Arrays.asList(seq.getUri())); 
 	 		return seq;
 	    }
+	    
+	    public static Sequence addSequence(SBOLDocument doc, Component component, Encoding encoding, String elements) throws SBOLGraphException
+	    {
+	    	String localName=createLocalName(DataModel.Sequence.uri, component.getSequences());
+	    	Sequence seq=createSequence(doc, URI.create(component.getUri().toString() + "_" + localName), localName, component.getName() + " sequence", elements, encoding);
+	    	List<URI> sequences=component.getSequences();
+	    	if (sequences==null)
+	    	{
+	    		component.setSequences(Arrays.asList(seq.getUri())); 
+	    	}
+	    	else
+	    	{
+	    		sequences.add(seq.getUri()); 
+	    		component.setSequences(sequences);
+	    	}
+	 		return seq;
+	    }
 	   
 	    
 	    public static Component createComponent(SBOLDocument doc, URI uri, URI type, String name, String description, URI role) throws SBOLGraphException

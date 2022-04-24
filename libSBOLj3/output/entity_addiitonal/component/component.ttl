@@ -1,0 +1,43 @@
+@base          <https://synbiohub.org/public/igem/> .
+@prefix :      <https://synbiohub.org/public/igem/> .
+@prefix CHEBI: <https://identifiers.org/CHEBI:> .
+@prefix EDAM:  <https://identifiers.org/edam:> .
+@prefix GO:    <https://identifiers.org/GO:> .
+@prefix SBO:   <https://identifiers.org/SBO:> .
+@prefix SO:    <https://identifiers.org/SO:> .
+@prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix sbol:  <http://sbols.org/v3#> .
+
+:BBa_F2620  a              sbol:Component ;
+        sbol:description   "PoPS Receiver" ;
+        sbol:displayId     "BBa_F2620" ;
+        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:name          "BBa_F2620" ;
+        sbol:role          SO:0000704 ;
+        sbol:type          SBO:0000251 .
+
+:BBa_R0040  a              sbol:Component ;
+        sbol:description   "TetR repressible promoter" ;
+        sbol:displayId     "BBa_R0040" ;
+        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasSequence   :BBa_R0040_Sequence1 ;
+        sbol:name          "pTetR" ;
+        sbol:role          SO:0000167 ;
+        sbol:type          SBO:0000251 .
+
+:BBa_R0040_Sequence2  a    sbol:Sequence ;
+        sbol:description   "pTetR sequence" ;
+        sbol:displayId     "BBa_R0040_Sequence2" ;
+        sbol:elements      "aaaa" ;
+        sbol:encoding      EDAM:format_1207 ;
+        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:name          "Sequence2" .
+
+:BBa_R0040_Sequence1  a    sbol:Sequence ;
+        sbol:description   "pTetR sequence" ;
+        sbol:displayId     "BBa_R0040_Sequence1" ;
+        sbol:elements      "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac" ;
+        sbol:encoding      EDAM:format_1207 ;
+        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:name          "Sequence1" .

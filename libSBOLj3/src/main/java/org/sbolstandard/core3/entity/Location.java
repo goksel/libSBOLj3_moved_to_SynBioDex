@@ -1,18 +1,25 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.Optional;
+import java.util.OptionalInt;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Orientation;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 public abstract class  Location extends Identified {
-	private Orientation orientation;
+	/*private Orientation orientation;
 	private int order=Integer.MIN_VALUE;
-	protected URI sequence;
+	protected URI sequence;*/
 
 	protected Location(Model model,URI uri) throws SBOLGraphException
 	{
@@ -29,53 +36,52 @@ public abstract class  Location extends Identified {
 		super(displayId);
 	}*/
 
-	public Orientation getOrientation() {
-		if (orientation==null)
-		{
-			URI value=RDFUtil.getPropertyAsURI(this.resource, DataModel.orientation);
-			if (value!=null)
-			{
-				orientation=Orientation.get(value); 
-			}
+	public Orientation getOrientation() throws SBOLGraphException{
+		Orientation orientation=null;
+		URI value=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.orientation);
+		if (value!=null){
+			orientation=Orientation.get(value); 
 		}
 		return orientation;
 	}
 	
 	public void setOrientation(Orientation orientation) {
-		this.orientation = orientation;
-		RDFUtil.setProperty(this.resource, DataModel.orientation, this.orientation.getUri());
+		URI orientationURI=null;
+		if (orientation!=null)
+		{
+			orientationURI=orientation.getUri();
+		}
+		RDFUtil.setProperty(this.resource, DataModel.orientation, orientationURI);
 	}
 	
 	
-	public int getOrder() {
-		if (order==Integer.MIN_VALUE)
-		{
-			String value=RDFUtil.getPropertyAsString(this.resource, DataModel.Location.order);
-			if (value!=null)
-			{
-				order=Integer.valueOf(value);
-			}
+	public OptionalInt getOrder() throws SBOLGraphException {
+		OptionalInt order=OptionalInt.empty();
+		String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Location.order);
+		if (value!=null){
+			order=OptionalInt.of(Integer.valueOf(value));
 		}
 		return order;
 	}
 	
-	public void setOrder(int order) {
-		this.order = order;
-		RDFUtil.setProperty(this.resource, DataModel.Location.order, String.valueOf(this.order));
+	public void setOrder(OptionalInt order) {
+		String stringValue=null;
+		if (order.isPresent())
+		{
+			stringValue= String.valueOf(order.getAsInt());
+		}
+		RDFUtil.setProperty(this.resource, DataModel.Location.order, stringValue);
 	}
 	
-	
-	public URI getSequence() {
-		if (sequence==null)
-		{
-			sequence=RDFUtil.getPropertyAsURI(this.resource, DataModel.Location.sequence);
-		}
-		return sequence;
+	@Valid
+	@NotNull(message = "{LOCATION_SEQUENCE_NOT_NULL}")
+	public URI getSequence() throws SBOLGraphException {
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Location.sequence);
 	}
 
-	public void setSequence(URI sequence) {
-		this.sequence = sequence;
-		RDFUtil.setProperty(this.resource, DataModel.Location.sequence, this.sequence);	
+	public void setSequence(@NotNull(message = "{LOCATION_SEQUENCE_NOT_NULL}") URI sequence) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setSequence", new Object[] {sequence}, URI.class);
+		RDFUtil.setProperty(this.resource, DataModel.Location.sequence, sequence);	
 	}
 	
 	public URI getResourceType()
@@ -91,9 +97,17 @@ public abstract class  Location extends Identified {
 			{
 				return new Cut(resource);
 			}
+			else if (RDFUtil.hasType(resource.getModel(), resource, DataModel.Range.uri))
+			{
+				return new Range(resource);
+			}
+			else if (RDFUtil.hasType(resource.getModel(), resource, DataModel.EntireSequenceLocation.uri))
+			{
+				return new EntireSequence(resource);
+			}
 			else
 			{
-				return null;
+				throw new SBOLGraphException ("Could not initialise the location entity. URI:" + resource.getURI());
 			}
 		}
 	}
@@ -145,7 +159,7 @@ public abstract class  Location extends Identified {
 		{
 			Cut location= new Cut(model, uri);
 			location.setSequence(sequence);
-			location.setAt(at);
+			location.setAt(Optional.of(at));
 			return location;
 		}
 		
@@ -176,8 +190,8 @@ public abstract class  Location extends Identified {
 		{
 			Range location= new Range(model, uri);
 			location.setSequence(sequence);
-			location.setStart(start);
-			location.setEnd(end);
+			location.setStart(Optional.of(start));
+			location.setEnd(Optional.of(end));
 			return location;
 		}
 		

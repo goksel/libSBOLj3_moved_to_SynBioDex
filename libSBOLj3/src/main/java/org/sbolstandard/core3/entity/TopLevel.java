@@ -1,23 +1,23 @@
 package org.sbolstandard.core3.entity;
 
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.List;
-
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
-import org.sbolstandard.core3.util.URINameSpace;
+import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 public abstract class TopLevel extends Identified {
 
-	private List<URI> attachments=null;
-	private URI namespace=null;
+	/*private List<URI> attachments=null;
+	private URI namespace=null;*/
 	
 	
 	protected TopLevel(Model model, URI uri) throws SBOLGraphException
@@ -35,37 +35,38 @@ public abstract class TopLevel extends Identified {
 	}
 	
 	public List<URI> getAttachments() {
-		if (attachments==null)
-		{
-			attachments=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.TopLevel.attachment);
-		}
-		return attachments;
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.TopLevel.attachment);
 	}
 	
 	public void setAttachments(List<URI> attachments) {
-		this.attachments = attachments;
 		RDFUtil.setProperty(resource, DataModel.TopLevel.attachment, attachments);
 	}
 	
-	public URI getNamespace() {
-		if (namespace==null)
-		{
-			namespace=RDFUtil.getPropertyAsURI(this.resource, DataModel.TopLevel.namespace);	
-		}
-		return namespace;
+	@NotNull(message = "{TOPLEVEL_NAMESPACE_NOT_NULL}")
+	public URI getNamespace() throws SBOLGraphException{
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.TopLevel.namespace);	
 	}
 
-	public void setNamespace(URI namespace) {
-		String uriString=namespace.toString();
-		if (SBOLUtil.isURL(uriString))
+	public void setNamespace(@NotNull(message = "{TOPLEVEL_NAMESPACE_NOT_NULL}") URI namespace) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setNamespace", new Object[] {namespace}, URI.class);
+		/*if (namespace==null)
 		{
-			if (uriString.endsWith("/") || uriString.endsWith("#"))
+			throw new SBOLGraphException("Namespace cannot be null. URI:" + this.resource.getURI());
+		}*/
+		URI newURI=null;
+		if (namespace!=null){
+			String uriString= namespace.toString();
+			
+			if (SBOLUtil.isURL(uriString))
 			{
-				uriString=uriString.substring(0, uriString.length()-1);
+				if (uriString.endsWith("/") || uriString.endsWith("#"))
+				{
+					uriString=uriString.substring(0, uriString.length()-1);
+				}
 			}
+			newURI=URI.create(uriString);
 		}
-		this.namespace = URI.create(uriString);
-		RDFUtil.setProperty(resource, DataModel.TopLevel.namespace, this.namespace);
+		RDFUtil.setProperty(resource, DataModel.TopLevel.namespace, newURI);
 	}
 	
 	

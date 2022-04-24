@@ -9,12 +9,19 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
+import org.sbolstandard.core3.vocabulary.VariableFeatureCardinality;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 public class CombinatorialDerivation extends TopLevel{
-	private URI template=null;
+	/*private URI template=null;
 	private URI strategy=null;
-	private List<VariableFeature> variableFeatures=new ArrayList<VariableFeature>();
+	private List<VariableFeature> variableFeatures=new ArrayList<VariableFeature>();*/
 	
 	protected  CombinatorialDerivation(Model model,URI uri) throws SBOLGraphException
 	{
@@ -26,58 +33,48 @@ public class CombinatorialDerivation extends TopLevel{
 		super(resource);
 	}
 	
+	@NotNull(message = "{COMBINATORIALDERIVATION_TEMPLATE_NOT_NULL}")
 	public URI getTemplate() throws SBOLGraphException {
-		if (template==null)
-		{
-			template=RDFUtil.getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.template);	
-		}
-		return template;
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.template);
 	}
 
-	public void setTemplate(URI template) {
-		this.template = template;
+	public void setTemplate(@NotNull(message = "{COMBINATORIALDERIVATION_TEMPLATE_NOT_NULL}") URI template) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setTemplate", new Object[] {template}, URI.class);
 		RDFUtil.setProperty(resource, DataModel.CombinatorialDerivation.template, template);
 	}
 	
-	public URI getStrategy() {
-		if (strategy==null)
-		{
-			strategy=RDFUtil.getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.strategy);	
-		}
-		return strategy;
+	public URI getStrategy() throws SBOLGraphException {
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.strategy);
 	}
 
 	public void setStrategy(URI strategy) {
-		this.strategy = strategy;
 		RDFUtil.setProperty(resource, DataModel.CombinatorialDerivation.strategy, strategy);
 	}
 
-
+	@Valid
 	public List<VariableFeature> getVariableFeatures() throws SBOLGraphException {
-		this.variableFeatures=addToList(this.variableFeatures, DataModel.CombinatorialDerivation.variableFeature, VariableFeature.class, DataModel.VariableComponent.uri);
-		return this.variableFeatures;
+		return addToList(DataModel.CombinatorialDerivation.variableFeature, VariableFeature.class, DataModel.VariableComponent.uri);
 	}
 	
-	public VariableFeature createVariableFeature(URI uri, URI cardinality, URI subComponent) throws SBOLGraphException
+	public VariableFeature createVariableFeature(URI uri, VariableFeatureCardinality cardinality, URI subComponent) throws SBOLGraphException
 	{
 		VariableFeature variableComponent= new VariableFeature(this.resource.getModel(), uri);
 		variableComponent.setCardinality(cardinality);
 		variableComponent.setFeature(subComponent);
-		this.variableFeatures=addToList (this.variableFeatures, variableComponent, DataModel.CombinatorialDerivation.variableFeature);
+		addToList(variableComponent, DataModel.CombinatorialDerivation.variableFeature);
 		return variableComponent;	
 	}
 	
-	private VariableFeature createVariableFeature(String displayId, URI cardinality, URI subComponent) throws SBOLGraphException
+	private VariableFeature createVariableFeature(String displayId, VariableFeatureCardinality cardinality, URI subComponent) throws SBOLGraphException
 	{
 		return createVariableFeature(SBOLAPI.append(this.getUri(), displayId), cardinality, subComponent);	
 	}
 	
-	public VariableFeature createVariableComponent(URI cardinality, URI subComponent) throws SBOLGraphException
+	public VariableFeature createVariableFeature(VariableFeatureCardinality cardinality, URI subComponent) throws SBOLGraphException
 	{
 		String displayId=SBOLAPI.createLocalName(DataModel.VariableComponent.uri, getVariableFeatures());	
 		return createVariableFeature(displayId, cardinality, subComponent);	
 	}
-	
 
 	@Override
 	public URI getResourceType() {

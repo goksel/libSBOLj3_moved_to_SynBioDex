@@ -9,9 +9,9 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class Interface extends Identified{
-	private List<URI> inputs=null;
+	/*private List<URI> inputs=null;
 	private List<URI> outputs=null;
-	private List<URI> nonDirectionals=null;
+	private List<URI> nonDirectionals=null;*/
 
 	protected  Interface(Model model,URI uri) throws SBOLGraphException
 	{
@@ -22,45 +22,29 @@ public class Interface extends Identified{
 	{
 		super(resource);
 	}
-	
 
 	public List<URI> getInputs() {
-		if (inputs==null)
-		{
-			inputs=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Interface.input);
-		}
-		return inputs;
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Interface.input);
 	}
 	
 	public void setInputs(List<URI> inputs) {
-		this.inputs = inputs;
 		RDFUtil.setProperty(resource, DataModel.Interface.input, inputs);
 	}
 	
 
 	public List<URI> getOutputs() {
-		if (outputs==null)
-		{
-			outputs=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Interface.output);
-		}
-		return outputs;
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Interface.output);
 	}
 	
 	public void setOutputs(List<URI> outputs) {
-		this.outputs = outputs;
 		RDFUtil.setProperty(resource, DataModel.Interface.output, outputs);
 	}
 	
 	public List<URI> getNonDirectionals() {
-		if (this.nonDirectionals==null)
-		{
-			nonDirectionals=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Interface.nondirectional);
-		}
-		return nonDirectionals;
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Interface.nondirectional);
 	}
 	
 	public void setNonDirectionals(List<URI> nonDirectionals) {
-		this.nonDirectionals = nonDirectionals;
 		RDFUtil.setProperty(resource, DataModel.Interface.nondirectional, nonDirectionals);
 	}
 	
@@ -68,5 +52,4 @@ public class Interface extends Identified{
 	public URI getResourceType() {
 		return DataModel.Interface.uri;
 	}
-
 }

@@ -17,11 +17,9 @@ public class ExperimentalData extends TopLevel{
 	{
 		super(resource);
 	}
-	
 
 	@Override
 	public URI getResourceType() {
 		return DataModel.ExperimentalData.uri;
-	}
-	
+	}	
 }

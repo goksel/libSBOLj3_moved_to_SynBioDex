@@ -20,10 +20,8 @@ public abstract class ControlledTopLevel extends TopLevel{
 		super(resource);
 	}
 	
-	
 	@Override
 	public URI getResourceType() {
 		return DataModel.TopLevel.uri;
 	}
-	
 }

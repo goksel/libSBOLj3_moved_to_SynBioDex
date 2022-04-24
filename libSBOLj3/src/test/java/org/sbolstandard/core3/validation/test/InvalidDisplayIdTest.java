@@ -12,6 +12,8 @@ import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
+import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.Role;
@@ -24,25 +26,22 @@ public class InvalidDisplayIdTest extends TestCase {
     {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
-        
        
-		
+        Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.NoValidation);
+        
         Component TetR_protein=SBOLAPI.createComponent(doc, "TetR_protein", ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
         TetR_protein.setDisplayId("1TetR");
         //Component LacI_protein=SBOLAPI.createComponent(doc, "LacI_protein", ComponentType.Protein.getUrl(), "LacI", "LacI protein", Role.TF);
         TetR_protein.setNamespace(URI.create("https://sbolstandard.org/examples/"));
-		
         
         Component rbs=doc.createComponent(URI.create("https://sbolstandard.org/examples"),URI.create("https://sbolstandard.org/examples/rbs"), Arrays.asList(ComponentType.DNA.getUrl())); 
 		rbs.setName("B0034");
 		rbs.setDisplayId("B0034 rbs");
 		rbs.setDescription("RBS (Elowitz 1999)");
 		rbs.setRoles(Arrays.asList(Role.RBS));
-		
-        TestUtil.serialise(doc, "invalid/displayid", "displayid");
+		TestUtil.serialise(doc, "invalid/displayid", "displayid");
       
-        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
-       
+        System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));  
     }
 }
 

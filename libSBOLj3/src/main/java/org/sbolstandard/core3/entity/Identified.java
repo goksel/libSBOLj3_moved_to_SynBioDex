@@ -4,6 +4,8 @@ import java.lang.reflect.Constructor;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.rdf.model.Model;
@@ -12,34 +14,40 @@ import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
+import org.hibernate.validator.constraints.ParameterScriptAssert;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.measure.Measure;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.util.URINameSpace;
+import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 
 public abstract class Identified {
 	protected Resource resource=null;
 	
-	private String displayId;
+	/*private String displayId;
 	private String name;
 	private String description;
 	private List<URI> wasDerivedFrom;
 	private List<URI> wasGeneratedBy;
 	private List<Measure> measures;
 	//private List<Metadata> metadataList;
-	private URI uri;
+	private URI uri;*/
 	
 	protected Identified()
 	{}
 	
 	protected Identified(Model model, URI uri) throws SBOLGraphException
 	{
-		this.uri=uri;
-		this.resource=RDFUtil.createResource(model, this.uri,this.getResourceType());
+		//this.uri=uri;
+		this.resource=RDFUtil.createResource(model, uri,this.getResourceType());
 		inferDisplayId(uri);
 	}
 	
@@ -52,9 +60,9 @@ public abstract class Identified {
 	
 	protected Identified(Resource resource) throws SBOLGraphException
 	{
-		this.uri=URI.create(resource.getURI());
+		//this.uri=URI.create(resource.getURI());
 		this.resource=resource;
-		inferDisplayId(this.uri);
+		inferDisplayId(URI.create(resource.getURI()));
 	}
 	
 	/*public Identified (String displayId)
@@ -63,88 +71,61 @@ public abstract class Identified {
 		this.resource=ResourceFactory.createResource();	
 	}*/
 	
-	public String getDisplayId() {
-		if (displayId==null)
-		{
-			displayId=RDFUtil.getPropertyAsString(this.resource, DataModel.Identified.displayId);
-		}
-		return displayId;
+	@Pattern(regexp = "^[a-zA-Z_]+[a-zA-Z0-9_]*$", message = "{IDENTIFIED_DISPLAYID}")
+	public String getDisplayId() throws SBOLGraphException{
+		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.displayId);
 	}
 	
-	public void setDisplayId(String displayId) {
-		this.displayId = displayId;
+	public void setDisplayId(@Pattern(regexp = "^[a-zA-Z_]+[a-zA-Z0-9_]*$", message = "{IDENTIFIED_DISPLAYID}") String displayId) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setDisplayId", new Object[] {displayId}, String.class);
 		RDFUtil.setProperty(resource, DataModel.Identified.displayId, displayId);		
 	}
 	
-	public String getName() {
-		if (name==null)
-		{
-			name=RDFUtil.getPropertyAsString(this.resource, DataModel.Identified.name);
-		}
-		return name;
+	public String getName() throws SBOLGraphException {
+		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.name);
 	}
-	public void setName(String name) {
-		if (name!=null){
-			this.name = name;
-			RDFUtil.setProperty(resource, DataModel.Identified.name, name);	
-		}
-	}
-	public String getDescription() {
-		if (description==null)
-		{
-			description=RDFUtil.getPropertyAsString(this.resource, DataModel.Identified.description);
-		}
-		return description;
-	}
-	public void setDescription(String description) {
-		if (description!=null)
-		{
-			this.description = description;
-			RDFUtil.setProperty(resource, DataModel.Identified.description, description);
-		}
+	
+	public void setName(String name) throws SBOLGraphException {
+		RDFUtil.setProperty(resource, DataModel.Identified.name, name);	
 		
 	}
 	
-	public List<URI> getWasDerivedFrom() {
-		if (wasDerivedFrom==null)
-		{
-			wasDerivedFrom=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Identified.wasDerivedFrom);
-		}
-		return wasDerivedFrom;
+	public String getDescription() throws SBOLGraphException {
+		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.description);
 	}
 	
-	public void setWasDerivedFrom(List<URI> wasDerivedFrom) {
-		this.wasDerivedFrom = wasDerivedFrom;
-		RDFUtil.setProperty(resource, DataModel.Identified.wasDerivedFrom, this.wasDerivedFrom);
+	public void setDescription(String description) throws SBOLGraphException {
+		RDFUtil.setProperty(resource, DataModel.Identified.description, description);
+	}
+	
+	
+	public List<URI> getWasDerivedFrom() {
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Identified.wasDerivedFrom);
+	}
+	
+	public void setWasDerivedFrom(@Valid List<URI> wasDerivedFrom) {
+		RDFUtil.setProperty(resource, DataModel.Identified.wasDerivedFrom, wasDerivedFrom);
 	}
 	
 	public List<URI> getWasGeneratedBy() {
-		if (wasGeneratedBy==null)
-		{
-			wasGeneratedBy=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Identified.wasGeneratedBy);
-		}
-		return wasGeneratedBy;
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Identified.wasGeneratedBy);
 	}
 	
 	public void setWasGeneratedBy(List<URI> wasGeneratedBy) {
-		this.wasGeneratedBy = wasGeneratedBy;
-		RDFUtil.setProperty(resource, DataModel.Identified.wasGeneratedBy, this.wasGeneratedBy);
-
+		RDFUtil.setProperty(resource, DataModel.Identified.wasGeneratedBy, wasGeneratedBy);
 	}
 	
+	@Valid
 	public List<Measure> getMeasures()throws SBOLGraphException  {
-		this.measures=addToList(this.measures, DataModel.Identified.measure, Measure.class, MeasureDataModel.Measure.uri);
-		return measures;
+		return addToList(DataModel.Identified.measure, Measure.class, MeasureDataModel.Measure.uri);
 	}
 	
-	
-
 	public Measure createMeasure(URI uri, float value, URI unit) throws SBOLGraphException
 	{
 		Measure measure = new Measure(this.resource.getModel(), uri) {};
-		measure.setValue(value);
+		measure.setValue(Optional.of(value));
 		measure.setUnit(unit);		
-		this.measures=addToList(this.measures, measure, DataModel.Identified.measure);
+		addToList(measure, DataModel.Identified.measure);
 		return measure;	
 	}
 	
@@ -176,7 +157,7 @@ public abstract class Identified {
 	}
 	
 	public URI getUri() {
-		return uri;
+		return URI.create(this.resource.getURI());
 	}
 	
 	abstract public URI getResourceType();
@@ -207,7 +188,22 @@ public abstract class Identified {
 	 * @return
 	 * @throws SBOLGraphException
 	 */
-	protected <T extends Identified>  List<T> addToList(List<T> items, URI property, Class<T> identifiedClass) throws SBOLGraphException
+	protected <T extends Identified>  List<T> addToList(URI property, Class<T> identifiedClass) throws SBOLGraphException
+	{
+		List<T> items=null;
+	
+		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property);
+		if (resources!=null && resources.size()>0){
+			items=new ArrayList<T>();
+			for (Resource res:resources){
+				Identified identified=createIdentified(res, identifiedClass);
+				items.add((T)identified);
+			}
+		}
+		return items;
+	}
+	
+	/*protected <T extends Identified>  List<T> addToList(List<T> items, URI property, Class<T> identifiedClass) throws SBOLGraphException
 	{
 		if (items==null)
 		{
@@ -224,7 +220,7 @@ public abstract class Identified {
 			
 		}
 		return items;
-	}
+	}*/
 	
 	protected <T extends Identified>  T contsructIdentified(URI property, Class<T> identifiedClass) throws SBOLGraphException
 	{
@@ -253,7 +249,13 @@ public abstract class Identified {
 	 * @param property
 	 * @return
 	 */
-	protected <T extends Identified> List<T> addToList(List<T> items, Identified identified, URI property)
+	protected <T extends Identified> void addToList(Identified identified, URI property)
+	{
+		RDFUtil.addProperty(this.resource,property, identified.getUri());
+	}
+	
+	
+	/*protected <T extends Identified> List<T> addToList(List<T> items, Identified identified, URI property)
 	{
 		RDFUtil.addProperty(this.resource,property, identified.getUri());
 		
@@ -263,10 +265,11 @@ public abstract class Identified {
 		}
 		items.add((T)identified);
 		return items;
-	}
+	}*/
 	
 	
-	protected <T extends Identified> List<T> addToList(List<T> items, URI property, Class<T> identifiedClass, URI identifiedResourceType) throws SBOLGraphException
+	
+	/*protected <T extends Identified> List<T> addToList(List<T> items, URI property, Class<T> identifiedClass, URI identifiedResourceType) throws SBOLGraphException
 	{
 		if (items==null)
 		{
@@ -281,6 +284,21 @@ public abstract class Identified {
 				}
 			}
 			
+		}
+		return items;
+	}*/
+	
+	protected <T extends Identified> List<T> addToList(URI property, Class<T> identifiedClass, URI identifiedResourceType) throws SBOLGraphException
+	{
+		List<T> items=null;
+		
+		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property, identifiedResourceType);
+		if (resources!=null && resources.size()>0){
+			items=new ArrayList<T>();
+			for (Resource res:resources){
+				Identified identified=createIdentified(res, identifiedClass);
+				items.add((T)identified);
+			}
 		}
 		return items;
 	}
@@ -372,7 +390,7 @@ public abstract class Identified {
 	}
 	
 	private void inferDisplayId(URI uri) throws SBOLGraphException {
-		displayId = getDisplayId();
+		String displayId = getDisplayId();
 		if (StringUtils.isEmpty(displayId)) {
 			String result = null;
 			String uriString = uri.toString();

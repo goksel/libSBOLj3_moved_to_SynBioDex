@@ -27,11 +27,11 @@
     "hasNamespace" : "https://sbolstandard.org/examples"
   } ],
   "@context" : {
-    "hashAlgorithm" : {
-      "@id" : "http://sbols.org/v3#hashAlgorithm"
-    },
     "hash" : {
       "@id" : "http://sbols.org/v3#hash"
+    },
+    "hashAlgorithm" : {
+      "@id" : "http://sbols.org/v3#hashAlgorithm"
     },
     "size" : {
       "@id" : "http://sbols.org/v3#size"

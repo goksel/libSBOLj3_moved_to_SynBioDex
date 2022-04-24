@@ -7,13 +7,16 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.ControlledIdentified;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
+import jakarta.validation.constraints.NotNull;
+
 public class Usage extends ControlledIdentified{
-	private URI entity=null;
-	private List<URI> roles=null;
+	/*private URI entity=null;
+	private List<URI> roles=null;*/
 		
-	
 	protected  Usage(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
@@ -24,32 +27,23 @@ public class Usage extends ControlledIdentified{
 		super(resource);
 	}
 	
-	public URI getEntity() {
-		if (entity==null)
-		{
-			entity=RDFUtil.getPropertyAsURI(this.resource, ProvenanceDataModel.Usage.entity);
-		}
-		return entity;
+	@NotNull(message = "{USAGE_ENTITY_NOT_NULL}")
+	public URI getEntity() throws SBOLGraphException {
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, ProvenanceDataModel.Usage.entity);
 	}
 	
-	public void setEntity(URI entity) {
-		this.entity = entity;
+	public void setEntity(@NotNull(message = "{USAGE_ENTITY_NOT_NULL}") URI entity) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setEntity", new Object[] {entity}, URI.class);
 		RDFUtil.setProperty(resource, ProvenanceDataModel.Usage.entity, entity);
 	}
 	
 	public List<URI> getRoles() {
-		if (roles==null)
-		{
-			roles=RDFUtil.getPropertiesAsURIs(this.resource, ProvenanceDataModel.Usage.role);
-		}
-		return roles;
+		return RDFUtil.getPropertiesAsURIs(this.resource, ProvenanceDataModel.Usage.role);
 	}
 	
 	public void setRoles(List<URI> roles) {
-		this.roles = roles;
 		RDFUtil.setProperty(resource, ProvenanceDataModel.Usage.role, roles);
 	}
-	
 	
 	@Override
 	public URI getResourceType() {

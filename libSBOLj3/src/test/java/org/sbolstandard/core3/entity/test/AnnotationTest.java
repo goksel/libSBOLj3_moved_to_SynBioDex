@@ -125,7 +125,7 @@ public class AnnotationTest extends TestCase {
 		 }
 	}
 
-	 private void printMetadata(Metadata metadata, int count)
+	 private void printMetadata(Metadata metadata, int count) throws SBOLGraphException
 	 {
 		 String space=String.format("%"+count+"s", "") ;
 		 System.out.println(space + "uri:" + metadata.getUri());

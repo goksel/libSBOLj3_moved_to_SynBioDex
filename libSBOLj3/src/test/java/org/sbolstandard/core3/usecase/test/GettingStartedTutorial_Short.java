@@ -129,8 +129,8 @@ public class GettingStartedTutorial_Short {
 		 System.out.println(output);   
 	     TestUtil.serialise(doc, "combine2020", "combine2020");   
 	     System.out.println("--------------------------");
-	     SBOLDocument doc2=SBOLIO.read(new File("input/gfp.nt"),SBOLFormat.NTRIPLES);
-	     //SBOLDocument doc2=SBOLIO.read(new File("output/combine2020/combine2020.nt"),"N-TRIPLES");
+	     //SBOLDocument doc2=SBOLIO.read(new File("input/gfp.nt"),SBOLFormat.NTRIPLES);
+	     SBOLDocument doc2=SBOLIO.read(new File("output/combine2020/combine2020.nt"),SBOLFormat.NTRIPLES);
 	     //SBOLDocument doc2=SBOLIO.read(new File("output/combine2020/combine2020.rdf"),"RDF/XML-ABBREV");
 	     
 	     

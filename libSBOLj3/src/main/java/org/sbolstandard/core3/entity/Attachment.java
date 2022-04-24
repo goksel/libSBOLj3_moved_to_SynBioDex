@@ -1,18 +1,31 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.OptionalLong;
+import java.util.Set;
 
 import org.apache.jena.rdf.model.Resource;
+import org.hibernate.validator.internal.util.logging.Messages;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.Message;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.ValidatorFactory;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.executable.ExecutableValidator;
+
 public class Attachment extends TopLevel{
-	private URI source=null;
+	/*private URI source=null;
 	private URI format=null;
-	private long size=Long.MIN_VALUE;
+	private OptionalLong size=OptionalLong.empty();
 	private String hash;
-	private String hashAlgorithm;
+	private String hashAlgorithm;*/
 	
 
 	protected  Attachment(org.apache.jena.rdf.model.Model model,URI uri) throws SBOLGraphException
@@ -25,75 +38,115 @@ public class Attachment extends TopLevel{
 		super(resource);
 	}
 	
+	//@NotNull(message = "Attachment.source cannot be null")
+	@NotNull(message = "{ATTACHMENT_SOURCE_NOT_NULL}")
 	public URI getSource() throws SBOLGraphException {
-		if (source==null)
+		/*if (source==null)
 		{
-			source=RDFUtil.getPropertyAsURI(this.resource, DataModel.Model.source);	
+			source=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);	
 		}
-		return source;
+		return source;*/
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);
 	}
 
-	public void setSource(URI source) {
-		this.source = source;
+	public void setSource(@NotNull (message="{ATTACHMENT_SOURCE_NOT_NULL}") URI source) throws SBOLGraphException {
+		//this.source = source;
+		/*try {
+	
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		ExecutableValidator executableValidator = factory.getValidator().forExecutables();
+		Object[] parameterValues = { source };
+		Set<ConstraintViolation<Identified>> violations = executableValidator.validateParameters(
+				  this,
+				  Attachment.class.getMethod( "setSource", URI.class),
+				  parameterValues
+				);
+			if (violations.size()>0)
+			{
+				throw new Error ("source is null - gmgm");
+			}
+		}
+		catch (Exception e)
+		{
+			throw new Error(e);
+		}*/
+		PropertyValidator.getValidator().validate(this, "setSource", new Object[] {source}, URI.class);
 		RDFUtil.setProperty(resource, DataModel.Model.source, source);
 	}
 
 	
-	public URI getFormat() {
-		if (format==null)
+	public URI getFormat() throws SBOLGraphException {
+		/*if (format==null)
 		{
-			format=RDFUtil.getPropertyAsURI(this.resource, DataModel.Attachment.format);	
+			format=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Attachment.format);	
 		}
-		return format;
+		return format;*/
+		
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Attachment.format);	
 	}
 
 	public void setFormat(URI format) {
-		this.format = format;
+		//this.format = format;
 		RDFUtil.setProperty(resource, DataModel.Attachment.format, format);
 	}
 	
-	public long getSize() {
-		if (size==Long.MIN_VALUE)
+	@PositiveOrZero(message="{ATTACHMENT_SIZE_POSITIVE_OR_ZERO}")
+	public OptionalLong getSize() throws SBOLGraphException{
+		/*if (size.isEmpty())
 		{
-			String value=RDFUtil.getPropertyAsString(this.resource, DataModel.Attachment.size);
+			String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.size);
 			if (value!=null)
 			{
-				size=Long.parseLong(value);
+				size=OptionalLong.of(Long.parseLong(value));
 			}
+		}
+		return size;*/
+		OptionalLong size=OptionalLong.empty();
+		String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.size);
+		if (value!=null)
+		{
+			size= OptionalLong.of(Long.parseLong(value));
 		}
 		return size;
 	}
 
-	public void setSize(long size) {
-		this.size = size;
-		RDFUtil.setProperty(resource, DataModel.Attachment.size, String.valueOf(size));
+	public void setSize(@PositiveOrZero(message="{ATTACHMENT_SIZE_POSITIVE_OR_ZERO}") OptionalLong sizeValue) throws SBOLGraphException {
+		//this.size = sizeValue;
+		String stringValue=null;
+		if (sizeValue.isPresent())
+		{
+			stringValue= String.valueOf(sizeValue.getAsLong());
+		}
+		PropertyValidator.getValidator().validate(this, "setSize", new Object[] {sizeValue}, OptionalLong.class);
+		RDFUtil.setProperty(resource, DataModel.Attachment.size, stringValue);
 	}
 
-	public String getHash() {
-		if (hash==null)
+	public String getHash() throws SBOLGraphException {
+		/*if (hash==null)
 		{
-			hash=RDFUtil.getPropertyAsString(this.resource, DataModel.Attachment.hash);	
+			hash=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hash);	
 		}
-		return hash;
-		
+		return hash;*/
+		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hash);	
 	}
 
 	public void setHash(String hash) {
-		this.hash = hash;
+		//this.hash = hash;
 		RDFUtil.setProperty(resource, DataModel.Attachment.hash, String.valueOf(hash));
-
 	}
 
-	public String getHashAlgorithm() {
-		if (hashAlgorithm==null)
+	public String getHashAlgorithm() throws SBOLGraphException {
+		/*if (hashAlgorithm==null)
 		{
-			hashAlgorithm=RDFUtil.getPropertyAsString(this.resource, DataModel.Attachment.hashAlgorithm);	
+			hashAlgorithm=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hashAlgorithm);	
 		}
-		return hashAlgorithm;
+		return hashAlgorithm;*/
+		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hashAlgorithm);	
+
 	}
 
 	public void setHashAlgorithm(String hashAlgorithm) {
-		this.hashAlgorithm = hashAlgorithm;
+		//this.hashAlgorithm = hashAlgorithm;
 		RDFUtil.setProperty(resource, DataModel.Attachment.hashAlgorithm, String.valueOf(hashAlgorithm));
 	}
 

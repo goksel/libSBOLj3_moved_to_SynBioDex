@@ -6,12 +6,13 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
 
 public class Sequence extends TopLevel {
-	private String elements;
-	private Encoding encoding;
+	/*private String elements;
+	private Encoding encoding;*/
 
 	protected  Sequence(Model model,URI uri) throws SBOLGraphException
 	{
@@ -23,34 +24,25 @@ public class Sequence extends TopLevel {
 		super(resource);
 	}
 
-	public String getElements() {
-		if (elements==null)
-		{
-			elements=RDFUtil.getPropertyAsString(this.resource, DataModel.Sequence.elements);
-		}
-		return elements;
+	public String getElements() throws SBOLGraphException{
+		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Sequence.elements);
 	}
 	
 	public void setElements(String elements) {
-		this.elements = elements;
-		RDFUtil.setProperty(this.resource, DataModel.Sequence.elements, this.elements);
+		RDFUtil.setProperty(this.resource, DataModel.Sequence.elements, elements);
 	}
 	
-	public Encoding getEncoding() {
-		if (encoding==null)
-		{
-			URI encodingValue=RDFUtil.getPropertyAsURI(this.resource, DataModel.Sequence.encoding);
-			if (encodingValue!=null)
-			{
-				encoding=Encoding.get(encodingValue); 
-			}
+	public Encoding getEncoding() throws SBOLGraphException {
+		Encoding encoding=null;
+		URI encodingValue=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Sequence.encoding);
+		if (encodingValue!=null){
+			encoding=Encoding.get(encodingValue); 
 		}
 		return encoding;
 	}
 	
 	public void setEncoding(Encoding encoding) {
-		this.encoding = encoding;
-		RDFUtil.setProperty(this.resource, DataModel.Sequence.encoding, this.encoding.getUri());
+		RDFUtil.setProperty(this.resource, DataModel.Sequence.encoding, encoding.getUri());
 	}
 
 	public URI getResourceType()

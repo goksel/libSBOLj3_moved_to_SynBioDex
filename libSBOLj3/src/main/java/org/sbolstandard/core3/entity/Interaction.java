@@ -7,11 +7,16 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 public class Interaction extends Identified{
-	private List<URI> types=null;
-	private List<Participation> participations=null;
+	/*private List<URI> types=null;
+	private List<Participation> participations=null;*/
 
 	protected  Interaction(Model model,URI uri) throws SBOLGraphException
 	{
@@ -22,34 +27,28 @@ public class Interaction extends Identified{
 	{
 		super(resource);
 	}
-
 	
+	@NotEmpty(message = "{INTERACTION_TYPES_NOT_EMPTY}")
 	public List<URI> getTypes() {
-		if (types==null)
-		{
-			types=RDFUtil.getPropertiesAsURIs(this.resource, DataModel.type);
-		}
-		return types;
+		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.type);
 	}
 	
-	public void setTypes(List<URI> types) {
-		this.types = types;
+	public void setTypes(@NotEmpty(message = "{INTERACTION_TYPES_NOT_EMPTY}") List<URI> types) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setTypes", new Object[] {types}, List.class);
 		RDFUtil.setProperty(resource, DataModel.type, types);
 	}
 	
-	
+	@Valid
 	public List<Participation> getParticipations() throws SBOLGraphException {
-		this.participations=addToList(this.participations, DataModel.Interaction.participation, Participation.class);
-		return this.participations;
+		return addToList(DataModel.Interaction.participation, Participation.class);
 	}
-
 
 	public Participation createParticipation(URI uri, List<URI> roles, URI feature) throws SBOLGraphException
 	{
 		Participation participation=new Participation(this.resource.getModel(),uri);
 		participation.setRoles(roles);
 		participation.setParticipant(feature);
-		this.participations=addToList(this.participations, participation, DataModel.Interaction.participation);
+		addToList(participation, DataModel.Interaction.participation);
 		return participation;
 	}
 	
@@ -64,11 +63,9 @@ public class Interaction extends Identified{
 		return createParticipation(displayId, roles, feature);	
 	}
 	
-	
 	@Override
 	public URI getResourceType() {
 		return DataModel.Interaction.uri;
 	}
-	
 	
 }

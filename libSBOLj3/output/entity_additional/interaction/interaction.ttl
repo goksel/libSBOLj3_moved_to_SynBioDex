@@ -1,0 +1,23 @@
+@base          <https://sbolstandard.org/examples/> .
+@prefix :      <https://sbolstandard.org/examples/> .
+@prefix CHEBI: <https://identifiers.org/CHEBI:> .
+@prefix EDAM:  <https://identifiers.org/edam:> .
+@prefix GO:    <https://identifiers.org/GO:> .
+@prefix SBO:   <https://identifiers.org/SBO:> .
+@prefix SO:    <https://identifiers.org/SO:> .
+@prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix sbol:  <http://sbols.org/v3#> .
+
+<i13504_system/Interaction1>
+        a               sbol:Interaction ;
+        sbol:displayId  "Interaction1" ;
+        sbol:type       SBO:0000589 .
+
+:i13504_system  a            sbol:Component ;
+        sbol:displayId       "i13504_system" ;
+        sbol:hasInteraction  <i13504_system/Interaction1> ;
+        sbol:hasNamespace    <https://sbolstandard.org/examples> ;
+        sbol:name            "i13504 system" ;
+        sbol:role            SBO:0000289 ;
+        sbol:type            SBO:0000251 .

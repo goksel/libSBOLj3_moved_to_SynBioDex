@@ -20,10 +20,8 @@ public abstract class ControlledIdentified extends Identified{
 		super(resource);
 	}
 	
-	
 	@Override
 	public URI getResourceType() {
 		return DataModel.Identified.uri;
 	}
-	
 }

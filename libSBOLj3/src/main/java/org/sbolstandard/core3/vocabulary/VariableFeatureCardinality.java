@@ -1,6 +1,8 @@
 package org.sbolstandard.core3.vocabulary;
 
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.sbolstandard.core3.util.URINameSpace;
 
@@ -11,13 +13,28 @@ public enum VariableFeatureCardinality {
 	ZeroOrMore(URINameSpace.SBOL.local("zeroOrMore")), 
 	OneOrMore(URINameSpace.SBOL.local("oneOrMore"));
 
-	private URI url;
+	private URI uri;
 
 	VariableFeatureCardinality(URI envUrl) {
-		this.url = envUrl;
+		this.uri = envUrl;
 	}
 
-	public URI getUrl() {
-		return url;
+	public URI getUri() {
+		return uri;
+	}
+	
+	private static final Map<URI, VariableFeatureCardinality> lookup = new HashMap<>();
+
+	static
+	{
+	    for(VariableFeatureCardinality encoding: VariableFeatureCardinality.values())
+	    {
+	        lookup.put(encoding.getUri(), encoding);
+	    }
+	}
+
+	public static VariableFeatureCardinality get(URI uri) 
+	{
+	    return lookup.get(uri);
 	}
 }

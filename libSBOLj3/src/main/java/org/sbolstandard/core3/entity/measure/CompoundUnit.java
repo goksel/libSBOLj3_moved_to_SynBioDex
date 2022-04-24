@@ -8,7 +8,6 @@ import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 public abstract class CompoundUnit extends Unit{
 	
-	
 	protected  CompoundUnit(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);

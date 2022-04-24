@@ -1,0 +1,51 @@
+{
+  "@graph" : [ {
+    "@id" : "https://sbolstandard.org/examples/interlab16device1",
+    "@type" : "sbol:Component",
+    "displayId" : "interlab16device1",
+    "hasFeature" : [ "https://sbolstandard.org/examples/interlab16device1/ExternallyDefined2", "https://sbolstandard.org/examples/interlab16device1/ExternallyDefined1" ],
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "type" : "SBO:0000241"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/interlab16device1/ExternallyDefined1",
+    "@type" : "sbol:ExternallyDefined",
+    "definition" : "http://uniprot.org/gfp",
+    "displayId" : "ExternallyDefined1",
+    "type" : "SBO:0000252"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/interlab16device1/ExternallyDefined2",
+    "@type" : "sbol:ExternallyDefined",
+    "definition" : "http://uniprot.org/rfp",
+    "displayId" : "ExternallyDefined2",
+    "type" : "SBO:0000252"
+  } ],
+  "@context" : {
+    "definition" : {
+      "@id" : "http://sbols.org/v3#definition",
+      "@type" : "@id"
+    },
+    "type" : {
+      "@id" : "http://sbols.org/v3#type",
+      "@type" : "@id"
+    },
+    "displayId" : {
+      "@id" : "http://sbols.org/v3#displayId"
+    },
+    "hasFeature" : {
+      "@id" : "http://sbols.org/v3#hasFeature",
+      "@type" : "@id"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
+      "@type" : "@id"
+    },
+    "SBO" : "https://identifiers.org/SBO:",
+    "CHEBI" : "https://identifiers.org/CHEBI:",
+    "GO" : "https://identifiers.org/GO:",
+    "sbol" : "http://sbols.org/v3#",
+    "EDAM" : "https://identifiers.org/edam:",
+    "SO" : "https://identifiers.org/SO:",
+    "prov" : "http://www.w3.org/ns/prov#",
+    "om" : "http://www.ontology-of-units-of-measure.org/resource/om-2/"
+  }
+}
