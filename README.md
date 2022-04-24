@@ -18,7 +18,7 @@ Use this option if you are developing a Java application using [Maven](https://m
    <dependency>
       <groupId>org.sbolstandard</groupId>
       <artifactId>libSBOLj3</artifactId>
-      <version>1.3-SNAPSHOT</version>
+      <version>1.4-SNAPSHOT</version>
    </dependency>
    ...
 </dependencies>
