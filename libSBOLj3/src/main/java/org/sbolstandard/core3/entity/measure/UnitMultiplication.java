@@ -1,18 +1,21 @@
 package org.sbolstandard.core3.entity.measure;
 
 import java.net.URI;
+import java.util.Optional;
+
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
+import jakarta.validation.constraints.NotNull;
+
 public class UnitMultiplication extends CompoundUnit{
-	
-	private URI term1;
-	private URI term2;
-	
-	
+	/*private URI term1;
+	private URI term2;*/
 	protected  UnitMultiplication(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
@@ -23,36 +26,28 @@ public class UnitMultiplication extends CompoundUnit{
 		super(resource);
 	}
 	
-	public URI getTerm1() {
-		if (term1==null)
-		{
-			term1=RDFUtil.getPropertyAsURI(this.resource, MeasureDataModel.UnitMultiplication.term1);	
-		}
-		return term1;
+	@NotNull(message = "{UNITMULTIPLICATION_TERM1_NOT_NULL}")	
+	public URI getTerm1() throws SBOLGraphException {
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitMultiplication.term1);	
 	}
 
-	public void setTerm1(URI term1) {
-		this.term1 = term1;
+	public void setTerm1(@NotNull(message = "UNITMULTIPLICATION_TERM1_NOT_NULL}") URI term1) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setTerm1", new Object[] {term1}, URI.class);
 		RDFUtil.setProperty(resource, MeasureDataModel.UnitMultiplication.term1, term1);
 	}
 	
-	public URI getTerm2() {
-		if (term2==null)
-		{
-			term2=RDFUtil.getPropertyAsURI(this.resource, MeasureDataModel.UnitMultiplication.term2);	
-		}
-		return term2;
+	@NotNull(message = "UNITMULTIPLICATION_TERM2_NOT_NULL}")	
+	public URI getTerm2() throws SBOLGraphException {
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitMultiplication.term2);	
 	}
 
-	public void setTerm2(URI term2) {
-		this.term2 = term2;
+	public void setTerm2(@NotNull(message = "UNITMULTIPLICATION_TERM2_NOT_NULL}") URI term2) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setTerm2", new Object[] {term2}, URI.class);
 		RDFUtil.setProperty(resource, MeasureDataModel.UnitMultiplication.term2, term2);
 	}
-	
 	
 	@Override
 	public URI getResourceType() {
 		return MeasureDataModel.UnitMultiplication.uri;
 	}
-	
 }

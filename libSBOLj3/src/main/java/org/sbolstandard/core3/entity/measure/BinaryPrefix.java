@@ -18,7 +18,6 @@ public class BinaryPrefix extends Prefix{
 		super(resource);
 	}
 	
-	
 	@Override
 	public URI getResourceType() {
 		return MeasureDataModel.BinaryPrefix.uri;

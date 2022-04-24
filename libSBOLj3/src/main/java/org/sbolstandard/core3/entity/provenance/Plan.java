@@ -19,7 +19,6 @@ public class Plan extends ControlledTopLevel{
 		super(resource);
 	}
 	
-	
 	@Override
 	public URI getResourceType() {
 		return ProvenanceDataModel.Plan.uri;

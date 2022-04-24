@@ -1,0 +1,46 @@
+{
+  "@graph" : [ {
+    "@id" : "https://sbolstandard.org/examples/attachment1",
+    "@type" : "sbol:Attachment",
+    "displayId" : "attachment1",
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "source" : "https://sbolstandard.org/attachment1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/attachment2",
+    "@type" : "sbol:Attachment",
+    "displayId" : "attachment2",
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "source" : "https://sbolstandard.org/attachment2"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/exp1",
+    "@type" : "sbol:Experiment",
+    "displayId" : "exp1",
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "member" : [ "https://sbolstandard.org/examples/attachment2", "https://sbolstandard.org/examples/attachment1" ]
+  } ],
+  "@context" : {
+    "source" : {
+      "@id" : "http://sbols.org/v3#source",
+      "@type" : "@id"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
+      "@type" : "@id"
+    },
+    "displayId" : {
+      "@id" : "http://sbols.org/v3#displayId"
+    },
+    "member" : {
+      "@id" : "http://sbols.org/v3#member",
+      "@type" : "@id"
+    },
+    "SBO" : "https://identifiers.org/SBO:",
+    "CHEBI" : "https://identifiers.org/CHEBI:",
+    "GO" : "https://identifiers.org/GO:",
+    "sbol" : "http://sbols.org/v3#",
+    "EDAM" : "https://identifiers.org/edam:",
+    "SO" : "https://identifiers.org/SO:",
+    "prov" : "http://www.w3.org/ns/prov#",
+    "om" : "http://www.ontology-of-units-of-measure.org/resource/om-2/"
+  }
+}

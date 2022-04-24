@@ -6,13 +6,16 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
-public class ComponentReference extends Feature{
-	private URI feature=null;
-	private URI inChildOf=null;
-	
+import jakarta.validation.constraints.NotNull;
 
+public class ComponentReference extends Feature{
+	/*private URI feature=null;
+	private URI inChildOf=null;*/
+	
 	protected  ComponentReference(Model model,URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
@@ -23,39 +26,28 @@ public class ComponentReference extends Feature{
 		super(resource);
 	}
 
-	
-	public URI getFeature() {
-		if (this.feature==null)
-		{
-			this.feature=RDFUtil.getPropertyAsURI(this.resource, DataModel.ComponentReference.feature);
-		}
-		return this.feature;
+	@NotNull(message = "{COMBINATORIALREFERENCE_REFERSTO_NOT_NULL}")
+	public URI getRefersTo() throws SBOLGraphException {
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.refersTo);
 	}
 	
-	public void setFeature(URI feature) {
-		this.feature = feature;
-		RDFUtil.setProperty(this.resource, DataModel.ComponentReference.feature, this.feature);
+	public void setRefersTo(@NotNull(message = "{COMBINATORIALREFERENCE_REFERSTO_NOT_NULL}") URI feature) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setRefersTo", new Object[] {feature}, URI.class);
+		RDFUtil.setProperty(this.resource, DataModel.ComponentReference.refersTo, feature);
 	}
-
 	
-	public URI getInChildOf() {
-		if (this.inChildOf==null)
-		{
-			this.inChildOf=RDFUtil.getPropertyAsURI(this.resource, DataModel.ComponentReference.inChildOf);
-		}
-		return this.inChildOf;
+	@NotNull(message = "{COMBINATORIALREFERENCE_INCHILDOF_NOT_NULL}")
+	public URI getInChildOf() throws SBOLGraphException{
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.inChildOf);
 	}
 
-	public void setInChildOf(URI inChildOf) {
-		this.inChildOf = inChildOf;
-		RDFUtil.setProperty(this.resource, DataModel.ComponentReference.inChildOf, this.inChildOf);	
+	public void setInChildOf(@NotNull(message = "{COMBINATORIALREFERENCE_INCHILDOF_NOT_NULL}") URI inChildOf) throws SBOLGraphException{
+		PropertyValidator.getValidator().validate(this, "setInChildOf", new Object[] {inChildOf}, URI.class);
+		RDFUtil.setProperty(this.resource, DataModel.ComponentReference.inChildOf, inChildOf);	
 	}
 	
-
 	@Override
 	public URI getResourceType() {
 		return DataModel.ComponentReference.uri;
 	}
-	
-	
 }

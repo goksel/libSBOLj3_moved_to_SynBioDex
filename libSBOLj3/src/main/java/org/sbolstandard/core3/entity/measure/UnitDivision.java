@@ -5,13 +5,15 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
+import jakarta.validation.constraints.NotNull;
+
 public class UnitDivision extends CompoundUnit{
-	
-	private URI numerator;
-	private URI denominator;
-	
+	/*private URI numerator;
+	private URI denominator;*/
 	
 	protected  UnitDivision(Model model,URI uri) throws SBOLGraphException
 	{
@@ -23,36 +25,28 @@ public class UnitDivision extends CompoundUnit{
 		super(resource);
 	}
 	
-	public URI getNumerator() {
-		if (numerator==null)
-		{
-			numerator=RDFUtil.getPropertyAsURI(this.resource, MeasureDataModel.UnitDivision.numerator);	
-		}
-		return numerator;
+	@NotNull(message = "{UNITDIVISION_NUMERATOR_NOT_NULL}")	
+	public URI getNumerator() throws SBOLGraphException{
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitDivision.numerator);	
 	}
 
-	public void setNumerator(URI numerator) {
-		this.numerator = numerator;
+	public void setNumerator(@NotNull(message = "{UNITDIVISION_NUMERATOR_NOT_NULL}") URI numerator) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setNumerator", new Object[] {numerator}, URI.class);
 		RDFUtil.setProperty(resource, MeasureDataModel.UnitDivision.numerator, numerator);
 	}
 	
-	public URI getDenominator() {
-		if (denominator==null)
-		{
-			denominator=RDFUtil.getPropertyAsURI(this.resource, MeasureDataModel.UnitDivision.denominator);	
-		}
-		return denominator;
+	@NotNull(message = "{UNITDIVISION_DENOMINATOR__NOT_NULL}")	
+	public URI getDenominator() throws SBOLGraphException {
+		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitDivision.denominator);	
 	}
 
-	public void setDenominator(URI denominator) {
-		this.denominator = denominator;
+	public void setDenominator(@NotNull(message = "{UNITDIVISION_DENOMINATOR__NOT_NULL}") URI denominator) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setDenominator", new Object[] {denominator}, URI.class);
 		RDFUtil.setProperty(resource, MeasureDataModel.UnitDivision.denominator, denominator);
 	}
-	
 	
 	@Override
 	public URI getResourceType() {
 		return MeasureDataModel.UnitDivision.uri;
-	}
-	
+	}	
 }

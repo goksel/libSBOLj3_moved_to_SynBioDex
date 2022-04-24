@@ -17,7 +17,9 @@ import org.sbolstandard.core3.entity.Location.RangeLocationBuilder;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.Orientation;
 import org.sbolstandard.core3.vocabulary.Role;
@@ -37,10 +39,16 @@ public class SequenceFeatureTest extends TestCase {
 		Sequence seq= (Sequence)doc.getIdentified(gfp.getSequences().get(0),Sequence.class);
 		
 		RangeLocationBuilder location=new RangeLocationBuilder(1, 3, seq.getUri());
-		gfp.createSequenceFeature(Arrays.asList(location));
+		SequenceFeature feature=gfp.createSequenceFeature(Arrays.asList(location));
 		
-		System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
-        
+		
+		TestUtil.serialise(doc, "entity_additional/sequencefeature", "sequencefeature");
+	    System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
+	    TestUtil.assertReadWrite(doc); 
+	    
+		Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+	     
+	    TestUtil.validateIdentified(feature,doc,0);
     }
 
 }

@@ -18,10 +18,8 @@ public class Experiment extends Collection{
 		super(resource);
 	}
 	
-	
 	@Override
 	public URI getResourceType() {
 		return DataModel.Experiment.uri;
 	}
-	
 }

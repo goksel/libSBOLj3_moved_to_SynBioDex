@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Component;
@@ -15,18 +17,23 @@ import org.sbolstandard.core3.entity.measure.PrefixedUnit;
 import org.sbolstandard.core3.entity.measure.SIPrefix;
 import org.sbolstandard.core3.entity.measure.SingularUnit;
 import org.sbolstandard.core3.entity.measure.UnitDivision;
+import org.sbolstandard.core3.entity.measure.UnitExponentiation;
+import org.sbolstandard.core3.entity.measure.UnitMultiplication;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.URINameSpace;
+import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
+import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 
 import junit.framework.TestCase;
 
 public class MeasureTest extends TestCase {
 	
-	public void test() throws SBOLGraphException, IOException
+	public void test() throws SBOLGraphException, IOException, Exception
     {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
@@ -40,7 +47,7 @@ public class MeasureTest extends TestCase {
         liter.setComment("The litre is a unit of volume defined as 1.0e-3 cubic metre.");
         liter.setAlternativeSymbols(Arrays.asList("L", "L2"));
         liter.setLongComment("This is an example long comment.");
-        liter.setFactor(0.001f);
+        liter.setFactor(Optional.of(0.001f));
        
         SingularUnit mole=doc.createSingularUnit("mole", "mol", "mole");
         
@@ -59,10 +66,10 @@ public class MeasureTest extends TestCase {
         measure.setTypes(Arrays.asList(URINameSpace.SBO.local("0000196"),URINameSpace.SBO.local("0000197")));
         
         SingularUnit kelvin=doc.createSingularUnit("kelvin", "kelvin", "kelvin");
-        doc.createUnitMultiplication("kelvinMole", "K mol", "kelvinMole", kelvin.getUri(), mole.getUri());
+        UnitMultiplication um= doc.createUnitMultiplication("kelvinMole", "K mol", "kelvinMole", kelvin.getUri(), mole.getUri());
         
         SingularUnit meter=doc.createSingularUnit("meter", "m", "meter");
-        doc.createUnitExponentiation("cubicMeter", "m3", "cubicMeter", meter.getUri(), 3);
+        UnitExponentiation m3=doc.createUnitExponentiation("cubicMeter", "m3", "cubicMeter", meter.getUri(), 3);
         
         TestUtil.serialise(doc, "measurement_entity/measurement", "measurement");
         SBOLDocument doc2=SBOLIO.read(new File("output/measurement_entity/measurement/measurement.ttl"), SBOLFormat.TURTLE);
@@ -89,10 +96,92 @@ public class MeasureTest extends TestCase {
         	}
         }
         
+        //TestUtil.assertReadWrite(doc);
         
-        TestUtil.assertReadWrite(doc);
+        
+        //measure.setTest(Optional.of(5));
+        //CaCl2.g
+        //TestUtil.validateIdentified(measure, 0);
+        //TestUtil.validateDocument(doc, 0);
+        
+        /*URI tmp=measure.getUnit();
+        measure.setUnit(null);
+        TestUtil.validateIdentified(measure, doc, 1);
+        measure.setUnit(tmp);
+        TestUtil.validateIdentified(measure, doc, 0);
+       */ 
+        
+    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+        
+        Optional<Float> temp=measure.getValue();
+        measure.setValue(Optional.of(4f));
+        TestUtil.validateIdentified(measure,doc,  0);  
+        
+        TestUtil.validateProperty(measure, "setValue", new Object[] {Optional.empty()}, Optional.class);
+        TestUtil.validateProperty(measure, "setValue", new Object[] {null}, Optional.class);
+        measure.setValue(Optional.empty());
+        TestUtil.validateIdentified(measure, doc, 1);
+        measure.setValue(null);
+        TestUtil.validateIdentified(measure, doc, 1);
+        
+        TestUtil.validateIdentified(CaCl2, 1);  
+        measure.setValue(temp);
+        TestUtil.validateIdentified(CaCl2, 0);  
+        
+        TestUtil.validateProperty(measure, "setUnit", new Object[] {null}, URI.class);
+        URI tempURI=measure.getUnit();
+        measure.setUnit(null);
+        TestUtil.validateIdentified(measure, doc, 1);
+        measure.setUnit(tempURI);
+        
+        TestUtil.validateProperty(millimole, "setPrefix", new Object[] {null}, URI.class);
+        TestUtil.validateProperty(millimole, "setUnit", new Object[] {null}, URI.class);
+        TestUtil.validateProperty(millimole, "setSymbol", new Object[] {null}, String.class);
+        TestUtil.validateProperty(millimole, "setSymbol", new Object[] {""}, String.class);
+        TestUtil.validateProperty(millimole, "setLabel", new Object[] {null}, String.class);
+        TestUtil.validateProperty(millimole, "setLabel", new Object[] {""}, String.class);
+        millimole.setPrefix(null);
+        millimole.setUnit(null);
+        millimole.setSymbol(null);
+        millimole.setLabel(null);
+        TestUtil.validateIdentified(millimole,doc, 4);  
+        TestUtil.validateDocument(doc, 4);  
+        millimole.setSymbol("");
+        millimole.setLabel("");
+        TestUtil.validateIdentified(millimole,doc, 4);  
+        TestUtil.validateDocument(doc, 4);  
+        
+        TestUtil.validateProperty(milli, "setFactor", new Object[] {null}, Optional.class);
+        TestUtil.validateProperty(milli, "setFactor", new Object[] {Optional.empty()}, Optional.class);
+        milli.setFactor(Optional.empty());
+        TestUtil.validateIdentified(milli,1);  
+        milli.setFactor(null);
+        TestUtil.validateIdentified(milli,1);  
+        
+        TestUtil.validateDocument(doc,5);  
+        
+        TestUtil.validateProperty(milliMolePerLiter, "setDenominator", new Object[] {null}, URI.class);
+        TestUtil.validateProperty(milliMolePerLiter, "setNumerator", new Object[] {null}, URI.class);
+        milliMolePerLiter.setDenominator(null);
+        milliMolePerLiter.setNumerator(null);
+        TestUtil.validateIdentified(milliMolePerLiter,doc,2,7);  
+        
+        TestUtil.validateProperty(m3, "setBase", new Object[] {null}, URI.class);
+        TestUtil.validateProperty(m3, "setExponent", new Object[] {Optional.empty()}, Optional.class);
+        TestUtil.validateProperty(m3, "setExponent", new Object[] {null}, Optional.class);
+        m3.setExponent(Optional.empty());
+        m3.setBase(null);
+        TestUtil.validateIdentified(m3,doc,2,9); 
+        
+        m3.setExponent(null);
+        TestUtil.validateIdentified(m3,2); 
+        
+        TestUtil.validateProperty(um, "setTerm1", new Object[] {null}, URI.class);
+        TestUtil.validateProperty(um, "setTerm2", new Object[] {null}, URI.class);
+        um.setTerm1(null);
+        um.setTerm2(null);
+        TestUtil.validateIdentified(um,doc,2,11);             
     }
-
 }
 
 //        om:hasFactor          "0.001"^^<http://www.w3.org/2001/XMLSchema#float> ;

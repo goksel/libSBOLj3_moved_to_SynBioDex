@@ -1,6 +1,7 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
@@ -14,8 +15,12 @@ import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 public class SequenceFeature extends Feature{
-	private List<Location> locations=null;
+	/*private List<Location> locations=null;*/
 
 	protected  SequenceFeature(Model model,URI uri) throws SBOLGraphException
 	{
@@ -27,29 +32,43 @@ public class SequenceFeature extends Feature{
 		super(resource);
 	}
 
-	public List<Location> getLocations() throws SBOLGraphException {
-		/*this.locations=addToList(this.locations, DataModel.SubComponent.location, Location.class, DataModel.Location.uri);
-		return locations;*/
-		if (locations==null)
+	private void addToList(List<Location> listA, List<? extends Location> listB)
+	{
+		if (listB!=null && listB.size()>0)
 		{
-			List<Resource> resources=RDFUtil.getResourcesWithProperty (resource, DataModel.SubComponent.location);
-			if (resources!=null)
-			{
-				for (Resource res:resources)
-				{
-					Location location= LocationFactory.create(res);	
-					locations.add(location);			
-				}		
-			}
+			listA.addAll(listB);
 		}
-		return locations;
+	}
+	
+	@NotEmpty(message = "{SEQUENCEFEATURE_LOCATIONS_NOT_EMPTY}")
+	public List<Location> getLocations() throws SBOLGraphException {
+		List<Location> locations=new ArrayList<Location>();
+		addToList(locations,getCutLocations());
+		addToList(locations,this.getRangeLocations());
+		addToList(locations,getEntireSequenceLocations());
+		return locations;		
+	}
+	
+	@Valid
+	public List<Cut> getCutLocations() throws SBOLGraphException {
+		return addToList(DataModel.SubComponent.location, Cut.class, DataModel.Cut.uri);
+	}
+	
+	@Valid
+	public List<Range> getRangeLocations() throws SBOLGraphException {
+		return addToList(DataModel.SubComponent.location, Range.class, DataModel.Range.uri);
+	}
+	
+	@Valid
+	public List<EntireSequence> getEntireSequenceLocations() throws SBOLGraphException {
+		return addToList(DataModel.SubComponent.location, EntireSequence.class, DataModel.EntireSequenceLocation.uri);
 	}
 
-	public Location createLocation(LocationBuilder builder ) throws SBOLGraphException
+	public Location createLocation(LocationBuilder builder) throws SBOLGraphException
 	{
 		URI locationUri=SBOLAPI.createLocalUri(this,builder.getLocationTypeUri(),getLocations(),builder.getLocationClass());
 		Location location=builder.build(this.resource.getModel(),locationUri);
-		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
+		addToList(location, DataModel.SubComponent.location);
 		return location;
 	}
 	
@@ -65,7 +84,7 @@ public class SequenceFeature extends Feature{
 			location.resource.addProperty(stmt.getPredicate(), stmt.getObject());
 		}
 		
-		this.locations=addToList(this.locations, location, DataModel.SubComponent.location);
+		addToList(location, DataModel.SubComponent.location);
 		return location;
 	}
 	

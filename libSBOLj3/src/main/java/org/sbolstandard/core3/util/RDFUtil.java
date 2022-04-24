@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.OptionalInt;
+
 import org.apache.jena.datatypes.xsd.impl.XSDFloat;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
@@ -38,6 +40,8 @@ import org.apache.jena.riot.RDFWriterBuilder;
 import org.apache.jena.riot.SysRIOT;
 import org.apache.jena.sparql.util.Context;
 import org.apache.jena.vocabulary.RDF;
+import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.vocabulary.DataModel;
 
 //IO: https://jena.apache.org/documentation/io/rdf-input.html
 //https://jena.apache.org/tutorials/rdf_api.html#ch-Writing-RDF
@@ -97,9 +101,10 @@ public class RDFUtil {
 	
 	private static void removeIfExists(Resource resource, Property p)
 	{
-		StmtIterator stmt =resource.listProperties(p);
-		if (stmt!=null && stmt.hasNext())
+		StmtIterator stmtIt =resource.listProperties(p);
+		if (stmtIt!=null && stmtIt.hasNext())
 		{
+			Statement stmt=stmtIt.next();
 			resource.getModel().remove(stmt);
 		}
 	}
@@ -108,7 +113,10 @@ public class RDFUtil {
 	{
 		Property p=resource.getModel().createProperty(property.toString());
 		removeIfExists(resource,p);
-		resource.addProperty(p, value);	
+		if (value!=null)
+		{
+			resource.addProperty(p, value);	
+		}
 	}
 	
 	public static void setProperty(Resource resource, URI property, float value)
@@ -124,19 +132,20 @@ public class RDFUtil {
 	{
 		Property p=resource.getModel().createProperty(property.toString());
 		removeIfExists(resource,p);
-		Resource resourceValue = resource.getModel().createResource(value.toString());
-		resource.addProperty(p, resourceValue);	
+		if (value!=null)
+		{
+			Resource resourceValue = resource.getModel().createResource(value.toString());
+			resource.addProperty(p, resourceValue);	
+		}
 	}
 	
 	public static void setProperty(Resource resource, URI property, List<URI> values)
 	{
-		if (values!=null && values.size()>0)
-		{
-			Property p=resource.getModel().createProperty(property.toString());
-			removeIfExists(resource,p);
 		
-			for (URI uri:values)
-			{
+		Property p=resource.getModel().createProperty(property.toString());
+		removeIfExists(resource,p);
+		if (values!=null && values.size()>0){
+			for (URI uri:values){
 				addProperty (resource, property, uri);
 			}
 		}
@@ -144,13 +153,10 @@ public class RDFUtil {
 	
 	public static void setPropertyAsStrings(Resource resource, URI property, List<String> values)
 	{
-		if (values!=null && values.size()>0)
-		{
-			Property p=resource.getModel().createProperty(property.toString());
-			removeIfExists(resource,p);
-		
-			for (String value:values)
-			{
+		Property p=resource.getModel().createProperty(property.toString());
+		removeIfExists(resource,p);
+		if (values!=null && values.size()>0){
+			for (String value:values){
 				addProperty (resource, property, value);
 			}
 		}
@@ -253,7 +259,7 @@ public class RDFUtil {
 	      return resources;
 	   }
 	  
-	  private static Object getLiteralValue(Resource resource, URI propertyURI)
+	 /* private static Object getLiteralValue(Resource resource, URI propertyURI)
 	  {
 		    Object value=null;
 			Property property=resource.getModel().getProperty(propertyURI.toString());   
@@ -262,9 +268,9 @@ public class RDFUtil {
 				value=stmt.getObject().asLiteral().getValue();
 			}
 			return value;
-	  }
+	  }*/
 	  
-	  public static Long getPropertyAsLong(Resource resource, URI propertyURI) {
+	  /*public static Long getPropertyAsLong(Resource resource, URI propertyURI) {
 			long result=Long.MIN_VALUE;
 			Object value=getLiteralValue(resource, propertyURI);
 			if (value!=null)
@@ -272,7 +278,7 @@ public class RDFUtil {
 			 result=(long) value;
 			}
 		    return result;  	
-		}
+		}*/
 	  
 	  public static String getPropertyAsString(Resource resource, URI propertyURI) {
 			Property property=resource.getModel().getProperty(propertyURI.toString());   
@@ -307,8 +313,6 @@ public class RDFUtil {
 		  return result;  
 		}
 	  
-	  
-
 	    /**
 	     * Gets the  property values for a given property and a resource.
 	     * @param model Model to search the property for

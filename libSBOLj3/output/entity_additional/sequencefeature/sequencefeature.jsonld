@@ -1,0 +1,90 @@
+{
+  "@graph" : [ {
+    "@id" : "https://sbolstandard.org/examples/E0040",
+    "@type" : "sbol:Component",
+    "displayId" : "E0040",
+    "hasFeature" : "https://sbolstandard.org/examples/E0040/SequenceFeature1",
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "hasSequence" : "https://sbolstandard.org/examples/E0040_Sequence1",
+    "name" : "E0040",
+    "role" : "SO:0000316",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/E0040/SequenceFeature1",
+    "@type" : "sbol:SequenceFeature",
+    "displayId" : "SequenceFeature1",
+    "hasLocation" : "https://sbolstandard.org/examples/E0040/SequenceFeature1/Range1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/E0040/SequenceFeature1/Range1",
+    "@type" : "sbol:Range",
+    "displayId" : "Range1",
+    "end" : "3",
+    "hasSequence" : "https://sbolstandard.org/examples/E0040_Sequence1",
+    "start" : "1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/E0040_Sequence1",
+    "@type" : "sbol:Sequence",
+    "description" : "E0040 sequence",
+    "displayId" : "E0040_Sequence1",
+    "elements" : "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa",
+    "encoding" : "EDAM:format_1207",
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "name" : "Sequence1"
+  } ],
+  "@context" : {
+    "encoding" : {
+      "@id" : "http://sbols.org/v3#encoding",
+      "@type" : "@id"
+    },
+    "elements" : {
+      "@id" : "http://sbols.org/v3#elements"
+    },
+    "description" : {
+      "@id" : "http://sbols.org/v3#description"
+    },
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
+      "@type" : "@id"
+    },
+    "displayId" : {
+      "@id" : "http://sbols.org/v3#displayId"
+    },
+    "hasLocation" : {
+      "@id" : "http://sbols.org/v3#hasLocation",
+      "@type" : "@id"
+    },
+    "end" : {
+      "@id" : "http://sbols.org/v3#end"
+    },
+    "start" : {
+      "@id" : "http://sbols.org/v3#start"
+    },
+    "hasSequence" : {
+      "@id" : "http://sbols.org/v3#hasSequence",
+      "@type" : "@id"
+    },
+    "hasFeature" : {
+      "@id" : "http://sbols.org/v3#hasFeature",
+      "@type" : "@id"
+    },
+    "role" : {
+      "@id" : "http://sbols.org/v3#role",
+      "@type" : "@id"
+    },
+    "type" : {
+      "@id" : "http://sbols.org/v3#type",
+      "@type" : "@id"
+    },
+    "SBO" : "https://identifiers.org/SBO:",
+    "CHEBI" : "https://identifiers.org/CHEBI:",
+    "GO" : "https://identifiers.org/GO:",
+    "sbol" : "http://sbols.org/v3#",
+    "EDAM" : "https://identifiers.org/edam:",
+    "SO" : "https://identifiers.org/SO:",
+    "prov" : "http://www.w3.org/ns/prov#",
+    "om" : "http://www.ontology-of-units-of-measure.org/resource/om-2/"
+  }
+}

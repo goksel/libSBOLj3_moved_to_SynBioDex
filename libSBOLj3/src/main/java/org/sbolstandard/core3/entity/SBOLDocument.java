@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -35,9 +37,13 @@ import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 public class SBOLDocument {
 	protected Model model = null;
-	
+	/*@NotNull (message="SBOLDocument.test cannot be null")
+	private URI test=null;*/
 	private List<Component> components;
 	private List<Sequence> sequences;
 	private List<CombinatorialDerivation> combinatorialDerivations;
@@ -122,6 +128,7 @@ public class SBOLDocument {
 		RDFUtil.setBaseURI(this.model, base);
 	}
 	
+	@Valid
 	public List<Component> getComponents() throws SBOLGraphException {
 		this.components=addToList(model, this.components, DataModel.Component.uri,Component.class);
 		return components;
@@ -239,6 +246,7 @@ public class SBOLDocument {
 		}
 	}
 
+	@Valid
 	public List<CombinatorialDerivation> getCombinatorialDerivations() throws SBOLGraphException {
 		this.combinatorialDerivations=addToList(model, this.combinatorialDerivations, DataModel.CombinatorialDerivation.uri,CombinatorialDerivation.class);
 		return combinatorialDerivations;
@@ -310,7 +318,8 @@ public class SBOLDocument {
 			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
 		}
 	}
-		
+	
+	@Valid
 	public List<org.sbolstandard.core3.entity.Model> getModels() throws SBOLGraphException {
 		this.models=addToList(model, this.models, DataModel.Model.uri,org.sbolstandard.core3.entity.Model.class);
 		return models;
@@ -382,7 +391,8 @@ public class SBOLDocument {
 			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
 		}
 	}
-		
+	
+	@Valid
 	public List<Attachment> getAttachments() throws SBOLGraphException {
 		this.attachments=addToList(model, this.attachments, DataModel.Attachment.uri,Attachment.class);
 		return attachments;
@@ -475,15 +485,16 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<Activity> getActivities() throws SBOLGraphException {
 		this.activities=addToList(model, this.activities, ProvenanceDataModel.Activity.uri,Activity.class);
 		return activities;
 	}
 	
-	private void initialisePrefix(Prefix prefix, String symbol, String name, float factor){
+	private void initialisePrefix(Prefix prefix, String symbol, String name, float factor) throws SBOLGraphException{
 		prefix.setSymbol(symbol);
 		prefix.setLabel(name);
-		prefix.setFactor(factor);
+		prefix.setFactor(Optional.of(factor));
 	}
 	
 	public SIPrefix createSIPrefix(URI namespace, URI uri, String symbol, String name, float factor) throws SBOLGraphException {		
@@ -505,6 +516,7 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<SIPrefix> getSIPrefixes() throws SBOLGraphException {
 		this.siPrefixes=addToList(model, this.siPrefixes, MeasureDataModel.SIPrefix.uri,SIPrefix.class);
 		return siPrefixes;
@@ -530,7 +542,7 @@ public class SBOLDocument {
 		}
 	}
 	
-	
+	@Valid
 	public List<BinaryPrefix> getBinaryPrefixes() throws SBOLGraphException {
 		this.binaryPrefixes=addToList(model, this.binaryPrefixes, MeasureDataModel.BinaryPrefix.uri,BinaryPrefix.class);
 		return binaryPrefixes;
@@ -585,6 +597,7 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<UnitMultiplication> getUnitMultiplications() throws SBOLGraphException {
 		this.unitMultiplications=addToList(model, this.unitMultiplications, MeasureDataModel.UnitMultiplication.uri,UnitMultiplication.class);
 		return unitMultiplications;
@@ -602,7 +615,6 @@ public class SBOLDocument {
 		return unit;
 	}
 	
-
 	public UnitDivision createUnitDivision(String displayId, String symbol, String name, URI numerator, URI denominator) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
@@ -614,6 +626,7 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<UnitDivision> getUnitDivisions() throws SBOLGraphException {
 		this.unitDivisions=addToList(model, this.unitDivisions, MeasureDataModel.UnitDivision.uri,UnitDivision.class);
 		return unitDivisions;
@@ -626,7 +639,7 @@ public class SBOLDocument {
 		unit.setSymbol(symbol);
 		unit.setLabel(name);
 		unit.setBase(baseUnit);
-		unit.setExponent(exponent);
+		unit.setExponent(Optional.of(exponent));
 		addToInMemoryList(unit, unitExponentiations);
 		return unit;
 	}
@@ -642,11 +655,11 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<UnitExponentiation> getUnitExponentiations() throws SBOLGraphException {
 		this.unitExponentiations=addToList(model, this.unitExponentiations, MeasureDataModel.UnitExponentiation.uri,UnitExponentiation.class);
 		return unitExponentiations;
 	}
-	
 	
 	public PrefixedUnit createPrexiedUnit(URI namespace, URI uri, String symbol, String name, URI unitURI, URI prefix) throws SBOLGraphException {
 
@@ -671,6 +684,7 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<PrefixedUnit> getPrefixedUnits() throws SBOLGraphException {
 		this.prefixedUnits=addToList(model, this.prefixedUnits, MeasureDataModel.PrefixedUnit.uri,PrefixedUnit.class);
 		return prefixedUnits;

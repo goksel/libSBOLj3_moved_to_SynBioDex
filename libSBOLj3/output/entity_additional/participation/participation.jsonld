@@ -1,0 +1,190 @@
+{
+  "@graph" : [ {
+    "@id" : "https://sbolstandard.org/examples/E0040",
+    "@type" : "sbol:Component",
+    "description" : "gfp coding sequence",
+    "displayId" : "E0040",
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "hasSequence" : "https://sbolstandard.org/examples/E0040_Sequence1",
+    "name" : "gfp",
+    "role" : "SO:0000316",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/E0040_Sequence1",
+    "@type" : "sbol:Sequence",
+    "description" : "gfp sequence",
+    "displayId" : "E0040_Sequence1",
+    "elements" : "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa",
+    "encoding" : "EDAM:format_1207",
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "name" : "Sequence1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/GFP_protein",
+    "@type" : "sbol:Component",
+    "description" : "GFP",
+    "displayId" : "GFP_protein",
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "name" : "GFP",
+    "type" : "SBO:0000252"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/i13504",
+    "@type" : "sbol:Component",
+    "displayId" : "i13504",
+    "hasFeature" : "https://sbolstandard.org/examples/i13504/SubComponent1",
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "hasSequence" : "https://sbolstandard.org/examples/i13504_Sequence1",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/i13504/SubComponent1",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent1",
+    "hasLocation" : "https://sbolstandard.org/examples/i13504/SubComponent1/Range1",
+    "instanceOf" : "https://sbolstandard.org/examples/E0040",
+    "orientation" : "SO:0001030"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/i13504/SubComponent1/Range1",
+    "@type" : "sbol:Range",
+    "displayId" : "Range1",
+    "end" : "719",
+    "hasSequence" : "https://sbolstandard.org/examples/i13504_Sequence1",
+    "orientation" : "SO:0001030",
+    "start" : "1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/i13504_Sequence1",
+    "@type" : "sbol:Sequence",
+    "description" : "null sequence",
+    "displayId" : "i13504_Sequence1",
+    "elements" : "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa",
+    "encoding" : "EDAM:format_1207",
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "name" : "Sequence1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/i13504_system",
+    "@type" : "sbol:Component",
+    "displayId" : "i13504_system",
+    "hasFeature" : [ "https://sbolstandard.org/examples/i13504_system/SubComponent2", "https://sbolstandard.org/examples/i13504_system/SubComponent1", "https://sbolstandard.org/examples/i13504_system/ComponentReference1" ],
+    "hasInteraction" : "https://sbolstandard.org/examples/i13504_system/Interaction1",
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "name" : "i13504 system",
+    "role" : "SBO:0000289",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/i13504_system/ComponentReference1",
+    "@type" : "sbol:ComponentReference",
+    "displayId" : "ComponentReference1",
+    "inChildOf" : "https://sbolstandard.org/examples/i13504_system/SubComponent1",
+    "refersTo" : "https://sbolstandard.org/examples/i13504/SubComponent1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/i13504_system/Interaction1",
+    "@type" : "sbol:Interaction",
+    "displayId" : "Interaction1",
+    "hasParticipation" : [ "https://sbolstandard.org/examples/i13504_system/Interaction1/Participation2", "https://sbolstandard.org/examples/i13504_system/Interaction1/Participation1" ],
+    "type" : "SBO:0000589"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/i13504_system/Interaction1/Participation1",
+    "@type" : "sbol:Participation",
+    "displayId" : "Participation1",
+    "participant" : "https://sbolstandard.org/examples/i13504_system/ComponentReference1",
+    "role" : "SBO:0000645"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/i13504_system/Interaction1/Participation2",
+    "@type" : "sbol:Participation",
+    "displayId" : "Participation2",
+    "participant" : "https://sbolstandard.org/examples/i13504_system/SubComponent2",
+    "role" : "SBO:0000011"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/i13504_system/SubComponent1",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent1",
+    "instanceOf" : "https://sbolstandard.org/examples/i13504"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/i13504_system/SubComponent2",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent2",
+    "instanceOf" : "https://sbolstandard.org/examples/GFP_protein"
+  } ],
+  "@context" : {
+    "description" : {
+      "@id" : "http://sbols.org/v3#description"
+    },
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
+      "@type" : "@id"
+    },
+    "type" : {
+      "@id" : "http://sbols.org/v3#type",
+      "@type" : "@id"
+    },
+    "displayId" : {
+      "@id" : "http://sbols.org/v3#displayId"
+    },
+    "inChildOf" : {
+      "@id" : "http://sbols.org/v3#inChildOf",
+      "@type" : "@id"
+    },
+    "refersTo" : {
+      "@id" : "http://sbols.org/v3#refersTo",
+      "@type" : "@id"
+    },
+    "hasLocation" : {
+      "@id" : "http://sbols.org/v3#hasLocation",
+      "@type" : "@id"
+    },
+    "orientation" : {
+      "@id" : "http://sbols.org/v3#orientation",
+      "@type" : "@id"
+    },
+    "instanceOf" : {
+      "@id" : "http://sbols.org/v3#instanceOf",
+      "@type" : "@id"
+    },
+    "encoding" : {
+      "@id" : "http://sbols.org/v3#encoding",
+      "@type" : "@id"
+    },
+    "elements" : {
+      "@id" : "http://sbols.org/v3#elements"
+    },
+    "participant" : {
+      "@id" : "http://sbols.org/v3#participant",
+      "@type" : "@id"
+    },
+    "role" : {
+      "@id" : "http://sbols.org/v3#role",
+      "@type" : "@id"
+    },
+    "hasInteraction" : {
+      "@id" : "http://sbols.org/v3#hasInteraction",
+      "@type" : "@id"
+    },
+    "hasFeature" : {
+      "@id" : "http://sbols.org/v3#hasFeature",
+      "@type" : "@id"
+    },
+    "hasSequence" : {
+      "@id" : "http://sbols.org/v3#hasSequence",
+      "@type" : "@id"
+    },
+    "hasParticipation" : {
+      "@id" : "http://sbols.org/v3#hasParticipation",
+      "@type" : "@id"
+    },
+    "end" : {
+      "@id" : "http://sbols.org/v3#end"
+    },
+    "start" : {
+      "@id" : "http://sbols.org/v3#start"
+    },
+    "SBO" : "https://identifiers.org/SBO:",
+    "CHEBI" : "https://identifiers.org/CHEBI:",
+    "GO" : "https://identifiers.org/GO:",
+    "sbol" : "http://sbols.org/v3#",
+    "EDAM" : "https://identifiers.org/edam:",
+    "SO" : "https://identifiers.org/SO:",
+    "prov" : "http://www.w3.org/ns/prov#",
+    "om" : "http://www.ontology-of-units-of-measure.org/resource/om-2/"
+  }
+}

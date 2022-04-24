@@ -1,0 +1,88 @@
+[ {
+  "@id" : "https://synbiohub.org/public/igem/BBa_F2620",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SO:0000704"
+  } ],
+  "http://sbols.org/v3#description" : [ {
+    "@value" : "PoPS Receiver"
+  } ],
+  "http://sbols.org/v3#name" : [ {
+    "@value" : "BBa_F2620"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000251"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "BBa_F2620"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Component" ]
+}, {
+  "@id" : "https://synbiohub.org/public/igem/BBa_R0040",
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000251"
+  } ],
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SO:0000167"
+  } ],
+  "http://sbols.org/v3#description" : [ {
+    "@value" : "TetR repressible promoter"
+  } ],
+  "http://sbols.org/v3#name" : [ {
+    "@value" : "pTetR"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
+  "http://sbols.org/v3#hasSequence" : [ {
+    "@id" : "https://synbiohub.org/public/igem/BBa_R0040_Sequence1"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "BBa_R0040"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Component" ]
+}, {
+  "@id" : "https://synbiohub.org/public/igem/BBa_R0040_Sequence1",
+  "http://sbols.org/v3#encoding" : [ {
+    "@id" : "https://identifiers.org/edam:format_1207"
+  } ],
+  "http://sbols.org/v3#elements" : [ {
+    "@value" : "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac"
+  } ],
+  "http://sbols.org/v3#description" : [ {
+    "@value" : "pTetR sequence"
+  } ],
+  "http://sbols.org/v3#name" : [ {
+    "@value" : "Sequence1"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "BBa_R0040_Sequence1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Sequence" ]
+}, {
+  "@id" : "https://synbiohub.org/public/igem/BBa_R0040_Sequence2",
+  "http://sbols.org/v3#encoding" : [ {
+    "@id" : "https://identifiers.org/edam:format_1207"
+  } ],
+  "http://sbols.org/v3#elements" : [ {
+    "@value" : "aaaa"
+  } ],
+  "http://sbols.org/v3#description" : [ {
+    "@value" : "pTetR sequence"
+  } ],
+  "http://sbols.org/v3#name" : [ {
+    "@value" : "Sequence2"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://synbiohub.org/public/igem"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "BBa_R0040_Sequence2"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Sequence" ]
+} ]
