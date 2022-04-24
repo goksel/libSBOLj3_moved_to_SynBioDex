@@ -6,7 +6,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
@@ -39,7 +39,7 @@ public class Participation extends Identified{
 	}
 	
 	public URI getParticipant() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Participation.participant);	
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Participation.participant);	
 	}
 
 	public void setParticipant(URI participant) {
@@ -47,7 +47,7 @@ public class Participation extends Identified{
 	}
 	
 	public URI getHigherOrderParticipant() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Participation.higherOrderParticipant);	
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Participation.higherOrderParticipant);	
 	}
 
 	public void setHigherOrderParticipant(URI higherOrderParticipant) {

@@ -7,7 +7,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Orientation;
 
@@ -36,7 +36,7 @@ public abstract class Feature extends Identified{
 	public Orientation getOrientation() throws SBOLGraphException {
 		Orientation orientation=null;
 		
-		URI value=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.orientation);
+		URI value=IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.orientation);
 		if (value!=null){
 			orientation=Orientation.get(value); 			
 		}

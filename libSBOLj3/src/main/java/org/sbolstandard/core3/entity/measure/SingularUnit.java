@@ -7,7 +7,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 public class SingularUnit extends Unit{
@@ -26,15 +26,15 @@ public class SingularUnit extends Unit{
 	}
 	
 	public void setFactor(Optional<Float>factor) throws SBOLGraphException {
-		IdentityValidator.getValidator().setPropertyAsOptional(this.resource, MeasureDataModel.SingularUnit.factor, factor);
+		IdentifiedValidator.getValidator().setPropertyAsOptional(this.resource, MeasureDataModel.SingularUnit.factor, factor);
 	}
 	
 	public Optional<Float> getFactor() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsOptionalFloat(this.resource, MeasureDataModel.SingularUnit.factor);
+		return IdentifiedValidator.getValidator().getPropertyAsOptionalFloat(this.resource, MeasureDataModel.SingularUnit.factor);
 	}
 	
 	public URI getUnit() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.SingularUnit.unit);	
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.SingularUnit.unit);	
 	}
 
 	public void setUnit(URI unit) {

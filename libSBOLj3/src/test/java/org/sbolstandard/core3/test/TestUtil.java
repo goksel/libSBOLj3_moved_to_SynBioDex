@@ -24,7 +24,7 @@ import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.SBOLComparator;
 import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.ComponentType;
@@ -753,7 +753,7 @@ public class TestUtil {
 	{	 
 		PropertyValidationType validationType=Configuration.getConfiguration().getPropertyValidationType();
 		Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
-		List<String> messages=IdentityValidator.getValidator().validate(identified);
+		List<String> messages=IdentifiedValidator.getValidator().validate(identified);
 		printMessages(messages, "Identified");
 		assertEquals(numberOfExpectedErrors, messages.size());
 	    Configuration.getConfiguration().setPropertyValidationType(validationType);    

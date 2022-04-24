@@ -27,9 +27,9 @@ import org.sbolstandard.core3.vocabulary.Role;
 
 import junit.framework.TestCase;
 
-public class AttachmentTest2 extends TestCase {
+public class IdentifiedTest extends TestCase {
 	
-	public void testAttachment2() throws SBOLGraphException, IOException, Exception
+	public void testIdentified() throws SBOLGraphException, IOException, Exception
     {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
@@ -40,28 +40,29 @@ public class AttachmentTest2 extends TestCase {
         attachment.setHashAlgorithm("Alg1");
         attachment.setHash("aaa");
         
-        //Attachment.source: exactly one.
-        /*boolean validEx=false;
-        try
-        {
-        	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateAfterSettingProperties);
-        	attachment.setSource(null);
-        }
-        catch (SBOLGraphException ex)
-        {
-        	validEx=true;
-        }
-        finally 
-        {
-        	assertTrue(validEx);
-        }*/
-        TestUtil.validateProperty(attachment, "setSource", new Object[] {null}, URI.class);
-     	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
-     	attachment.setSource(null);
-        TestUtil.validateDocument(doc, 1);
+        
+        Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+        
+        attachment.setDisplayId("test");
+        TestUtil.validateIdentified(attachment,doc,0);
+        attachment.setDisplayId("1test");
+        TestUtil.validateIdentified(attachment,doc,1);
+        attachment.setDisplayId("_test");
+        TestUtil.validateIdentified(attachment,doc,0);
+        TestUtil.validateProperty(attachment, "setDisplayId", new Object[] {"!qq"}, String.class);
+        
+        
+        Attachment attachment2=doc.createAttachment("2attachment", URI.create("https://sbolstandard.org/attachment2_source"));
+        TestUtil.validateIdentified(attachment2,doc,1);
+        attachment2.setDisplayId("attachment2");
+        TestUtil.validateIdentified(attachment2,doc,0);
+      
+        attachment.setWasDerivedFrom(null);
+        TestUtil.validateIdentified(attachment,doc,0);
+        attachment.setWasDerivedFrom(Arrays.asList(attachment.getUri()));
+        TestUtil.validateIdentified(attachment, doc, 1);
+          
+        
     }
-	
-	
-	
 
 }

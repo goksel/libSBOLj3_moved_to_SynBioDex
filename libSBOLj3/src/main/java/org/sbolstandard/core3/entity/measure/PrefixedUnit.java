@@ -7,7 +7,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
@@ -30,7 +30,7 @@ public class PrefixedUnit extends Unit{
 	
 	@NotNull(message = "{PREFIXEDUNIT_PREFIX_NOT_NULL}")	
 	public URI getPrefix() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.PrefixedUnit.prefix);	
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.PrefixedUnit.prefix);	
 	}
 
 	public void setPrefix(@NotNull(message = "{PREFIXEDUNIT_PREFIX_NOT_NULL}") URI prefix) throws SBOLGraphException {
@@ -40,7 +40,7 @@ public class PrefixedUnit extends Unit{
 	
 	@NotNull(message = "{PREFIXEDUNIT_UNIT_NOT_NULL}")	
 	public URI getUnit() throws SBOLGraphException{
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.PrefixedUnit.unit);
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.PrefixedUnit.unit);
 	}
 
 	public void setUnit(@NotNull(message = "{PREFIXEDUNIT_UNIT_NOT_NULL}") URI unit) throws SBOLGraphException {

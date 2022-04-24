@@ -7,8 +7,9 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 import jakarta.validation.Valid;
@@ -34,6 +35,30 @@ public abstract class TopLevel extends Identified {
 		super(resource);
 	}
 	
+	@Override
+	public List<ValidationMessage> getValidationMessages()
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		
+    	String nameSpace=null;
+    	try
+    	{
+    		if (this.getNamespace()!=null)
+    		{
+    			nameSpace=this.getNamespace().toString().toLowerCase();
+    		}
+    	}
+    	catch (SBOLGraphException e) {}
+    	
+    	String uriString=this.getUri().toString().toLowerCase();
+    	if (!uriString.startsWith("urn") && nameSpace!=null){
+    		if (!uriString.startsWith(nameSpace)){
+    			validationMessages= addToValidations(validationMessages,new ValidationMessage("{TOPLEVEL_URI_STARTS_WITH_NAMESPACE}", "namespace"));      	
+    		}
+    	}
+    	return validationMessages;
+	}
+	
 	public List<URI> getAttachments() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.TopLevel.attachment);
 	}
@@ -44,7 +69,7 @@ public abstract class TopLevel extends Identified {
 	
 	@NotNull(message = "{TOPLEVEL_NAMESPACE_NOT_NULL}")
 	public URI getNamespace() throws SBOLGraphException{
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.TopLevel.namespace);	
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.TopLevel.namespace);	
 	}
 
 	public void setNamespace(@NotNull(message = "{TOPLEVEL_NAMESPACE_NOT_NULL}") URI namespace) throws SBOLGraphException {

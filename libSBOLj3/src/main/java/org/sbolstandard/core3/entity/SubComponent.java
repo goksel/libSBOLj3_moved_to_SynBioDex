@@ -11,7 +11,7 @@ import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.entity.Location.LocationFactory;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
@@ -36,7 +36,7 @@ public class SubComponent extends Feature{
 	}
 
 	public URI getRoleIntegration() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.roleIntegration);
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.roleIntegration);
 	}
 	
 	public void setRoleIntegration(URI roleIntegration) {
@@ -45,7 +45,7 @@ public class SubComponent extends Feature{
 
 	@NotNull(message = "{SUBCOMPONENT_ISINSTANCEOF_NOT_NULL}")
 	public URI getIsInstanceOf() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.instanceOf);
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.instanceOf);
 	}
 
 	public void setIsInstanceOf(@NotNull(message = "{SUBCOMPONENT_ISINSTANCEOF_NOT_NULL}") URI isInstanceOf) throws SBOLGraphException {

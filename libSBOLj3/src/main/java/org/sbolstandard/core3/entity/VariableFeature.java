@@ -8,7 +8,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Orientation;
@@ -38,7 +38,7 @@ public class VariableFeature extends Identified{
 	@NotNull(message = "{VARIABLEFEATURE_CARDINALITY_NOT_NULL}")
 	public VariableFeatureCardinality getCardinality() throws SBOLGraphException {
 		VariableFeatureCardinality cardinality=null;
-		URI value= IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableComponent.cardinality);	
+		URI value= IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableComponent.cardinality);	
 		if (value!=null)
 		{
 			cardinality=VariableFeatureCardinality.get(value);
@@ -58,7 +58,7 @@ public class VariableFeature extends Identified{
 	
 	@NotNull(message = "{VARIABLEFEATURE_FEATURE_NOT_NULL}")
 	public URI getFeature() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableComponent.variable);	
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableComponent.variable);	
 	}
 
 	public void setFeature(@NotNull(message = "{VARIABLEFEATURE_FEATURE_NOT_NULL}") URI feature) throws SBOLGraphException {

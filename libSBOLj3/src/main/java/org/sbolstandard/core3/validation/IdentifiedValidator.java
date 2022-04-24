@@ -18,26 +18,28 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
-public class IdentityValidator {
-	private static IdentityValidator idendityValidator = null;
+public class IdentifiedValidator {
+	private static IdentifiedValidator idendityValidator = null;
 	protected Validator validator;
 	
-	private IdentityValidator()
+	private IdentifiedValidator()
 	{	
 	}
-	
-	public static IdentityValidator getValidator() throws SBOLGraphException
+    
+	public static IdentifiedValidator getValidator() throws SBOLGraphException
 	{
 		if (idendityValidator == null)
 		{
 			try
 			{
-				idendityValidator=new IdentityValidator();
+				idendityValidator=new IdentifiedValidator();
 				ValidatorFactory factory = Validation.byDefaultProvider()
 		 	            .configure()
 		 	            //.addValueExtractor(new ...ValueExtractor())
@@ -70,7 +72,7 @@ public class IdentityValidator {
 	    	    fragments.add(String.format("Parent entity URI: %s",identifiedRoot.getUri().toString()));
 	    	    fragments.add(String.format("Parent entity type: %s",identifiedRoot.getClass()));    
 	    	}*/
-	    	if (violation.getInvalidValue()!=null){
+	    	if (violation.getInvalidValue()!=null && !(violation.getInvalidValue() instanceof Identified)){
 	    		fragments.add("Value:" + violation.getInvalidValue().toString());
 	    	}
 	    	String message=StringUtils.join(fragments, "," + System.lineSeparator()  + "\t");
@@ -164,7 +166,7 @@ public class IdentityValidator {
 	public Optional<Integer> getPropertyAsOptionalInteger(Resource resource, URI property) throws SBOLGraphException
 	{
 		Optional<Integer> result=Optional.empty();
-		String value=IdentityValidator.getValidator().getPropertyAsString(resource, property);
+		String value=IdentifiedValidator.getValidator().getPropertyAsString(resource, property);
 		if (value!=null){
 			result=Optional.of(Integer.valueOf(value));
 		}
@@ -186,7 +188,7 @@ public class IdentityValidator {
 	public Optional<Float> getPropertyAsOptionalFloat(Resource resource, URI property) throws SBOLGraphException
 	{
 		Optional<Float> result=Optional.empty();
-		String value=IdentityValidator.getValidator().getPropertyAsString(resource, property);
+		String value=IdentifiedValidator.getValidator().getPropertyAsString(resource, property);
 		if (value!=null){
 			try
 			{

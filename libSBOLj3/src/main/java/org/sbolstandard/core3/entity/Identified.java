@@ -14,21 +14,23 @@ import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
-import org.hibernate.validator.constraints.ParameterScriptAssert;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.measure.Measure;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.util.URINameSpace;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidIdentified;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 
+@ValidIdentified
 public abstract class Identified {
 	protected Resource resource=null;
 	
@@ -73,7 +75,7 @@ public abstract class Identified {
 	
 	@Pattern(regexp = "^[a-zA-Z_]+[a-zA-Z0-9_]*$", message = "{IDENTIFIED_DISPLAYID}")
 	public String getDisplayId() throws SBOLGraphException{
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.displayId);
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.displayId);
 	}
 	
 	public void setDisplayId(@Pattern(regexp = "^[a-zA-Z_]+[a-zA-Z0-9_]*$", message = "{IDENTIFIED_DISPLAYID}") String displayId) throws SBOLGraphException {
@@ -82,7 +84,7 @@ public abstract class Identified {
 	}
 	
 	public String getName() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.name);
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.name);
 	}
 	
 	public void setName(String name) throws SBOLGraphException {
@@ -91,7 +93,7 @@ public abstract class Identified {
 	}
 	
 	public String getDescription() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.description);
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.description);
 	}
 	
 	public void setDescription(String description) throws SBOLGraphException {
@@ -161,6 +163,38 @@ public abstract class Identified {
 	}
 	
 	abstract public URI getResourceType();
+
+	protected List<ValidationMessage> addToValidations(List<ValidationMessage> messages,ValidationMessage message)
+	{
+		if (messages==null)
+		{
+			messages=new ArrayList<ValidationMessage>();
+		}
+		messages.add(message);
+		return messages;
+		
+	}
+	public List<ValidationMessage> getValidationMessages()
+	{
+		List<ValidationMessage> validationMessages=null;
+		List<URI> wasDerivedFroms=this.getWasDerivedFrom();
+    	if (wasDerivedFroms!=null && wasDerivedFroms.contains(this.getUri()))
+    	{
+    		validationMessages= addToValidations(validationMessages,new ValidationMessage("{IDENTIFIED_REFERREDBY_WASDERIVEDFROM}", "wasDerivedFrom"));      
+    	}
+    	/*String name="";
+    	try
+    	{
+    		name= this.getName();
+    	}catch(SBOLGraphException e) {}
+    	
+    	if (name!=null && name.equals("invalidname"))
+    	{
+    		validationMessages= addToValidations(validationMessages,new ValidationMessage("{RANGE_START_NOT_NULL}", "name"));      
+    	}
+    	*/
+    	return validationMessages;
+	}
 	
 	protected <T extends Identified> Identified createIdentified(Resource res, Class<T> identified) throws SBOLGraphException
 	{

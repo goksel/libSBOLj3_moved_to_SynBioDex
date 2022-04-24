@@ -8,7 +8,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.hibernate.validator.internal.util.logging.Messages;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.Message;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
@@ -46,7 +46,7 @@ public class Attachment extends TopLevel{
 			source=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);	
 		}
 		return source;*/
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);
 	}
 
 	public void setSource(@NotNull (message="{ATTACHMENT_SOURCE_NOT_NULL}") URI source) throws SBOLGraphException {
@@ -82,7 +82,7 @@ public class Attachment extends TopLevel{
 		}
 		return format;*/
 		
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Attachment.format);	
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Attachment.format);	
 	}
 
 	public void setFormat(URI format) {
@@ -102,7 +102,7 @@ public class Attachment extends TopLevel{
 		}
 		return size;*/
 		OptionalLong size=OptionalLong.empty();
-		String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.size);
+		String value=IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.size);
 		if (value!=null)
 		{
 			size= OptionalLong.of(Long.parseLong(value));
@@ -127,7 +127,7 @@ public class Attachment extends TopLevel{
 			hash=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hash);	
 		}
 		return hash;*/
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hash);	
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hash);	
 	}
 
 	public void setHash(String hash) {
@@ -141,7 +141,7 @@ public class Attachment extends TopLevel{
 			hashAlgorithm=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hashAlgorithm);	
 		}
 		return hashAlgorithm;*/
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hashAlgorithm);	
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hashAlgorithm);	
 
 	}
 

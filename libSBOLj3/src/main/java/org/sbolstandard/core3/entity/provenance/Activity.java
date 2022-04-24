@@ -11,7 +11,7 @@ import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.ControlledTopLevel;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
 import jakarta.validation.Valid;
@@ -37,7 +37,7 @@ public class Activity extends ControlledTopLevel{
 	public XSDDateTime getStartedAtTime() throws SBOLGraphException {
 		XSDDateTime startedAtTime=null;
 		
-		String startedAtTimeString=IdentityValidator.getValidator().getPropertyAsString(this.resource, ProvenanceDataModel.Activity.startedAtTime);
+		String startedAtTimeString=IdentifiedValidator.getValidator().getPropertyAsString(this.resource, ProvenanceDataModel.Activity.startedAtTime);
 		if (startedAtTimeString!=null){
 			try{
 				startedAtTime= (XSDDateTime) XSDDateType.XSDdateTime.parse(startedAtTimeString);
@@ -60,7 +60,7 @@ public class Activity extends ControlledTopLevel{
 	public XSDDateTime getEndedAtTime() throws SBOLGraphException {
 		XSDDateTime endedAtTime=null;
 		
-		String timeString=IdentityValidator.getValidator().getPropertyAsString(this.resource, ProvenanceDataModel.Activity.endedAtTime);
+		String timeString=IdentifiedValidator.getValidator().getPropertyAsString(this.resource, ProvenanceDataModel.Activity.endedAtTime);
 		if (timeString!=null){
 			try{
 				endedAtTime= (XSDDateTime) XSDDateType.XSDdateTime.parse(timeString);

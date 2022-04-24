@@ -8,7 +8,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
@@ -43,7 +43,7 @@ public class ExternallyDefined extends Feature{
 	
 	@NotNull(message = "{EXTERNALLYDEFINED_DEFINITION_NOT_NULL}")
 	public URI getDefinition() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ExternalyDefined.definition);
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ExternalyDefined.definition);
 	}
 
 	public void setDefinition(@NotNull(message = "{EXTERNALLYDEFINED_DEFINITION_NOT_NULL}") URI definition) throws SBOLGraphException {

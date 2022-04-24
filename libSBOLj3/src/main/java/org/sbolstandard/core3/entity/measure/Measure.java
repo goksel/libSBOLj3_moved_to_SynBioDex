@@ -10,7 +10,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.ControlledIdentified;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
@@ -41,7 +41,7 @@ public class Measure extends ControlledIdentified{
 		//String valueString=String.valueOf(value);
 		//RDFUtil.setProperty(resource, MeasureDataModel.Measure.value, valueString);	
 		PropertyValidator.getValidator().validate(this, "setValue", new Object[] {value}, Optional.class);
-		IdentityValidator.getValidator().setPropertyAsOptional(this.resource, MeasureDataModel.Measure.value, value);
+		IdentifiedValidator.getValidator().setPropertyAsOptional(this.resource, MeasureDataModel.Measure.value, value);
 	}
 	
 	/*public XSDFloat getFactor() throws SBOLGraphException {
@@ -83,7 +83,7 @@ public class Measure extends ControlledIdentified{
 	//@NotNull(message = "Measure.value cannot be null")	
 	@NotNull (message = "{MEASURE_VALUE_NOT_NULL}")
 	public Optional<@NotNull (message = "{MEASURE_VALUE_NOT_NULL}") Float> getValue() throws SBOLGraphException {
-		Optional<Float> value= IdentityValidator.getValidator().getPropertyAsOptionalFloat(this.resource, MeasureDataModel.Measure.value);
+		Optional<Float> value= IdentifiedValidator.getValidator().getPropertyAsOptionalFloat(this.resource, MeasureDataModel.Measure.value);
 		return value;
 	}
 	
@@ -101,7 +101,7 @@ public class Measure extends ControlledIdentified{
 	*/
 	@NotNull(message = "{MEASURE_UNIT_NOT_NULL}")	
 	public URI getUnit() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.Measure.unit);	
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.Measure.unit);	
 	}
 
 	public void setUnit(@NotNull(message = "{MEASURE_UNIT_NOT_NULL}") URI unit) throws SBOLGraphException {

@@ -7,7 +7,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.ControlledTopLevel;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
@@ -36,7 +36,7 @@ public abstract class Unit extends ControlledTopLevel{
 	
 	@NotEmpty(message = "{UNIT_SYMBOL_NOT_EMPTY}")	
 	public String getSymbol() throws SBOLGraphException{
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.symbol);
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.symbol);
 	}
 	
 	public void setSymbol(@NotEmpty(message = "{UNIT_SYMBOL_NOT_EMPTY}") String symbol) throws SBOLGraphException {
@@ -54,7 +54,7 @@ public abstract class Unit extends ControlledTopLevel{
 	
 	@NotEmpty(message = "{UNIT_LABEL_NOT_EMPTY}")	
 	public String getLabel() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.label);
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.label);
 	}
 	
 	public void setLabel(@NotEmpty(message = "{UNIT_LABEL_NOT_EMPTY}") String label) throws SBOLGraphException{
@@ -97,7 +97,7 @@ public abstract class Unit extends ControlledTopLevel{
 	}
 	
 	public String getComment() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.comment);
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.comment);
 	}
 	
 	
@@ -110,7 +110,7 @@ public abstract class Unit extends ControlledTopLevel{
 	}
 	
 	public String getLongComment() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.longComment);
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.longComment);
 	}
 	
 	public void setLongComment(String longComment) {

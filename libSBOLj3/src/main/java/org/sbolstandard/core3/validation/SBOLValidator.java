@@ -72,7 +72,7 @@ public class SBOLValidator {
 	    	    fragments.add(String.format("Entity URI: %s",identified.getUri().toString()));
 	    	    fragments.add(String.format("Entity type: %s",identified.getClass()));    
 	    	}
-	    	if (violation.getInvalidValue()!=null){
+	    	if (violation.getInvalidValue()!=null && !(violation.getInvalidValue() instanceof Identified)){
 	    		fragments.add("Value:" + violation.getInvalidValue().toString());
 	    	}
 	    	String message=StringUtils.join(fragments, String.format(",%s\t", System.lineSeparator()));

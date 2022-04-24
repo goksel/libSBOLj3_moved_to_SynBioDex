@@ -7,7 +7,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
@@ -28,7 +28,7 @@ public class UnitMultiplication extends CompoundUnit{
 	
 	@NotNull(message = "{UNITMULTIPLICATION_TERM1_NOT_NULL}")	
 	public URI getTerm1() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitMultiplication.term1);	
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitMultiplication.term1);	
 	}
 
 	public void setTerm1(@NotNull(message = "UNITMULTIPLICATION_TERM1_NOT_NULL}") URI term1) throws SBOLGraphException {
@@ -38,7 +38,7 @@ public class UnitMultiplication extends CompoundUnit{
 	
 	@NotNull(message = "UNITMULTIPLICATION_TERM2_NOT_NULL}")	
 	public URI getTerm2() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitMultiplication.term2);	
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitMultiplication.term2);	
 	}
 
 	public void setTerm2(@NotNull(message = "UNITMULTIPLICATION_TERM2_NOT_NULL}") URI term2) throws SBOLGraphException {

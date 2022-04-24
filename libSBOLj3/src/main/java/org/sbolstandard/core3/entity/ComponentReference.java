@@ -6,7 +6,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
@@ -28,7 +28,7 @@ public class ComponentReference extends Feature{
 
 	@NotNull(message = "{COMBINATORIALREFERENCE_REFERSTO_NOT_NULL}")
 	public URI getRefersTo() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.refersTo);
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.refersTo);
 	}
 	
 	public void setRefersTo(@NotNull(message = "{COMBINATORIALREFERENCE_REFERSTO_NOT_NULL}") URI feature) throws SBOLGraphException {
@@ -38,7 +38,7 @@ public class ComponentReference extends Feature{
 	
 	@NotNull(message = "{COMBINATORIALREFERENCE_INCHILDOF_NOT_NULL}")
 	public URI getInChildOf() throws SBOLGraphException{
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.inChildOf);
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.inChildOf);
 	}
 
 	public void setInChildOf(@NotNull(message = "{COMBINATORIALREFERENCE_INCHILDOF_NOT_NULL}") URI inChildOf) throws SBOLGraphException{

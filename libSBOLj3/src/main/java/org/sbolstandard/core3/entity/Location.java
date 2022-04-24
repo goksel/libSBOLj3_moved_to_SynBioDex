@@ -8,7 +8,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Orientation;
@@ -38,7 +38,7 @@ public abstract class  Location extends Identified {
 
 	public Orientation getOrientation() throws SBOLGraphException{
 		Orientation orientation=null;
-		URI value=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.orientation);
+		URI value=IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.orientation);
 		if (value!=null){
 			orientation=Orientation.get(value); 
 		}
@@ -57,7 +57,7 @@ public abstract class  Location extends Identified {
 	
 	public OptionalInt getOrder() throws SBOLGraphException {
 		OptionalInt order=OptionalInt.empty();
-		String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Location.order);
+		String value=IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Location.order);
 		if (value!=null){
 			order=OptionalInt.of(Integer.valueOf(value));
 		}
@@ -76,7 +76,7 @@ public abstract class  Location extends Identified {
 	@Valid
 	@NotNull(message = "{LOCATION_SEQUENCE_NOT_NULL}")
 	public URI getSequence() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Location.sequence);
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Location.sequence);
 	}
 
 	public void setSequence(@NotNull(message = "{LOCATION_SEQUENCE_NOT_NULL}") URI sequence) throws SBOLGraphException {
