@@ -14,6 +14,7 @@ import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
+import org.hibernate.validator.constraints.ParameterScriptAssert;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.measure.Measure;
 import org.sbolstandard.core3.util.RDFUtil;
@@ -21,10 +22,12 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 
 public abstract class Identified {
 	protected Resource resource=null;
@@ -68,11 +71,13 @@ public abstract class Identified {
 		this.resource=ResourceFactory.createResource();	
 	}*/
 	
+	@Pattern(regexp = "^[a-zA-Z_]+[a-zA-Z0-9_]*$", message = "{IDENTIFIED_DISPLAYID}")
 	public String getDisplayId() throws SBOLGraphException{
 		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.displayId);
 	}
 	
-	public void setDisplayId(String displayId) {
+	public void setDisplayId(@Pattern(regexp = "^[a-zA-Z_]+[a-zA-Z0-9_]*$", message = "{IDENTIFIED_DISPLAYID}") String displayId) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setDisplayId", new Object[] {displayId}, String.class);
 		RDFUtil.setProperty(resource, DataModel.Identified.displayId, displayId);		
 	}
 	
@@ -93,11 +98,12 @@ public abstract class Identified {
 		RDFUtil.setProperty(resource, DataModel.Identified.description, description);
 	}
 	
+	
 	public List<URI> getWasDerivedFrom() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Identified.wasDerivedFrom);
 	}
 	
-	public void setWasDerivedFrom(List<URI> wasDerivedFrom) {
+	public void setWasDerivedFrom(@Valid List<URI> wasDerivedFrom) {
 		RDFUtil.setProperty(resource, DataModel.Identified.wasDerivedFrom, wasDerivedFrom);
 	}
 	

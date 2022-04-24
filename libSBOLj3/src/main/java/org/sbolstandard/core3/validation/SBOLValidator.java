@@ -120,20 +120,20 @@ public class SBOLValidator {
  	       return messages;
 	}
 	
-	public static String validateFolder(String folder, String extension) throws IOException, SBOLGraphException
+	public static String validateFolder(String folder, String extension, String keywordsToExclude) throws IOException, SBOLGraphException
 	{
 		StringBuilder output=new StringBuilder();
-		validateFolderRecursive(output, new File(folder), extension);
+		validateFolderRecursive(output, new File(folder), extension, keywordsToExclude);
 		String result=output.toString();
 		return result;
 	}
 	
 	public static String validateFolder(String folder) throws IOException, SBOLGraphException
 	{
-		return validateFolder(folder,null);
+		return validateFolder(folder,null,null);
 	}
 
-	private static void validateFolderRecursive(StringBuilder output, File folder, String extension) throws IOException, SBOLGraphException
+	private static void validateFolderRecursive(StringBuilder output, File folder, String extension, String keywordsToExclude) throws IOException, SBOLGraphException
 	{
 		File[] files=folder.listFiles();
 		for (int i=0;i<files.length;i++)
@@ -141,22 +141,25 @@ public class SBOLValidator {
 			File file=files[i];
 			if (file.isDirectory())
 			{
-				validateFolderRecursive(output, file, extension);
+				validateFolderRecursive(output, file, extension, keywordsToExclude);
 			}
 			else
 			{
 				boolean validate=true;
-				if (extension!=null)
+				if (!file.getPath().toLowerCase().contains(keywordsToExclude))
 				{
-					String ext=FileNameUtils.getExtension(file.getName());
-					if (!ext.equalsIgnoreCase(extension))
+					if (extension!=null)
 					{
-						validate=false;
+						String ext=FileNameUtils.getExtension(file.getName());
+						if (!ext.equalsIgnoreCase(extension))
+						{
+							validate=false;
+						}
 					}
-				}
-				if (validate)
-				{
-					validateFile(output, file);
+					if (validate)
+					{
+						validateFile(output, file);
+					}
 				}
 			}
 		}
@@ -165,19 +168,26 @@ public class SBOLValidator {
 	
 	public static void validateFile(StringBuilder output, File file) throws IOException, SBOLGraphException
 	{ 
-		SBOLDocument doc=SBOLIO.read(file);
-		String folder=SBOLAPI.class.getClassLoader().getResource("validation").getFile();
-		String[] files=new File(folder).list();
-		
-		//while (validationFiles.hasMoreElements())
-		for (int i=0;i<files.length;i++)
-		{
-			//String resourceFile=validationFiles.nextElement().getFile();
-			String resourceFile="validation/" + files[i];
+		try {
+			SBOLDocument doc=SBOLIO.read(file);
+			/*String folder=SBOLAPI.class.getClassLoader().getResource("validation").getFile();
+			String[] files=new File(folder).list();
 			
-			String sparqlQuery=loadQuery(resourceFile);
-			String queryName= new File(resourceFile).getName();
-			validateFileWithQuery(output, doc, sparqlQuery, file, queryName);
+			//while (validationFiles.hasMoreElements())
+			for (int i=0;i<files.length;i++)
+			{
+				//String resourceFile=validationFiles.nextElement().getFile();
+				String resourceFile="validation/" + files[i];
+				
+				String sparqlQuery=loadQuery(resourceFile);
+				String queryName= new File(resourceFile).getName();
+				
+				validateFileWithQuery(output, doc, sparqlQuery, file, queryName);
+			}*/
+		}
+		catch (SBOLGraphException e)
+		{
+			throw new SBOLGraphException(e.getMessage() +  System.lineSeparator()  + "File:" + file.getPath(), null);
 		}
 		
 		//String sparqlDisplayId=loadQuery("validation/displayid.sparql");

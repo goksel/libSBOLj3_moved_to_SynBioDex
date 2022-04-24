@@ -101,34 +101,31 @@ public class AppTest
         {
         	SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation),popsReceiver, pTetR, Arrays.asList(ParticipationRole.Stimulated), TetR_protein, Arrays.asList(ParticipationRole.Stimulator));
         }
-        middle= System.nanoTime();
+        //middle= System.nanoTime();
         
         
         end= System.nanoTime();
-        print(start,middle, end);
+        print(start,end);
         
         
         start=System.nanoTime();
         
-        for (int i=0;i<300000;i++)
+        for (int i=0;i<3000;i++)
         {
         	popsReceiver.getInteractions(); 
         }
-        middle= System.nanoTime();
         
         
         end= System.nanoTime();
-        print(start,middle, end);
+        print(start, end);
        
         
         
     }
     
-    private void print(long start, long middle, long end)
+    private void print(long start, long end)
     {
-    	 long first=middle-start;
-         long second=end-middle;
-         System.out.println(String.format("First execution time: %s ns, %s ms", first, first/1000000));
-         System.out.println(String.format("Second execution time: %s ns, %s ms", second, second/1000000));
+    	 long first=end-start;
+         System.out.println(String.format("Execution time: %s ns, %s ms", first, first/1000000));
     }
 }

@@ -10,7 +10,7 @@ public class Validate {
 
 	@Test
 	public void validate() throws IOException, SBOLGraphException {
-		String message=SBOLValidator.validateFolder("output","ttl");
+		String message=SBOLValidator.validateFolder("output","ttl","invalid");
 		
 		if (message!=null)
 		{

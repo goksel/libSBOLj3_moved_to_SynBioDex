@@ -94,6 +94,30 @@ public class AttachmentTest extends TestCase {
         //Attachment size can be bigger than zero
         attachment.setSize(tempLong);
         TestUtil.validateIdentified(attachment,doc,0);
+        
+        attachment.setDisplayId("test");
+        TestUtil.validateIdentified(attachment,doc,0);
+        attachment.setDisplayId("1test");
+        TestUtil.validateIdentified(attachment,doc,1);
+        attachment.setDisplayId("_test");
+        TestUtil.validateIdentified(attachment,doc,0);
+        TestUtil.validateProperty(attachment, "setDisplayId", new Object[] {"!qq"}, String.class);
+        
+        
+        Attachment attachment2=doc.createAttachment("2attachment", URI.create("https://sbolstandard.org/attachment2_source"));
+        TestUtil.validateIdentified(attachment2,doc,1);
+        attachment2.setDisplayId("attachment2");
+        TestUtil.validateIdentified(attachment2,doc,0);
+        
+        /*attachment2.setWasDerivedFrom(null);
+        TestUtil.validateIdentified(attachment2,doc,0);
+        attachment2.setWasDerivedFrom(Arrays.asList(attachment2.getUri()));
+        TestUtil.validateIdentified(attachment2,doc,1);*/
+          
+        
+        
+        
+        
       
     }
 

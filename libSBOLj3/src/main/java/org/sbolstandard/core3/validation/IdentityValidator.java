@@ -73,7 +73,7 @@ public class IdentityValidator {
 	    	if (violation.getInvalidValue()!=null){
 	    		fragments.add("Value:" + violation.getInvalidValue().toString());
 	    	}
-	    	String message=StringUtils.join(fragments, ",\r\n\t");
+	    	String message=StringUtils.join(fragments, "," + System.lineSeparator()  + "\t");
 	    	messages.add(message);
 	    }
 	    return messages;

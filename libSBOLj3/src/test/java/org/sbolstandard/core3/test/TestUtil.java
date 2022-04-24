@@ -789,6 +789,8 @@ public class TestUtil {
         {
         	if (ex.getCause() instanceof SBOLGraphException)
         	{
+        		System.out.println("Property Validation:" + ex.getCause().getMessage());
+        		System.out.println("--------------------");
         		validEx=true;
         	}
         	else
