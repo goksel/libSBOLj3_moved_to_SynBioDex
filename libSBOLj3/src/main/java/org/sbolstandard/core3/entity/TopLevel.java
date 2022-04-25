@@ -36,24 +36,20 @@ public abstract class TopLevel extends Identified {
 	}
 	
 	@Override
-	public List<ValidationMessage> getValidationMessages()
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
 	{
 		List<ValidationMessage> validationMessages=super.getValidationMessages();
 		
     	String nameSpace=null;
-    	try
-    	{
-    		if (this.getNamespace()!=null)
-    		{
-    			nameSpace=this.getNamespace().toString().toLowerCase();
-    		}
+    	
+    	if (this.getNamespace()!=null){
+    		nameSpace=this.getNamespace().toString().toLowerCase();
     	}
-    	catch (SBOLGraphException e) {}
     	
     	String uriString=this.getUri().toString().toLowerCase();
     	if (!uriString.startsWith("urn") && nameSpace!=null){
     		if (!uriString.startsWith(nameSpace)){
-    			validationMessages= addToValidations(validationMessages,new ValidationMessage("{TOPLEVEL_URI_STARTS_WITH_NAMESPACE}", "namespace"));      	
+    			validationMessages= addToValidations(validationMessages,new ValidationMessage("{TOPLEVEL_URI_STARTS_WITH_NAMESPACE}", DataModel.TopLevel.namespace.toString()));      	
     		}
     	}
     	return validationMessages;

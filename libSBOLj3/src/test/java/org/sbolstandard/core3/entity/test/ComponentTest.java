@@ -14,6 +14,7 @@ import org.sbolstandard.core3.entity.Component;
 import org.sbolstandard.core3.entity.ComponentReference;
 import org.sbolstandard.core3.entity.Feature;
 import org.sbolstandard.core3.entity.SBOLDocument;
+import org.sbolstandard.core3.entity.Sequence;
 import org.sbolstandard.core3.entity.SequenceFeature;
 import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.io.SBOLFormat;
@@ -76,9 +77,20 @@ public class ComponentTest extends TestCase {
 	    TestUtil.validateDocument(doc,1);
 	    attachment.setSize(OptionalLong.of(100));
 	    
-	    TestUtil.validateProperty(pTetR, "setNamespace", new Object[] {null}, URI.class);
-	    pTetR.setNamespace(null);
-	    TestUtil.validateIdentified(pTetR,doc,1);
+	    
+	    //Encoding must be provided if elements are set
+	    Sequence seq=doc.getSequences().get(0);
+	    seq.setEncoding(null);
+	    TestUtil.validateIdentified(seq,doc,1,1);
+		
+	    //One main component type must be provided.
+	    pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUrl(), ComponentType.Protein.getUrl() ));
+	    TestUtil.validateIdentified(pTetR,doc,1,2);
+		  
+	    
+	    
+		   
+	    
     }
 
 }

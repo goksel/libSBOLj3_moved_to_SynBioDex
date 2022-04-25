@@ -12,6 +12,8 @@ import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
+import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
 
@@ -45,6 +47,31 @@ public class Component extends TopLevel {
 	protected Component(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
+	}
+	
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		List<URI> types=this.getTypes();
+		if (types!=null)
+		{
+			int counter=0;
+			ComponentType[] typeValues=ComponentType.values();
+			for (int i=0;i<typeValues.length;i++)
+			{
+				if (types.contains(typeValues[i].getUrl()))
+				{
+					counter++;
+				}
+				if (counter==2)
+				{
+					validationMessages= addToValidations(validationMessages,new ValidationMessage("{COMPONENT_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type.toString()));      	
+				    break;
+				}		
+			}
+		}
+    	return validationMessages;
 	}
 	
 	@Valid

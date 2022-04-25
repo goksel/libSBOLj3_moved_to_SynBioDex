@@ -174,25 +174,14 @@ public abstract class Identified {
 		return messages;
 		
 	}
-	public List<ValidationMessage> getValidationMessages()
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
 	{
 		List<ValidationMessage> validationMessages=null;
 		List<URI> wasDerivedFroms=this.getWasDerivedFrom();
     	if (wasDerivedFroms!=null && wasDerivedFroms.contains(this.getUri()))
     	{
-    		validationMessages= addToValidations(validationMessages,new ValidationMessage("{IDENTIFIED_REFERREDBY_WASDERIVEDFROM}", "wasDerivedFrom"));      
+    		validationMessages= addToValidations(validationMessages,new ValidationMessage("{IDENTIFIED_CANNOT_BE_REFERREDBY_WASDERIVEDFROM}", DataModel.Identified.wasDerivedFrom.toString()));      
     	}
-    	/*String name="";
-    	try
-    	{
-    		name= this.getName();
-    	}catch(SBOLGraphException e) {}
-    	
-    	if (name!=null && name.equals("invalidname"))
-    	{
-    		validationMessages= addToValidations(validationMessages,new ValidationMessage("{RANGE_START_NOT_NULL}", "name"));      
-    	}
-    	*/
     	return validationMessages;
 	}
 	

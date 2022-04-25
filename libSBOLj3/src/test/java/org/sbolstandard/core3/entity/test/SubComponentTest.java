@@ -31,6 +31,7 @@ import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.Orientation;
 import org.sbolstandard.core3.vocabulary.RestrictionType;
 import org.sbolstandard.core3.vocabulary.Role;
+import org.sbolstandard.core3.vocabulary.RoleIntegration;
 
 import jakarta.validation.Constraint;
 import junit.framework.TestCase;
@@ -76,5 +77,10 @@ public class SubComponentTest extends TestCase {
 	    range.setEnd(Optional.empty());
 	    range2.setEnd(Optional.empty());
 	    TestUtil.validateIdentified(termSubComponent,doc,3);
+	    termSubComponent.setRoleIntegration(null);
+	    TestUtil.validateIdentified(termSubComponent,doc,3);
+	    termSubComponent.setRoleIntegration(RoleIntegration.valueOf("sdfsdf"));
+	    
+	    
     }
 }

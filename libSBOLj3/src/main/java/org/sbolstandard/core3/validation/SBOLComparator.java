@@ -49,6 +49,7 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
+import org.sbolstandard.core3.vocabulary.RoleIntegration;
 
 public class SBOLComparator {
 
@@ -592,7 +593,7 @@ public class SBOLComparator {
 		//TODO: assertEqualLocations(entity1, entity2, entity1.getLocations(),entity2.getLocations(), DataModel.SubComponent.location);
 		//TODO: assertEqualLocations(entity1, entity2, entity1.getSourceLocations(),entity2.getSourceLocations(), DataModel.SubComponent.sourcelocation);
 			output = add(output, assertEqual(entity1, entity2, entity1.getIsInstanceOf(),entity2.getIsInstanceOf(), DataModel.SubComponent.instanceOf));
-			output = add(output, assertEqual(entity1, entity2, entity1.getRoleIntegration(),entity2.getRoleIntegration(), DataModel.SubComponent.roleIntegration));		
+			output = add(output, assertEqualEnum(entity1, entity2, entity1.getRoleIntegration(),entity2.getRoleIntegration(), DataModel.SubComponent.roleIntegration));		
 		}
 		return output;
 	}
@@ -790,7 +791,23 @@ public class SBOLComparator {
 		{
 			output = add(output,message);
 		}
-		return output;
+		return output;	
+	}
+	
+	private static StringBuilder assertEqualEnum(Identified identified1, Identified identified2, Object value1, Object value2, URI property)
+	{
+		StringBuilder output=null;
+		URI uri1=null;
+		URI uri2=null;
+		if (value1!=null && value1 instanceof RoleIntegration)
+		{
+			uri1=((RoleIntegration) value1).getUri();
+		}
+		if (value2!=null && value2 instanceof RoleIntegration)
+		{
+			uri2=((RoleIntegration) value2).getUri();
+		}
+		return assertEqual(identified1, identified2, uri1, uri2, property);
 		
 	}
 	

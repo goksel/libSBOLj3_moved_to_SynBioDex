@@ -41,17 +41,29 @@ public class IdentifiedAnnotationValidator implements ConstraintValidator<ValidI
         		 context.buildConstraintViolationWithTemplate( "{RANGE_START_NOT_NULL}" )
                  .addPropertyNode( "name" ).addConstraintViolation();
         	}*/
-    		List<ValidationMessage> messages=identified.getValidationMessages();
-    		if (messages!=null)
+    		List<ValidationMessage> messages=null;
+    		try
+    		{
+    			 messages=identified.getValidationMessages();
+    			 if (messages!=null)
+    	    		{
+    	    			valid=false;
+    	    			context.disableDefaultConstraintViolation();
+    	    			for (ValidationMessage message: messages)
+    	    			{
+    	    				  context.buildConstraintViolationWithTemplate(message.getMessage())
+    	                      .addPropertyNode(message.getProperty()).addConstraintViolation();
+    	    			}
+    	    		}
+    		}
+    		catch (SBOLGraphException e)
     		{
     			valid=false;
     			context.disableDefaultConstraintViolation();
-    			for (ValidationMessage message: messages)
-    			{
-    				  context.buildConstraintViolationWithTemplate(message.getMessage())
-                      .addPropertyNode(message.getProperty()).addConstraintViolation();
-    			}
+    			context.buildConstraintViolationWithTemplate(e.getMessage() + " Exception: " + e.toString())
+                .addPropertyNode("error").addConstraintViolation();
     		}
+    		
         }
     	return valid;
     }

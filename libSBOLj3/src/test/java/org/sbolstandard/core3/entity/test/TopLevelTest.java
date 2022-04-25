@@ -40,18 +40,16 @@ public class TopLevelTest extends TestCase {
         attachment.setHashAlgorithm("Alg1");
         attachment.setHash("aaa");
         
-        
         Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
         
         attachment.setWasDerivedFrom(Arrays.asList(attachment.getUri()));  
         attachment.setNamespace(URI.create("http://sdfsf.org"));
         TestUtil.validateIdentified(attachment,doc,2);
       
-          
-        
+        TestUtil.validateProperty(attachment, "setNamespace", new Object[] {null}, URI.class);
+        attachment.setNamespace(null);
+	    TestUtil.validateIdentified(attachment,doc,2);
+	  
     }
-	
-	
-	
 
 }

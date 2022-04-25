@@ -14,6 +14,8 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
+import org.sbolstandard.core3.vocabulary.Encoding;
+import org.sbolstandard.core3.vocabulary.RoleIntegration;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -35,13 +37,24 @@ public class SubComponent extends Feature{
 		super(resource);
 	}
 
-	public URI getRoleIntegration() throws SBOLGraphException {
-		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.roleIntegration);
+	public RoleIntegration getRoleIntegration() throws SBOLGraphException {		
+		RoleIntegration roleIntegration=null;
+		URI value=IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.roleIntegration);
+		if (value!=null){
+			roleIntegration=RoleIntegration.get(value); 
+		}
+		return roleIntegration;
 	}
 	
-	public void setRoleIntegration(URI roleIntegration) {
-		RDFUtil.setProperty(this.resource, DataModel.SubComponent.roleIntegration, roleIntegration);
+	public void setRoleIntegration(RoleIntegration roleIntegration) {
+		URI roleIntegrationURI=null;
+		if (roleIntegration!=null)
+		{
+			roleIntegrationURI=roleIntegration.getUri();
+		}
+		RDFUtil.setProperty(this.resource, DataModel.SubComponent.roleIntegration, roleIntegrationURI);
 	}
+	
 
 	@NotNull(message = "{SUBCOMPONENT_ISINSTANCEOF_NOT_NULL}")
 	public URI getIsInstanceOf() throws SBOLGraphException {

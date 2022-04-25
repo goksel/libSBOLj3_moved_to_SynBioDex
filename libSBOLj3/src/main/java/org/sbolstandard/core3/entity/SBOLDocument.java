@@ -154,6 +154,7 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<Sequence> getSequences() throws SBOLGraphException {
 		this.sequences=addToList(model, this.sequences, DataModel.Sequence.uri,Sequence.class);
 		return sequences;
@@ -272,6 +273,7 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid	
 	public List<Implementation> getImplementations() throws SBOLGraphException {
 		this.implementations=addToList(model, this.implementations, DataModel.Implementation.uri,Implementation.class);
 		return implementations;
@@ -295,6 +297,7 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<ExperimentalData> getExperimentalData() throws SBOLGraphException {
 		this.experimentalDatas=addToList(model, this.experimentalDatas, DataModel.ExperimentalData.uri,ExperimentalData.class);
 		return experimentalDatas;
@@ -346,6 +349,7 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<Collection> getCollections() throws SBOLGraphException {
 		this.collections=addToList(model, this.collections, DataModel.Collection.uri,Collection.class);
 		return collections;
@@ -368,7 +372,8 @@ public class SBOLDocument {
 			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
 		}
 	}
-		
+	
+	@Valid	
 	public List<Experiment> getExperiments() throws SBOLGraphException {
 		this.experiments=addToList(model, this.experiments, DataModel.Experiment.uri,Experiment.class);
 		return experiments;
@@ -437,7 +442,7 @@ public class SBOLDocument {
 		}
 	}
 	
-	
+	@Valid
 	public List<Agent> getAgents() throws SBOLGraphException {
 		this.agents=addToList(model, this.agents, ProvenanceDataModel.Agent.uri,Agent.class);
 		return agents;
@@ -461,6 +466,7 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<Plan> getPlans() throws SBOLGraphException {
 		this.plans=addToList(model, this.plans, ProvenanceDataModel.Plan.uri,Plan.class);
 		return plans;
@@ -569,6 +575,7 @@ public class SBOLDocument {
 		}
 	}
 	
+	@Valid
 	public List<SingularUnit> getSingularUnits() throws SBOLGraphException {
 		this.singularUnits=addToList(model, this.singularUnits, MeasureDataModel.SingularUnit.uri,SingularUnit.class);
 		return singularUnits;
