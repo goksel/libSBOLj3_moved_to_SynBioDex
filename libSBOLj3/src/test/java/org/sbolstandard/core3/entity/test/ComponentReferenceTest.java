@@ -3,10 +3,7 @@ package org.sbolstandard.core3.entity.test;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
-import java.util.OptionalLong;
-
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Collection;
 import org.sbolstandard.core3.entity.Component;
 import org.sbolstandard.core3.entity.ComponentReference;
 import org.sbolstandard.core3.entity.SBOLDocument;
@@ -16,8 +13,6 @@ import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
-import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.Role;
 
@@ -42,7 +37,7 @@ public class ComponentReferenceTest extends TestCase {
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
         
-    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
         
 		TestUtil.validateIdentified(compRef,doc,0);
 		
@@ -59,6 +54,15 @@ public class ComponentReferenceTest extends TestCase {
 		compRef.setInChildOf(null);
 		TestUtil.validateIdentified(compRef,doc,1);
 		compRef.setInChildOf(temp);
+		TestUtil.validateIdentified(compRef,doc,0);
+		//inchildOf must refer to a subcomponent in parent component.
+		compRef.setInChildOf(URI.create("http://invalidcomponentreference.org"));
+		TestUtil.validateIdentified(ilab16_dev1,doc,1);
+		
+		
+		
+		
+		
 		
 
     }

@@ -13,10 +13,13 @@ import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
+import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.RoleIntegration;
 
+import jakarta.validation.ConstraintTarget;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
@@ -37,13 +40,37 @@ public class SubComponent extends Feature{
 		super(resource);
 	}
 
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		List<URI> roles=this.getRoles();
+		if (roles!=null && roles.size()>0)
+		{
+			RoleIntegration roleIntegration=this.getRoleIntegration();
+			if (roleIntegration==null)
+			{
+				validationMessages= addToValidations(validationMessages,new ValidationMessage("{SUBCOMPONENT_ROLEINTEGRATION_NOT_NULL_IF_ROLES_EXIST}", DataModel.SubComponent.roleIntegration.toString()));      	
+			}
+		}
+    	return validationMessages;
+	}
+	
 	public RoleIntegration getRoleIntegration() throws SBOLGraphException {		
 		RoleIntegration roleIntegration=null;
 		URI value=IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.roleIntegration);
+		//value=URI.create("http://test.org");
 		if (value!=null){
-			roleIntegration=RoleIntegration.get(value); 
+			roleIntegration=toRoleIntegration(value);
+			PropertyValidator.getValidator().validateReturnValue(this, "toRoleIntegration", roleIntegration, URI.class);
 		}
 		return roleIntegration;
+	}
+	
+	@NotNull(message = "{SUBCOMPONENT_ROLEINTEGRATION_VALID_IF_NOT_NULL}")   
+	public RoleIntegration toRoleIntegration(URI uri)
+	{
+		return RoleIntegration.get(uri); 
 	}
 	
 	public void setRoleIntegration(RoleIntegration roleIntegration) {

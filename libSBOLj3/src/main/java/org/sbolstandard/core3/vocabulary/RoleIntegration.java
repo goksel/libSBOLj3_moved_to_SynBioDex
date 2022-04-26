@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.sbolstandard.core3.util.URINameSpace;
 
+import jakarta.validation.constraints.NotNull;
+
 public enum RoleIntegration {
 	overrideRoles(URINameSpace.SBOL.local("overrideRoles")), 
 	mergeRoles(URINameSpace.SBOL.local("mergeRoles"));

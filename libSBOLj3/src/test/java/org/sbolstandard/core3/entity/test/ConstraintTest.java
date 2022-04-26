@@ -3,26 +3,14 @@ package org.sbolstandard.core3.entity.test;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
-import java.util.List;
-
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Collection;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.ComponentReference;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.SubComponent;
+import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.Encoding;
-import org.sbolstandard.core3.vocabulary.RestrictionType;
-import org.sbolstandard.core3.vocabulary.Role;
-
-import jakarta.validation.Constraint;
+import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
 public class ConstraintTest extends TestCase {
@@ -50,8 +38,9 @@ public class ConstraintTest extends TestCase {
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
         
-    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
         
+    	
         TestUtil.validateIdentified(constraint,doc,0);
         TestUtil.validateProperty(constraint, "setRestriction", new Object[] {null}, URI.class);
 		constraint.setRestriction(null);
@@ -64,6 +53,8 @@ public class ConstraintTest extends TestCase {
 		TestUtil.validateProperty(constraint, "setSubject", new Object[] {null}, URI.class);
 		constraint.setSubject(null);
 		TestUtil.validateIdentified(constraint,doc,3);
+		
+		
     }
 
 }

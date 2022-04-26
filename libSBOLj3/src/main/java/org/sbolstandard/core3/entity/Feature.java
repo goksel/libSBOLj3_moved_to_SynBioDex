@@ -8,8 +8,12 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Orientation;
+import org.sbolstandard.core3.vocabulary.RoleIntegration;
+
+import jakarta.validation.constraints.NotNull;
 
 public abstract class Feature extends Identified{
 	/*private List<URI> roles=null;
@@ -38,9 +42,17 @@ public abstract class Feature extends Identified{
 		
 		URI value=IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.orientation);
 		if (value!=null){
-			orientation=Orientation.get(value); 			
+			
+			orientation=toOrientation(value); 	
+			PropertyValidator.getValidator().validateReturnValue(this, "toOrientation", orientation, URI.class);
 		}
 		return orientation;
+	}
+	
+	@NotNull(message = "{FEATURE_ORIENTATION_VALID_IF_NOT_NULL}")   
+	public Orientation toOrientation (URI uri)
+	{
+		return Orientation.get(uri); 
 	}
 	
 	public void setOrientation(Orientation orientation) {

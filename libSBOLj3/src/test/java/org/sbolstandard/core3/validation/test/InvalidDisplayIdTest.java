@@ -3,20 +3,14 @@ package org.sbolstandard.core3.validation.test;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
-
-import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Collection;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.SBOLDocument;
+import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.Role;
+import org.sbolstandard.core3.vocabulary.*;
 
 import junit.framework.TestCase;
 
@@ -27,8 +21,9 @@ public class InvalidDisplayIdTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
        
-        Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.NoValidation);
-        
+        Configuration.getConfiguration().setValidateBeforeSaving(false);
+        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+ 	    
         Component TetR_protein=SBOLAPI.createComponent(doc, "TetR_protein", ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
         TetR_protein.setDisplayId("1TetR");
         //Component LacI_protein=SBOLAPI.createComponent(doc, "LacI_protein", ComponentType.Protein.getUrl(), "LacI", "LacI protein", Role.TF);

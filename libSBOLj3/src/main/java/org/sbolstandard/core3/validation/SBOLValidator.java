@@ -64,7 +64,7 @@ public class SBOLValidator {
 	    Set<ConstraintViolation<SBOLDocument>> violations = validator.validate(document);
 	    List<String> messages=new ArrayList<String>();
 	    for (ConstraintViolation<SBOLDocument> violation : violations) {
-	    	List<String> fragments=new ArrayList<String>();
+	    	/*List<String> fragments=new ArrayList<String>();
 	    	fragments.add(violation.getMessage());
 	    	fragments.add(String.format("Property: %s",violation.getPropertyPath().toString()));
 	    	if (violation.getLeafBean()!=null && violation.getLeafBean() instanceof Identified ){
@@ -75,8 +75,8 @@ public class SBOLValidator {
 	    	if (violation.getInvalidValue()!=null && !(violation.getInvalidValue() instanceof Identified)){
 	    		fragments.add("Value:" + violation.getInvalidValue().toString());
 	    	}
-	    	String message=StringUtils.join(fragments, String.format(",%s\t", System.lineSeparator()));
-	    	messages.add(message);
+	    	String message=StringUtils.join(fragments, String.format(",%s\t", System.lineSeparator()));*/
+	    	messages.add(PropertyValidator.getViolotionMessage(violation));
 	    }
 	    return messages;
 	}

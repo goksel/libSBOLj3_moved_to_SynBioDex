@@ -28,6 +28,9 @@ public enum Orientation {
         {
             lookup.put(orientation.getUri(), orientation);
         }
+        lookup.put(URINameSpace.SBOL.local("inline"), inline);
+        lookup.put(URINameSpace.SBOL.local("reverseComplement"), reverseComplement);
+        
     }
   
     public static Orientation get(URI uri) 

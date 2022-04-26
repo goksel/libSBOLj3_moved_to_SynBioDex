@@ -23,8 +23,8 @@ import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
+import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.SBOLComparator;
 import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.ComponentType;
@@ -730,10 +730,16 @@ public class TestUtil {
 	
 	private static void printMessages(List<String> messages, String type)
 	{	 
-        for (String message: messages){
-        	System.out.println(type +  " Validation test: " + message);
-        }
         if (messages!=null && messages.size()>0)
+        {
+			for (String message: messages){
+	        	System.out.println(type +  " Validation test: " + message);
+	        } 
+        }
+        else
+        {
+        	System.out.println("\tNo errors. Type:" + type);
+        }
         System.out.println("--------------------");
 	}
 	
@@ -751,33 +757,35 @@ public class TestUtil {
 	
 	public static void validateIdentified(Identified identified,int numberOfExpectedErrors) throws SBOLGraphException
 	{	 
-		PropertyValidationType validationType=Configuration.getConfiguration().getPropertyValidationType();
-		Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+		boolean isValidateAfterSettingPropertiesInitial=Configuration.getConfiguration().isValidateAfterSettingProperties();
+		Configuration.getConfiguration().setValidateAfterReadingSBOLDocuments(true);
 		List<String> messages=IdentifiedValidator.getValidator().validate(identified);
+		System.out.println("Identified:" + identified.getUri());
 		printMessages(messages, "Identified");
-		assertEquals(numberOfExpectedErrors, messages.size());
-	    Configuration.getConfiguration().setPropertyValidationType(validationType);    
+		int size= (messages==null)? 0 : messages.size();
+		assertEquals(numberOfExpectedErrors, size);
+	    Configuration.getConfiguration().setValidateAfterReadingSBOLDocuments(isValidateAfterSettingPropertiesInitial);    
 	}
 	
 	public static void validateDocument(SBOLDocument document ,int numberOfExpectedErrors) throws SBOLGraphException
 	{	 
-		PropertyValidationType validationType=Configuration.getConfiguration().getPropertyValidationType();
-		Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
-    
+		boolean isValidateAfterSettingPropertiesInitial=Configuration.getConfiguration().isValidateAfterSettingProperties();
+		Configuration.getConfiguration().setValidateAfterReadingSBOLDocuments(true);
+		
 		List<String> messages=SBOLValidator.getValidator().validate(document);
+		int size= (messages==null)? 0 : messages.size();
 		printMessages(messages, "Document");
-		assertEquals(numberOfExpectedErrors, messages.size());
-	    Configuration.getConfiguration().setPropertyValidationType(validationType);
-	        
+		assertEquals(numberOfExpectedErrors, size);
+	    Configuration.getConfiguration().setValidateAfterReadingSBOLDocuments(isValidateAfterSettingPropertiesInitial);
 	}
 	
 	public static void validateProperty(Identified identified, String methodName, Object[] parameterValues, Class<?>... parameterTypes) throws SBOLGraphException, Exception
 	{
-		PropertyValidationType validationType=Configuration.getConfiguration().getPropertyValidationType();
+		boolean isValidateAfterSettingPropertiesInitial=Configuration.getConfiguration().isValidateAfterSettingProperties();
 		boolean validEx=false;   
 		Method method;
 		try {
-	    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateAfterSettingProperties);
+	    	Configuration.getConfiguration().setValidateAfterSettingProperties(true);
 			method = identified.getClass().getMethod(methodName, parameterTypes);
 			method.invoke(identified, parameterValues);
 		} 
@@ -789,7 +797,7 @@ public class TestUtil {
         {
         	if (ex.getCause() instanceof SBOLGraphException)
         	{
-        		System.out.println("Property Validation:" + ex.getCause().getMessage());
+        		System.out.println("Property Validation: " + ex.getCause().getMessage());
         		System.out.println("--------------------");
         		validEx=true;
         	}
@@ -802,7 +810,59 @@ public class TestUtil {
         {
         	String message=String.format("Property validation fails. Entity: %s, property: %s, values:", identified.getUri(), methodName, StringUtils.join(parameterValues,","));
         	assertTrue(message,validEx);
-        	Configuration.getConfiguration().setPropertyValidationType(validationType);
+        	Configuration.getConfiguration().setValidateAfterSettingProperties(isValidateAfterSettingPropertiesInitial);
+        }
+	}
+	
+	public static void validateReturnValue(Identified identified, String methodName, Object[] parameterValues, Class<?>... parameterTypes) throws SBOLGraphException, Exception
+	{
+		validateReturnValue(true, identified, methodName, parameterValues, parameterTypes);
+	}
+	
+	public static void validateReturnValue(boolean shouldFail, Identified identified, String methodName, Object[] parameterValues, Class<?>... parameterTypes) throws SBOLGraphException, Exception
+	{
+		boolean validEx=false;   
+		Method method;
+		try {
+			method = identified.getClass().getMethod(methodName, parameterTypes);
+			Object value=method.invoke(identified, parameterValues);
+			PropertyValidator.getValidator().validateReturnValue(identified, methodName, value, parameterTypes);
+			
+		} 
+		catch (NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+			throw new Exception(e.getMessage(),e);
+		}
+		 catch (Exception ex)
+        {
+			 String message=null;
+        	if (ex instanceof SBOLGraphException)
+        	{
+        		validEx=true;
+        		message=ex.getMessage();
+        	}
+        	else if (ex.getCause() instanceof SBOLGraphException){
+        		validEx=true;
+        		message=ex.getCause().getLocalizedMessage();
+        	}
+        	
+        	if (validEx && shouldFail)
+        	{
+        		System.out.println("Return Value Validation: " + message);
+        		System.out.println("--------------------");
+        	}
+        	else
+        	{
+        		throw ex;
+        	}
+        }
+        finally 
+        {
+        	if (shouldFail)
+        	{
+        		String message=String.format("Property validation fails. Entity: %s, property: %s, values:", identified.getUri(), methodName, StringUtils.join(parameterValues,","));
+        		assertTrue(message,validEx);
+        	}
         }
 	}
 }

@@ -6,23 +6,13 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.ExternallyDefined;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.measure.Measure;
-import org.sbolstandard.core3.entity.measure.PrefixedUnit;
-import org.sbolstandard.core3.entity.measure.SIPrefix;
-import org.sbolstandard.core3.entity.measure.SingularUnit;
-import org.sbolstandard.core3.entity.measure.UnitDivision;
-import org.sbolstandard.core3.entity.measure.UnitExponentiation;
-import org.sbolstandard.core3.entity.measure.UnitMultiplication;
+import org.sbolstandard.core3.entity.*;
+import org.sbolstandard.core3.entity.measure.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.validation.SBOLValidator;
@@ -34,10 +24,12 @@ public class ValidationReadWriteTest extends TestCase {
 	
 	public void test() throws SBOLGraphException, IOException
     {
+		Configuration.getConfiguration().setValidateAfterReadingSBOLDocuments(true);
+	    
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
-        Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
-        Component media=SBOLAPI.createComponent(doc, "M9_Glucose_CAA", ComponentType.FunctionalEntity.getUrl(), "M9 Glucose CAA", "M9 Glucose CAA growth media", null);
+        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+	    Component media=SBOLAPI.createComponent(doc, "M9_Glucose_CAA", ComponentType.FunctionalEntity.getUrl(), "M9 Glucose CAA", "M9 Glucose CAA growth media", null);
         ExternallyDefined CaCl2=media.createExternallyDefined(Arrays.asList(ComponentType.SimpleChemical.getUrl()), URINameSpace.CHEBI.local("3312"));
         
         
@@ -147,6 +139,8 @@ public class ValidationReadWriteTest extends TestCase {
      
  	    String output=null;
        
+ 	   Configuration.getConfiguration().setValidateBeforeSaving(true);  
+	   
  	   	//Writing the invalid SBOL document will fail	   
         exception=false;
 	    try
@@ -161,7 +155,7 @@ public class ValidationReadWriteTest extends TestCase {
 	    
        
 	    //Write the invalid SBOL document
-	    Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.NoValidation);
+	    Configuration.getConfiguration().setValidateBeforeSaving(false);  
 	    exception=false;
 	    try
 	    {
@@ -179,7 +173,11 @@ public class ValidationReadWriteTest extends TestCase {
 	    exception=false;
 	    try
 	    {
+	    	String str2="";
 	    	doc3=SBOLIO.read(output, SBOLFormat.TURTLE);
+	      	boolean isValid=SBOLValidator.getValidator().isValid(doc);
+	      	String str="";
+	    	
 	    }
 	    catch (SBOLGraphException e)
 	    {
@@ -202,6 +200,8 @@ public class ValidationReadWriteTest extends TestCase {
 	    assertTrue(!exception);
 	  
 	   TestUtil.validateDocument(doc3,11);  
+	   Configuration.getConfiguration().setValidateAfterReadingSBOLDocuments(true);
+	    
         
     }
 }

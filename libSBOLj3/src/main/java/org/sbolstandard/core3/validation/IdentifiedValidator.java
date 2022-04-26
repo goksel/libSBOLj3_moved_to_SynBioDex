@@ -57,7 +57,8 @@ public class IdentifiedValidator {
 	public List<String> validate(Identified identified)
 	{
 	    Set<ConstraintViolation<Identified>> violations = validator.validate(identified);
-	    List<String> messages=new ArrayList<String>();
+	    List<String> messages = PropertyValidator.getViolotionMessages(violations);
+	   /* List<String> messages=new ArrayList<String>();
 	    for (ConstraintViolation<Identified> violation : violations) {
 	    	List<String> fragments=new ArrayList<String>();
 	    	fragments.add(violation.getMessage());
@@ -67,21 +68,16 @@ public class IdentifiedValidator {
 	    	    fragments.add(String.format("Entity URI: %s",identifiedLeaf.getUri().toString()));
 	    	    fragments.add(String.format("Entity type: %s",identifiedLeaf.getClass()));    
 	    	}
-	    	/*if (violation.getRootBean()!=null && violation.getRootBean() instanceof Identified ){
-	    	    Identified identifiedRoot= (Identified) violation.getLeafBean();
-	    	    fragments.add(String.format("Parent entity URI: %s",identifiedRoot.getUri().toString()));
-	    	    fragments.add(String.format("Parent entity type: %s",identifiedRoot.getClass()));    
-	    	}*/
 	    	if (violation.getInvalidValue()!=null && !(violation.getInvalidValue() instanceof Identified)){
 	    		fragments.add("Value:" + violation.getInvalidValue().toString());
 	    	}
 	    	String message=StringUtils.join(fragments, "," + System.lineSeparator()  + "\t");
 	    	messages.add(message);
-	    }
+	    }*/
 	    return messages;
 	}
 	
-	public List<String> validate2(Identified identified)
+	/*public List<String> validate2(Identified identified)
 	{
 	    Set<ConstraintViolation<Identified>> violations = validator.validate(identified);
 	      List<String> messages=new ArrayList<String>();
@@ -98,7 +94,7 @@ public class IdentifiedValidator {
 	    	    messages.add(message);
 	    	}
 	      return messages;
-	}
+	}*/
 	
 	public URI getPropertyAsURI(Resource resource, URI property) throws SBOLGraphException
 	{

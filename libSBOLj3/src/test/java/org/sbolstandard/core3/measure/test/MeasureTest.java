@@ -6,29 +6,16 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
-
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.ExternallyDefined;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.measure.Measure;
-import org.sbolstandard.core3.entity.measure.PrefixedUnit;
-import org.sbolstandard.core3.entity.measure.SIPrefix;
-import org.sbolstandard.core3.entity.measure.SingularUnit;
-import org.sbolstandard.core3.entity.measure.UnitDivision;
-import org.sbolstandard.core3.entity.measure.UnitExponentiation;
-import org.sbolstandard.core3.entity.measure.UnitMultiplication;
+import org.sbolstandard.core3.entity.*;
+import org.sbolstandard.core3.entity.measure.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.URINameSpace;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
-import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.ComponentType;
-
 import junit.framework.TestCase;
 
 public class MeasureTest extends TestCase {
@@ -111,8 +98,8 @@ public class MeasureTest extends TestCase {
         TestUtil.validateIdentified(measure, doc, 0);
        */ 
         
-    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
-        
+        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+
         Optional<Float> temp=measure.getValue();
         measure.setValue(Optional.of(4f));
         TestUtil.validateIdentified(measure,doc,  0);  

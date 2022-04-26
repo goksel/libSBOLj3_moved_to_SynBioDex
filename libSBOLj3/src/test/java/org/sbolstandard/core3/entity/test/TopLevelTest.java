@@ -1,30 +1,14 @@
 package org.sbolstandard.core3.entity.test;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.net.URI;
 import java.util.Arrays;
-import java.util.List;
 import java.util.OptionalLong;
-
-import org.apache.jena.sparql.function.library.execTime;
-import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Attachment;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.Identified;
-import org.sbolstandard.core3.entity.Implementation;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.io.SBOLFormat;
-import org.sbolstandard.core3.io.SBOLIO;
+import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
-import org.sbolstandard.core3.validation.PropertyValidator;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.ModelLanguage;
-import org.sbolstandard.core3.vocabulary.Role;
-
+import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
 public class TopLevelTest extends TestCase {
@@ -40,8 +24,8 @@ public class TopLevelTest extends TestCase {
         attachment.setHashAlgorithm("Alg1");
         attachment.setHash("aaa");
         
-        Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
-        
+        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+	    
         attachment.setWasDerivedFrom(Arrays.asList(attachment.getUri()));  
         attachment.setNamespace(URI.create("http://sdfsf.org"));
         TestUtil.validateIdentified(attachment,doc,2);

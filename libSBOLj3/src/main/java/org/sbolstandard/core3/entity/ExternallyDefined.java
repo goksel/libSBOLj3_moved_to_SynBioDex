@@ -8,8 +8,10 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 import jakarta.validation.Valid;
@@ -28,6 +30,18 @@ public class ExternallyDefined extends Feature{
 	protected  ExternallyDefined(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
+	}
+	
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		List<URI> types=this.getTypes();
+		if (SBOLUtil.includesMultipleRootComponentTypes(types))
+		{
+			validationMessages= addToValidations(validationMessages,new ValidationMessage("{EXTERNALLYDEFINED_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type.toString()));      	
+		}
+		return validationMessages;
 	}
 
 	@Valid

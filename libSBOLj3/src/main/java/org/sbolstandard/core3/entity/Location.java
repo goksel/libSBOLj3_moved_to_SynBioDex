@@ -40,9 +40,16 @@ public abstract class  Location extends Identified {
 		Orientation orientation=null;
 		URI value=IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.orientation);
 		if (value!=null){
-			orientation=Orientation.get(value); 
+			orientation=toOrientation(value); 
+			PropertyValidator.getValidator().validateReturnValue(this, "toOrientation", orientation, URI.class);
 		}
 		return orientation;
+	}
+	
+	@NotNull(message = "{LOCATION_ORIENTATION_VALID_IF_NOT_NULL}")   
+	public Orientation toOrientation (URI uri)
+	{
+		return Orientation.get(uri); 
 	}
 	
 	public void setOrientation(Orientation orientation) {

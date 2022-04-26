@@ -3,37 +3,16 @@ package org.sbolstandard.core3.entity.test;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
-
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Collection;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.ComponentReference;
-import org.sbolstandard.core3.entity.Cut;
-import org.sbolstandard.core3.entity.Feature;
-import org.sbolstandard.core3.entity.Location;
+import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.entity.Location.LocationBuilder;
-import org.sbolstandard.core3.entity.Range;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.Sequence;
-import org.sbolstandard.core3.entity.SequenceFeature;
-import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.Encoding;
-import org.sbolstandard.core3.vocabulary.Orientation;
-import org.sbolstandard.core3.vocabulary.RestrictionType;
-import org.sbolstandard.core3.vocabulary.Role;
-import org.sbolstandard.core3.vocabulary.RoleIntegration;
-
-import jakarta.validation.Constraint;
+import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
 public class SubComponentTest extends TestCase {
@@ -50,6 +29,9 @@ public class SubComponentTest extends TestCase {
 		Component term=SBOLAPI.createDnaComponent(doc, "B0015", "terminator", "B0015 double terminator", Role.Terminator,term_na);
 		SubComponent termSubComponent=device.createSubComponent(term.getUri());
 		termSubComponent.setOrientation(Orientation.inline);
+		
+		RoleIntegration ri2=termSubComponent.getRoleIntegration();
+		TestUtil.validateReturnValue(termSubComponent, "toRoleIntegration", new Object[] {URI.create("http://invalidroleintegration.org")}, URI.class);
 		
 		Sequence i13504Sequence= doc.getIdentified(device.getSequences().get(0),Sequence.class);
 		
@@ -68,7 +50,7 @@ public class SubComponentTest extends TestCase {
 	    System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
 	    TestUtil.assertReadWrite(doc); 
 	    
-		Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+	    Configuration.getConfiguration().setValidateAfterSettingProperties(false);
 	     
 	    TestUtil.validateIdentified(termSubComponent,doc,0);
 	    
@@ -79,8 +61,19 @@ public class SubComponentTest extends TestCase {
 	    TestUtil.validateIdentified(termSubComponent,doc,3);
 	    termSubComponent.setRoleIntegration(null);
 	    TestUtil.validateIdentified(termSubComponent,doc,3);
-	    termSubComponent.setRoleIntegration(RoleIntegration.valueOf("sdfsdf"));
+	    termSubComponent.setRoleIntegration(RoleIntegration.mergeRoles);
+	    TestUtil.validateIdentified(termSubComponent,doc,3);
 	    
+	    //Roles must be provided if roleIntegration is not nulls
+	    termSubComponent.setRoleIntegration(null);
+	    termSubComponent.setRoles(Arrays.asList(URI.create("http://testrole.org")));
+	    TestUtil.validateIdentified(termSubComponent,doc,4);
 	    
+	    termSubComponent.setIsInstanceOf(term.getUri());
+	    TestUtil.validateIdentified(device, 3);   
+	    termSubComponent.setIsInstanceOf(device.getUri());
+	    TestUtil.validateIdentified(device, 4);
+	    
+	   
     }
 }

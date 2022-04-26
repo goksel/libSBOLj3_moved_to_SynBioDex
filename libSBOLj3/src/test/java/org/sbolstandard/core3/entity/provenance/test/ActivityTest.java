@@ -2,32 +2,19 @@ package org.sbolstandard.core3.entity.provenance.test;
 
 import java.io.IOException;
 import java.net.URI;
-import java.time.Month;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
-
 import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.Identified;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.provenance.Activity;
-import org.sbolstandard.core3.entity.provenance.Agent;
-import org.sbolstandard.core3.entity.provenance.Association;
-import org.sbolstandard.core3.entity.provenance.Plan;
-import org.sbolstandard.core3.entity.provenance.Usage;
+import org.sbolstandard.core3.entity.*;
+import org.sbolstandard.core3.entity.provenance.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.validation.SBOLComparator;
-import org.sbolstandard.core3.validation.SBOLValidator;
-import org.sbolstandard.core3.vocabulary.ActivityType;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.ParticipationRole;
+import org.sbolstandard.core3.vocabulary.*;
 
 import junit.framework.TestCase;
 
@@ -93,8 +80,8 @@ public class ActivityTest extends TestCase {
         }
         SBOLComparator.assertEqual(doc, doc2);
         
-    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
-        
+        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+	            
     	TestUtil.validateProperty(association, "setAgent", new Object[] {null}, URI.class); 
         TestUtil.validateProperty(usage1, "setEntity", new Object[] {null}, URI.class); 
         TestUtil.validateDocument(doc, 0);

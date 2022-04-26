@@ -54,25 +54,46 @@ public class Component extends TopLevel {
 	{
 		List<ValidationMessage> validationMessages=super.getValidationMessages();
 		List<URI> types=this.getTypes();
-		if (types!=null)
+		if (SBOLUtil.includesMultipleRootComponentTypes(types))
 		{
-			int counter=0;
-			ComponentType[] typeValues=ComponentType.values();
-			for (int i=0;i<typeValues.length;i++)
+			validationMessages= addToValidations(validationMessages,new ValidationMessage("{COMPONENT_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type.toString()));      	
+		}
+		
+		List<SubComponent> subComponents=this.getSubComponents();
+		if (subComponents!=null)
+		{
+			for (SubComponent subComponent: subComponents)
 			{
-				if (types.contains(typeValues[i].getUrl()))
+				URI instanceOf=subComponent.getIsInstanceOf();
+				if (instanceOf!=null && this.getUri().equals(instanceOf))
 				{
-					counter++;
+					validationMessages= addToValidations(validationMessages,new ValidationMessage("{SUBCOMPONENT_INSTANCEOF_MUST_NOT_REFER_ITS_PARENT}", DataModel.SubComponent.instanceOf.toString()));      	
+				    break;	
 				}
-				if (counter==2)
-				{
-					validationMessages= addToValidations(validationMessages,new ValidationMessage("{COMPONENT_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type.toString()));      	
-				    break;
-				}		
 			}
 		}
+		
+		List<ComponentReference> componentReferences=this.getComponentReferences();
+		if (componentReferences!=null)
+		{
+			for (ComponentReference compRef: componentReferences)
+			{
+				URI inChildOf=compRef.getInChildOf();
+				if (inChildOf!=null)
+				{
+					if (!SBOLUtil.exists(inChildOf, subComponents))
+					{
+						validationMessages= addToValidations(validationMessages,new ValidationMessage("{COMBINATORIALREFERENCE_INCHILDOF_MUST_REFER_TO_A_SUBCOMPONENT_OF_THE_PARENT}", DataModel.ComponentReference.inChildOf.toString()));      	
+						break;	
+					}
+				}
+			}
+		}
+		
     	return validationMessages;
 	}
+	
+	
 	
 	@Valid
 	@NotEmpty(message = "{COMPONENT_TYPES_NOT_EMPTY}")

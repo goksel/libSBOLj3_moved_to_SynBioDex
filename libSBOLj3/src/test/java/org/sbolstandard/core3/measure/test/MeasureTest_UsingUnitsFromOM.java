@@ -5,9 +5,7 @@ import java.net.URI;
 import java.util.Arrays;
 
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.ExternallyDefined;
-import org.sbolstandard.core3.entity.SBOLDocument;
+import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;

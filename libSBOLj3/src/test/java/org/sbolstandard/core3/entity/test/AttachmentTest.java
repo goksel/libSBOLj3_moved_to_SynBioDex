@@ -15,7 +15,6 @@ import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.ModelLanguage;
 import org.sbolstandard.core3.vocabulary.Role;
@@ -45,8 +44,8 @@ public class AttachmentTest extends TestCase {
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
         
-        Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
-     	
+        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+        
         URI temp=attachment.getSource();
         attachment.setSource(URI.create("https://sbolstandard.org/attachment1_source2"));
         TestUtil.validateIdentified(attachment,doc,0);
