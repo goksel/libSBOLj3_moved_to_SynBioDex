@@ -12,7 +12,10 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.SBOLValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
+import org.sbolstandard.core3.vocabulary.CombinatorialDerivationStrategy;
 import org.sbolstandard.core3.vocabulary.DataModel;
+import org.sbolstandard.core3.vocabulary.Orientation;
 import org.sbolstandard.core3.vocabulary.VariableFeatureCardinality;
 
 import jakarta.validation.Valid;
@@ -33,6 +36,29 @@ public class CombinatorialDerivation extends TopLevel{
 		super(resource);
 	}
 	
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		if (this.getStrategy()==CombinatorialDerivationStrategy.Enumerate)
+		{
+			List<VariableFeature> variableFeatures=this.getVariableFeatures();
+			if (variableFeatures!=null)
+			{
+				for (VariableFeature variableFeature: variableFeatures)
+				{
+					VariableFeatureCardinality cardinality=variableFeature.getCardinality();
+					if (cardinality.equals(VariableFeatureCardinality.OneOrMore) || cardinality.equals(VariableFeatureCardinality.ZeroOrMore))
+					{
+						ValidationMessage message = new ValidationMessage("{COMBINATORIALDERIVATION_VARIABLEFEATURE_VALID_IF_STRATEGY_ENUMERATE}", DataModel.CombinatorialDerivation.variableFeature,variableFeature,variableFeature.getCardinality().getUri());
+						message.childPath(DataModel.VariableFeature.cardinality);
+						validationMessages= addToValidations(validationMessages,message);
+					}
+				}
+			}			
+		}
+		return validationMessages;
+	}
 	@NotNull(message = "{COMBINATORIALDERIVATION_TEMPLATE_NOT_NULL}")
 	public URI getTemplate() throws SBOLGraphException {
 		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.template);
@@ -43,17 +69,37 @@ public class CombinatorialDerivation extends TopLevel{
 		RDFUtil.setProperty(resource, DataModel.CombinatorialDerivation.template, template);
 	}
 	
-	public URI getStrategy() throws SBOLGraphException {
-		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.strategy);
+	public CombinatorialDerivationStrategy getStrategy() throws SBOLGraphException {
+		CombinatorialDerivationStrategy strategy=null;
+		
+		URI value=IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.strategy);
+		if (value!=null){
+			
+			strategy=toStrategy(value); 	
+			PropertyValidator.getValidator().validateReturnValue(this, "toStrategy", strategy, URI.class);
+		}
+		return strategy;		
 	}
 
-	public void setStrategy(URI strategy) {
-		RDFUtil.setProperty(resource, DataModel.CombinatorialDerivation.strategy, strategy);
+	@NotNull(message = "{COMBINATORIALDERIVATION_STRATEGY_VALID_IF_NOT_NULL}")   
+	public CombinatorialDerivationStrategy toStrategy(URI uri)
+	{
+		return CombinatorialDerivationStrategy.get(uri); 
+	}
+
+	
+	public void setStrategy(CombinatorialDerivationStrategy strategy) {
+		URI uri=null;
+		if (strategy!=null)
+		{
+			uri=strategy.getUri();
+		}
+		RDFUtil.setProperty(this.resource, DataModel.CombinatorialDerivation.strategy, uri);		
 	}
 
 	@Valid
 	public List<VariableFeature> getVariableFeatures() throws SBOLGraphException {
-		return addToList(DataModel.CombinatorialDerivation.variableFeature, VariableFeature.class, DataModel.VariableComponent.uri);
+		return addToList(DataModel.CombinatorialDerivation.variableFeature, VariableFeature.class, DataModel.VariableFeature.uri);
 	}
 	
 	public VariableFeature createVariableFeature(URI uri, VariableFeatureCardinality cardinality, URI subComponent) throws SBOLGraphException
@@ -72,7 +118,7 @@ public class CombinatorialDerivation extends TopLevel{
 	
 	public VariableFeature createVariableFeature(VariableFeatureCardinality cardinality, URI subComponent) throws SBOLGraphException
 	{
-		String displayId=SBOLAPI.createLocalName(DataModel.VariableComponent.uri, getVariableFeatures());	
+		String displayId=SBOLAPI.createLocalName(DataModel.VariableFeature.uri, getVariableFeatures());	
 		return createVariableFeature(displayId, cardinality, subComponent);	
 	}
 

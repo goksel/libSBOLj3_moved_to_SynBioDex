@@ -14,7 +14,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.jena.rdf.model.Model;
@@ -120,7 +122,38 @@ public class SBOLUtil {
 	 	return result;
 	 }
 	 
-		
+	 public static String toQualifiedString(URI uri)
+		{
+			for (URI key:lookup.keySet())
+			{
+				String uriString=uri.toString().toLowerCase();
+				String keyString=key.toString().toLowerCase();
+				int index=uriString.indexOf(keyString);
+				if (index>-1)
+				{
+					String subUri=uri.toString().substring(index + keyString.length());
+					//return (lookup.get(key)).prefix + ":" + subUri; 
+					return subUri; 
+				}
+			}
+			return uri.toString();
+		}
+	 
+	 private static final Map<URI, URINameSpace> lookup = new HashMap<>();
+	  
+	    static
+	    {
+	    	lookup.put(URINameSpace.SBOL.uri, URINameSpace.SBOL);
+	        lookup.put(URINameSpace.SO.uri, URINameSpace.SO);
+	        lookup.put(URINameSpace.SBO.uri, URINameSpace.SBO);
+	        lookup.put(URINameSpace.CHEBI.uri, URINameSpace.CHEBI);
+	        lookup.put(URINameSpace.GO.uri, URINameSpace.GO);
+	        lookup.put(URINameSpace.EDAM.uri, URINameSpace.EDAM);
+	        lookup.put(URINameSpace.PROV.uri, URINameSpace.PROV);
+	        lookup.put(URINameSpace.OM.uri, URINameSpace.OM);
+	        lookup.put(URINameSpace.RDFS.uri, URINameSpace.RDFS); 
+	    }
+	    
 	 /*public static List<URI> filterItems(Identified identified, List<URI> identifieds, URI property, URI value)
 	 {
 		return RDFUtil.filterItems(identified.resource.getRDFModel(), identifieds, property, value.toString());

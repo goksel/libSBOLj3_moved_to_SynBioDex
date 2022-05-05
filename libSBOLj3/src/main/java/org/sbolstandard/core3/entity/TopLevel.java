@@ -49,7 +49,7 @@ public abstract class TopLevel extends Identified {
     	String uriString=this.getUri().toString().toLowerCase();
     	if (!uriString.startsWith("urn") && nameSpace!=null){
     		if (!uriString.startsWith(nameSpace)){
-    			validationMessages= addToValidations(validationMessages,new ValidationMessage("{TOPLEVEL_URI_STARTS_WITH_NAMESPACE}", DataModel.TopLevel.namespace.toString()));      	
+    			validationMessages= addToValidations(validationMessages,new ValidationMessage("{TOPLEVEL_URI_STARTS_WITH_NAMESPACE}", DataModel.TopLevel.namespace));      	
     		}
     	}
     	return validationMessages;

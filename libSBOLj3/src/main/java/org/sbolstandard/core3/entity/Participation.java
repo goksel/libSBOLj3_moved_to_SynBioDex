@@ -35,7 +35,7 @@ public class Participation extends Identified{
 		List<ValidationMessage> validationMessages=super.getValidationMessages();
 		if ((this.getParticipant()==null && this.getHigherOrderParticipant()==null) || (this.getParticipant()!=null && this.getHigherOrderParticipant()!=null))
 		{
-			validationMessages= addToValidations(validationMessages,new ValidationMessage("{PARTICIPANT_MUST_HAVE_ONE_PARTICIPANT_OR_HIGHERORDERPARTICIPANT}", DataModel.Participation.participant.toString()));      	
+			validationMessages= addToValidations(validationMessages,new ValidationMessage("{PARTICIPANT_MUST_HAVE_ONE_PARTICIPANT_OR_HIGHERORDERPARTICIPANT}", DataModel.Participation.participant));      	
 		}
 		return validationMessages;
 	}

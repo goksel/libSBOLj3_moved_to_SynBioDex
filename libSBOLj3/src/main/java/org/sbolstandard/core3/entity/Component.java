@@ -57,7 +57,7 @@ public class Component extends TopLevel {
 		List<URI> types=this.getTypes();
 		if (SBOLUtil.includesMultipleRootComponentTypes(types))
 		{
-			validationMessages= addToValidations(validationMessages,new ValidationMessage("{COMPONENT_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type.toString()));      	
+			validationMessages= addToValidations(validationMessages,new ValidationMessage("{COMPONENT_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type));      	
 		}
 		
 		List<SubComponent> subComponents=this.getSubComponents();
@@ -65,7 +65,11 @@ public class Component extends TopLevel {
 		{
 			for (SubComponent subComponent: subComponents)
 			{
-				validationMessages=IdentifiedValidator.assertNotEqual(this,validationMessages, subComponent.getIsInstanceOf(), this.getUri(), "{SUBCOMPONENT_INSTANCEOF_MUST_NOT_REFER_ITS_PARENT}", DataModel.SubComponent.instanceOf);
+				ValidationMessage message = new ValidationMessage("{SUBCOMPONENT_INSTANCEOF_MUST_NOT_REFER_ITS_PARENT}", DataModel.Component.feature,subComponent, subComponent.getIsInstanceOf());
+				message.childPath(DataModel.SubComponent.instanceOf);
+				validationMessages= IdentifiedValidator.assertNotEqual(this, validationMessages, subComponent.getIsInstanceOf(), this.getUri(), message);			
+				
+				//validationMessages=IdentifiedValidator.assertNotEqual(this,validationMessages, subComponent.getIsInstanceOf(), this.getUri(), "{SUBCOMPONENT_INSTANCEOF_MUST_NOT_REFER_ITS_PARENT}", DataModel.SubComponent.instanceOf);
 			}
 		}
 		
@@ -74,7 +78,10 @@ public class Component extends TopLevel {
 		{
 			for (ComponentReference compRef: componentReferences)
 			{
-				validationMessages=IdentifiedValidator.assertExists(this, validationMessages, compRef.getInChildOf(), subComponents, "{COMBINATORIALREFERENCE_INCHILDOF_MUST_REFER_TO_A_SUBCOMPONENT_OF_THE_PARENT}", DataModel.ComponentReference.inChildOf);
+				ValidationMessage message = new ValidationMessage("{COMPONENTREFERENCE_INCHILDOF_MUST_REFER_TO_A_SUBCOMPONENT_OF_THE_PARENT}", DataModel.Component.feature,compRef, compRef.getInChildOf());
+				message.childPath(DataModel.ComponentReference.inChildOf);
+				validationMessages= IdentifiedValidator.assertExists(this, validationMessages, compRef.getInChildOf(), subComponents, message);			
+				//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, compRef.getInChildOf(), subComponents, "{COMBINATORIALREFERENCE_INCHILDOF_MUST_REFER_TO_A_SUBCOMPONENT_OF_THE_PARENT}", DataModel.ComponentReference.inChildOf);
 			}
 		}
 		
@@ -84,8 +91,15 @@ public class Component extends TopLevel {
 		{
 			for (Constraint constraint: constraints)
 			{
-				validationMessages=IdentifiedValidator.assertExists(this, validationMessages, constraint.getSubject(), features, "{CONSTRAINT_SUBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Constraint.subject);
-				validationMessages=IdentifiedValidator.assertExists(this, validationMessages, constraint.getObject(), features, "{CONSTRAINT_OBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Constraint.object);
+				ValidationMessage message = new ValidationMessage("{CONSTRAINT_SUBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Component.constraint,constraint,constraint.getSubject());
+				message.childPath( DataModel.Constraint.subject);
+				validationMessages= IdentifiedValidator.assertExists(this, validationMessages, constraint.getSubject(), features, message);			
+				
+				message = new ValidationMessage("{CONSTRAINT_OBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Component.constraint,constraint,constraint.getObject());
+				message.childPath( DataModel.Constraint.object);
+				validationMessages= IdentifiedValidator.assertExists(this, validationMessages, constraint.getObject(), features, message);			
+				//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, constraint.getSubject(), features, "{CONSTRAINT_SUBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Constraint.subject);
+				//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, constraint.getObject(), features, "{CONSTRAINT_OBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Constraint.object);
 			}
 		}
 		
@@ -99,8 +113,16 @@ public class Component extends TopLevel {
 				{
 					for (Participation participation: participations)
 					{
-						validationMessages=IdentifiedValidator.assertExists(this, validationMessages, participation.getParticipant(), features, "{PARTICIPANT_PARTICIPANT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Participation.participant);
-						validationMessages=IdentifiedValidator.assertExists(this, validationMessages, participation.getHigherOrderParticipant(), interactions, "{PARTICIPANT_HIGHERORDERPARTICIPANT_MUST_REFER_TO_AN_INTERACTION_OF_THE_PARENT}", DataModel.Participation.higherOrderParticipant);
+						ValidationMessage message = new ValidationMessage("{PARTICIPANT_PARTICIPANT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Component.interaction,interaction,participation.getParticipant());
+						message.childPath(DataModel.Interaction.participation, participation).childPath(DataModel.Participation.participant);
+						validationMessages=IdentifiedValidator.assertExists(this, validationMessages, participation.getParticipant(), features, message);
+						
+						message = new ValidationMessage("{PARTICIPANT_HIGHERORDERPARTICIPANT_MUST_REFER_TO_AN_INTERACTION_OF_THE_PARENT}", DataModel.Component.interaction,interaction,participation.getHigherOrderParticipant());
+						message.childPath(DataModel.Interaction.participation, participation).childPath(DataModel.Participation.higherOrderParticipant);
+						validationMessages=IdentifiedValidator.assertExists(this, validationMessages, participation.getHigherOrderParticipant(), interactions, message);
+						
+						//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, participation.getParticipant(), features, "{PARTICIPANT_PARTICIPANT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Participation.participant);
+						//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, participation.getHigherOrderParticipant(), interactions, "{PARTICIPANT_HIGHERORDERPARTICIPANT_MUST_REFER_TO_AN_INTERACTION_OF_THE_PARENT}", DataModel.Participation.higherOrderParticipant);
 					}
 				}
 			}
@@ -109,14 +131,21 @@ public class Component extends TopLevel {
 		Interface compInterface=this.getInterface();
 		if (compInterface!=null)
 		{
-			List<URI> inputs=compInterface.getInputs();
-			if (inputs!=null)
-			{
-				for (URI input: inputs)
-				{
-					validationMessages=IdentifiedValidator.assertExists(this, validationMessages, input, features, "{INTERFACE_INPUT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Interface.input);
-				}
-			}
+			ValidationMessage message = new ValidationMessage("{INTERFACE_INPUT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Component.hasInterface,compInterface,null);
+			message.childPath(DataModel.Interface.input);
+			validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getInputs(), features, message);			
+			
+			message = new ValidationMessage("{INTERFACE_OUTPUT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Component.hasInterface,compInterface,null);
+			message.childPath(DataModel.Interface.output);
+			validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getOutputs(), features, message);			
+			
+			message = new ValidationMessage("{INTERFACE_NONDIRECTIONAL_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Component.hasInterface,compInterface,null);
+			message.childPath(DataModel.Interface.nondirectional);
+			validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getNonDirectionals(), features, message);			
+			
+			//validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getInputs(), features, "{INTERFACE_INPUT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Interface.input);			
+			//validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getOutputs(), features, "{INTERFACE_OUTPUT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Interface.output);
+			//validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getNonDirectionals(), features, "{INTERFACE_NONDIRECTIONAL_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Interface.nondirectional);
 		}
 		
     	return validationMessages;

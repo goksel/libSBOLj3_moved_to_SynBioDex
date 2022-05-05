@@ -447,7 +447,15 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqual(entity1, entity2));
-			output = add(output, assertEqual(entity1, entity2, entity1.getStrategy(),entity2.getStrategy(), DataModel.CombinatorialDerivation.strategy));
+			if (entity1.getStrategy()!=null && entity2.getStrategy()!=null)
+			{
+				output = add(output, assertEqual(entity1, entity2, entity1.getStrategy().getUri(),entity2.getStrategy().getUri(), DataModel.CombinatorialDerivation.strategy));
+			}
+			
+			else 
+			{
+				output=add(output, assertBothNullOrNotNull(entity1, entity1, entity1.getStrategy(), entity2.getStrategy(), DataModel.CombinatorialDerivation.strategy));
+			}
 			output = add(output, assertEqual(entity1, entity2, entity1.getTemplate(),entity2.getTemplate(), DataModel.CombinatorialDerivation.template));
 			output = add(output, assertEqualEntity(entity1.getVariableFeatures(), entity2.getVariableFeatures()));	
 		}
@@ -460,11 +468,11 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqual(entity1, entity2));
-			output = add(output, assertEqual(entity1, entity2, entity1.getCardinality().getUri(),entity2.getCardinality().getUri(), DataModel.VariableComponent.cardinality));
-			output = add(output, assertEqual(entity1, entity2, entity1.getFeature(),entity2.getFeature(), DataModel.VariableComponent.variable));
-			output = add(output, assertEqual(entity1, entity2, entity1.getVariantCollections(),entity2.getVariantCollections(), DataModel.VariableComponent.variantCollection));
-			output = add(output, assertEqual(entity1, entity2, entity1.getVariantDerivations(),entity2.getVariantDerivations(), DataModel.VariableComponent.variantDerivation));
-			output = add(output, assertEqual(entity1, entity2, entity1.getVariants(),entity2.getVariants(), DataModel.VariableComponent.variant));	
+			output = add(output, assertEqual(entity1, entity2, entity1.getCardinality().getUri(),entity2.getCardinality().getUri(), DataModel.VariableFeature.cardinality));
+			output = add(output, assertEqual(entity1, entity2, entity1.getFeature(),entity2.getFeature(), DataModel.VariableFeature.variable));
+			output = add(output, assertEqual(entity1, entity2, entity1.getVariantCollections(),entity2.getVariantCollections(), DataModel.VariableFeature.variantCollection));
+			output = add(output, assertEqual(entity1, entity2, entity1.getVariantDerivations(),entity2.getVariantDerivations(), DataModel.VariableFeature.variantDerivation));
+			output = add(output, assertEqual(entity1, entity2, entity1.getVariants(),entity2.getVariants(), DataModel.VariableFeature.variant));	
 		}
 		return output;
 	}

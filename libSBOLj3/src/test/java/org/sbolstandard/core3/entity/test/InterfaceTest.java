@@ -52,7 +52,10 @@ public class InterfaceTest extends TestCase {
         Component LacIProducer2=SBOLAPI.createDnaComponent(doc, "LacI_producer2", "LacI producer2", "LacI producer2", Role.EngineeredGene, null); 
         SubComponent lacISubComponent2=SBOLAPI.addSubComponent(LacIProducer2, LacI_protein); 
         compInterface.setInputs(Arrays.asList(lacISubComponent2.getUri(),tetRSubComponent.getUri()));
-        TestUtil.validateIdentified(LacIProducer,doc,1);
+        compInterface.setOutputs(Arrays.asList(lacISubComponent2.getUri(),tetRSubComponent.getUri()));
+        compInterface.setNonDirectionals(Arrays.asList(lacISubComponent2.getUri(),tetRSubComponent.getUri()));
+        TestUtil.validateIdentified(LacIProducer,doc,3);
+        
         
     }
 

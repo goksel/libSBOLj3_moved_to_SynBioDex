@@ -147,9 +147,9 @@ public class DataModel {
 			public static URI strategy=URINameSpace.SBOL.local("strategy");	
 		}
 		
-		public static final class VariableComponent
+		public static final class VariableFeature
 		{
-			public static URI uri=URINameSpace.SBOL.local("VariableComponent");
+			public static URI uri=URINameSpace.SBOL.local("VariableFeature");
 			public static URI cardinality=URINameSpace.SBOL.local("cardinality");
 			public static URI variant=URINameSpace.SBOL.local("variant");
 			public static URI variable=URINameSpace.SBOL.local("variable");	

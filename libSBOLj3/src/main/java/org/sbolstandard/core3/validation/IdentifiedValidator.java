@@ -84,7 +84,19 @@ public class IdentifiedValidator {
 			{
 				if (!SBOLUtil.exists(uri, identifieds))
 				{
-					messages= identified.addToValidations(messages,new ValidationMessage(errorMessage, property.toString()));      		
+					messages= identified.addToValidations(messages,new ValidationMessage(errorMessage, property,uri));      		
+				}
+			}
+			return messages;
+		}
+	 
+	 public static <T extends Identified> List<ValidationMessage> assertExists(Identified identified, List<ValidationMessage> messages, URI uri, List<T> identifieds, ValidationMessage message)
+		{
+			if (uri!=null)
+			{
+				if (!SBOLUtil.exists(uri, identifieds))
+				{
+					messages= identified.addToValidations(messages,message);
 				}
 			}
 			return messages;
@@ -96,20 +108,42 @@ public class IdentifiedValidator {
 			{
 				for (URI uri: uriList)
 				{
-					if (!SBOLUtil.exists(uri, identifieds))
-					{
-						messages= identified.addToValidations(messages,new ValidationMessage(errorMessage, property.toString()));      		
-					}
+					messages=assertExists(identified, messages, uri, identifieds, errorMessage, property);
 				}
 			}
 			return messages;
 		}
-		
+	
+	 public static <T extends Identified> List<ValidationMessage> assertExists(Identified identified, List<ValidationMessage> messages, List<URI> uriList, List<T> identifieds, ValidationMessage message)
+		{
+			if (uriList!=null)
+			{
+				for (URI uri: uriList)
+				{
+					message.setInvalidValue(uri);
+					messages=assertExists(identified, messages, uri, identifieds, message);
+				}
+			}
+			return messages;
+		}
+	
+	 
 	 public static <T extends Identified> List<ValidationMessage> assertNotEqual(Identified identified, List<ValidationMessage> messages, URI uri1, URI uri2, String errorMessage, URI property)
 		{
 			if (uri1!=null && uri2!=null && uri1.equals(uri2))
 			{
-				messages= identified.addToValidations(messages,new ValidationMessage(errorMessage, property.toString()));      		
+				messages= identified.addToValidations(messages,new ValidationMessage(errorMessage, property));      		
+			}
+			
+			return messages;
+		}
+	 
+	 
+	 public static <T extends Identified> List<ValidationMessage> assertNotEqual(Identified identified, List<ValidationMessage> messages, URI uri1, URI uri2, ValidationMessage message)
+		{
+			if (uri1!=null && uri2!=null && uri1.equals(uri2))
+			{
+				messages= identified.addToValidations(messages,message);      		
 			}
 			
 			return messages;

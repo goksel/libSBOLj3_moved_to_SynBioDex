@@ -41,7 +41,7 @@ public class LocalSubComponent extends Feature{
 		List<URI> types=this.getTypes();
 		if (SBOLUtil.includesMultipleRootComponentTypes(types))
 		{
-			validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type.toString()));      	
+			validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type));      	
 		}
 		return validationMessages;
 	}

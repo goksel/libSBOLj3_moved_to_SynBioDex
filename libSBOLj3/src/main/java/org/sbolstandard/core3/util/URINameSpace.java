@@ -1,6 +1,10 @@
 package org.sbolstandard.core3.util;
 
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.sbolstandard.core3.vocabulary.Orientation;
 
 public class URINameSpace {
 
@@ -37,6 +41,10 @@ public class URINameSpace {
 		return URI.create(uri.toString() + name);
 	}
 	
+	
+	
+	
+  
 	public static URINameSpace SO=SONameSpace.getInstance();
 	public static URINameSpace SBO=SBONameSpace.getInstance();
 	public static URINameSpace SBOL=SBOLNameSpace.getInstance();
@@ -46,11 +54,6 @@ public class URINameSpace {
 	public static URINameSpace PROV=PROVNameSpace.getInstance();
 	public static URINameSpace OM=OMNameSpace.getInstance();
 	public static URINameSpace RDFS=OMNameSpace.getInstance();
-	
-	
-	
-	
-	
 	
 	//protected abstract NameSpace getInstance();
 	

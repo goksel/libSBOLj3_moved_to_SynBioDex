@@ -26,22 +26,22 @@ public class ComponentReference extends Feature{
 		super(resource);
 	}
 
-	@NotNull(message = "{COMBINATORIALREFERENCE_REFERSTO_NOT_NULL}")
+	@NotNull(message = "{COMPONENTREFERENCE_REFERSTO_NOT_NULL}") 
 	public URI getRefersTo() throws SBOLGraphException {
 		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.refersTo);
 	}
 	
-	public void setRefersTo(@NotNull(message = "{COMBINATORIALREFERENCE_REFERSTO_NOT_NULL}") URI feature) throws SBOLGraphException {
+	public void setRefersTo(@NotNull(message = "{COMPONENTREFERENCE_REFERSTO_NOT_NULL}") URI feature) throws SBOLGraphException {
 		PropertyValidator.getValidator().validate(this, "setRefersTo", new Object[] {feature}, URI.class);
 		RDFUtil.setProperty(this.resource, DataModel.ComponentReference.refersTo, feature);
 	}
 	
-	@NotNull(message = "{COMBINATORIALREFERENCE_INCHILDOF_NOT_NULL}")
+	@NotNull(message = "{COMPONENTREFERENCE_INCHILDOF_NOT_NULL}")
 	public URI getInChildOf() throws SBOLGraphException{
 		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ComponentReference.inChildOf);
 	}
 
-	public void setInChildOf(@NotNull(message = "{COMBINATORIALREFERENCE_INCHILDOF_NOT_NULL}") URI inChildOf) throws SBOLGraphException{
+	public void setInChildOf(@NotNull(message = "{COMPONENTREFERENCE_INCHILDOF_NOT_NULL}") URI inChildOf) throws SBOLGraphException{
 		PropertyValidator.getValidator().validate(this, "setInChildOf", new Object[] {inChildOf}, URI.class);
 		RDFUtil.setProperty(this.resource, DataModel.ComponentReference.inChildOf, inChildOf);	
 	}

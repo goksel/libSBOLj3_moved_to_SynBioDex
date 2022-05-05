@@ -50,7 +50,7 @@ public class SubComponent extends Feature{
 			RoleIntegration roleIntegration=this.getRoleIntegration();
 			if (roleIntegration==null)
 			{
-				validationMessages= addToValidations(validationMessages,new ValidationMessage("{SUBCOMPONENT_ROLEINTEGRATION_NOT_NULL_IF_ROLES_EXIST}", DataModel.SubComponent.roleIntegration.toString()));      	
+				validationMessages= addToValidations(validationMessages,new ValidationMessage("{SUBCOMPONENT_ROLEINTEGRATION_NOT_NULL_IF_ROLES_EXIST}", DataModel.SubComponent.roleIntegration));      	
 			}
 		}
     	return validationMessages;

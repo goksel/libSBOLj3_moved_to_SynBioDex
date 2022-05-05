@@ -39,7 +39,7 @@ public class ExternallyDefined extends Feature{
 		List<URI> types=this.getTypes();
 		if (SBOLUtil.includesMultipleRootComponentTypes(types))
 		{
-			validationMessages= addToValidations(validationMessages,new ValidationMessage("{EXTERNALLYDEFINED_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type.toString()));      	
+			validationMessages= addToValidations(validationMessages,new ValidationMessage("{EXTERNALLYDEFINED_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type));      	
 		}
 		return validationMessages;
 	}

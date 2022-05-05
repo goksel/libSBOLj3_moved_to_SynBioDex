@@ -180,7 +180,7 @@ public abstract class Identified {
 		List<URI> wasDerivedFroms=this.getWasDerivedFrom();
     	if (wasDerivedFroms!=null && wasDerivedFroms.contains(this.getUri()))
     	{
-    		validationMessages= addToValidations(validationMessages,new ValidationMessage("{IDENTIFIED_CANNOT_BE_REFERREDBY_WASDERIVEDFROM}", DataModel.Identified.wasDerivedFrom.toString()));      
+    		validationMessages= addToValidations(validationMessages,new ValidationMessage("{IDENTIFIED_CANNOT_BE_REFERREDBY_WASDERIVEDFROM}", DataModel.Identified.wasDerivedFrom));      
     	}
     	return validationMessages;
 	}

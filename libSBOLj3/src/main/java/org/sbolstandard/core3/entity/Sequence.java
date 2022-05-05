@@ -32,7 +32,7 @@ public class Sequence extends TopLevel {
 		List<ValidationMessage> validationMessages=super.getValidationMessages();
 		if (this.getElements()!=null && this.getEncoding()==null)
 		{
-			validationMessages= addToValidations(validationMessages,new ValidationMessage("{SEQUENCE_MUST_HAVE_ENCODING}", DataModel.Sequence.encoding.toString()));      	   
+			validationMessages= addToValidations(validationMessages,new ValidationMessage("{SEQUENCE_MUST_HAVE_ENCODING}", DataModel.Sequence.encoding));      	   
 		}
     	return validationMessages;
 	}

@@ -104,7 +104,8 @@ public class ParticipantTest extends TestCase {
 	    System.out.println(uri2.equals(uri3));
 	    System.out.println(uri3.equals(uri4));*/
 	    
-	    
+	    URI uri=URI.create("https://synbiohub.org/public/igem/cs1");
+	    System.out.print(URI.create("https://synbiohub.org/public"));
 	    
 	    
 		    
