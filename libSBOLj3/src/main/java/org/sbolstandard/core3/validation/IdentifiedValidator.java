@@ -15,6 +15,7 @@ import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
@@ -77,6 +78,44 @@ public class IdentifiedValidator {
 	    return messages;
 	}
 	
+	 public static <T extends Identified> List<ValidationMessage> assertExists(Identified identified, List<ValidationMessage> messages, URI uri, List<T> identifieds, String errorMessage, URI property)
+		{
+			if (uri!=null)
+			{
+				if (!SBOLUtil.exists(uri, identifieds))
+				{
+					messages= identified.addToValidations(messages,new ValidationMessage(errorMessage, property.toString()));      		
+				}
+			}
+			return messages;
+		}
+	 
+	 public static <T extends Identified> List<ValidationMessage> assertExists(Identified identified, List<ValidationMessage> messages, List<URI> uriList, List<T> identifieds, String errorMessage, URI property)
+		{
+			if (uriList!=null)
+			{
+				for (URI uri: uriList)
+				{
+					if (!SBOLUtil.exists(uri, identifieds))
+					{
+						messages= identified.addToValidations(messages,new ValidationMessage(errorMessage, property.toString()));      		
+					}
+				}
+			}
+			return messages;
+		}
+		
+	 public static <T extends Identified> List<ValidationMessage> assertNotEqual(Identified identified, List<ValidationMessage> messages, URI uri1, URI uri2, String errorMessage, URI property)
+		{
+			if (uri1!=null && uri2!=null && uri1.equals(uri2))
+			{
+				messages= identified.addToValidations(messages,new ValidationMessage(errorMessage, property.toString()));      		
+			}
+			
+			return messages;
+		}
+	
+	 
 	/*public List<String> validate2(Identified identified)
 	{
 	    Set<ConstraintViolation<Identified>> violations = validator.validate(identified);

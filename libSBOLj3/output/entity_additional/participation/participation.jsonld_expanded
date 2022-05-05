@@ -62,6 +62,18 @@
   } ],
   "@type" : [ "http://sbols.org/v3#Component" ]
 }, {
+  "@id" : "https://sbolstandard.org/examples/TetR",
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000252"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "TetR"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Component" ]
+}, {
   "@id" : "https://sbolstandard.org/examples/i13504",
   "http://sbols.org/v3#hasSequence" : [ {
     "@id" : "https://sbolstandard.org/examples/i13504_Sequence1"
@@ -136,6 +148,8 @@
 }, {
   "@id" : "https://sbolstandard.org/examples/i13504_system",
   "http://sbols.org/v3#hasInteraction" : [ {
+    "@id" : "https://sbolstandard.org/examples/i13504_system/Interaction2"
+  }, {
     "@id" : "https://sbolstandard.org/examples/i13504_system/Interaction1"
   } ],
   "http://sbols.org/v3#hasFeature" : [ {
@@ -209,6 +223,30 @@
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "Participation2"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Participation" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/i13504_system/Interaction2",
+  "http://sbols.org/v3#hasParticipation" : [ {
+    "@id" : "https://sbolstandard.org/examples/i13504_system/Interaction2/Participation1"
+  } ],
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000169"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Interaction2"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Interaction" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/i13504_system/Interaction2/Participation1",
+  "http://sbols.org/v3#higherOrderParticipant" : [ {
+    "@id" : "https://sbolstandard.org/examples/i13504_system/Interaction1"
+  } ],
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000020"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Participation1"
   } ],
   "@type" : [ "http://sbols.org/v3#Participation" ]
 }, {

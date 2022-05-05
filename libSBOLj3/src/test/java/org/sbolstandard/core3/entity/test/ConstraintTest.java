@@ -40,7 +40,11 @@ public class ConstraintTest extends TestCase {
         
         Configuration.getConfiguration().setValidateAfterSettingProperties(false);
         
+    	URI tempRestriction=constraint.getRestriction();
+    	URI tempSubject=constraint.getSubject();
+    	URI tempObject=constraint.getObject();
     	
+ 
         TestUtil.validateIdentified(constraint,doc,0);
         TestUtil.validateProperty(constraint, "setRestriction", new Object[] {null}, URI.class);
 		constraint.setRestriction(null);
@@ -53,6 +57,26 @@ public class ConstraintTest extends TestCase {
 		TestUtil.validateProperty(constraint, "setSubject", new Object[] {null}, URI.class);
 		constraint.setSubject(null);
 		TestUtil.validateIdentified(constraint,doc,3);
+		
+		constraint.setRestriction(tempRestriction);
+		constraint.setSubject(tempSubject);
+		constraint.setObject(tempObject);
+		TestUtil.validateIdentified(constraint,doc,0);
+		
+		//CONSTRAINT_SUBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT
+		constraint.setSubject(i13504SubComponent.getUri());
+		TestUtil.validateIdentified(ilab16_dev1,doc,1,1);
+		constraint.setSubject(tempSubject);
+		TestUtil.validateIdentified(ilab16_dev1,doc,0,0);
+		
+		//CONSTRAINT_OBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT
+		constraint.setObject(i13504SubComponent.getUri());
+		TestUtil.validateIdentified(ilab16_dev1,doc,1,1);
+		
+		//In addition to adding an invalid subject URI, the subject and the object uri cannot be the same. Hence the following line will introduce two errors.
+		//CONSTRAINT_OBJECT_AND_SUBJECT_ARE_NOT_EQUAL
+		constraint.setSubject(i13504SubComponent.getUri());
+		TestUtil.validateIdentified(ilab16_dev1,doc,3,3);
 		
 		
     }

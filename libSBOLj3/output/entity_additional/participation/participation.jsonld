@@ -27,6 +27,12 @@
     "name" : "GFP",
     "type" : "SBO:0000252"
   }, {
+    "@id" : "https://sbolstandard.org/examples/TetR",
+    "@type" : "sbol:Component",
+    "displayId" : "TetR",
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "type" : "SBO:0000252"
+  }, {
     "@id" : "https://sbolstandard.org/examples/i13504",
     "@type" : "sbol:Component",
     "displayId" : "i13504",
@@ -63,7 +69,7 @@
     "@type" : "sbol:Component",
     "displayId" : "i13504_system",
     "hasFeature" : [ "https://sbolstandard.org/examples/i13504_system/SubComponent2", "https://sbolstandard.org/examples/i13504_system/SubComponent1", "https://sbolstandard.org/examples/i13504_system/ComponentReference1" ],
-    "hasInteraction" : "https://sbolstandard.org/examples/i13504_system/Interaction1",
+    "hasInteraction" : [ "https://sbolstandard.org/examples/i13504_system/Interaction2", "https://sbolstandard.org/examples/i13504_system/Interaction1" ],
     "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "i13504 system",
     "role" : "SBO:0000289",
@@ -92,6 +98,18 @@
     "displayId" : "Participation2",
     "participant" : "https://sbolstandard.org/examples/i13504_system/SubComponent2",
     "role" : "SBO:0000011"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/i13504_system/Interaction2",
+    "@type" : "sbol:Interaction",
+    "displayId" : "Interaction2",
+    "hasParticipation" : "https://sbolstandard.org/examples/i13504_system/Interaction2/Participation1",
+    "type" : "SBO:0000169"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/i13504_system/Interaction2/Participation1",
+    "@type" : "sbol:Participation",
+    "displayId" : "Participation1",
+    "higherOrderParticipant" : "https://sbolstandard.org/examples/i13504_system/Interaction1",
+    "role" : "SBO:0000020"
   }, {
     "@id" : "https://sbolstandard.org/examples/i13504_system/SubComponent1",
     "@type" : "sbol:SubComponent",
@@ -141,6 +159,10 @@
       "@id" : "http://sbols.org/v3#instanceOf",
       "@type" : "@id"
     },
+    "hasParticipation" : {
+      "@id" : "http://sbols.org/v3#hasParticipation",
+      "@type" : "@id"
+    },
     "encoding" : {
       "@id" : "http://sbols.org/v3#encoding",
       "@type" : "@id"
@@ -168,8 +190,8 @@
       "@id" : "http://sbols.org/v3#hasSequence",
       "@type" : "@id"
     },
-    "hasParticipation" : {
-      "@id" : "http://sbols.org/v3#hasParticipation",
+    "higherOrderParticipant" : {
+      "@id" : "http://sbols.org/v3#higherOrderParticipant",
       "@type" : "@id"
     },
     "end" : {

@@ -119,6 +119,8 @@ public class SBOLUtil {
 		}
 	 	return result;
 	 }
+	 
+		
 	 /*public static List<URI> filterItems(Identified identified, List<URI> identifieds, URI property, URI value)
 	 {
 		return RDFUtil.filterItems(identified.resource.getRDFModel(), identifieds, property, value.toString());

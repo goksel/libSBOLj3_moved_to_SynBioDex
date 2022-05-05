@@ -11,6 +11,7 @@ import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.ComponentType;
@@ -64,12 +65,7 @@ public class Component extends TopLevel {
 		{
 			for (SubComponent subComponent: subComponents)
 			{
-				URI instanceOf=subComponent.getIsInstanceOf();
-				if (instanceOf!=null && this.getUri().equals(instanceOf))
-				{
-					validationMessages= addToValidations(validationMessages,new ValidationMessage("{SUBCOMPONENT_INSTANCEOF_MUST_NOT_REFER_ITS_PARENT}", DataModel.SubComponent.instanceOf.toString()));      	
-				    break;	
-				}
+				validationMessages=IdentifiedValidator.assertNotEqual(this,validationMessages, subComponent.getIsInstanceOf(), this.getUri(), "{SUBCOMPONENT_INSTANCEOF_MUST_NOT_REFER_ITS_PARENT}", DataModel.SubComponent.instanceOf);
 			}
 		}
 		
@@ -78,14 +74,47 @@ public class Component extends TopLevel {
 		{
 			for (ComponentReference compRef: componentReferences)
 			{
-				URI inChildOf=compRef.getInChildOf();
-				if (inChildOf!=null)
+				validationMessages=IdentifiedValidator.assertExists(this, validationMessages, compRef.getInChildOf(), subComponents, "{COMBINATORIALREFERENCE_INCHILDOF_MUST_REFER_TO_A_SUBCOMPONENT_OF_THE_PARENT}", DataModel.ComponentReference.inChildOf);
+			}
+		}
+		
+		List<Feature> features=this.getFeatures();
+		List<Constraint> constraints=this.getConstraints();
+		if (constraints!=null)
+		{
+			for (Constraint constraint: constraints)
+			{
+				validationMessages=IdentifiedValidator.assertExists(this, validationMessages, constraint.getSubject(), features, "{CONSTRAINT_SUBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Constraint.subject);
+				validationMessages=IdentifiedValidator.assertExists(this, validationMessages, constraint.getObject(), features, "{CONSTRAINT_OBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Constraint.object);
+			}
+		}
+		
+		List<Interaction> interactions=this.getInteractions();
+		if (interactions!=null)
+		{
+			for (Interaction interaction:interactions)
+			{
+				List<Participation> participations=interaction.getParticipations();
+				if (participations!=null)
 				{
-					if (!SBOLUtil.exists(inChildOf, subComponents))
+					for (Participation participation: participations)
 					{
-						validationMessages= addToValidations(validationMessages,new ValidationMessage("{COMBINATORIALREFERENCE_INCHILDOF_MUST_REFER_TO_A_SUBCOMPONENT_OF_THE_PARENT}", DataModel.ComponentReference.inChildOf.toString()));      	
-						break;	
+						validationMessages=IdentifiedValidator.assertExists(this, validationMessages, participation.getParticipant(), features, "{PARTICIPANT_PARTICIPANT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Participation.participant);
+						validationMessages=IdentifiedValidator.assertExists(this, validationMessages, participation.getHigherOrderParticipant(), interactions, "{PARTICIPANT_HIGHERORDERPARTICIPANT_MUST_REFER_TO_AN_INTERACTION_OF_THE_PARENT}", DataModel.Participation.higherOrderParticipant);
 					}
+				}
+			}
+		}
+		
+		Interface compInterface=this.getInterface();
+		if (compInterface!=null)
+		{
+			List<URI> inputs=compInterface.getInputs();
+			if (inputs!=null)
+			{
+				for (URI input: inputs)
+				{
+					validationMessages=IdentifiedValidator.assertExists(this, validationMessages, input, features, "{INTERFACE_INPUT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Interface.input);
 				}
 			}
 		}
@@ -391,7 +420,6 @@ public class Component extends TopLevel {
 	public Interface createInterface() throws SBOLGraphException {
 		return createInterface(SBOLAPI.append(this.getUri(), "Interface1"));
 	}
-	
 	
 	public Interface getInterface() throws SBOLGraphException {
 		return contsructIdentified(DataModel.Component.hasInterface, Interface.class);

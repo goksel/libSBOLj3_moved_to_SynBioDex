@@ -43,11 +43,21 @@ public class Interaction extends Identified{
 		return addToList(DataModel.Interaction.participation, Participation.class);
 	}
 
+	
 	public Participation createParticipation(URI uri, List<URI> roles, URI feature) throws SBOLGraphException
 	{
 		Participation participation=new Participation(this.resource.getModel(),uri);
 		participation.setRoles(roles);
 		participation.setParticipant(feature);
+		addToList(participation, DataModel.Interaction.participation);
+		return participation;
+	}
+	
+	public Participation createHigherOrderParticipation(URI uri, List<URI> roles, URI interaction) throws SBOLGraphException
+	{
+		Participation participation=new Participation(this.resource.getModel(),uri);
+		participation.setRoles(roles);
+		participation.setHigherOrderParticipant(interaction);
 		addToList(participation, DataModel.Interaction.participation);
 		return participation;
 	}
@@ -62,6 +72,18 @@ public class Interaction extends Identified{
 		String displayId=SBOLAPI.createLocalName(DataModel.Participation.uri, getParticipations());	
 		return createParticipation(displayId, roles, feature);	
 	}
+
+	private Participation createHigherOrderParticipation(String displayId, List<URI> roles, URI interaction) throws SBOLGraphException
+	{
+		return createHigherOrderParticipation(SBOLAPI.append(this.getUri(), displayId), roles, interaction);	
+	}
+	
+	public Participation createHigherOrderParticipation(List<URI> roles, URI interaction) throws SBOLGraphException
+	{
+		String displayId=SBOLAPI.createLocalName(DataModel.Participation.uri, getParticipations());	
+		return createHigherOrderParticipation(displayId, roles, interaction);	
+	}
+
 	
 	@Override
 	public URI getResourceType() {

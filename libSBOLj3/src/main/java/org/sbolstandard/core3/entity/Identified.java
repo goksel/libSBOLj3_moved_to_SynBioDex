@@ -164,7 +164,7 @@ public abstract class Identified {
 	
 	abstract public URI getResourceType();
 
-	protected List<ValidationMessage> addToValidations(List<ValidationMessage> messages,ValidationMessage message)
+	public List<ValidationMessage> addToValidations(List<ValidationMessage> messages,ValidationMessage message)
 	{
 		if (messages==null)
 		{

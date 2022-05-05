@@ -164,6 +164,29 @@
      ]
   }
    ,
+  "https://sbolstandard.org/examples/TetR" : { 
+    "http://sbols.org/v3#displayId" : [ { 
+      "type" : "literal" ,
+      "value" : "TetR"
+    }
+     ] ,
+    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#Component"
+    }
+     ] ,
+    "http://sbols.org/v3#hasNamespace" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples"
+    }
+     ] ,
+    "http://sbols.org/v3#type" : [ { 
+      "type" : "uri" ,
+      "value" : "https://identifiers.org/SBO:0000252"
+    }
+     ]
+  }
+   ,
   "https://sbolstandard.org/examples/i13504_system/SubComponent2" : { 
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
@@ -327,10 +350,37 @@
       "type" : "uri" ,
       "value" : "https://sbolstandard.org/examples/i13504_system/Interaction1"
     }
+    , { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples/i13504_system/Interaction2"
+    }
      ] ,
     "http://sbols.org/v3#type" : [ { 
       "type" : "uri" ,
       "value" : "https://identifiers.org/SBO:0000251"
+    }
+     ]
+  }
+   ,
+  "https://sbolstandard.org/examples/i13504_system/Interaction2/Participation1" : { 
+    "http://sbols.org/v3#displayId" : [ { 
+      "type" : "literal" ,
+      "value" : "Participation1"
+    }
+     ] ,
+    "http://sbols.org/v3#role" : [ { 
+      "type" : "uri" ,
+      "value" : "https://identifiers.org/SBO:0000020"
+    }
+     ] ,
+    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#Participation"
+    }
+     ] ,
+    "http://sbols.org/v3#higherOrderParticipant" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples/i13504_system/Interaction1"
     }
      ]
   }
@@ -401,6 +451,29 @@
     "http://sbols.org/v3#type" : [ { 
       "type" : "uri" ,
       "value" : "https://identifiers.org/SBO:0000589"
+    }
+     ]
+  }
+   ,
+  "https://sbolstandard.org/examples/i13504_system/Interaction2" : { 
+    "http://sbols.org/v3#displayId" : [ { 
+      "type" : "literal" ,
+      "value" : "Interaction2"
+    }
+     ] ,
+    "http://sbols.org/v3#hasParticipation" : [ { 
+      "type" : "uri" ,
+      "value" : "https://sbolstandard.org/examples/i13504_system/Interaction2/Participation1"
+    }
+     ] ,
+    "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
+      "type" : "uri" ,
+      "value" : "http://sbols.org/v3#Interaction"
+    }
+     ] ,
+    "http://sbols.org/v3#type" : [ { 
+      "type" : "uri" ,
+      "value" : "https://identifiers.org/SBO:0000169"
     }
      ]
   }

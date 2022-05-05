@@ -29,6 +29,12 @@
         sbol:instanceOf   :E0040 ;
         sbol:orientation  SO:0001030 .
 
+<i13504_system/Interaction2>
+        a                      sbol:Interaction ;
+        sbol:displayId         "Interaction2" ;
+        sbol:hasParticipation  <i13504_system/Interaction2/Participation1> ;
+        sbol:type              SBO:0000169 .
+
 :E0040_Sequence1  a        sbol:Sequence ;
         sbol:description   "gfp sequence" ;
         sbol:displayId     "E0040_Sequence1" ;
@@ -51,7 +57,7 @@
 :i13504_system  a            sbol:Component ;
         sbol:displayId       "i13504_system" ;
         sbol:hasFeature      <i13504_system/SubComponent2> , <i13504_system/SubComponent1> , <i13504_system/ComponentReference1> ;
-        sbol:hasInteraction  <i13504_system/Interaction1> ;
+        sbol:hasInteraction  <i13504_system/Interaction2> , <i13504_system/Interaction1> ;
         sbol:hasNamespace    <https://sbolstandard.org/examples> ;
         sbol:name            "i13504 system" ;
         sbol:role            SBO:0000289 ;
@@ -63,6 +69,12 @@
         sbol:hasNamespace  <https://sbolstandard.org/examples> ;
         sbol:hasSequence   :i13504_Sequence1 ;
         sbol:type          SBO:0000251 .
+
+<i13504_system/Interaction2/Participation1>
+        a                            sbol:Participation ;
+        sbol:displayId               "Participation1" ;
+        sbol:higherOrderParticipant  <i13504_system/Interaction1> ;
+        sbol:role                    SBO:0000020 .
 
 :E0040  a                  sbol:Component ;
         sbol:description   "gfp coding sequence" ;
@@ -91,6 +103,11 @@
         sbol:hasSequence  :i13504_Sequence1 ;
         sbol:orientation  SO:0001030 ;
         sbol:start        "1" .
+
+:TetR   a                  sbol:Component ;
+        sbol:displayId     "TetR" ;
+        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:type          SBO:0000252 .
 
 <i13504_system/Interaction1/Participation1>
         a                 sbol:Participation ;
