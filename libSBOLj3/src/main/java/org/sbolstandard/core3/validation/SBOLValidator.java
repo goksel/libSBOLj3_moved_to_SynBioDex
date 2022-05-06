@@ -27,6 +27,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
+import jakarta.validation.executable.ExecutableValidator;
 
 
 public class SBOLValidator {
@@ -36,6 +37,16 @@ public class SBOLValidator {
 	
 	private SBOLValidator()
 	{	
+	}
+	
+	private void setValidator(Validator validator) throws SBOLGraphException	
+	{
+		if (validator==null)
+		{
+			throw new SBOLGraphException("Unable to create a Validator");
+		}
+			
+		this.validator=validator;
 	}
 	
 	public static SBOLValidator getValidator() throws SBOLGraphException
@@ -49,7 +60,7 @@ public class SBOLValidator {
 		 	            .configure()
 		 	            //.addValueExtractor(new ...ValueExtractor())
 		 	            .buildValidatorFactory();
-				sbolValidator.validator = factory.getValidator();	
+				sbolValidator.setValidator(factory.getValidator());	
 			}
 			catch (Exception exception)
 			{

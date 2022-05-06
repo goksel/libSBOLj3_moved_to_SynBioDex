@@ -2,7 +2,10 @@ package org.sbolstandard.core3.entity;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
@@ -45,8 +48,10 @@ public class CombinatorialDerivation extends TopLevel{
 			List<VariableFeature> variableFeatures=this.getVariableFeatures();
 			if (variableFeatures!=null)
 			{
+				Map<URI, Integer> variableCount=new HashMap<>();
 				for (VariableFeature variableFeature: variableFeatures)
 				{
+					//COMBINATORIALDERIVATION_VARIABLEFEATURE_VALID_IF_STRATEGY_ENUMERATE
 					VariableFeatureCardinality cardinality=variableFeature.getCardinality();
 					if (cardinality.equals(VariableFeatureCardinality.OneOrMore) || cardinality.equals(VariableFeatureCardinality.ZeroOrMore))
 					{
@@ -54,11 +59,29 @@ public class CombinatorialDerivation extends TopLevel{
 						message.childPath(DataModel.VariableFeature.cardinality);
 						validationMessages= addToValidations(validationMessages,message);
 					}
+					
+					//COMBINATORIALDERIVATION_VARIABLEFEATURE_UNIQUE
+					Integer count=variableCount.get(variableFeature.getVariable());
+					if (count==null)
+					{
+						variableCount.put(variableFeature.getVariable(), 1);
+					}
+					else 
+					{
+						if (count==1)
+						{
+							ValidationMessage message = new ValidationMessage("{COMBINATORIALDERIVATION_VARIABLEFEATURE_UNIQUE}", DataModel.CombinatorialDerivation.variableFeature,variableFeature,variableFeature.getVariable());
+							message.childPath(DataModel.VariableFeature.variable);
+							validationMessages= addToValidations(validationMessages,message);
+						}
+						variableCount.put(variableFeature.getVariable(), count++);
+					}	
 				}
 			}			
 		}
 		return validationMessages;
 	}
+	
 	@NotNull(message = "{COMBINATORIALDERIVATION_TEMPLATE_NOT_NULL}")
 	public URI getTemplate() throws SBOLGraphException {
 		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.template);
@@ -106,7 +129,7 @@ public class CombinatorialDerivation extends TopLevel{
 	{
 		VariableFeature variableComponent= new VariableFeature(this.resource.getModel(), uri);
 		variableComponent.setCardinality(cardinality);
-		variableComponent.setFeature(subComponent);
+		variableComponent.setVariable(subComponent);
 		addToList(variableComponent, DataModel.CombinatorialDerivation.variableFeature);
 		return variableComponent;	
 	}

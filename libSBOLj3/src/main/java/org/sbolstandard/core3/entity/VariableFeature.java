@@ -41,9 +41,16 @@ public class VariableFeature extends Identified{
 		URI value= IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableFeature.cardinality);	
 		if (value!=null)
 		{
-			cardinality=VariableFeatureCardinality.get(value);
+			cardinality=toCardinality(value); 
+			PropertyValidator.getValidator().validateReturnValue(this, "toCardinality", cardinality, URI.class);
 		}
 		return cardinality;
+	}
+
+	@NotNull(message = "{VARIABLEFEATURE_CARDINALITY_VALID_IF_NOT_NULL}")   
+	public VariableFeatureCardinality toCardinality(URI uri)
+	{
+		return VariableFeatureCardinality.get(uri); 
 	}
 
 	public void setCardinality(@NotNull(message = "{VARIABLEFEATURE_CARDINALITY_NOT_NULL}") VariableFeatureCardinality cardinality) throws SBOLGraphException {
@@ -57,12 +64,12 @@ public class VariableFeature extends Identified{
 	}
 	
 	@NotNull(message = "{VARIABLEFEATURE_FEATURE_NOT_NULL}")
-	public URI getFeature() throws SBOLGraphException {
+	public URI getVariable() throws SBOLGraphException {
 		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableFeature.variable);	
 	}
 
-	public void setFeature(@NotNull(message = "{VARIABLEFEATURE_FEATURE_NOT_NULL}") URI feature) throws SBOLGraphException {
-		PropertyValidator.getValidator().validate(this, "setFeature", new Object[] {feature}, URI.class);
+	public void setVariable(@NotNull(message = "{VARIABLEFEATURE_FEATURE_NOT_NULL}") URI feature) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setVariable", new Object[] {feature}, URI.class);
 		RDFUtil.setProperty(resource, DataModel.VariableFeature.variable, feature);
 	}
 	

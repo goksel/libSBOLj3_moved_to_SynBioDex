@@ -184,14 +184,6 @@
       </sbol:hasInteraction>
       <sbol:name>TetR device</sbol:name>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
-      <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="TetR_producer/SubComponent9">
-            <sbol:instanceOf>
-               <sbol:Component rdf:about="atC_TetR"/>
-            </sbol:instanceOf>
-            <sbol:displayId>SubComponent9</sbol:displayId>
-         </sbol:SubComponent>
-      </sbol:hasFeature>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
    </sbol:Component>
    <sbol:Component rdf:about="rbs_gfp">
@@ -379,6 +371,12 @@
       </sbol:hasInteraction>
       <sbol:hasFeature rdf:resource="LacI_producer/SubComponent1"/>
       <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="LacI_producer/SubComponent11">
+            <sbol:instanceOf rdf:resource="atC_TetR"/>
+            <sbol:displayId>SubComponent11</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:hasFeature>
          <sbol:SubComponent rdf:about="LacI_producer/SubComponent5">
             <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
             <sbol:instanceOf>
@@ -475,7 +473,7 @@
             <sbol:hasParticipation>
                <sbol:Participation rdf:about="LacI_producer/Interaction4/Participation3">
                   <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
-                  <sbol:participant rdf:resource="TetR_producer/SubComponent9"/>
+                  <sbol:participant rdf:resource="LacI_producer/SubComponent11"/>
                   <sbol:displayId>Participation3</sbol:displayId>
                </sbol:Participation>
             </sbol:hasParticipation>

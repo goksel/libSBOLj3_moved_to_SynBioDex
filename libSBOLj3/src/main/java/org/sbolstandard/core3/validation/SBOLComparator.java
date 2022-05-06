@@ -469,7 +469,7 @@ public class SBOLComparator {
 		{
 			output = add(output, assertEqual(entity1, entity2));
 			output = add(output, assertEqual(entity1, entity2, entity1.getCardinality().getUri(),entity2.getCardinality().getUri(), DataModel.VariableFeature.cardinality));
-			output = add(output, assertEqual(entity1, entity2, entity1.getFeature(),entity2.getFeature(), DataModel.VariableFeature.variable));
+			output = add(output, assertEqual(entity1, entity2, entity1.getVariable(),entity2.getVariable(), DataModel.VariableFeature.variable));
 			output = add(output, assertEqual(entity1, entity2, entity1.getVariantCollections(),entity2.getVariantCollections(), DataModel.VariableFeature.variantCollection));
 			output = add(output, assertEqual(entity1, entity2, entity1.getVariantDerivations(),entity2.getVariantDerivations(), DataModel.VariableFeature.variantDerivation));
 			output = add(output, assertEqual(entity1, entity2, entity1.getVariants(),entity2.getVariants(), DataModel.VariableFeature.variant));	

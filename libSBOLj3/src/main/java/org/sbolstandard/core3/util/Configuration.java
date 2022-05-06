@@ -6,6 +6,10 @@ public class Configuration {
 	
 	private boolean enforceOneToOneRelationships=true;
 	private boolean validateAfterSettingProperties=true;
+	private boolean validateBeforeSaving=true;
+	private boolean validateAfterReadingSBOLDocuments=true;
+
+	
 	public boolean isValidateAfterSettingProperties() {
 		return validateAfterSettingProperties;
 	}
@@ -26,11 +30,6 @@ public class Configuration {
 		this.validateBeforeSaving = validateBeforeSaving;
 	}
 
-	private boolean validateBeforeSaving=true;
-	private boolean validateAfterReadingSBOLDocuments=true;
-	
-	
-	
 	
 	public boolean validateAfterReadingSBOLDocuments() {
 		return validateAfterReadingSBOLDocuments;

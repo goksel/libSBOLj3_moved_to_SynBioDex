@@ -15,10 +15,20 @@ import jakarta.validation.executable.ExecutableValidator;
 
 public class PropertyValidator {
 	private static PropertyValidator propertyValidator = null;
-	protected ExecutableValidator validator;
+	private ExecutableValidator validator;
 	
 	private PropertyValidator()
 	{	
+	}
+	
+	private void setExecutableValidator(ExecutableValidator executableValidator) throws SBOLGraphException	
+	{
+		if (executableValidator==null)
+		{
+			throw new SBOLGraphException("Unable to create an ExecutableValidator");
+		}
+			
+		this.validator=executableValidator;
 	}
 	
 	public static PropertyValidator getValidator() throws SBOLGraphException
@@ -31,11 +41,13 @@ public class PropertyValidator {
 				ValidatorFactory factory = Validation.byDefaultProvider()
 		 	            .configure()
 		 	            .buildValidatorFactory();
-				propertyValidator.validator = factory.getValidator().forExecutables();	
+				
+				//propertyValidator.validator = factory.getValidator().forExecutables();	
+				propertyValidator.setExecutableValidator(factory.getValidator().forExecutables());	
 			}
 			catch (Exception exception)
 			{
-				throw new SBOLGraphException("Could not initialize the property validator", exception);
+				throw new SBOLGraphException("Could not initialize the property validator. " + exception.getMessage(), exception);
 			}
 		}
 		return propertyValidator;
@@ -53,7 +65,7 @@ public class PropertyValidator {
 			throw new SBOLGraphException(e.getMessage(),e);
 		}
 		
-		Set<ConstraintViolation<Identified>> violations = validator.validateReturnValue(identified, method,returnValue);
+		Set<ConstraintViolation<Identified>> violations = this.validator.validateReturnValue(identified, method,returnValue);
 		processViolations(violations);
 	}
 	
@@ -108,7 +120,7 @@ public class PropertyValidator {
 				throw new SBOLGraphException(e.getMessage(),e);
 			}
 			
-			Set<ConstraintViolation<Identified>> violations = validator.validateParameters(identified, method,parameterValues);
+			Set<ConstraintViolation<Identified>> violations = this.validator.validateParameters(identified, method,parameterValues);
 			processViolations(violations);
 		}
 	}

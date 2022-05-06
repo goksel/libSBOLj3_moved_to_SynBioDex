@@ -44,6 +44,24 @@
   } ],
   "@type" : [ "http://sbols.org/v3#Attachment" ]
 }, {
+  "@id" : "https://sbolstandard.org/examples/attachment2",
+  "http://sbols.org/v3#size" : [ {
+    "@value" : "1000"
+  } ],
+  "http://sbols.org/v3#format" : [ {
+    "@id" : "https://identifiers.org/edam:format_2585"
+  } ],
+  "http://sbols.org/v3#source" : [ {
+    "@id" : "https://sbolstandard.org/attachment2"
+  } ],
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "attachment2"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Attachment" ]
+}, {
   "@id" : "https://sbolstandard.org/examples/impl1",
   "http://sbols.org/v3#hasAttachment" : [ {
     "@id" : "https://sbolstandard.org/examples/attachment1"

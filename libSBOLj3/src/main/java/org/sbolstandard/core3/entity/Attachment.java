@@ -1,6 +1,7 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.List;
 import java.util.OptionalLong;
 import java.util.Set;
 
@@ -11,6 +12,7 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.Message;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 import jakarta.validation.ConstraintViolation;
@@ -37,6 +39,17 @@ public class Attachment extends TopLevel{
 	{
 		super(resource);
 	}
+
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		if (this.getHash()!=null && this.getHashAlgorithm()==null)
+		{
+			validationMessages= addToValidations(validationMessages,new ValidationMessage("{ATTACHMENT_HASHGORITHM_NOT_NULL_IF_HASH_IS_PROVIDED}", DataModel.Attachment.hashAlgorithm));      	
+		}
+		return validationMessages;
+	}		
 	
 	//@NotNull(message = "Attachment.source cannot be null")
 	@NotNull(message = "{ATTACHMENT_SOURCE_NOT_NULL}")
@@ -132,7 +145,7 @@ public class Attachment extends TopLevel{
 
 	public void setHash(String hash) {
 		//this.hash = hash;
-		RDFUtil.setProperty(resource, DataModel.Attachment.hash, String.valueOf(hash));
+		RDFUtil.setProperty(resource, DataModel.Attachment.hash, hash);
 	}
 
 	public String getHashAlgorithm() throws SBOLGraphException {
@@ -147,7 +160,7 @@ public class Attachment extends TopLevel{
 
 	public void setHashAlgorithm(String hashAlgorithm) {
 		//this.hashAlgorithm = hashAlgorithm;
-		RDFUtil.setProperty(resource, DataModel.Attachment.hashAlgorithm, String.valueOf(hashAlgorithm));
+		RDFUtil.setProperty(resource, DataModel.Attachment.hashAlgorithm, hashAlgorithm);
 	}
 
 	@Override
