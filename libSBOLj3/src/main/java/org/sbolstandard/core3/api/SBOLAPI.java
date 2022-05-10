@@ -21,6 +21,7 @@ import org.sbolstandard.core3.entity.SequenceFeature;
 import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
@@ -416,7 +417,7 @@ public class SBOLAPI {
 	    
 	    public static Component createComponent(SBOLDocument doc, URI uri, URI type, String name, String description, URI role) throws SBOLGraphException
 	    {
-	    	Component component=doc.createComponent(doc.getBaseURI(), uri, Arrays.asList(type)); 
+	    	Component component=doc.createComponent(uri, SBOLUtil.toNameSpace(doc.getBaseURI()), Arrays.asList(type)); 
 	    	component.setName(name);
 	    	component.setDescription(description);
 	        if (role!=null)
@@ -462,7 +463,7 @@ public class SBOLAPI {
 	    
 	    public static Sequence createSequence(SBOLDocument doc, URI uri, String name, String description, String sequence, Encoding encoding) throws SBOLGraphException
 	    {
-	        Sequence sequenceEntity=doc.createSequence(doc.getBaseURI(), uri);
+	        Sequence sequenceEntity=doc.createSequence(uri,SBOLUtil.toNameSpace(doc.getBaseURI()));
 	        sequenceEntity.setName(name);
 	        sequenceEntity.setDescription(description);   
 	        if (sequence!=null)

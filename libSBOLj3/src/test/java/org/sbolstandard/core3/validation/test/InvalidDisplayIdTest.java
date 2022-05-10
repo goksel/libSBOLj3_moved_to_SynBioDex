@@ -29,7 +29,7 @@ public class InvalidDisplayIdTest extends TestCase {
         //Component LacI_protein=SBOLAPI.createComponent(doc, "LacI_protein", ComponentType.Protein.getUrl(), "LacI", "LacI protein", Role.TF);
         TetR_protein.setNamespace(URI.create("https://sbolstandard.org/examples/"));
         
-        Component rbs=doc.createComponent(URI.create("https://sbolstandard.org/examples"),URI.create("https://sbolstandard.org/examples/rbs"), Arrays.asList(ComponentType.DNA.getUrl())); 
+        Component rbs=doc.createComponent(URI.create("https://sbolstandard.org/examples/rbs"), URI.create("https://sbolstandard.org/examples"), Arrays.asList(ComponentType.DNA.getUrl())); 
 		rbs.setName("B0034");
 		rbs.setDisplayId("B0034 rbs");
 		rbs.setDescription("RBS (Elowitz 1999)");

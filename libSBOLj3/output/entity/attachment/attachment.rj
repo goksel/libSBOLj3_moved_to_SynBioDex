@@ -43,6 +43,11 @@
       "value" : "https://identifiers.org/edam:format_2585"
     }
      ] ,
+    "http://sbols.org/v3#hash" : [ { 
+      "type" : "literal" ,
+      "value" : "aaa"
+    }
+     ] ,
     "http://sbols.org/v3#hasNamespace" : [ { 
       "type" : "uri" ,
       "value" : "https://sbolstandard.org/examples"
@@ -56,6 +61,11 @@
     "http://sbols.org/v3#source" : [ { 
       "type" : "uri" ,
       "value" : "https://sbolstandard.org/attachment2"
+    }
+     ] ,
+    "http://sbols.org/v3#hashAlgorithm" : [ { 
+      "type" : "literal" ,
+      "value" : "HashAlg"
     }
      ]
   }

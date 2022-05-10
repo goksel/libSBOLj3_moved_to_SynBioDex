@@ -32,9 +32,11 @@
         sbol:role          GO:0003700 ;
         sbol:type          SBO:0000252 .
 
-:attachment2  a            sbol:Attachment ;
-        sbol:displayId     "attachment2" ;
-        sbol:format        EDAM:format_2585 ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
-        sbol:size          "1000" ;
-        sbol:source        <https://sbolstandard.org/attachment2> .
+:attachment2  a             sbol:Attachment ;
+        sbol:displayId      "attachment2" ;
+        sbol:format         EDAM:format_2585 ;
+        sbol:hasNamespace   <https://sbolstandard.org/examples> ;
+        sbol:hash           "aaa" ;
+        sbol:hashAlgorithm  "HashAlg" ;
+        sbol:size           "1000" ;
+        sbol:source         <https://sbolstandard.org/attachment2> .

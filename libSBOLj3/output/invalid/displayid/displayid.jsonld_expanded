@@ -1,7 +1,7 @@
 [ {
   "@id" : "https://sbolstandard.org/examples/TetR_protein",
   "http://sbols.org/v3#hasNamespace" : [ {
-    "@id" : "https://sbolstandard.org/examples"
+    "@id" : "https://sbolstandard.org/examples/"
   } ],
   "http://sbols.org/v3#description" : [ {
     "@value" : "TetR protein"

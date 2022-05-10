@@ -45,6 +45,12 @@
   "@type" : [ "http://sbols.org/v3#Attachment" ]
 }, {
   "@id" : "https://sbolstandard.org/examples/attachment2",
+  "http://sbols.org/v3#hash" : [ {
+    "@value" : "aaa"
+  } ],
+  "http://sbols.org/v3#hashAlgorithm" : [ {
+    "@value" : "HashAlg"
+  } ],
   "http://sbols.org/v3#size" : [ {
     "@value" : "1000"
   } ],

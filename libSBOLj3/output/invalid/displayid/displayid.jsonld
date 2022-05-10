@@ -4,7 +4,7 @@
     "@type" : "sbol:Component",
     "description" : "TetR protein",
     "displayId" : "1TetR",
-    "hasNamespace" : "https://sbolstandard.org/examples",
+    "hasNamespace" : "https://sbolstandard.org/examples/",
     "name" : "TetR",
     "role" : "GO:0003700",
     "type" : "SBO:0000252"

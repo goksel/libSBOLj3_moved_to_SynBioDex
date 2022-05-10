@@ -78,7 +78,7 @@ public class RDFUtil {
 		}
 		else
 		{
-			throw new SBOLGraphException(String.format("Resource with the URI already exists! URI:%s", resourceUriString));
+			throw new SBOLGraphException(String.format("Resource with the URI already exists! URI: %s", resourceUriString));
 		}
 		return resource;
 	}

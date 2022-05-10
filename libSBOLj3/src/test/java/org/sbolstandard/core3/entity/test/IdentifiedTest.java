@@ -39,6 +39,7 @@ public class IdentifiedTest extends TestCase {
         attachment2.setDisplayId("attachment2");
         TestUtil.validateIdentified(attachment2,doc,0);
       
+        //IDENTIFIED_CANNOT_BE_REFERREDBY_WASDERIVEDFROM
         attachment.setWasDerivedFrom(null);
         TestUtil.validateIdentified(attachment,doc,0);
         attachment.setWasDerivedFrom(Arrays.asList(attachment.getUri()));

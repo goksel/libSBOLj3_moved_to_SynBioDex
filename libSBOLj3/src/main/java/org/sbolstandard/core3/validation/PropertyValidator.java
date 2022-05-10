@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.sbolstandard.core3.entity.Identified;
+import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import jakarta.validation.ConstraintViolation;
@@ -79,8 +80,8 @@ public class PropertyValidator {
     	    fragments.add(String.format("Entity URI: %s",identifiedLeaf.getUri().toString()));
     	    fragments.add(String.format("Entity type: %s",identifiedLeaf.getClass()));    
     	}
-    	if (violation.getInvalidValue()!=null && !(violation.getInvalidValue() instanceof Identified)){    	
-    		fragments.add("Value:" + violation.getInvalidValue().toString());
+    	if (violation.getInvalidValue()!=null && !(violation.getInvalidValue() instanceof Identified) && !(violation.getInvalidValue() instanceof SBOLDocument)){    	
+    		fragments.add("Value: " + violation.getInvalidValue().toString());
     	}
     	String message=StringUtils.join(fragments, "," + System.lineSeparator()  + "\t");
     	return message;

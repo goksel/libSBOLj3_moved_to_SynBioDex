@@ -166,13 +166,7 @@ public abstract class Identified {
 
 	public List<ValidationMessage> addToValidations(List<ValidationMessage> messages,ValidationMessage message)
 	{
-		if (messages==null)
-		{
-			messages=new ArrayList<ValidationMessage>();
-		}
-		messages.add(message);
-		return messages;
-		
+		return IdentifiedValidator.addToValidations(messages, message);
 	}
 	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
 	{

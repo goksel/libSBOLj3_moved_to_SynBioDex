@@ -13,6 +13,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -158,5 +159,29 @@ public class SBOLUtil {
 	 {
 		return RDFUtil.filterItems(identified.resource.getRDFModel(), identifieds, property, value.toString());
 	 }*/
+	    
+	    public static URI toNameSpace(URI uri)
+		{
+			String uriString=uri.toString();
+			if (uriString.endsWith("/"))
+			{
+				uriString=uriString.substring(0, uriString.length()-1);
+			}
+			return URI.create(uriString);
+		}
+	    
+	    public static <T extends Identified>  List<URI> getURIs(List<T> identifieds)
+		{
+			ArrayList<URI> uris=null;
+			if (identifieds!=null)
+			{
+				uris=new ArrayList<URI>();
+				for (Identified identified:identifieds)
+				{
+					uris.add(identified.getUri());
+				}
+			}
+			return uris;
+		}
 	
 }

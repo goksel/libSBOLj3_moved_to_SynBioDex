@@ -291,6 +291,16 @@ public class IdentifiedValidator {
 		RDFUtil.setProperty(resource, property, stringValue);	
 	}
 	
+	public static List<ValidationMessage> addToValidations(List<ValidationMessage> messages,ValidationMessage message)
+	{
+		if (messages==null)
+		{
+			messages=new ArrayList<ValidationMessage>();
+		}
+		messages.add(message);
+		return messages;
+		
+	}
 	
 	/*public Optional<?> getPropertyAsOptional(Resource resource, URI property) throws SBOLGraphException
 	{

@@ -33,7 +33,7 @@ public class AttachmentTest extends TestCase {
         Attachment attachment2=doc.createAttachment("attachment2", URI.create("https://sbolstandard.org/attachment2"));
         attachment2.setFormat(ModelLanguage.SBML);
         attachment2.setSize(OptionalLong.of(1000));
-        attachment2.setHashAlgorithm(null);
+        attachment2.setHashAlgorithm("HashAlg");
         attachment2.setHash("aaa");
         System.out.println(SBOLIO.write(doc, RDFFormat.TURTLE));
         System.out.println(SBOLValidator.getValidator().isValid(doc));
