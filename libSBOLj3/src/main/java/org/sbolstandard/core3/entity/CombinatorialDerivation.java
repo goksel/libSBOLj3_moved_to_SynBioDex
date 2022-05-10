@@ -149,6 +149,13 @@ public class CombinatorialDerivation extends TopLevel{
 	public URI getResourceType() {
 		return DataModel.CombinatorialDerivation.uri;
 	}
+
+	@Override
+	public List<Identified> getChildren() throws SBOLGraphException {
+		List<Identified> identifieds=super.getChildren();
+		identifieds=addToList(identifieds, this.getVariableFeatures());
+		return identifieds;
+	}
 	
 	
 }

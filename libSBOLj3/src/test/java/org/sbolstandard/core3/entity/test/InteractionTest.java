@@ -42,6 +42,9 @@ public class InteractionTest extends TestCase {
         interaction.setTypes(null);
         
         TestUtil.validateIdentified(interaction,doc,1);
+        interaction.setTypes(Arrays.asList(InteractionType.GeneticProduction));
+        TestUtil.validateIdentified(interaction,doc,0);
+           
     }
 	
 }

@@ -19,14 +19,14 @@ import jakarta.validation.ConstraintValidatorContext.ConstraintViolationBuilder.
 import jakarta.validation.ConstraintValidatorContext.ConstraintViolationBuilder.LeafNodeBuilderDefinedContext;
 import jakarta.validation.ConstraintValidatorContext.ConstraintViolationBuilder.NodeBuilderCustomizableContext;
 
-public class IdentifiedAnnotationValidator implements ConstraintValidator<ValidIdentified, Identified> {
+public class SBOLEntityAnnotationValidator implements ConstraintValidator<ValidSBOLEntity, ValidatableSBOLEntity> {
 
 	@Override
-    public void initialize(ValidIdentified constraintAnnotation) {
+    public void initialize(ValidSBOLEntity constraintAnnotation) {
     }
 
     @Override
-    public boolean isValid(Identified identified, ConstraintValidatorContext context) {
+    public boolean isValid(ValidatableSBOLEntity identified, ConstraintValidatorContext context) {
         boolean valid=true;
     	if (identified!=null)
         {
@@ -63,10 +63,16 @@ public class IdentifiedAnnotationValidator implements ConstraintValidator<ValidI
     	    				  //context.buildConstraintViolationWithTemplate(message.getMessage())
     	                      //.addPropertyNode(message.getProperty()).addConstraintViolation();
     	    			String messageString=message.getMessage();
-    	    			if (message.getInvalidValue()!=null && !(message.getInvalidValue() instanceof Identified)){
-    	    				String separator="," + System.lineSeparator()  + "\t";
+    	    			String separator="," + System.lineSeparator()  + "\t";
+	    				if (message.getInvalidValue()!=null && !(message.getInvalidValue() instanceof ValidatableSBOLEntity)){
     	    				messageString = String.format("%s%sValue: %s",messageString, separator, message.getInvalidValue().toString());
     	    			}
+	    				else if (message.getInvalidValue()!=null && message.getInvalidValue() instanceof Identified){
+    	    				Identified invalidIdentified= (Identified ) message.getInvalidValue() ;
+    	    				messageString = String.format("%s%sChild Entity URI: %s",messageString, separator, invalidIdentified.getUri().toString());
+    	    				messageString = String.format("%s%sChild Entity Type: %s",messageString, separator, invalidIdentified.getClass());  	
+    	    			}
+        	    			
     	    				  //context.buildConstraintViolationWithTemplate(messageString)
     	                      //.addPropertyNode(message.getProperty()).addConstraintViolation();
     	    			ConstraintViolationBuilder violationBuilder= context.buildConstraintViolationWithTemplate(messageString);
@@ -124,28 +130,30 @@ public class IdentifiedAnnotationValidator implements ConstraintValidator<ValidI
     private boolean addViolationPath(ConstraintViolationBuilder violationBuilder, ValidationMessage message)
     {
     	boolean added=false;
-    	NodeBuilderCustomizableContext nbcc= violationBuilder.addPropertyNode(SBOLUtil.toQualifiedString(message.getProperty()));
-		
-		if (message.getChildEntity()!=null){
-			Identified childEntity=message.getChildEntity();
-			String key=childEntity.getUri().toString();
-			Class<?> childClass=childEntity.getClass();
-			LeafNodeBuilderDefinedContext entityContext=nbcc.addBeanNode().inContainer(childClass, 1).inIterable().atKey(key);
-			//LeafNodeBuilderDefinedContext entityContext=nbcc.addBeanNode().inIterable().atKey(key);
+    	if (message!=null)
+    	{
+	    	NodeBuilderCustomizableContext nbcc= violationBuilder.addPropertyNode(SBOLUtil.toQualifiedString(message.getProperty()));
 			
-			
-			added=addViolationPath(violationBuilder, message.getChildMessage());
+			if (message.getChildEntity()!=null){
+				Identified childEntity=message.getChildEntity();
+				String key=childEntity.getUri().toString();
+				Class<?> childClass=childEntity.getClass();
+				LeafNodeBuilderDefinedContext entityContext=nbcc.addBeanNode().inContainer(childClass, 1).inIterable().atKey(key);
+				//LeafNodeBuilderDefinedContext entityContext=nbcc.addBeanNode().inIterable().atKey(key);
+				
+				added=addViolationPath(violationBuilder, message.getChildMessage());
+				if (!added)
+				{
+					entityContext.addConstraintViolation(); 
+					added=true;
+				}
+		    }
 			if (!added)
-			{
-				entityContext.addConstraintViolation(); 
+			{		
+				nbcc.addConstraintViolation();  
 				added=true;
 			}
-	    }
-		if (!added)
-		{		
-			nbcc.addConstraintViolation();  
-			added=true;
-		}
+    	}
     	return added;
     }
     

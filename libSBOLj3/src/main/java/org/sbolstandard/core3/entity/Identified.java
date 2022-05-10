@@ -22,7 +22,8 @@ import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
-import org.sbolstandard.core3.validation.ValidIdentified;
+import org.sbolstandard.core3.validation.ValidSBOLEntity;
+import org.sbolstandard.core3.validation.ValidatableSBOLEntity;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
@@ -30,8 +31,8 @@ import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 
-@ValidIdentified
-public abstract class Identified {
+@ValidSBOLEntity
+public abstract class Identified implements ValidatableSBOLEntity {
 	protected Resource resource=null;
 	
 	/*private String displayId;
@@ -163,6 +164,13 @@ public abstract class Identified {
 	}
 	
 	abstract public URI getResourceType();
+	public List<Identified> getChildren() throws SBOLGraphException
+	{
+		List<Identified> identifieds=null;
+		identifieds=addToList(identifieds, this.getMeasures());
+		return identifieds;
+	}
+	
 
 	public List<ValidationMessage> addToValidations(List<ValidationMessage> messages,ValidationMessage message)
 	{
@@ -175,6 +183,12 @@ public abstract class Identified {
     	if (wasDerivedFroms!=null && wasDerivedFroms.contains(this.getUri()))
     	{
     		validationMessages= addToValidations(validationMessages,new ValidationMessage("{IDENTIFIED_CANNOT_BE_REFERREDBY_WASDERIVEDFROM}", DataModel.Identified.wasDerivedFrom));      
+    	}
+    	
+    	List<Identified> children=this.getChildren();
+    	if (children!=null)
+    	{
+    		validationMessages=IdentifiedValidator.assertURIStartsWith(this, validationMessages, children);
     	}
     	return validationMessages;
 	}
@@ -272,6 +286,31 @@ public abstract class Identified {
 	}
 	
 	
+	protected <T extends Identified> List<Identified> addToList(List<Identified> listA, List<T> listB)
+	{
+		if (listB!=null && listB.size()>0)
+		{
+			if (listA==null)
+			{
+				listA=new ArrayList<Identified>();
+			}
+			listA.addAll(listB);
+		}
+		return listA;
+	}
+	
+	protected <T extends Identified> List<Identified> addToList(List<Identified> listA, T identified)
+	{
+		if (identified!=null)
+		{
+			if (listA==null)
+			{
+				listA=new ArrayList<Identified>();
+			}
+			listA.add(identified);
+		}
+		return listA;
+	}
 	/*protected <T extends Identified> List<T> addToList(List<T> items, Identified identified, URI property)
 	{
 		RDFUtil.addProperty(this.resource,property, identified.getUri());

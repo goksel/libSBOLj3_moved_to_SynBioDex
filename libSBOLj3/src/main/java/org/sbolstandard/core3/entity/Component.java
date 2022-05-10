@@ -207,7 +207,7 @@ public class Component extends TopLevel {
 	}
 	*/
 	
-	private void addToList(List<Feature> listA, List<? extends Feature> listB)
+	private void addToFeatureList(List<Feature> listA, List<? extends Feature> listB)
 	{
 		if (listB!=null && listB.size()>0)
 		{
@@ -217,11 +217,11 @@ public class Component extends TopLevel {
 	
 	public List<Feature> getFeatures() throws SBOLGraphException{
 		List<Feature> features=new ArrayList<Feature>();
-		addToList(features, getSubComponents());
-		addToList(features, getComponentReferences());
-		addToList(features, getLocalSubComponents());
-		addToList(features, getExternallyDefineds());
-		addToList(features, getSequenceFeatures());	
+		addToFeatureList(features, getSubComponents());
+		addToFeatureList(features, getComponentReferences());
+		addToFeatureList(features, getLocalSubComponents());
+		addToFeatureList(features, getExternallyDefineds());
+		addToFeatureList(features, getSequenceFeatures());	
 		return features;
 	}
 	
@@ -466,6 +466,16 @@ public class Component extends TopLevel {
 	{
 		return DataModel.Component.uri;
 	}
+	
+	@Override
+	public List<Identified> getChildren() throws SBOLGraphException {
+		List<Identified> identifieds=super.getChildren();
+		identifieds=addToList(identifieds, this.getFeatures());
+		identifieds=addToList(identifieds, this.getInteractions());
+		identifieds=addToList(identifieds, this.getInterface());
+		return identifieds;
+	}
+	
 }
 
 

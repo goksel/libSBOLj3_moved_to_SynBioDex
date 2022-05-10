@@ -160,5 +160,13 @@ public class SubComponent extends Feature{
 		return DataModel.SubComponent.uri;
 	}
 	
+	@Override
+	public List<Identified> getChildren() throws SBOLGraphException {
+		List<Identified> identifieds=super.getChildren();
+		identifieds=addToList(identifieds, this.getLocations());
+		identifieds=addToList(identifieds, this.getSourceLocations());
+		
+		return identifieds;
+	}
 	
 }

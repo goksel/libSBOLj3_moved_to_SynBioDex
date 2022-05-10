@@ -9,8 +9,11 @@ import java.util.OptionalLong;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Attachment;
 import org.sbolstandard.core3.entity.Component;
+import org.sbolstandard.core3.entity.Interaction;
+import org.sbolstandard.core3.entity.Participation;
 import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.entity.Sequence;
+import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
@@ -18,7 +21,9 @@ import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.Encoding;
+import org.sbolstandard.core3.vocabulary.InteractionType;
 import org.sbolstandard.core3.vocabulary.ModelLanguage;
+import org.sbolstandard.core3.vocabulary.ParticipationRole;
 import org.sbolstandard.core3.vocabulary.Role;
 
 import junit.framework.TestCase;
@@ -80,9 +85,33 @@ public class ComponentTest extends TestCase {
 	    //One main component type must be provided.
 	    pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUrl(), ComponentType.Protein.getUrl() ));
 	    TestUtil.validateIdentified(pTetR,doc,1,2);
-		  
+	    pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUrl()));
+	    seq.setEncoding(Encoding.NucleicAcid);
+	    TestUtil.validateIdentified(pTetR,doc,0);
 	    
-	    
+		
+	   //IDENTIFIED_URI_MUST_BE_USED_AS_A_PREFIX_FOR_CHILDREN
+        Interaction interaction= popsReceiver.createInteraction(SBOLAPI.append(base, "protein_production"), Arrays.asList(InteractionType.GeneticProduction));
+        TestUtil.validateIdentified(popsReceiver,doc,1);
+        
+        Interaction interaction2= popsReceiver.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
+        Component TetR=SBOLAPI.createComponent(doc, URI.create("https://synbiohub.org/public/igem/TetR"),ComponentType.Protein.getUrl(), "TetR", "TetR repressor", Role.TF);
+        SubComponent gfpProteinSubComponent=SBOLAPI.addSubComponent(popsReceiver, TetR);
+        Participation participation= interaction2.createParticipation(SBOLAPI.append(base, "inhibitor_participation"), Arrays.asList(ParticipationRole.Inhibitor), gfpProteinSubComponent.getUri());
+        TestUtil.validateIdentified(popsReceiver,doc,2);
+        TestUtil.validateIdentified(interaction2,1);
+        
+        //Introduce two more errors. 
+        Interaction interaction3= popsReceiver.createInteraction(SBOLAPI.append(base, "protein_production3"), Arrays.asList(InteractionType.GeneticProduction));
+        Participation participation3= interaction3.createParticipation(SBOLAPI.append(base, "inhibitor_participation3"), Arrays.asList(ParticipationRole.Inhibitor), gfpProteinSubComponent.getUri());
+        TestUtil.validateIdentified(popsReceiver, doc,4);
+        TestUtil.validateIdentified(interaction3, 1);
+        
+        
+        
+		
+        
+       
 		   
 	    
     }

@@ -11,11 +11,11 @@ import jakarta.validation.Payload;
 
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = { IdentifiedAnnotationValidator.class })
+@Constraint(validatedBy = { SBOLEntityAnnotationValidator.class })
 @Documented
-public @interface ValidIdentified {
+public @interface ValidSBOLEntity {
 
-    String message() default "default identified message";
+    String message() default "Invalid SBOL entity.";
 
     Class<?>[] groups() default { };
 

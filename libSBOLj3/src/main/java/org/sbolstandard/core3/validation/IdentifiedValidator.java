@@ -126,8 +126,26 @@ public class IdentifiedValidator {
 			}
 			return messages;
 		}
-	
 	 
+	 public static <T extends Identified> List<ValidationMessage> assertURIStartsWith(Identified identified, List<ValidationMessage> messages, List<T> identifieds) throws SBOLGraphException
+		{
+			if (identifieds!=null)
+			{
+				String targetURI=identified.getUri().toString() + "/";
+				
+				for (Identified identifiedTarget: identifieds)
+				{
+					if (!identifiedTarget.getUri().toString().toLowerCase().startsWith(targetURI.toLowerCase()))
+					{
+						ValidationMessage message=new ValidationMessage("{IDENTIFIED_URI_MUST_BE_USED_AS_A_PREFIX_FOR_CHILDREN}", DataModel.Identified.uri,identifiedTarget, identifiedTarget);			    		
+						//message.childPath(DataModel.Identified.uri, identifiedTarget);
+				  		messages=IdentifiedValidator.addToValidations(messages, message);
+					}	
+				}
+			}
+			return messages;
+		}
+	
 	 public static <T extends Identified> List<ValidationMessage> assertNotEqual(Identified identified, List<ValidationMessage> messages, URI uri1, URI uri2, String errorMessage, URI property)
 		{
 			if (uri1!=null && uri2!=null && uri1.equals(uri2))

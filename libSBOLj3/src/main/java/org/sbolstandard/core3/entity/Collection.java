@@ -34,5 +34,4 @@ public class Collection extends TopLevel{
 		return DataModel.Collection.uri;
 	}
 	
-	
 }

@@ -34,8 +34,8 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
-import org.sbolstandard.core3.validation.ValidDocument;
-import org.sbolstandard.core3.validation.ValidIdentified;
+import org.sbolstandard.core3.validation.ValidSBOLEntity;
+import org.sbolstandard.core3.validation.ValidatableSBOLEntity;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
@@ -45,8 +45,8 @@ import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
-@ValidDocument
-public class SBOLDocument {
+@ValidSBOLEntity
+public class SBOLDocument implements ValidatableSBOLEntity {
 	protected Model model = null;
 	/*@NotNull (message="SBOLDocument.test cannot be null")
 	private URI test=null;*/
@@ -998,8 +998,8 @@ public class SBOLDocument {
 				{
 					if (searchTopLevel.getUri().toString().toLowerCase().startsWith(targetURI.toLowerCase()))
 					{
-				  		ValidationMessage message=new ValidationMessage("{TOPLEVEL_URI_CANNOT_BE_USED_AS_A_PREFIX}", DataModel.Identified.uri,searchTopLevel,searchTopLevel.getUri());      
-				  		message.childPath(DataModel.Identified.uri, topLevel);
+				  		ValidationMessage message=new ValidationMessage("{TOPLEVEL_URI_CANNOT_BE_USED_AS_A_PREFIX}", DataModel.TopLevel.uri,searchTopLevel,searchTopLevel.getUri());      
+				  		message.childPath(DataModel.TopLevel.uri, topLevel);
 				  		messages=IdentifiedValidator.addToValidations(messages, message);
 					}
 				}
@@ -1007,5 +1007,7 @@ public class SBOLDocument {
 		}
 		return messages;
 	}
+	
+	
 			
 }

@@ -102,10 +102,16 @@ public class RDFUtil {
 	private static void removeIfExists(Resource resource, Property p)
 	{
 		StmtIterator stmtIt =resource.listProperties(p);
-		if (stmtIt!=null && stmtIt.hasNext())
-		{
-			Statement stmt=stmtIt.next();
-			resource.getModel().remove(stmt);
+		if (stmtIt!=null){
+			List<Statement> stmts=new ArrayList<Statement>();
+			while(stmtIt.hasNext()){
+				Statement stmt=stmtIt.next();
+				stmts.add(stmt);
+			}
+			for (Statement stmt:stmts)
+			{
+				resource.getModel().remove(stmt);
+			}
 		}
 	}
 	

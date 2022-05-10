@@ -32,7 +32,7 @@ public class SequenceFeature extends Feature{
 		super(resource);
 	}
 
-	private void addToList(List<Location> listA, List<? extends Location> listB)
+	private void addToLocationList(List<Location> listA, List<? extends Location> listB)
 	{
 		if (listB!=null && listB.size()>0)
 		{
@@ -43,9 +43,9 @@ public class SequenceFeature extends Feature{
 	@NotEmpty(message = "{SEQUENCEFEATURE_LOCATIONS_NOT_EMPTY}")
 	public List<Location> getLocations() throws SBOLGraphException {
 		List<Location> locations=new ArrayList<Location>();
-		addToList(locations,getCutLocations());
-		addToList(locations,this.getRangeLocations());
-		addToList(locations,getEntireSequenceLocations());
+		addToLocationList(locations,getCutLocations());
+		addToLocationList(locations,this.getRangeLocations());
+		addToLocationList(locations,getEntireSequenceLocations());
 		return locations;		
 	}
 	
@@ -91,5 +91,12 @@ public class SequenceFeature extends Feature{
 	@Override
 	public URI getResourceType() {
 		return DataModel.SequenceFeature.uri;
+	}
+	
+	@Override
+	public List<Identified> getChildren() throws SBOLGraphException {
+		List<Identified> identifieds=super.getChildren();
+		identifieds=addToList(identifieds, this.getLocations());
+		return identifieds;
 	}
 }

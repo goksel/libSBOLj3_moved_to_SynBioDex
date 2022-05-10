@@ -59,6 +59,9 @@ public class ValidationMessage {
 	public Identified getChildEntity() {
 		return this.childEntity;
 	}
+	public Identified setChildEntity(Identified childEntity) {
+		return this.childEntity= childEntity;
+	}
 
 	
 	public ValidationMessage childPath(URI property, Identified entity) throws SBOLGraphException

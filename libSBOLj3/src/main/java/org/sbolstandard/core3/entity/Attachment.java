@@ -3,24 +3,15 @@ package org.sbolstandard.core3.entity;
 import java.net.URI;
 import java.util.List;
 import java.util.OptionalLong;
-import java.util.Set;
-
 import org.apache.jena.rdf.model.Resource;
-import org.hibernate.validator.internal.util.logging.Messages;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
-import org.sbolstandard.core3.validation.Message;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
-
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.ValidatorFactory;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.executable.ExecutableValidator;
 
 public class Attachment extends TopLevel{
 	/*private URI source=null;
@@ -167,6 +158,5 @@ public class Attachment extends TopLevel{
 	public URI getResourceType() {
 		return DataModel.Attachment.uri;
 	}
-	
 	
 }

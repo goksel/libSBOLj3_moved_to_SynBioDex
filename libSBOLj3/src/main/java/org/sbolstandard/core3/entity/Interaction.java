@@ -90,4 +90,10 @@ public class Interaction extends Identified{
 		return DataModel.Interaction.uri;
 	}
 	
+	@Override
+	public List<Identified> getChildren() throws SBOLGraphException {
+		List<Identified> identifieds=super.getChildren();
+		identifieds=addToList(identifieds, this.getParticipations());
+		return identifieds;
+	}
 }
