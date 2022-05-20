@@ -30,15 +30,16 @@
     "@id" : "https://synbiohub.org/public/igem/i13504/SubComponent1",
     "@type" : "sbol:SubComponent",
     "displayId" : "SubComponent1",
-    "hasLocation" : "https://synbiohub.org/public/igem/i13504/SubComponent1/Range1",
+    "hasLocation" : "https://synbiohub.org/public/igem/i13504/SubComponent1/SubComponent1",
     "instanceOf" : "https://synbiohub.org/public/igem/B0015",
     "orientation" : "SO:0001030"
   }, {
-    "@id" : "https://synbiohub.org/public/igem/i13504/SubComponent1/Range1",
+    "@id" : "https://synbiohub.org/public/igem/i13504/SubComponent1/SubComponent1",
     "@type" : "sbol:Range",
-    "displayId" : "Range1",
+    "displayId" : "SubComponent1",
     "end" : "80",
     "hasSequence" : "https://synbiohub.org/public/igem/i13504_Sequence1",
+    "orientation" : "SO:0001030",
     "start" : "1"
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504_Sequence1",
@@ -71,12 +72,22 @@
     "displayId" : {
       "@id" : "http://sbols.org/v3#displayId"
     },
-    "hasFeature" : {
-      "@id" : "http://sbols.org/v3#hasFeature",
+    "orientation" : {
+      "@id" : "http://sbols.org/v3#orientation",
       "@type" : "@id"
+    },
+    "end" : {
+      "@id" : "http://sbols.org/v3#end"
+    },
+    "start" : {
+      "@id" : "http://sbols.org/v3#start"
     },
     "hasSequence" : {
       "@id" : "http://sbols.org/v3#hasSequence",
+      "@type" : "@id"
+    },
+    "hasFeature" : {
+      "@id" : "http://sbols.org/v3#hasFeature",
       "@type" : "@id"
     },
     "type" : {
@@ -91,19 +102,9 @@
       "@id" : "http://sbols.org/v3#hasLocation",
       "@type" : "@id"
     },
-    "orientation" : {
-      "@id" : "http://sbols.org/v3#orientation",
-      "@type" : "@id"
-    },
     "instanceOf" : {
       "@id" : "http://sbols.org/v3#instanceOf",
       "@type" : "@id"
-    },
-    "end" : {
-      "@id" : "http://sbols.org/v3#end"
-    },
-    "start" : {
-      "@id" : "http://sbols.org/v3#start"
     },
     "SBO" : "https://identifiers.org/SBO:",
     "CHEBI" : "https://identifiers.org/CHEBI:",

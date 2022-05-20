@@ -25,6 +25,14 @@
         sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
         sbol:name          "Sequence1" .
 
+<i13504/SubComponent1/SubComponent1>
+        a                 sbol:Range ;
+        sbol:displayId    "SubComponent1" ;
+        sbol:end          "80" ;
+        sbol:hasSequence  :i13504_Sequence1 ;
+        sbol:orientation  SO:0001030 ;
+        sbol:start        "1" .
+
 :i13504  a                 sbol:Component ;
         sbol:displayId     "i13504" ;
         sbol:hasFeature    <i13504/SubComponent1> ;
@@ -44,13 +52,6 @@
 <i13504/SubComponent1>
         a                 sbol:SubComponent ;
         sbol:displayId    "SubComponent1" ;
-        sbol:hasLocation  <i13504/SubComponent1/Range1> ;
+        sbol:hasLocation  <i13504/SubComponent1/SubComponent1> ;
         sbol:instanceOf   :B0015 ;
         sbol:orientation  SO:0001030 .
-
-<i13504/SubComponent1/Range1>
-        a                 sbol:Range ;
-        sbol:displayId    "Range1" ;
-        sbol:end          "80" ;
-        sbol:hasSequence  :i13504_Sequence1 ;
-        sbol:start        "1" .

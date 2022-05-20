@@ -36,9 +36,8 @@ public class RangeTest extends TestCase {
 		int end=start + term_na.length()-1;
     	
 		i13504Sequence.setElements(i13504Sequence.getElements() + term_na);
-		LocationBuilder locationBuilder=new Location.RangeLocationBuilder(start, end,i13504Sequence);
-		locationBuilder.setOrientation(Orientation.inline);
-		Range range=(Range)termSubComponent.createLocation(locationBuilder);
+		Range range=termSubComponent.createRange(start, end,i13504Sequence);
+		range.setOrientation(Orientation.inline);
 		
 		
 		TestUtil.serialise(doc, "entity_additional/range", "range");

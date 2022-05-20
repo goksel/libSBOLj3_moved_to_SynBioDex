@@ -15,6 +15,7 @@ import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.entity.Interaction;
 import org.sbolstandard.core3.entity.Location;
 import org.sbolstandard.core3.entity.Participation;
+import org.sbolstandard.core3.entity.Range;
 import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.entity.Sequence;
 import org.sbolstandard.core3.entity.SequenceFeature;
@@ -294,9 +295,7 @@ public class SBOLAPI {
 	    		/*URI childSequenceUri=child.getSequences().get(0);
 	    		Sequence childSequence=(Sequence)document.getIdentified(childSequenceUri, Sequence.class);*/
 	    		Sequence childSequence=child.getSequences().get(0);
-	    		LocationBuilder locationbuilder=createLocationBuilder(document, parent, childSequence.getElements(), orientation);
-	    		Location location=subComponent.createLocation(locationbuilder);
-	        	location.setOrientation(orientation);
+	    		createRange(document, parent, subComponent, childSequence.getElements(), orientation);
 	    	}
 	    	return subComponent;
 	    }
@@ -314,6 +313,41 @@ public class SBOLAPI {
 	    	return feature;
 	    }
 
+	    private static Range createRange(SBOLDocument document, Component parent, SubComponent subComponent, String elements, Orientation orientation) throws SBOLGraphException
+	    {
+	    	Range range=null;
+	    	if (elements!=null && elements.length()>0)
+	    	{
+		    	List<Sequence> sequences= parent.getSequences();
+		    	Sequence sequence=null;
+		    	int start, end;
+		    	if (sequences!=null && sequences.size()>0)
+		    	{
+		    		sequence=parent.getSequences().get(0);
+		    		start=sequence.getElements().length() + 1;
+			        end=start + elements.length()-1;
+		    	}
+		    	else
+		    	{
+		    		sequence=createSequence(document, parent, Encoding.NucleicAcid, "");	
+			    	start=1;
+		        	end=elements.length()-1;
+		    	}
+		    	
+		    	if (orientation==Orientation.inline)
+	    		{
+	    			sequence.setElements(sequence.getElements() + elements);
+	    		}
+	    		else
+	    		{
+	    			throw new SBOLGraphException("Reverse complement sequence addition has not been implemented yet!");
+	    		}
+		    	range=subComponent.createRange(start, end, sequence);
+		    	range.setOrientation(orientation);
+	    	}
+	    	return range;
+
+	    }
 	    private static LocationBuilder createLocationBuilder(SBOLDocument document, Component parent, String elements, Orientation orientation) throws SBOLGraphException
 	    {
 	    	LocationBuilder locationBuilder=null;

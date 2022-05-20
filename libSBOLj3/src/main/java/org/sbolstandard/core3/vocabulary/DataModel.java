@@ -73,6 +73,7 @@ public class DataModel {
 		public static final class LocalSubComponent
 		{
 			public static URI uri=URINameSpace.SBOL.local("LocalSubComponent");
+			public static URI location=SubComponent.location;
 		}
 		
 		public static final class ExternalyDefined

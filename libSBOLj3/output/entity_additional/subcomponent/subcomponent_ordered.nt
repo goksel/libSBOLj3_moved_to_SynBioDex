@@ -16,6 +16,7 @@
 <https://synbiohub.org/public/igem/i13504/SubComponent1/Range1> <http://sbols.org/v3#displayId> "Range1" .
 <https://synbiohub.org/public/igem/i13504/SubComponent1/Range1> <http://sbols.org/v3#end> "80" .
 <https://synbiohub.org/public/igem/i13504/SubComponent1/Range1> <http://sbols.org/v3#hasSequence> <https://synbiohub.org/public/igem/i13504_Sequence1> .
+<https://synbiohub.org/public/igem/i13504/SubComponent1/Range1> <http://sbols.org/v3#orientation> <https://identifiers.org/SO:0001030> .
 <https://synbiohub.org/public/igem/i13504/SubComponent1/Range1> <http://sbols.org/v3#start> "1" .
 <https://synbiohub.org/public/igem/i13504/SubComponent1/Range1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Range> .
 <https://synbiohub.org/public/igem/i13504/SubComponent1/Range2> <http://sbols.org/v3#displayId> "Range2" .

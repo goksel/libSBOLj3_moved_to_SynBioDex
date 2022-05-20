@@ -96,9 +96,9 @@ public class GettingStartedTutorial {
 		int end=start + term_na.length()-1;
     	
 		i13504Sequence.setElements(i13504Sequence.getElements() + term_na);
-		LocationBuilder locationBuilder=new Location.RangeLocationBuilder(start, end,i13504Sequence);
-		locationBuilder.setOrientation(Orientation.inline);
-		termSubComponent.createLocation(locationBuilder);
+		Range range=termSubComponent.createRange(start, end,i13504Sequence);
+		range.setOrientation(Orientation.inline);
+		
 		System.out.println(String.format("Added the terminator subcomponent %s", term.getUri()));
 		
 		//Iterate through sub components

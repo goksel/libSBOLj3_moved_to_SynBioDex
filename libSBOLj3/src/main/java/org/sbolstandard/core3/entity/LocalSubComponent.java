@@ -3,9 +3,11 @@ package org.sbolstandard.core3.entity;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.entity.Location.LocationFactory;
 import org.sbolstandard.core3.util.RDFUtil;
@@ -20,7 +22,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-public class LocalSubComponent extends Feature{
+public class LocalSubComponent extends FeatureWithLocation{
 	/*private List<URI> types=new ArrayList<URI>();
 	private List<Location> locations=null;*/
 
@@ -57,32 +59,59 @@ public class LocalSubComponent extends Feature{
 		RDFUtil.setProperty(resource, DataModel.type, types);
 	}
 	
+	@Valid
 	public List<Location> getLocations() throws SBOLGraphException {		
-		List<Location> locations=null;
-		{
-			List<Resource> resources=RDFUtil.getResourcesWithProperty (resource, DataModel.SubComponent.location);
-			if (resources!=null)
-			{
-				for (Resource res:resources)
-				{
-					if (locations==null)
-					{
-						locations=new ArrayList<Location>();
-					}
-					Location location= LocationFactory.create(res);	
-					locations.add(location);			
-				}
-			}
-		}
-		return locations;
-	}
-
-	public Location createLocation(LocationBuilder builder ) throws SBOLGraphException {
-		Location location=builder.build(this.resource.getModel(),this.getUri());
-		addToList(location, DataModel.SubComponent.location);
-		return location;
+		return getLocations(DataModel.LocalSubComponent.location);
 	}
 	
+	public List<Cut> getCuts() throws SBOLGraphException {
+		return getCuts(DataModel.LocalSubComponent.location);
+	}
+	
+	public List<Range> getRanges() throws SBOLGraphException {
+		return getRanges(DataModel.LocalSubComponent.location);
+	}
+
+	public List<EntireSequence> getEntireSequences() throws SBOLGraphException {
+		return getEntireSequences(DataModel.LocalSubComponent.location);
+	}
+
+	public Cut createCut(URI uri,  int at, Sequence sequence) throws SBOLGraphException {
+		return createCut(uri, at, sequence, DataModel.LocalSubComponent.location);
+	}
+	
+	public Cut createCut(String displayId, int at, Sequence sequence) throws SBOLGraphException {
+		return createCut(displayId, at, sequence, DataModel.LocalSubComponent.location);
+	}
+	
+	public Cut createCut(int at, Sequence sequence) throws SBOLGraphException {
+		return createCut(at, sequence,  DataModel.LocalSubComponent.location,getCuts());
+	}
+	
+	public Range createRange(URI uri, int start, int end, Sequence sequence) throws SBOLGraphException {
+		return createRange(uri, start, end, sequence, DataModel.LocalSubComponent.location);
+	}
+	
+	public Range createRange(String displayId, int start, int end, Sequence sequence) throws SBOLGraphException {
+		return createRange(displayId, start, end, sequence, DataModel.LocalSubComponent.location);
+	}
+	
+	public Range createRange(int start, int end, Sequence sequence) throws SBOLGraphException {
+		return createRange(start, end, sequence, DataModel.LocalSubComponent.location, getRanges());
+	}
+	
+	public EntireSequence createEntireSequence(URI uri, int start, int end, Sequence sequence) throws SBOLGraphException {
+		return createEntireSequence(uri, start, end, sequence, DataModel.LocalSubComponent.location);
+	}
+	
+	public EntireSequence createEntireSequence(String displayId, int start, int end, Sequence sequence) throws SBOLGraphException {
+		return createEntireSequence(displayId, start, end, sequence, DataModel.LocalSubComponent.location);	
+	}
+	
+	public EntireSequence createEntireSequence(int start, int end, Sequence sequence) throws SBOLGraphException {
+		return createEntireSequence(start, end, sequence, DataModel.LocalSubComponent.location, getEntireSequences());
+	}
+
 	@Override
 	public URI getResourceType() {
 		return DataModel.LocalSubComponent.uri;

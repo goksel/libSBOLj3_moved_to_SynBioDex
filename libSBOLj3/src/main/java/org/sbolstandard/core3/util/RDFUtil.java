@@ -673,7 +673,6 @@ public class RDFUtil {
 			 }
 	    	 return filtered; 
 		 }
-	    
 	   
 }
 

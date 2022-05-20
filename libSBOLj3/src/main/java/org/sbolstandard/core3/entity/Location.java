@@ -1,6 +1,7 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.OptionalInt;
 
@@ -96,6 +97,16 @@ public abstract class  Location extends Identified {
 	public URI getResourceType()
 	{
 		return DataModel.Location.uri;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T extends Identified> HashMap<URI, Class<T>> getSubClassTypes()
+	{
+		HashMap<URI, Class<T>> subclasses=new HashMap<URI, Class<T>>();
+		subclasses.put(DataModel.Cut.uri, (Class<T>) Cut.class);
+		subclasses.put(DataModel.Range.uri,  (Class<T>)Range.class);
+		subclasses.put(DataModel.EntireSequenceLocation.uri,(Class<T>) EntireSequence.class);
+		return subclasses;
 	}
 	
 	public static class LocationFactory

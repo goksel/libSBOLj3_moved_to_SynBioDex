@@ -46,10 +46,11 @@ public class LocalSubComponentTest extends TestCase {
         lsComponent.setTypes(tempTypes);
         TestUtil.validateIdentified(lsComponent,doc,0);
         
-        
         lsComponent.setTypes(Arrays.asList(ComponentType.DNA.getUrl(), ComponentType.Protein.getUrl() ));
 	    TestUtil.validateIdentified(lsComponent,doc,1);
 	
+	    
+	    
     }	
 	
 }
