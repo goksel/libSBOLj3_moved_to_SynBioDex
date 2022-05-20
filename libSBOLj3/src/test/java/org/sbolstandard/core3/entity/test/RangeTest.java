@@ -30,7 +30,7 @@ public class RangeTest extends TestCase {
 		SubComponent termSubComponent=device.createSubComponent(term.getUri());
 		termSubComponent.setOrientation(Orientation.inline);
 		
-		Sequence i13504Sequence= doc.getIdentified(device.getSequences().get(0),Sequence.class);
+		Sequence i13504Sequence= device.getSequences().get(0);
 		
 		int start=i13504Sequence.getElements().length() + 1;
 		int end=start + term_na.length()-1;

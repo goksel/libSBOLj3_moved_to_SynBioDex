@@ -75,9 +75,9 @@ public class PoPSReceiverExample extends TestCase {
         
         TestUtil.assertDNARootComponents(doc2, 1);
         
-        List<URI> pLuxRSeqs=pLuxR.getSequences(Encoding.NucleicAcid);
+        List<Sequence> pLuxRSeqs=pLuxR.getSequences(Encoding.NucleicAcid);
         assertTrue("Could not filter sequences by encoding type", pLuxRSeqs!=null && pLuxRSeqs.size()==1);
-        System.out.println("Sequence URI:" + pLuxRSeqs.get(0));
+        System.out.println("Sequence URI:" + pLuxRSeqs.get(0).getUri());
         
         List<Sequence> naSequences=doc2.getSequences(Encoding.NucleicAcid);
         assertTrue("Could not filter document sequences by encoding type", naSequences!=null && naSequences.size()==8);

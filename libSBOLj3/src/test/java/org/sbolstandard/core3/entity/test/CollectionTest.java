@@ -37,6 +37,11 @@ public class CollectionTest extends TestCase {
         TestUtil.serialise(doc, "entity/collection", "collection");
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
+        
+        col.setMembers(Arrays.asList(TetR_protein.getUri(), LacI_protein.getUri(), URI.create("http://invalidmemberuri.org")));
+        TestUtil.validateIdentified(col,doc,0,1);
+        
+        
     }
 
 }

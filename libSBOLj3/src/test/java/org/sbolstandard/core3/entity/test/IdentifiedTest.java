@@ -8,6 +8,7 @@ import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
@@ -44,5 +45,17 @@ public class IdentifiedTest extends TestCase {
         TestUtil.validateIdentified(attachment,doc,0);
         attachment.setWasDerivedFrom(Arrays.asList(attachment.getUri()));
         TestUtil.validateIdentified(attachment, doc, 1);
+        attachment.setWasDerivedFrom(null);
+        TestUtil.validateIdentified(attachment, doc, 0);
+       
+        //IDENTIFIED_SUITABLE_SBOL_ENTITY_TYPES
+        //This will cause an invalid attachment and will create an invalid sequence. Two document errors - one attachment error.
+        attachment.addAnnotationType(DataModel.Sequence.uri);
+        TestUtil.validateIdentified(attachment, doc, 1,2);
+        
+        
+        
+        
+        
     }
 }

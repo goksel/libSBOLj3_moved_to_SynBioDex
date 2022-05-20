@@ -78,7 +78,7 @@ public class PropertyValidator {
     	if (violation.getLeafBean()!=null && violation.getLeafBean() instanceof Identified ){
     	    Identified identifiedLeaf= (Identified) violation.getLeafBean();
     	    fragments.add(String.format("Entity URI: %s",identifiedLeaf.getUri().toString()));
-    	    fragments.add(String.format("Entity type: %s",identifiedLeaf.getClass()));    
+    	    fragments.add(String.format("Entity Type: %s",identifiedLeaf.getClass()));    
     	}
     	if (violation.getInvalidValue()!=null && !(violation.getInvalidValue() instanceof Identified) && !(violation.getInvalidValue() instanceof SBOLDocument)){    	
     		fragments.add("Value: " + violation.getInvalidValue().toString());

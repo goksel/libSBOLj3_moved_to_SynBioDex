@@ -23,7 +23,7 @@
     "@type" : "sbol:CombinatorialDerivation",
     "displayId" : "cs1",
     "hasNamespace" : "https://synbiohub.org/public/igem",
-    "input" : "http://sbolstandard.org/template"
+    "template" : "https://synbiohub.org/public/igem/BBa_R0040"
   } ],
   "@context" : {
     "hasSequence" : {
@@ -51,8 +51,8 @@
     "displayId" : {
       "@id" : "http://sbols.org/v3#displayId"
     },
-    "input" : {
-      "@id" : "http://sbols.org/v3#input",
+    "template" : {
+      "@id" : "http://sbols.org/v3#template",
       "@type" : "@id"
     },
     "encoding" : {

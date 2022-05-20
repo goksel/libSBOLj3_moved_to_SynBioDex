@@ -59,7 +59,7 @@ public class GettingStartedTutorial {
 		Sequence rbs_seq=doc.createSequence("B0034_Sequence");
 		rbs_seq.setElements("aaagaggagaaa");
 		rbs_seq.setEncoding(Encoding.NucleicAcid);
-		rbs.setSequences(Arrays.asList(rbs_seq.getUri()));
+		rbs.setSequences(Arrays.asList(rbs_seq));
 		
 		//Start assembling the i13504 device's sequence by adding the RBS component.
 		SBOLAPI.appendComponent(doc, device,rbs,Orientation.inline);
@@ -86,7 +86,9 @@ public class GettingStartedTutorial {
 		//Add the terminator as a subcomponent. This time we will be using low level API methods, which can be used to create features and locations.
 		SubComponent termSubComponent=device.createSubComponent(term.getUri());
 		termSubComponent.setOrientation(Orientation.inline);
-		Sequence i13504Sequence= doc.getIdentified(device.getSequences().get(0),Sequence.class);
+		//Sequence i13504Sequence= doc.getIdentified(device.getSequences().get(0),Sequence.class);
+		Sequence i13504Sequence= device.getSequences().get(0);
+		
 		
 		
 		
@@ -138,7 +140,7 @@ public class GettingStartedTutorial {
 		 SubComponent sc_i13504_system=SBOLAPI.addSubComponent(ilab16_dev1, i13504_system);	
 		 
 		 ComponentReference compRef_i13504_dev1=ilab16_dev1.createComponentReference(i13504SubComponent, sc_i13504_system);
-		 ilab16_dev1.createConstraint(RestrictionType.Topology.meets, sc_j23101.getUri(), compRef_i13504_dev1.getUri());
+		 ilab16_dev1.createConstraint(RestrictionType.Topology.meets, sc_j23101, compRef_i13504_dev1);
 	        
 		 // Right hand side of slide: interlab16device2
 		 Component ilab16_dev2=doc.createComponent("interlab16device2", Arrays.asList(ComponentType.DNA.getUrl())); 
@@ -147,7 +149,7 @@ public class GettingStartedTutorial {
 		 SubComponent sc_i13504_system_dev2=SBOLAPI.addSubComponent(ilab16_dev2, i13504_system);	
 		 
 		 ComponentReference compRef_i13504_dev2=ilab16_dev2.createComponentReference(i13504SubComponent, sc_i13504_system_dev2);
-		 ilab16_dev2.createConstraint(RestrictionType.Topology.meets, sc_j23106.getUri(), compRef_i13504_dev2.getUri());
+		 ilab16_dev2.createConstraint(RestrictionType.Topology.meets, sc_j23106, compRef_i13504_dev2);
 		 
 		 System.out.println(System.lineSeparator() + "SBOL:");
 		 String output=SBOLIO.write(doc, SBOLFormat.TURTLE);

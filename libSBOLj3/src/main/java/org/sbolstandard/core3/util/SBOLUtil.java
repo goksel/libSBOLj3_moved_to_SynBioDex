@@ -173,7 +173,7 @@ public class SBOLUtil {
 	    public static <T extends Identified>  List<URI> getURIs(List<T> identifieds)
 		{
 			ArrayList<URI> uris=null;
-			if (identifieds!=null)
+			if (identifieds!=null && identifieds.size()>0 )
 			{
 				uris=new ArrayList<URI>();
 				for (Identified identified:identifieds)
@@ -184,4 +184,14 @@ public class SBOLUtil {
 			return uris;
 		}
 	
+		
+	    public static URI toURI(Identified identified)
+	    {
+	    	URI uri=null;
+			if (identified!=null)
+			{
+				uri=identified.getUri();
+			}
+			return uri;
+	    }
 }

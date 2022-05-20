@@ -1,6 +1,7 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
@@ -62,5 +63,27 @@ public abstract class Feature extends Identified{
 			orientationURI=orientation.getUri();
 		}
 		RDFUtil.setProperty(this.resource, DataModel.orientation, orientationURI);
+	}
+	
+	/*public static <T extends Identified> HashMap<URI, Class<T>> getSubClassTypes()
+	{
+		HashMap<URI, Class<T>> subclasses=new HashMap<URI, Class<T>>();
+		subclasses.put(DataModel.ComponentReference.uri,  ComponentReference.class);
+		subclasses.put(DataModel.SubComponent.uri,  SubComponent.class);
+		subclasses.put(DataModel.LocalSubComponent.uri,  LocalSubComponent.class);
+		subclasses.put(DataModel.ExternalyDefined.uri,  ExternallyDefined.class);
+		subclasses.put(DataModel.SequenceFeature.uri,  SequenceFeature.class);
+		return subclasses;
+	}*/
+	
+	public static HashMap<URI, Class> getSubClassTypes()
+	{
+		HashMap<URI, Class> subclasses=new HashMap<URI, Class>();
+		subclasses.put(DataModel.ComponentReference.uri,  ComponentReference.class);
+		subclasses.put(DataModel.SubComponent.uri,  SubComponent.class);
+		subclasses.put(DataModel.LocalSubComponent.uri,  LocalSubComponent.class);
+		subclasses.put(DataModel.ExternalyDefined.uri,  ExternallyDefined.class);
+		subclasses.put(DataModel.SequenceFeature.uri,  SequenceFeature.class);
+		return subclasses;
 	}
 }

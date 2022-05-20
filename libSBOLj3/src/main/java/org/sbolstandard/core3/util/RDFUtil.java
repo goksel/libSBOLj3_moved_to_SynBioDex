@@ -353,7 +353,7 @@ public class RDFUtil {
 	     * @param propertyURI the URI of the property
 	     * @return List of String objects with the corresponding values
 	     */
-	    public static List<String> getPropertiesAsStrings(Resource resource, URI propertyURI) 
+	    public static List<String> getLiteralPropertiesAsStrings(Resource resource, URI propertyURI) 
 	    {
 	        ArrayList<String> values=null;
 	        Property property=resource.getModel().getProperty(propertyURI.toString());
@@ -394,7 +394,7 @@ public class RDFUtil {
 		    return result;
 		}
 	    
-	    public static boolean hasTypePrefix(Resource resource, URI prefix)
+	    /*public static boolean hasTypePrefix(Resource resource, URI prefix)
 		{
 			boolean result=false;
 			List<String> types=getPropertiesAsStrings(resource, URI.create(RDF.type.getURI()));
@@ -407,6 +407,26 @@ public class RDFUtil {
 				}
 			}
 			return result;
+		}*/
+	    
+	    public static List<URI> getRDFTypes(Resource resource, URI namespace)
+		{
+			List<URI> types=getPropertiesAsURIs(resource, URI.create(RDF.type.getURI()));
+			List<URI> validRDFTypes=null;
+			if (types!=null) {
+				for (URI typeURI: types)
+				{
+					if (typeURI.toString().toLowerCase().startsWith(namespace.toString().toLowerCase()))
+					{
+						if (validRDFTypes==null)
+						{
+							validRDFTypes=new ArrayList<URI>();
+						}
+						validRDFTypes.add(typeURI);
+					}
+				}
+			}
+			return validRDFTypes;
 		}
 	    
 	   

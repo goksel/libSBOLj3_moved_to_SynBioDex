@@ -3,6 +3,7 @@ package org.sbolstandard.core3.test;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.nio.charset.Charset;
@@ -13,6 +14,7 @@ import java.util.Set;
 import org.apache.commons.lang3.CharSet;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.datatypes.xsd.XSDDateTime;
+import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
@@ -21,6 +23,7 @@ import org.sbolstandard.core3.entity.provenance.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
@@ -864,5 +867,13 @@ public class TestUtil {
         		assertTrue(message,validEx);
         	}
         }
+	}
+	
+	public static Resource getResource(Identified identified) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException 
+	{
+		Field resField = Identified.class.getDeclaredField("resource");
+		resField.setAccessible(true);
+		Resource resource = (Resource) resField.get(identified);
+		return resource;
 	}
 }

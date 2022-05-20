@@ -142,7 +142,7 @@ public class DataModel {
 		public static final class CombinatorialDerivation
 		{
 			public static URI uri=URINameSpace.SBOL.local("CombinatorialDerivation");
-			public static URI template=URINameSpace.SBOL.local("input");
+			public static URI template=URINameSpace.SBOL.local("template");
 			public static URI variableFeature=URINameSpace.SBOL.local("hasVariableFeature");
 			public static URI strategy=URINameSpace.SBOL.local("strategy");	
 		}

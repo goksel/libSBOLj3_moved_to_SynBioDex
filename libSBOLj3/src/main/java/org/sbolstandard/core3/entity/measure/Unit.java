@@ -45,7 +45,7 @@ public abstract class Unit extends ControlledTopLevel{
 	}
 	
 	public List<String> getAlternativeSymbols() {
-		return RDFUtil.getPropertiesAsStrings(this.resource, MeasureDataModel.Unit.alternativeSymbol);
+		return RDFUtil.getLiteralPropertiesAsStrings(this.resource, MeasureDataModel.Unit.alternativeSymbol);
 	}
 	
 	public void setAlternativeSymbols(List<String> alternativeSymbols) {
@@ -67,7 +67,7 @@ public abstract class Unit extends ControlledTopLevel{
 	}
 	
 	public List<String> getAlternativeLabels() {
-		return RDFUtil.getPropertiesAsStrings(this.resource, MeasureDataModel.Unit.alternativeLabel);
+		return RDFUtil.getLiteralPropertiesAsStrings(this.resource, MeasureDataModel.Unit.alternativeLabel);
 	}
 	
 	public void setAlternativeLabels(List<String> alternativeLabels) {

@@ -40,7 +40,7 @@ public class Interaction extends Identified{
 	
 	@Valid
 	public List<Participation> getParticipations() throws SBOLGraphException {
-		return addToList(DataModel.Interaction.participation, Participation.class);
+		return addToList(DataModel.Interaction.participation, Participation.class, DataModel.Participation.uri);
 	}
 
 	

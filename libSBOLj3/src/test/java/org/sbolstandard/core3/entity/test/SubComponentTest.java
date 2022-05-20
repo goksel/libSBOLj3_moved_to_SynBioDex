@@ -33,7 +33,7 @@ public class SubComponentTest extends TestCase {
 		RoleIntegration ri2=termSubComponent.getRoleIntegration();
 		TestUtil.validateReturnValue(termSubComponent, "toRoleIntegration", new Object[] {URI.create("http://invalidroleintegration.org")}, URI.class);
 		
-		Sequence i13504Sequence= doc.getIdentified(device.getSequences().get(0),Sequence.class);
+		Sequence i13504Sequence= device.getSequences().get(0);
 		
 		int start=i13504Sequence.getElements().length() + 1;
 		int end=start + term_na.length()-1;

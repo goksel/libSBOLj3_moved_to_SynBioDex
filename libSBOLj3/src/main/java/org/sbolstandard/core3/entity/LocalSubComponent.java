@@ -61,16 +61,18 @@ public class LocalSubComponent extends Feature{
 		List<Location> locations=null;
 		{
 			List<Resource> resources=RDFUtil.getResourcesWithProperty (resource, DataModel.SubComponent.location);
-			for (Resource res:resources)
+			if (resources!=null)
 			{
-				if (locations==null)
+				for (Resource res:resources)
 				{
-					locations=new ArrayList<Location>();
+					if (locations==null)
+					{
+						locations=new ArrayList<Location>();
+					}
+					Location location= LocationFactory.create(res);	
+					locations.add(location);			
 				}
-				Location location= LocationFactory.create(res);	
-				locations.add(location);			
 			}
-				
 		}
 		return locations;
 	}

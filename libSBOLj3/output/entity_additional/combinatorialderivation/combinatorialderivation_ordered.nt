@@ -15,5 +15,5 @@
 <https://synbiohub.org/public/igem/BBa_R0040_Sequence1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Sequence> .
 <https://synbiohub.org/public/igem/cs1> <http://sbols.org/v3#displayId> "cs1" .
 <https://synbiohub.org/public/igem/cs1> <http://sbols.org/v3#hasNamespace> <https://synbiohub.org/public/igem> .
-<https://synbiohub.org/public/igem/cs1> <http://sbols.org/v3#input> <http://sbolstandard.org/template> .
+<https://synbiohub.org/public/igem/cs1> <http://sbols.org/v3#template> <https://synbiohub.org/public/igem/BBa_R0040> .
 <https://synbiohub.org/public/igem/cs1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#CombinatorialDerivation> .

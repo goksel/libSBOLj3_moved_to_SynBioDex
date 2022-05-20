@@ -248,7 +248,7 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		return combinatorialDerivations;
 	}
 
-	public CombinatorialDerivation createCombinatorialDerivation(URI uri, URI namespace, URI template) throws SBOLGraphException {
+	public CombinatorialDerivation createCombinatorialDerivation(URI uri, URI namespace, Component template) throws SBOLGraphException {
 
 		CombinatorialDerivation combinatorialDerivation= new CombinatorialDerivation(this.model, uri);
 		combinatorialDerivation.setTemplate(template);
@@ -257,7 +257,7 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		return combinatorialDerivation;
 	}
 	
-	public CombinatorialDerivation createCombinatorialDerivation(String displayId, URI template) throws SBOLGraphException {
+	public CombinatorialDerivation createCombinatorialDerivation(String displayId, Component template) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
 			return createCombinatorialDerivation(SBOLAPI.append(this.getBaseURI(), displayId), SBOLUtil.toNameSpace(this.getBaseURI()), template);
@@ -1005,9 +1005,30 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 				}
 			}
 		}
+		
+		List<Collection> collections=this.getCollections();
+		if (collections!=null)
+		{
+			List<URI> topLevelURIs= SBOLUtil.getURIs(topLevels);
+			for (Collection collection:collections)
+			{
+				List<URI> members=collection.getMembers();
+				if (members != null) {
+					for (URI member: members){
+						if (!topLevelURIs.contains(member)){
+							ValidationMessage message = new ValidationMessage("{SBOL_VALID_ENTITY_TYPES}", DataModel.Collection.uri, collection, member);
+							message.childPath(DataModel.Collection.member, null);
+							messages=IdentifiedValidator.addToValidations(messages, message);
+						}
+					}
+				
+				}
+			}
+		}
+		
 		return messages;
+		
+	
 	}
-	
-	
 			
 }

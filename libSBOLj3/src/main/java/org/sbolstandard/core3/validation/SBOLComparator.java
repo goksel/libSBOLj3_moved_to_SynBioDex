@@ -46,6 +46,7 @@ import org.sbolstandard.core3.entity.provenance.Association;
 import org.sbolstandard.core3.entity.provenance.Plan;
 import org.sbolstandard.core3.entity.provenance.Usage;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
@@ -483,9 +484,9 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqual(entity1, entity2));
-			output = add(output, assertEqual(entity1, entity2, entity1.getModels(),entity2.getModels(), DataModel.Component.model));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getModels()),SBOLUtil.getURIs(entity2.getModels()), DataModel.Component.model));
 			output = add(output, assertEqual(entity1, entity2, entity1.getRoles(),entity2.getRoles(), DataModel.role));
-			output = add(output, assertEqual(entity1, entity2, entity1.getSequences(),entity2.getSequences(), DataModel.Component.sequence));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getSequences()),SBOLUtil.getURIs(entity2.getSequences()), DataModel.Component.sequence));
 			output = add(output, assertEqual(entity1, entity2, entity1.getTypes(),entity2.getTypes(), DataModel.type));
 			output = add(output, assertEqualInterface(entity1.getInterface(),entity2.getInterface()));
 			output = add(output, assertEqualEntity(entity1.getComponentReferences(), entity2.getComponentReferences()));
@@ -856,6 +857,19 @@ public class SBOLComparator {
 		StringBuilder output=null;
 		String message=String.format("Could not read the %s property. Entity:%s, Value1:%s, Value2:%s", property.toString(), identified1.getUri().toString(), value1, value2);
 		if (!stringEquals(String.valueOf(value1),String.valueOf(value2)))
+		{
+			output = add(output,message);
+		}
+		return output;
+	}
+	
+	private static StringBuilder assertEqual(Identified identified1, Identified identified2, Identified value1, Identified value2, URI property) throws SBOLGraphException
+	{
+		StringBuilder output=null;
+		String message=String.format("Could not read the %s property. Entity:%s, Value1:%s, Value2:%s", property.toString(), identified1.getUri().toString(), value1, value2);
+		output = add(output, assertEqual(value1, value2));	
+		
+		if (output!=null && output.length()>0)
 		{
 			output = add(output,message);
 		}

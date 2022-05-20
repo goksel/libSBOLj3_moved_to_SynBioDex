@@ -9,6 +9,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.ControlledTopLevel;
+import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
@@ -136,5 +137,13 @@ public class Activity extends ControlledTopLevel{
 	@Override
 	public URI getResourceType() {
 		return ProvenanceDataModel.Activity.uri;
+	}
+	
+	@Override
+	public List<Identified> getChildren() throws SBOLGraphException {
+		List<Identified> identifieds=super.getChildren();
+		identifieds=addToList(identifieds, this.getUsages());
+		identifieds=addToList(identifieds, this.getAssociations());
+		return identifieds;
 	}
 }

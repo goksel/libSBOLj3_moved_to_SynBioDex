@@ -291,8 +291,9 @@ public class SBOLAPI {
 	    	subComponent.setOrientation(orientation);
 	    	if (child.getSequences()!=null && child.getSequences().size()>0)
 	    	{
-	    		URI childSequenceUri=child.getSequences().get(0);
-	    		Sequence childSequence=(Sequence)document.getIdentified(childSequenceUri, Sequence.class);
+	    		/*URI childSequenceUri=child.getSequences().get(0);
+	    		Sequence childSequence=(Sequence)document.getIdentified(childSequenceUri, Sequence.class);*/
+	    		Sequence childSequence=child.getSequences().get(0);
 	    		LocationBuilder locationbuilder=createLocationBuilder(document, parent, childSequence.getElements(), orientation);
 	    		Location location=subComponent.createLocation(locationbuilder);
 	        	location.setOrientation(orientation);
@@ -318,13 +319,13 @@ public class SBOLAPI {
 	    	LocationBuilder locationBuilder=null;
 	    	if (elements!=null && elements.length()>0)
 	    	{
-		    	List<URI> sequences= parent.getSequences();
+		    	List<Sequence> sequences= parent.getSequences();
 		    	Sequence sequence=null;
 		    	int start, end;
 		    	if (sequences!=null && sequences.size()>0)
 		    	{
-		    		sequence=(Sequence)document.getIdentified(sequences.get(0),Sequence.class);
-				    start=sequence.getElements().length() + 1;
+		    		sequence=parent.getSequences().get(0);
+		    		start=sequence.getElements().length() + 1;
 			        end=start + elements.length()-1;
 		    	}
 		    	else
@@ -393,7 +394,7 @@ public class SBOLAPI {
 	    {
 	    	String localName=createLocalName(DataModel.Sequence.uri, component.getSequences());
 	    	Sequence seq=createSequence(doc, URI.create(component.getUri().toString() + "_" + localName), localName, component.getName() + " sequence", elements, encoding);
-	    	component.setSequences(Arrays.asList(seq.getUri())); 
+	    	component.setSequences(Arrays.asList(seq)); 
 	 		return seq;
 	    }
 	    
@@ -401,14 +402,14 @@ public class SBOLAPI {
 	    {
 	    	String localName=createLocalName(DataModel.Sequence.uri, component.getSequences());
 	    	Sequence seq=createSequence(doc, URI.create(component.getUri().toString() + "_" + localName), localName, component.getName() + " sequence", elements, encoding);
-	    	List<URI> sequences=component.getSequences();
+	    	List<Sequence> sequences=component.getSequences();
 	    	if (sequences==null)
 	    	{
-	    		component.setSequences(Arrays.asList(seq.getUri())); 
+	    		component.setSequences(Arrays.asList(seq)); 
 	    	}
 	    	else
 	    	{
-	    		sequences.add(seq.getUri()); 
+	    		sequences.add(seq); 
 	    		component.setSequences(sequences);
 	    	}
 	 		return seq;
@@ -500,7 +501,7 @@ public class SBOLAPI {
 				 {
 					 for (ComponentReference compRef2: childReferences2)
 					 {
-						 container.createConstraint(RestrictionType.Identity.verifyIdentical, compRef1.getUri(), compRef2.getUri());
+						 container.createConstraint(RestrictionType.Identity.verifyIdentical, compRef1, compRef2);
 					 }
 				 } 
 			 }	 
@@ -532,7 +533,7 @@ public class SBOLAPI {
 				 {
 					 for (SubComponent compRef2: childReferences2)
 					 {
-						 container.createConstraint(RestrictionType.Identity.verifyIdentical, compRef1.getUri(), compRef2.getUri());
+						 container.createConstraint(RestrictionType.Identity.verifyIdentical, compRef1, compRef2);
 					 }
 				 } 
 			 }	 
@@ -571,7 +572,7 @@ public class SBOLAPI {
 	  				{
 	  					for (SubComponent subComponentInParent:subComponentsInParent)
 	  					{	
-		  					ComponentReference compRef=container.createComponentReference(subComponentInParent.getUri(), subComponentInContainer.getUri());
+		  					ComponentReference compRef=container.createComponentReference(subComponentInParent, subComponentInContainer);
 		  			        if (componentReferences==null)
 		  			        {
 		  			        	componentReferences=new ArrayList<ComponentReference>();
@@ -595,7 +596,7 @@ public class SBOLAPI {
 	    		{
 	    			for (SubComponent subComponent2:subComponents2)
 		    		{	
-	    		        Constraint constraint=container.createConstraint(RestrictionType.Topology.contains, subComponent1.getUri(), subComponent2.getUri());
+	    		        Constraint constraint=container.createConstraint(RestrictionType.Topology.contains, subComponent1, subComponent2);
 	    		        if (result==null)
 	    		        {
 	    		        	result=new ArrayList<Constraint>();

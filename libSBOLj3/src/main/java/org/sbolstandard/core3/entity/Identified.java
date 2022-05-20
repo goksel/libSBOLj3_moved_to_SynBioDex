@@ -3,7 +3,9 @@ package org.sbolstandard.core3.entity;
 import java.lang.reflect.Constructor;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.OptionalInt;
 
@@ -190,6 +192,8 @@ public abstract class Identified implements ValidatableSBOLEntity {
     	{
     		validationMessages=IdentifiedValidator.assertURIStartsWith(this, validationMessages, children);
     	}
+    	
+    	validationMessages=IdentifiedValidator.getValidator().assertOneSBOLEntityType(this, this.resource, validationMessages);
     	return validationMessages;
 	}
 	
@@ -211,28 +215,6 @@ public abstract class Identified implements ValidatableSBOLEntity {
 		}
 	}
 	
-	/***
-	 * Deserialises an array of objects from RDF resources
-	 * @param items
-	 * @param property
-	 * @param identifiedClass
-	 * @return
-	 * @throws SBOLGraphException
-	 */
-	protected <T extends Identified>  List<T> addToList(URI property, Class<T> identifiedClass) throws SBOLGraphException
-	{
-		List<T> items=null;
-	
-		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property);
-		if (resources!=null && resources.size()>0){
-			items=new ArrayList<T>();
-			for (Resource res:resources){
-				Identified identified=createIdentified(res, identifiedClass);
-				items.add((T)identified);
-			}
-		}
-		return items;
-	}
 	
 	/*protected <T extends Identified>  List<T> addToList(List<T> items, URI property, Class<T> identifiedClass) throws SBOLGraphException
 	{
@@ -272,6 +254,84 @@ public abstract class Identified implements ValidatableSBOLEntity {
 		return identified;
 	}
 	
+	protected <T extends Identified>  T contsructIdentified(URI property, Class<T> identifiedClass, URI identifiedResourceType ) throws SBOLGraphException
+	{
+		T identified=null;
+		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property,identifiedResourceType);
+		if (resources!=null)
+		{
+			if (resources.size()==1)
+			{
+				 identified=(T)createIdentified(resources.get(0), identifiedClass);
+			}
+			else
+			{
+				String message=String.format("Multiple property values exist for the property %s. The entity URI:%s", property.toString(),this.resource.getURI());
+				throw new SBOLGraphException(message);
+			}
+		}		
+		return identified;
+	}
+	
+	/*protected <T extends Identified>  T contsructIdentified(URI property, HashMap<URI, Class<T>> identifiedClassOptions) throws SBOLGraphException
+	{
+		T identified=null;
+		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property);
+		if (resources!=null)
+		{
+			if (resources.size()==1)
+			{
+				Resource targetRes=resources.get(0);
+				if (identifiedClassOptions!=null) 
+				{
+					for (Entry<URI, Class<T>> entry: identifiedClassOptions.entrySet())
+					{
+						if (RDFUtil.hasType(targetRes.getModel(), targetRes, entry.getKey()))
+						{
+							identified=(T)createIdentified(targetRes, entry.getValue());
+						}
+					}
+				}
+			}
+			else
+			{
+				String message=String.format("Multiple property values exist for the property %s. The entity URI:%s", property.toString(),this.resource.getURI());
+				throw new SBOLGraphException(message);
+			}
+		}		
+		return identified;
+	}*/
+	
+	protected <T extends Identified>  T contsructIdentified(URI property, HashMap<URI, Class> identifiedClassOptions) throws SBOLGraphException
+	{
+		T identified=null;
+		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property);
+		if (resources!=null)
+		{
+			if (resources.size()==1)
+			{
+				Resource targetRes=resources.get(0);
+				if (identifiedClassOptions!=null) 
+				{
+					for (Entry<URI, Class> entry: identifiedClassOptions.entrySet())
+					{
+						if (RDFUtil.hasType(targetRes.getModel(), targetRes, entry.getKey()))
+						{
+							identified=(T)createIdentified(targetRes, entry.getValue());
+							break;
+						}
+					}
+				}
+			}
+			else
+			{
+				String message=String.format("Multiple property values exist for the property %s. The entity URI:%s", property.toString(),this.resource.getURI());
+				throw new SBOLGraphException(message);
+			}
+		}		
+		return identified;
+	}
+		
 	
 	/***
 	 * Serialises an array of objects into RDF resources.
@@ -349,6 +409,29 @@ public abstract class Identified implements ValidatableSBOLEntity {
 		List<T> items=null;
 		
 		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property, identifiedResourceType);
+		if (resources!=null && resources.size()>0){
+			items=new ArrayList<T>();
+			for (Resource res:resources){
+				Identified identified=createIdentified(res, identifiedClass);
+				items.add((T)identified);
+			}
+		}
+		return items;
+	}
+	
+	/***
+	 * Deserialises an array of objects from RDF resources
+	 * @param items
+	 * @param property
+	 * @param identifiedClass
+	 * @return
+	 * @throws SBOLGraphException
+	 */
+	protected <T extends Identified>  List<T> addToList2(URI property, Class<T> identifiedClass) throws SBOLGraphException
+	{
+		List<T> items=null;
+	
+		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property);
 		if (resources!=null && resources.size()>0){
 			items=new ArrayList<T>();
 			for (Resource res:resources){

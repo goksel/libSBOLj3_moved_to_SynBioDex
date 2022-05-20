@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Location.LocationBuilder;
@@ -40,7 +39,7 @@ public class Component extends TopLevel {
 	
 	//private Set<Interaction> interactions2=null;
 	
-	protected Component(Model model, URI uri) throws SBOLGraphException
+	protected Component(org.apache.jena.rdf.model.Model model, URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
 	}
@@ -148,10 +147,14 @@ public class Component extends TopLevel {
 			//validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getNonDirectionals(), features, "{INTERFACE_NONDIRECTIONAL_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Interface.nondirectional);
 		}
 		
-    	return validationMessages;
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.sequence, this.resource, getSequences(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.feature, this.resource, getFeatures(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.interaction, this.resource, getInteractions(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.constraint, this.resource, getConstraints(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.model, this.resource, getModels(), validationMessages);
+		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.Component.hasInterface, this.resource, getInterface(), validationMessages);
+		return validationMessages;
 	}
-	
-	
 	
 	@Valid
 	@NotEmpty(message = "{COMPONENT_TYPES_NOT_EMPTY}")
@@ -173,18 +176,42 @@ public class Component extends TopLevel {
 	}
 	
 	
-	public List<URI> getSequences() {
+	/*public List<URI> getSequences() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Component.sequence);
 	}
+	*/
 	
-	public void setSequences(List<URI> sequences) {
-		RDFUtil.setProperty(resource, DataModel.Component.sequence, sequences);
+	public List<Sequence> getSequences() throws SBOLGraphException {
+		return addToList(DataModel.Component.sequence, Sequence.class, DataModel.Sequence.uri);
 	}
 	
-	public List<URI> getSequences(Encoding encoding)
+	public void setSequences(List<Sequence> sequences) {
+		List<URI> uris=SBOLUtil.getURIs(sequences);
+		RDFUtil.setProperty(resource, DataModel.Component.sequence, uris);
+	}
+	
+	public List<Sequence> getSequences(Encoding encoding) throws SBOLGraphException
 	{
-		return filterIdentifieds(this.getSequences(),DataModel.Sequence.encoding, encoding.getUri().toString());
+		ArrayList<Sequence> result=null;
+		List<Sequence> sequences=this.getSequences();
+		if (encoding!=null && sequences!=null)
+		{
+			for (Sequence sequence: sequences)
+			{
+				if (sequence.getEncoding().equals(encoding))
+				{
+					if (result==null)
+					{
+						result=new ArrayList<Sequence>();
+					}
+					result.add(sequence);
+				}
+			}
+		}
+		return result;
+		//return filterIdentifieds(SBOLUtil.getURIs(this.getSequences()),DataModel.Sequence.encoding, encoding.getUri().toString());
 	}
+	
 	
 	//Features
 	
@@ -265,7 +292,7 @@ public class Component extends TopLevel {
 		return addToList(DataModel.Component.feature, ComponentReference.class, DataModel.ComponentReference.uri);
 	}
 	
-	public ComponentReference createComponentReference(URI uri, URI feature, URI inChildOf) throws SBOLGraphException {
+	public ComponentReference createComponentReference(URI uri, Feature feature, SubComponent inChildOf) throws SBOLGraphException {
 		ComponentReference componentReference= new ComponentReference(this.resource.getModel(), uri);
 		componentReference.setRefersTo(feature);
 		componentReference.setInChildOf(inChildOf);
@@ -273,21 +300,13 @@ public class Component extends TopLevel {
 		return componentReference;	
 	}
 	
-	private ComponentReference createComponentReference(String displayId, URI feature, URI inChildOf) throws SBOLGraphException {
+	private ComponentReference createComponentReference(String displayId, Feature feature, SubComponent inChildOf) throws SBOLGraphException {
 		return createComponentReference(SBOLAPI.append(this.getUri(), displayId), feature, inChildOf);	
 	}
 	
-	public ComponentReference createComponentReference(URI feature, URI inChildOf) throws SBOLGraphException {
+	public ComponentReference createComponentReference(Feature feature, SubComponent inChildOf) throws SBOLGraphException {
 		String displayId=SBOLAPI.createLocalName(DataModel.ComponentReference.uri, getComponentReferences());
 		return createComponentReference(displayId, feature, inChildOf);	
-	}
-	
-	public ComponentReference createComponentReference(URI uri, Feature feature, SubComponent inChildOf) throws SBOLGraphException {
-		return createComponentReference(uri, feature.getUri(), inChildOf.getUri());
-	}
-	
-	public ComponentReference createComponentReference(Feature feature, SubComponent inChildOf) throws SBOLGraphException {
-		return createComponentReference(feature.getUri(), inChildOf.getUri());
 	}
 
 	//Local sub components
@@ -408,11 +427,11 @@ public class Component extends TopLevel {
 	
 	@Valid
 	public List<Interaction> getInteractions() throws SBOLGraphException {
-		return addToList(DataModel.Component.interaction, Interaction.class);
+		return addToList(DataModel.Component.interaction, Interaction.class, DataModel.Interaction.uri);
 	}
 	
 	//Constraint
-	public Constraint createConstraint(URI uri, URI restriction, URI subject, URI object) throws SBOLGraphException {
+	public Constraint createConstraint(URI uri, URI restriction, Feature subject, Feature object) throws SBOLGraphException {
 		Constraint constraint= new Constraint(this.resource.getModel(), uri);
 		constraint.setRestriction(restriction);
 		constraint.setSubject(subject);
@@ -421,18 +440,18 @@ public class Component extends TopLevel {
 		return constraint;
 	}
 	
-	private Constraint createConstraint(String displayId, URI restriction, URI subject, URI object) throws SBOLGraphException {
+	private Constraint createConstraint(String displayId, URI restriction, Feature subject, Feature object) throws SBOLGraphException {
 		return createConstraint(SBOLAPI.append(this.getUri(), displayId), restriction, subject, object);
 	}
 	
-	public Constraint createConstraint(URI restriction, URI subject, URI object) throws SBOLGraphException {
+	public Constraint createConstraint(URI restriction, Feature subject, Feature object) throws SBOLGraphException {
 		String displayId=SBOLAPI.createLocalName(DataModel.Constraint.uri, getConstraints());	
 		return createConstraint(displayId, restriction, subject, object);
 	}
 	
 	@Valid
 	public List<Constraint> getConstraints() throws SBOLGraphException {
-		return addToList(DataModel.Component.constraint, Constraint.class);
+		return addToList(DataModel.Component.constraint, Constraint.class, DataModel.Constraint.uri);
 	}
 	
 	//Interface
@@ -451,17 +470,26 @@ public class Component extends TopLevel {
 	}
 	
 	public Interface getInterface() throws SBOLGraphException {
-		return contsructIdentified(DataModel.Component.hasInterface, Interface.class);
+		return contsructIdentified(DataModel.Component.hasInterface, Interface.class, DataModel.Interface.uri);
 	}
 	
-	public List<URI> getModels() {
+	/*public List<URI> getModels() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Component.model);
 	}
 	
 	public void setModels(List<URI> models) {
 		RDFUtil.setProperty(resource, DataModel.Component.model, models);
-	}
+	}*/
 
+	public List<Model> getModels() throws SBOLGraphException {
+		return addToList(DataModel.Component.model, Model.class, DataModel.Model.uri);
+	}
+	
+	public void setModels(List<Model> models) {
+		RDFUtil.setProperty(resource, DataModel.Component.model, SBOLUtil.getURIs(models));
+	}
+	
+	
 	public URI getResourceType()
 	{
 		return DataModel.Component.uri;

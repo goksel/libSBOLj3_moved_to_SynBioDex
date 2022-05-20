@@ -24,7 +24,7 @@ public class ModelTest extends TestCase {
         Component toggleSwitch=SBOLAPI.createComponent(doc, "toggle_switch", ComponentType.FunctionalEntity.getUrl(), "Toggle Switch", "Toggle Switch genetic circuit", null);
         Model model=doc.createModel("model1", URI.create("http://virtualparts.org"), ModelFramework.Continuous,ModelLanguage.SBML);
         model.setNamespace(URI.create(namespace));
-        toggleSwitch.setModels(Arrays.asList(model.getUri()));
+        toggleSwitch.setModels(Arrays.asList(model));
         
         TestUtil.serialise(doc, "entity/model", "model");
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));

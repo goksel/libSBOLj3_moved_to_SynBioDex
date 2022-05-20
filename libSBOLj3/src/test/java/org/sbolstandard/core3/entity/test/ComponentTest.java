@@ -1,15 +1,20 @@
 package org.sbolstandard.core3.entity.test;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalLong;
+
+import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Attachment;
 import org.sbolstandard.core3.entity.Component;
+import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.entity.Interaction;
+import org.sbolstandard.core3.entity.Model;
 import org.sbolstandard.core3.entity.Participation;
 import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.entity.Sequence;
@@ -18,8 +23,11 @@ import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.ComponentType;
+import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.InteractionType;
 import org.sbolstandard.core3.vocabulary.ModelLanguage;
@@ -30,7 +38,7 @@ import junit.framework.TestCase;
 
 public class ComponentTest extends TestCase {
 	
-	public void testComponentReference() throws SBOLGraphException, IOException, Exception
+	public void testComponent() throws SBOLGraphException, IOException, Exception
     {
 		URI base=URI.create("https://synbiohub.org/public/igem/");
 		SBOLDocument doc=new SBOLDocument(base);
@@ -50,14 +58,54 @@ public class ComponentTest extends TestCase {
 		TestUtil.validateIdentified(pTetR,doc,0);
 		
 		//Component.hasSequence can have multiple values
-		List<URI> tempList=pTetR.getSequences();
+		List<Sequence> tempSequences=pTetR.getSequences();
 		SBOLAPI.addSequence(doc, pTetR, Encoding.NucleicAcid, "aaaa");
 		TestUtil.validateIdentified(pTetR,doc,0);
-		pTetR.setSequences(tempList);
+		pTetR.setSequences(tempSequences);
+		
+		Resource resource = TestUtil.getResource(pTetR);
+		
+		//SBOL_VALID_ENTITY_TYPES - Component.Sequences
+		RDFUtil.setProperty(resource, DataModel.Component.sequence, popsReceiver.getUri());
+		TestUtil.validateIdentified(pTetR,doc,1);
+		RDFUtil.setProperty(resource, DataModel.Component.sequence, Arrays.asList(popsReceiver.getUri(), pTetR.getUri(), tempSequences.get(0).getUri()));	
+		TestUtil.validateIdentified(pTetR,doc,2);
+		pTetR.setSequences(tempSequences);
+		TestUtil.validateIdentified(pTetR,doc,0);
+		
+		//SBOL_VALID_ENTITY_TYPES - Component.Models
+		List<Model> tempModels=pTetR.getModels();
+		RDFUtil.setProperty(resource, DataModel.Component.model, SBOLUtil.getURIs(tempSequences));
+		TestUtil.validateIdentified(pTetR,doc,1);
+		pTetR.setModels(tempModels);
+		TestUtil.validateIdentified(pTetR,doc,0);
+		
+		
+		//SBOL_VALID_ENTITY_TYPES - Component.Features
+		List<URI> tempURIs=SBOLUtil.getURIs(pTetR.getFeatures());
+		RDFUtil.setProperty(resource, DataModel.Component.feature, SBOLUtil.getURIs(pTetR.getSequences()));
+		TestUtil.validateIdentified(pTetR,doc,1);
+		RDFUtil.setProperty(resource, DataModel.Component.feature, tempURIs);
+		TestUtil.validateIdentified(pTetR,doc,0);
+		
+		//SBOL_VALID_ENTITY_TYPES - Component.Constraints
+		tempURIs=SBOLUtil.getURIs(pTetR.getConstraints());
+		RDFUtil.setProperty(resource, DataModel.Component.constraint, SBOLUtil.getURIs(pTetR.getSequences()));
+		TestUtil.validateIdentified(pTetR,doc,1);
+		RDFUtil.setProperty(resource, DataModel.Component.constraint, tempURIs);
+		TestUtil.validateIdentified(pTetR,doc,0);
+
+		//SBOL_VALID_ENTITY_TYPES - Component.Interactions
+		tempURIs=SBOLUtil.getURIs(pTetR.getInteractions());
+		RDFUtil.setProperty(resource, DataModel.Component.interaction, SBOLUtil.getURIs(pTetR.getSequences()));
+		TestUtil.validateIdentified(pTetR,doc,1);
+		RDFUtil.setProperty(resource, DataModel.Component.interaction, tempURIs);
+		TestUtil.validateIdentified(pTetR,doc,0);
+		
 		
 		//Component.type is required
 		TestUtil.validateProperty(pTetR, "setTypes", new Object[] {null}, List.class);
-		tempList=pTetR.getTypes();
+		List<URI> tempList=pTetR.getTypes();
 		pTetR.setTypes(null);
 		TestUtil.validateIdentified(pTetR,doc,1);
 		pTetR.setTypes(new ArrayList<URI>());
@@ -106,6 +154,8 @@ public class ComponentTest extends TestCase {
         Participation participation3= interaction3.createParticipation(SBOLAPI.append(base, "inhibitor_participation3"), Arrays.asList(ParticipationRole.Inhibitor), gfpProteinSubComponent.getUri());
         TestUtil.validateIdentified(popsReceiver, doc,4);
         TestUtil.validateIdentified(interaction3, 1);
+        
+        
         
         
         

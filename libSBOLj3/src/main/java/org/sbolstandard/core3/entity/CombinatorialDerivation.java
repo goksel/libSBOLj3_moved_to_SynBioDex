@@ -79,17 +79,41 @@ public class CombinatorialDerivation extends TopLevel{
 				}
 			}			
 		}
+		
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.CombinatorialDerivation.variableFeature, this.resource, getVariableFeatures(), validationMessages);
+		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.CombinatorialDerivation.template, this.resource, getTemplate(), validationMessages);
+			
 		return validationMessages;
 	}
 	
-	@NotNull(message = "{COMBINATORIALDERIVATION_TEMPLATE_NOT_NULL}")
+	/*@NotNull(message = "{COMBINATORIALDERIVATION_TEMPLATE_NOT_NULL}")
 	public URI getTemplate() throws SBOLGraphException {
 		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.template);
 	}
 
-	public void setTemplate(@NotNull(message = "{COMBINATORIALDERIVATION_TEMPLATE_NOT_NULL}") URI template) throws SBOLGraphException {
+	/*public void setTemplate(@NotNull(message = "{COMBINATORIALDERIVATION_TEMPLATE_NOT_NULL}") URI template) throws SBOLGraphException {
 		PropertyValidator.getValidator().validate(this, "setTemplate", new Object[] {template}, URI.class);
 		RDFUtil.setProperty(resource, DataModel.CombinatorialDerivation.template, template);
+	}*/
+	
+	@NotNull(message = "{COMBINATORIALDERIVATION_TEMPLATE_NOT_NULL}")
+	public Component getTemplate() throws SBOLGraphException {
+		return contsructIdentified(DataModel.CombinatorialDerivation.template, Component.class, DataModel.Component.uri);
+		//return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.template);
+	}
+	
+	/*public URI getTemplateURI() throws SBOLGraphException {
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.CombinatorialDerivation.template);
+	}*/
+	
+	public void setTemplate(@NotNull(message = "{COMBINATORIALDERIVATION_TEMPLATE_NOT_NULL}") Component template) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setTemplate", new Object[] {template}, Component.class);
+		URI uri=null;
+		if (template!=null)
+		{
+			uri=template.getUri();
+		}
+		RDFUtil.setProperty(resource, DataModel.CombinatorialDerivation.template, uri);
 	}
 	
 	public CombinatorialDerivationStrategy getStrategy() throws SBOLGraphException {
