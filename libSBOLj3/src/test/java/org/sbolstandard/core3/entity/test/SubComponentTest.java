@@ -39,11 +39,11 @@ public class SubComponentTest extends TestCase {
 		int end=start + term_na.length()-1;
     	
 		i13504Sequence.setElements(i13504Sequence.getElements() + term_na);
-		LocationBuilder locationBuilder=new Location.RangeLocationBuilder(start, end,i13504Sequence.getUri());
+		LocationBuilder locationBuilder=new Location.RangeLocationBuilder(start, end,i13504Sequence);
 		locationBuilder.setOrientation(Orientation.inline);
 		Range range=(Range)termSubComponent.createLocation(locationBuilder);
 		
-		LocationBuilder locationBuilder2=new Location.RangeLocationBuilder(start+1, end,i13504Sequence.getUri());
+		LocationBuilder locationBuilder2=new Location.RangeLocationBuilder(start+1, end,i13504Sequence);
 		Range range2=(Range)termSubComponent.createSourceLocation(locationBuilder2);
 		
 		TestUtil.serialise(doc, "entity_additional/subcomponent", "subcomponent");

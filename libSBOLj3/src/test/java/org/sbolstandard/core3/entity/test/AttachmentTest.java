@@ -49,7 +49,7 @@ public class AttachmentTest extends TestCase {
         attachment.setHash("aaa");
         
         Implementation impl=doc.createImplementation("impl1");
-        impl.setComponent(TetR_protein.getUri());
+        impl.setComponent(TetR_protein);
         impl.setAttachments(Arrays.asList(attachment.getUri()));
         
         TestUtil.serialise(doc, "entity/attachment", "attachment");

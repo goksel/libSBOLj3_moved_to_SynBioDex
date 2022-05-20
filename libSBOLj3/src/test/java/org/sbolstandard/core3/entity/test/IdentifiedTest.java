@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.OptionalLong;
+
+import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.vocabulary.*;
@@ -48,11 +51,31 @@ public class IdentifiedTest extends TestCase {
         attachment.setWasDerivedFrom(null);
         TestUtil.validateIdentified(attachment, doc, 0);
        
-        //IDENTIFIED_SUITABLE_SBOL_ENTITY_TYPES
+        
+        Resource resource = TestUtil.getResource(attachment);
+        
+		//SBOL_VALID_ENTITY_TYPES - Identified.wasGeenratedBy
+		RDFUtil.setProperty(resource, DataModel.Identified.wasGeneratedBy, attachment.getUri());
+		TestUtil.validateIdentified(attachment, doc, 1);
+		attachment.setWasGeneratedBy(null);
+		TestUtil.validateIdentified(attachment, doc, 0);
+		
+		RDFUtil.setProperty(resource, DataModel.Identified.measure, attachment.getUri());
+		TestUtil.validateIdentified(attachment, doc, 1);
+		URI tmp=null;
+		RDFUtil.setProperty(resource, DataModel.Identified.measure, tmp);
+		TestUtil.validateIdentified(attachment, doc, 0);
+		
+		
+		
+		
+	       
+		
+		//IDENTIFIED_SUITABLE_SBOL_ENTITY_TYPES
         //This will cause an invalid attachment and will create an invalid sequence. Two document errors - one attachment error.
         attachment.addAnnotationType(DataModel.Sequence.uri);
         TestUtil.validateIdentified(attachment, doc, 1,2);
-        
+       
         
         
         

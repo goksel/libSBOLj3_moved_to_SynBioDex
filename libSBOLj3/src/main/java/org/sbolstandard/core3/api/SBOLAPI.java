@@ -345,7 +345,7 @@ public class SBOLAPI {
 	    		}
 		    	 
 
-	        	locationBuilder=new Location.RangeLocationBuilder(start, end,sequence.getUri());
+	        	locationBuilder=new Location.RangeLocationBuilder(start, end,sequence);
 	        	locationBuilder.setOrientation(orientation);
 	    	}
 	    	return locationBuilder;

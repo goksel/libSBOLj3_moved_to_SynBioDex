@@ -27,7 +27,7 @@ public class SequenceFeatureTest extends TestCase {
 		
 		Sequence seq= gfp.getSequences().get(0);
 		
-		RangeLocationBuilder location=new RangeLocationBuilder(1, 3, seq.getUri());
+		RangeLocationBuilder location=new RangeLocationBuilder(1, 3, seq);
 		SequenceFeature feature=gfp.createSequenceFeature(Arrays.asList(location));
 		
 		

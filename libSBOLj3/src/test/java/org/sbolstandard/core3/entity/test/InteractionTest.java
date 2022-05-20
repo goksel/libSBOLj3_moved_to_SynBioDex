@@ -5,12 +5,15 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.*;
 
@@ -44,7 +47,16 @@ public class InteractionTest extends TestCase {
         TestUtil.validateIdentified(interaction,doc,1);
         interaction.setTypes(Arrays.asList(InteractionType.GeneticProduction));
         TestUtil.validateIdentified(interaction,doc,0);
-           
+        
+        Resource resource = TestUtil.getResource(interaction);
+        
+		//SBOL_VALID_ENTITY_TYPES - Interaction.participation
+		RDFUtil.setProperty(resource, DataModel.Interaction.participation, i13504_system.getUri());
+		TestUtil.validateIdentified(interaction,doc,1);
+		URI tmp=null;
+		RDFUtil.setProperty(resource, DataModel.Interaction.participation, tmp);
+		TestUtil.validateIdentified(interaction,doc,0);
+	
     }
 	
 }

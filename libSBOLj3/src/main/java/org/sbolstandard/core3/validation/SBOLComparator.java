@@ -506,9 +506,9 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqual(entity1, entity2));
-			output = add(output, assertEqual(entity1, entity2, entity1.getInputs(),entity2.getInputs(), DataModel.Interface.input));
-			output = add(output, assertEqual(entity1, entity2, entity1.getNonDirectionals(),entity2.getNonDirectionals(), DataModel.Interface.nondirectional));
-			output = add(output, assertEqual(entity1, entity2, entity1.getOutputs(),entity2.getOutputs(), DataModel.Interface.output));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getInputs()),SBOLUtil.getURIs(entity2.getInputs()), DataModel.Interface.input));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getNonDirectionals()),SBOLUtil.getURIs(entity2.getNonDirectionals()), DataModel.Interface.nondirectional));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getOutputs()),SBOLUtil.getURIs(entity2.getOutputs()), DataModel.Interface.output));
 		}
 		return output;
 	}
@@ -787,7 +787,7 @@ public class SBOLComparator {
 		output = add(output, assertEqual(identified1, identified2, identified1.getDisplayId(),identified2.getDisplayId(), DataModel.Identified.displayId));
 		output = add(output, assertEqual(identified1, identified2, identified1.getUri(),identified2.getUri(), DataModel.Identified.uri));
 		output = add(output, assertEqual(identified1, identified2, identified1.getWasDerivedFrom(),identified2.getWasDerivedFrom(), DataModel.Identified.wasDerivedFrom));
-		output = add(output, assertEqual(identified1, identified2, identified1.getWasGeneratedBy(),identified2.getWasGeneratedBy(), DataModel.Identified.wasGeneratedBy));
+		output = add(output, assertEqual(identified1, identified2, SBOLUtil.getURIs(identified1.getWasGeneratedBy()),SBOLUtil.getURIs(identified2.getWasGeneratedBy()), DataModel.Identified.wasGeneratedBy));
 		output = add(output, assertEqualEntity(identified1.getMeasures(), identified2.getMeasures()));
 		return output;
 	}

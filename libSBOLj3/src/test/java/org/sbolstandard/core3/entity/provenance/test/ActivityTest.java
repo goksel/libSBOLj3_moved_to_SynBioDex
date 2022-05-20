@@ -56,7 +56,7 @@ public class ActivityTest extends TestCase {
         association.setPlan(plan.getUri());
         association.setRoles(Arrays.asList(ActivityType.Design.getUrl()));
         
-        toggleSwitchOptimised.setWasGeneratedBy(Arrays.asList(activity.getUri()));
+        toggleSwitchOptimised.setWasGeneratedBy(Arrays.asList(activity));
         toggleSwitchOptimised.setWasDerivedFrom(Arrays.asList(toggleSwitch.getUri()));
         
         

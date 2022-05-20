@@ -31,7 +31,7 @@ public class CutTest extends TestCase {
 		
 		Component pTetR=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_R0040"), "pTetR", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
 	    Sequence sequence=doc.getSequences().get(0);
-		LocationBuilder locationBuilder=new Location.CutLocationBuilder(5, sequence.getUri());
+		LocationBuilder locationBuilder=new Location.CutLocationBuilder(5, sequence);
 		
 		SequenceFeature feature=pTetR.createSequenceFeature(Arrays.asList(locationBuilder));
 		
@@ -63,7 +63,7 @@ public class CutTest extends TestCase {
     	TestUtil.validateIdentified(cut,doc,0);
     	
     	//Location.sequence can't be null
-    	TestUtil.validateProperty(cut, "setSequence", new Object[] {null}, URI.class);
+    	TestUtil.validateProperty(cut, "setSequence", new Object[] {null}, Sequence.class);
     	cut.setSequence(null);
     	TestUtil.validateIdentified(cut,doc,1);
 

@@ -97,6 +97,14 @@ public class IdentifiedValidator {
 		return messages;
 	}
 
+	
+	public static <T extends Identified> List<ValidationMessage> assertExistsIdentifieds(Identified identified, List<ValidationMessage> messages, List<T> targets, List<T> identifieds, ValidationMessage message) {
+		if (targets != null) {
+			messages = assertExists(identified, messages, SBOLUtil.getURIs(targets), identifieds,message);
+		}
+		return messages;
+	}
+	
 	public static <T extends Identified> List<ValidationMessage> assertExists(Identified identified, List<ValidationMessage> messages, List<URI> uriList, List<T> identifieds, String errorMessage, URI property) {
 		if (uriList != null) {
 			for (URI uri : uriList) {

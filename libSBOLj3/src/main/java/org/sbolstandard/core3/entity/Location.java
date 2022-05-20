@@ -8,6 +8,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
@@ -82,13 +83,14 @@ public abstract class  Location extends Identified {
 	
 	@Valid
 	@NotNull(message = "{LOCATION_SEQUENCE_NOT_NULL}")
-	public URI getSequence() throws SBOLGraphException {
-		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Location.sequence);
+	public Sequence getSequence() throws SBOLGraphException {
+		//return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Location.sequence);
+		return contsructIdentified(DataModel.Location.sequence, Sequence.class, DataModel.Sequence.uri);
 	}
 
-	public void setSequence(@NotNull(message = "{LOCATION_SEQUENCE_NOT_NULL}") URI sequence) throws SBOLGraphException {
-		PropertyValidator.getValidator().validate(this, "setSequence", new Object[] {sequence}, URI.class);
-		RDFUtil.setProperty(this.resource, DataModel.Location.sequence, sequence);	
+	public void setSequence(@NotNull(message = "{LOCATION_SEQUENCE_NOT_NULL}") Sequence sequence) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setSequence", new Object[] {sequence}, Sequence.class);
+		RDFUtil.setProperty(this.resource, DataModel.Location.sequence, SBOLUtil.toURI(sequence));	
 	}
 	
 	public URI getResourceType()
@@ -121,10 +123,10 @@ public abstract class  Location extends Identified {
 	
 	public static abstract class LocationBuilder
 	{
-		protected URI sequence;
+		protected Sequence sequence;
 		private Orientation orientation;
 		private int order;
-		public LocationBuilder(URI sequence)
+		public LocationBuilder(Sequence sequence)
 		{
 			this.sequence=sequence;
 		}
@@ -156,7 +158,7 @@ public abstract class  Location extends Identified {
 	public static class CutLocationBuilder extends LocationBuilder
 	{
 		private int at;
-		public CutLocationBuilder(int at, URI sequence)
+		public CutLocationBuilder(int at, Sequence sequence)
 		{
 			super(sequence);
 			this.at=at;
@@ -186,7 +188,7 @@ public abstract class  Location extends Identified {
 		private int start;
 		private int end;
 		
-		public RangeLocationBuilder(int start, int end, URI sequence)
+		public RangeLocationBuilder(int start, int end, Sequence sequence)
 		{
 			super(sequence);
 			this.start=start;
@@ -217,7 +219,7 @@ public abstract class  Location extends Identified {
 	public static class EntireSequenceLocationBuilder extends LocationBuilder
 	{
 		
-		public EntireSequenceLocationBuilder(URI sequence)
+		public EntireSequenceLocationBuilder(Sequence sequence)
 		{
 			super(sequence);
 		}

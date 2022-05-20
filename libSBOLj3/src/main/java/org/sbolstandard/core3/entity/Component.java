@@ -132,15 +132,15 @@ public class Component extends TopLevel {
 		{
 			ValidationMessage message = new ValidationMessage("{INTERFACE_INPUT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Component.hasInterface,compInterface,null);
 			message.childPath(DataModel.Interface.input);
-			validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getInputs(), features, message);			
+			validationMessages= IdentifiedValidator.assertExistsIdentifieds(compInterface, validationMessages, compInterface.getInputs(), features, message);			
 			
 			message = new ValidationMessage("{INTERFACE_OUTPUT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Component.hasInterface,compInterface,null);
 			message.childPath(DataModel.Interface.output);
-			validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getOutputs(), features, message);			
+			validationMessages= IdentifiedValidator.assertExistsIdentifieds(compInterface, validationMessages, compInterface.getOutputs(), features, message);			
 			
 			message = new ValidationMessage("{INTERFACE_NONDIRECTIONAL_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Component.hasInterface,compInterface,null);
 			message.childPath(DataModel.Interface.nondirectional);
-			validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getNonDirectionals(), features, message);			
+			validationMessages= IdentifiedValidator.assertExistsIdentifieds(compInterface, validationMessages, compInterface.getNonDirectionals(), features, message);			
 			
 			//validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getInputs(), features, "{INTERFACE_INPUT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Interface.input);			
 			//validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getOutputs(), features, "{INTERFACE_OUTPUT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Interface.output);
@@ -186,8 +186,7 @@ public class Component extends TopLevel {
 	}
 	
 	public void setSequences(List<Sequence> sequences) {
-		List<URI> uris=SBOLUtil.getURIs(sequences);
-		RDFUtil.setProperty(resource, DataModel.Component.sequence, uris);
+		RDFUtil.setProperty(resource, DataModel.Component.sequence, SBOLUtil.getURIs(sequences));
 	}
 	
 	public List<Sequence> getSequences(Encoding encoding) throws SBOLGraphException
@@ -469,6 +468,7 @@ public class Component extends TopLevel {
 		return createInterface(SBOLAPI.append(this.getUri(), "Interface1"));
 	}
 	
+	@Valid
 	public Interface getInterface() throws SBOLGraphException {
 		return contsructIdentified(DataModel.Component.hasInterface, Interface.class, DataModel.Interface.uri);
 	}

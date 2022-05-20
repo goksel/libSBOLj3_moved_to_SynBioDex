@@ -65,18 +65,19 @@ public abstract class Feature extends Identified{
 		RDFUtil.setProperty(this.resource, DataModel.orientation, orientationURI);
 	}
 	
-	/*public static <T extends Identified> HashMap<URI, Class<T>> getSubClassTypes()
+	@SuppressWarnings("unchecked")
+	public static <T extends Identified> HashMap<URI, Class<T>> getSubClassTypes()
 	{
 		HashMap<URI, Class<T>> subclasses=new HashMap<URI, Class<T>>();
-		subclasses.put(DataModel.ComponentReference.uri,  ComponentReference.class);
-		subclasses.put(DataModel.SubComponent.uri,  SubComponent.class);
-		subclasses.put(DataModel.LocalSubComponent.uri,  LocalSubComponent.class);
-		subclasses.put(DataModel.ExternalyDefined.uri,  ExternallyDefined.class);
-		subclasses.put(DataModel.SequenceFeature.uri,  SequenceFeature.class);
+		subclasses.put(DataModel.ComponentReference.uri, (Class<T>) ComponentReference.class);
+		subclasses.put(DataModel.SubComponent.uri,  (Class<T>)SubComponent.class);
+		subclasses.put(DataModel.LocalSubComponent.uri,(Class<T>)  LocalSubComponent.class);
+		subclasses.put(DataModel.ExternalyDefined.uri, (Class<T>)  ExternallyDefined.class);
+		subclasses.put(DataModel.SequenceFeature.uri,(Class<T>)  SequenceFeature.class);
 		return subclasses;
-	}*/
+	}
 	
-	public static HashMap<URI, Class> getSubClassTypes()
+	/*public static HashMap<URI, Class> getSubClassTypes()
 	{
 		HashMap<URI, Class> subclasses=new HashMap<URI, Class>();
 		subclasses.put(DataModel.ComponentReference.uri,  ComponentReference.class);
@@ -85,5 +86,5 @@ public abstract class Feature extends Identified{
 		subclasses.put(DataModel.ExternalyDefined.uri,  ExternallyDefined.class);
 		subclasses.put(DataModel.SequenceFeature.uri,  SequenceFeature.class);
 		return subclasses;
-	}
+	}*/
 }
