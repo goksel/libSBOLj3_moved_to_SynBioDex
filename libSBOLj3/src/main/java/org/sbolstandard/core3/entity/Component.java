@@ -365,7 +365,7 @@ public class Component extends TopLevel {
 		return addToList(DataModel.Component.feature, SequenceFeature.class, DataModel.SequenceFeature.uri);
 	}
 	
-	public SequenceFeature createSequenceFeature(URI uri, List<LocationBuilder> locations) throws SBOLGraphException {
+	/*public SequenceFeature createSequenceFeature(URI uri, List<LocationBuilder> locations) throws SBOLGraphException {
 		SequenceFeature sequenceFeature= new SequenceFeature(this.resource.getModel(), uri);
 		
 		RDFUtil.addProperty(resource, DataModel.Component.feature, sequenceFeature.getUri());
@@ -386,6 +386,42 @@ public class Component extends TopLevel {
 	public SequenceFeature createSequenceFeature(List<LocationBuilder> locations) throws SBOLGraphException {
 		String displayId=SBOLAPI.createLocalName(DataModel.SequenceFeature.uri, getSequenceFeatures());	
 		return createSequenceFeature(displayId, locations);
+	}
+	*/
+	
+	public SequenceFeature createSequenceFeature(Sequence sequence) throws SBOLGraphException {
+		SequenceFeature feature=createSequenceFeature();
+		feature.createEntireSequence(sequence);
+		return feature;
+	}
+	
+	public SequenceFeature createSequenceFeature(int at, Sequence sequence) throws SBOLGraphException {
+		SequenceFeature feature=createSequenceFeature();
+		feature.createCut(at, sequence);
+		return feature;
+	}
+	
+	public SequenceFeature createSequenceFeature(int start, int end, Sequence sequence) throws SBOLGraphException {
+		SequenceFeature feature=createSequenceFeature();
+		feature.createRange(start, end, sequence);
+		return feature;
+	}
+	
+	private SequenceFeature createSequenceFeature() throws SBOLGraphException {
+		String displayId=SBOLAPI.createLocalName(DataModel.SequenceFeature.uri, getSequenceFeatures());	
+		SequenceFeature seqFeature=createSequenceFeature(displayId);
+		return seqFeature;
+	}
+	
+	private SequenceFeature createSequenceFeature(String displayId) throws SBOLGraphException {
+		SequenceFeature seqFeature=createSequenceFeature(SBOLAPI.append(this.getUri(), displayId));
+		return seqFeature;
+	}
+	
+	private SequenceFeature createSequenceFeature(URI uri) throws SBOLGraphException {
+		SequenceFeature sequenceFeature= new SequenceFeature(this.resource.getModel(), uri);
+		RDFUtil.addProperty(resource, DataModel.Component.feature, sequenceFeature.getUri());
+		return sequenceFeature;	
 	}
 	
 	/*

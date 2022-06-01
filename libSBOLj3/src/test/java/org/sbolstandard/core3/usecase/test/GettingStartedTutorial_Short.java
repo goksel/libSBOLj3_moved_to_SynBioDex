@@ -98,8 +98,8 @@ public class GettingStartedTutorial_Short {
 		 ComponentReference gfpCDSReference=i13504_system.createComponentReference(gfpSubComponent, i13504SubComponent);
 					    
 		 Interaction interaction= i13504_system.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
-    	 interaction.createParticipation(Arrays.asList(ParticipationRole.Template), gfpCDSReference.getUri());
-    	 interaction.createParticipation(Arrays.asList(ParticipationRole.Product), gfpProteinSubComponent.getUri());
+    	 interaction.createParticipation(Arrays.asList(ParticipationRole.Template), gfpCDSReference);
+    	 interaction.createParticipation(Arrays.asList(ParticipationRole.Product), gfpProteinSubComponent);
 	    	
 		 /* --------------------------------------------------
 		  Slide 34: Example: concatenating & reusing components

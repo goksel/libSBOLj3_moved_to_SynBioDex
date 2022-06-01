@@ -110,6 +110,19 @@
       <sbol:hasFeature rdf:resource="i13504_system/ComponentReference1"/>
    </sbol:Component>
    <sbol:Component rdf:about="E0040">
+      <sbol:hasFeature>
+         <sbol:SequenceFeature rdf:about="E0040/SequenceFeature1">
+            <sbol:hasLocation>
+               <sbol:EntireSequence rdf:about="E0040/SequenceFeature1/EntireSequence1">
+                  <sbol:hasSequence>
+                     <sbol:Sequence rdf:about="gfp_start"/>
+                  </sbol:hasSequence>
+                  <sbol:displayId>EntireSequence1</sbol:displayId>
+               </sbol:EntireSequence>
+            </sbol:hasLocation>
+            <sbol:displayId>SequenceFeature1</sbol:displayId>
+         </sbol:SequenceFeature>
+      </sbol:hasFeature>
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="E0040_Sequence1"/>
       </sbol:hasSequence>
@@ -127,6 +140,10 @@
       <sbol:name>Sequence1</sbol:name>
       <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:displayId>E0040_Sequence1</sbol:displayId>
+   </sbol:Sequence>
+   <sbol:Sequence rdf:about="gfp_start">
+      <sbol:hasNamespace rdf:resource="/examples"/>
+      <sbol:displayId>gfp_start</sbol:displayId>
    </sbol:Sequence>
    <sbol:Sequence rdf:about="i13504_Sequence1">
       <sbol:elements>atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa</sbol:elements>

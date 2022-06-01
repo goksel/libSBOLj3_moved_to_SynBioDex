@@ -85,6 +85,7 @@ public class DataModel {
 		public static final class SequenceFeature
 		{
 			public static URI uri =URINameSpace.SBOL.local("SequenceFeature");
+			public static URI location=SubComponent.location;	
 		}
 		
 		public static final class Interaction

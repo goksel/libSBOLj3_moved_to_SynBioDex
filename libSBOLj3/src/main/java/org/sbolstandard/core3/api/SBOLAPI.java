@@ -139,7 +139,7 @@ public class SBOLAPI {
 	    	   
 	    public static  Participation createParticipation(Interaction interaction, List<URI> roles, Feature feature) throws SBOLGraphException
 	    {
-	    	Participation participation=interaction.createParticipation(roles, feature.getUri());
+	    	Participation participation=interaction.createParticipation(roles, feature);
 	    	return participation;
 	    }
 	    
@@ -300,18 +300,38 @@ public class SBOLAPI {
 	    	return subComponent;
 	    }
 
-	    public static SequenceFeature appendSequenceFeature(SBOLDocument document, Component parent, String elements, Orientation orientation) throws SBOLGraphException 
-	    {
-	    	LocationBuilder locationbuilder=createLocationBuilder(document, parent, elements, orientation);
-	    	
-	        SequenceFeature feature=parent.createSequenceFeature(Arrays.asList(locationbuilder));
-		    if (feature!=null)
-		    {
-		    	feature.setOrientation(orientation);
-		    }
-	    	
-	    	return feature;
-	    }
+		public static SequenceFeature appendSequenceFeature(SBOLDocument document, Component parent, String elements, Orientation orientation) throws SBOLGraphException {
+			SequenceFeature feature = null;
+			if (elements != null && elements.length() > 0) {
+				List<Sequence> sequences = parent.getSequences();
+				Sequence sequence = null;
+				int start, end;
+				if (sequences != null && sequences.size() > 0) {
+					sequence = parent.getSequences().get(0);
+					start = sequence.getElements().length() + 1;
+					end = start + elements.length() - 1;
+				} 
+				else {
+					sequence = createSequence(document, parent, Encoding.NucleicAcid, "");
+					start = 1;
+					end = elements.length() - 1;
+				}
+
+				if (orientation == Orientation.inline) {
+					sequence.setElements(sequence.getElements() + elements);
+				} 
+				else {
+					throw new SBOLGraphException("Reverse complement sequence addition has not been implemented yet!");
+				}
+				feature = parent.createSequenceFeature(start, end, sequence);
+				if (feature != null) {
+					feature.setOrientation(orientation);
+				}
+				((Range)feature.getLocations().get(0)).setOrientation(orientation);
+				
+			}
+			return feature;
+		}
 
 	    private static Range createRange(SBOLDocument document, Component parent, SubComponent subComponent, String elements, Orientation orientation) throws SBOLGraphException
 	    {
@@ -348,7 +368,8 @@ public class SBOLAPI {
 	    	return range;
 
 	    }
-	    private static LocationBuilder createLocationBuilder(SBOLDocument document, Component parent, String elements, Orientation orientation) throws SBOLGraphException
+	   
+	    /*private static LocationBuilder createLocationBuilder(SBOLDocument document, Component parent, String elements, Orientation orientation) throws SBOLGraphException
 	    {
 	    	LocationBuilder locationBuilder=null;
 	    	if (elements!=null && elements.length()>0)
@@ -383,7 +404,7 @@ public class SBOLAPI {
 	        	locationBuilder.setOrientation(orientation);
 	    	}
 	    	return locationBuilder;
-	    }
+	    }*/
 	    
 	    public static Component createDnaComponent(SBOLDocument doc, URI uri, String name, String description, URI role, String sequence) throws SBOLGraphException
 	    {

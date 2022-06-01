@@ -1,5 +1,8 @@
 [ {
   "@id" : "https://sbolstandard.org/examples/E0040",
+  "http://sbols.org/v3#hasFeature" : [ {
+    "@id" : "https://sbolstandard.org/examples/E0040/SequenceFeature1"
+  } ],
   "http://sbols.org/v3#hasSequence" : [ {
     "@id" : "https://sbolstandard.org/examples/E0040_Sequence1"
   } ],
@@ -22,6 +25,24 @@
     "@value" : "E0040"
   } ],
   "@type" : [ "http://sbols.org/v3#Component" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/E0040/SequenceFeature1",
+  "http://sbols.org/v3#hasLocation" : [ {
+    "@id" : "https://sbolstandard.org/examples/E0040/SequenceFeature1/EntireSequence1"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "SequenceFeature1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#SequenceFeature" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/E0040/SequenceFeature1/EntireSequence1",
+  "http://sbols.org/v3#hasSequence" : [ {
+    "@id" : "https://sbolstandard.org/examples/gfp_start"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "EntireSequence1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#EntireSequence" ]
 }, {
   "@id" : "https://sbolstandard.org/examples/E0040_Sequence1",
   "http://sbols.org/v3#encoding" : [ {
@@ -73,6 +94,15 @@
     "@value" : "TetR"
   } ],
   "@type" : [ "http://sbols.org/v3#Component" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/gfp_start",
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "gfp_start"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Sequence" ]
 }, {
   "@id" : "https://sbolstandard.org/examples/i13504",
   "http://sbols.org/v3#hasSequence" : [ {

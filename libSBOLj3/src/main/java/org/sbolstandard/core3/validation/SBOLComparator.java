@@ -47,10 +47,14 @@ import org.sbolstandard.core3.entity.provenance.Plan;
 import org.sbolstandard.core3.entity.provenance.Usage;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
+import org.sbolstandard.core3.vocabulary.CombinatorialDerivationStrategy;
 import org.sbolstandard.core3.vocabulary.DataModel;
+import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
+import org.sbolstandard.core3.vocabulary.Orientation;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 import org.sbolstandard.core3.vocabulary.RoleIntegration;
+import org.sbolstandard.core3.vocabulary.VariableFeatureCardinality;
 
 public class SBOLComparator {
 
@@ -450,7 +454,7 @@ public class SBOLComparator {
 			output = add(output, assertEqual(entity1, entity2));
 			if (entity1.getStrategy()!=null && entity2.getStrategy()!=null)
 			{
-				output = add(output, assertEqual(entity1, entity2, entity1.getStrategy().getUri(),entity2.getStrategy().getUri(), DataModel.CombinatorialDerivation.strategy));
+				output = add(output, assertEqualEnum(entity1, entity2, entity1.getStrategy(),entity2.getStrategy(), DataModel.CombinatorialDerivation.strategy));
 			}
 			
 			else 
@@ -469,7 +473,7 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqual(entity1, entity2));
-			output = add(output, assertEqual(entity1, entity2, entity1.getCardinality().getUri(),entity2.getCardinality().getUri(), DataModel.VariableFeature.cardinality));
+			output = add(output, assertEqualEnum(entity1, entity2, entity1.getCardinality(),entity2.getCardinality(), DataModel.VariableFeature.cardinality));
 			output = add(output, assertEqual(entity1, entity2, entity1.getVariable(),entity2.getVariable(), DataModel.VariableFeature.variable));
 			output = add(output, assertEqual(entity1, entity2, entity1.getVariantCollections(),entity2.getVariantCollections(), DataModel.VariableFeature.variantCollection));
 			output = add(output, assertEqual(entity1, entity2, entity1.getVariantDerivations(),entity2.getVariantDerivations(), DataModel.VariableFeature.variantDerivation));
@@ -569,7 +573,7 @@ public class SBOLComparator {
 			assertEqual(entity1, entity2);
 			if (entity1.getOrientation()!=null && entity2.getOrientation()!=null)
 			{
-				output = add(output, assertEqual(entity1, entity2, entity1.getOrientation().getUri(),entity2.getOrientation().getUri(), DataModel.orientation));
+				output = add(output, assertEqualEnum(entity1, entity2, entity1.getOrientation(),entity2.getOrientation(), DataModel.orientation));
 			}
 			
 			else 
@@ -625,7 +629,7 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqual(entity1, entity2));
-			output = add(output, assertEqual(entity1, entity2, entity1.getParticipant(), entity2.getParticipant(),DataModel.Participation.participant));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.toURI(entity1.getParticipant()), SBOLUtil.toURI(entity2.getParticipant()),DataModel.Participation.participant));
 			output = add(output, assertEqual(entity1, entity2, entity1.getRoles(),entity2.getRoles(), DataModel.role));	
 		}
 		return output;
@@ -706,7 +710,7 @@ public class SBOLComparator {
 		{
 			output = add(output, assertEqual(entity1, entity2));		
 			output = add(output, assertEqual(entity1, entity2, entity1.getElements(), entity2.getElements(),DataModel.Sequence.elements));
-			output = add(output, assertEqual(entity1, entity2, entity1.getEncoding().getUri(), entity2.getEncoding().getUri(),DataModel.Sequence.encoding));
+			output = add(output, assertEqualEnum(entity1, entity2, entity1.getEncoding(),entity2.getEncoding(), DataModel.Sequence.encoding));		
 		}
 		return output;
 	}
@@ -805,19 +809,37 @@ public class SBOLComparator {
 	
 	private static StringBuilder assertEqualEnum(Identified identified1, Identified identified2, Object value1, Object value2, URI property)
 	{
-		StringBuilder output=null;
-		URI uri1=null;
-		URI uri2=null;
-		if (value1!=null && value1 instanceof RoleIntegration)
-		{
-			uri1=((RoleIntegration) value1).getUri();
-		}
-		if (value2!=null && value2 instanceof RoleIntegration)
-		{
-			uri2=((RoleIntegration) value2).getUri();
-		}
+		URI uri1=enumToURI(value1);
+		URI uri2=enumToURI(value2);
 		return assertEqual(identified1, identified2, uri1, uri2, property);
-		
+	}
+	
+	private static URI enumToURI(Object value)
+	{
+		if (value!=null)
+		{
+			if (value instanceof RoleIntegration)
+			{
+				return ((RoleIntegration) value).getUri();
+			}
+			else if (value instanceof Encoding)
+			{
+				return ((Encoding) value).getUri();
+			}
+			else if (value instanceof CombinatorialDerivationStrategy)
+			{
+				return ((CombinatorialDerivationStrategy) value).getUri();
+			}
+			else if (value instanceof VariableFeatureCardinality)
+			{
+				return ((VariableFeatureCardinality) value).getUri();
+			}
+			else if (value instanceof Orientation)
+			{
+				return ((Orientation) value).getUri();
+			}
+		}
+		return null;
 	}
 	
 	private static StringBuilder assertBothNullOrNotNull(Identified identified1, Identified identified2, Object value1, Object value2, URI property)

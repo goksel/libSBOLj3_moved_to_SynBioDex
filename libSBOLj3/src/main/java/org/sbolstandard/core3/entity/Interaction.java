@@ -46,7 +46,7 @@ public class Interaction extends Identified{
 	}
 
 	
-	public Participation createParticipation(URI uri, List<URI> roles, URI feature) throws SBOLGraphException
+	public Participation createParticipation(URI uri, List<URI> roles, Feature feature) throws SBOLGraphException
 	{
 		Participation participation=new Participation(this.resource.getModel(),uri);
 		participation.setRoles(roles);
@@ -64,12 +64,12 @@ public class Interaction extends Identified{
 		return participation;
 	}
 	
-	private Participation createParticipation(String displayId, List<URI> roles, URI feature) throws SBOLGraphException
+	private Participation createParticipation(String displayId, List<URI> roles, Feature feature) throws SBOLGraphException
 	{
 		return createParticipation(SBOLAPI.append(this.getUri(), displayId), roles, feature);	
 	}
 	
-	public Participation createParticipation(List<URI> roles, URI feature) throws SBOLGraphException
+	public Participation createParticipation(List<URI> roles, Feature feature) throws SBOLGraphException
 	{
 		String displayId=SBOLAPI.createLocalName(DataModel.Participation.uri, getParticipations());	
 		return createParticipation(displayId, roles, feature);	

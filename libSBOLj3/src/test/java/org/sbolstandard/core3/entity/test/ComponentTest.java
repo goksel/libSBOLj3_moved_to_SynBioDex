@@ -100,9 +100,8 @@ public class ComponentTest extends TestCase {
 		RDFUtil.setProperty(resource, DataModel.Component.interaction, SBOLUtil.getURIs(pTetR.getSequences()));
 		TestUtil.validateIdentified(pTetR,doc,1);
 		RDFUtil.setProperty(resource, DataModel.Component.interaction, tempURIs);
-		TestUtil.validateIdentified(pTetR,doc,0);
-		
-		
+		TestUtil.validateIdentified(pTetR,doc,0);		
+				
 		//Component.type is required
 		TestUtil.validateProperty(pTetR, "setTypes", new Object[] {null}, List.class);
 		List<URI> tempList=pTetR.getTypes();
@@ -145,13 +144,13 @@ public class ComponentTest extends TestCase {
         Interaction interaction2= popsReceiver.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
         Component TetR=SBOLAPI.createComponent(doc, URI.create("https://synbiohub.org/public/igem/TetR"),ComponentType.Protein.getUrl(), "TetR", "TetR repressor", Role.TF);
         SubComponent gfpProteinSubComponent=SBOLAPI.addSubComponent(popsReceiver, TetR);
-        Participation participation= interaction2.createParticipation(SBOLAPI.append(base, "inhibitor_participation"), Arrays.asList(ParticipationRole.Inhibitor), gfpProteinSubComponent.getUri());
+        Participation participation= interaction2.createParticipation(SBOLAPI.append(base, "inhibitor_participation"), Arrays.asList(ParticipationRole.Inhibitor), gfpProteinSubComponent);
         TestUtil.validateIdentified(popsReceiver,doc,2);
         TestUtil.validateIdentified(interaction2,1);
         
         //Introduce two more errors. 
         Interaction interaction3= popsReceiver.createInteraction(SBOLAPI.append(base, "protein_production3"), Arrays.asList(InteractionType.GeneticProduction));
-        Participation participation3= interaction3.createParticipation(SBOLAPI.append(base, "inhibitor_participation3"), Arrays.asList(ParticipationRole.Inhibitor), gfpProteinSubComponent.getUri());
+        Participation participation3= interaction3.createParticipation(SBOLAPI.append(base, "inhibitor_participation3"), Arrays.asList(ParticipationRole.Inhibitor), gfpProteinSubComponent);
         TestUtil.validateIdentified(popsReceiver, doc,4);
         TestUtil.validateIdentified(interaction3, 1);
         

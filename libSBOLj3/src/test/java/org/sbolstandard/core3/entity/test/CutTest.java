@@ -5,6 +5,8 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
+import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Component;
 import org.sbolstandard.core3.entity.Cut;
@@ -18,7 +20,9 @@ import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Role;
 import junit.framework.TestCase;
 
@@ -31,9 +35,8 @@ public class CutTest extends TestCase {
 		
 		Component pTetR=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_R0040"), "pTetR", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
 	    Sequence sequence=doc.getSequences().get(0);
-		LocationBuilder locationBuilder=new Location.CutLocationBuilder(5, sequence);
 		
-		SequenceFeature feature=pTetR.createSequenceFeature(Arrays.asList(locationBuilder));
+		SequenceFeature feature=pTetR.createSequenceFeature(5, sequence);
 		
 		List<SequenceFeature> seqFeatures=pTetR.getSequenceFeatures();
 		List<Feature> features=pTetR.getFeatures();
@@ -66,6 +69,16 @@ public class CutTest extends TestCase {
     	TestUtil.validateProperty(cut, "setSequence", new Object[] {null}, Sequence.class);
     	cut.setSequence(null);
     	TestUtil.validateIdentified(cut,doc,1);
+    	
+    	 //SBOL_VALID_ENTITY_TYPES - Component.interface
+	    Resource resource= TestUtil.getResource(cut);
+	    RDFUtil.setProperty(resource, DataModel.Location.sequence, Arrays.asList(sequence.getUri(), pTetR.getUri()));
+	  	TestUtil.validateIdentified(cut,doc,1);
+	  	cut.setSequence(sequence);
+		TestUtil.validateIdentified(cut,doc,0);
+	  
+    	
+    	
 
     }
 }

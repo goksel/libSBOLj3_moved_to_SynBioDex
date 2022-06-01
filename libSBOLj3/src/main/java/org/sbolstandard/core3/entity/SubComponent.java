@@ -2,6 +2,7 @@ package org.sbolstandard.core3.entity;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
@@ -93,60 +94,8 @@ public class SubComponent extends FeatureWithLocation{
 		RDFUtil.setProperty(this.resource, DataModel.SubComponent.instanceOf, isInstanceOf);	
 	}
 	
-	@Valid
-	public List<Location> getLocations() throws SBOLGraphException {		
-		return getLocations(DataModel.SubComponent.location);
-	}
 	
-	public List<Cut> getCuts() throws SBOLGraphException {
-		return getCuts(DataModel.SubComponent.location);
-	}
-	
-	public List<Range> getRanges() throws SBOLGraphException {
-		return getRanges(DataModel.SubComponent.location);
-	}
-
-	public List<EntireSequence> getEntireSequences() throws SBOLGraphException {
-		return getEntireSequences(DataModel.SubComponent.location);
-	}
-
-	public Cut createCut(URI uri,  int at, Sequence sequence) throws SBOLGraphException {
-		return createCut(uri, at, sequence, DataModel.SubComponent.location);
-	}
-	
-	public Cut createCut(String displayId, int at, Sequence sequence) throws SBOLGraphException {
-		return createCut(displayId, at, sequence, DataModel.SubComponent.location);
-	}
-	
-	public Cut createCut(int at, Sequence sequence) throws SBOLGraphException {
-		return createCut(at, sequence,  DataModel.SubComponent.location, merge(getCuts(), getSourceCuts()));
-	}
-	
-	public Range createRange(URI uri, int start, int end, Sequence sequence) throws SBOLGraphException {
-		return createRange(uri, start, end, sequence, DataModel.SubComponent.location);
-	}
-	
-	public Range createRange(String displayId, int start, int end, Sequence sequence) throws SBOLGraphException {
-		return createRange(displayId, start, end, sequence, DataModel.SubComponent.location);
-	}
-	
-	public Range createRange(int start, int end, Sequence sequence) throws SBOLGraphException {
-		return createRange(start, end, sequence, DataModel.SubComponent.location, merge(getRanges(), getSourceRanges()));
-	}
-	
-	public EntireSequence createEntireSequence(URI uri, int start, int end, Sequence sequence) throws SBOLGraphException {
-		return createEntireSequence(uri, start, end, sequence, DataModel.SubComponent.location);
-	}
-	
-	public EntireSequence createEntireSequence(String displayId, int start, int end, Sequence sequence) throws SBOLGraphException {
-		return createEntireSequence(displayId, start, end, sequence, DataModel.SubComponent.location);	
-	}
-	
-	public EntireSequence createEntireSequence(int start, int end, Sequence sequence) throws SBOLGraphException {
-		return createEntireSequence(start, end, sequence, DataModel.SubComponent.location, merge(getEntireSequences(), getSourceEntireSequences()));
-	}
-
-	private <T extends Location> List<T> merge(List<T> list1, List<T> list2) throws SBOLGraphException
+	/*private <T extends Location> List<T> merge2(List<T> list1, List<T> list2) throws SBOLGraphException
 	{
 		List<T> allLocations=new ArrayList<T>();
 		if (list1!=null)
@@ -158,7 +107,7 @@ public class SubComponent extends FeatureWithLocation{
 			allLocations.addAll(list2);
 		}
 		return allLocations;
-	}
+	}*/
 		
 	@Valid
 	public List<Location> getSourceLocations() throws SBOLGraphException {
@@ -186,7 +135,7 @@ public class SubComponent extends FeatureWithLocation{
 	}
 	
 	public Cut createSourceCut(int at, Sequence sequence) throws SBOLGraphException {
-		return createCut(at, sequence,  DataModel.SubComponent.sourceLocation, merge(getCuts(), getSourceCuts()));
+		return createCut(at, sequence,  DataModel.SubComponent.sourceLocation);
 	}
 	
 	public Range createSourceRange(URI uri, int start, int end, Sequence sequence) throws SBOLGraphException {
@@ -198,25 +147,34 @@ public class SubComponent extends FeatureWithLocation{
 	}
 	
 	public Range createSourceRange(int start, int end, Sequence sequence) throws SBOLGraphException {
-		return createRange(start, end, sequence, DataModel.SubComponent.sourceLocation, merge(getRanges(), getSourceRanges()));
+		return createRange(start, end, sequence, DataModel.SubComponent.sourceLocation);
 	}
 	
-	public EntireSequence createSourceEntireSequence(URI uri, int start, int end, Sequence sequence) throws SBOLGraphException {
-		return createEntireSequence(uri, start, end, sequence, DataModel.SubComponent.sourceLocation);
+	public EntireSequence createSourceEntireSequence(URI uri, Sequence sequence) throws SBOLGraphException {
+		return createEntireSequence(uri, sequence, DataModel.SubComponent.sourceLocation);
 	}
 	
-	public EntireSequence createSourceEntireSequence(String displayId, int start, int end, Sequence sequence) throws SBOLGraphException {
-		return createEntireSequence(displayId, start, end, sequence, DataModel.SubComponent.sourceLocation);	
+	public EntireSequence createSourceEntireSequence(String displayId,Sequence sequence) throws SBOLGraphException {
+		return createEntireSequence(displayId, sequence, DataModel.SubComponent.sourceLocation);	
 	}
 	
-	public EntireSequence createSourceEntireSequence(int start, int end, Sequence sequence) throws SBOLGraphException {
-		return createEntireSequence(start, end, sequence, DataModel.SubComponent.sourceLocation, merge(getEntireSequences(), getSourceEntireSequences()) );
+	public EntireSequence createSourceEntireSequence(Sequence sequence) throws SBOLGraphException {
+		return createEntireSequence(sequence, DataModel.SubComponent.sourceLocation);
 	}
-
 	
 	@Override
 	public URI getResourceType() {
 		return DataModel.SubComponent.uri;
+	}
+	
+	@Override
+	public URI getDefaultLocationProperty() {
+		return DataModel.SubComponent.location;
+	}
+	
+	@Override
+	public List<URI> getAdditionalLocationProperties() {
+		return new ArrayList<URI>(Arrays.asList(DataModel.SubComponent.sourceLocation));
 	}
 	
 	@Override

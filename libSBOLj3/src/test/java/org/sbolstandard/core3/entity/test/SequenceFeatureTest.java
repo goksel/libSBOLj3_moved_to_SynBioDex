@@ -27,10 +27,8 @@ public class SequenceFeatureTest extends TestCase {
 		
 		Sequence seq= gfp.getSequences().get(0);
 		
-		RangeLocationBuilder location=new RangeLocationBuilder(1, 3, seq);
-		SequenceFeature feature=gfp.createSequenceFeature(Arrays.asList(location));
-		
-		
+		SequenceFeature feature=gfp.createSequenceFeature(1, 3, seq);
+			
 		TestUtil.serialise(doc, "entity_additional/sequencefeature", "sequencefeature");
 	    System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
 	    TestUtil.assertReadWrite(doc); 

@@ -2,6 +2,7 @@ package org.sbolstandard.core3.entity;
 
 import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 
@@ -12,6 +13,7 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Orientation;
 
@@ -38,6 +40,14 @@ public abstract class  Location extends Identified {
 		super(displayId);
 	}*/
 
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.Location.sequence, this.resource, getSequence(), validationMessages);
+		return validationMessages;
+	}
+	
 	public Orientation getOrientation() throws SBOLGraphException{
 		Orientation orientation=null;
 		URI value=IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.orientation);

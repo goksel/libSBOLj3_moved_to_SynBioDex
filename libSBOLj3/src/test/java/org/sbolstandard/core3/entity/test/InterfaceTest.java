@@ -77,7 +77,15 @@ public class InterfaceTest extends TestCase {
 	    compInterface.setNonDirectionals(Arrays.asList(aTCSubComponent));  
 	    TestUtil.validateIdentified(compInterface,doc,0);
 	 
+	    //SBOL_VALID_ENTITY_TYPES - Component.interface
+	    Resource resLacIProducer= TestUtil.getResource(LacIProducer);
         
+	    URI tempURI=LacIProducer.getInterface().getUri();
+	  	RDFUtil.setProperty(resLacIProducer, DataModel.Component.hasInterface, LacIProducer.getUri());
+	  	TestUtil.validateIdentified(LacIProducer,doc,1);
+	  	RDFUtil.setProperty(resLacIProducer, DataModel.Component.hasInterface, tempURI);
+	  	TestUtil.validateIdentified(LacIProducer,doc,0);
+	    
     }
 
 }

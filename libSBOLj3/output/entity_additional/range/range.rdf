@@ -14,14 +14,14 @@
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="i13504/SubComponent1">
             <sbol:hasLocation>
-               <sbol:Range rdf:about="i13504/SubComponent1/SubComponent1">
+               <sbol:Range rdf:about="i13504/SubComponent1/Range1">
                   <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
                   <sbol:end>80</sbol:end>
                   <sbol:start>1</sbol:start>
                   <sbol:hasSequence>
                      <sbol:Sequence rdf:about="i13504_Sequence1"/>
                   </sbol:hasSequence>
-                  <sbol:displayId>SubComponent1</sbol:displayId>
+                  <sbol:displayId>Range1</sbol:displayId>
                </sbol:Range>
             </sbol:hasLocation>
             <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>

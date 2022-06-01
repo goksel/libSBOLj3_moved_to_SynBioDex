@@ -6,13 +6,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.*;
 
 import junit.framework.TestCase;
@@ -31,16 +34,20 @@ public class ParticipantTest extends TestCase {
         SubComponent gfpSubComponent=SBOLAPI.appendComponent(doc, device,gfp, Orientation.inline);
 		
         Component i13504_system=SBOLAPI.createComponent(doc,"i13504_system", ComponentType.DNA.getUrl(), "i13504 system", null, Role.FunctionalCompartment);
-		Component GFP=SBOLAPI.createComponent(doc, "GFP_protein", ComponentType.Protein.getUrl(), "GFP", "GFP", null); 
+		Component GFP=SBOLAPI.createComponent(doc, "GFP_protein", ComponentType.Protein.getUrl(), "GFP", "GFP", null);//MSKGEELFTG 
 		SubComponent i13504SubComponent=SBOLAPI.addSubComponent(i13504_system, device);
 		SubComponent gfpProteinSubComponent=SBOLAPI.addSubComponent(i13504_system, GFP);
+		Sequence seqGfpStart=doc.createSequence("gfp_start");
+		SequenceFeature sf=gfp.createSequenceFeature(seqGfpStart);
+		
+		
 		
         ComponentReference gfpCDSReference=i13504_system.createComponentReference(gfpSubComponent, i13504SubComponent);
 		
         Interaction interaction= i13504_system.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
        
-        Participation participation= interaction.createParticipation(Arrays.asList(ParticipationRole.Template), gfpCDSReference.getUri());
-		interaction.createParticipation(Arrays.asList(ParticipationRole.Product), gfpProteinSubComponent.getUri());
+        Participation participation= interaction.createParticipation(Arrays.asList(ParticipationRole.Template), gfpCDSReference);
+		interaction.createParticipation(Arrays.asList(ParticipationRole.Product), gfpProteinSubComponent);
 	    
 		
 		Interaction interaction2= i13504_system.createInteraction(Arrays.asList(InteractionType.Inhibition));
@@ -67,7 +74,7 @@ public class ParticipantTest extends TestCase {
 	    TestUtil.validateIdentified(participation,doc,1);
 	    
 	    //PARTICIPANT_MUST_HAVE_ONE_PARTICIPANT_OR_HIGHERORDERPARTICIPANT
-	    URI temp=participation.getParticipant();
+	    Feature temp=participation.getParticipant();
 	    participation.setParticipant(null);
 	    TestUtil.validateIdentified(participation,doc,2);
 	    
@@ -83,8 +90,18 @@ public class ParticipantTest extends TestCase {
 	    participation.setRoles(tempRoles);
 	    TestUtil.validateIdentified(participation,doc,0);
 	    
+	    Resource resource = TestUtil.getResource(participation);
+		
+	    //SBOL_VALID_ENTITY_TYPES - Participation.Feature
+	    Feature participant=participation.getParticipant();
+	  	RDFUtil.setProperty(resource, DataModel.Participation.participant, Arrays.asList(participant.getUri(), inhibitor.getUri()));
+	  	TestUtil.validateIdentified(participant,doc,1);
+	  	participation.setParticipant(participant);
+	  	TestUtil.validateIdentified(participant,doc,0);		
+	  		
+	  		
 	    //PARTICIPANT_PARTICIPANT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT
-	    participation.setParticipant(URI.create("http://someinvalidparticipant.org"));
+	    participation.setParticipant(sf);
 	    TestUtil.validateIdentified(i13504_system,doc, 1);
 	    
 	    participation.setParticipant(temp);
