@@ -27,7 +27,7 @@ public class RangeTest extends TestCase {
 		SBOLAPI.addSequence(doc, device, Encoding.NucleicAcid, "");
 		
 		Component term=SBOLAPI.createDnaComponent(doc, "B0015", "terminator", "B0015 double terminator", Role.Terminator,term_na);
-		SubComponent termSubComponent=device.createSubComponent(term.getUri());
+		SubComponent termSubComponent=device.createSubComponent(term);
 		termSubComponent.setOrientation(Orientation.inline);
 		
 		Sequence i13504Sequence= device.getSequences().get(0);

@@ -50,7 +50,7 @@ public class AttachmentTest extends TestCase {
         
         Implementation impl=doc.createImplementation("impl1");
         impl.setComponent(TetR_protein);
-        impl.setAttachments(Arrays.asList(attachment.getUri()));
+        impl.setAttachments(Arrays.asList(attachment));
         
         TestUtil.serialise(doc, "entity/attachment", "attachment");
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));

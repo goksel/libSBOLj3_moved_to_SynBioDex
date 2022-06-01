@@ -84,7 +84,7 @@ public class GettingStartedTutorial {
 		Component term=SBOLAPI.createDnaComponent(doc, "B0015", "terminator", "B0015 double terminator", Role.Terminator,term_na);
 		
 		//Add the terminator as a subcomponent. This time we will be using low level API methods, which can be used to create features and locations.
-		SubComponent termSubComponent=device.createSubComponent(term.getUri());
+		SubComponent termSubComponent=device.createSubComponent(term);
 		termSubComponent.setOrientation(Orientation.inline);
 		//Sequence i13504Sequence= doc.getIdentified(device.getSequences().get(0),Sequence.class);
 		Sequence i13504Sequence= device.getSequences().get(0);
@@ -105,7 +105,7 @@ public class GettingStartedTutorial {
 		System.out.println("Subcomponents:");
 		for (SubComponent subComp: device.getSubComponents())
 		{
-			System.out.println(subComp.getIsInstanceOf());
+			System.out.println(subComp.getInstanceOf());
 		}
 
 		//Search for components using the SPARQL graph query language.

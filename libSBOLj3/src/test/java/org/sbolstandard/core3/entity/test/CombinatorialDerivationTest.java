@@ -25,7 +25,7 @@ public class CombinatorialDerivationTest extends TestCase {
 		SBOLDocument doc=new SBOLDocument(base);
 		
 		
-		Component pTetR=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_R0040"), "pTetR", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
+		Component pTetR=SBOLAPI.createDnaComponent(doc, "BBa_R0040", "pTetR", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
 		CombinatorialDerivation cd=doc.createCombinatorialDerivation("cs1", pTetR);
 		
 		
@@ -53,30 +53,29 @@ public class CombinatorialDerivationTest extends TestCase {
 		RDFUtil.setProperty(resource, DataModel.CombinatorialDerivation.template, pTetR.getUri());
 		TestUtil.validateIdentified(cd,doc,0);
 		
+        Component start=SBOLAPI.createDnaComponent(doc, "BBa_R0040_start", "pTetR_start", "promoter_start", Role.EngineeredRegion, "tccctat");
 		
+        SubComponent startFeature=pTetR.createSubComponent(start);
+        SubComponent startCodonFeature=pTetR.createSubComponent(start);
         
-        
-        Component start=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_R0040_start"), "pTetR_start", "promoter_start", Role.EngineeredRegion, "tccctat");
-		
-        pTetR.createSubComponent(start.getUri());
-        VariableFeature vf=cd.createVariableFeature(VariableFeatureCardinality.One,start.getUri());
+        VariableFeature vf=cd.createVariableFeature(VariableFeatureCardinality.One,startFeature);
         
         TestUtil.validateProperty(vf, "setCardinality", new Object[] {null}, VariableFeatureCardinality.class);
         vf.setCardinality(null);
         TestUtil.validateIdentified(vf, doc, 1);
         
-        TestUtil.validateProperty(vf, "setVariable", new Object[] {null}, URI.class);
+        TestUtil.validateProperty(vf, "setVariable", new Object[] {null}, Feature.class);
         vf.setVariable(null);
         TestUtil.validateIdentified(vf, doc, 2);
         
         vf.setCardinality(VariableFeatureCardinality.One);
-        vf.setVariable(start.getUri());
-       TestUtil.validateIdentified(vf, doc, 0);
+        vf.setVariable(startFeature);
+        TestUtil.validateIdentified(vf, doc, 0);
         
         cd.setStrategy(CombinatorialDerivationStrategy.Enumerate);
         TestUtil.validateIdentified(vf, doc, 0);
         
-       TestUtil.validateReturnValue(cd, "toStrategy", new Object[] {URI.create("http://sbols.org/v3#InvalidStrategy")}, URI.class);
+        TestUtil.validateReturnValue(cd, "toStrategy", new Object[] {URI.create("http://sbols.org/v3#InvalidStrategy")}, URI.class);
         
         cd.setStrategy(CombinatorialDerivationStrategy.Enumerate);
         vf.setCardinality(VariableFeatureCardinality.OneOrMore);
@@ -84,24 +83,18 @@ public class CombinatorialDerivationTest extends TestCase {
         vf.setCardinality(VariableFeatureCardinality.One);
         TestUtil.validateIdentified(cd, doc, 0);
         
-        VariableFeature vf2=cd.createVariableFeature(VariableFeatureCardinality.One,start.getUri());
+        VariableFeature vf2=cd.createVariableFeature(VariableFeatureCardinality.One,startFeature);
         TestUtil.validateIdentified(cd, doc, 1);
-        VariableFeature vf3=cd.createVariableFeature(VariableFeatureCardinality.One,pTetR.getUri());
-        VariableFeature vf4=cd.createVariableFeature(VariableFeatureCardinality.One,pTetR.getUri());
-        TestUtil.validateIdentified(cd, doc, 2);
+        VariableFeature vf4=cd.createVariableFeature(VariableFeatureCardinality.One,startCodonFeature);
+        
+        //SBOL_VALID_ENTITY_TYPES - VariableFeature.Variable
+        //VARIABLEFEATURE_FEATURE_NOT_NULL
+        Resource resvf3= TestUtil.getResource(vf4);
+        RDFUtil.setProperty(resvf3, DataModel.VariableFeature.variable, pTetR.getUri());
+        TestUtil.validateIdentified(cd, doc, 3);
         
         TestUtil.validateReturnValue(vf4, "toCardinality", new Object[] {URI.create("http://invalidcardinality.org")}, URI.class);
         TestUtil.validateReturnValue(false, vf4, "toCardinality", new Object[] {VariableFeatureCardinality.One.getUri()}, URI.class);
-        
-        
-          
-        
-        
-        
-        
-        
-        
- 	   
     }
 
 }

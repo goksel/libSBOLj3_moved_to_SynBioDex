@@ -97,7 +97,7 @@ public class SBOLAPI {
 	    	//If not DNA and there is no subComponent yet, add a subcomponent for the child
 	    	if ((subComponents==null || subComponents.size()==0) && !child.getTypes().contains(ComponentType.DNA.getUrl()))
 	    	{
-	    		SubComponent subComponent=parent.createSubComponent(child.getUri());
+	    		SubComponent subComponent=parent.createSubComponent(child);
 		    	if (subComponents==null)
 		    	{
 		    		subComponents=new ArrayList<SubComponent>();
@@ -115,7 +115,7 @@ public class SBOLAPI {
 		    {
 		    	for (SubComponent feature: features)
 		    	{
-		    		if (feature.getIsInstanceOf().equals(child.getUri()))
+		    		if (feature.getInstanceOf().equals(child.getUri()))
 		    		{
 		    			if (found==null)
 		    			{
@@ -288,7 +288,7 @@ public class SBOLAPI {
 	    
 	    public static SubComponent appendComponent(SBOLDocument document, Component parent, Component child, Orientation orientation) throws SBOLGraphException 
 	    {
-	    	SubComponent subComponent=parent.createSubComponent(child.getUri());
+	    	SubComponent subComponent=parent.createSubComponent(child);
 	    	subComponent.setOrientation(orientation);
 	    	if (child.getSequences()!=null && child.getSequences().size()>0)
 	    	{
@@ -406,16 +406,6 @@ public class SBOLAPI {
 	    	return locationBuilder;
 	    }*/
 	    
-	    public static Component createDnaComponent(SBOLDocument doc, URI uri, String name, String description, URI role, String sequence) throws SBOLGraphException
-	    {
-	    	Component dna=createComponent(doc, uri, ComponentType.DNA.getUrl(), name, description, role);
-	    	if (sequence!=null && sequence.length()>0)
-	    	{
-	    		createSequence(doc, dna, Encoding.NucleicAcid, sequence);
-	    	}
-	    	return dna;
-	    }
-	    
 	    public static Component createDnaComponent(SBOLDocument doc, String displayId, String name, String description, URI role, String sequence) throws SBOLGraphException
 	    {
 	    	Component dna=createComponent(doc, displayId, ComponentType.DNA.getUrl(), name, description, role);	
@@ -426,10 +416,10 @@ public class SBOLAPI {
 	    	return dna;
 	    }
 	    
-	    public static Component createProteinComponent(SBOLDocument doc, Component container, URI uri, String name, String description, URI role, String sequence) throws SBOLGraphException
+	    public static Component createProteinComponent(SBOLDocument doc, Component container, String displayId, String name, String description, URI role, String sequence) throws SBOLGraphException
 	    {
-	    	Component protein=createComponent(doc, uri, ComponentType.Protein.getUrl(), name, description, role);
-	    	container.createSubComponent(protein.getUri());
+	    	Component protein=createComponent(doc, displayId, ComponentType.Protein.getUrl(), name, description, role);
+	    	container.createSubComponent(protein);
 	    	if (sequence!=null && sequence.length()>0)
 	    	{
 	    		createSequence(doc, protein, Encoding.AminoAcid, sequence);
@@ -440,7 +430,7 @@ public class SBOLAPI {
 	    
 	    public static SubComponent addSubComponent(Component parent, Component child) throws SBOLGraphException
 	    {
-	    	SubComponent subComponent=parent.createSubComponent(child.getUri());
+	    	SubComponent subComponent=parent.createSubComponent(child);
 	    	return subComponent;
 	    }
 	    
@@ -749,13 +739,13 @@ public class SBOLAPI {
 					{
 						for (SubComponent comp:compDef.getSubComponents())
 						{
-							if (comp.getIsInstanceOf()!=null)
+							if (comp.getInstanceOf()!=null)
 							{
 								if (childNodes==null)
 								{
 									childNodes=new HashSet<URI>();
 								}
-								childNodes.add(comp.getIsInstanceOf());
+								childNodes.add(comp.getInstanceOf().getUri());
 							}
 						}
 					}

@@ -70,7 +70,6 @@ public class LocalSubComponentTest extends TestCase {
 		RDFUtil.setProperty(resource, lsComponent.getDefaultLocationProperty(), tempURIs);
 		TestUtil.validateIdentified(lsComponent,doc,0);
 		
-
     }	
 	
 }

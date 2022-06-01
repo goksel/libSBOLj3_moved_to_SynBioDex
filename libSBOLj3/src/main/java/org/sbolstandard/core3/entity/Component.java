@@ -64,11 +64,11 @@ public class Component extends TopLevel {
 		{
 			for (SubComponent subComponent: subComponents)
 			{
-				ValidationMessage message = new ValidationMessage("{SUBCOMPONENT_INSTANCEOF_MUST_NOT_REFER_ITS_PARENT}", DataModel.Component.feature,subComponent, subComponent.getIsInstanceOf());
+				ValidationMessage message = new ValidationMessage("{SUBCOMPONENT_INSTANCEOF_MUST_NOT_REFER_ITS_PARENT}", DataModel.Component.feature,subComponent, subComponent.getInstanceOf());
 				message.childPath(DataModel.SubComponent.instanceOf);
-				validationMessages= IdentifiedValidator.assertNotEqual(this, validationMessages, subComponent.getIsInstanceOf(), this.getUri(), message);			
+				validationMessages= IdentifiedValidator.assertNotEqual(this, validationMessages, subComponent.getInstanceOf(), this, message);			
+				//validationMessages= IdentifiedValidator.assertNotEqual(this, validationMessages, subComponent.getIsInstanceOf().getUri(), this.getUri(), message);			
 				
-				//validationMessages=IdentifiedValidator.assertNotEqual(this,validationMessages, subComponent.getIsInstanceOf(), this.getUri(), "{SUBCOMPONENT_INSTANCEOF_MUST_NOT_REFER_ITS_PARENT}", DataModel.SubComponent.instanceOf);
 			}
 		}
 		
@@ -267,20 +267,20 @@ public class Component extends TopLevel {
 		return subComponents;*/
 	}
 	
-	public SubComponent createSubComponent(URI uri, URI isInstanceOf) throws SBOLGraphException
+	public SubComponent createSubComponent(URI uri, Component isInstanceOf) throws SBOLGraphException
 	{
 		SubComponent feature = new SubComponent(this.resource.getModel(), uri);
-		feature.setIsInstanceOf(isInstanceOf);
+		feature.setInstanceOf(isInstanceOf);
 		addToList(feature, DataModel.Component.feature);
 		return feature;	
 	}
 	
-	private SubComponent createSubComponent(String displayId, URI isInstanceOf) throws SBOLGraphException
+	private SubComponent createSubComponent(String displayId, Component isInstanceOf) throws SBOLGraphException
 	{
 		return createSubComponent(SBOLAPI.append(this.getUri(), displayId), isInstanceOf);
 	}
 	
-	public SubComponent createSubComponent(URI isInstanceOf) throws SBOLGraphException
+	public SubComponent createSubComponent(Component isInstanceOf) throws SBOLGraphException
 	{
 		String displayId=SBOLAPI.createLocalName(DataModel.SubComponent.uri, getSubComponents());
 		return createSubComponent(displayId, isInstanceOf);

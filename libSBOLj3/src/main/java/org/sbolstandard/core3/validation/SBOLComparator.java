@@ -605,7 +605,7 @@ public class SBOLComparator {
 			output = add(output, assertEqualFeature(entity1, entity2));
 		//TODO: assertEqualLocations(entity1, entity2, entity1.getLocations(),entity2.getLocations(), DataModel.SubComponent.location);
 		//TODO: assertEqualLocations(entity1, entity2, entity1.getSourceLocations(),entity2.getSourceLocations(), DataModel.SubComponent.sourcelocation);
-			output = add(output, assertEqual(entity1, entity2, entity1.getIsInstanceOf(),entity2.getIsInstanceOf(), DataModel.SubComponent.instanceOf));
+			output = add(output, assertEqual(entity1, entity2, entity1.getInstanceOf(),entity2.getInstanceOf(), DataModel.SubComponent.instanceOf));
 			output = add(output, assertEqualEnum(entity1, entity2, entity1.getRoleIntegration(),entity2.getRoleIntegration(), DataModel.SubComponent.roleIntegration));		
 		}
 		return output;
@@ -779,7 +779,7 @@ public class SBOLComparator {
 		StringBuilder output=null;
 		output = add(output, assertEqual((Identified)topLevel1, (Identified)topLevel2));	
 		output = add(output, assertEqual(topLevel1,topLevel2, topLevel1.getNamespace(), topLevel2.getNamespace(), DataModel.TopLevel.namespace));	
-		output = add(output, assertEqual(topLevel1, topLevel2, topLevel1.getAttachments(),topLevel2.getAttachments(), DataModel.TopLevel.attachment));
+		output = add(output, assertEqual(topLevel1, topLevel2, SBOLUtil.getURIs(topLevel1.getAttachments()),SBOLUtil.getURIs(topLevel2.getAttachments()), DataModel.TopLevel.attachment));
 		return output;
 	}
 	

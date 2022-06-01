@@ -43,7 +43,7 @@ public class ComponentTest extends TestCase {
 		URI base=URI.create("https://synbiohub.org/public/igem/");
 		SBOLDocument doc=new SBOLDocument(base);
 		
-		Component popsReceiver=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_F2620"), "BBa_F2620", "PoPS Receiver", Role.EngineeredGene, null); 
+		Component popsReceiver=SBOLAPI.createDnaComponent(doc, "BBa_F2620", "BBa_F2620", "PoPS Receiver", Role.EngineeredGene, null); 
 	    TestUtil.serialise(doc, "entity_additional/component", "component");
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
@@ -54,7 +54,7 @@ public class ComponentTest extends TestCase {
 		//Component.hasSequence can have zero values
 		TestUtil.validateIdentified(popsReceiver,doc,0);
 		
-		Component pTetR=SBOLAPI.createDnaComponent(doc, URI.create("https://synbiohub.org/public/igem/BBa_R0040"), "pTetR", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
+		Component pTetR=SBOLAPI.createDnaComponent(doc, "BBa_R0040", "pTetR", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
 		TestUtil.validateIdentified(pTetR,doc,0);
 		
 		//Component.hasSequence can have multiple values
@@ -117,7 +117,7 @@ public class ComponentTest extends TestCase {
 	    attachment.setFormat(ModelLanguage.SBML);
 	    attachment.setSize(OptionalLong.of(1000));
 	    
-	    pTetR.setAttachments(Arrays.asList(attachment.getUri()));
+	    pTetR.setAttachments(Arrays.asList(attachment));
 	    TestUtil.validateIdentified(pTetR,doc,0);
 	    attachment.setSize(OptionalLong.of(-1));
 	    TestUtil.validateDocument(doc,1);

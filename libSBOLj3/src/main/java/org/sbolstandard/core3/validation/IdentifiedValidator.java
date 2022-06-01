@@ -189,12 +189,19 @@ public class IdentifiedValidator {
 
 		return messages;
 	}
-
+	
 	public static <T extends Identified> List<ValidationMessage> assertNotEqual(Identified identified, List<ValidationMessage> messages, URI uri1, URI uri2, ValidationMessage message) {
 		if (uri1 != null && uri2 != null && uri1.equals(uri2)) {
 			messages = identified.addToValidations(messages, message);
 		}
 
+		return messages;
+	}
+
+	public static <T extends Identified> List<ValidationMessage> assertNotEqual(Identified identified, List<ValidationMessage> messages, Identified identified1, Identified identified2, ValidationMessage message) {
+		if (identified1 != null && identified2 != null) {
+			return assertNotEqual(identified, messages, identified1.getUri(), identified2.getUri(), message);
+		}
 		return messages;
 	}
 

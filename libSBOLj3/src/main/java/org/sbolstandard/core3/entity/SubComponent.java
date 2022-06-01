@@ -12,6 +12,7 @@ import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.entity.Location.LocationFactory;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
@@ -54,7 +55,11 @@ public class SubComponent extends FeatureWithLocation{
 				validationMessages= addToValidations(validationMessages,new ValidationMessage("{SUBCOMPONENT_ROLEINTEGRATION_NOT_NULL_IF_ROLES_EXIST}", DataModel.SubComponent.roleIntegration));      	
 			}
 		}
-    	return validationMessages;
+		
+		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.SubComponent.instanceOf, this.resource, this.getInstanceOf(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.SubComponent.sourceLocation, this.resource, getSourceLocations(), validationMessages);
+
+		return validationMessages;
 	}
 	
 	public RoleIntegration getRoleIntegration() throws SBOLGraphException {		
@@ -85,13 +90,14 @@ public class SubComponent extends FeatureWithLocation{
 	
 
 	@NotNull(message = "{SUBCOMPONENT_ISINSTANCEOF_NOT_NULL}")
-	public URI getIsInstanceOf() throws SBOLGraphException {
-		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.instanceOf);
+	public Component getInstanceOf() throws SBOLGraphException {
+		//return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.instanceOf);
+		return contsructIdentified(DataModel.SubComponent.instanceOf, Component.class, DataModel.Component.uri);
 	}
 
-	public void setIsInstanceOf(@NotNull(message = "{SUBCOMPONENT_ISINSTANCEOF_NOT_NULL}") URI isInstanceOf) throws SBOLGraphException {
-		PropertyValidator.getValidator().validate(this, "setIsInstanceOf", new Object[] {isInstanceOf}, URI.class);
-		RDFUtil.setProperty(this.resource, DataModel.SubComponent.instanceOf, isInstanceOf);	
+	public void setInstanceOf(@NotNull(message = "{SUBCOMPONENT_ISINSTANCEOF_NOT_NULL}") Component isInstanceOf) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setInstanceOf", new Object[] {isInstanceOf}, Component.class);
+		RDFUtil.setProperty(this.resource, DataModel.SubComponent.instanceOf, SBOLUtil.toURI(isInstanceOf));	
 	}
 	
 	

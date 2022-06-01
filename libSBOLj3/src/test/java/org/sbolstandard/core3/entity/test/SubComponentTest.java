@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Optional;
+
+import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.entity.Location.LocationBuilder;
@@ -11,6 +13,7 @@ import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
@@ -27,7 +30,7 @@ public class SubComponentTest extends TestCase {
 		SBOLAPI.addSequence(doc, device, Encoding.NucleicAcid, "");
 		
 		Component term=SBOLAPI.createDnaComponent(doc, "B0015", "terminator", "B0015 double terminator", Role.Terminator,term_na);
-		SubComponent termSubComponent=device.createSubComponent(term.getUri());
+		SubComponent termSubComponent=device.createSubComponent(term);
 		termSubComponent.setOrientation(Orientation.inline);
 		
 		RoleIntegration ri2=termSubComponent.getRoleIntegration();
@@ -52,8 +55,8 @@ public class SubComponentTest extends TestCase {
 	     
 	    TestUtil.validateIdentified(termSubComponent,doc,0);
 	    
-	    TestUtil.validateProperty(termSubComponent, "setIsInstanceOf", new Object[] {null}, URI.class);
-	    termSubComponent.setIsInstanceOf(null);	    
+	    TestUtil.validateProperty(termSubComponent, "setInstanceOf", new Object[] {null}, Component.class);
+	    termSubComponent.setInstanceOf(null);	    
 	    range.setEnd(Optional.empty());
 	    range2.setEnd(Optional.empty());
 	    TestUtil.validateIdentified(termSubComponent,doc,3);
@@ -67,11 +70,35 @@ public class SubComponentTest extends TestCase {
 	    termSubComponent.setRoles(Arrays.asList(URI.create("http://testrole.org")));
 	    TestUtil.validateIdentified(termSubComponent,doc,4);
 	    
-	    termSubComponent.setIsInstanceOf(term.getUri());
+	    termSubComponent.setInstanceOf(term);
 	    TestUtil.validateIdentified(device, 3);   
-	    termSubComponent.setIsInstanceOf(device.getUri());
+	    termSubComponent.setInstanceOf(device);
 	    TestUtil.validateIdentified(device, 4);
 	    
-	   
+	    //Clean the errors
+	    termSubComponent.setInstanceOf(term);
+	    TestUtil.validateIdentified(device, 3);
+	    range.setEnd(Optional.of(end));
+	    range2.setEnd(Optional.of(end));
+	    termSubComponent.setRoleIntegration(RoleIntegration.mergeRoles);
+	    TestUtil.validateIdentified(device, 0);
+	    
+	    
+	    Resource resource = TestUtil.getResource(termSubComponent);
+		
+	    //SBOL_VALID_ENTITY_TYPES - SubComponent.instanceOf
+	    Component instanceOf=termSubComponent.getInstanceOf();
+	  	RDFUtil.setProperty(resource, DataModel.SubComponent.instanceOf, Arrays.asList(instanceOf.getUri(), range.getUri()));
+	  	TestUtil.validateIdentified(termSubComponent,doc,1);
+	  	termSubComponent.setInstanceOf(term);
+	  	TestUtil.validateIdentified(termSubComponent,doc,0);	
+	  	
+	  	Cut cutSource=termSubComponent.createSourceCut(1, i13504Sequence);
+	  	RDFUtil.setProperty(resource, DataModel.SubComponent.sourceLocation, Arrays.asList(cutSource.getUri(), i13504Sequence.getUri()));
+	  	TestUtil.validateIdentified(termSubComponent,doc,1);
+	  	RDFUtil.setProperty(resource, DataModel.SubComponent.sourceLocation, Arrays.asList(cutSource.getUri()));
+	  	TestUtil.validateIdentified(termSubComponent,doc,0);	
+	  	
+	  
     }
 }

@@ -61,21 +61,24 @@ public class CombinatorialDerivation extends TopLevel{
 					}
 					
 					//COMBINATORIALDERIVATION_VARIABLEFEATURE_UNIQUE
-					Integer count=variableCount.get(variableFeature.getVariable());
-					if (count==null)
+					if (variableFeature.getVariable()!=null)
 					{
-						variableCount.put(variableFeature.getVariable(), 1);
-					}
-					else 
-					{
-						if (count==1)
+						Integer count=variableCount.get(variableFeature.getVariable().getUri());
+						if (count==null)
 						{
-							ValidationMessage message = new ValidationMessage("{COMBINATORIALDERIVATION_VARIABLEFEATURE_UNIQUE}", DataModel.CombinatorialDerivation.variableFeature,variableFeature,variableFeature.getVariable());
-							message.childPath(DataModel.VariableFeature.variable);
-							validationMessages= addToValidations(validationMessages,message);
+							variableCount.put(variableFeature.getVariable().getUri(), 1);
 						}
-						variableCount.put(variableFeature.getVariable(), count++);
-					}	
+						else 
+						{
+							if (count==1)
+							{
+								ValidationMessage message = new ValidationMessage("{COMBINATORIALDERIVATION_VARIABLEFEATURE_UNIQUE}", DataModel.CombinatorialDerivation.variableFeature,variableFeature,variableFeature.getVariable());
+								message.childPath(DataModel.VariableFeature.variable);
+								validationMessages= addToValidations(validationMessages,message);
+							}
+							variableCount.put(variableFeature.getVariable().getUri(), count++);
+						}	
+					}
 				}
 			}			
 		}
@@ -149,24 +152,24 @@ public class CombinatorialDerivation extends TopLevel{
 		return addToList(DataModel.CombinatorialDerivation.variableFeature, VariableFeature.class, DataModel.VariableFeature.uri);
 	}
 	
-	public VariableFeature createVariableFeature(URI uri, VariableFeatureCardinality cardinality, URI subComponent) throws SBOLGraphException
+	public VariableFeature createVariableFeature(URI uri, VariableFeatureCardinality cardinality, Feature variable) throws SBOLGraphException
 	{
 		VariableFeature variableComponent= new VariableFeature(this.resource.getModel(), uri);
 		variableComponent.setCardinality(cardinality);
-		variableComponent.setVariable(subComponent);
+		variableComponent.setVariable(variable);
 		addToList(variableComponent, DataModel.CombinatorialDerivation.variableFeature);
 		return variableComponent;	
 	}
 	
-	private VariableFeature createVariableFeature(String displayId, VariableFeatureCardinality cardinality, URI subComponent) throws SBOLGraphException
+	private VariableFeature createVariableFeature(String displayId, VariableFeatureCardinality cardinality, Feature variable) throws SBOLGraphException
 	{
-		return createVariableFeature(SBOLAPI.append(this.getUri(), displayId), cardinality, subComponent);	
+		return createVariableFeature(SBOLAPI.append(this.getUri(), displayId), cardinality, variable);	
 	}
 	
-	public VariableFeature createVariableFeature(VariableFeatureCardinality cardinality, URI subComponent) throws SBOLGraphException
+	public VariableFeature createVariableFeature(VariableFeatureCardinality cardinality, Feature variable) throws SBOLGraphException
 	{
 		String displayId=SBOLAPI.createLocalName(DataModel.VariableFeature.uri, getVariableFeatures());	
-		return createVariableFeature(displayId, cardinality, subComponent);	
+		return createVariableFeature(displayId, cardinality, variable);	
 	}
 
 	@Override

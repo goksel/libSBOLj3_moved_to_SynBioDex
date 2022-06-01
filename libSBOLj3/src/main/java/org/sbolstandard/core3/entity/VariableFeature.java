@@ -8,8 +8,10 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Orientation;
 import org.sbolstandard.core3.vocabulary.VariableFeatureCardinality;
@@ -35,6 +37,14 @@ public class VariableFeature extends Identified{
 		super(resource);
 	}
 	
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.VariableFeature.variable, this.resource, getVariable(), validationMessages);
+		return validationMessages;
+	}
+
 	@NotNull(message = "{VARIABLEFEATURE_CARDINALITY_NOT_NULL}")
 	public VariableFeatureCardinality getCardinality() throws SBOLGraphException {
 		VariableFeatureCardinality cardinality=null;
@@ -64,13 +74,14 @@ public class VariableFeature extends Identified{
 	}
 	
 	@NotNull(message = "{VARIABLEFEATURE_FEATURE_NOT_NULL}")
-	public URI getVariable() throws SBOLGraphException {
-		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableFeature.variable);	
+	public Feature getVariable() throws SBOLGraphException {
+		//return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.VariableFeature.variable);
+		return contsructIdentified(DataModel.VariableFeature.variable, Feature.getSubClassTypes());
 	}
 
-	public void setVariable(@NotNull(message = "{VARIABLEFEATURE_FEATURE_NOT_NULL}") URI feature) throws SBOLGraphException {
-		PropertyValidator.getValidator().validate(this, "setVariable", new Object[] {feature}, URI.class);
-		RDFUtil.setProperty(resource, DataModel.VariableFeature.variable, feature);
+	public void setVariable(@NotNull(message = "{VARIABLEFEATURE_FEATURE_NOT_NULL}") Feature feature) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setVariable", new Object[] {feature}, Feature.class);
+		RDFUtil.setProperty(resource, DataModel.VariableFeature.variable, SBOLUtil.toURI(feature));
 	}
 	
 	public List<URI> getVariants() {

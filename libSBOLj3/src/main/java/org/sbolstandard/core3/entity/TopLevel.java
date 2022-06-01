@@ -1,6 +1,7 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
@@ -76,18 +77,26 @@ public abstract class TopLevel extends Identified {
     			{
         		validationMessages= addToValidations(validationMessages,new ValidationMessage("{TOPLEVEL_URI_PATTERN}", DataModel.TopLevel.namespace, this.getNamespace()));      			
     			}
-    		}
-    		
+    		}	
     	}
+    	validationMessages= IdentifiedValidator.assertExists(this, DataModel.TopLevel.attachment, this.resource, getAttachments(), validationMessages);
     	return validationMessages;
 	}
 	
-	public List<URI> getAttachments() {
-		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.TopLevel.attachment);
+	public List<Attachment> getAttachments() throws SBOLGraphException {
+		//return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.TopLevel.attachment);
+		return addToList(DataModel.TopLevel.attachment, Attachment.class, DataModel.Attachment.uri);
+
+		
 	}
 	
-	public void setAttachments(List<URI> attachments) {
-		RDFUtil.setProperty(resource, DataModel.TopLevel.attachment, attachments);
+	public void setAttachments(List<Attachment> attachments) {
+		//RDFUtil.setProperty(resource, DataModel.TopLevel.attachment, attachments);
+		RDFUtil.setProperty(resource, DataModel.TopLevel.attachment, SBOLUtil.getURIs(attachments));
+	}
+	
+	public void setAttachments(Attachment... attachments) {
+		setAttachments(Arrays.asList(attachments));
 	}
 	
 	@NotNull(message = "{TOPLEVEL_NAMESPACE_NOT_NULL}")

@@ -35,7 +35,7 @@ public class ComponentReferenceTest extends TestCase {
 		Component simpleDevice=doc.createComponent("simpleDevice", Arrays.asList(ComponentType.DNA.getUrl())); 
 		SBOLAPI.addSequence(doc, simpleDevice, Encoding.NucleicAcid, "");
 		Component term=SBOLAPI.createDnaComponent(doc, "B0015", "terminator", "B0015 double terminator", Role.Terminator,term_na);
-		SubComponent termSubComponent=simpleDevice.createSubComponent(term.getUri());
+		SubComponent termSubComponent=simpleDevice.createSubComponent(term);
 		
 		
 		Component i13504_system=SBOLAPI.createComponent(doc,"i13504_system", ComponentType.DNA.getUrl(), "i13504 system", null, Role.FunctionalCompartment);

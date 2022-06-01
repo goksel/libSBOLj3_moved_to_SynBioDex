@@ -3,13 +3,19 @@ package org.sbolstandard.core3.entity.test;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
+import java.util.List;
 import java.util.OptionalLong;
+
+import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
@@ -58,11 +64,35 @@ public class TopLevelTest extends TestCase {
 	    attachment2.setNamespace(URI.create("https://sbolstandard.org/examples"));
 	    TestUtil.validateIdentified(attachment2,doc,0);
 	    
-	    //TOPLEVEL_URI_CANNOT_BE_USED_AS_A_PREFIX
 	    Attachment attachment3=doc.createAttachment(URI.create("https://sbolstandard.org/attachment3"), URI.create("https://sbolstandard.org"), URI.create("https://sbolstandard.org/local/attachment3"));
 	    TestUtil.validateDocument(doc,0); 
+	    attachment.setAttachments(attachment2,attachment3);
+	    TestUtil.validateDocument(doc,0);  
+		   
+	    
+	    Resource resource = TestUtil.getResource(attachment);
+		
+	    Component pTetR=SBOLAPI.createDnaComponent(doc, "BBa_R0040", "pTetR", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
+	    Component pLacI=SBOLAPI.createDnaComponent(doc, "pLacI", "pLacI", "LacI repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
+		
+	    TestUtil.validateDocument(doc,0);  
+		
+	    //SBOL_VALID_ENTITY_TYPES - TopLevel.attachments
+	  	List<URI> tempURIs=SBOLUtil.getURIs(attachment.getAttachments());
+	  	RDFUtil.setProperty(resource, DataModel.TopLevel.attachment, SBOLUtil.getURIs(doc.getComponents()));
+	  	TestUtil.validateIdentified(attachment,doc,1);
+	  	attachment.setAttachments(attachment2,attachment3);
+	  	TestUtil.validateIdentified(attachment,doc,0);		
+	  
+	  	
+	    
+	    //TOPLEVEL_URI_CANNOT_BE_USED_AS_A_PREFIX
 	    Attachment attachment4=doc.createAttachment(URI.create("https://sbolstandard.org/attachment3/withprefix"), URI.create("https://sbolstandard.org"), URI.create("https://sbolstandard.org/local/attachment4"));
-	    TestUtil.validateDocument(doc,1);  
+	    TestUtil.validateDocument(doc,1);
+	    
+	    
+	    
+	   		
     }
 
 }
