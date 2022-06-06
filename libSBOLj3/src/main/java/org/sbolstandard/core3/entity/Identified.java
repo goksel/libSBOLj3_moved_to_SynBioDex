@@ -18,6 +18,7 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.measure.Measure;
+import org.sbolstandard.core3.entity.measure.Unit;
 import org.sbolstandard.core3.entity.provenance.Activity;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
@@ -128,7 +129,7 @@ public abstract class Identified implements ValidatableSBOLEntity {
 		return addToList(DataModel.Identified.measure, Measure.class, MeasureDataModel.Measure.uri);
 	}
 	
-	public Measure createMeasure(URI uri, float value, URI unit) throws SBOLGraphException
+	public Measure createMeasure(URI uri, float value, Unit unit) throws SBOLGraphException
 	{
 		Measure measure = new Measure(this.resource.getModel(), uri) {};
 		measure.setValue(Optional.of(value));
@@ -137,7 +138,7 @@ public abstract class Identified implements ValidatableSBOLEntity {
 		return measure;	
 	}
 	
-	public Measure createMeasure(String displayId, float value, URI unit) throws SBOLGraphException
+	public Measure createMeasure(String displayId, float value, Unit unit) throws SBOLGraphException
 	{
 		return createMeasure(SBOLAPI.append(this.getUri(), displayId), value, unit);
 	}
@@ -240,7 +241,7 @@ public abstract class Identified implements ValidatableSBOLEntity {
 		return items;
 	}*/
 	
-	protected <T extends Identified>  T contsructIdentified(URI property, Class<T> identifiedClass) throws SBOLGraphException
+	protected <T extends Identified>  T contsructIdentified2(URI property, Class<T> identifiedClass) throws SBOLGraphException
 	{
 		T identified=null;
 		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property);
@@ -310,26 +311,19 @@ public abstract class Identified implements ValidatableSBOLEntity {
 	protected <T extends Identified>  T contsructIdentified(URI property, HashMap<URI, Class<T>> identifiedClassOptions) throws SBOLGraphException
 	{
 		T identified=null;
+		int numberOfMatchingResources=0;
 		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property);
-		if (resources!=null)
-		{
-			if (resources.size()==1)
-			{
-				Resource targetRes=resources.get(0);
-				if (identifiedClassOptions!=null) 
-				{
-					for (Entry<URI, Class<T>> entry: identifiedClassOptions.entrySet())
-					{
-						if (RDFUtil.hasType(targetRes.getModel(), targetRes, entry.getKey()))
-						{
-							identified=(T)createIdentified(targetRes, entry.getValue());
-							break;
-						}
+		if (resources!=null && identifiedClassOptions!=null){
+			for (Resource targetRes: resources) {
+				for (Entry<URI, Class<T>> entry: identifiedClassOptions.entrySet()){
+					if (RDFUtil.hasType(targetRes.getModel(), targetRes, entry.getKey())){
+						identified=(T)createIdentified(targetRes, entry.getValue());
+						numberOfMatchingResources++;
+						break;
 					}
 				}
 			}
-			else
-			{
+			if (numberOfMatchingResources>1){
 				String message=String.format("Multiple property values exist for the property %s. The entity URI:%s", property.toString(),this.resource.getURI());
 				throw new SBOLGraphException(message);
 			}

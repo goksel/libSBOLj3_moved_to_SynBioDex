@@ -876,4 +876,34 @@ public class TestUtil {
 		Resource resource = (Resource) resField.get(identified);
 		return resource;
 	}
+	
+	public static <T extends Identified, T2 extends Identified> void testValidEntity(SBOLDocument doc, Identified identified, List<T2> validChildIdentifieds, List<T> invalidChildIdentifieds, URI property) throws SBOLGraphException, Exception
+	{
+		Resource resource = TestUtil.getResource(identified);
+		List<URI> tempURIs=SBOLUtil.getURIs(validChildIdentifieds);
+		RDFUtil.setProperty(resource, property, SBOLUtil.getURIs(invalidChildIdentifieds));
+		TestUtil.validateIdentified(identified,doc,1);
+		RDFUtil.setProperty(resource, property, tempURIs);
+		TestUtil.validateIdentified(identified,doc,0);
+	}
+	
+	public static void testValidEntity(SBOLDocument doc, Identified identified, Identified validChildIdentified, Identified invalidChildIdentified, URI property) throws SBOLGraphException, Exception
+	{
+		Resource resource= TestUtil.getResource(identified);    
+		URI tempURI=validChildIdentified.getUri();
+		RDFUtil.setProperty(resource, property, invalidChildIdentified.getUri());
+		TestUtil.validateIdentified(identified,doc,1);
+		RDFUtil.setProperty(resource, property, tempURI);
+		TestUtil.validateIdentified(identified,doc,0);
+	}
+	
+	public static <T extends Identified> void testValidEntity(SBOLDocument doc, Identified identified, Identified validChildIdentified, List<T> invalidChildIdentifieds, URI property) throws SBOLGraphException, Exception
+	{
+		Resource resource= TestUtil.getResource(identified);    
+		URI tempURI=validChildIdentified.getUri();
+		RDFUtil.setProperty(resource, property, SBOLUtil.getURIs(invalidChildIdentifieds));
+		TestUtil.validateIdentified(identified,doc,1);
+		RDFUtil.setProperty(resource, property, tempURI);
+		TestUtil.validateIdentified(identified,doc,0);
+	}
 }

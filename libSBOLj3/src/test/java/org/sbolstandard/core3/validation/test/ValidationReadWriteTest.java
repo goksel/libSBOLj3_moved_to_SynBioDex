@@ -48,19 +48,19 @@ public class ValidationReadWriteTest extends TestCase {
         milli.setAlternativeSymbols(Arrays.asList("m1", "m2"));
         milli.setLongComment("This is an example long comment for the milli prefix.");
         
-        PrefixedUnit millimole=doc.createPrexiedUnit("millimole", "mmol", "millimole", mole.getUri(),milli.getUri());
+        PrefixedUnit millimole=doc.createPrexiedUnit("millimole", "mmol", "millimole", mole,milli);
         
-        UnitDivision milliMolePerLiter=doc.createUnitDivision("millimolePerLitre", "mmol/l", "millimolar", millimole.getUri(), liter.getUri());
+        UnitDivision milliMolePerLiter=doc.createUnitDivision("millimolePerLitre", "mmol/l", "millimolar", millimole, liter);
         
         //URI milliMolePerLiter=URINameSpace.OM.local("millimolePerLitre");
-        Measure measure=CaCl2.createMeasure(SBOLAPI.append(CaCl2.getUri(), "measure1"), 0.1f, milliMolePerLiter.getUri());
+        Measure measure=CaCl2.createMeasure(SBOLAPI.append(CaCl2.getUri(), "measure1"), 0.1f, milliMolePerLiter);
         measure.setTypes(Arrays.asList(URINameSpace.SBO.local("0000196"),URINameSpace.SBO.local("0000197")));
         
         SingularUnit kelvin=doc.createSingularUnit("kelvin", "kelvin", "kelvin");
-        UnitMultiplication um= doc.createUnitMultiplication("kelvinMole", "K mol", "kelvinMole", kelvin.getUri(), mole.getUri());
+        UnitMultiplication um= doc.createUnitMultiplication("kelvinMole", "K mol", "kelvinMole", kelvin, mole);
         
         SingularUnit meter=doc.createSingularUnit("meter", "m", "meter");
-        UnitExponentiation m3=doc.createUnitExponentiation("cubicMeter", "m3", "cubicMeter", meter.getUri(), 3);
+        UnitExponentiation m3=doc.createUnitExponentiation("cubicMeter", "m3", "cubicMeter", meter, 3);
         
         TestUtil.serialise(doc, "measurement_entity/measurement", "measurement");
         SBOLDocument doc2=SBOLIO.read(new File("output/measurement_entity/measurement/measurement.ttl"), SBOLFormat.TURTLE);

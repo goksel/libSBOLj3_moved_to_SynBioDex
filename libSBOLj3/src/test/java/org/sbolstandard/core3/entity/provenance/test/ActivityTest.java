@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
+
 import org.apache.jena.datatypes.xsd.XSDDateTime;
+import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.entity.provenance.*;
@@ -12,7 +15,9 @@ import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.SBOLComparator;
 import org.sbolstandard.core3.vocabulary.*;
 
@@ -52,20 +57,18 @@ public class ActivityTest extends TestCase {
         Usage usage2=activity.createUsage(toggleSwitchOptimised.getUri());
         usage2.setRoles(Arrays.asList(ParticipationRole.Product));
         
-        Association association=activity.createAssociation(agent.getUri());
-        association.setPlan(plan.getUri());
+        Association association=activity.createAssociation(agent);
+        association.setPlan(plan);
         association.setRoles(Arrays.asList(ActivityType.Design.getUrl()));
         
         toggleSwitchOptimised.setWasGeneratedBy(Arrays.asList(activity));
         toggleSwitchOptimised.setWasDerivedFrom(Arrays.asList(toggleSwitch.getUri()));
         
-        
-        
         Activity rbsactivity=doc.createActivity("RBS_optimisation_activity");
         rbsactivity.setTypes(Arrays.asList(ActivityType.Design.getUrl()));
         rbsactivity.setName("RBS optimization activity");
         rbsactivity.setDescription("An activity that is used to RBSs");
-        rbsactivity.setWasInformedBys(Arrays.asList(activity.getUri()));
+        rbsactivity.setWasInformedBys(Arrays.asList(activity));
         
        
         TestUtil.serialise(doc, "provenance_entity/activity", "activity");
@@ -82,14 +85,42 @@ public class ActivityTest extends TestCase {
         
         Configuration.getConfiguration().setValidateAfterSettingProperties(false);
 	            
-    	TestUtil.validateProperty(association, "setAgent", new Object[] {null}, URI.class); 
+    	TestUtil.validateProperty(association, "setAgent", new Object[] {null}, Agent.class); 
         TestUtil.validateProperty(usage1, "setEntity", new Object[] {null}, URI.class); 
         TestUtil.validateDocument(doc, 0);
         association.setAgent(null);
         TestUtil.validateIdentified(association,doc, 1);
         usage1.setEntity(null);
         TestUtil.validateIdentified(usage1,doc, 1,2);
+        
+        //Clean the errors.
+        association.setAgent(agent);
+        usage1.setEntity(toggleSwitch.getUri());
+        TestUtil.validateIdentified(usage1,doc, 0);
+        
+		//SBOL_VALID_ENTITY_TYPES - Activity.Usages
+		TestUtil.testValidEntity(doc, activity, activity.getUsages(),  activity.getAssociations(), ProvenanceDataModel.Activity.qualifiedUsage);
+		
+		//SBOL_VALID_ENTITY_TYPES - Activity.WasInformedBys
+		TestUtil.testValidEntity(doc, activity, activity.getWasInformedBys(), activity.getAssociations(), ProvenanceDataModel.Activity.wasInformedBy);
+		
+		//SBOL_VALID_ENTITY_TYPES - Activity.Associations
+		TestUtil.testValidEntity(doc, activity, activity.getAssociations(), activity.getUsages(), ProvenanceDataModel.Activity.qualifiedAssociation);
+		
+		//SBOL_VALID_ENTITY_TYPES - Activity.Associations
+		TestUtil.testValidEntity(doc, activity, activity.getAssociations(), activity.getUsages(), ProvenanceDataModel.Activity.qualifiedAssociation);
+		
+		//SBOL_VALID_ENTITY_TYPES - Association.Agent
+		TestUtil.testValidEntity(doc, association, association.getAgent(), Arrays.asList(association.getAgent(), toggleSwitch), ProvenanceDataModel.Association.agent);
+		
+		//SBOL_VALID_ENTITY_TYPES - Activity.Plans
+		TestUtil.testValidEntity(doc, association, association.getPlan(), Arrays.asList(association.getPlan(), toggleSwitch), ProvenanceDataModel.Association.plan);
+					
+
     }
+	
+	
+	
 	
 	private void printActivity(SBOLDocument document, Activity activity) throws SBOLGraphException
 	{
@@ -114,12 +145,12 @@ public class ActivityTest extends TestCase {
 				System.out.println("Association:");
 				printMetadata(association, 3);
 				System.out.println("   Agent:");
-				Agent agent=(Agent)document.getIdentified(association.getAgent(),Agent.class);
+				Agent agent=document.getIdentified(association.getAgent().getUri(),Agent.class);
 				printMetadata(agent, 6);
 				if (association.getPlan()!=null)
 				{
 					System.out.println("   Plan:");
-					Plan plan=(Plan)document.getIdentified(association.getPlan(),Plan.class);
+					Plan plan=association.getPlan();
 					printMetadata(plan, 6);
 				}	
 			}

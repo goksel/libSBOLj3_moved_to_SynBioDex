@@ -183,7 +183,6 @@ public class SBOLUtil {
 			}
 			return uris;
 		}
-	
 		
 	    public static URI toURI(Identified identified)
 	    {

@@ -57,6 +57,8 @@ public class CombinatorialDerivationTest extends TestCase {
 		
         SubComponent startFeature=pTetR.createSubComponent(start);
         SubComponent startCodonFeature=pTetR.createSubComponent(start);
+        SubComponent endCodonFeature=pTetR.createSubComponent(start);
+        
         
         VariableFeature vf=cd.createVariableFeature(VariableFeatureCardinality.One,startFeature);
         
@@ -89,12 +91,35 @@ public class CombinatorialDerivationTest extends TestCase {
         
         //SBOL_VALID_ENTITY_TYPES - VariableFeature.Variable
         //VARIABLEFEATURE_FEATURE_NOT_NULL
-        Resource resvf3= TestUtil.getResource(vf4);
-        RDFUtil.setProperty(resvf3, DataModel.VariableFeature.variable, pTetR.getUri());
+        Resource resvf4= TestUtil.getResource(vf4);
+        RDFUtil.setProperty(resvf4, DataModel.VariableFeature.variable, pTetR.getUri());
         TestUtil.validateIdentified(cd, doc, 3);
+        
+        //Clear the errors
+        vf4.setVariable(startCodonFeature);
+        vf2.setVariable(endCodonFeature);
+        TestUtil.validateIdentified(cd, doc, 0);
         
         TestUtil.validateReturnValue(vf4, "toCardinality", new Object[] {URI.create("http://invalidcardinality.org")}, URI.class);
         TestUtil.validateReturnValue(false, vf4, "toCardinality", new Object[] {VariableFeatureCardinality.One.getUri()}, URI.class);
+        
+        //SBOL_VALID_ENTITY_TYPES - VariableFeature.variantCollection
+        Resource resvf= TestUtil.getResource(vf4);
+        RDFUtil.setProperty(resvf, DataModel.VariableFeature.variantCollection, startCodonFeature.getUri());
+        RDFUtil.setProperty(resvf, DataModel.VariableFeature.variantDerivation, startCodonFeature.getUri());
+        RDFUtil.setProperty(resvf, DataModel.VariableFeature.variant, startCodonFeature.getUri());
+        RDFUtil.setProperty(resvf, DataModel.VariableFeature.variantMeasure, startCodonFeature.getUri());
+          
+        
+        TestUtil.validateIdentified(cd, doc, 4);
+        URI tmp=null;
+        RDFUtil.setProperty(resvf, DataModel.VariableFeature.variantCollection, tmp);
+        RDFUtil.setProperty(resvf, DataModel.VariableFeature.variantDerivation, tmp);
+        RDFUtil.setProperty(resvf, DataModel.VariableFeature.variant, tmp);
+        RDFUtil.setProperty(resvf, DataModel.VariableFeature.variantMeasure, tmp);
+        
+        TestUtil.validateIdentified(cd, doc, 0);
+    
     }
 
 }

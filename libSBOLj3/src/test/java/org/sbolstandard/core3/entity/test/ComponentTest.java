@@ -153,16 +153,7 @@ public class ComponentTest extends TestCase {
         Participation participation3= interaction3.createParticipation(SBOLAPI.append(base, "inhibitor_participation3"), Arrays.asList(ParticipationRole.Inhibitor), gfpProteinSubComponent);
         TestUtil.validateIdentified(popsReceiver, doc,4);
         TestUtil.validateIdentified(interaction3, 1);
-        
-        
-        
-        
-        
-		
-        
-       
-		   
-	    
+           
     }
 
 }

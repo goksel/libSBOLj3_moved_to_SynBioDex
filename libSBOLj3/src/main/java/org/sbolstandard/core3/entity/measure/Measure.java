@@ -8,12 +8,17 @@ import java.util.OptionalInt;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.ControlledIdentified;
+import org.sbolstandard.core3.entity.Feature;
+import org.sbolstandard.core3.entity.Interface;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
+import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -100,13 +105,14 @@ public class Measure extends ControlledIdentified{
 	}
 	*/
 	@NotNull(message = "{MEASURE_UNIT_NOT_NULL}")	
-	public URI getUnit() throws SBOLGraphException {
-		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.Measure.unit);	
+	public Unit getUnit() throws SBOLGraphException {
+		//return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.Measure.unit);	
+		return contsructIdentified(MeasureDataModel.Measure.unit, Unit.getSubClassTypes());
 	}
 
-	public void setUnit(@NotNull(message = "{MEASURE_UNIT_NOT_NULL}") URI unit) throws SBOLGraphException {
-		PropertyValidator.getValidator().validate(this, "setUnit", new Object[] {unit}, URI.class);
-		RDFUtil.setProperty(resource, MeasureDataModel.Measure.unit, unit);
+	public void setUnit(@NotNull(message = "{MEASURE_UNIT_NOT_NULL}") Unit unit) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setUnit", new Object[] {unit}, Unit.class);
+		RDFUtil.setProperty(resource, MeasureDataModel.Measure.unit, SBOLUtil.toURI(unit));
 	}
 
 	public List<URI> getTypes() {
@@ -121,5 +127,14 @@ public class Measure extends ControlledIdentified{
 	public URI getResourceType() {
 		return MeasureDataModel.Measure.uri;
 	}
+	
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		validationMessages= IdentifiedValidator.assertEquals(this, MeasureDataModel.Measure.unit, this.resource, getUnit(), validationMessages);
+		return validationMessages;
+	}
+
 	
 }

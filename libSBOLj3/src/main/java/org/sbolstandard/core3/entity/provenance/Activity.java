@@ -8,11 +8,15 @@ import org.apache.jena.datatypes.xsd.impl.XSDDateType;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
+import org.sbolstandard.core3.entity.Component;
 import org.sbolstandard.core3.entity.ControlledTopLevel;
 import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
+import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
 import jakarta.validation.Valid;
@@ -88,12 +92,13 @@ public class Activity extends ControlledTopLevel{
 		RDFUtil.setProperty(resource, ProvenanceDataModel.Activity.type, types);
 	}
 	
-	public List<URI> getWasInformedBys() {
-		return RDFUtil.getPropertiesAsURIs(this.resource, ProvenanceDataModel.Activity.wasInformedBy);
+	public List<Activity> getWasInformedBys() throws SBOLGraphException {
+		//return RDFUtil.getPropertiesAsURIs(this.resource, ProvenanceDataModel.Activity.wasInformedBy);
+		return addToList(ProvenanceDataModel.Activity.wasInformedBy, Activity.class, ProvenanceDataModel.Activity.uri);	
 	}
 	
-	public void setWasInformedBys(List<URI> wasInformedBys) {
-		RDFUtil.setProperty(resource, ProvenanceDataModel.Activity.wasInformedBy, wasInformedBys);
+	public void setWasInformedBys(List<Activity> wasInformedBys) {
+		RDFUtil.setProperty(resource, ProvenanceDataModel.Activity.wasInformedBy, SBOLUtil.getURIs(wasInformedBys));
 	}
 	
 	@Valid
@@ -120,7 +125,7 @@ public class Activity extends ControlledTopLevel{
 		return addToList(ProvenanceDataModel.Activity.qualifiedAssociation, Association.class, ProvenanceDataModel.Association.uri);
 	}
 	
-	public Association createAssociation(URI uri, URI agent) throws SBOLGraphException
+	public Association createAssociation(URI uri, Agent agent) throws SBOLGraphException
 	{
 		Association association= new Association(this.resource.getModel(), uri);
 		association.setAgent(agent);
@@ -128,7 +133,7 @@ public class Activity extends ControlledTopLevel{
 		return association;	
 	}
 	
-	public Association createAssociation(URI agent) throws SBOLGraphException
+	public Association createAssociation(Agent agent) throws SBOLGraphException
 	{
 		URI childUri=SBOLAPI.createLocalUri(this, ProvenanceDataModel.Association.uri, this.getAssociations());
 		return createAssociation(childUri, agent);	
@@ -145,5 +150,15 @@ public class Activity extends ControlledTopLevel{
 		identifieds=addToList(identifieds, this.getUsages());
 		identifieds=addToList(identifieds, this.getAssociations());
 		return identifieds;
+	}
+	
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		validationMessages= IdentifiedValidator.assertExists(this, ProvenanceDataModel.Activity.qualifiedUsage, this.resource, getUsages(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, ProvenanceDataModel.Activity.wasInformedBy, this.resource, getWasInformedBys(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, ProvenanceDataModel.Activity.qualifiedAssociation, this.resource, getAssociations(), validationMessages);
+		return validationMessages;
 	}
 }

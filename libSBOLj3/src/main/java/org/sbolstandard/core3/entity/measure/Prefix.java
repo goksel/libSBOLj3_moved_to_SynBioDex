@@ -1,10 +1,12 @@
 package org.sbolstandard.core3.entity.measure;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Optional;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
@@ -39,4 +41,13 @@ public abstract class Prefix extends Unit{
 	public URI getResourceType() {
 		return MeasureDataModel.Prefix.uri;
 	}	
+	
+	@SuppressWarnings("unchecked")
+	public static <T extends Identified> HashMap<URI, Class<T>> getSubClassTypes()
+	{
+		HashMap<URI, Class<T>> subclasses=new HashMap<URI, Class<T>>();
+		subclasses.put(MeasureDataModel.BinaryPrefix.uri, (Class<T>) BinaryPrefix.class);
+		subclasses.put(MeasureDataModel.SIPrefix.uri, (Class<T>) SIPrefix.class);
+		return subclasses;
+	}
 }

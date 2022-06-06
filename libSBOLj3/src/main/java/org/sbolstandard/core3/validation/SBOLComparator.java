@@ -328,7 +328,7 @@ public class SBOLComparator {
 		{
 			output = add(output,assertEqual(entity1, entity2));
 			output = add(output,assertEqual(entity1, entity2, entity1.getTypes(),entity2.getTypes(), ProvenanceDataModel.Activity.type));
-			output = add(output,assertEqual(entity1, entity2, entity1.getWasInformedBys(),entity2.getWasInformedBys(), ProvenanceDataModel.Activity.wasInformedBy));
+			output = add(output,assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getWasInformedBys()), SBOLUtil.getURIs(entity2.getWasInformedBys()), ProvenanceDataModel.Activity.wasInformedBy));
 			output = add(output,assertEqual(entity1, entity2, entity1.getEndedAtTime(),entity2.getEndedAtTime(), ProvenanceDataModel.Activity.endedAtTime));
 			output = add(output,assertEqual(entity1, entity2, entity1.getStartedAtTime(),entity2.getStartedAtTime(), ProvenanceDataModel.Activity.startedAtTime));
 			output = add(output,assertEqualEntity(entity1.getAssociations(), entity2.getAssociations()));
@@ -475,9 +475,10 @@ public class SBOLComparator {
 			output = add(output, assertEqual(entity1, entity2));
 			output = add(output, assertEqualEnum(entity1, entity2, entity1.getCardinality(),entity2.getCardinality(), DataModel.VariableFeature.cardinality));
 			output = add(output, assertEqual(entity1, entity2, entity1.getVariable(),entity2.getVariable(), DataModel.VariableFeature.variable));
-			output = add(output, assertEqual(entity1, entity2, entity1.getVariantCollections(),entity2.getVariantCollections(), DataModel.VariableFeature.variantCollection));
-			output = add(output, assertEqual(entity1, entity2, entity1.getVariantDerivations(),entity2.getVariantDerivations(), DataModel.VariableFeature.variantDerivation));
-			output = add(output, assertEqual(entity1, entity2, entity1.getVariants(),entity2.getVariants(), DataModel.VariableFeature.variant));	
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getVariantCollections()), SBOLUtil.getURIs(entity2.getVariantCollections()), DataModel.VariableFeature.variantCollection));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getVariantDerivations()), SBOLUtil.getURIs(entity2.getVariantDerivations()), DataModel.VariableFeature.variantDerivation));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getVariants()), SBOLUtil.getURIs(entity2.getVariants()), DataModel.VariableFeature.variant));	
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getVariantMeasures()), SBOLUtil.getURIs(entity2.getVariantMeasures()), DataModel.VariableFeature.variantMeasure));	
 		}
 		return output;
 	}

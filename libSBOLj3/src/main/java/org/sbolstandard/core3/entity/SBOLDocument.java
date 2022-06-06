@@ -25,6 +25,7 @@ import org.sbolstandard.core3.entity.measure.Prefix;
 import org.sbolstandard.core3.entity.measure.PrefixedUnit;
 import org.sbolstandard.core3.entity.measure.SIPrefix;
 import org.sbolstandard.core3.entity.measure.SingularUnit;
+import org.sbolstandard.core3.entity.measure.Unit;
 import org.sbolstandard.core3.entity.measure.UnitDivision;
 import org.sbolstandard.core3.entity.measure.UnitExponentiation;
 import org.sbolstandard.core3.entity.measure.UnitMultiplication;
@@ -576,7 +577,7 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		return singularUnits;
 	}
 	
-	public UnitMultiplication createUnitMultiplication(URI uri, URI namespace, String symbol, String name, URI unit1, URI unit2) throws SBOLGraphException {
+	public UnitMultiplication createUnitMultiplication(URI uri, URI namespace, String symbol, String name, Unit unit1, Unit unit2) throws SBOLGraphException {
 
 		UnitMultiplication unit = new UnitMultiplication(this.model, uri) {};
 		unit.setNamespace(namespace);
@@ -588,7 +589,7 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		return unit;
 	}
 	
-	public UnitMultiplication createUnitMultiplication(String displayId, String symbol, String name, URI unit1, URI unit2) throws SBOLGraphException {
+	public UnitMultiplication createUnitMultiplication(String displayId, String symbol, String name, Unit unit1, Unit unit2) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
 			return createUnitMultiplication(SBOLAPI.append(this.getBaseURI(), displayId), SBOLUtil.toNameSpace(this.getBaseURI()), symbol, name, unit1, unit2);
@@ -605,7 +606,7 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		return unitMultiplications;
 	}
 	
-	public UnitDivision createUnitDivision(URI uri, URI namespace, String symbol, String name, URI numerator, URI denominator) throws SBOLGraphException {
+	public UnitDivision createUnitDivision(URI uri, URI namespace, String symbol, String name, Unit numerator, Unit denominator) throws SBOLGraphException {
 
 		UnitDivision unit = new UnitDivision(this.model, uri) {};
 		unit.setNamespace(namespace);
@@ -617,7 +618,7 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		return unit;
 	}
 	
-	public UnitDivision createUnitDivision(String displayId, String symbol, String name, URI numerator, URI denominator) throws SBOLGraphException {
+	public UnitDivision createUnitDivision(String displayId, String symbol, String name, Unit numerator, Unit denominator) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
 			return createUnitDivision(SBOLAPI.append(this.getBaseURI(), displayId), SBOLUtil.toNameSpace(this.getBaseURI()), symbol, name, numerator, denominator);
@@ -634,7 +635,7 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		return unitDivisions;
 	}
 	
-	public UnitExponentiation createUnitExponentiation(URI uri, URI namespace, String symbol, String name, URI baseUnit, int exponent) throws SBOLGraphException {
+	public UnitExponentiation createUnitExponentiation(URI uri, URI namespace, String symbol, String name, Unit baseUnit, int exponent) throws SBOLGraphException {
 
 		UnitExponentiation unit = new UnitExponentiation(this.model, uri) {};
 		unit.setNamespace(namespace);
@@ -646,7 +647,7 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		return unit;
 	}
 	
-	public UnitExponentiation createUnitExponentiation(String displayId, String symbol, String name, URI baseUnit, int exponent) throws SBOLGraphException {
+	public UnitExponentiation createUnitExponentiation(String displayId, String symbol, String name, Unit baseUnit, int exponent) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
 			return createUnitExponentiation(SBOLAPI.append(this.getBaseURI(), displayId), SBOLUtil.toNameSpace(this.getBaseURI()), symbol, name, baseUnit, exponent);
@@ -663,22 +664,22 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		return unitExponentiations;
 	}
 	
-	public PrefixedUnit createPrexiedUnit(URI uri, URI namespace, String symbol, String name, URI unitURI, URI prefix) throws SBOLGraphException {
+	public PrefixedUnit createPrexiedUnit(URI uri, URI namespace, String symbol, String name, Unit unit, Prefix prefix) throws SBOLGraphException {
 
-		PrefixedUnit unit = new PrefixedUnit(this.model, uri) {};
-		unit.setNamespace(namespace);
-		unit.setSymbol(symbol);
-		unit.setLabel(name);
-		unit.setUnit(unitURI);
-		unit.setPrefix(prefix);
-		addToInMemoryList(unit, prefixedUnits);
-		return unit;
+		PrefixedUnit prefixedUnit = new PrefixedUnit(this.model, uri) {};
+		prefixedUnit.setNamespace(namespace);
+		prefixedUnit.setSymbol(symbol);
+		prefixedUnit.setLabel(name);
+		prefixedUnit.setUnit(unit);
+		prefixedUnit.setPrefix(prefix);
+		addToInMemoryList(prefixedUnit, prefixedUnits);
+		return prefixedUnit;
 	}
 	
-	public PrefixedUnit createPrexiedUnit(String displayId, String symbol, String name, URI unitURI, URI prefix) throws SBOLGraphException {
+	public PrefixedUnit createPrexiedUnit(String displayId, String symbol, String name, Unit unit, Prefix prefix) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
-			return createPrexiedUnit(SBOLAPI.append(this.getBaseURI(), displayId), SBOLUtil.toNameSpace(this.getBaseURI()), symbol, name, unitURI, prefix);
+			return createPrexiedUnit(SBOLAPI.append(this.getBaseURI(), displayId), SBOLUtil.toNameSpace(this.getBaseURI()), symbol, name, unit, prefix);
 		}
 		else
 		{

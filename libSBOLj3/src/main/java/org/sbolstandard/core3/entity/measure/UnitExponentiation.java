@@ -1,6 +1,7 @@
 package org.sbolstandard.core3.entity.measure;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 
@@ -8,8 +9,10 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
@@ -32,13 +35,14 @@ public class UnitExponentiation extends CompoundUnit{
 	}
 	
 	@NotNull(message = "{UNITEXPONENTIATION_BASE_NOT_NULL}")	
-	public URI getBase() throws SBOLGraphException{
-		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitExponentiation.base);
+	public Unit getBase() throws SBOLGraphException{
+		//return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.UnitExponentiation.base);
+		return contsructIdentified(MeasureDataModel.UnitExponentiation.base, Unit.getSubClassTypes());	
 	}
 
-	public void setBase(@NotNull(message = "{UNITEXPONENTIATION_BASE_NOT_NULL}") URI base) throws SBOLGraphException {
-		PropertyValidator.getValidator().validate(this, "setBase", new Object[] {base}, URI.class);
-		RDFUtil.setProperty(resource, MeasureDataModel.UnitExponentiation.base, base);
+	public void setBase(@NotNull(message = "{UNITEXPONENTIATION_BASE_NOT_NULL}") Unit base) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setBase", new Object[] {base}, Unit.class);
+		RDFUtil.setProperty(resource, MeasureDataModel.UnitExponentiation.base, SBOLUtil.toURI(base));
 	}
 	
 	@NotNull(message = "{UNITEXPONENTIATION_EXPONENT_NOT_EMPTY}")	
@@ -54,6 +58,14 @@ public class UnitExponentiation extends CompoundUnit{
 	@Override
 	public URI getResourceType() {
 		return MeasureDataModel.UnitExponentiation.uri;
+	}
+	
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		validationMessages= IdentifiedValidator.assertEquals(this, MeasureDataModel.UnitExponentiation.base, this.resource, getBase(), validationMessages);
+		return validationMessages;
 	}
 	
 }

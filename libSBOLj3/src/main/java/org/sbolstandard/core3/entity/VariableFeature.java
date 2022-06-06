@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.entity.measure.Measure;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
@@ -13,6 +14,7 @@ import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
+import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 import org.sbolstandard.core3.vocabulary.Orientation;
 import org.sbolstandard.core3.vocabulary.VariableFeatureCardinality;
 
@@ -42,6 +44,11 @@ public class VariableFeature extends Identified{
 	{
 		List<ValidationMessage> validationMessages=super.getValidationMessages();
 		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.VariableFeature.variable, this.resource, getVariable(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.VariableFeature.variantMeasure, this.resource, getMeasures(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.VariableFeature.variantCollection, this.resource, getVariantCollections(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.VariableFeature.variantDerivation, this.resource, getVariantDerivations(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.VariableFeature.variant, this.resource, getVariants(), validationMessages);
+		
 		return validationMessages;
 	}
 
@@ -84,36 +91,40 @@ public class VariableFeature extends Identified{
 		RDFUtil.setProperty(resource, DataModel.VariableFeature.variable, SBOLUtil.toURI(feature));
 	}
 	
-	public List<URI> getVariants() {
-		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableFeature.variant);
+	public List<Component> getVariants() throws SBOLGraphException {
+		//return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableFeature.variant);
+		return addToList(DataModel.VariableFeature.variant, Component.class, DataModel.Component.uri);
 	}
 	
-	public void setVariants(List<URI> variants) {
-		RDFUtil.setProperty(resource, DataModel.VariableFeature.variant, variants);
+	public void setVariants(List<Component> variants) {
+		RDFUtil.setProperty(resource, DataModel.VariableFeature.variant, SBOLUtil.getURIs(variants));
 	}
 	
-	public List<URI> getVariantCollections() {
-		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableFeature.variantCollection);
+	public List<Collection> getVariantCollections() throws SBOLGraphException {
+		//return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableFeature.variantCollection);
+		return addToList(DataModel.VariableFeature.variantCollection, Collection.class, DataModel.Collection.uri);
 	}
 	
-	public void setVariantCollections(List<URI> variantCollections) {
-		RDFUtil.setProperty(resource, DataModel.VariableFeature.variantCollection, variantCollections);
+	public void setVariantCollections(List<Collection> variantCollections) {
+		RDFUtil.setProperty(resource, DataModel.VariableFeature.variantCollection, SBOLUtil.getURIs(variantCollections));
 	}
 	
-	public List<URI> getVariantDerivations() {
-		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableFeature.variantDerivation);
+	public List<CombinatorialDerivation> getVariantDerivations() throws SBOLGraphException {
+		//return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableFeature.variantDerivation);
+		return addToList(DataModel.VariableFeature.variantDerivation, CombinatorialDerivation.class, DataModel.CombinatorialDerivation.uri);
 	}
 	
-	public void setVariantDerivations(List<URI> variantDerivations) {
-		RDFUtil.setProperty(resource, DataModel.VariableFeature.variantDerivation, variantDerivations);
+	public void setVariantDerivations(List<Collection> variantDerivations) {
+		RDFUtil.setProperty(resource, DataModel.VariableFeature.variantDerivation, SBOLUtil.getURIs(variantDerivations));
 	}
 	
-	public List<URI> getVariantMeasures() {
-		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableFeature.variantMeasure);
+	public List<Measure> getVariantMeasures() throws SBOLGraphException {
+		//return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.VariableFeature.variantMeasure);
+		return addToList(DataModel.VariableFeature.variantMeasure, Measure.class, MeasureDataModel.Measure.uri);
 	}
 	
-	public void setVariantMeasures(List<URI> variantMeasures) {
-		RDFUtil.setProperty(resource, DataModel.VariableFeature.variantMeasure, variantMeasures);
+	public void setVariantMeasures(List<Measure> variantMeasures) {
+		RDFUtil.setProperty(resource, DataModel.VariableFeature.variantMeasure, SBOLUtil.getURIs(variantMeasures));
 	}
 	
 	@Override

@@ -1,14 +1,22 @@
 package org.sbolstandard.core3.entity.measure;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.entity.ComponentReference;
 import org.sbolstandard.core3.entity.ControlledTopLevel;
+import org.sbolstandard.core3.entity.ExternallyDefined;
+import org.sbolstandard.core3.entity.Identified;
+import org.sbolstandard.core3.entity.LocalSubComponent;
+import org.sbolstandard.core3.entity.SequenceFeature;
+import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -121,4 +129,19 @@ public abstract class Unit extends ControlledTopLevel{
 	public URI getResourceType() {
 		return MeasureDataModel.Unit.uri;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T extends Identified> HashMap<URI, Class<T>> getSubClassTypes()
+	{
+		HashMap<URI, Class<T>> subclasses=new HashMap<URI, Class<T>>();
+		subclasses.put(MeasureDataModel.BinaryPrefix.uri, (Class<T>) BinaryPrefix.class);
+		subclasses.put(MeasureDataModel.PrefixedUnit.uri, (Class<T>) PrefixedUnit.class);
+		subclasses.put(MeasureDataModel.SingularUnit.uri, (Class<T>) SingularUnit.class);
+		subclasses.put(MeasureDataModel.SIPrefix.uri, (Class<T>) SIPrefix.class);
+		subclasses.put(MeasureDataModel.UnitDivision.uri, (Class<T>) UnitDivision.class);
+		subclasses.put(MeasureDataModel.UnitExponentiation.uri, (Class<T>) UnitExponentiation.class);
+		subclasses.put(MeasureDataModel.UnitMultiplication.uri, (Class<T>) UnitMultiplication.class);	
+		return subclasses;
+	}
+	
 }
