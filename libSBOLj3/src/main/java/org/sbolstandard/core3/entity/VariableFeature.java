@@ -48,7 +48,6 @@ public class VariableFeature extends Identified{
 		validationMessages= IdentifiedValidator.assertExists(this, DataModel.VariableFeature.variantCollection, this.resource, getVariantCollections(), validationMessages);
 		validationMessages= IdentifiedValidator.assertExists(this, DataModel.VariableFeature.variantDerivation, this.resource, getVariantDerivations(), validationMessages);
 		validationMessages= IdentifiedValidator.assertExists(this, DataModel.VariableFeature.variant, this.resource, getVariants(), validationMessages);
-		
 		return validationMessages;
 	}
 

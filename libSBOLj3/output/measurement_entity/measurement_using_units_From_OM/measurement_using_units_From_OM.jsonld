@@ -1,5 +1,50 @@
 {
   "@graph" : [ {
+    "@id" : "om:litre",
+    "@type" : [ "sbol:TopLevel", "om:SingularUnit" ],
+    "displayId" : "litre",
+    "hasNamespace" : "http://www.ontology-of-units-of-measure.org/resource/om-2",
+    "name" : "liter",
+    "label" : "liter",
+    "symbol" : "l"
+  }, {
+    "@id" : "om:milli",
+    "@type" : [ "sbol:TopLevel", "om:SIPrefix" ],
+    "displayId" : "milli",
+    "hasNamespace" : "http://www.ontology-of-units-of-measure.org/resource/om-2",
+    "name" : "milli",
+    "hasFactor" : "0.001",
+    "label" : "milli",
+    "symbol" : "m"
+  }, {
+    "@id" : "om:millimole",
+    "@type" : [ "sbol:TopLevel", "om:PrefixedUnit" ],
+    "displayId" : "millimole",
+    "hasNamespace" : "http://www.ontology-of-units-of-measure.org/resource/om-2",
+    "name" : "millimole",
+    "hasPrefix" : "om:milli",
+    "hasUnit" : "om:mole",
+    "label" : "millimole",
+    "symbol" : "mmol"
+  }, {
+    "@id" : "om:millimolePerLitre",
+    "@type" : [ "sbol:TopLevel", "om:UnitDivision" ],
+    "displayId" : "millimolePerLitre",
+    "hasNamespace" : "http://www.ontology-of-units-of-measure.org/resource/om-2",
+    "name" : "millimolar",
+    "hasDenominator" : "om:litre",
+    "hasNumerator" : "om:millimole",
+    "label" : "millimolar",
+    "symbol" : "mmol/l"
+  }, {
+    "@id" : "om:mole",
+    "@type" : [ "sbol:TopLevel", "om:SingularUnit" ],
+    "displayId" : "mole",
+    "hasNamespace" : "http://www.ontology-of-units-of-measure.org/resource/om-2",
+    "name" : "mole",
+    "label" : "mole",
+    "symbol" : "mol"
+  }, {
     "@id" : "https://sbolstandard.org/examples/M9_Glucose_CAA",
     "@type" : "sbol:Component",
     "description" : "M9 Glucose CAA growth media",
@@ -23,26 +68,35 @@
     "hasUnit" : "om:millimolePerLitre"
   } ],
   "@context" : {
-    "hasFeature" : {
-      "@id" : "http://sbols.org/v3#hasFeature",
-      "@type" : "@id"
-    },
-    "description" : {
-      "@id" : "http://sbols.org/v3#description"
+    "hasFactor" : {
+      "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor"
     },
     "name" : {
       "@id" : "http://sbols.org/v3#name"
+    },
+    "label" : {
+      "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/label"
+    },
+    "symbol" : {
+      "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/symbol"
     },
     "hasNamespace" : {
       "@id" : "http://sbols.org/v3#hasNamespace",
       "@type" : "@id"
     },
-    "type" : {
-      "@id" : "http://sbols.org/v3#type",
-      "@type" : "@id"
-    },
     "displayId" : {
       "@id" : "http://sbols.org/v3#displayId"
+    },
+    "hasUnit" : {
+      "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit",
+      "@type" : "@id"
+    },
+    "hasNumericalValue" : {
+      "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumericalValue"
+    },
+    "hasPrefix" : {
+      "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/hasPrefix",
+      "@type" : "@id"
     },
     "hasMeasure" : {
       "@id" : "http://sbols.org/v3#hasMeasure",
@@ -52,12 +106,24 @@
       "@id" : "http://sbols.org/v3#definition",
       "@type" : "@id"
     },
-    "hasUnit" : {
-      "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit",
+    "type" : {
+      "@id" : "http://sbols.org/v3#type",
       "@type" : "@id"
     },
-    "hasNumericalValue" : {
-      "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumericalValue"
+    "hasFeature" : {
+      "@id" : "http://sbols.org/v3#hasFeature",
+      "@type" : "@id"
+    },
+    "description" : {
+      "@id" : "http://sbols.org/v3#description"
+    },
+    "hasDenominator" : {
+      "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/hasDenominator",
+      "@type" : "@id"
+    },
+    "hasNumerator" : {
+      "@id" : "http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumerator",
+      "@type" : "@id"
     },
     "SBO" : "https://identifiers.org/SBO:",
     "CHEBI" : "https://identifiers.org/CHEBI:",

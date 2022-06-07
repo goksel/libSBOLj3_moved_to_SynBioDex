@@ -92,12 +92,12 @@ public class ParticipantTest extends TestCase {
 	    
 	    Resource resource = TestUtil.getResource(participation);
 		
-	    //SBOL_VALID_ENTITY_TYPES - Participation.Feature
+	    //SBOL_VALID_ENTITY_TYPES - Participation.Feature/Participant
 	    Feature participant=participation.getParticipant();
 	  	RDFUtil.setProperty(resource, DataModel.Participation.participant, Arrays.asList(participant.getUri(), inhibitor.getUri()));
-	  	TestUtil.validateIdentified(participant,doc,1);
+	  	TestUtil.validateIdentified(participation,1);
 	  	participation.setParticipant(participant);
-	  	TestUtil.validateIdentified(participant,doc,0);		
+	  	TestUtil.validateIdentified(participation,doc,0);		
 	  		
 	  		
 	    //PARTICIPANT_PARTICIPANT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT

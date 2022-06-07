@@ -84,15 +84,10 @@ public class TopLevelTest extends TestCase {
 	  	attachment.setAttachments(attachment2,attachment3);
 	  	TestUtil.validateIdentified(attachment,doc,0);		
 	  
-	  	
-	    
 	    //TOPLEVEL_URI_CANNOT_BE_USED_AS_A_PREFIX
 	    Attachment attachment4=doc.createAttachment(URI.create("https://sbolstandard.org/attachment3/withprefix"), URI.create("https://sbolstandard.org"), URI.create("https://sbolstandard.org/local/attachment4"));
 	    TestUtil.validateDocument(doc,1);
-	    
-	    
-	    
-	   		
+	    		
     }
 
 }
