@@ -58,9 +58,9 @@
       "value" : "https://synbiohub.org/public/igem"
     }
      ] ,
-    "http://sbols.org/v3#input" : [ { 
+    "http://sbols.org/v3#template" : [ { 
       "type" : "uri" ,
-      "value" : "http://sbolstandard.org/template"
+      "value" : "https://synbiohub.org/public/igem/BBa_R0040"
     }
      ]
   }

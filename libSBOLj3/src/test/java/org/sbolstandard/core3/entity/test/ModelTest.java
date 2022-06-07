@@ -3,22 +3,14 @@ package org.sbolstandard.core3.entity.test;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
-import java.util.List;
-
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.Model;
-import org.sbolstandard.core3.entity.SBOLDocument;
+import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.ModelFramework;
-import org.sbolstandard.core3.vocabulary.ModelLanguage;
-
+import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
 public class ModelTest extends TestCase {
@@ -32,13 +24,13 @@ public class ModelTest extends TestCase {
         Component toggleSwitch=SBOLAPI.createComponent(doc, "toggle_switch", ComponentType.FunctionalEntity.getUrl(), "Toggle Switch", "Toggle Switch genetic circuit", null);
         Model model=doc.createModel("model1", URI.create("http://virtualparts.org"), ModelFramework.Continuous,ModelLanguage.SBML);
         model.setNamespace(URI.create(namespace));
-        toggleSwitch.setModels(Arrays.asList(model.getUri()));
+        toggleSwitch.setModels(Arrays.asList(model));
         
         TestUtil.serialise(doc, "entity/model", "model");
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
         
-    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
         
         TestUtil.validateIdentified(model,doc,0);
 		

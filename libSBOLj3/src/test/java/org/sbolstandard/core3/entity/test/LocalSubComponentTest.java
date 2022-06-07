@@ -6,26 +6,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.ComponentReference;
-import org.sbolstandard.core3.entity.Implementation;
-import org.sbolstandard.core3.entity.Interaction;
-import org.sbolstandard.core3.entity.LocalSubComponent;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.SubComponent;
+import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.InteractionType;
-import org.sbolstandard.core3.vocabulary.Orientation;
-import org.sbolstandard.core3.vocabulary.ParticipationRole;
-import org.sbolstandard.core3.vocabulary.Role;
-
+import org.sbolstandard.core3.util.SBOLUtil;
+import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
 public class LocalSubComponentTest extends TestCase {
@@ -43,18 +34,42 @@ public class LocalSubComponentTest extends TestCase {
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
         
-    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
         
         TestUtil.validateIdentified(lsComponent,doc,0);
         //LocalSubComponent.types cannot be empty
         TestUtil.validateProperty(lsComponent, "setTypes", new Object[] {null}, List.class);
         TestUtil.validateProperty(lsComponent, "setTypes", new Object[] {new ArrayList<URI>()}, List.class);
         
+        List<URI> tempTypes=lsComponent.getTypes();
         lsComponent.setTypes(null);
         TestUtil.validateIdentified(lsComponent,doc,1);
         
         lsComponent.setTypes(new ArrayList<URI>());
         TestUtil.validateIdentified(lsComponent,doc,1);
+        lsComponent.setTypes(tempTypes);
+        TestUtil.validateIdentified(lsComponent,doc,0);
+        
+        lsComponent.setTypes(Arrays.asList(ComponentType.DNA.getUrl(), ComponentType.Protein.getUrl() ));
+	    TestUtil.validateIdentified(lsComponent,doc,1);
+	    lsComponent.setTypes(Arrays.asList(ComponentType.DNA.getUrl()));
+	    TestUtil.validateIdentified(lsComponent,doc,0);
+	    
+	    Sequence seq=doc.createSequence("seq1");
+	    lsComponent.createCut(2, seq);
+	    TestUtil.validateIdentified(lsComponent,doc,0);
+		
+	    Resource resource = TestUtil.getResource(lsComponent);
+		
+		//SBOL_VALID_ENTITY_TYPES - LocalSubComponent.locations
+		List<URI> tempURIs=SBOLUtil.getURIs(lsComponent.getLocations());
+		tempURIs.add(i13504_system.getUri());
+		RDFUtil.setProperty(resource, lsComponent.getDefaultLocationProperty(), tempURIs);
+		TestUtil.validateIdentified(lsComponent,doc,1);
+		tempURIs.remove(i13504_system.getUri());
+		RDFUtil.setProperty(resource, lsComponent.getDefaultLocationProperty(), tempURIs);
+		TestUtil.validateIdentified(lsComponent,doc,0);
+		
     }	
 	
 }

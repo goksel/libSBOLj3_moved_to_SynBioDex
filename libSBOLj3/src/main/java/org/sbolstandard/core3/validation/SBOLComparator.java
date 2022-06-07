@@ -46,9 +46,15 @@ import org.sbolstandard.core3.entity.provenance.Association;
 import org.sbolstandard.core3.entity.provenance.Plan;
 import org.sbolstandard.core3.entity.provenance.Usage;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
+import org.sbolstandard.core3.vocabulary.CombinatorialDerivationStrategy;
 import org.sbolstandard.core3.vocabulary.DataModel;
+import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
+import org.sbolstandard.core3.vocabulary.Orientation;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
+import org.sbolstandard.core3.vocabulary.RoleIntegration;
+import org.sbolstandard.core3.vocabulary.VariableFeatureCardinality;
 
 public class SBOLComparator {
 
@@ -322,7 +328,7 @@ public class SBOLComparator {
 		{
 			output = add(output,assertEqual(entity1, entity2));
 			output = add(output,assertEqual(entity1, entity2, entity1.getTypes(),entity2.getTypes(), ProvenanceDataModel.Activity.type));
-			output = add(output,assertEqual(entity1, entity2, entity1.getWasInformedBys(),entity2.getWasInformedBys(), ProvenanceDataModel.Activity.wasInformedBy));
+			output = add(output,assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getWasInformedBys()), SBOLUtil.getURIs(entity2.getWasInformedBys()), ProvenanceDataModel.Activity.wasInformedBy));
 			output = add(output,assertEqual(entity1, entity2, entity1.getEndedAtTime(),entity2.getEndedAtTime(), ProvenanceDataModel.Activity.endedAtTime));
 			output = add(output,assertEqual(entity1, entity2, entity1.getStartedAtTime(),entity2.getStartedAtTime(), ProvenanceDataModel.Activity.startedAtTime));
 			output = add(output,assertEqualEntity(entity1.getAssociations(), entity2.getAssociations()));
@@ -446,7 +452,15 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqual(entity1, entity2));
-			output = add(output, assertEqual(entity1, entity2, entity1.getStrategy(),entity2.getStrategy(), DataModel.CombinatorialDerivation.strategy));
+			if (entity1.getStrategy()!=null && entity2.getStrategy()!=null)
+			{
+				output = add(output, assertEqualEnum(entity1, entity2, entity1.getStrategy(),entity2.getStrategy(), DataModel.CombinatorialDerivation.strategy));
+			}
+			
+			else 
+			{
+				output=add(output, assertBothNullOrNotNull(entity1, entity1, entity1.getStrategy(), entity2.getStrategy(), DataModel.CombinatorialDerivation.strategy));
+			}
 			output = add(output, assertEqual(entity1, entity2, entity1.getTemplate(),entity2.getTemplate(), DataModel.CombinatorialDerivation.template));
 			output = add(output, assertEqualEntity(entity1.getVariableFeatures(), entity2.getVariableFeatures()));	
 		}
@@ -459,11 +473,12 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqual(entity1, entity2));
-			output = add(output, assertEqual(entity1, entity2, entity1.getCardinality().getUri(),entity2.getCardinality().getUri(), DataModel.VariableComponent.cardinality));
-			output = add(output, assertEqual(entity1, entity2, entity1.getFeature(),entity2.getFeature(), DataModel.VariableComponent.variable));
-			output = add(output, assertEqual(entity1, entity2, entity1.getVariantCollections(),entity2.getVariantCollections(), DataModel.VariableComponent.variantCollection));
-			output = add(output, assertEqual(entity1, entity2, entity1.getVariantDerivations(),entity2.getVariantDerivations(), DataModel.VariableComponent.variantDerivation));
-			output = add(output, assertEqual(entity1, entity2, entity1.getVariants(),entity2.getVariants(), DataModel.VariableComponent.variant));	
+			output = add(output, assertEqualEnum(entity1, entity2, entity1.getCardinality(),entity2.getCardinality(), DataModel.VariableFeature.cardinality));
+			output = add(output, assertEqual(entity1, entity2, entity1.getVariable(),entity2.getVariable(), DataModel.VariableFeature.variable));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getVariantCollections()), SBOLUtil.getURIs(entity2.getVariantCollections()), DataModel.VariableFeature.variantCollection));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getVariantDerivations()), SBOLUtil.getURIs(entity2.getVariantDerivations()), DataModel.VariableFeature.variantDerivation));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getVariants()), SBOLUtil.getURIs(entity2.getVariants()), DataModel.VariableFeature.variant));	
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getVariantMeasures()), SBOLUtil.getURIs(entity2.getVariantMeasures()), DataModel.VariableFeature.variantMeasure));	
 		}
 		return output;
 	}
@@ -474,9 +489,9 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqual(entity1, entity2));
-			output = add(output, assertEqual(entity1, entity2, entity1.getModels(),entity2.getModels(), DataModel.Component.model));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getModels()),SBOLUtil.getURIs(entity2.getModels()), DataModel.Component.model));
 			output = add(output, assertEqual(entity1, entity2, entity1.getRoles(),entity2.getRoles(), DataModel.role));
-			output = add(output, assertEqual(entity1, entity2, entity1.getSequences(),entity2.getSequences(), DataModel.Component.sequence));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getSequences()),SBOLUtil.getURIs(entity2.getSequences()), DataModel.Component.sequence));
 			output = add(output, assertEqual(entity1, entity2, entity1.getTypes(),entity2.getTypes(), DataModel.type));
 			output = add(output, assertEqualInterface(entity1.getInterface(),entity2.getInterface()));
 			output = add(output, assertEqualEntity(entity1.getComponentReferences(), entity2.getComponentReferences()));
@@ -496,9 +511,9 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqual(entity1, entity2));
-			output = add(output, assertEqual(entity1, entity2, entity1.getInputs(),entity2.getInputs(), DataModel.Interface.input));
-			output = add(output, assertEqual(entity1, entity2, entity1.getNonDirectionals(),entity2.getNonDirectionals(), DataModel.Interface.nondirectional));
-			output = add(output, assertEqual(entity1, entity2, entity1.getOutputs(),entity2.getOutputs(), DataModel.Interface.output));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getInputs()),SBOLUtil.getURIs(entity2.getInputs()), DataModel.Interface.input));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getNonDirectionals()),SBOLUtil.getURIs(entity2.getNonDirectionals()), DataModel.Interface.nondirectional));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.getURIs(entity1.getOutputs()),SBOLUtil.getURIs(entity2.getOutputs()), DataModel.Interface.output));
 		}
 		return output;
 	}
@@ -559,7 +574,7 @@ public class SBOLComparator {
 			assertEqual(entity1, entity2);
 			if (entity1.getOrientation()!=null && entity2.getOrientation()!=null)
 			{
-				output = add(output, assertEqual(entity1, entity2, entity1.getOrientation().getUri(),entity2.getOrientation().getUri(), DataModel.orientation));
+				output = add(output, assertEqualEnum(entity1, entity2, entity1.getOrientation(),entity2.getOrientation(), DataModel.orientation));
 			}
 			
 			else 
@@ -591,8 +606,8 @@ public class SBOLComparator {
 			output = add(output, assertEqualFeature(entity1, entity2));
 		//TODO: assertEqualLocations(entity1, entity2, entity1.getLocations(),entity2.getLocations(), DataModel.SubComponent.location);
 		//TODO: assertEqualLocations(entity1, entity2, entity1.getSourceLocations(),entity2.getSourceLocations(), DataModel.SubComponent.sourcelocation);
-			output = add(output, assertEqual(entity1, entity2, entity1.getIsInstanceOf(),entity2.getIsInstanceOf(), DataModel.SubComponent.instanceOf));
-			output = add(output, assertEqual(entity1, entity2, entity1.getRoleIntegration(),entity2.getRoleIntegration(), DataModel.SubComponent.roleIntegration));		
+			output = add(output, assertEqual(entity1, entity2, entity1.getInstanceOf(),entity2.getInstanceOf(), DataModel.SubComponent.instanceOf));
+			output = add(output, assertEqualEnum(entity1, entity2, entity1.getRoleIntegration(),entity2.getRoleIntegration(), DataModel.SubComponent.roleIntegration));		
 		}
 		return output;
 	}
@@ -615,7 +630,7 @@ public class SBOLComparator {
 		if (entity1!=null)
 		{
 			output = add(output, assertEqual(entity1, entity2));
-			output = add(output, assertEqual(entity1, entity2, entity1.getParticipant(), entity2.getParticipant(),DataModel.Participation.participant));
+			output = add(output, assertEqual(entity1, entity2, SBOLUtil.toURI(entity1.getParticipant()), SBOLUtil.toURI(entity2.getParticipant()),DataModel.Participation.participant));
 			output = add(output, assertEqual(entity1, entity2, entity1.getRoles(),entity2.getRoles(), DataModel.role));	
 		}
 		return output;
@@ -696,7 +711,7 @@ public class SBOLComparator {
 		{
 			output = add(output, assertEqual(entity1, entity2));		
 			output = add(output, assertEqual(entity1, entity2, entity1.getElements(), entity2.getElements(),DataModel.Sequence.elements));
-			output = add(output, assertEqual(entity1, entity2, entity1.getEncoding().getUri(), entity2.getEncoding().getUri(),DataModel.Sequence.encoding));
+			output = add(output, assertEqualEnum(entity1, entity2, entity1.getEncoding(),entity2.getEncoding(), DataModel.Sequence.encoding));		
 		}
 		return output;
 	}
@@ -765,7 +780,7 @@ public class SBOLComparator {
 		StringBuilder output=null;
 		output = add(output, assertEqual((Identified)topLevel1, (Identified)topLevel2));	
 		output = add(output, assertEqual(topLevel1,topLevel2, topLevel1.getNamespace(), topLevel2.getNamespace(), DataModel.TopLevel.namespace));	
-		output = add(output, assertEqual(topLevel1, topLevel2, topLevel1.getAttachments(),topLevel2.getAttachments(), DataModel.TopLevel.attachment));
+		output = add(output, assertEqual(topLevel1, topLevel2, SBOLUtil.getURIs(topLevel1.getAttachments()),SBOLUtil.getURIs(topLevel2.getAttachments()), DataModel.TopLevel.attachment));
 		return output;
 	}
 	
@@ -777,7 +792,7 @@ public class SBOLComparator {
 		output = add(output, assertEqual(identified1, identified2, identified1.getDisplayId(),identified2.getDisplayId(), DataModel.Identified.displayId));
 		output = add(output, assertEqual(identified1, identified2, identified1.getUri(),identified2.getUri(), DataModel.Identified.uri));
 		output = add(output, assertEqual(identified1, identified2, identified1.getWasDerivedFrom(),identified2.getWasDerivedFrom(), DataModel.Identified.wasDerivedFrom));
-		output = add(output, assertEqual(identified1, identified2, identified1.getWasGeneratedBy(),identified2.getWasGeneratedBy(), DataModel.Identified.wasGeneratedBy));
+		output = add(output, assertEqual(identified1, identified2, SBOLUtil.getURIs(identified1.getWasGeneratedBy()),SBOLUtil.getURIs(identified2.getWasGeneratedBy()), DataModel.Identified.wasGeneratedBy));
 		output = add(output, assertEqualEntity(identified1.getMeasures(), identified2.getMeasures()));
 		return output;
 	}
@@ -790,8 +805,42 @@ public class SBOLComparator {
 		{
 			output = add(output,message);
 		}
-		return output;
-		
+		return output;	
+	}
+	
+	private static StringBuilder assertEqualEnum(Identified identified1, Identified identified2, Object value1, Object value2, URI property)
+	{
+		URI uri1=enumToURI(value1);
+		URI uri2=enumToURI(value2);
+		return assertEqual(identified1, identified2, uri1, uri2, property);
+	}
+	
+	private static URI enumToURI(Object value)
+	{
+		if (value!=null)
+		{
+			if (value instanceof RoleIntegration)
+			{
+				return ((RoleIntegration) value).getUri();
+			}
+			else if (value instanceof Encoding)
+			{
+				return ((Encoding) value).getUri();
+			}
+			else if (value instanceof CombinatorialDerivationStrategy)
+			{
+				return ((CombinatorialDerivationStrategy) value).getUri();
+			}
+			else if (value instanceof VariableFeatureCardinality)
+			{
+				return ((VariableFeatureCardinality) value).getUri();
+			}
+			else if (value instanceof Orientation)
+			{
+				return ((Orientation) value).getUri();
+			}
+		}
+		return null;
 	}
 	
 	private static StringBuilder assertBothNullOrNotNull(Identified identified1, Identified identified2, Object value1, Object value2, URI property)
@@ -831,6 +880,19 @@ public class SBOLComparator {
 		StringBuilder output=null;
 		String message=String.format("Could not read the %s property. Entity:%s, Value1:%s, Value2:%s", property.toString(), identified1.getUri().toString(), value1, value2);
 		if (!stringEquals(String.valueOf(value1),String.valueOf(value2)))
+		{
+			output = add(output,message);
+		}
+		return output;
+	}
+	
+	private static StringBuilder assertEqual(Identified identified1, Identified identified2, Identified value1, Identified value2, URI property) throws SBOLGraphException
+	{
+		StringBuilder output=null;
+		String message=String.format("Could not read the %s property. Entity:%s, Value1:%s, Value2:%s", property.toString(), identified1.getUri().toString(), value1, value2);
+		output = add(output, assertEqual(value1, value2));	
+		
+		if (output!=null && output.length()>0)
 		{
 			output = add(output,message);
 		}

@@ -19,7 +19,7 @@
       <sbol:name>B0034</sbol:name>
    </sbol:Component>
    <sbol:Component rdf:about="TetR_protein">
-      <sbol:hasNamespace rdf:resource="/examples"/>
+      <sbol:hasNamespace rdf:resource=""/>
       <sbol:description>TetR protein</sbol:description>
       <sbol:name>TetR</sbol:name>
       <sbol:displayId>1TetR</sbol:displayId>

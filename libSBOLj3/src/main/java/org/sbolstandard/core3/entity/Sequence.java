@@ -1,12 +1,14 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
 
@@ -24,8 +26,19 @@ public class Sequence extends TopLevel {
 		super(resource);
 	}
 
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		if (this.getElements()!=null && this.getEncoding()==null)
+		{
+			validationMessages= addToValidations(validationMessages,new ValidationMessage("{SEQUENCE_MUST_HAVE_ENCODING}", DataModel.Sequence.encoding));      	   
+		}
+    	return validationMessages;
+	}
+	
 	public String getElements() throws SBOLGraphException{
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Sequence.elements);
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Sequence.elements);
 	}
 	
 	public void setElements(String elements) {
@@ -34,7 +47,7 @@ public class Sequence extends TopLevel {
 	
 	public Encoding getEncoding() throws SBOLGraphException {
 		Encoding encoding=null;
-		URI encodingValue=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Sequence.encoding);
+		URI encodingValue=IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Sequence.encoding);
 		if (encodingValue!=null){
 			encoding=Encoding.get(encodingValue); 
 		}
@@ -42,7 +55,12 @@ public class Sequence extends TopLevel {
 	}
 	
 	public void setEncoding(Encoding encoding) {
-		RDFUtil.setProperty(this.resource, DataModel.Sequence.encoding, encoding.getUri());
+		URI encodingURI=null;
+		if (encoding!=null)
+		{
+			encodingURI=encoding.getUri();
+		}
+		RDFUtil.setProperty(this.resource, DataModel.Sequence.encoding, encodingURI);
 	}
 
 	public URI getResourceType()

@@ -27,6 +27,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
+import jakarta.validation.executable.ExecutableValidator;
 
 
 public class SBOLValidator {
@@ -36,6 +37,16 @@ public class SBOLValidator {
 	
 	private SBOLValidator()
 	{	
+	}
+	
+	private void setValidator(Validator validator) throws SBOLGraphException	
+	{
+		if (validator==null)
+		{
+			throw new SBOLGraphException("Unable to create a Validator");
+		}
+			
+		this.validator=validator;
 	}
 	
 	public static SBOLValidator getValidator() throws SBOLGraphException
@@ -49,7 +60,7 @@ public class SBOLValidator {
 		 	            .configure()
 		 	            //.addValueExtractor(new ...ValueExtractor())
 		 	            .buildValidatorFactory();
-				sbolValidator.validator = factory.getValidator();	
+				sbolValidator.setValidator(factory.getValidator());	
 			}
 			catch (Exception exception)
 			{
@@ -64,7 +75,7 @@ public class SBOLValidator {
 	    Set<ConstraintViolation<SBOLDocument>> violations = validator.validate(document);
 	    List<String> messages=new ArrayList<String>();
 	    for (ConstraintViolation<SBOLDocument> violation : violations) {
-	    	List<String> fragments=new ArrayList<String>();
+	    	/*List<String> fragments=new ArrayList<String>();
 	    	fragments.add(violation.getMessage());
 	    	fragments.add(String.format("Property: %s",violation.getPropertyPath().toString()));
 	    	if (violation.getLeafBean()!=null && violation.getLeafBean() instanceof Identified ){
@@ -72,11 +83,11 @@ public class SBOLValidator {
 	    	    fragments.add(String.format("Entity URI: %s",identified.getUri().toString()));
 	    	    fragments.add(String.format("Entity type: %s",identified.getClass()));    
 	    	}
-	    	if (violation.getInvalidValue()!=null){
+	    	if (violation.getInvalidValue()!=null && !(violation.getInvalidValue() instanceof Identified)){
 	    		fragments.add("Value:" + violation.getInvalidValue().toString());
 	    	}
-	    	String message=StringUtils.join(fragments, String.format(",%s\t", System.lineSeparator()));
-	    	messages.add(message);
+	    	String message=StringUtils.join(fragments, String.format(",%s\t", System.lineSeparator()));*/
+	    	messages.add(PropertyValidator.getViolotionMessage(violation));
 	    }
 	    return messages;
 	}

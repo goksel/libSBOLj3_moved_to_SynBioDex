@@ -3,36 +3,19 @@ package org.sbolstandard.core3.entity.test;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
 
+import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Collection;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.ComponentReference;
-import org.sbolstandard.core3.entity.Cut;
-import org.sbolstandard.core3.entity.Feature;
-import org.sbolstandard.core3.entity.Location;
+import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.entity.Location.LocationBuilder;
-import org.sbolstandard.core3.entity.Range;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.Sequence;
-import org.sbolstandard.core3.entity.SequenceFeature;
-import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.Encoding;
-import org.sbolstandard.core3.vocabulary.Orientation;
-import org.sbolstandard.core3.vocabulary.RestrictionType;
-import org.sbolstandard.core3.vocabulary.Role;
-
-import jakarta.validation.Constraint;
+import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
 public class SubComponentTest extends TestCase {
@@ -47,34 +30,75 @@ public class SubComponentTest extends TestCase {
 		SBOLAPI.addSequence(doc, device, Encoding.NucleicAcid, "");
 		
 		Component term=SBOLAPI.createDnaComponent(doc, "B0015", "terminator", "B0015 double terminator", Role.Terminator,term_na);
-		SubComponent termSubComponent=device.createSubComponent(term.getUri());
+		SubComponent termSubComponent=device.createSubComponent(term);
 		termSubComponent.setOrientation(Orientation.inline);
 		
-		Sequence i13504Sequence= doc.getIdentified(device.getSequences().get(0),Sequence.class);
+		RoleIntegration ri2=termSubComponent.getRoleIntegration();
+		TestUtil.validateReturnValue(termSubComponent, "toRoleIntegration", new Object[] {URI.create("http://invalidroleintegration.org")}, URI.class);
+		
+		Sequence i13504Sequence= device.getSequences().get(0);
 		
 		int start=i13504Sequence.getElements().length() + 1;
 		int end=start + term_na.length()-1;
     	
 		i13504Sequence.setElements(i13504Sequence.getElements() + term_na);
-		LocationBuilder locationBuilder=new Location.RangeLocationBuilder(start, end,i13504Sequence.getUri());
-		locationBuilder.setOrientation(Orientation.inline);
-		Range range=(Range)termSubComponent.createLocation(locationBuilder);
+		Range range=(Range)termSubComponent.createRange(start, end,i13504Sequence);
+		range.setOrientation(Orientation.inline);
 		
-		LocationBuilder locationBuilder2=new Location.RangeLocationBuilder(start+1, end,i13504Sequence.getUri());
-		Range range2=(Range)termSubComponent.createSourceLocation(locationBuilder2);
+		Range range2=(Range)termSubComponent.createSourceRange(start+1, end,i13504Sequence);
 		
 		TestUtil.serialise(doc, "entity_additional/subcomponent", "subcomponent");
 	    System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
 	    TestUtil.assertReadWrite(doc); 
 	    
-		Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+	    Configuration.getConfiguration().setValidateAfterSettingProperties(false);
 	     
 	    TestUtil.validateIdentified(termSubComponent,doc,0);
 	    
-	    TestUtil.validateProperty(termSubComponent, "setIsInstanceOf", new Object[] {null}, URI.class);
-	    termSubComponent.setIsInstanceOf(null);	    
+	    TestUtil.validateProperty(termSubComponent, "setInstanceOf", new Object[] {null}, Component.class);
+	    termSubComponent.setInstanceOf(null);	    
 	    range.setEnd(Optional.empty());
 	    range2.setEnd(Optional.empty());
 	    TestUtil.validateIdentified(termSubComponent,doc,3);
+	    termSubComponent.setRoleIntegration(null);
+	    TestUtil.validateIdentified(termSubComponent,doc,3);
+	    termSubComponent.setRoleIntegration(RoleIntegration.mergeRoles);
+	    TestUtil.validateIdentified(termSubComponent,doc,3);
+	    
+	    //Roles must be provided if roleIntegration is not nulls
+	    termSubComponent.setRoleIntegration(null);
+	    termSubComponent.setRoles(Arrays.asList(URI.create("http://testrole.org")));
+	    TestUtil.validateIdentified(termSubComponent,doc,4);
+	    
+	    termSubComponent.setInstanceOf(term);
+	    TestUtil.validateIdentified(device, 3);   
+	    termSubComponent.setInstanceOf(device);
+	    TestUtil.validateIdentified(device, 4);
+	    
+	    //Clean the errors
+	    termSubComponent.setInstanceOf(term);
+	    TestUtil.validateIdentified(device, 3);
+	    range.setEnd(Optional.of(end));
+	    range2.setEnd(Optional.of(end));
+	    termSubComponent.setRoleIntegration(RoleIntegration.mergeRoles);
+	    TestUtil.validateIdentified(device, 0);
+	    
+	    
+	    Resource resource = TestUtil.getResource(termSubComponent);
+		
+	    //SBOL_VALID_ENTITY_TYPES - SubComponent.instanceOf
+	    Component instanceOf=termSubComponent.getInstanceOf();
+	  	RDFUtil.setProperty(resource, DataModel.SubComponent.instanceOf, Arrays.asList(instanceOf.getUri(), range.getUri()));
+	  	TestUtil.validateIdentified(termSubComponent,doc,1);
+	  	termSubComponent.setInstanceOf(term);
+	  	TestUtil.validateIdentified(termSubComponent,doc,0);	
+	  	
+	  	Cut cutSource=termSubComponent.createSourceCut(1, i13504Sequence);
+	  	RDFUtil.setProperty(resource, DataModel.SubComponent.sourceLocation, Arrays.asList(cutSource.getUri(), i13504Sequence.getUri()));
+	  	TestUtil.validateIdentified(termSubComponent,doc,1);
+	  	RDFUtil.setProperty(resource, DataModel.SubComponent.sourceLocation, Arrays.asList(cutSource.getUri()));
+	  	TestUtil.validateIdentified(termSubComponent,doc,0);	
+	  	
+	  
     }
 }

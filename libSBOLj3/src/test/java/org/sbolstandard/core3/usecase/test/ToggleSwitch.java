@@ -84,7 +84,7 @@ public class ToggleSwitch extends TestCase {
         SBOLAPI.addSubComponent (LacIProducer, GFP);
         SubComponent TetR_protein_subComponent= SBOLAPI.addSubComponent(LacIProducer, TetR_protein);
         SubComponent aTC_subComponent=SBOLAPI.addSubComponent(LacIProducer, aTC);
-        SubComponent atC_TetR_subComponent= SBOLAPI.addSubComponent(TetRProducer, atC_TetR);
+        SubComponent atC_TetR_subComponent= SBOLAPI.addSubComponent(LacIProducer, atC_TetR);
         
         SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),LacIProducer, lacI, Arrays.asList(ParticipationRole.Template), LacI_protein, Arrays.asList(ParticipationRole.Product));  
         SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),LacIProducer, gfp, Arrays.asList(ParticipationRole.Template), GFP, Arrays.asList(ParticipationRole.Product));  

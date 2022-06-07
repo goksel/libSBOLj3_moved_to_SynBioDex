@@ -8,12 +8,17 @@ import java.util.OptionalInt;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.ControlledIdentified;
+import org.sbolstandard.core3.entity.Feature;
+import org.sbolstandard.core3.entity.Interface;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.util.SBOLUtil;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
+import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -41,7 +46,7 @@ public class Measure extends ControlledIdentified{
 		//String valueString=String.valueOf(value);
 		//RDFUtil.setProperty(resource, MeasureDataModel.Measure.value, valueString);	
 		PropertyValidator.getValidator().validate(this, "setValue", new Object[] {value}, Optional.class);
-		IdentityValidator.getValidator().setPropertyAsOptional(this.resource, MeasureDataModel.Measure.value, value);
+		IdentifiedValidator.getValidator().setPropertyAsOptional(this.resource, MeasureDataModel.Measure.value, value);
 	}
 	
 	/*public XSDFloat getFactor() throws SBOLGraphException {
@@ -83,7 +88,7 @@ public class Measure extends ControlledIdentified{
 	//@NotNull(message = "Measure.value cannot be null")	
 	@NotNull (message = "{MEASURE_VALUE_NOT_NULL}")
 	public Optional<@NotNull (message = "{MEASURE_VALUE_NOT_NULL}") Float> getValue() throws SBOLGraphException {
-		Optional<Float> value= IdentityValidator.getValidator().getPropertyAsOptionalFloat(this.resource, MeasureDataModel.Measure.value);
+		Optional<Float> value= IdentifiedValidator.getValidator().getPropertyAsOptionalFloat(this.resource, MeasureDataModel.Measure.value);
 		return value;
 	}
 	
@@ -100,13 +105,14 @@ public class Measure extends ControlledIdentified{
 	}
 	*/
 	@NotNull(message = "{MEASURE_UNIT_NOT_NULL}")	
-	public URI getUnit() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.Measure.unit);	
+	public Unit getUnit() throws SBOLGraphException {
+		//return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, MeasureDataModel.Measure.unit);	
+		return contsructIdentified(MeasureDataModel.Measure.unit, Unit.getSubClassTypes());
 	}
 
-	public void setUnit(@NotNull(message = "{MEASURE_UNIT_NOT_NULL}") URI unit) throws SBOLGraphException {
-		PropertyValidator.getValidator().validate(this, "setUnit", new Object[] {unit}, URI.class);
-		RDFUtil.setProperty(resource, MeasureDataModel.Measure.unit, unit);
+	public void setUnit(@NotNull(message = "{MEASURE_UNIT_NOT_NULL}") Unit unit) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setUnit", new Object[] {unit}, Unit.class);
+		RDFUtil.setProperty(resource, MeasureDataModel.Measure.unit, SBOLUtil.toURI(unit));
 	}
 
 	public List<URI> getTypes() {
@@ -121,5 +127,14 @@ public class Measure extends ControlledIdentified{
 	public URI getResourceType() {
 		return MeasureDataModel.Measure.uri;
 	}
+	
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		validationMessages= IdentifiedValidator.assertEquals(this, MeasureDataModel.Measure.unit, this.resource, getUnit(), validationMessages);
+		return validationMessages;
+	}
+
 	
 }

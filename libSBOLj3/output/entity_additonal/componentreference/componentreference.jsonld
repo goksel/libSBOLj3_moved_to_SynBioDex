@@ -1,5 +1,24 @@
 {
   "@graph" : [ {
+    "@id" : "https://synbiohub.org/public/igem/B0015",
+    "@type" : "sbol:Component",
+    "description" : "B0015 double terminator",
+    "displayId" : "B0015",
+    "hasNamespace" : "https://synbiohub.org/public/igem",
+    "hasSequence" : "https://synbiohub.org/public/igem/B0015_Sequence1",
+    "name" : "terminator",
+    "role" : "SO:0000141",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "https://synbiohub.org/public/igem/B0015_Sequence1",
+    "@type" : "sbol:Sequence",
+    "description" : "terminator sequence",
+    "displayId" : "B0015_Sequence1",
+    "elements" : "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc",
+    "encoding" : "EDAM:format_1207",
+    "hasNamespace" : "https://synbiohub.org/public/igem",
+    "name" : "Sequence1"
+  }, {
     "@id" : "https://synbiohub.org/public/igem/i13504",
     "@type" : "sbol:Component",
     "displayId" : "i13504",
@@ -37,21 +56,52 @@
     "@type" : "sbol:SubComponent",
     "displayId" : "SubComponent1",
     "instanceOf" : "https://synbiohub.org/public/igem/i13504_system"
+  }, {
+    "@id" : "https://synbiohub.org/public/igem/simpleDevice",
+    "@type" : "sbol:Component",
+    "displayId" : "simpleDevice",
+    "hasFeature" : "https://synbiohub.org/public/igem/simpleDevice/SubComponent1",
+    "hasNamespace" : "https://synbiohub.org/public/igem",
+    "hasSequence" : "https://synbiohub.org/public/igem/simpleDevice_Sequence1",
+    "type" : "SBO:0000251"
+  }, {
+    "@id" : "https://synbiohub.org/public/igem/simpleDevice/SubComponent1",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent1",
+    "instanceOf" : "https://synbiohub.org/public/igem/B0015"
+  }, {
+    "@id" : "https://synbiohub.org/public/igem/simpleDevice_Sequence1",
+    "@type" : "sbol:Sequence",
+    "description" : "null sequence",
+    "displayId" : "simpleDevice_Sequence1",
+    "elements" : "",
+    "encoding" : "EDAM:format_1207",
+    "hasNamespace" : "https://synbiohub.org/public/igem",
+    "name" : "Sequence1"
   } ],
   "@context" : {
-    "hasNamespace" : {
-      "@id" : "http://sbols.org/v3#hasNamespace",
+    "encoding" : {
+      "@id" : "http://sbols.org/v3#encoding",
       "@type" : "@id"
     },
-    "type" : {
-      "@id" : "http://sbols.org/v3#type",
+    "elements" : {
+      "@id" : "http://sbols.org/v3#elements"
+    },
+    "description" : {
+      "@id" : "http://sbols.org/v3#description"
+    },
+    "name" : {
+      "@id" : "http://sbols.org/v3#name"
+    },
+    "hasNamespace" : {
+      "@id" : "http://sbols.org/v3#hasNamespace",
       "@type" : "@id"
     },
     "displayId" : {
       "@id" : "http://sbols.org/v3#displayId"
     },
-    "hasFeature" : {
-      "@id" : "http://sbols.org/v3#hasFeature",
+    "type" : {
+      "@id" : "http://sbols.org/v3#type",
       "@type" : "@id"
     },
     "inChildOf" : {
@@ -62,16 +112,21 @@
       "@id" : "http://sbols.org/v3#refersTo",
       "@type" : "@id"
     },
-    "instanceOf" : {
-      "@id" : "http://sbols.org/v3#instanceOf",
+    "hasSequence" : {
+      "@id" : "http://sbols.org/v3#hasSequence",
       "@type" : "@id"
     },
     "role" : {
       "@id" : "http://sbols.org/v3#role",
       "@type" : "@id"
     },
-    "name" : {
-      "@id" : "http://sbols.org/v3#name"
+    "hasFeature" : {
+      "@id" : "http://sbols.org/v3#hasFeature",
+      "@type" : "@id"
+    },
+    "instanceOf" : {
+      "@id" : "http://sbols.org/v3#instanceOf",
+      "@type" : "@id"
     },
     "SBO" : "https://identifiers.org/SBO:",
     "CHEBI" : "https://identifiers.org/CHEBI:",

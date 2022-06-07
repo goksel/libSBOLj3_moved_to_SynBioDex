@@ -73,6 +73,7 @@ public class DataModel {
 		public static final class LocalSubComponent
 		{
 			public static URI uri=URINameSpace.SBOL.local("LocalSubComponent");
+			public static URI location=SubComponent.location;
 		}
 		
 		public static final class ExternalyDefined
@@ -84,6 +85,7 @@ public class DataModel {
 		public static final class SequenceFeature
 		{
 			public static URI uri =URINameSpace.SBOL.local("SequenceFeature");
+			public static URI location=SubComponent.location;	
 		}
 		
 		public static final class Interaction
@@ -142,14 +144,14 @@ public class DataModel {
 		public static final class CombinatorialDerivation
 		{
 			public static URI uri=URINameSpace.SBOL.local("CombinatorialDerivation");
-			public static URI template=URINameSpace.SBOL.local("input");
+			public static URI template=URINameSpace.SBOL.local("template");
 			public static URI variableFeature=URINameSpace.SBOL.local("hasVariableFeature");
 			public static URI strategy=URINameSpace.SBOL.local("strategy");	
 		}
 		
-		public static final class VariableComponent
+		public static final class VariableFeature
 		{
-			public static URI uri=URINameSpace.SBOL.local("VariableComponent");
+			public static URI uri=URINameSpace.SBOL.local("VariableFeature");
 			public static URI cardinality=URINameSpace.SBOL.local("cardinality");
 			public static URI variant=URINameSpace.SBOL.local("variant");
 			public static URI variable=URINameSpace.SBOL.local("variable");	

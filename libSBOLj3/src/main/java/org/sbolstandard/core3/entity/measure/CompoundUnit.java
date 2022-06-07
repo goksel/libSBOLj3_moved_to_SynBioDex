@@ -23,4 +23,5 @@ public abstract class CompoundUnit extends Unit{
 		return MeasureDataModel.CompoundUnit.uri;
 	}
 	
+	
 }

@@ -25,6 +25,7 @@
             </sbol:sourceLocation>
             <sbol:hasLocation>
                <sbol:Range rdf:about="i13504/SubComponent1/Range1">
+                  <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
                   <sbol:end>80</sbol:end>
                   <sbol:start>1</sbol:start>
                   <sbol:hasSequence>

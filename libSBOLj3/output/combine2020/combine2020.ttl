@@ -47,6 +47,7 @@
         sbol:displayId    "Range1" ;
         sbol:end          "18" ;
         sbol:hasSequence  :i13504_Sequence1 ;
+        sbol:orientation  SO:0001030 ;
         sbol:start        "13" .
 
 :B0034_Sequence  a         sbol:Sequence ;
@@ -178,6 +179,7 @@
         sbol:displayId    "Range1" ;
         sbol:end          "826" ;
         sbol:hasSequence  :i13504_Sequence1 ;
+        sbol:orientation  SO:0001030 ;
         sbol:start        "747" .
 
 :B0015  a                  sbol:Component ;
@@ -245,6 +247,7 @@
         sbol:displayId    "Range1" ;
         sbol:end          "746" ;
         sbol:hasSequence  :i13504_Sequence1 ;
+        sbol:orientation  SO:0001030 ;
         sbol:start        "739" .
 
 <i13504/SubComponent1>

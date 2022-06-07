@@ -1,24 +1,17 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.List;
 import java.util.OptionalLong;
-import java.util.Set;
-
 import org.apache.jena.rdf.model.Resource;
-import org.hibernate.validator.internal.util.logging.Messages;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
-import org.sbolstandard.core3.validation.Message;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
-
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.ValidatorFactory;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.executable.ExecutableValidator;
 
 public class Attachment extends TopLevel{
 	/*private URI source=null;
@@ -37,6 +30,17 @@ public class Attachment extends TopLevel{
 	{
 		super(resource);
 	}
+
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		if (this.getHash()!=null && this.getHashAlgorithm()==null)
+		{
+			validationMessages= addToValidations(validationMessages,new ValidationMessage("{ATTACHMENT_HASHGORITHM_NOT_NULL_IF_HASH_IS_PROVIDED}", DataModel.Attachment.hashAlgorithm));      	
+		}
+		return validationMessages;
+	}		
 	
 	//@NotNull(message = "Attachment.source cannot be null")
 	@NotNull(message = "{ATTACHMENT_SOURCE_NOT_NULL}")
@@ -46,7 +50,7 @@ public class Attachment extends TopLevel{
 			source=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);	
 		}
 		return source;*/
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);
 	}
 
 	public void setSource(@NotNull (message="{ATTACHMENT_SOURCE_NOT_NULL}") URI source) throws SBOLGraphException {
@@ -82,7 +86,7 @@ public class Attachment extends TopLevel{
 		}
 		return format;*/
 		
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Attachment.format);	
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Attachment.format);	
 	}
 
 	public void setFormat(URI format) {
@@ -102,7 +106,7 @@ public class Attachment extends TopLevel{
 		}
 		return size;*/
 		OptionalLong size=OptionalLong.empty();
-		String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.size);
+		String value=IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.size);
 		if (value!=null)
 		{
 			size= OptionalLong.of(Long.parseLong(value));
@@ -127,12 +131,12 @@ public class Attachment extends TopLevel{
 			hash=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hash);	
 		}
 		return hash;*/
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hash);	
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hash);	
 	}
 
 	public void setHash(String hash) {
 		//this.hash = hash;
-		RDFUtil.setProperty(resource, DataModel.Attachment.hash, String.valueOf(hash));
+		RDFUtil.setProperty(resource, DataModel.Attachment.hash, hash);
 	}
 
 	public String getHashAlgorithm() throws SBOLGraphException {
@@ -141,19 +145,18 @@ public class Attachment extends TopLevel{
 			hashAlgorithm=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hashAlgorithm);	
 		}
 		return hashAlgorithm;*/
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hashAlgorithm);	
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hashAlgorithm);	
 
 	}
 
 	public void setHashAlgorithm(String hashAlgorithm) {
 		//this.hashAlgorithm = hashAlgorithm;
-		RDFUtil.setProperty(resource, DataModel.Attachment.hashAlgorithm, String.valueOf(hashAlgorithm));
+		RDFUtil.setProperty(resource, DataModel.Attachment.hashAlgorithm, hashAlgorithm);
 	}
 
 	@Override
 	public URI getResourceType() {
 		return DataModel.Attachment.uri;
 	}
-	
 	
 }

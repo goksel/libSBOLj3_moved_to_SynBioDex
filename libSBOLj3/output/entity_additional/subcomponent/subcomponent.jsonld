@@ -40,6 +40,7 @@
     "displayId" : "Range1",
     "end" : "80",
     "hasSequence" : "https://synbiohub.org/public/igem/i13504_Sequence1",
+    "orientation" : "SO:0001030",
     "start" : "1"
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504/SubComponent1/Range2",

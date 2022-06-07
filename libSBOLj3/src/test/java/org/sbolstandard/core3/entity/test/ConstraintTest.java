@@ -3,26 +3,17 @@ package org.sbolstandard.core3.entity.test;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
-import java.util.List;
 
+import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Collection;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.ComponentReference;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.SubComponent;
+import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.Encoding;
-import org.sbolstandard.core3.vocabulary.RestrictionType;
-import org.sbolstandard.core3.vocabulary.Role;
-
-import jakarta.validation.Constraint;
+import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
 public class ConstraintTest extends TestCase {
@@ -43,27 +34,67 @@ public class ConstraintTest extends TestCase {
 		Component j23101=doc.createComponent("j23101", Arrays.asList(ComponentType.DNA.getUrl())); 
 		SubComponent sc_j23101=SBOLAPI.addSubComponent(ilab16_dev1, j23101);	
 			
-		org.sbolstandard.core3.entity.Constraint constraint=ilab16_dev1.createConstraint(RestrictionType.Topology.meets, sc_j23101.getUri(), compRef_i13504_dev1.getUri());
+		org.sbolstandard.core3.entity.Constraint constraint=ilab16_dev1.createConstraint(RestrictionType.Topology.meets, sc_j23101, compRef_i13504_dev1);
 		
 	    TestUtil.serialise(doc, "entity_additional/constraint", "constraint");
       
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
         
-    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
         
+    	URI tempRestriction=constraint.getRestriction();
+    	Feature tempSubject=constraint.getSubject();
+    	Feature tempObject=constraint.getObject();
+    	
+ 
         TestUtil.validateIdentified(constraint,doc,0);
         TestUtil.validateProperty(constraint, "setRestriction", new Object[] {null}, URI.class);
 		constraint.setRestriction(null);
 		TestUtil.validateIdentified(constraint,doc,1);
 		
-		TestUtil.validateProperty(constraint, "setObject", new Object[] {null}, URI.class);
+		TestUtil.validateProperty(constraint, "setObject", new Object[] {null}, Feature.class);
 		constraint.setObject(null);
 		TestUtil.validateIdentified(constraint,doc,2);
 		
-		TestUtil.validateProperty(constraint, "setSubject", new Object[] {null}, URI.class);
+		TestUtil.validateProperty(constraint, "setSubject", new Object[] {null}, Feature.class);
 		constraint.setSubject(null);
 		TestUtil.validateIdentified(constraint,doc,3);
+		
+		constraint.setRestriction(tempRestriction);
+		constraint.setSubject(tempSubject);
+		constraint.setObject(tempObject);
+		TestUtil.validateIdentified(constraint,doc,0);
+		
+		//CONSTRAINT_SUBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT
+		constraint.setSubject(i13504SubComponent);
+		TestUtil.validateIdentified(ilab16_dev1,doc,1,1);
+		constraint.setSubject(tempSubject);
+		TestUtil.validateIdentified(ilab16_dev1,doc,0,0);
+		
+		//CONSTRAINT_OBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT
+		constraint.setObject(i13504SubComponent);
+		TestUtil.validateIdentified(ilab16_dev1,doc,1,1);
+		
+		//In addition to adding an invalid subject URI, the subject and the object uri cannot be the same. Hence the following line will introduce two errors.
+		//CONSTRAINT_OBJECT_AND_SUBJECT_ARE_NOT_EQUAL
+		constraint.setSubject(i13504SubComponent);
+		TestUtil.validateIdentified(ilab16_dev1,doc,3,3);
+		constraint.setSubject(tempSubject);
+		constraint.setObject(tempObject);
+		TestUtil.validateIdentified(ilab16_dev1,doc,0);
+		
+		Resource resource = TestUtil.getResource(constraint);
+		//SBOL_VALID_ENTITY_TYPES - Constraint.subject & object
+		RDFUtil.setProperty(resource, DataModel.Constraint.subject, device.getUri());
+		TestUtil.validateIdentified(constraint,doc,2);
+		RDFUtil.setProperty(resource, DataModel.Constraint.object, device.getUri());
+		TestUtil.validateIdentified(constraint,doc,4);
+		constraint.setSubject(tempSubject);
+		constraint.setObject(tempObject);
+		TestUtil.validateIdentified(constraint,doc,0);
+		
+		
     }
 
 }

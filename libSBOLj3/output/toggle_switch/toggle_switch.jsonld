@@ -29,7 +29,7 @@
     "@type" : "sbol:Component",
     "description" : "LacI producer",
     "displayId" : "LacI_producer",
-    "hasFeature" : [ "https://sbolstandard.org/examples/LacI_producer/SubComponent1", "https://sbolstandard.org/examples/LacI_producer/SubComponent5", "https://sbolstandard.org/examples/LacI_producer/SubComponent10", "https://sbolstandard.org/examples/LacI_producer/SubComponent2", "https://sbolstandard.org/examples/LacI_producer/SubComponent8", "https://sbolstandard.org/examples/LacI_producer/SubComponent9", "https://sbolstandard.org/examples/LacI_producer/SubComponent3", "https://sbolstandard.org/examples/LacI_producer/SubComponent6", "https://sbolstandard.org/examples/LacI_producer/SubComponent7", "https://sbolstandard.org/examples/LacI_producer/SubComponent4" ],
+    "hasFeature" : [ "https://sbolstandard.org/examples/LacI_producer/SubComponent1", "https://sbolstandard.org/examples/LacI_producer/SubComponent11", "https://sbolstandard.org/examples/LacI_producer/SubComponent5", "https://sbolstandard.org/examples/LacI_producer/SubComponent10", "https://sbolstandard.org/examples/LacI_producer/SubComponent2", "https://sbolstandard.org/examples/LacI_producer/SubComponent8", "https://sbolstandard.org/examples/LacI_producer/SubComponent9", "https://sbolstandard.org/examples/LacI_producer/SubComponent3", "https://sbolstandard.org/examples/LacI_producer/SubComponent6", "https://sbolstandard.org/examples/LacI_producer/SubComponent7", "https://sbolstandard.org/examples/LacI_producer/SubComponent4" ],
     "hasInteraction" : [ "https://sbolstandard.org/examples/LacI_producer/Interaction3", "https://sbolstandard.org/examples/LacI_producer/Interaction2", "https://sbolstandard.org/examples/LacI_producer/Interaction1", "https://sbolstandard.org/examples/LacI_producer/Interaction4" ],
     "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "LacI producer",
@@ -111,7 +111,7 @@
     "@id" : "https://sbolstandard.org/examples/LacI_producer/Interaction4/Participation3",
     "@type" : "sbol:Participation",
     "displayId" : "Participation3",
-    "participant" : "https://sbolstandard.org/examples/TetR_producer/SubComponent9",
+    "participant" : "https://sbolstandard.org/examples/LacI_producer/SubComponent11",
     "role" : "SBO:0000011"
   }, {
     "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent1",
@@ -124,6 +124,11 @@
     "@type" : "sbol:SubComponent",
     "displayId" : "SubComponent10",
     "instanceOf" : "https://sbolstandard.org/examples/aTC"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent11",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent11",
+    "instanceOf" : "https://sbolstandard.org/examples/atC_TetR"
   }, {
     "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent2",
     "@type" : "sbol:SubComponent",
@@ -183,7 +188,7 @@
     "@type" : "sbol:Component",
     "description" : "TetR producer",
     "displayId" : "TetR_producer",
-    "hasFeature" : [ "https://sbolstandard.org/examples/TetR_producer/SubComponent2", "https://sbolstandard.org/examples/TetR_producer/SubComponent7", "https://sbolstandard.org/examples/TetR_producer/SubComponent5", "https://sbolstandard.org/examples/TetR_producer/SubComponent3", "https://sbolstandard.org/examples/TetR_producer/SubComponent8", "https://sbolstandard.org/examples/TetR_producer/SubComponent1", "https://sbolstandard.org/examples/TetR_producer/SubComponent6", "https://sbolstandard.org/examples/TetR_producer/SubComponent4", "https://sbolstandard.org/examples/TetR_producer/SubComponent9" ],
+    "hasFeature" : [ "https://sbolstandard.org/examples/TetR_producer/SubComponent2", "https://sbolstandard.org/examples/TetR_producer/SubComponent7", "https://sbolstandard.org/examples/TetR_producer/SubComponent5", "https://sbolstandard.org/examples/TetR_producer/SubComponent3", "https://sbolstandard.org/examples/TetR_producer/SubComponent8", "https://sbolstandard.org/examples/TetR_producer/SubComponent1", "https://sbolstandard.org/examples/TetR_producer/SubComponent6", "https://sbolstandard.org/examples/TetR_producer/SubComponent4" ],
     "hasInteraction" : [ "https://sbolstandard.org/examples/TetR_producer/Interaction2", "https://sbolstandard.org/examples/TetR_producer/Interaction1", "https://sbolstandard.org/examples/TetR_producer/Interaction3" ],
     "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "TetR device",
@@ -293,11 +298,6 @@
     "@type" : "sbol:SubComponent",
     "displayId" : "SubComponent8",
     "instanceOf" : "https://sbolstandard.org/examples/IPTG_LacI"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/TetR_producer/SubComponent9",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "SubComponent9",
-    "instanceOf" : "https://sbolstandard.org/examples/atC_TetR"
   }, {
     "@id" : "https://sbolstandard.org/examples/TetR_protein",
     "@type" : "sbol:Component",

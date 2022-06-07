@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
@@ -29,7 +29,7 @@ public class Model extends TopLevel{
 	
 	@NotNull(message = "{MODEL_SOURCE_NOT_NULL}")
 	public URI getSource() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);	
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.source);	
 	}
 
 	public void setSource(@NotNull(message = "{MODEL_SOURCE_NOT_NULL}") URI source) throws SBOLGraphException {
@@ -39,7 +39,7 @@ public class Model extends TopLevel{
 
 	@NotNull(message = "{MODEL_FRAMEWORK_NOT_NULL}")
 	public URI getFramework() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.framework);	
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.framework);	
 	}
 
 	public void setFramework(@NotNull(message = "{MODEL_FRAMEWORK_NOT_NULL}") URI framework) throws SBOLGraphException{
@@ -49,7 +49,7 @@ public class Model extends TopLevel{
 
 	@NotNull(message = "{MODEL_LANGUAGE_NOT_NULL}")
 	public URI getLanguage() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.language);	
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Model.language);	
 	}
 
 	public void setLanguage(@NotNull(message = "{MODEL_LANGUAGE_NOT_NULL}") URI language) throws SBOLGraphException {

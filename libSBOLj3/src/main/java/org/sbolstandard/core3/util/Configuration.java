@@ -5,23 +5,32 @@ public class Configuration {
 	private static Configuration configuration = null;
 	
 	private boolean enforceOneToOneRelationships=true;
-	private PropertyValidationType validationActionTypeToSave=PropertyValidationType.ValidateAfterSettingProperties;
+	private boolean validateAfterSettingProperties=true;
+	private boolean validateBeforeSaving=true;
 	private boolean validateAfterReadingSBOLDocuments=true;
+
 	
-	
-	
-	public PropertyValidationType getPropertyValidationType() {
-		return validationActionTypeToSave;
+	public boolean isValidateAfterSettingProperties() {
+		return validateAfterSettingProperties;
 	}
 
-	/***
+	public void setValidateAfterSettingProperties(boolean validateAfterSettingProperties) {
+		this.validateAfterSettingProperties = validateAfterSettingProperties;
+	}
+
+	public boolean isValidateBeforeSaving() {
+		return validateBeforeSaving;
+	}
+
+	/**
 	 * Set this parameter to enforce validating SBOL graphs before writing to the disk.
-	 * @param validationActionTypeToSave
+	 * @param validateBeforeSaving
 	 */
-	public void setPropertyValidationType(PropertyValidationType validationActionTypeToSave) {
-		this.validationActionTypeToSave = validationActionTypeToSave;
+	public void setValidateBeforeSaving(boolean validateBeforeSaving) {
+		this.validateBeforeSaving = validateBeforeSaving;
 	}
 
+	
 	public boolean validateAfterReadingSBOLDocuments() {
 		return validateAfterReadingSBOLDocuments;
 	}
@@ -57,9 +66,9 @@ public class Configuration {
 		return configuration;
 	}
 	
-	public enum PropertyValidationType{
+	/*public enum PropertyValidationType{
 		ValidateBeforeSavingSBOLDocuments,
 		ValidateAfterSettingProperties,
 		NoValidation
-	}
+	}*/
 }

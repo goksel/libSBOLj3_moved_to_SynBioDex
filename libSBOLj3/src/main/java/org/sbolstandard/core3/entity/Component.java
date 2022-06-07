@@ -4,14 +4,16 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
+import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
 
@@ -37,7 +39,7 @@ public class Component extends TopLevel {
 	
 	//private Set<Interaction> interactions2=null;
 	
-	protected Component(Model model, URI uri) throws SBOLGraphException
+	protected Component(org.apache.jena.rdf.model.Model model, URI uri) throws SBOLGraphException
 	{
 		super(model, uri);
 	}
@@ -45,6 +47,113 @@ public class Component extends TopLevel {
 	protected Component(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
+	}
+	
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		List<URI> types=this.getTypes();
+		if (SBOLUtil.includesMultipleRootComponentTypes(types))
+		{
+			validationMessages= addToValidations(validationMessages,new ValidationMessage("{COMPONENT_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type));      	
+		}
+		
+		List<SubComponent> subComponents=this.getSubComponents();
+		if (subComponents!=null)
+		{
+			for (SubComponent subComponent: subComponents)
+			{
+				ValidationMessage message = new ValidationMessage("{SUBCOMPONENT_INSTANCEOF_MUST_NOT_REFER_ITS_PARENT}", DataModel.Component.feature,subComponent, subComponent.getInstanceOf());
+				message.childPath(DataModel.SubComponent.instanceOf);
+				validationMessages= IdentifiedValidator.assertNotEqual(this, validationMessages, subComponent.getInstanceOf(), this, message);			
+				//validationMessages= IdentifiedValidator.assertNotEqual(this, validationMessages, subComponent.getIsInstanceOf().getUri(), this.getUri(), message);			
+				
+			}
+		}
+		
+		List<ComponentReference> componentReferences=this.getComponentReferences();
+		if (componentReferences!=null)
+		{
+			for (ComponentReference compRef: componentReferences)
+			{
+				ValidationMessage message = new ValidationMessage("{COMPONENTREFERENCE_INCHILDOF_MUST_REFER_TO_A_SUBCOMPONENT_OF_THE_PARENT}", DataModel.Component.feature,compRef, compRef.getInChildOf());
+				message.childPath(DataModel.ComponentReference.inChildOf);
+				validationMessages= IdentifiedValidator.assertExists(this, validationMessages, compRef.getInChildOf(), subComponents, message);			
+				//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, compRef.getInChildOf(), subComponents, "{COMBINATORIALREFERENCE_INCHILDOF_MUST_REFER_TO_A_SUBCOMPONENT_OF_THE_PARENT}", DataModel.ComponentReference.inChildOf);
+			}
+		}
+		
+		List<Feature> features=this.getFeatures();
+		List<Constraint> constraints=this.getConstraints();
+		if (constraints!=null)
+		{
+			for (Constraint constraint: constraints)
+			{
+				ValidationMessage message = new ValidationMessage("{CONSTRAINT_SUBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Component.constraint,constraint,constraint.getSubject());
+				message.childPath( DataModel.Constraint.subject);
+				validationMessages= IdentifiedValidator.assertExists(this, validationMessages, constraint.getSubject(), features, message);			
+				
+				message = new ValidationMessage("{CONSTRAINT_OBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Component.constraint,constraint,constraint.getObject());
+				message.childPath( DataModel.Constraint.object);
+				validationMessages= IdentifiedValidator.assertExists(this, validationMessages, constraint.getObject(), features, message);			
+				//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, constraint.getSubject(), features, "{CONSTRAINT_SUBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Constraint.subject);
+				//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, constraint.getObject(), features, "{CONSTRAINT_OBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Constraint.object);
+			}
+		}
+		
+		List<Interaction> interactions=this.getInteractions();
+		if (interactions!=null)
+		{
+			for (Interaction interaction:interactions)
+			{
+				List<Participation> participations=interaction.getParticipations();
+				if (participations!=null)
+				{
+					for (Participation participation: participations)
+					{
+						ValidationMessage message = new ValidationMessage("{PARTICIPANT_PARTICIPANT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Component.interaction,interaction,participation.getParticipant());
+						message.childPath(DataModel.Interaction.participation, participation).childPath(DataModel.Participation.participant);
+						validationMessages=IdentifiedValidator.assertExists(this, validationMessages, participation.getParticipant(), features, message);
+						
+						message = new ValidationMessage("{PARTICIPANT_HIGHERORDERPARTICIPANT_MUST_REFER_TO_AN_INTERACTION_OF_THE_PARENT}", DataModel.Component.interaction,interaction,participation.getHigherOrderParticipant());
+						message.childPath(DataModel.Interaction.participation, participation).childPath(DataModel.Participation.higherOrderParticipant);
+						validationMessages=IdentifiedValidator.assertExists(this, validationMessages, participation.getHigherOrderParticipant(), interactions, message);
+						
+						//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, participation.getParticipant(), features, "{PARTICIPANT_PARTICIPANT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Participation.participant);
+						//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, participation.getHigherOrderParticipant(), interactions, "{PARTICIPANT_HIGHERORDERPARTICIPANT_MUST_REFER_TO_AN_INTERACTION_OF_THE_PARENT}", DataModel.Participation.higherOrderParticipant);
+					}
+				}
+			}
+		}
+		
+		Interface compInterface=this.getInterface();
+		if (compInterface!=null)
+		{
+			ValidationMessage message = new ValidationMessage("{INTERFACE_INPUT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Component.hasInterface,compInterface,null);
+			message.childPath(DataModel.Interface.input);
+			validationMessages= IdentifiedValidator.assertExistsIdentifieds(compInterface, validationMessages, compInterface.getInputs(), features, message);			
+			
+			message = new ValidationMessage("{INTERFACE_OUTPUT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Component.hasInterface,compInterface,null);
+			message.childPath(DataModel.Interface.output);
+			validationMessages= IdentifiedValidator.assertExistsIdentifieds(compInterface, validationMessages, compInterface.getOutputs(), features, message);			
+			
+			message = new ValidationMessage("{INTERFACE_NONDIRECTIONAL_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Component.hasInterface,compInterface,null);
+			message.childPath(DataModel.Interface.nondirectional);
+			validationMessages= IdentifiedValidator.assertExistsIdentifieds(compInterface, validationMessages, compInterface.getNonDirectionals(), features, message);			
+			
+			//validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getInputs(), features, "{INTERFACE_INPUT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Interface.input);			
+			//validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getOutputs(), features, "{INTERFACE_OUTPUT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Interface.output);
+			//validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getNonDirectionals(), features, "{INTERFACE_NONDIRECTIONAL_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Interface.nondirectional);
+		}
+		
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.sequence, this.resource, getSequences(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.feature, this.resource, getFeatures(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.interaction, this.resource, getInteractions(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.constraint, this.resource, getConstraints(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.model, this.resource, getModels(), validationMessages);
+		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.Component.hasInterface, this.resource, getInterface(), validationMessages);
+		return validationMessages;
 	}
 	
 	@Valid
@@ -67,18 +176,41 @@ public class Component extends TopLevel {
 	}
 	
 	
-	public List<URI> getSequences() {
+	/*public List<URI> getSequences() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Component.sequence);
 	}
+	*/
 	
-	public void setSequences(List<URI> sequences) {
-		RDFUtil.setProperty(resource, DataModel.Component.sequence, sequences);
+	public List<Sequence> getSequences() throws SBOLGraphException {
+		return addToList(DataModel.Component.sequence, Sequence.class, DataModel.Sequence.uri);
 	}
 	
-	public List<URI> getSequences(Encoding encoding)
+	public void setSequences(List<Sequence> sequences) {
+		RDFUtil.setProperty(resource, DataModel.Component.sequence, SBOLUtil.getURIs(sequences));
+	}
+	
+	public List<Sequence> getSequences(Encoding encoding) throws SBOLGraphException
 	{
-		return filterIdentifieds(this.getSequences(),DataModel.Sequence.encoding, encoding.getUri().toString());
+		ArrayList<Sequence> result=null;
+		List<Sequence> sequences=this.getSequences();
+		if (encoding!=null && sequences!=null)
+		{
+			for (Sequence sequence: sequences)
+			{
+				if (sequence.getEncoding().equals(encoding))
+				{
+					if (result==null)
+					{
+						result=new ArrayList<Sequence>();
+					}
+					result.add(sequence);
+				}
+			}
+		}
+		return result;
+		//return filterIdentifieds(SBOLUtil.getURIs(this.getSequences()),DataModel.Sequence.encoding, encoding.getUri().toString());
 	}
+	
 	
 	//Features
 	
@@ -101,7 +233,7 @@ public class Component extends TopLevel {
 	}
 	*/
 	
-	private void addToList(List<Feature> listA, List<? extends Feature> listB)
+	private void addToFeatureList(List<Feature> listA, List<? extends Feature> listB)
 	{
 		if (listB!=null && listB.size()>0)
 		{
@@ -111,11 +243,11 @@ public class Component extends TopLevel {
 	
 	public List<Feature> getFeatures() throws SBOLGraphException{
 		List<Feature> features=new ArrayList<Feature>();
-		addToList(features, getSubComponents());
-		addToList(features, getComponentReferences());
-		addToList(features, getLocalSubComponents());
-		addToList(features, getExternallyDefineds());
-		addToList(features, getSequenceFeatures());	
+		addToFeatureList(features, getSubComponents());
+		addToFeatureList(features, getComponentReferences());
+		addToFeatureList(features, getLocalSubComponents());
+		addToFeatureList(features, getExternallyDefineds());
+		addToFeatureList(features, getSequenceFeatures());	
 		return features;
 	}
 	
@@ -135,20 +267,20 @@ public class Component extends TopLevel {
 		return subComponents;*/
 	}
 	
-	public SubComponent createSubComponent(URI uri, URI isInstanceOf) throws SBOLGraphException
+	public SubComponent createSubComponent(URI uri, Component isInstanceOf) throws SBOLGraphException
 	{
 		SubComponent feature = new SubComponent(this.resource.getModel(), uri);
-		feature.setIsInstanceOf(isInstanceOf);
+		feature.setInstanceOf(isInstanceOf);
 		addToList(feature, DataModel.Component.feature);
 		return feature;	
 	}
 	
-	private SubComponent createSubComponent(String displayId, URI isInstanceOf) throws SBOLGraphException
+	private SubComponent createSubComponent(String displayId, Component isInstanceOf) throws SBOLGraphException
 	{
 		return createSubComponent(SBOLAPI.append(this.getUri(), displayId), isInstanceOf);
 	}
 	
-	public SubComponent createSubComponent(URI isInstanceOf) throws SBOLGraphException
+	public SubComponent createSubComponent(Component isInstanceOf) throws SBOLGraphException
 	{
 		String displayId=SBOLAPI.createLocalName(DataModel.SubComponent.uri, getSubComponents());
 		return createSubComponent(displayId, isInstanceOf);
@@ -159,7 +291,7 @@ public class Component extends TopLevel {
 		return addToList(DataModel.Component.feature, ComponentReference.class, DataModel.ComponentReference.uri);
 	}
 	
-	public ComponentReference createComponentReference(URI uri, URI feature, URI inChildOf) throws SBOLGraphException {
+	public ComponentReference createComponentReference(URI uri, Feature feature, SubComponent inChildOf) throws SBOLGraphException {
 		ComponentReference componentReference= new ComponentReference(this.resource.getModel(), uri);
 		componentReference.setRefersTo(feature);
 		componentReference.setInChildOf(inChildOf);
@@ -167,21 +299,13 @@ public class Component extends TopLevel {
 		return componentReference;	
 	}
 	
-	private ComponentReference createComponentReference(String displayId, URI feature, URI inChildOf) throws SBOLGraphException {
+	private ComponentReference createComponentReference(String displayId, Feature feature, SubComponent inChildOf) throws SBOLGraphException {
 		return createComponentReference(SBOLAPI.append(this.getUri(), displayId), feature, inChildOf);	
 	}
 	
-	public ComponentReference createComponentReference(URI feature, URI inChildOf) throws SBOLGraphException {
+	public ComponentReference createComponentReference(Feature feature, SubComponent inChildOf) throws SBOLGraphException {
 		String displayId=SBOLAPI.createLocalName(DataModel.ComponentReference.uri, getComponentReferences());
 		return createComponentReference(displayId, feature, inChildOf);	
-	}
-	
-	public ComponentReference createComponentReference(URI uri, Feature feature, SubComponent inChildOf) throws SBOLGraphException {
-		return createComponentReference(uri, feature.getUri(), inChildOf.getUri());
-	}
-	
-	public ComponentReference createComponentReference(Feature feature, SubComponent inChildOf) throws SBOLGraphException {
-		return createComponentReference(feature.getUri(), inChildOf.getUri());
 	}
 
 	//Local sub components
@@ -241,7 +365,7 @@ public class Component extends TopLevel {
 		return addToList(DataModel.Component.feature, SequenceFeature.class, DataModel.SequenceFeature.uri);
 	}
 	
-	public SequenceFeature createSequenceFeature(URI uri, List<LocationBuilder> locations) throws SBOLGraphException {
+	/*public SequenceFeature createSequenceFeature(URI uri, List<LocationBuilder> locations) throws SBOLGraphException {
 		SequenceFeature sequenceFeature= new SequenceFeature(this.resource.getModel(), uri);
 		
 		RDFUtil.addProperty(resource, DataModel.Component.feature, sequenceFeature.getUri());
@@ -262,6 +386,42 @@ public class Component extends TopLevel {
 	public SequenceFeature createSequenceFeature(List<LocationBuilder> locations) throws SBOLGraphException {
 		String displayId=SBOLAPI.createLocalName(DataModel.SequenceFeature.uri, getSequenceFeatures());	
 		return createSequenceFeature(displayId, locations);
+	}
+	*/
+	
+	public SequenceFeature createSequenceFeature(Sequence sequence) throws SBOLGraphException {
+		SequenceFeature feature=createSequenceFeature();
+		feature.createEntireSequence(sequence);
+		return feature;
+	}
+	
+	public SequenceFeature createSequenceFeature(int at, Sequence sequence) throws SBOLGraphException {
+		SequenceFeature feature=createSequenceFeature();
+		feature.createCut(at, sequence);
+		return feature;
+	}
+	
+	public SequenceFeature createSequenceFeature(int start, int end, Sequence sequence) throws SBOLGraphException {
+		SequenceFeature feature=createSequenceFeature();
+		feature.createRange(start, end, sequence);
+		return feature;
+	}
+	
+	private SequenceFeature createSequenceFeature() throws SBOLGraphException {
+		String displayId=SBOLAPI.createLocalName(DataModel.SequenceFeature.uri, getSequenceFeatures());	
+		SequenceFeature seqFeature=createSequenceFeature(displayId);
+		return seqFeature;
+	}
+	
+	private SequenceFeature createSequenceFeature(String displayId) throws SBOLGraphException {
+		SequenceFeature seqFeature=createSequenceFeature(SBOLAPI.append(this.getUri(), displayId));
+		return seqFeature;
+	}
+	
+	private SequenceFeature createSequenceFeature(URI uri) throws SBOLGraphException {
+		SequenceFeature sequenceFeature= new SequenceFeature(this.resource.getModel(), uri);
+		RDFUtil.addProperty(resource, DataModel.Component.feature, sequenceFeature.getUri());
+		return sequenceFeature;	
 	}
 	
 	/*
@@ -302,11 +462,11 @@ public class Component extends TopLevel {
 	
 	@Valid
 	public List<Interaction> getInteractions() throws SBOLGraphException {
-		return addToList(DataModel.Component.interaction, Interaction.class);
+		return addToList(DataModel.Component.interaction, Interaction.class, DataModel.Interaction.uri);
 	}
 	
 	//Constraint
-	public Constraint createConstraint(URI uri, URI restriction, URI subject, URI object) throws SBOLGraphException {
+	public Constraint createConstraint(URI uri, URI restriction, Feature subject, Feature object) throws SBOLGraphException {
 		Constraint constraint= new Constraint(this.resource.getModel(), uri);
 		constraint.setRestriction(restriction);
 		constraint.setSubject(subject);
@@ -315,18 +475,18 @@ public class Component extends TopLevel {
 		return constraint;
 	}
 	
-	private Constraint createConstraint(String displayId, URI restriction, URI subject, URI object) throws SBOLGraphException {
+	private Constraint createConstraint(String displayId, URI restriction, Feature subject, Feature object) throws SBOLGraphException {
 		return createConstraint(SBOLAPI.append(this.getUri(), displayId), restriction, subject, object);
 	}
 	
-	public Constraint createConstraint(URI restriction, URI subject, URI object) throws SBOLGraphException {
+	public Constraint createConstraint(URI restriction, Feature subject, Feature object) throws SBOLGraphException {
 		String displayId=SBOLAPI.createLocalName(DataModel.Constraint.uri, getConstraints());	
 		return createConstraint(displayId, restriction, subject, object);
 	}
 	
 	@Valid
 	public List<Constraint> getConstraints() throws SBOLGraphException {
-		return addToList(DataModel.Component.constraint, Constraint.class);
+		return addToList(DataModel.Component.constraint, Constraint.class, DataModel.Constraint.uri);
 	}
 	
 	//Interface
@@ -344,23 +504,42 @@ public class Component extends TopLevel {
 		return createInterface(SBOLAPI.append(this.getUri(), "Interface1"));
 	}
 	
-	
+	@Valid
 	public Interface getInterface() throws SBOLGraphException {
-		return contsructIdentified(DataModel.Component.hasInterface, Interface.class);
+		return contsructIdentified(DataModel.Component.hasInterface, Interface.class, DataModel.Interface.uri);
 	}
 	
-	public List<URI> getModels() {
+	/*public List<URI> getModels() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Component.model);
 	}
 	
 	public void setModels(List<URI> models) {
 		RDFUtil.setProperty(resource, DataModel.Component.model, models);
-	}
+	}*/
 
+	public List<Model> getModels() throws SBOLGraphException {
+		return addToList(DataModel.Component.model, Model.class, DataModel.Model.uri);
+	}
+	
+	public void setModels(List<Model> models) {
+		RDFUtil.setProperty(resource, DataModel.Component.model, SBOLUtil.getURIs(models));
+	}
+	
+	
 	public URI getResourceType()
 	{
 		return DataModel.Component.uri;
 	}
+	
+	@Override
+	public List<Identified> getChildren() throws SBOLGraphException {
+		List<Identified> identifieds=super.getChildren();
+		identifieds=addToList(identifieds, this.getFeatures());
+		identifieds=addToList(identifieds, this.getInteractions());
+		identifieds=addToList(identifieds, this.getInterface());
+		return identifieds;
+	}
+	
 }
 
 

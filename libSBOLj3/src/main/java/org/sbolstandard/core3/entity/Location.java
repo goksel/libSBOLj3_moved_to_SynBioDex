@@ -1,6 +1,8 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 
@@ -8,8 +10,10 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.util.SBOLUtil;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Orientation;
 
@@ -36,13 +40,28 @@ public abstract class  Location extends Identified {
 		super(displayId);
 	}*/
 
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.Location.sequence, this.resource, getSequence(), validationMessages);
+		return validationMessages;
+	}
+	
 	public Orientation getOrientation() throws SBOLGraphException{
 		Orientation orientation=null;
-		URI value=IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.orientation);
+		URI value=IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.orientation);
 		if (value!=null){
-			orientation=Orientation.get(value); 
+			orientation=toOrientation(value); 
+			PropertyValidator.getValidator().validateReturnValue(this, "toOrientation", orientation, URI.class);
 		}
 		return orientation;
+	}
+	
+	@NotNull(message = "{LOCATION_ORIENTATION_VALID_IF_NOT_NULL}")   
+	public Orientation toOrientation (URI uri)
+	{
+		return Orientation.get(uri); 
 	}
 	
 	public void setOrientation(Orientation orientation) {
@@ -57,7 +76,7 @@ public abstract class  Location extends Identified {
 	
 	public OptionalInt getOrder() throws SBOLGraphException {
 		OptionalInt order=OptionalInt.empty();
-		String value=IdentityValidator.getValidator().getPropertyAsString(this.resource, DataModel.Location.order);
+		String value=IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Location.order);
 		if (value!=null){
 			order=OptionalInt.of(Integer.valueOf(value));
 		}
@@ -75,18 +94,29 @@ public abstract class  Location extends Identified {
 	
 	@Valid
 	@NotNull(message = "{LOCATION_SEQUENCE_NOT_NULL}")
-	public URI getSequence() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Location.sequence);
+	public Sequence getSequence() throws SBOLGraphException {
+		//return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Location.sequence);
+		return contsructIdentified(DataModel.Location.sequence, Sequence.class, DataModel.Sequence.uri);
 	}
 
-	public void setSequence(@NotNull(message = "{LOCATION_SEQUENCE_NOT_NULL}") URI sequence) throws SBOLGraphException {
-		PropertyValidator.getValidator().validate(this, "setSequence", new Object[] {sequence}, URI.class);
-		RDFUtil.setProperty(this.resource, DataModel.Location.sequence, sequence);	
+	public void setSequence(@NotNull(message = "{LOCATION_SEQUENCE_NOT_NULL}") Sequence sequence) throws SBOLGraphException {
+		PropertyValidator.getValidator().validate(this, "setSequence", new Object[] {sequence}, Sequence.class);
+		RDFUtil.setProperty(this.resource, DataModel.Location.sequence, SBOLUtil.toURI(sequence));	
 	}
 	
 	public URI getResourceType()
 	{
 		return DataModel.Location.uri;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T extends Identified> HashMap<URI, Class<T>> getSubClassTypes()
+	{
+		HashMap<URI, Class<T>> subclasses=new HashMap<URI, Class<T>>();
+		subclasses.put(DataModel.Cut.uri, (Class<T>) Cut.class);
+		subclasses.put(DataModel.Range.uri,  (Class<T>)Range.class);
+		subclasses.put(DataModel.EntireSequenceLocation.uri,(Class<T>) EntireSequence.class);
+		return subclasses;
 	}
 	
 	public static class LocationFactory
@@ -114,10 +144,10 @@ public abstract class  Location extends Identified {
 	
 	public static abstract class LocationBuilder
 	{
-		protected URI sequence;
+		protected Sequence sequence;
 		private Orientation orientation;
 		private int order;
-		public LocationBuilder(URI sequence)
+		public LocationBuilder(Sequence sequence)
 		{
 			this.sequence=sequence;
 		}
@@ -149,7 +179,7 @@ public abstract class  Location extends Identified {
 	public static class CutLocationBuilder extends LocationBuilder
 	{
 		private int at;
-		public CutLocationBuilder(int at, URI sequence)
+		public CutLocationBuilder(int at, Sequence sequence)
 		{
 			super(sequence);
 			this.at=at;
@@ -179,7 +209,7 @@ public abstract class  Location extends Identified {
 		private int start;
 		private int end;
 		
-		public RangeLocationBuilder(int start, int end, URI sequence)
+		public RangeLocationBuilder(int start, int end, Sequence sequence)
 		{
 			super(sequence);
 			this.start=start;
@@ -210,7 +240,7 @@ public abstract class  Location extends Identified {
 	public static class EntireSequenceLocationBuilder extends LocationBuilder
 	{
 		
-		public EntireSequenceLocationBuilder(URI sequence)
+		public EntireSequenceLocationBuilder(Sequence sequence)
 		{
 			super(sequence);
 		}

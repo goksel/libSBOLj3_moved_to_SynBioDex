@@ -8,8 +8,10 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.util.SBOLUtil;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 import jakarta.validation.Valid;
@@ -29,6 +31,18 @@ public class ExternallyDefined extends Feature{
 	{
 		super(resource);
 	}
+	
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		List<URI> types=this.getTypes();
+		if (SBOLUtil.includesMultipleRootComponentTypes(types))
+		{
+			validationMessages= addToValidations(validationMessages,new ValidationMessage("{EXTERNALLYDEFINED_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type));      	
+		}
+		return validationMessages;
+	}
 
 	@Valid
 	@NotEmpty(message = "{EXTERNALLYDEFINED_TYPES_NOT_EMPTY}")
@@ -43,7 +57,7 @@ public class ExternallyDefined extends Feature{
 	
 	@NotNull(message = "{EXTERNALLYDEFINED_DEFINITION_NOT_NULL}")
 	public URI getDefinition() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ExternalyDefined.definition);
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ExternalyDefined.definition);
 	}
 
 	public void setDefinition(@NotNull(message = "{EXTERNALLYDEFINED_DEFINITION_NOT_NULL}") URI definition) throws SBOLGraphException {
