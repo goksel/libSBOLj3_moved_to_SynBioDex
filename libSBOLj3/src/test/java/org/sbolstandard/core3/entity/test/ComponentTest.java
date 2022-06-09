@@ -188,6 +188,16 @@ public class ComponentTest extends TestCase {
         TestUtil.validateIdentified(seqINCHI, 0);
         seqINCHI.setElements("InChI=1S/C6H8O6/c7-1-2(8)5-3(9)4(10)6(11)12-5/h2,5,7-10H,1H2/t2-,5+/m0/s1"); //L-ascorbic acid with InChI
         TestUtil.validateIdentified(seqINCHI, 0);
+        
+        // COMPONENT_TYPE_MATCH_PROPERTY
+        // Previous tests further up the page will test whether when set correctly it still returns true, so effectively random data here to check that it returns false when necessary
+        Configuration.getConfiguration().setValidateRecommendedRules(false);
+        Component componentTestFalse=SBOLAPI.createComponent(doc, "TestComponentTypeMatchFalse", base, "TestComponentTypeMatchFalse", "TestComponentTypeMatchFalse", base); 
+        TestUtil.validateIdentified(componentTestFalse, 0);
+        Configuration.getConfiguration().setValidateRecommendedRules(true);
+        Component componentTestTrue=SBOLAPI.createComponent(doc, "TestComponentTypeMatchTrue", base, "TestComponentTypeMatchTrue", "TestComponentTypeMatchTrue", base); 
+        TestUtil.validateIdentified(componentTestTrue, 1);
+	    
     }
 
 }
