@@ -96,7 +96,7 @@ public class Component extends TopLevel {
 						}
 					}
 					if(!foundType) {
-						validationMessages = addToValidations(validationMessages, new ValidationMessage("{COMPONENT_TYPE_MATCH_PROPERTY}", DataModel.Component.feature, DataModel.type));
+						validationMessages = addToValidations(validationMessages, new ValidationMessage("{COMPONENT_TYPE_MATCH_PROPERTY}", DataModel.type,componentType));
 					}
 				}
 			}

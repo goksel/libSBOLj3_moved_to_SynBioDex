@@ -197,6 +197,9 @@ public class ComponentTest extends TestCase {
         Configuration.getConfiguration().setValidateRecommendedRules(true);
         Component componentTestTrue=SBOLAPI.createComponent(doc, "TestComponentTypeMatchTrue", base, "TestComponentTypeMatchTrue", "TestComponentTypeMatchTrue", base); 
         TestUtil.validateIdentified(componentTestTrue, 1);
+        componentTestTrue.setTypes(Arrays.asList(ComponentType.DNA.getUrl()));
+        TestUtil.validateIdentified(componentTestTrue, 0);
+        
 	    
     }
 
