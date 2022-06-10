@@ -8,6 +8,7 @@ public class Configuration {
 	private boolean validateAfterSettingProperties=true;
 	private boolean validateBeforeSaving=true;
 	private boolean validateAfterReadingSBOLDocuments=true;
+	private boolean validateRecommendedRules=true;
 
 	
 	public boolean isValidateAfterSettingProperties() {
@@ -28,6 +29,14 @@ public class Configuration {
 	 */
 	public void setValidateBeforeSaving(boolean validateBeforeSaving) {
 		this.validateBeforeSaving = validateBeforeSaving;
+	}
+
+	public boolean isValidateRecommendedRules() {
+		return validateRecommendedRules;
+	}
+
+	public void setValidateRecommendedRules(boolean validateRecommendedRules) {
+		this.validateRecommendedRules = validateRecommendedRules;
 	}
 
 	

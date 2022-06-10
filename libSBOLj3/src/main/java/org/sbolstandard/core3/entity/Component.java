@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Location.LocationBuilder;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
@@ -81,6 +82,23 @@ public class Component extends TopLevel {
 				message.childPath(DataModel.ComponentReference.inChildOf);
 				validationMessages= IdentifiedValidator.assertExists(this, validationMessages, compRef.getInChildOf(), subComponents, message);			
 				//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, compRef.getInChildOf(), subComponents, "{COMBINATORIALREFERENCE_INCHILDOF_MUST_REFER_TO_A_SUBCOMPONENT_OF_THE_PARENT}", DataModel.ComponentReference.inChildOf);
+			}
+		}
+		
+		if (Configuration.getConfiguration().isValidateRecommendedRules())
+		{
+			if(types != null) {
+				for (URI componentType : types) {
+					boolean foundType = false;
+					for(ComponentType thisComponentType: ComponentType.values()) {
+						if(componentType.equals(thisComponentType.getUrl())){
+							foundType = true;
+						}
+					}
+					if(!foundType) {
+						validationMessages = addToValidations(validationMessages, new ValidationMessage("{COMPONENT_TYPE_MATCH_PROPERTY}", DataModel.type,componentType));
+					}
+				}
 			}
 		}
 		

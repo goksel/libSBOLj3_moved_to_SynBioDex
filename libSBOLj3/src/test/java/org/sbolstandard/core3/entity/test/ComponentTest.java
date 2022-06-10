@@ -111,7 +111,20 @@ public class ComponentTest extends TestCase {
 		TestUtil.validateIdentified(pTetR,doc,1);		
 		pTetR.setTypes(tempList);
 		TestUtil.validateIdentified(pTetR,doc,0);		
-		
+
+        // COMPONENT_TYPE_MATCH_PROPERTY
+		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org")));
+		TestUtil.validateIdentified(pTetR,doc,1);
+		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUrl()));
+		TestUtil.validateIdentified(pTetR,doc,0);
+		//also check that the configuration option properly disables the check and allows an invalid type
+		Configuration.getConfiguration().setValidateRecommendedRules(false);
+		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org")));
+		TestUtil.validateIdentified(pTetR,doc,0);
+		//Reset the values
+		pTetR.setTypes(tempList);
+		Configuration.getConfiguration().setValidateRecommendedRules(true);
+		TestUtil.validateIdentified(pTetR,doc,0);	
 		
 		Attachment attachment=doc.createAttachment("attachment1", URI.create("https://sbolstandard.org/attachment1"));
 	    attachment.setFormat(ModelLanguage.SBML);
@@ -187,7 +200,8 @@ public class ComponentTest extends TestCase {
         seqINCHI.setElements("InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3"); //ethanol
         TestUtil.validateIdentified(seqINCHI, 0);
         seqINCHI.setElements("InChI=1S/C6H8O6/c7-1-2(8)5-3(9)4(10)6(11)12-5/h2,5,7-10H,1H2/t2-,5+/m0/s1"); //L-ascorbic acid with InChI
-        TestUtil.validateIdentified(seqINCHI, 0);
+        TestUtil.validateIdentified(seqINCHI, 0);        
+	    
     }
 
 }
