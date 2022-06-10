@@ -1,5 +1,7 @@
 package org.sbolstandard.core3.vocabulary;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.sbolstandard.core3.util.URINameSpace;
 public enum ComponentType
@@ -21,6 +23,20 @@ public enum ComponentType
 	 
 	    public URI getUrl() {
 	        return url;
+	    }
+	    
+	    private static final Map<URI, ComponentType> lookup = new HashMap<>();
+	    
+		static {
+			for(ComponentType value : ComponentType.values())
+	        {
+	            lookup.put(value.getUrl(), value);
+	        }
+		}
+		  
+	    public static ComponentType get(URI url) 
+	    {
+	        return lookup.get(url);
 	    }
 }
 

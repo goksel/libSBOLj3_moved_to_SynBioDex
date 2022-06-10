@@ -2,6 +2,7 @@ package org.sbolstandard.core3.entity;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.jena.rdf.model.Resource;
@@ -99,6 +100,38 @@ public class Component extends TopLevel {
 				validationMessages= IdentifiedValidator.assertExists(this, validationMessages, constraint.getObject(), features, message);			
 				//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, constraint.getSubject(), features, "{CONSTRAINT_SUBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Constraint.subject);
 				//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, constraint.getObject(), features, "{CONSTRAINT_OBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Constraint.object);
+			}
+		}
+		
+		HashMap<ComponentType, URI> ComponentTypeEncodings = new HashMap<>();
+		ComponentTypeEncodings.put(ComponentType.DNA, Encoding.NucleicAcid.getUri());
+		ComponentTypeEncodings.put(ComponentType.RNA, Encoding.NucleicAcid.getUri());
+		ComponentTypeEncodings.put(ComponentType.Protein, Encoding.AminoAcid.getUri());
+		ComponentTypeEncodings.put(ComponentType.SimpleChemical, Encoding.INCHI.getUri());
+		ComponentTypeEncodings.put(ComponentType.SimpleChemical, Encoding.SMILES.getUri());
+		
+		// COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
+		List<Sequence> sequences = this.getSequences();
+		// check nothing is null before continuing
+		if (sequences != null && types != null) {
+			for (Sequence sequence : sequences) {
+				boolean foundTypeMatch = false;
+				Encoding encoding = sequence.getEncoding();
+				if (encoding != null) {
+					for (URI componentTypeURI : types) {
+						ComponentType componentType = ComponentType.get(componentTypeURI);
+						if(ComponentTypeEncodings.get(componentType).equals(encoding.getUri())) {
+							foundTypeMatch = true;
+							break;
+						}
+					}
+
+					if (!foundTypeMatch) {
+						validationMessages = addToValidations(validationMessages,
+								new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE}",
+										DataModel.type));
+					}
+				}
 			}
 		}
 		

@@ -63,6 +63,11 @@ public class ComponentTest extends TestCase {
 		TestUtil.validateIdentified(pTetR,doc,0);
 		pTetR.setSequences(tempSequences);
 		
+		pTetR.getSequences().get(0).setEncoding(Encoding.INCHI);
+		TestUtil.validateIdentified(pTetR,doc,1);
+		pTetR.getSequences().get(0).setEncoding(Encoding.NucleicAcid);
+		TestUtil.validateIdentified(pTetR,doc,0);
+		
 		Resource resource = TestUtil.getResource(pTetR);
 		
 		//SBOL_VALID_ENTITY_TYPES - Component.Sequences
