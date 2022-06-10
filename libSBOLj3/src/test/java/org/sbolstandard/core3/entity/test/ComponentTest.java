@@ -116,7 +116,20 @@ public class ComponentTest extends TestCase {
 		TestUtil.validateIdentified(pTetR,doc,1);		
 		pTetR.setTypes(tempList);
 		TestUtil.validateIdentified(pTetR,doc,0);		
-		
+
+        // COMPONENT_TYPE_MATCH_PROPERTY
+		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org")));
+		TestUtil.validateIdentified(pTetR,doc,1);
+		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUrl()));
+		TestUtil.validateIdentified(pTetR,doc,0);
+		//also check that the configuration option properly disables the check and allows an invalid type
+		Configuration.getConfiguration().setValidateRecommendedRules(false);
+		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org")));
+		TestUtil.validateIdentified(pTetR,doc,0);
+		//Reset the values
+		pTetR.setTypes(tempList);
+		Configuration.getConfiguration().setValidateRecommendedRules(true);
+		TestUtil.validateIdentified(pTetR,doc,0);	
 		
 		Attachment attachment=doc.createAttachment("attachment1", URI.create("https://sbolstandard.org/attachment1"));
 	    attachment.setFormat(ModelLanguage.SBML);
@@ -159,6 +172,41 @@ public class ComponentTest extends TestCase {
         TestUtil.validateIdentified(popsReceiver, doc,4);
         TestUtil.validateIdentified(interaction3, 1);
            
+     	//SEQUENCE_ELEMENTS_CONSISTENT_WITH_ENCODING
+        Sequence seqAA = doc.createSequence("seqAA");
+        seqAA.setEncoding(Encoding.AminoAcid);
+        seqAA.setElements("ATgz");
+        TestUtil.validateIdentified(seqAA, 1);
+        seqAA.setElements("ATgd");
+        TestUtil.validateIdentified(seqAA, 0);
+
+        Sequence seqNA = doc.createSequence("seqNA");
+        seqNA.setEncoding(Encoding.NucleicAcid);
+        seqNA.setElements("ZAtc");
+        TestUtil.validateIdentified(seqNA, 1);
+        seqNA.setElements("ATGcn");
+        TestUtil.validateIdentified(seqNA, 0);
+
+        // examples taken from https://archive.epa.gov/med/med_archive_03/web/html/smiles.html
+        Sequence seqSMILES = doc.createSequence("seqSMILES");
+        seqSMILES.setEncoding(Encoding.SMILES);
+        seqSMILES.setElements("Hydrogen Dioxode"); //pretty much anything is allowed other than a space
+        TestUtil.validateIdentified(seqSMILES, 1);
+        seqSMILES.setElements("c1c(N(=O)=O)cccc1"); // nitrobenzene
+        TestUtil.validateIdentified(seqSMILES, 0);
+        seqSMILES.setElements("C=1CCCCC1"); // Cyclohexene
+        TestUtil.validateIdentified(seqSMILES, 0);
+
+        // examples taken from https://en.wikipedia.org/wiki/International_Chemical_Identifier
+        Sequence seqINCHI = doc.createSequence("seqINCHI");
+        seqINCHI.setEncoding(Encoding.INCHI);
+        seqINCHI.setElements("InChI=JS/C2H6O/c1-2-3/h3H,2H2,1H3"); //ethanol but starting with a J
+        TestUtil.validateIdentified(seqINCHI, 1);
+        seqINCHI.setElements("InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3"); //ethanol
+        TestUtil.validateIdentified(seqINCHI, 0);
+        seqINCHI.setElements("InChI=1S/C6H8O6/c7-1-2(8)5-3(9)4(10)6(11)12-5/h2,5,7-10H,1H2/t2-,5+/m0/s1"); //L-ascorbic acid with InChI
+        TestUtil.validateIdentified(seqINCHI, 0);        
+	    
     }
 
 }
