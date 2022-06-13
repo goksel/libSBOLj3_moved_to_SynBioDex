@@ -121,12 +121,7 @@ public class Component extends TopLevel {
 			}
 		}
 		
-		HashMap<ComponentType, URI> ComponentTypeEncodings = new HashMap<>();
-		ComponentTypeEncodings.put(ComponentType.DNA, Encoding.NucleicAcid.getUri());
-		ComponentTypeEncodings.put(ComponentType.RNA, Encoding.NucleicAcid.getUri());
-		ComponentTypeEncodings.put(ComponentType.Protein, Encoding.AminoAcid.getUri());
-		ComponentTypeEncodings.put(ComponentType.SimpleChemical, Encoding.INCHI.getUri());
-		ComponentTypeEncodings.put(ComponentType.SimpleChemical, Encoding.SMILES.getUri());
+		
 		
 		// COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
 		List<Sequence> sequences = this.getSequences();
@@ -135,14 +130,10 @@ public class Component extends TopLevel {
 			for (Sequence sequence : sequences) {
 				boolean foundTypeMatch = false;
 				Encoding encoding = sequence.getEncoding();
+				
 				if (encoding != null) {
-					for (URI componentTypeURI : types) {
-						ComponentType componentType = ComponentType.get(componentTypeURI);
-						if(ComponentTypeEncodings.get(componentType).equals(encoding.getUri())) {
-							foundTypeMatch = true;
-							break;
-						}
-					}
+
+					foundTypeMatch = compareEncodingToType(encoding, types);
 
 					if (!foundTypeMatch) {
 						validationMessages = addToValidations(validationMessages,
@@ -591,6 +582,23 @@ public class Component extends TopLevel {
 		return identifieds;
 	}
 	
+	public boolean compareEncodingToType(Encoding encoding, List<URI> types) {
+		boolean foundTypeMatch = false;
+		outerloop:
+			for (URI componentTypeURI : types) {
+				ComponentType componentType = ComponentType.get(componentTypeURI);
+				if(componentType != null) {
+					List<URI> typeMatchs = ComponentType.checkComponentTypeMatch(componentType);
+					for (URI typeURI: typeMatchs) {
+						if(typeURI.equals(encoding.getUri())) {
+							foundTypeMatch = true;
+							break outerloop;
+						}
+					}
+				}
+			}
+		return foundTypeMatch;
+	}
 }
 
 

@@ -63,10 +63,12 @@ public class ComponentTest extends TestCase {
 		TestUtil.validateIdentified(pTetR,doc,0);
 		pTetR.setSequences(tempSequences);
 		
+		// COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
 		pTetR.getSequences().get(0).setEncoding(Encoding.INCHI);
 		TestUtil.validateIdentified(pTetR,doc,1);
 		pTetR.getSequences().get(0).setEncoding(Encoding.NucleicAcid);
 		TestUtil.validateIdentified(pTetR,doc,0);
+		pTetR.setSequences(tempSequences);
 		
 		Resource resource = TestUtil.getResource(pTetR);
 		
@@ -119,13 +121,13 @@ public class ComponentTest extends TestCase {
 
         // COMPONENT_TYPE_MATCH_PROPERTY
 		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org")));
-		TestUtil.validateIdentified(pTetR,doc,1);
+		TestUtil.validateIdentified(pTetR,doc,2); // will also error against COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
 		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUrl()));
-		TestUtil.validateIdentified(pTetR,doc,0);
+		TestUtil.validateIdentified(pTetR,doc,0); 
 		//also check that the configuration option properly disables the check and allows an invalid type
 		Configuration.getConfiguration().setValidateRecommendedRules(false);
 		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org")));
-		TestUtil.validateIdentified(pTetR,doc,0);
+		TestUtil.validateIdentified(pTetR,doc,1); // will also error against COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
 		//Reset the values
 		pTetR.setTypes(tempList);
 		Configuration.getConfiguration().setValidateRecommendedRules(true);
