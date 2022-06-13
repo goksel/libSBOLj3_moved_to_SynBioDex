@@ -126,22 +126,38 @@ public class Component extends TopLevel {
 		// COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
 		List<Sequence> sequences = this.getSequences();
 		// check nothing is null before continuing
+		
+		
 		if (sequences != null && types != null) {
-			for (Sequence sequence : sequences) {
+			for (URI componentTypeURI : types) {
 				boolean foundTypeMatch = false;
-				Encoding encoding = sequence.getEncoding();
-				
-				if (encoding != null) {
 
-					foundTypeMatch = compareEncodingToType(encoding, types);
-
-					if (!foundTypeMatch) {
-						validationMessages = addToValidations(validationMessages,
-								new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE}",
-										DataModel.type));
+				ComponentType componentType = ComponentType.get(componentTypeURI);
+				if(componentType != null) {
+					List<URI> typeMatches = ComponentType.checkComponentTypeMatch(componentType);
+					outerloop:
+					for (Sequence sequence : sequences) {
+						Encoding encoding = sequence.getEncoding();
+						if (encoding != null) {
+							for (URI typeURI: typeMatches) {
+								if(typeURI.equals(encoding.getUri())) {
+									foundTypeMatch = true;
+									break outerloop;
+								}
+							}
+						}
 					}
 				}
+				
+
+				if (!foundTypeMatch) {
+					validationMessages = addToValidations(validationMessages,
+							new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE}",
+									DataModel.type, componentType));
+				}
 			}
+			
+			
 		}
 		
 		List<Interaction> interactions=this.getInteractions();
@@ -582,23 +598,7 @@ public class Component extends TopLevel {
 		return identifieds;
 	}
 	
-	public boolean compareEncodingToType(Encoding encoding, List<URI> types) {
-		boolean foundTypeMatch = false;
-		outerloop:
-			for (URI componentTypeURI : types) {
-				ComponentType componentType = ComponentType.get(componentTypeURI);
-				if(componentType != null) {
-					List<URI> typeMatchs = ComponentType.checkComponentTypeMatch(componentType);
-					for (URI typeURI: typeMatchs) {
-						if(typeURI.equals(encoding.getUri())) {
-							foundTypeMatch = true;
-							break outerloop;
-						}
-					}
-				}
-			}
-		return foundTypeMatch;
-	}
+	
 }
 
 

@@ -147,11 +147,11 @@ public class ComponentTest extends TestCase {
 	    //Encoding must be provided if elements are set
 	    Sequence seq=doc.getSequences().get(0);
 	    seq.setEncoding(null);
-	    TestUtil.validateIdentified(seq,doc,1,1);
+	    TestUtil.validateIdentified(seq,doc,1,2); // will also error against COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
 		
 	    //One main component type must be provided.
 	    pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUrl(), ComponentType.Protein.getUrl() ));
-	    TestUtil.validateIdentified(pTetR,doc,1,2);
+	    TestUtil.validateIdentified(pTetR,doc,3,4); // will also error against COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
 	    pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUrl()));
 	    seq.setEncoding(Encoding.NucleicAcid);
 	    TestUtil.validateIdentified(pTetR,doc,0);
