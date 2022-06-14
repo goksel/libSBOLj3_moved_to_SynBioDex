@@ -2,6 +2,7 @@ package org.sbolstandard.core3.entity;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.jena.rdf.model.Resource;
@@ -118,6 +119,45 @@ public class Component extends TopLevel {
 				//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, constraint.getSubject(), features, "{CONSTRAINT_SUBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Constraint.subject);
 				//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, constraint.getObject(), features, "{CONSTRAINT_OBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Constraint.object);
 			}
+		}
+		
+		
+		
+		// COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
+		List<Sequence> sequences = this.getSequences();
+		// check nothing is null before continuing
+		
+		
+		if (sequences != null && types != null) {
+			for (URI componentTypeURI : types) {
+				boolean foundTypeMatch = false;
+
+				ComponentType componentType = ComponentType.get(componentTypeURI);
+				if(componentType != null) {
+					List<URI> typeMatches = ComponentType.checkComponentTypeMatch(componentType);
+					outerloop:
+					for (Sequence sequence : sequences) {
+						Encoding encoding = sequence.getEncoding();
+						if (encoding != null) {
+							for (URI typeURI: typeMatches) {
+								if(typeURI.equals(encoding.getUri())) {
+									foundTypeMatch = true;
+									break outerloop;
+								}
+							}
+						}
+					}
+				}
+				
+
+				if (!foundTypeMatch) {
+					validationMessages = addToValidations(validationMessages,
+							new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE}",
+									DataModel.type, componentType));
+				}
+			}
+			
+			
 		}
 		
 		List<Interaction> interactions=this.getInteractions();
@@ -557,6 +597,7 @@ public class Component extends TopLevel {
 		identifieds=addToList(identifieds, this.getInterface());
 		return identifieds;
 	}
+	
 	
 }
 
