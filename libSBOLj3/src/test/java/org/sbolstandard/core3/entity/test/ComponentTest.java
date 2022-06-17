@@ -71,7 +71,10 @@ public class ComponentTest extends TestCase {
 		TestUtil.validateIdentified(pTetR,doc,0);
 		pTetR.getSequences().get(0).setElements("aaa");
 		TestUtil.validateIdentified(pTetR,doc,1);
+		Configuration.getConfiguration().setValidateRecommendedRules(false);
+		TestUtil.validateIdentified(pTetR,doc,0);
 
+		Configuration.getConfiguration().setValidateRecommendedRules(true);
 		pTetR.setSequences(tempSequences); //use previously saved vales above
 		
 		
