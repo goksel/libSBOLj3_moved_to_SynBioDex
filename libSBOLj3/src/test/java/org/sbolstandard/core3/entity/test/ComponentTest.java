@@ -60,8 +60,20 @@ public class ComponentTest extends TestCase {
 		//Component.hasSequence can have multiple values
 		List<Sequence> tempSequences=pTetR.getSequences();
 		SBOLAPI.addSequence(doc, pTetR, Encoding.NucleicAcid, "aaaa");
+		// disable testing option requirements so it doesn't match against COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH
+		Configuration.getConfiguration().setValidateRecommendedRules(false);
 		TestUtil.validateIdentified(pTetR,doc,0);
+		Configuration.getConfiguration().setValidateRecommendedRules(true);
 		pTetR.setSequences(tempSequences);
+		
+		// COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH
+		SBOLAPI.addSequence(doc, pTetR, Encoding.NucleicAcid, "tttttttttttttttttttttttttttttttttttttttttttttttttttttt");
+		TestUtil.validateIdentified(pTetR,doc,0);
+		pTetR.getSequences().get(0).setElements("aaa");
+		TestUtil.validateIdentified(pTetR,doc,1);
+
+		pTetR.setSequences(tempSequences); //use previously saved vales above
+		
 		
 		// COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
 		pTetR.getSequences().get(0).setEncoding(Encoding.INCHI);
