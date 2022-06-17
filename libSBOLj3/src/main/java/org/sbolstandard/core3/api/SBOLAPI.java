@@ -445,7 +445,7 @@ public class SBOLAPI {
 	    
 	    public static Sequence addSequence(SBOLDocument doc, Component component, Encoding encoding, String elements) throws SBOLGraphException
 	    {
-	    	String localName=createLocalName(DataModel.Sequence.uri, component.getSequences());
+	    	String localName=createLocalName(DataModel.Sequence.uri, doc.getSequences());
 	    	Sequence seq=createSequence(doc, URI.create(component.getUri().toString() + "_" + localName), localName, component.getName() + " sequence", elements, encoding);
 	    	List<Sequence> sequences=component.getSequences();
 	    	if (sequences==null)
