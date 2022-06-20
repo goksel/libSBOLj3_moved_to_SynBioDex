@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
@@ -156,8 +157,50 @@ public class Component extends TopLevel {
 									DataModel.type, componentType));
 				}
 			}
+		}
+		
+		//COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH
+		if (Configuration.getConfiguration().isValidateRecommendedRules() && sequences != null && types != null) {
+			HashMap<Encoding, ArrayList<Integer>> elementLengths = new HashMap<>();
+			// loop through all sequences, get the elements for each sequence and store them in a hashmap for later comparison
+			for(Sequence sequence: sequences) {
+				Encoding encoding = sequence.getEncoding();
+				String elements = sequence.getElements();
+				int elementLength = elements.length();
+				if(elementLengths.containsKey(encoding)) {
+					ArrayList<Integer> lengthList = elementLengths.get(encoding);
+					lengthList.add(elementLength);
+					elementLengths.put(encoding, lengthList);
+				}else {
+					ArrayList<Integer> lengthList = new ArrayList<>();
+					lengthList.add(elementLength);
+					elementLengths.put(encoding, lengthList);
+				}
+			}
 			
-			
+			//having added the sequence lengths by element encoding, now check that everything matches
+			for (Map.Entry<Encoding, ArrayList<Integer>> entry : elementLengths.entrySet()) {
+				boolean sizesMatch = true;
+				
+				Encoding encoding = entry.getKey();
+				ArrayList<Integer> lengthList = entry.getValue();
+				if(lengthList.size()>1) {
+					int firstSize = lengthList.get(0);
+					System.out.println("First: "+firstSize);
+					//check all elements of the array against the first one to find a size
+					for(int i = 1; i< lengthList.size();i++) {
+						System.out.println(i+": "+lengthList.get(i));
+						if(lengthList.get(i) != firstSize) {
+							sizesMatch = false;
+						}
+					}
+				}
+				if(!sizesMatch) {
+					validationMessages = addToValidations(validationMessages,
+							new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH}",
+									DataModel.type, encoding));
+				}
+			}
 		}
 		
 		List<Interaction> interactions=this.getInteractions();
