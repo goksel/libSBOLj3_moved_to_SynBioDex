@@ -162,7 +162,7 @@ public class Component extends TopLevel {
 
 		//SUBCOMPONENT_OBJECTS_CIRCULAR_REFERENCE_CHAIN
 		if(subComponents!=null) {
-			if(checkSubComponentMatchToRoot(subComponents, new ArrayList<>(Arrays.asList(this.getUri())), 0)) {
+			if(checkSubComponentMatchToRoot(subComponents, new ArrayList<>(Arrays.asList(this.getUri())))) {
 				validationMessages = addToValidations(validationMessages, new ValidationMessage("{SUBCOMPONENT_OBJECTS_CIRCULAR_REFERENCE_CHAIN}", 
 						DataModel.type));
 				}
@@ -651,7 +651,7 @@ public class Component extends TopLevel {
 		return identifieds;
 	}
 	
-	public boolean checkSubComponentMatchToRoot(List<SubComponent> subComponents, ArrayList<URI> URIsToCheck, int depth) throws SBOLGraphException {
+	public boolean checkSubComponentMatchToRoot(List<SubComponent> subComponents, ArrayList<URI> URIsToCheck) throws SBOLGraphException {
 		boolean foundMatch = false;
 
 		if(subComponents!=null) {
@@ -666,7 +666,7 @@ public class Component extends TopLevel {
 				
 				URIsToCheck.add(componentInstance.getUri());
 				// also check any sub components of the subcomponent
-				foundMatch = checkSubComponentMatchToRoot(componentInstance.getSubComponents(), URIsToCheck, (depth+1));
+				foundMatch = checkSubComponentMatchToRoot(componentInstance.getSubComponents(), URIsToCheck);
 			}
 		}
 		
