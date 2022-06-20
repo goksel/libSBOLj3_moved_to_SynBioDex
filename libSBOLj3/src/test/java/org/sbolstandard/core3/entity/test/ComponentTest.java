@@ -188,6 +188,21 @@ public class ComponentTest extends TestCase {
         Participation participation3= interaction3.createParticipation(SBOLAPI.append(base, "inhibitor_participation3"), Arrays.asList(ParticipationRole.Inhibitor), gfpProteinSubComponent);
         TestUtil.validateIdentified(popsReceiver, doc,4);
         TestUtil.validateIdentified(interaction3, 1);
+
+        //SUBCOMPONENT_OBJECTS_CIRCULAR_REFERENCE_CHAIN
+        Component TetRbindingDomain=SBOLAPI.createComponent(doc, URI.create("https://synbiohub.org/public/igem/TetR_binding"),ComponentType.Protein.getUrl(), "TetRbinding", "TetR binding domain", Role.TF);
+        SubComponent tetRProteinSubComponent=SBOLAPI.addSubComponent(popsReceiver, TetR);//Valid
+	    TestUtil.validateIdentified(TetR,doc, 0, 5);
+        SubComponent tetRBindingProteinSubComponent=SBOLAPI.addSubComponent(TetR, TetRbindingDomain);//Valid
+	    TestUtil.validateIdentified(TetR,doc, 0, 5);
+        SubComponent tetRBindingProteinSubComponent2=SBOLAPI.addSubComponent(TetR, TetR);//InValid
+	    TestUtil.validateIdentified(TetR,doc, 2, 7);
+        SubComponent tetRBindingProteinSubComponent3=SBOLAPI.addSubComponent(TetRbindingDomain, TetR); //InValid
+	    TestUtil.validateIdentified(TetR,doc, 2, 8);
+        SubComponent tetRBindingProteinSubComponent4=SBOLAPI.addSubComponent(TetRbindingDomain, popsReceiver); //InValid
+        TestUtil.validateIdentified(TetR,doc, 2, 8);
+	    TestUtil.validateIdentified(popsReceiver,doc,5, 8);
+
            
      	//SEQUENCE_ELEMENTS_CONSISTENT_WITH_ENCODING
         Sequence seqAA = doc.createSequence("seqAA");
@@ -225,5 +240,4 @@ public class ComponentTest extends TestCase {
         TestUtil.validateIdentified(seqINCHI, 0);        
 	    
     }
-
 }
