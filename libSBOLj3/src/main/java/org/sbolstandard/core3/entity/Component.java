@@ -2,7 +2,6 @@ package org.sbolstandard.core3.entity;
 
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -162,8 +161,8 @@ public class Component extends TopLevel {
 
 		//SUBCOMPONENT_OBJECTS_CIRCULAR_REFERENCE_CHAIN
 		if(subComponents!=null) {
-			if(checkSubComponentMatchToRoot(subComponents, new ArrayList<>(Arrays.asList(this.getUri())))) {
-				validationMessages = addToValidations(validationMessages, new ValidationMessage("{SUBCOMPONENT_OBJECTS_CIRCULAR_REFERENCE_CHAIN}", 
+			if(checkSubComponentMatchToRoot(subComponents, this.getUri(), new ArrayList<URI>())) {
+				validationMessages = addToValidations(validationMessages, new ValidationMessage("{COMPONENT_TYPE_MATCH_PROPERTY}", 
 						DataModel.type));
 				}
 		}
@@ -651,22 +650,25 @@ public class Component extends TopLevel {
 		return identifieds;
 	}
 	
-	public boolean checkSubComponentMatchToRoot(List<SubComponent> subComponents, ArrayList<URI> URIsToCheck) throws SBOLGraphException {
+	public boolean checkSubComponentMatchToRoot(List<SubComponent> subComponents, URI rootURI, ArrayList<URI> visitedSubComponents) throws SBOLGraphException {
 		boolean foundMatch = false;
 
 		if(subComponents!=null) {
 			for(SubComponent subComponent: subComponents) {	
 				Component componentInstance = subComponent.getInstanceOf();
-				//need to check against every parent to avoid against an infinite loop if more than 2 levels deep and one of the mid parents is itself the same component
-				for(URI URItoCheck: URIsToCheck) {
-					if(componentInstance!=null && componentInstance.getUri().equals(URItoCheck)) {
-						return true;
-					}
+				if(componentInstance!=null && componentInstance.getUri().equals(rootURI)) {
+					return true;
 				}
 				
-				URIsToCheck.add(componentInstance.getUri());
-				// also check any sub components of the subcomponent
-				foundMatch = checkSubComponentMatchToRoot(componentInstance.getSubComponents(), URIsToCheck);
+				// also check any sub components of the subcomponent if it has not been checked already
+				
+				if(!visitedSubComponents.contains(componentInstance.getUri())) {
+					visitedSubComponents.add(componentInstance.getUri());
+					foundMatch = checkSubComponentMatchToRoot(componentInstance.getSubComponents(), rootURI, visitedSubComponents);
+				}else {
+					// If it has already been checked in this chain then automatically there has to be recursion
+					return true;
+				}
 			}
 		}
 		
