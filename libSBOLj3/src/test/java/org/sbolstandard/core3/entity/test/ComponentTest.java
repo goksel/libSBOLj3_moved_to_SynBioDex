@@ -192,16 +192,24 @@ public class ComponentTest extends TestCase {
         //SUBCOMPONENT_OBJECTS_CIRCULAR_REFERENCE_CHAIN
         Component TetRbindingDomain=SBOLAPI.createComponent(doc, URI.create("https://synbiohub.org/public/igem/TetR_binding"),ComponentType.Protein.getUrl(), "TetRbinding", "TetR binding domain", Role.TF);
         SubComponent tetRProteinSubComponent=SBOLAPI.addSubComponent(popsReceiver, TetR);//Valid
-	    TestUtil.validateIdentified(TetR,doc, 0, 5);
+	    TestUtil.validateIdentified(TetR,doc, 0, 4);
         SubComponent tetRBindingProteinSubComponent=SBOLAPI.addSubComponent(TetR, TetRbindingDomain);//Valid
-	    TestUtil.validateIdentified(TetR,doc, 0, 5);
+	    TestUtil.validateIdentified(TetR,doc, 0, 4);
         SubComponent tetRBindingProteinSubComponent2=SBOLAPI.addSubComponent(TetR, TetR);//InValid
-	    TestUtil.validateIdentified(TetR,doc, 2, 7);
+        TestUtil.validateIdentified(TetR,doc, 2, 6);
+        
         SubComponent tetRBindingProteinSubComponent3=SBOLAPI.addSubComponent(TetRbindingDomain, TetR); //InValid
-	    TestUtil.validateIdentified(TetR,doc, 2, 8);
+	    TestUtil.validateIdentified(TetR,doc, 3, 8);
+	    TestUtil.validateIdentified(TetRbindingDomain,1);
+	    
         SubComponent tetRBindingProteinSubComponent4=SBOLAPI.addSubComponent(TetRbindingDomain, popsReceiver); //InValid
-        TestUtil.validateIdentified(TetR,doc, 2, 8);
-	    TestUtil.validateIdentified(popsReceiver,doc,5, 8);
+        
+       // Configuration.getConfiguration().setValidateBeforeSaving(false);
+       // System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
+        
+        
+        TestUtil.validateIdentified(TetR,doc, 5, 11);
+	    TestUtil.validateIdentified(popsReceiver,doc,5, 11);
 
            
      	//SEQUENCE_ELEMENTS_CONSISTENT_WITH_ENCODING

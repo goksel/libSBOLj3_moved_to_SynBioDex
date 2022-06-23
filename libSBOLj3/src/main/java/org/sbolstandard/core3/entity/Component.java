@@ -67,11 +67,13 @@ public class Component extends TopLevel {
 		{
 			for (SubComponent subComponent: subComponents)
 			{
-				ValidationMessage message = new ValidationMessage("{SUBCOMPONENT_INSTANCEOF_MUST_NOT_REFER_ITS_PARENT}", DataModel.Component.feature,subComponent, subComponent.getInstanceOf());
-				message.childPath(DataModel.SubComponent.instanceOf);
-				validationMessages= IdentifiedValidator.assertNotEqual(this, validationMessages, subComponent.getInstanceOf(), this, message);			
+				if (subComponent.getInstanceOf()!=null)
+				{
+					ValidationMessage message = new ValidationMessage("{SUBCOMPONENT_INSTANCEOF_MUST_NOT_REFER_ITS_PARENT}", DataModel.Component.feature,subComponent, subComponent.getInstanceOf().getUri());
+					message.childPath(DataModel.SubComponent.instanceOf);
+					validationMessages= IdentifiedValidator.assertNotEqual(this, validationMessages, subComponent.getInstanceOf(), this, message);			
 				//validationMessages= IdentifiedValidator.assertNotEqual(this, validationMessages, subComponent.getIsInstanceOf().getUri(), this.getUri(), message);			
-				
+				}
 			}
 		}
 		
@@ -161,12 +163,8 @@ public class Component extends TopLevel {
 
 		//SUBCOMPONENT_OBJECTS_CIRCULAR_REFERENCE_CHAIN
 		if(subComponents!=null) {
-			if(checkSubComponentMatchToRoot(subComponents, this.getUri(), new ArrayList<URI>())) {
-				validationMessages = addToValidations(validationMessages, new ValidationMessage("{COMPONENT_TYPE_MATCH_PROPERTY}", 
-						DataModel.type));
-				}
+			validationMessages = checkSubComponentMatchToRoot(validationMessages, this, this.getUri(), new ArrayList<URI>());
 		}
-
 		
 		//COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH
 		if (Configuration.getConfiguration().isValidateRecommendedRules() && sequences != null && types != null) {
@@ -195,10 +193,10 @@ public class Component extends TopLevel {
 				ArrayList<Integer> lengthList = entry.getValue();
 				if(lengthList.size()>1) {
 					int firstSize = lengthList.get(0);
-					System.out.println("First: "+firstSize);
+					//System.out.println("First: "+firstSize);
 					//check all elements of the array against the first one to find a size
 					for(int i = 1; i< lengthList.size();i++) {
-						System.out.println(i+": "+lengthList.get(i));
+						//System.out.println(i+": "+lengthList.get(i));
 						if(lengthList.get(i) != firstSize) {
 							sizesMatch = false;
 						}
@@ -207,7 +205,7 @@ public class Component extends TopLevel {
 				if(!sizesMatch) {
 					validationMessages = addToValidations(validationMessages,
 							new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH}",
-									DataModel.type, encoding));
+									DataModel.Sequence.encoding, encoding));
 				}
 			}
 		}
@@ -650,29 +648,28 @@ public class Component extends TopLevel {
 		return identifieds;
 	}
 	
-	public boolean checkSubComponentMatchToRoot(List<SubComponent> subComponents, URI rootURI, ArrayList<URI> visitedSubComponents) throws SBOLGraphException {
-		boolean foundMatch = false;
-
+	public List<ValidationMessage> checkSubComponentMatchToRoot(List<ValidationMessage> messages, Component currentComponent, URI rootURI, ArrayList<URI> visitedSubComponents) throws SBOLGraphException {
+		List<SubComponent> subComponents=currentComponent.getSubComponents();
 		if(subComponents!=null) {
 			for(SubComponent subComponent: subComponents) {	
 				Component componentInstance = subComponent.getInstanceOf();
-				if(componentInstance!=null && componentInstance.getUri().equals(rootURI)) {
-					return true;
-				}
-				
-				// also check any sub components of the subcomponent if it has not been checked already
-				
-				if(!visitedSubComponents.contains(componentInstance.getUri())) {
-					visitedSubComponents.add(componentInstance.getUri());
-					foundMatch = checkSubComponentMatchToRoot(componentInstance.getSubComponents(), rootURI, visitedSubComponents);
-				}else {
-					// If it has already been checked in this chain then automatically there has to be recursion
-					return true;
+				if (componentInstance!=null)
+				{		
+					if(componentInstance.getUri().equals(rootURI)) {
+						ValidationMessage message= new ValidationMessage("{SUBCOMPONENT_OBJECTS_CIRCULAR_REFERENCE_CHAIN}", DataModel.Component.feature,subComponent, currentComponent);
+						message.childPath(DataModel.SubComponent.instanceOf, subComponent.getInstanceOf());
+						messages=addToValidations(messages, message);
+					}
+					
+					// also check any sub components of the subcomponent if it has not been checked already			
+					if(!visitedSubComponents.contains(componentInstance.getUri())) {
+						visitedSubComponents.add(componentInstance.getUri());
+						messages = checkSubComponentMatchToRoot(messages, componentInstance, rootURI, visitedSubComponents);
+					}
 				}
 			}
 		}
-		
-		return foundMatch;
+		return messages;
 	}
 	
 	
