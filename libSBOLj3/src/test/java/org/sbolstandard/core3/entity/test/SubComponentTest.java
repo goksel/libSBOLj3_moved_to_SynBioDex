@@ -73,7 +73,7 @@ public class SubComponentTest extends TestCase {
 	    termSubComponent.setInstanceOf(term);
 	    TestUtil.validateIdentified(device, 3);   
 	    termSubComponent.setInstanceOf(device);
-	    TestUtil.validateIdentified(device, 4);
+	    TestUtil.validateIdentified(device, 5);
 	    
 	    //Clean the errors
 	    termSubComponent.setInstanceOf(term);

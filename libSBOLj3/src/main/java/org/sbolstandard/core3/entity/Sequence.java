@@ -44,7 +44,7 @@ public class Sequence extends TopLevel {
 
 		String elements = this.getElements();
 		Encoding enc = this.getEncoding();
-		if (elements != null && enc != null) {
+		if (elements!=null && !elements.isEmpty() && enc != null) {
 			if (enc.equals(Encoding.AminoAcid)) {
 				Pattern patternAA = Pattern.compile("^[ARNDCQEGHILKMFPSTWYVX]+$", Pattern.CASE_INSENSITIVE); // compiled from list of characters at https://iupac.qmul.ac.uk/AminoAcid/AA1n2.html
 				Matcher matcherAA = patternAA.matcher(elements);
