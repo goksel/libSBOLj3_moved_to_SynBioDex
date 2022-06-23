@@ -203,6 +203,8 @@ public class ComponentTest extends TestCase {
 	    TestUtil.validateIdentified(TetRbindingDomain,1);
 	    
         SubComponent tetRBindingProteinSubComponent4=SBOLAPI.addSubComponent(TetRbindingDomain, popsReceiver); //InValid
+		
+		//SUBCOMPONENT_LOCATION_LENGTH
         
        // Configuration.getConfiguration().setValidateBeforeSaving(false);
        // System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));

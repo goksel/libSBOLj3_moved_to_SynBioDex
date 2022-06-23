@@ -62,7 +62,7 @@ public class Component extends TopLevel {
 			validationMessages= addToValidations(validationMessages,new ValidationMessage("{COMPONENT_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type));      	
 		}
 		
-		List<SubComponent> subComponents=this.getSubComponents();
+		List<SubComponent> subComponents = this.getSubComponents();
 		if (subComponents!=null)
 		{
 			for (SubComponent subComponent: subComponents)
@@ -164,6 +164,56 @@ public class Component extends TopLevel {
 		//SUBCOMPONENT_OBJECTS_CIRCULAR_REFERENCE_CHAIN
 		if(subComponents!=null) {
 			validationMessages = checkSubComponentMatchToRoot(validationMessages, this, this.getUri(), new ArrayList<URI>());
+		}
+		
+		
+		//SUBCOMPONENT_LOCATION_LENGTH
+		/* If a SubComponent object has at least one hasLocation and zero sourceLocation properties, and the Component 
+		 * linked by its instanceOf has precisely one hasSequence property whose Sequence has a value for its elements property, 
+		 * then the sum of the lengths of the Location objects referred to by the hasLocation properties MUST equal the 
+		 * length of the elements value of the Sequence.
+		 */
+		if(subComponents != null) {
+			for (SubComponent subComponent: subComponents)
+			{
+				List<Location> SubComponentLocations = subComponent.getLocations();
+				List<Location> SubComponentSourceLocations = subComponent.getSourceLocations();
+				Component subComponentInstance = subComponent.getInstanceOf();
+				
+				if(SubComponentLocations != null && SubComponentSourceLocations != null && subComponentInstance != null) {
+					List<Sequence> subComponentInstanceSequences = subComponentInstance.getSequences();
+					if(subComponentInstanceSequences != null) {
+						// if the subComponent object has at least one location and the Component has precisely one sequence
+						if(SubComponentLocations.size()>0 && SubComponentSourceLocations.size()==1) {
+							// ensure that only 1 of the sequences has a value for its element property
+							int count = 0;
+							String sequenceToUse = "";
+							for(Sequence sequence: subComponentInstanceSequences) {
+								String sequenceElements = sequence.getElements();
+								// only count if the elements exist and have a length larger then 0
+								if(sequenceElements != null && sequenceElements.length()>0) {
+									count++;
+									sequenceToUse = sequenceElements;
+								}
+							}
+							if(count==1) {
+								int locationLength = 0;
+								// the sum of the lengths of the location objects
+								for(Location location: SubComponentLocations) {
+									locationLength += location.getSequence().getElements().length();
+								}
+								// check this is equal to the length of the single sequence found above
+								if(locationLength != sequenceToUse.length()) {
+									validationMessages = addToValidations(validationMessages,
+											new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE}",
+													DataModel.type));
+								}
+							}
+						}
+					}
+				}
+				
+			}
 		}
 		
 		//COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH
