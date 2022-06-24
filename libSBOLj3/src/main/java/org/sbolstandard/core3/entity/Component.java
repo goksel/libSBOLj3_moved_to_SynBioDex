@@ -206,7 +206,7 @@ public class Component extends TopLevel {
 								if(locationLength != sequenceToUse.length()) {
 									validationMessages = addToValidations(validationMessages,
 											new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE}",
-													DataModel.type));
+													DataModel.SubComponent.location));
 								}
 							}
 						}
