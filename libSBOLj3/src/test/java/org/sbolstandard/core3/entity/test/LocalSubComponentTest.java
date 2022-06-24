@@ -70,13 +70,19 @@ public class LocalSubComponentTest extends TestCase {
 		RDFUtil.setProperty(resource, lsComponent.getDefaultLocationProperty(), tempURIs);
 		TestUtil.validateIdentified(lsComponent,doc,0);
 
-	    //LOCALSUBCOMPONENT_TYPE_FROM_TABLE2        
+	    //LOCALSUBCOMPONENT_TYPE_FROM_TABLE2
         lsComponent.setTypes(tempTypes);
 	    lsComponent.setTypes(Arrays.asList(ComponentType.Cell.getUrl()));
 	    TestUtil.validateIdentified(lsComponent,doc,1);
         lsComponent.setTypes(tempTypes);
 	    lsComponent.setTypes(Arrays.asList(ComponentType.DNA.getUrl()));
 	    TestUtil.validateIdentified(lsComponent,doc,0);
+	    // ensure it validates is optional checks are disabled
+		Configuration.getConfiguration().setValidateRecommendedRules(false);
+	    lsComponent.setTypes(Arrays.asList(ComponentType.Cell.getUrl()));
+	    TestUtil.validateIdentified(lsComponent,doc,0);
+
+		Configuration.getConfiguration().setValidateRecommendedRules(true);
 		
     }	
 	

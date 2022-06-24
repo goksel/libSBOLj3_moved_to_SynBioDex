@@ -10,6 +10,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.entity.Location.LocationFactory;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
@@ -47,17 +48,19 @@ public class LocalSubComponent extends FeatureWithLocation{
 		}
 		
 		// LOCALSUBCOMPONENT_TYPE_FROM_TABLE2
-		List<URI> subComponentTypes = this.getTypes();
-		if(subComponentTypes != null) {
-
-			for(URI componentTypeURI: subComponentTypes) {
-				ComponentType type = ComponentType.get(componentTypeURI);
+		if (Configuration.getConfiguration().isValidateRecommendedRules()) {
+			List<URI> subComponentTypes = this.getTypes();
+			if(subComponentTypes != null) {
+	
+				for(URI componentTypeURI: subComponentTypes) {
+					ComponentType type = ComponentType.get(componentTypeURI);
+							
+					if( !ComponentType.checkComponentTypeInTable2(type)){
+						System.out.println("NOOOOOOOOOOOOOO");
+						validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_FROM_TABLE2}", 
+								DataModel.type));      	
 						
-				if( !ComponentType.checkComponentTypeInTable2(type)){
-					System.out.println("NOOOOOOOOOOOOOO");
-					validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_FROM_TABLE2}", 
-							DataModel.type));      	
-					
+					}
 				}
 			}
 		}
