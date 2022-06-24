@@ -55,6 +55,20 @@ public enum ComponentType
 	    		return null;
 	    	}
 	    }
+	    
+	    public static boolean checkComponentTypeInTable2(ComponentType type) {
+	    	if( type.equals(ComponentType.DNA) ||
+					type.equals(ComponentType.RNA) ||
+					type.equals(ComponentType.Protein) ||
+					type.equals(ComponentType.SimpleChemical) ||
+					type.equals(ComponentType.NoncovalentComplex) ||
+					type.equals(ComponentType.FunctionalEntity)){
+	    		return true;
+	    	}
+	    	
+	    	return false;
+						
+	    }
 		
 }
 

@@ -45,6 +45,24 @@ public class LocalSubComponent extends FeatureWithLocation{
 		{
 			validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type));      	
 		}
+		
+		// LOCALSUBCOMPONENT_TYPE_FROM_TABLE2
+		List<URI> subComponentTypes = this.getTypes();
+		if(subComponentTypes != null) {
+
+			for(URI componentTypeURI: subComponentTypes) {
+				ComponentType type = ComponentType.get(componentTypeURI);
+						
+				if( !ComponentType.checkComponentTypeInTable2(type)){
+					System.out.println("NOOOOOOOOOOOOOO");
+					validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_FROM_TABLE2}", 
+							DataModel.type));      	
+					
+				}
+			}
+		}
+		
+		
 		return validationMessages;
 	}
 	

@@ -69,6 +69,14 @@ public class LocalSubComponentTest extends TestCase {
 		tempURIs.remove(i13504_system.getUri());
 		RDFUtil.setProperty(resource, lsComponent.getDefaultLocationProperty(), tempURIs);
 		TestUtil.validateIdentified(lsComponent,doc,0);
+
+	    //LOCALSUBCOMPONENT_TYPE_FROM_TABLE2        
+        lsComponent.setTypes(tempTypes);
+	    lsComponent.setTypes(Arrays.asList(ComponentType.Cell.getUrl()));
+	    TestUtil.validateIdentified(lsComponent,doc,1);
+        lsComponent.setTypes(tempTypes);
+	    lsComponent.setTypes(Arrays.asList(ComponentType.DNA.getUrl()));
+	    TestUtil.validateIdentified(lsComponent,doc,0);
 		
     }	
 	
