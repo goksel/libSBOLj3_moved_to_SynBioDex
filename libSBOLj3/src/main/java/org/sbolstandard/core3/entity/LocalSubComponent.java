@@ -10,6 +10,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.entity.Location.LocationFactory;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
@@ -45,6 +46,20 @@ public class LocalSubComponent extends FeatureWithLocation{
 		{
 			validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type));      	
 		}
+		
+		// LOCALSUBCOMPONENT_TYPE_FROM_TABLE2
+		if (Configuration.getConfiguration().isValidateRecommendedRules()) {
+			if(types != null) {
+				for(URI typeURI: types) {
+					ComponentType recommendType = ComponentType.getRecommendedType(typeURI);
+					if(recommendType ==null){
+						validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_FROM_TABLE2}", DataModel.type, typeURI));      		
+					}
+				}
+			}
+		}
+		
+		
 		return validationMessages;
 	}
 	

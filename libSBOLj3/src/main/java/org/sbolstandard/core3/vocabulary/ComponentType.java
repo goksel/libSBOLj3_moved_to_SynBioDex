@@ -34,10 +34,26 @@ public enum ComponentType
 	            lookup.put(value.getUrl(), value);
 	        }
 		}
+		
+		private static final Map<URI, ComponentType> recommendedLookup = new HashMap<>();
+	    
+		static {
+			recommendedLookup.put(DNA.getUrl(), DNA);
+			recommendedLookup.put(RNA.getUrl(), RNA);
+			recommendedLookup.put(Protein.getUrl(), Protein);
+			recommendedLookup.put(SimpleChemical.getUrl(), SimpleChemical);
+			recommendedLookup.put(NoncovalentComplex.getUrl(), NoncovalentComplex);
+			recommendedLookup.put(FunctionalEntity.getUrl(), FunctionalEntity);
+		}
 		  
 	    public static ComponentType get(URI url) 
 	    {
 	        return lookup.get(url);
+	    }
+	    
+	    public static ComponentType getRecommendedType(URI url) 
+	    {
+	        return recommendedLookup.get(url);
 	    }
 	    
 	    // hardcoded list of matches from table 2 to table 1
@@ -55,7 +71,7 @@ public enum ComponentType
 	    		return null;
 	    	}
 	    }
-		
+	    
 }
 
 
