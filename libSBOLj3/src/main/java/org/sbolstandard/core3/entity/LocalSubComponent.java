@@ -49,17 +49,11 @@ public class LocalSubComponent extends FeatureWithLocation{
 		
 		// LOCALSUBCOMPONENT_TYPE_FROM_TABLE2
 		if (Configuration.getConfiguration().isValidateRecommendedRules()) {
-			List<URI> subComponentTypes = this.getTypes();
-			if(subComponentTypes != null) {
-	
-				for(URI componentTypeURI: subComponentTypes) {
-					ComponentType type = ComponentType.get(componentTypeURI);
-							
-					if( !ComponentType.checkComponentTypeInTable2(type)){
-						System.out.println("NOOOOOOOOOOOOOO");
-						validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_FROM_TABLE2}", 
-								DataModel.type));      	
-						
+			if(types != null) {
+				for(URI typeURI: types) {
+					ComponentType recommendType = ComponentType.getRecommendedType(typeURI);
+					if(recommendType ==null){
+						validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_FROM_TABLE2}", DataModel.type, typeURI));      		
 					}
 				}
 			}
