@@ -48,7 +48,7 @@ public class LocalSubComponent extends FeatureWithLocation{
 		}
 		
 		// LOCALSUBCOMPONENT_TYPE_FROM_TABLE2
-		if (Configuration.getConfiguration().isValidateRecommendedRules()) {
+		if (Configuration.getInstance().isValidateRecommendedRules()) {
 			if(types != null) {
 				for(URI typeURI: types) {
 					ComponentType recommendType = ComponentType.getRecommendedType(typeURI);

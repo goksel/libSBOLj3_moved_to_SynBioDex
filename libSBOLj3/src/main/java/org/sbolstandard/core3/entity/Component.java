@@ -89,7 +89,7 @@ public class Component extends TopLevel {
 			}
 		}
 		
-		if (Configuration.getConfiguration().isValidateRecommendedRules())
+		if (Configuration.getInstance().isValidateRecommendedRules())
 		{
 			if(types != null) {
 				for (URI componentType : types) {
@@ -167,7 +167,7 @@ public class Component extends TopLevel {
 		}
 		
 		//COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH
-		if (Configuration.getConfiguration().isValidateRecommendedRules() && sequences != null && types != null) {
+		if (Configuration.getInstance().isValidateRecommendedRules() && sequences != null && types != null) {
 			HashMap<Encoding, ArrayList<Integer>> elementLengths = new HashMap<>();
 			// loop through all sequences, get the elements for each sequence and store them in a hashmap for later comparison
 			for(Sequence sequence: sequences) {

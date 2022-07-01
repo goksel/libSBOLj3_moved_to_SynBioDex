@@ -25,7 +25,7 @@ public class ExperimentTest extends TestCase {
         
         Experiment exp=doc.createExperiment("exp1");
         
-        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+        Configuration.getInstance().setValidateAfterSettingProperties(false);
         
         //Collections can be empty
         TestUtil.validateIdentified(exp,doc,0);

@@ -21,8 +21,8 @@ public class InvalidDisplayIdTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
        
-        Configuration.getConfiguration().setValidateBeforeSaving(false);
-        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+        Configuration.getInstance().setValidateBeforeSaving(false);
+        Configuration.getInstance().setValidateAfterSettingProperties(false);
  	    
         Component TetR_protein=SBOLAPI.createComponent(doc, "TetR_protein", ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
         TetR_protein.setDisplayId("1TetR");

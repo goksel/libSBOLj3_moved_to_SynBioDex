@@ -101,7 +101,7 @@ public class MeasureTest extends TestCase {
         TestUtil.validateIdentified(measure, doc, 0);
        */ 
         
-        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+        Configuration.getInstance().setValidateAfterSettingProperties(false);
 
         Optional<Float> temp=measure.getValue();
         measure.setValue(Optional.of(4f));

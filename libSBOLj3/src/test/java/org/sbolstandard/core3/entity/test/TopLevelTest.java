@@ -35,7 +35,7 @@ public class TopLevelTest extends TestCase {
         //attachment.setNamespace(URI.create("https://sbolstandard.org/examples"));
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         
-        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+        Configuration.getInstance().setValidateAfterSettingProperties(false);
 	  
        
         //TOPLEVEL_NAMESPACE_NOT_NULL

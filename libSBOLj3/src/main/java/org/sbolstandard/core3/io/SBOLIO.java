@@ -28,7 +28,7 @@ public class SBOLIO{
 	private static boolean isValid(SBOLDocument doc) throws SBOLGraphException
 	{
 		boolean isValid=true;
-		if (Configuration.getConfiguration().isValidateBeforeSaving())
+		if (Configuration.getInstance().isValidateBeforeSaving())
 		{
 			isValid=SBOLValidator.getValidator().isValid(doc);
 		}
@@ -37,7 +37,7 @@ public class SBOLIO{
 	
 	private static void assertValid(SBOLDocument doc) throws SBOLGraphException
 	{
-		if (Configuration.getConfiguration().validateAfterReadingSBOLDocuments())
+		if (Configuration.getInstance().validateAfterReadingSBOLDocuments())
 		{
 			SBOLValidator.getValidator().isValid(doc);
 		}

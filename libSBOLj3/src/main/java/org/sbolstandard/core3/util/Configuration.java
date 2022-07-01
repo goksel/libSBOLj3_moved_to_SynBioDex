@@ -66,7 +66,16 @@ public class Configuration {
 		
 	}
 	
-	public static Configuration getConfiguration()
+	private static class SingletonHelper {
+        private static final Configuration INSTANCE = new Configuration();
+    }
+	
+	public static Configuration getInstance()
+	{
+		return SingletonHelper.INSTANCE;
+	}
+	
+	/*public static Configuration getConfiguration()
 	{
 		if (configuration == null)
 		{
@@ -74,6 +83,8 @@ public class Configuration {
 		}
 		return configuration;
 	}
+	*/
+
 	
 	/*public enum PropertyValidationType{
 		ValidateBeforeSavingSBOLDocuments,

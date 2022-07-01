@@ -51,7 +51,7 @@ public class SubComponentTest extends TestCase {
 	    System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
 	    TestUtil.assertReadWrite(doc); 
 	    
-	    Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+	    Configuration.getInstance().setValidateAfterSettingProperties(false);
 	     
 	    TestUtil.validateIdentified(termSubComponent,doc,0);
 	    

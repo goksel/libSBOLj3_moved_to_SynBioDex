@@ -34,7 +34,7 @@ public class LocalSubComponentTest extends TestCase {
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
         
-        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+        Configuration.getInstance().setValidateAfterSettingProperties(false);
         
         TestUtil.validateIdentified(lsComponent,doc,0);
         //LocalSubComponent.types cannot be empty
@@ -78,11 +78,11 @@ public class LocalSubComponentTest extends TestCase {
 	    lsComponent.setTypes(Arrays.asList(ComponentType.DNA.getUrl()));
 	    TestUtil.validateIdentified(lsComponent,doc,0);
 	    // ensure it validates is optional checks are disabled
-		Configuration.getConfiguration().setValidateRecommendedRules(false);
+		Configuration.getInstance().setValidateRecommendedRules(false);
 	    lsComponent.setTypes(Arrays.asList(ComponentType.Cell.getUrl()));
 	    TestUtil.validateIdentified(lsComponent,doc,0);
 
-		Configuration.getConfiguration().setValidateRecommendedRules(true);
+		Configuration.getInstance().setValidateRecommendedRules(true);
 		
     }	
 	

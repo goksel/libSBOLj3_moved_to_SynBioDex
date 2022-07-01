@@ -56,7 +56,7 @@ public class AttachmentTest extends TestCase {
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
         
-        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+        Configuration.getInstance().setValidateAfterSettingProperties(false);
         
         URI temp=attachment.getSource();
         attachment.setSource(URI.create("https://sbolstandard.org/attachment1_source2"));

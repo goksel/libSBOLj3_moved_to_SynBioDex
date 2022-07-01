@@ -28,7 +28,7 @@ public class IdentifiedTest extends TestCase {
         attachment.setHashAlgorithm("Alg1");
         attachment.setHash("aaa");
         
-        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+        Configuration.getInstance().setValidateAfterSettingProperties(false);
         
         attachment.setDisplayId("test");
         TestUtil.validateIdentified(attachment,doc,0);

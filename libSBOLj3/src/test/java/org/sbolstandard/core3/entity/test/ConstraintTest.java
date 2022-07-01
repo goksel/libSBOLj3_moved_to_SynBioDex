@@ -41,7 +41,7 @@ public class ConstraintTest extends TestCase {
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
         
-        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+        Configuration.getInstance().setValidateAfterSettingProperties(false);
         
     	URI tempRestriction=constraint.getRestriction();
     	Feature tempSubject=constraint.getSubject();

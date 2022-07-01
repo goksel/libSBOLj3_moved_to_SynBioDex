@@ -48,7 +48,7 @@ public class ComponentTest extends TestCase {
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
         
-        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+        Configuration.getInstance().setValidateAfterSettingProperties(false);
         
         
 		//Component.hasSequence can have zero values
@@ -61,9 +61,9 @@ public class ComponentTest extends TestCase {
 		List<Sequence> tempSequences=pTetR.getSequences();
 		SBOLAPI.addSequence(doc, pTetR, Encoding.NucleicAcid, "aaaa");
 		// disable testing option requirements so it doesn't match against COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH
-		Configuration.getConfiguration().setValidateRecommendedRules(false);
+		Configuration.getInstance().setValidateRecommendedRules(false);
 		TestUtil.validateIdentified(pTetR,doc,0);
-		Configuration.getConfiguration().setValidateRecommendedRules(true);
+		Configuration.getInstance().setValidateRecommendedRules(true);
 		pTetR.setSequences(tempSequences);
 		
 		// COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH
@@ -71,10 +71,10 @@ public class ComponentTest extends TestCase {
 		TestUtil.validateIdentified(pTetR,doc,0);
 		pTetR.getSequences().get(0).setElements("aaa");
 		TestUtil.validateIdentified(pTetR,doc,1);
-		Configuration.getConfiguration().setValidateRecommendedRules(false);
+		Configuration.getInstance().setValidateRecommendedRules(false);
 		TestUtil.validateIdentified(pTetR,doc,0);
 
-		Configuration.getConfiguration().setValidateRecommendedRules(true);
+		Configuration.getInstance().setValidateRecommendedRules(true);
 		pTetR.setSequences(tempSequences); //use previously saved vales above
 		
 		
@@ -140,12 +140,12 @@ public class ComponentTest extends TestCase {
 		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUrl()));
 		TestUtil.validateIdentified(pTetR,doc,0); 
 		//also check that the configuration option properly disables the check and allows an invalid type
-		Configuration.getConfiguration().setValidateRecommendedRules(false);
+		Configuration.getInstance().setValidateRecommendedRules(false);
 		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org")));
 		TestUtil.validateIdentified(pTetR,doc,1); // will also error against COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
 		//Reset the values
 		pTetR.setTypes(tempList);
-		Configuration.getConfiguration().setValidateRecommendedRules(true);
+		Configuration.getInstance().setValidateRecommendedRules(true);
 		TestUtil.validateIdentified(pTetR,doc,0);	
 		
 		Attachment attachment=doc.createAttachment("attachment1", URI.create("https://sbolstandard.org/attachment1"));
