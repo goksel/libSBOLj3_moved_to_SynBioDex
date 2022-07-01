@@ -47,7 +47,7 @@ public class CutTest extends TestCase {
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc); 
         
-        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+        Configuration.getInstance().setValidateAfterSettingProperties(false);
         
     	Cut cut=(Cut)feature.getLocations().get(0);
     	TestUtil.validateIdentified(cut,doc,0);

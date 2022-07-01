@@ -49,12 +49,6 @@
         sbol:role          GO:0003700 ;
         sbol:type          SBO:0000252 .
 
-<BBa_F2620/Interaction1>
-        a                      sbol:Interaction ;
-        sbol:displayId         "Interaction1" ;
-        sbol:hasParticipation  <BBa_F2620/Interaction1/Participation1> , <BBa_F2620/Interaction1/Participation2> ;
-        sbol:type              SBO:0000589 .
-
 <BBa_F2620/SubComponent7/Range1>
         a                 sbol:Range ;
         sbol:displayId    "Range1" ;
@@ -104,6 +98,16 @@
         sbol:orientation  SO:0001030 ;
         sbol:start        "55" .
 
+<BBa_F2620/SubComponent10>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent10" ;
+        sbol:instanceOf  :TetR_protein .
+
+<BBa_F2620/SubComponent9>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent9" ;
+        sbol:instanceOf  :BBa_C0062_protein .
+
 <BBa_F2620/SubComponent3>
         a                 sbol:SubComponent ;
         sbol:displayId    "SubComponent3" ;
@@ -127,24 +131,6 @@
         sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
         sbol:name          "Sequence1" .
 
-<BBa_F2620/Interaction1/Participation2>
-        a                 sbol:Participation ;
-        sbol:displayId    "Participation2" ;
-        sbol:participant  <BBa_F2620/SubComponent1> ;
-        sbol:role         SBO:0000011 .
-
-<BBa_F2620/Interaction2/Participation2>
-        a                 sbol:Participation ;
-        sbol:displayId    "Participation2" ;
-        sbol:participant  <BBa_F2620/SubComponent1> ;
-        sbol:role         SBO:0000459 .
-
-<BBa_F2620/Interaction3/Participation2>
-        a                 sbol:Participation ;
-        sbol:displayId    "Participation2" ;
-        sbol:participant  <BBa_F2620/SubComponent2> ;
-        sbol:role         SBO:0000459 .
-
 :TetR_protein_Sequence1
         a                  sbol:Sequence ;
         sbol:description   "TetR sequence" ;
@@ -160,6 +146,11 @@
         sbol:hasLocation  <BBa_B0015/SubComponent2/Range1> ;
         sbol:instanceOf   :BBa_B0012 ;
         sbol:orientation  SO:0001030 .
+
+<BBa_F2620/SubComponent8>
+        a                sbol:SubComponent ;
+        sbol:displayId   "SubComponent8" ;
+        sbol:instanceOf  :BBa_C0062_protein .
 
 :BBa_B0010  a              sbol:Component ;
         sbol:description   "Transcriptional terminator consisting of a 64 bp stem-loop" ;
@@ -184,12 +175,6 @@
         sbol:displayId   "SubComponent2" ;
         sbol:instanceOf  :TetR_protein .
 
-<BBa_F2620/Interaction2/Participation1>
-        a                 sbol:Participation ;
-        sbol:displayId    "Participation1" ;
-        sbol:participant  <BBa_F2620/SubComponent7> ;
-        sbol:role         SBO:0000643 .
-
 :BBa_B0034_Sequence1  a    sbol:Sequence ;
         sbol:description   "BBa_B0034 sequence" ;
         sbol:displayId     "BBa_B0034_Sequence1" ;
@@ -198,12 +183,6 @@
         sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
         sbol:name          "Sequence1" .
 
-<BBa_F2620/Interaction1/Participation1>
-        a                 sbol:Participation ;
-        sbol:displayId    "Participation1" ;
-        sbol:participant  <BBa_F2620/SubComponent5> ;
-        sbol:role         SBO:0000645 .
-
 <BBa_B0015/SubComponent1/Range1>
         a                 sbol:Range ;
         sbol:displayId    "Range1" ;
@@ -211,12 +190,6 @@
         sbol:hasSequence  :BBa_B0015_Sequence1 ;
         sbol:orientation  SO:0001030 ;
         sbol:start        "1" .
-
-<BBa_F2620/Interaction3/Participation1>
-        a                 sbol:Participation ;
-        sbol:displayId    "Participation1" ;
-        sbol:participant  <BBa_F2620/SubComponent3> ;
-        sbol:role         SBO:0000643 .
 
 :BBa_B0015  a              sbol:Component ;
         sbol:description   "Double terminator consisting of BBa_B0010 and BBa_B0012" ;
@@ -250,16 +223,15 @@
         sbol:instanceOf   :BBa_R0062 ;
         sbol:orientation  SO:0001030 .
 
-:BBa_F2620  a                sbol:Component ;
-        sbol:description     "PoPS Receiver" ;
-        sbol:displayId       "BBa_F2620" ;
-        sbol:hasFeature      <BBa_F2620/SubComponent2> , <BBa_F2620/SubComponent7> , <BBa_F2620/SubComponent5> , <BBa_F2620/SubComponent3> , <BBa_F2620/SubComponent4> , <BBa_F2620/SubComponent6> , <BBa_F2620/SubComponent1> ;
-        sbol:hasInteraction  <BBa_F2620/Interaction2> , <BBa_F2620/Interaction1> , <BBa_F2620/Interaction3> ;
-        sbol:hasNamespace    <https://synbiohub.org/public/igem> ;
-        sbol:hasSequence     :BBa_F2620_Sequence1 ;
-        sbol:name            "BBa_F2620" ;
-        sbol:role            SO:0000704 ;
-        sbol:type            SBO:0000251 .
+:BBa_F2620  a              sbol:Component ;
+        sbol:description   "PoPS Receiver" ;
+        sbol:displayId     "BBa_F2620" ;
+        sbol:hasFeature    <BBa_F2620/SubComponent2> , <BBa_F2620/SubComponent7> , <BBa_F2620/SubComponent10> , <BBa_F2620/SubComponent9> , <BBa_F2620/SubComponent8> , <BBa_F2620/SubComponent5> , <BBa_F2620/SubComponent3> , <BBa_F2620/SubComponent4> , <BBa_F2620/SubComponent6> , <BBa_F2620/SubComponent1> ;
+        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasSequence   :BBa_F2620_Sequence1 ;
+        sbol:name          "BBa_F2620" ;
+        sbol:role          SO:0000704 ;
+        sbol:type          SBO:0000251 .
 
 <BBa_F2620/SubComponent5/Range1>
         a                 sbol:Range ;
@@ -282,12 +254,6 @@
         sbol:encoding      EDAM:format_1208 ;
         sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
         sbol:name          "Sequence1" .
-
-<BBa_F2620/Interaction3>
-        a                      sbol:Interaction ;
-        sbol:displayId         "Interaction3" ;
-        sbol:hasParticipation  <BBa_F2620/Interaction3/Participation1> , <BBa_F2620/Interaction3/Participation2> ;
-        sbol:type              SBO:0000170 .
 
 <BBa_B0015/SubComponent2/Range1>
         a                 sbol:Range ;
@@ -337,12 +303,6 @@
         sbol:encoding      EDAM:format_1207 ;
         sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
         sbol:name          "Sequence1" .
-
-<BBa_F2620/Interaction2>
-        a                      sbol:Interaction ;
-        sbol:displayId         "Interaction2" ;
-        sbol:hasParticipation  <BBa_F2620/Interaction2/Participation1> , <BBa_F2620/Interaction2/Participation2> ;
-        sbol:type              SBO:0000170 .
 
 :BBa_C0062  a              sbol:Component ;
         sbol:description   "luxR repressor/activator,  (no LVA?)" ;

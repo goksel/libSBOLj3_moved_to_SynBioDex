@@ -29,7 +29,7 @@ public class ExternallyDefinedTest extends TestCase {
 		System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
 	    TestUtil.assertReadWrite(doc);
 	    
-	    Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+	    Configuration.getInstance().setValidateAfterSettingProperties(false);
 	       	     
 	    TestUtil.validateIdentified(exDefined,doc,0);
 	    

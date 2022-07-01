@@ -44,7 +44,7 @@ public class RangeTest extends TestCase {
 	    System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
 	    TestUtil.assertReadWrite(doc); 
 	    
-	    Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+	    Configuration.getInstance().setValidateAfterSettingProperties(false);
 	    
 	    TestUtil.validateIdentified(range,doc,0);
 	    

@@ -24,22 +24,14 @@
         sbol:role           SBO:0000289 ;
         sbol:type           SBO:0000241 .
 
-:MulticellularSystem  a     sbol:Component ;
-        sbol:description    "Multicellular System" ;
-        sbol:displayId      "MulticellularSystem" ;
-        sbol:hasConstraint  <MulticellularSystem/Constraint1> ;
-        sbol:hasFeature     <MulticellularSystem/ComponentReference2> , <MulticellularSystem/SubComponent1> , <MulticellularSystem/ComponentReference1> , <MulticellularSystem/SubComponent2> ;
-        sbol:hasNamespace   <https://sbolstandard.org/examples> ;
-        sbol:name           "MulticellularSystem" ;
-        sbol:role           SBO:0000289 ;
-        sbol:type           SBO:0000241 .
-
-<MulticellularSystem/Constraint1>
-        a                 sbol:Constraint ;
-        sbol:displayId    "Constraint1" ;
-        sbol:object       <MulticellularSystem/ComponentReference2> ;
-        sbol:restriction  sbol:verifyIdentical ;
-        sbol:subject      <MulticellularSystem/ComponentReference1> .
+:MulticellularSystem  a    sbol:Component ;
+        sbol:description   "Multicellular System" ;
+        sbol:displayId     "MulticellularSystem" ;
+        sbol:hasFeature    <MulticellularSystem/SubComponent1> , <MulticellularSystem/SubComponent2> ;
+        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:name          "MulticellularSystem" ;
+        sbol:role          SBO:0000289 ;
+        sbol:type          SBO:0000241 .
 
 <SenderSystem/Constraint1>
         a                 sbol:Constraint ;
@@ -57,12 +49,6 @@
         a                sbol:SubComponent ;
         sbol:displayId   "SubComponent2" ;
         sbol:instanceOf  :ReceiverSystem .
-
-<MulticellularSystem/ComponentReference2>
-        a               sbol:ComponentReference ;
-        sbol:displayId  "ComponentReference2" ;
-        sbol:inChildOf  <MulticellularSystem/SubComponent2> ;
-        sbol:refersTo   <ReceiverSystem/SubComponent2> .
 
 :OrganismA  a              sbol:Component ;
         sbol:description   "Organism A" ;
@@ -119,9 +105,3 @@
         a                sbol:SubComponent ;
         sbol:displayId   "SubComponent1" ;
         sbol:instanceOf  :SenderSystem .
-
-<MulticellularSystem/ComponentReference1>
-        a               sbol:ComponentReference ;
-        sbol:displayId  "ComponentReference1" ;
-        sbol:inChildOf  <MulticellularSystem/SubComponent1> ;
-        sbol:refersTo   <SenderSystem/SubComponent2> .

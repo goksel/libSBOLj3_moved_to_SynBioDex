@@ -22,21 +22,23 @@ import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
-import jakarta.validation.executable.ExecutableValidator;
-
 
 public class SBOLValidator {
 
-	private static SBOLValidator sbolValidator = null;
+	//private static SBOLValidator sbolValidator = null;
 	protected Validator validator;
 	
-	private SBOLValidator()
+	private SBOLValidator() throws SBOLGraphException
 	{	
+		ValidatorFactory factory = Validation.byDefaultProvider()
+ 	            .configure()
+ 	            //.addValueExtractor(new ...ValueExtractor())
+ 	            .buildValidatorFactory();
+		this.setValidator(factory.getValidator());	
 	}
 	
 	private void setValidator(Validator validator) throws SBOLGraphException	
@@ -49,7 +51,7 @@ public class SBOLValidator {
 		this.validator=validator;
 	}
 	
-	public static SBOLValidator getValidator() throws SBOLGraphException
+	/*public static SBOLValidator getValidator() throws SBOLGraphException
 	{
 		if (sbolValidator == null)
 		{
@@ -68,7 +70,23 @@ public class SBOLValidator {
 			}
 		}
 		return sbolValidator;
+	}*/
+	
+	public static SBOLValidator getValidator() throws SBOLGraphException {
+		return SingletonHelper.INSTANCE;
 	}
+
+	private static class SingletonHelper {
+        private static final SBOLValidator INSTANCE ;
+        static {
+            try {
+                INSTANCE = new SBOLValidator();
+            } catch (SBOLGraphException e) {
+                throw new ExceptionInInitializerError(e);
+            }
+        }
+    }
+
 	
 	public List<String> validate(SBOLDocument document)
 	{

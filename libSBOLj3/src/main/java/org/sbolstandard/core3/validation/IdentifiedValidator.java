@@ -4,14 +4,11 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
 import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
 import org.sbolstandard.core3.entity.Identified;
-import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
@@ -19,22 +16,27 @@ import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
-
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
 public class IdentifiedValidator {
-	private static IdentifiedValidator idendityValidator = null;
+	//private static IdentifiedValidator idendityValidator = null;
 	protected Validator validator;
 
-	private IdentifiedValidator() {
+	private IdentifiedValidator() throws SBOLGraphException {
+		try {
+			ValidatorFactory factory = Validation.byDefaultProvider().configure()
+					// .addValueExtractor(new ...ValueExtractor())
+					.buildValidatorFactory();
+			this.validator = factory.getValidator();
+		} catch (Exception exception) {
+			throw new SBOLGraphException("Could not initialize the validator", exception);
+		}
 	}
 
-	public static IdentifiedValidator getValidator() throws SBOLGraphException {
+	/*public static IdentifiedValidator getValidator() throws SBOLGraphException {
 		if (idendityValidator == null) {
 			try {
 				idendityValidator = new IdentifiedValidator();
@@ -47,8 +49,25 @@ public class IdentifiedValidator {
 			}
 		}
 		return idendityValidator;
+	}*/
+	
+	//https://itzone.com.vn/en/article/bill-pugh-singleton-in-java-incredibly-simple/
+	//https://www.geeksforgeeks.org/java-singleton-design-pattern-practices-examples/?ref=lbp
+	public static IdentifiedValidator getValidator() throws SBOLGraphException {
+		return SingletonHelper.INSTANCE;
 	}
 
+	private static class SingletonHelper {
+        private static final IdentifiedValidator INSTANCE ;
+        static {
+            try {
+                INSTANCE = new IdentifiedValidator();
+            } catch (SBOLGraphException e) {
+                throw new ExceptionInInitializerError(e);
+            }
+        }
+    }
+	
 	public List<String> validate(Identified identified) {
 		Set<ConstraintViolation<Identified>> violations = validator.validate(identified);
 		List<String> messages = PropertyValidator.getViolotionMessages(violations);
@@ -233,7 +252,7 @@ public class IdentifiedValidator {
 
 	public URI getPropertyAsURI(Resource resource, URI property) throws SBOLGraphException {
 		URI result = null;
-		if (Configuration.getConfiguration().enforceOneToOneRelationships()) {
+		if (Configuration.getInstance().enforceOneToOneRelationships()) {
 			List<URI> uris = RDFUtil.getPropertiesAsURIs(resource, property);
 			if (uris != null && uris.size() > 0) {
 				if (uris.size() > 1) {
@@ -251,7 +270,7 @@ public class IdentifiedValidator {
 
 	public String getPropertyAsString(Resource resource, URI property) throws SBOLGraphException {
 		String result = null;
-		if (Configuration.getConfiguration().enforceOneToOneRelationships()) {
+		if (Configuration.getInstance().enforceOneToOneRelationships()) {
 			List<String> uris = RDFUtil.getLiteralPropertiesAsStrings(resource, property);
 			if (uris != null && uris.size() > 0) {
 				if (uris.size() > 1) {

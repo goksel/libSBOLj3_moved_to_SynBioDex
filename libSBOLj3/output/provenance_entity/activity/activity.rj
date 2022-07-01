@@ -146,7 +146,7 @@
      ] ,
     "http://www.w3.org/ns/prov#endedAtTime" : [ { 
       "type" : "literal" ,
-      "value" : "2020-08-30T08:19:49.827Z"
+      "value" : "2020-08-30T09:41:31.162Z"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
@@ -160,7 +160,7 @@
      ] ,
     "http://www.w3.org/ns/prov#startedAtTime" : [ { 
       "type" : "literal" ,
-      "value" : "2019-07-29T08:19:49.827Z"
+      "value" : "2019-07-29T09:41:31.162Z"
     }
      ] ,
     "http://sbols.org/v3#hasNamespace" : [ { 

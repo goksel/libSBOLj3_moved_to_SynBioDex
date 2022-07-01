@@ -83,7 +83,7 @@ public class ActivityTest extends TestCase {
         }
         SBOLComparator.assertEqual(doc, doc2);
         
-        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+        Configuration.getInstance().setValidateAfterSettingProperties(false);
 	            
     	TestUtil.validateProperty(association, "setAgent", new Object[] {null}, Agent.class); 
         TestUtil.validateProperty(usage1, "setEntity", new Object[] {null}, URI.class); 

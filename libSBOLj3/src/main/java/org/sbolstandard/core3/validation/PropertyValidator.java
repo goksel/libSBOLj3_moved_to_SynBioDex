@@ -15,11 +15,24 @@ import jakarta.validation.ValidatorFactory;
 import jakarta.validation.executable.ExecutableValidator;
 
 public class PropertyValidator {
-	private static PropertyValidator propertyValidator = null;
+	//private static PropertyValidator propertyValidator = null;
 	private ExecutableValidator validator;
 	
-	private PropertyValidator()
+	private PropertyValidator() throws SBOLGraphException
 	{	
+		try
+		{
+			ValidatorFactory factory = Validation.byDefaultProvider()
+	 	            .configure()
+	 	            .buildValidatorFactory();
+			
+			//propertyValidator.validator = factory.getValidator().forExecutables();	
+			this.setExecutableValidator(factory.getValidator().forExecutables());	
+		}
+		catch (Exception exception)
+		{
+			throw new SBOLGraphException("Could not initialize the property validator. " + exception.getMessage(), exception);
+		}
 	}
 	
 	private void setExecutableValidator(ExecutableValidator executableValidator) throws SBOLGraphException	
@@ -32,7 +45,7 @@ public class PropertyValidator {
 		this.validator=executableValidator;
 	}
 	
-	public static PropertyValidator getValidator() throws SBOLGraphException
+	/*public static PropertyValidator getValidator() throws SBOLGraphException
 	{
 		if (propertyValidator == null)
 		{
@@ -52,8 +65,22 @@ public class PropertyValidator {
 			}
 		}
 		return propertyValidator;
+	}*/
+
+	public static PropertyValidator getValidator() throws SBOLGraphException {
+		return SingletonHelper.INSTANCE;
 	}
 
+	private static class SingletonHelper {
+        private static final PropertyValidator INSTANCE ;
+        static {
+            try {
+                INSTANCE = new PropertyValidator();
+            } catch (SBOLGraphException e) {
+                throw new ExceptionInInitializerError(e);
+            }
+        }
+    }
 	
 	
 	public void validateReturnValue(Identified identified, String methodName, Object returnValue, Class<?>... parameterTypes) throws SBOLGraphException
@@ -111,7 +138,7 @@ public class PropertyValidator {
 	
 	public void validate(Identified identified, String methodName, Object[] parameterValues, Class<?>... parameterTypes) throws SBOLGraphException
 	{
-		if (Configuration.getConfiguration().isValidateAfterSettingProperties())
+		if (Configuration.getInstance().isValidateAfterSettingProperties())
 		{
 			Method method;
 			try {

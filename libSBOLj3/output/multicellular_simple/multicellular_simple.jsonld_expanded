@@ -21,27 +21,8 @@
   "@type" : [ "http://sbols.org/v3#Component" ]
 }, {
   "@id" : "https://sbolstandard.org/examples/MulticellularSystem",
-  "http://sbols.org/v3#hasFeature" : [ {
-    "@id" : "https://sbolstandard.org/examples/MulticellularSystem/ComponentReference2"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/MulticellularSystem/SubComponent1"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/MulticellularSystem/ComponentReference1"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/MulticellularSystem/SubComponent2"
-  } ],
-  "http://sbols.org/v3#hasNamespace" : [ {
-    "@id" : "https://sbolstandard.org/examples"
-  } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000241"
-  } ],
-  "http://sbols.org/v3#description" : [ {
-    "@value" : "Multicellular System"
-  } ],
-  "@type" : [ "http://sbols.org/v3#Component" ],
-  "http://sbols.org/v3#hasConstraint" : [ {
-    "@id" : "https://sbolstandard.org/examples/MulticellularSystem/Constraint1"
   } ],
   "http://sbols.org/v3#role" : [ {
     "@id" : "https://identifiers.org/SBO:0000289"
@@ -49,48 +30,21 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "MulticellularSystem"
   } ],
-  "http://sbols.org/v3#displayId" : [ {
-    "@value" : "MulticellularSystem"
-  } ]
-}, {
-  "@id" : "https://sbolstandard.org/examples/MulticellularSystem/ComponentReference1",
-  "http://sbols.org/v3#refersTo" : [ {
-    "@id" : "https://sbolstandard.org/examples/SenderSystem/SubComponent2"
+  "http://sbols.org/v3#hasNamespace" : [ {
+    "@id" : "https://sbolstandard.org/examples"
   } ],
-  "http://sbols.org/v3#inChildOf" : [ {
+  "http://sbols.org/v3#hasFeature" : [ {
     "@id" : "https://sbolstandard.org/examples/MulticellularSystem/SubComponent1"
-  } ],
-  "http://sbols.org/v3#displayId" : [ {
-    "@value" : "ComponentReference1"
-  } ],
-  "@type" : [ "http://sbols.org/v3#ComponentReference" ]
-}, {
-  "@id" : "https://sbolstandard.org/examples/MulticellularSystem/ComponentReference2",
-  "http://sbols.org/v3#refersTo" : [ {
-    "@id" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent2"
-  } ],
-  "http://sbols.org/v3#inChildOf" : [ {
+  }, {
     "@id" : "https://sbolstandard.org/examples/MulticellularSystem/SubComponent2"
   } ],
   "http://sbols.org/v3#displayId" : [ {
-    "@value" : "ComponentReference2"
+    "@value" : "MulticellularSystem"
   } ],
-  "@type" : [ "http://sbols.org/v3#ComponentReference" ]
-}, {
-  "@id" : "https://sbolstandard.org/examples/MulticellularSystem/Constraint1",
-  "http://sbols.org/v3#subject" : [ {
-    "@id" : "https://sbolstandard.org/examples/MulticellularSystem/ComponentReference1"
+  "http://sbols.org/v3#description" : [ {
+    "@value" : "Multicellular System"
   } ],
-  "http://sbols.org/v3#restriction" : [ {
-    "@id" : "http://sbols.org/v3#verifyIdentical"
-  } ],
-  "http://sbols.org/v3#object" : [ {
-    "@id" : "https://sbolstandard.org/examples/MulticellularSystem/ComponentReference2"
-  } ],
-  "http://sbols.org/v3#displayId" : [ {
-    "@value" : "Constraint1"
-  } ],
-  "@type" : [ "http://sbols.org/v3#Constraint" ]
+  "@type" : [ "http://sbols.org/v3#Component" ]
 }, {
   "@id" : "https://sbolstandard.org/examples/MulticellularSystem/SubComponent1",
   "http://sbols.org/v3#instanceOf" : [ {

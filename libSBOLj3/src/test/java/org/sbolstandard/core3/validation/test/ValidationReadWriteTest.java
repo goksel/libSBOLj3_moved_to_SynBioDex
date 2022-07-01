@@ -24,11 +24,11 @@ public class ValidationReadWriteTest extends TestCase {
 	
 	public void test() throws SBOLGraphException, IOException
     {
-		Configuration.getConfiguration().setValidateAfterReadingSBOLDocuments(true);
+		Configuration.getInstance().setValidateAfterReadingSBOLDocuments(true);
 	    
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
-        Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+        Configuration.getInstance().setValidateAfterSettingProperties(false);
 	    Component media=SBOLAPI.createComponent(doc, "M9_Glucose_CAA", ComponentType.FunctionalEntity.getUrl(), "M9 Glucose CAA", "M9 Glucose CAA growth media", null);
         ExternallyDefined CaCl2=media.createExternallyDefined(Arrays.asList(ComponentType.SimpleChemical.getUrl()), URINameSpace.CHEBI.local("3312"));
         
@@ -139,7 +139,7 @@ public class ValidationReadWriteTest extends TestCase {
      
  	    String output=null;
        
- 	   Configuration.getConfiguration().setValidateBeforeSaving(true);  
+ 	   Configuration.getInstance().setValidateBeforeSaving(true);  
 	   
  	   	//Writing the invalid SBOL document will fail	   
         exception=false;
@@ -155,7 +155,7 @@ public class ValidationReadWriteTest extends TestCase {
 	    
        
 	    //Write the invalid SBOL document
-	    Configuration.getConfiguration().setValidateBeforeSaving(false);  
+	    Configuration.getInstance().setValidateBeforeSaving(false);  
 	    exception=false;
 	    try
 	    {
@@ -187,7 +187,7 @@ public class ValidationReadWriteTest extends TestCase {
 	   
 	    
 	    //Read the invalid SBOL document with errors and validate programmatically
-	    Configuration.getConfiguration().setValidateAfterReadingSBOLDocuments(false);
+	    Configuration.getInstance().setValidateAfterReadingSBOLDocuments(false);
 	    exception=false;
 	    try
 	    {
@@ -200,7 +200,7 @@ public class ValidationReadWriteTest extends TestCase {
 	    assertTrue(!exception);
 	  
 	   TestUtil.validateDocument(doc3,11);  
-	   Configuration.getConfiguration().setValidateAfterReadingSBOLDocuments(true);
+	   Configuration.getInstance().setValidateAfterReadingSBOLDocuments(true);
 	    
         
     }

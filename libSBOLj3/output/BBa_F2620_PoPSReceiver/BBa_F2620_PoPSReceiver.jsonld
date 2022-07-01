@@ -149,72 +149,22 @@
     "@type" : "sbol:Component",
     "description" : "PoPS Receiver",
     "displayId" : "BBa_F2620",
-    "hasFeature" : [ "https://synbiohub.org/public/igem/BBa_F2620/SubComponent2", "https://synbiohub.org/public/igem/BBa_F2620/SubComponent7", "https://synbiohub.org/public/igem/BBa_F2620/SubComponent5", "https://synbiohub.org/public/igem/BBa_F2620/SubComponent3", "https://synbiohub.org/public/igem/BBa_F2620/SubComponent4", "https://synbiohub.org/public/igem/BBa_F2620/SubComponent6", "https://synbiohub.org/public/igem/BBa_F2620/SubComponent1" ],
-    "hasInteraction" : [ "https://synbiohub.org/public/igem/BBa_F2620/Interaction2", "https://synbiohub.org/public/igem/BBa_F2620/Interaction1", "https://synbiohub.org/public/igem/BBa_F2620/Interaction3" ],
+    "hasFeature" : [ "https://synbiohub.org/public/igem/BBa_F2620/SubComponent2", "https://synbiohub.org/public/igem/BBa_F2620/SubComponent7", "https://synbiohub.org/public/igem/BBa_F2620/SubComponent10", "https://synbiohub.org/public/igem/BBa_F2620/SubComponent9", "https://synbiohub.org/public/igem/BBa_F2620/SubComponent8", "https://synbiohub.org/public/igem/BBa_F2620/SubComponent5", "https://synbiohub.org/public/igem/BBa_F2620/SubComponent3", "https://synbiohub.org/public/igem/BBa_F2620/SubComponent4", "https://synbiohub.org/public/igem/BBa_F2620/SubComponent6", "https://synbiohub.org/public/igem/BBa_F2620/SubComponent1" ],
     "hasNamespace" : "https://synbiohub.org/public/igem",
     "hasSequence" : "https://synbiohub.org/public/igem/BBa_F2620_Sequence1",
     "name" : "BBa_F2620",
     "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
-    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction1",
-    "@type" : "sbol:Interaction",
-    "displayId" : "Interaction1",
-    "hasParticipation" : [ "https://synbiohub.org/public/igem/BBa_F2620/Interaction1/Participation1", "https://synbiohub.org/public/igem/BBa_F2620/Interaction1/Participation2" ],
-    "type" : "SBO:0000589"
-  }, {
-    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction1/Participation1",
-    "@type" : "sbol:Participation",
-    "displayId" : "Participation1",
-    "participant" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent5",
-    "role" : "SBO:0000645"
-  }, {
-    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction1/Participation2",
-    "@type" : "sbol:Participation",
-    "displayId" : "Participation2",
-    "participant" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent1",
-    "role" : "SBO:0000011"
-  }, {
-    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction2",
-    "@type" : "sbol:Interaction",
-    "displayId" : "Interaction2",
-    "hasParticipation" : [ "https://synbiohub.org/public/igem/BBa_F2620/Interaction2/Participation1", "https://synbiohub.org/public/igem/BBa_F2620/Interaction2/Participation2" ],
-    "type" : "SBO:0000170"
-  }, {
-    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction2/Participation1",
-    "@type" : "sbol:Participation",
-    "displayId" : "Participation1",
-    "participant" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent7",
-    "role" : "SBO:0000643"
-  }, {
-    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction2/Participation2",
-    "@type" : "sbol:Participation",
-    "displayId" : "Participation2",
-    "participant" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent1",
-    "role" : "SBO:0000459"
-  }, {
-    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction3",
-    "@type" : "sbol:Interaction",
-    "displayId" : "Interaction3",
-    "hasParticipation" : [ "https://synbiohub.org/public/igem/BBa_F2620/Interaction3/Participation1", "https://synbiohub.org/public/igem/BBa_F2620/Interaction3/Participation2" ],
-    "type" : "SBO:0000170"
-  }, {
-    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction3/Participation1",
-    "@type" : "sbol:Participation",
-    "displayId" : "Participation1",
-    "participant" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent3",
-    "role" : "SBO:0000643"
-  }, {
-    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction3/Participation2",
-    "@type" : "sbol:Participation",
-    "displayId" : "Participation2",
-    "participant" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent2",
-    "role" : "SBO:0000459"
-  }, {
     "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent1",
     "@type" : "sbol:SubComponent",
     "displayId" : "SubComponent1",
     "instanceOf" : "https://synbiohub.org/public/igem/BBa_C0062_protein"
+  }, {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent10",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent10",
+    "instanceOf" : "https://synbiohub.org/public/igem/TetR_protein"
   }, {
     "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent2",
     "@type" : "sbol:SubComponent",
@@ -295,6 +245,16 @@
     "hasSequence" : "https://synbiohub.org/public/igem/BBa_F2620_Sequence1",
     "orientation" : "SO:0001030",
     "start" : "969"
+  }, {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent8",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent8",
+    "instanceOf" : "https://synbiohub.org/public/igem/BBa_C0062_protein"
+  }, {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent9",
+    "@type" : "sbol:SubComponent",
+    "displayId" : "SubComponent9",
+    "instanceOf" : "https://synbiohub.org/public/igem/BBa_C0062_protein"
   }, {
     "@id" : "https://synbiohub.org/public/igem/BBa_F2620_Sequence1",
     "@type" : "sbol:Sequence",
@@ -413,20 +373,8 @@
       "@id" : "http://sbols.org/v3#role",
       "@type" : "@id"
     },
-    "hasParticipation" : {
-      "@id" : "http://sbols.org/v3#hasParticipation",
-      "@type" : "@id"
-    },
-    "participant" : {
-      "@id" : "http://sbols.org/v3#participant",
-      "@type" : "@id"
-    },
     "hasFeature" : {
       "@id" : "http://sbols.org/v3#hasFeature",
-      "@type" : "@id"
-    },
-    "hasInteraction" : {
-      "@id" : "http://sbols.org/v3#hasInteraction",
       "@type" : "@id"
     },
     "SBO" : "https://identifiers.org/SBO:",

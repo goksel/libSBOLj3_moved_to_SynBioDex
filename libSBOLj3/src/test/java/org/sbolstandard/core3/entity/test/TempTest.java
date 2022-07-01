@@ -37,7 +37,7 @@ public class TempTest extends TestCase {
 		
 		Component popsReceiver=SBOLAPI.createDnaComponent(doc, "BBa_F2620", "BBa_F2620", "PoPS Receiver", Role.EngineeredGene, null); 
 	   
-		Configuration.getConfiguration().setValidateAfterSettingProperties(false);
+		Configuration.getInstance().setValidateAfterSettingProperties(false);
         
 		Component pTetR=SBOLAPI.createDnaComponent(doc, "pTetR", "pTetR", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
 		
