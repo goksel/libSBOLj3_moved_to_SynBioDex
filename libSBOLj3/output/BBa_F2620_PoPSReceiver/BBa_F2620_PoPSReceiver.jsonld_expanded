@@ -346,12 +346,6 @@
   }, {
     "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent7"
   }, {
-    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent10"
-  }, {
-    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent9"
-  }, {
-    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent8"
-  }, {
     "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent5"
   }, {
     "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent3"
@@ -361,6 +355,13 @@
     "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent6"
   }, {
     "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent1"
+  } ],
+  "http://sbols.org/v3#hasInteraction" : [ {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction2"
+  }, {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction1"
+  }, {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction3"
   } ],
   "http://sbols.org/v3#hasSequence" : [ {
     "@id" : "https://synbiohub.org/public/igem/BBa_F2620_Sequence1"
@@ -385,21 +386,126 @@
     "@id" : "https://identifiers.org/SBO:0000251"
   } ]
 }, {
+  "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction1",
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000589"
+  } ],
+  "http://sbols.org/v3#hasParticipation" : [ {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction1/Participation1"
+  }, {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction1/Participation2"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Interaction1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Interaction" ]
+}, {
+  "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction1/Participation1",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000645"
+  } ],
+  "http://sbols.org/v3#participant" : [ {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent5"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Participation1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Participation" ]
+}, {
+  "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction1/Participation2",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000011"
+  } ],
+  "http://sbols.org/v3#participant" : [ {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent1"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Participation2"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Participation" ]
+}, {
+  "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction2",
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000170"
+  } ],
+  "http://sbols.org/v3#hasParticipation" : [ {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction2/Participation1"
+  }, {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction2/Participation2"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Interaction2"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Interaction" ]
+}, {
+  "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction2/Participation1",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000643"
+  } ],
+  "http://sbols.org/v3#participant" : [ {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent7"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Participation1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Participation" ]
+}, {
+  "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction2/Participation2",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000459"
+  } ],
+  "http://sbols.org/v3#participant" : [ {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent1"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Participation2"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Participation" ]
+}, {
+  "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction3",
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000170"
+  } ],
+  "http://sbols.org/v3#hasParticipation" : [ {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction3/Participation1"
+  }, {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction3/Participation2"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Interaction3"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Interaction" ]
+}, {
+  "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction3/Participation1",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000643"
+  } ],
+  "http://sbols.org/v3#participant" : [ {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent3"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Participation1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Participation" ]
+}, {
+  "@id" : "https://synbiohub.org/public/igem/BBa_F2620/Interaction3/Participation2",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000459"
+  } ],
+  "http://sbols.org/v3#participant" : [ {
+    "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent2"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Participation2"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Participation" ]
+}, {
   "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent1",
   "http://sbols.org/v3#instanceOf" : [ {
     "@id" : "https://synbiohub.org/public/igem/BBa_C0062_protein"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "SubComponent1"
-  } ],
-  "@type" : [ "http://sbols.org/v3#SubComponent" ]
-}, {
-  "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent10",
-  "http://sbols.org/v3#instanceOf" : [ {
-    "@id" : "https://synbiohub.org/public/igem/TetR_protein"
-  } ],
-  "http://sbols.org/v3#displayId" : [ {
-    "@value" : "SubComponent10"
   } ],
   "@type" : [ "http://sbols.org/v3#SubComponent" ]
 }, {
@@ -576,24 +682,6 @@
     "@value" : "Range1"
   } ],
   "@type" : [ "http://sbols.org/v3#Range" ]
-}, {
-  "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent8",
-  "http://sbols.org/v3#instanceOf" : [ {
-    "@id" : "https://synbiohub.org/public/igem/BBa_C0062_protein"
-  } ],
-  "http://sbols.org/v3#displayId" : [ {
-    "@value" : "SubComponent8"
-  } ],
-  "@type" : [ "http://sbols.org/v3#SubComponent" ]
-}, {
-  "@id" : "https://synbiohub.org/public/igem/BBa_F2620/SubComponent9",
-  "http://sbols.org/v3#instanceOf" : [ {
-    "@id" : "https://synbiohub.org/public/igem/BBa_C0062_protein"
-  } ],
-  "http://sbols.org/v3#displayId" : [ {
-    "@value" : "SubComponent9"
-  } ],
-  "@type" : [ "http://sbols.org/v3#SubComponent" ]
 }, {
   "@id" : "https://synbiohub.org/public/igem/BBa_F2620_Sequence1",
   "http://sbols.org/v3#name" : [ {

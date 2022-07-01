@@ -61,46 +61,53 @@
             <sbol:displayId>SubComponent2</sbol:displayId>
          </sbol:SubComponent>
       </sbol:hasFeature>
-      <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="BBa_F2620/SubComponent7">
-            <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
-            <sbol:instanceOf rdf:resource="BBa_R0062"/>
-            <sbol:hasLocation>
-               <sbol:Range rdf:about="BBa_F2620/SubComponent7/Range1">
-                  <sbol:start>969</sbol:start>
-                  <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
-                  <sbol:hasSequence>
-                     <sbol:Sequence rdf:about="BBa_F2620_Sequence1"/>
-                  </sbol:hasSequence>
-                  <sbol:end>1023</sbol:end>
-                  <sbol:displayId>Range1</sbol:displayId>
-               </sbol:Range>
-            </sbol:hasLocation>
-            <sbol:displayId>SubComponent7</sbol:displayId>
-         </sbol:SubComponent>
-      </sbol:hasFeature>
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="BBa_F2620/Interaction2">
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000170"/>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="BBa_F2620/Interaction2/Participation1">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000643"/>
+                  <sbol:participant>
+                     <sbol:SubComponent rdf:about="BBa_F2620/SubComponent7">
+                        <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
+                        <sbol:instanceOf rdf:resource="BBa_R0062"/>
+                        <sbol:hasLocation>
+                           <sbol:Range rdf:about="BBa_F2620/SubComponent7/Range1">
+                              <sbol:start>969</sbol:start>
+                              <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
+                              <sbol:hasSequence>
+                                 <sbol:Sequence rdf:about="BBa_F2620_Sequence1"/>
+                              </sbol:hasSequence>
+                              <sbol:end>1023</sbol:end>
+                              <sbol:displayId>Range1</sbol:displayId>
+                           </sbol:Range>
+                        </sbol:hasLocation>
+                        <sbol:displayId>SubComponent7</sbol:displayId>
+                     </sbol:SubComponent>
+                  </sbol:participant>
+                  <sbol:displayId>Participation1</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="BBa_F2620/Interaction2/Participation2">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000459"/>
+                  <sbol:participant>
+                     <sbol:SubComponent rdf:about="BBa_F2620/SubComponent1">
+                        <sbol:instanceOf rdf:resource="BBa_C0062_protein"/>
+                        <sbol:displayId>SubComponent1</sbol:displayId>
+                     </sbol:SubComponent>
+                  </sbol:participant>
+                  <sbol:displayId>Participation2</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:displayId>Interaction2</sbol:displayId>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
+      <sbol:hasFeature rdf:resource="BBa_F2620/SubComponent7"/>
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="BBa_F2620_Sequence1"/>
       </sbol:hasSequence>
       <sbol:displayId>BBa_F2620</sbol:displayId>
-      <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="BBa_F2620/SubComponent10">
-            <sbol:instanceOf rdf:resource="TetR_protein"/>
-            <sbol:displayId>SubComponent10</sbol:displayId>
-         </sbol:SubComponent>
-      </sbol:hasFeature>
-      <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="BBa_F2620/SubComponent9">
-            <sbol:instanceOf rdf:resource="BBa_C0062_protein"/>
-            <sbol:displayId>SubComponent9</sbol:displayId>
-         </sbol:SubComponent>
-      </sbol:hasFeature>
-      <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="BBa_F2620/SubComponent8">
-            <sbol:instanceOf rdf:resource="BBa_C0062_protein"/>
-            <sbol:displayId>SubComponent8</sbol:displayId>
-         </sbol:SubComponent>
-      </sbol:hasFeature>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:hasFeature>
@@ -123,6 +130,26 @@
             <sbol:displayId>SubComponent5</sbol:displayId>
          </sbol:SubComponent>
       </sbol:hasFeature>
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="BBa_F2620/Interaction1">
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000589"/>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="BBa_F2620/Interaction1/Participation1">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000645"/>
+                  <sbol:participant rdf:resource="BBa_F2620/SubComponent5"/>
+                  <sbol:displayId>Participation1</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="BBa_F2620/Interaction1/Participation2">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000011"/>
+                  <sbol:participant rdf:resource="BBa_F2620/SubComponent1"/>
+                  <sbol:displayId>Participation2</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:displayId>Interaction1</sbol:displayId>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
       <sbol:hasFeature>
          <sbol:SubComponent rdf:about="BBa_F2620/SubComponent3">
             <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
@@ -184,12 +211,27 @@
       </sbol:hasFeature>
       <sbol:description>PoPS Receiver</sbol:description>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
-      <sbol:hasFeature>
-         <sbol:SubComponent rdf:about="BBa_F2620/SubComponent1">
-            <sbol:instanceOf rdf:resource="BBa_C0062_protein"/>
-            <sbol:displayId>SubComponent1</sbol:displayId>
-         </sbol:SubComponent>
-      </sbol:hasFeature>
+      <sbol:hasFeature rdf:resource="BBa_F2620/SubComponent1"/>
+      <sbol:hasInteraction>
+         <sbol:Interaction rdf:about="BBa_F2620/Interaction3">
+            <sbol:type rdf:resource="https://identifiers.org/SBO:0000170"/>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="BBa_F2620/Interaction3/Participation1">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000643"/>
+                  <sbol:participant rdf:resource="BBa_F2620/SubComponent3"/>
+                  <sbol:displayId>Participation1</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:hasParticipation>
+               <sbol:Participation rdf:about="BBa_F2620/Interaction3/Participation2">
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000459"/>
+                  <sbol:participant rdf:resource="BBa_F2620/SubComponent2"/>
+                  <sbol:displayId>Participation2</sbol:displayId>
+               </sbol:Participation>
+            </sbol:hasParticipation>
+            <sbol:displayId>Interaction3</sbol:displayId>
+         </sbol:Interaction>
+      </sbol:hasInteraction>
    </sbol:Component>
    <sbol:Component rdf:about="BBa_B0010">
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>

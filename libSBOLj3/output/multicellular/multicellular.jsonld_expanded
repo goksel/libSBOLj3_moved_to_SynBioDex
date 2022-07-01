@@ -34,6 +34,8 @@
   }, {
     "@id" : "https://sbolstandard.org/examples/AHL_producer/SubComponent1"
   }, {
+    "@id" : "https://sbolstandard.org/examples/AHL_producer/SubComponent7"
+  }, {
     "@id" : "https://sbolstandard.org/examples/AHL_producer/SubComponent4"
   }, {
     "@id" : "https://sbolstandard.org/examples/AHL_producer/SubComponent6"
@@ -42,6 +44,9 @@
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "AHL_producer"
+  } ],
+  "http://sbols.org/v3#hasInteraction" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_producer/Interaction1"
   } ],
   "http://sbols.org/v3#role" : [ {
     "@id" : "https://identifiers.org/SO:0000704"
@@ -53,6 +58,44 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "AHL producer"
   } ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/AHL_producer/Interaction1",
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000589"
+  } ],
+  "http://sbols.org/v3#hasParticipation" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_producer/Interaction1/Participation1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/AHL_producer/Interaction1/Participation2"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Interaction1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Interaction" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/AHL_producer/Interaction1/Participation1",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000645"
+  } ],
+  "http://sbols.org/v3#participant" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_producer/SubComponent6"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Participation1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Participation" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/AHL_producer/Interaction1/Participation2",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000011"
+  } ],
+  "http://sbols.org/v3#participant" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_producer/SubComponent7"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Participation2"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Participation" ]
 }, {
   "@id" : "https://sbolstandard.org/examples/AHL_producer/SubComponent1",
   "http://sbols.org/v3#orientation" : [ {
@@ -113,14 +156,32 @@
 }, {
   "@id" : "https://sbolstandard.org/examples/AHL_producer/SubComponent6",
   "http://sbols.org/v3#instanceOf" : [ {
-    "@id" : "https://sbolstandard.org/examples/AHL"
+    "@id" : "https://sbolstandard.org/examples/luxI"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "SubComponent6"
   } ],
   "@type" : [ "http://sbols.org/v3#SubComponent" ]
 }, {
+  "@id" : "https://sbolstandard.org/examples/AHL_producer/SubComponent7",
+  "http://sbols.org/v3#instanceOf" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "SubComponent7"
+  } ],
+  "@type" : [ "http://sbols.org/v3#SubComponent" ]
+}, {
   "@id" : "https://sbolstandard.org/examples/AHL_receiver",
+  "http://sbols.org/v3#hasInteraction" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction4"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction2"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction3"
+  } ],
   "http://sbols.org/v3#hasFeature" : [ {
     "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent11"
   }, {
@@ -151,12 +212,15 @@
     "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent15"
   }, {
     "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent4"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent16"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent18"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent17"
   } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000251"
-  } ],
-  "http://sbols.org/v3#hasInteraction" : [ {
-    "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction1"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "AHL receiver"
@@ -177,14 +241,12 @@
 }, {
   "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction1",
   "http://sbols.org/v3#type" : [ {
-    "@id" : "https://identifiers.org/SBO:0000177"
+    "@id" : "https://identifiers.org/SBO:0000589"
   } ],
   "http://sbols.org/v3#hasParticipation" : [ {
     "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction1/Participation1"
   }, {
     "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction1/Participation2"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction1/Participation3"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "Interaction1"
@@ -192,6 +254,122 @@
   "@type" : [ "http://sbols.org/v3#Interaction" ]
 }, {
   "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction1/Participation1",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000645"
+  } ],
+  "http://sbols.org/v3#participant" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent13"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Participation1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Participation" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction1/Participation2",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000011"
+  } ],
+  "http://sbols.org/v3#participant" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent14"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Participation2"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Participation" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction2",
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000589"
+  } ],
+  "http://sbols.org/v3#hasParticipation" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction2/Participation1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction2/Participation2"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Interaction2"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Interaction" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction2/Participation1",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000645"
+  } ],
+  "http://sbols.org/v3#participant" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent15"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Participation1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Participation" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction2/Participation2",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000011"
+  } ],
+  "http://sbols.org/v3#participant" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent16"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Participation2"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Participation" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction3",
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000170"
+  } ],
+  "http://sbols.org/v3#hasParticipation" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction3/Participation1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction3/Participation2"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Interaction3"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Interaction" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction3/Participation1",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000643"
+  } ],
+  "http://sbols.org/v3#participant" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent17"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Participation1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Participation" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction3/Participation2",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000459"
+  } ],
+  "http://sbols.org/v3#participant" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent18"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Participation2"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Participation" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction4",
+  "http://sbols.org/v3#type" : [ {
+    "@id" : "https://identifiers.org/SBO:0000177"
+  } ],
+  "http://sbols.org/v3#hasParticipation" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction4/Participation1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction4/Participation2"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction4/Participation3"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Interaction4"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Interaction" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction4/Participation1",
   "http://sbols.org/v3#role" : [ {
     "@id" : "https://identifiers.org/SBO:0000010"
   } ],
@@ -203,7 +381,7 @@
   } ],
   "@type" : [ "http://sbols.org/v3#Participation" ]
 }, {
-  "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction1/Participation2",
+  "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction4/Participation2",
   "http://sbols.org/v3#role" : [ {
     "@id" : "https://identifiers.org/SBO:0000010"
   } ],
@@ -215,7 +393,7 @@
   } ],
   "@type" : [ "http://sbols.org/v3#Participation" ]
 }, {
-  "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction1/Participation3",
+  "@id" : "https://sbolstandard.org/examples/AHL_receiver/Interaction4/Participation3",
   "http://sbols.org/v3#role" : [ {
     "@id" : "https://identifiers.org/SBO:0000011"
   } ],
@@ -268,7 +446,7 @@
 }, {
   "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent13",
   "http://sbols.org/v3#instanceOf" : [ {
-    "@id" : "https://sbolstandard.org/examples/LuxR_protein"
+    "@id" : "https://sbolstandard.org/examples/luxR"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "SubComponent13"
@@ -277,7 +455,7 @@
 }, {
   "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent14",
   "http://sbols.org/v3#instanceOf" : [ {
-    "@id" : "https://sbolstandard.org/examples/GFP_protein"
+    "@id" : "https://sbolstandard.org/examples/LuxR_protein"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "SubComponent14"
@@ -286,10 +464,37 @@
 }, {
   "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent15",
   "http://sbols.org/v3#instanceOf" : [ {
-    "@id" : "https://sbolstandard.org/examples/LuxR_AHL"
+    "@id" : "https://sbolstandard.org/examples/gfp"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "SubComponent15"
+  } ],
+  "@type" : [ "http://sbols.org/v3#SubComponent" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent16",
+  "http://sbols.org/v3#instanceOf" : [ {
+    "@id" : "https://sbolstandard.org/examples/GFP_protein"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "SubComponent16"
+  } ],
+  "@type" : [ "http://sbols.org/v3#SubComponent" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent17",
+  "http://sbols.org/v3#instanceOf" : [ {
+    "@id" : "https://sbolstandard.org/examples/pLuxR"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "SubComponent17"
+  } ],
+  "@type" : [ "http://sbols.org/v3#SubComponent" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/AHL_receiver/SubComponent18",
+  "http://sbols.org/v3#instanceOf" : [ {
+    "@id" : "https://sbolstandard.org/examples/LuxR_AHL"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "SubComponent18"
   } ],
   "@type" : [ "http://sbols.org/v3#SubComponent" ]
 }, {
@@ -544,6 +749,8 @@
     "@id" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent2"
   }, {
     "@id" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent5"
   } ],
   "http://sbols.org/v3#description" : [ {
     "@value" : "Receiver System"
@@ -560,6 +767,8 @@
   } ],
   "http://sbols.org/v3#hasConstraint" : [ {
     "@id" : "https://sbolstandard.org/examples/ReceiverSystem/Constraint1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/ReceiverSystem/Constraint2"
   } ],
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://sbolstandard.org/examples"
@@ -577,6 +786,21 @@
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "Constraint1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Constraint" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/ReceiverSystem/Constraint2",
+  "http://sbols.org/v3#subject" : [ {
+    "@id" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent4"
+  } ],
+  "http://sbols.org/v3#restriction" : [ {
+    "@id" : "http://sbols.org/v3#contains"
+  } ],
+  "http://sbols.org/v3#object" : [ {
+    "@id" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent5"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Constraint2"
   } ],
   "@type" : [ "http://sbols.org/v3#Constraint" ]
 }, {
@@ -616,12 +840,23 @@
   } ],
   "@type" : [ "http://sbols.org/v3#SubComponent" ]
 }, {
+  "@id" : "https://sbolstandard.org/examples/ReceiverSystem/SubComponent5",
+  "http://sbols.org/v3#instanceOf" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_receiver"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "SubComponent5"
+  } ],
+  "@type" : [ "http://sbols.org/v3#SubComponent" ]
+}, {
   "@id" : "https://sbolstandard.org/examples/SenderSystem",
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://sbolstandard.org/examples"
   } ],
   "http://sbols.org/v3#hasFeature" : [ {
     "@id" : "https://sbolstandard.org/examples/SenderSystem/SubComponent1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/SenderSystem/SubComponent5"
   }, {
     "@id" : "https://sbolstandard.org/examples/SenderSystem/SubComponent3"
   }, {
@@ -634,6 +869,8 @@
   } ],
   "http://sbols.org/v3#hasConstraint" : [ {
     "@id" : "https://sbolstandard.org/examples/SenderSystem/Constraint1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/SenderSystem/Constraint2"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "SenderSystem"
@@ -661,6 +898,21 @@
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "Constraint1"
+  } ],
+  "@type" : [ "http://sbols.org/v3#Constraint" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/SenderSystem/Constraint2",
+  "http://sbols.org/v3#subject" : [ {
+    "@id" : "https://sbolstandard.org/examples/SenderSystem/SubComponent4"
+  } ],
+  "http://sbols.org/v3#restriction" : [ {
+    "@id" : "http://sbols.org/v3#contains"
+  } ],
+  "http://sbols.org/v3#object" : [ {
+    "@id" : "https://sbolstandard.org/examples/SenderSystem/SubComponent5"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "Constraint2"
   } ],
   "@type" : [ "http://sbols.org/v3#Constraint" ]
 }, {
@@ -697,6 +949,15 @@
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "SubComponent4"
+  } ],
+  "@type" : [ "http://sbols.org/v3#SubComponent" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/SenderSystem/SubComponent5",
+  "http://sbols.org/v3#instanceOf" : [ {
+    "@id" : "https://sbolstandard.org/examples/AHL_producer"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "SubComponent5"
   } ],
   "@type" : [ "http://sbols.org/v3#SubComponent" ]
 }, {

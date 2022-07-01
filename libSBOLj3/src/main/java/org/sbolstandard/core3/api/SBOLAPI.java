@@ -36,12 +36,9 @@ public class SBOLAPI {
 	    	List<Interaction> interactions=new ArrayList<Interaction>();
 	    	List<SubComponent> features1=createSubComponents(parent, participant1);
 	    	List<SubComponent> features2=createSubComponents(parent, participant2);
-	    	if (features1!=null && features2!=null)
-	    	{
-		    	for (Feature feature1: features1)
-		    	{
-		    		for (Feature feature2: features2)
-		    		{
+	    	if (features1!=null && features2!=null){
+		    	for (Feature feature1: features1){
+		    		for (Feature feature2: features2){
 		    			Interaction interaction=createInteraction(interactionTypes, parent, feature1, participant1Roles, feature2, participant2Roles);	
 		    			interactions.add(interaction);
 		    		}
@@ -95,8 +92,8 @@ public class SBOLAPI {
 	  	{
 	    	List<SubComponent> subComponents=getSubComponents(parent, child);
 	    	//If not DNA and there is no subComponent yet, add a subcomponent for the child
-	    	if ((subComponents==null || subComponents.size()==0) && !child.getTypes().contains(ComponentType.DNA.getUrl()))
-	    	{
+	    	//if ((subComponents==null || subComponents.size()==0) && !child.getTypes().contains(ComponentType.DNA.getUrl()))
+	    	if (subComponents==null || subComponents.size()==0){
 	    		SubComponent subComponent=parent.createSubComponent(child);
 		    	if (subComponents==null)
 		    	{
@@ -115,7 +112,7 @@ public class SBOLAPI {
 		    {
 		    	for (SubComponent feature: features)
 		    	{
-		    		if (feature.getInstanceOf().equals(child.getUri()))
+		    		if (feature.getInstanceOf().getUri().equals(child.getUri()))
 		    		{
 		    			if (found==null)
 		    			{
