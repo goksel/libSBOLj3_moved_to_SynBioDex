@@ -29,7 +29,7 @@
     "@type" : "sbol:Component",
     "description" : "LacI producer",
     "displayId" : "LacI_producer",
-    "hasFeature" : [ "https://sbolstandard.org/examples/LacI_producer/SubComponent13", "https://sbolstandard.org/examples/LacI_producer/SubComponent1", "https://sbolstandard.org/examples/LacI_producer/SubComponent11", "https://sbolstandard.org/examples/LacI_producer/SubComponent5", "https://sbolstandard.org/examples/LacI_producer/SubComponent12", "https://sbolstandard.org/examples/LacI_producer/SubComponent14", "https://sbolstandard.org/examples/LacI_producer/SubComponent17", "https://sbolstandard.org/examples/LacI_producer/SubComponent10", "https://sbolstandard.org/examples/LacI_producer/SubComponent2", "https://sbolstandard.org/examples/LacI_producer/SubComponent8", "https://sbolstandard.org/examples/LacI_producer/SubComponent9", "https://sbolstandard.org/examples/LacI_producer/SubComponent3", "https://sbolstandard.org/examples/LacI_producer/SubComponent6", "https://sbolstandard.org/examples/LacI_producer/SubComponent15", "https://sbolstandard.org/examples/LacI_producer/SubComponent7", "https://sbolstandard.org/examples/LacI_producer/SubComponent16", "https://sbolstandard.org/examples/LacI_producer/SubComponent4" ],
+    "hasFeature" : [ "https://sbolstandard.org/examples/LacI_producer/SubComponent1", "https://sbolstandard.org/examples/LacI_producer/SubComponent11", "https://sbolstandard.org/examples/LacI_producer/SubComponent5", "https://sbolstandard.org/examples/LacI_producer/SubComponent10", "https://sbolstandard.org/examples/LacI_producer/SubComponent2", "https://sbolstandard.org/examples/LacI_producer/SubComponent8", "https://sbolstandard.org/examples/LacI_producer/SubComponent9", "https://sbolstandard.org/examples/LacI_producer/SubComponent3", "https://sbolstandard.org/examples/LacI_producer/SubComponent6", "https://sbolstandard.org/examples/LacI_producer/SubComponent7", "https://sbolstandard.org/examples/LacI_producer/SubComponent4" ],
     "hasInteraction" : [ "https://sbolstandard.org/examples/LacI_producer/Interaction3", "https://sbolstandard.org/examples/LacI_producer/Interaction2", "https://sbolstandard.org/examples/LacI_producer/Interaction1", "https://sbolstandard.org/examples/LacI_producer/Interaction4" ],
     "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "LacI producer",
@@ -45,13 +45,13 @@
     "@id" : "https://sbolstandard.org/examples/LacI_producer/Interaction1/Participation1",
     "@type" : "sbol:Participation",
     "displayId" : "Participation1",
-    "participant" : "https://sbolstandard.org/examples/LacI_producer/SubComponent12",
+    "participant" : "https://sbolstandard.org/examples/LacI_producer/SubComponent3",
     "role" : "SBO:0000645"
   }, {
     "@id" : "https://sbolstandard.org/examples/LacI_producer/Interaction1/Participation2",
     "@type" : "sbol:Participation",
     "displayId" : "Participation2",
-    "participant" : "https://sbolstandard.org/examples/LacI_producer/SubComponent13",
+    "participant" : "https://sbolstandard.org/examples/LacI_producer/SubComponent7",
     "role" : "SBO:0000011"
   }, {
     "@id" : "https://sbolstandard.org/examples/LacI_producer/Interaction2",
@@ -63,13 +63,13 @@
     "@id" : "https://sbolstandard.org/examples/LacI_producer/Interaction2/Participation1",
     "@type" : "sbol:Participation",
     "displayId" : "Participation1",
-    "participant" : "https://sbolstandard.org/examples/LacI_producer/SubComponent14",
+    "participant" : "https://sbolstandard.org/examples/LacI_producer/SubComponent5",
     "role" : "SBO:0000645"
   }, {
     "@id" : "https://sbolstandard.org/examples/LacI_producer/Interaction2/Participation2",
     "@type" : "sbol:Participation",
     "displayId" : "Participation2",
-    "participant" : "https://sbolstandard.org/examples/LacI_producer/SubComponent15",
+    "participant" : "https://sbolstandard.org/examples/LacI_producer/SubComponent8",
     "role" : "SBO:0000011"
   }, {
     "@id" : "https://sbolstandard.org/examples/LacI_producer/Interaction3",
@@ -81,13 +81,13 @@
     "@id" : "https://sbolstandard.org/examples/LacI_producer/Interaction3/Participation1",
     "@type" : "sbol:Participation",
     "displayId" : "Participation1",
-    "participant" : "https://sbolstandard.org/examples/LacI_producer/SubComponent16",
+    "participant" : "https://sbolstandard.org/examples/LacI_producer/SubComponent1",
     "role" : "SBO:0000642"
   }, {
     "@id" : "https://sbolstandard.org/examples/LacI_producer/Interaction3/Participation2",
     "@type" : "sbol:Participation",
     "displayId" : "Participation2",
-    "participant" : "https://sbolstandard.org/examples/LacI_producer/SubComponent17",
+    "participant" : "https://sbolstandard.org/examples/LacI_producer/SubComponent9",
     "role" : "SBO:0000019"
   }, {
     "@id" : "https://sbolstandard.org/examples/LacI_producer/Interaction4",
@@ -129,36 +129,6 @@
     "@type" : "sbol:SubComponent",
     "displayId" : "SubComponent11",
     "instanceOf" : "https://sbolstandard.org/examples/atC_TetR"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent12",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "SubComponent12",
-    "instanceOf" : "https://sbolstandard.org/examples/lacI"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent13",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "SubComponent13",
-    "instanceOf" : "https://sbolstandard.org/examples/LacI_protein"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent14",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "SubComponent14",
-    "instanceOf" : "https://sbolstandard.org/examples/gfp"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent15",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "SubComponent15",
-    "instanceOf" : "https://sbolstandard.org/examples/GFP_protein"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent16",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "SubComponent16",
-    "instanceOf" : "https://sbolstandard.org/examples/pTetR"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent17",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "SubComponent17",
-    "instanceOf" : "https://sbolstandard.org/examples/TetR_protein"
   }, {
     "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent2",
     "@type" : "sbol:SubComponent",
@@ -218,7 +188,7 @@
     "@type" : "sbol:Component",
     "description" : "TetR producer",
     "displayId" : "TetR_producer",
-    "hasFeature" : [ "https://sbolstandard.org/examples/TetR_producer/SubComponent2", "https://sbolstandard.org/examples/TetR_producer/SubComponent7", "https://sbolstandard.org/examples/TetR_producer/SubComponent12", "https://sbolstandard.org/examples/TetR_producer/SubComponent5", "https://sbolstandard.org/examples/TetR_producer/SubComponent10", "https://sbolstandard.org/examples/TetR_producer/SubComponent3", "https://sbolstandard.org/examples/TetR_producer/SubComponent8", "https://sbolstandard.org/examples/TetR_producer/SubComponent1", "https://sbolstandard.org/examples/TetR_producer/SubComponent6", "https://sbolstandard.org/examples/TetR_producer/SubComponent11", "https://sbolstandard.org/examples/TetR_producer/SubComponent4", "https://sbolstandard.org/examples/TetR_producer/SubComponent9" ],
+    "hasFeature" : [ "https://sbolstandard.org/examples/TetR_producer/SubComponent2", "https://sbolstandard.org/examples/TetR_producer/SubComponent7", "https://sbolstandard.org/examples/TetR_producer/SubComponent5", "https://sbolstandard.org/examples/TetR_producer/SubComponent3", "https://sbolstandard.org/examples/TetR_producer/SubComponent8", "https://sbolstandard.org/examples/TetR_producer/SubComponent1", "https://sbolstandard.org/examples/TetR_producer/SubComponent6", "https://sbolstandard.org/examples/TetR_producer/SubComponent4" ],
     "hasInteraction" : [ "https://sbolstandard.org/examples/TetR_producer/Interaction2", "https://sbolstandard.org/examples/TetR_producer/Interaction1", "https://sbolstandard.org/examples/TetR_producer/Interaction3" ],
     "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "TetR device",
@@ -234,13 +204,13 @@
     "@id" : "https://sbolstandard.org/examples/TetR_producer/Interaction1/Participation1",
     "@type" : "sbol:Participation",
     "displayId" : "Participation1",
-    "participant" : "https://sbolstandard.org/examples/TetR_producer/SubComponent9",
+    "participant" : "https://sbolstandard.org/examples/TetR_producer/SubComponent3",
     "role" : "SBO:0000645"
   }, {
     "@id" : "https://sbolstandard.org/examples/TetR_producer/Interaction1/Participation2",
     "@type" : "sbol:Participation",
     "displayId" : "Participation2",
-    "participant" : "https://sbolstandard.org/examples/TetR_producer/SubComponent10",
+    "participant" : "https://sbolstandard.org/examples/TetR_producer/SubComponent5",
     "role" : "SBO:0000011"
   }, {
     "@id" : "https://sbolstandard.org/examples/TetR_producer/Interaction2",
@@ -252,13 +222,13 @@
     "@id" : "https://sbolstandard.org/examples/TetR_producer/Interaction2/Participation1",
     "@type" : "sbol:Participation",
     "displayId" : "Participation1",
-    "participant" : "https://sbolstandard.org/examples/TetR_producer/SubComponent11",
+    "participant" : "https://sbolstandard.org/examples/TetR_producer/SubComponent1",
     "role" : "SBO:0000642"
   }, {
     "@id" : "https://sbolstandard.org/examples/TetR_producer/Interaction2/Participation2",
     "@type" : "sbol:Participation",
     "displayId" : "Participation2",
-    "participant" : "https://sbolstandard.org/examples/TetR_producer/SubComponent12",
+    "participant" : "https://sbolstandard.org/examples/TetR_producer/SubComponent6",
     "role" : "SBO:0000019"
   }, {
     "@id" : "https://sbolstandard.org/examples/TetR_producer/Interaction3",
@@ -290,21 +260,6 @@
     "displayId" : "SubComponent1",
     "instanceOf" : "https://sbolstandard.org/examples/pLacI",
     "orientation" : "SO:0001030"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/TetR_producer/SubComponent10",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "SubComponent10",
-    "instanceOf" : "https://sbolstandard.org/examples/TetR_protein"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/TetR_producer/SubComponent11",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "SubComponent11",
-    "instanceOf" : "https://sbolstandard.org/examples/pLacI"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/TetR_producer/SubComponent12",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "SubComponent12",
-    "instanceOf" : "https://sbolstandard.org/examples/LacI_protein"
   }, {
     "@id" : "https://sbolstandard.org/examples/TetR_producer/SubComponent2",
     "@type" : "sbol:SubComponent",
@@ -343,11 +298,6 @@
     "@type" : "sbol:SubComponent",
     "displayId" : "SubComponent8",
     "instanceOf" : "https://sbolstandard.org/examples/IPTG_LacI"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/TetR_producer/SubComponent9",
-    "@type" : "sbol:SubComponent",
-    "displayId" : "SubComponent9",
-    "instanceOf" : "https://sbolstandard.org/examples/tetR"
   }, {
     "@id" : "https://sbolstandard.org/examples/TetR_protein",
     "@type" : "sbol:Component",
@@ -469,10 +419,49 @@
     "@type" : "sbol:Component",
     "description" : "Toggle Switch genetic circuit",
     "displayId" : "toggle_switch",
-    "hasFeature" : [ "https://sbolstandard.org/examples/toggle_switch/SubComponent1", "https://sbolstandard.org/examples/toggle_switch/SubComponent2" ],
+    "hasConstraint" : [ "https://sbolstandard.org/examples/toggle_switch/Constraint1", "https://sbolstandard.org/examples/toggle_switch/Constraint2" ],
+    "hasFeature" : [ "https://sbolstandard.org/examples/toggle_switch/SubComponent1", "https://sbolstandard.org/examples/toggle_switch/ComponentReference4", "https://sbolstandard.org/examples/toggle_switch/ComponentReference3", "https://sbolstandard.org/examples/toggle_switch/ComponentReference2", "https://sbolstandard.org/examples/toggle_switch/ComponentReference1", "https://sbolstandard.org/examples/toggle_switch/SubComponent2" ],
     "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "Toggle Switch",
     "type" : "SBO:0000251"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/toggle_switch/ComponentReference1",
+    "@type" : "sbol:ComponentReference",
+    "displayId" : "ComponentReference1",
+    "inChildOf" : "https://sbolstandard.org/examples/toggle_switch/SubComponent1",
+    "refersTo" : "https://sbolstandard.org/examples/LacI_producer/SubComponent7"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/toggle_switch/ComponentReference2",
+    "@type" : "sbol:ComponentReference",
+    "displayId" : "ComponentReference2",
+    "inChildOf" : "https://sbolstandard.org/examples/toggle_switch/SubComponent2",
+    "refersTo" : "https://sbolstandard.org/examples/TetR_producer/SubComponent6"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/toggle_switch/ComponentReference3",
+    "@type" : "sbol:ComponentReference",
+    "displayId" : "ComponentReference3",
+    "inChildOf" : "https://sbolstandard.org/examples/toggle_switch/SubComponent1",
+    "refersTo" : "https://sbolstandard.org/examples/LacI_producer/SubComponent9"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/toggle_switch/ComponentReference4",
+    "@type" : "sbol:ComponentReference",
+    "displayId" : "ComponentReference4",
+    "inChildOf" : "https://sbolstandard.org/examples/toggle_switch/SubComponent2",
+    "refersTo" : "https://sbolstandard.org/examples/TetR_producer/SubComponent5"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/toggle_switch/Constraint1",
+    "@type" : "sbol:Constraint",
+    "displayId" : "Constraint1",
+    "object" : "https://sbolstandard.org/examples/toggle_switch/ComponentReference2",
+    "restriction" : "sbol:verifyIdentical",
+    "subject" : "https://sbolstandard.org/examples/toggle_switch/ComponentReference1"
+  }, {
+    "@id" : "https://sbolstandard.org/examples/toggle_switch/Constraint2",
+    "@type" : "sbol:Constraint",
+    "displayId" : "Constraint2",
+    "object" : "https://sbolstandard.org/examples/toggle_switch/ComponentReference4",
+    "restriction" : "sbol:verifyIdentical",
+    "subject" : "https://sbolstandard.org/examples/toggle_switch/ComponentReference3"
   }, {
     "@id" : "https://sbolstandard.org/examples/toggle_switch/SubComponent1",
     "@type" : "sbol:SubComponent",
@@ -510,6 +499,18 @@
       "@id" : "http://sbols.org/v3#instanceOf",
       "@type" : "@id"
     },
+    "subject" : {
+      "@id" : "http://sbols.org/v3#subject",
+      "@type" : "@id"
+    },
+    "restriction" : {
+      "@id" : "http://sbols.org/v3#restriction",
+      "@type" : "@id"
+    },
+    "object" : {
+      "@id" : "http://sbols.org/v3#object",
+      "@type" : "@id"
+    },
     "orientation" : {
       "@id" : "http://sbols.org/v3#orientation",
       "@type" : "@id"
@@ -522,8 +523,20 @@
       "@id" : "http://sbols.org/v3#hasParticipation",
       "@type" : "@id"
     },
+    "refersTo" : {
+      "@id" : "http://sbols.org/v3#refersTo",
+      "@type" : "@id"
+    },
+    "inChildOf" : {
+      "@id" : "http://sbols.org/v3#inChildOf",
+      "@type" : "@id"
+    },
     "hasFeature" : {
       "@id" : "http://sbols.org/v3#hasFeature",
+      "@type" : "@id"
+    },
+    "hasConstraint" : {
+      "@id" : "http://sbols.org/v3#hasConstraint",
       "@type" : "@id"
     },
     "hasInteraction" : {
