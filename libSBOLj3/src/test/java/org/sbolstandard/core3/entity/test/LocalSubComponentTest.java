@@ -72,17 +72,35 @@ public class LocalSubComponentTest extends TestCase {
 
 	    //LOCALSUBCOMPONENT_TYPE_FROM_TABLE2
         lsComponent.setTypes(tempTypes);
-	    lsComponent.setTypes(Arrays.asList(ComponentType.Cell.getUrl()));
+	    lsComponent.setTypes(Arrays.asList(ComponentType.OptionalComponentType.Cell.getUri()));
 	    TestUtil.validateIdentified(lsComponent,doc,1);
         lsComponent.setTypes(tempTypes);
 	    lsComponent.setTypes(Arrays.asList(ComponentType.DNA.getUrl()));
 	    TestUtil.validateIdentified(lsComponent,doc,0);
+	    lsComponent.setTypes(Arrays.asList(ComponentType.DNA.getUrl(), ComponentType.OptionalComponentType.Cell.getUri()));
+	    TestUtil.validateIdentified(lsComponent,doc,0);
+	    lsComponent.setTypes(Arrays.asList(ComponentType.TopologyType.Linear.getUri(), ComponentType.OptionalComponentType.Cell.getUri()));
+	    TestUtil.validateIdentified(lsComponent,doc,1);
+	    lsComponent.setTypes(Arrays.asList(ComponentType.Protein.getUrl(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
+	    TestUtil.validateIdentified(lsComponent,doc,0);
+	    lsComponent.setTypes(Arrays.asList(ComponentType.DNA.getUrl(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
+	    TestUtil.validateIdentified(lsComponent,doc,1);
+	    lsComponent.setTypes(Arrays.asList(ComponentType.RNA.getUrl(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
+	    TestUtil.validateIdentified(lsComponent,doc,1);
+	    lsComponent.setTypes(Arrays.asList(ComponentType.RNA.getUrl(), ComponentType.TopologyType.Linear.getUri()));
+	    TestUtil.validateIdentified(lsComponent,doc,0);
+	    
+	    
+	    
+	    
 	    // ensure it validates is optional checks are disabled
 		Configuration.getInstance().setValidateRecommendedRules(false);
-	    lsComponent.setTypes(Arrays.asList(ComponentType.Cell.getUrl()));
+	    lsComponent.setTypes(Arrays.asList(ComponentType.OptionalComponentType.Cell.getUri()));
 	    TestUtil.validateIdentified(lsComponent,doc,0);
 
 		Configuration.getInstance().setValidateRecommendedRules(true);
+		
+		
 		
     }	
 	

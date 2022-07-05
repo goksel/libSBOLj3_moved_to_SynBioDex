@@ -21,6 +21,9 @@ import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.util.FileManager;
+import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.validation.ValidationMessage;
@@ -193,4 +196,25 @@ public class SBOLUtil {
 			}
 			return uri;
 	    }
+	    
+	    
+	    private static String readFromFileResource(String fileResource) throws IOException
+		{
+			try
+			{
+				File file = new File(SBOLAPI.class.getClassLoader().getResource(fileResource).getFile());
+				return IOUtils.toString(new FileInputStream(file), Charset.defaultCharset());
+			}
+			catch (Exception e)
+			{
+				throw new IOException("Could not load the file " + fileResource,e);
+			}
+		}
+	    
+	    public static Model getModelFromFileResource(String fileResource) {
+	        File file = new File(SBOLAPI.class.getClassLoader().getResource(fileResource).getFile());
+	        return RDFDataMgr.loadModel(file.getPath());
+	    }
+	    
+	    
 }

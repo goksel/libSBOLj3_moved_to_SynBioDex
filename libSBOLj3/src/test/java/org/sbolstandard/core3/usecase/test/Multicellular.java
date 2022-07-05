@@ -31,8 +31,8 @@ public class Multicellular extends TestCase {
         Component multicellularSystem=SBOLAPI.createComponent(doc, "MulticellularSystem", ComponentType.FunctionalEntity.getUrl(), "MulticellularSystem", "Multicellular System", Role.FunctionalCompartment);
         Component senderSystem=SBOLAPI.createComponent(doc, "SenderSystem", ComponentType.FunctionalEntity.getUrl(), "SenderSystem", "Sender System", Role.FunctionalCompartment);
         Component receiverSystem=SBOLAPI.createComponent(doc, "ReceiverSystem", ComponentType.FunctionalEntity.getUrl(), "ReceiverSystem", "Receiver System", Role.FunctionalCompartment);
-        Component senderCell=SBOLAPI.createComponent(doc, "OrganismA", ComponentType.Cell.getUrl(), "OrganismA", "Organism A", Role.PhysicalCompartment);
-        Component receiverCell=SBOLAPI.createComponent(doc, "OrganismB", ComponentType.Cell.getUrl(), "OrganismB", "Organism B", Role.PhysicalCompartment);
+        Component senderCell=SBOLAPI.createComponent(doc, "OrganismA", ComponentType.OptionalComponentType.Cell.getUri(), "OrganismA", "Organism A", Role.PhysicalCompartment);
+        Component receiverCell=SBOLAPI.createComponent(doc, "OrganismB", ComponentType.OptionalComponentType.Cell.getUri(), "OrganismB", "Organism B", Role.PhysicalCompartment);
         Component AHL=SBOLAPI.createComponent(doc, "AHL", ComponentType.SimpleChemical.getUrl(), "AHL", "AHL", Role.Effector);
        
         SBOLAPI.createConstraint(senderSystem, senderCell, AHL, RestrictionType.Topology.contains);

@@ -137,13 +137,13 @@ public class Component extends TopLevel {
 
 				ComponentType componentType = ComponentType.get(componentTypeURI);
 				if(componentType != null) {
-					List<URI> typeMatches = ComponentType.checkComponentTypeMatch(componentType);
+					List<Encoding> typeMatches = ComponentType.checkComponentTypeMatch(componentType);
 					outerloop:
 					for (Sequence sequence : sequences) {
 						Encoding encoding = sequence.getEncoding();
 						if (encoding != null) {
-							for (URI typeURI: typeMatches) {
-								if(typeURI.equals(encoding.getUri())) {
+							for (Encoding typeURI: typeMatches) {
+								if(typeURI.getUri().equals(encoding.getUri())) {
 									foundTypeMatch = true;
 									break outerloop;
 								}

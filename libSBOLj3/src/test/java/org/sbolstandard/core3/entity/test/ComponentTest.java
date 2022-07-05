@@ -27,6 +27,7 @@ import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.ComponentType;
+import org.sbolstandard.core3.vocabulary.ComponentType.OptionalComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.InteractionType;
@@ -247,5 +248,11 @@ public class ComponentTest extends TestCase {
         seqINCHI.setElements("InChI=1S/C6H8O6/c7-1-2(8)5-3(9)4(10)6(11)12-5/h2,5,7-10H,1H2/t2-,5+/m0/s1"); //L-ascorbic acid with InChI
         TestUtil.validateIdentified(seqINCHI, 0);        
 	    
+        ComponentType[] values=ComponentType.values();
+        System.out.println(values.length);
+        OptionalComponentType[] optionalValues2=ComponentType.OptionalComponentType.values();
+        System.out.println(optionalValues2.length);
+        
+        
     }
 }

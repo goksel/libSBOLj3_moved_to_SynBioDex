@@ -17,6 +17,7 @@ import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.ComponentType;
+import org.sbolstandard.core3.vocabulary.ComponentType.TopologyType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 import jakarta.validation.Valid;
@@ -47,13 +48,33 @@ public class LocalSubComponent extends FeatureWithLocation{
 			validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type));      	
 		}
 		
-		// LOCALSUBCOMPONENT_TYPE_FROM_TABLE2
 		if (Configuration.getInstance().isValidateRecommendedRules()) {
 			if(types != null) {
+				// LOCALSUBCOMPONENT_TYPE_FROM_TABLE2
+				boolean found=false;
 				for(URI typeURI: types) {
-					ComponentType recommendType = ComponentType.getRecommendedType(typeURI);
-					if(recommendType ==null){
-						validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_FROM_TABLE2}", DataModel.type, typeURI));      		
+					ComponentType recommendType = ComponentType.get(typeURI);
+					if (recommendType!=null)
+					{
+						found=true;
+						break;
+					}
+				}
+				if(!found){
+					validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_FROM_TABLE2}", DataModel.type, types));      		
+				}
+				
+				int counter=0;
+				if (types.contains(ComponentType.DNA.getUrl()) || types.contains(ComponentType.RNA.getUrl()) ){
+					for(URI typeURI: types) {
+						TopologyType topologyType = TopologyType.get(typeURI);
+						if (topologyType!=null)
+						{
+							counter++;
+						}
+					}
+					if(counter>1){
+						validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE}", DataModel.type, types));      		
 					}
 				}
 			}
