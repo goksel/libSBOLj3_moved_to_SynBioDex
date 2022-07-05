@@ -114,7 +114,7 @@ public class SBOLUtil {
 			int counter=0;
 			ComponentType[] typeValues=ComponentType.values();
 			for (int i=0;i<typeValues.length;i++){
-				if (types.contains(typeValues[i].getUrl())){
+				if (types.contains(typeValues[i].getUri())){
 					counter++;
 				}
 				if (counter==2) {

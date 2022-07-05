@@ -25,7 +25,7 @@ public class ImplementationTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component TetR_protein=SBOLAPI.createComponent(doc, "TetR_protein", ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
+        Component TetR_protein=SBOLAPI.createComponent(doc, "TetR_protein", ComponentType.Protein.getUri(), "TetR", "TetR protein", Role.TF);
         
         Implementation impl=doc.createImplementation("impl1");
         impl.setComponent(TetR_protein);

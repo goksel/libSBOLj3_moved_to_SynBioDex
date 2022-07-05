@@ -8,7 +8,16 @@ import java.util.Map;
 
 import org.sbolstandard.core3.util.URINameSpace;
 
-public enum ComponentType {
+interface HasURI{
+    URI getUri();
+    /*static Map<URI, HasURI> lookup = new HashMap<>();
+    static <T extends HasURI> T get(URI uri)
+    {
+    	return (T) lookup.get(uri);
+    }*/
+}
+
+public enum ComponentType implements HasURI{
 	DNA(URINameSpace.SBO.local("0000251")), 
 	RNA(URINameSpace.SBO.local("0000250")), 
 	Protein(URINameSpace.SBO.local("0000252")), 
@@ -22,11 +31,11 @@ public enum ComponentType {
 		this.uri = uri;
 	}
 
-	public URI getUrl() {
+	public URI getUri() {
 		return uri;
 	}
 
-	public enum OptionalComponentType {
+	public enum OptionalComponentType implements HasURI {
 		Cell(URINameSpace.GO.local("0005623"));
 
 		private URI uri;
@@ -40,11 +49,10 @@ public enum ComponentType {
 		}
 	}
 	
-	public enum TopologyType {
+	public enum TopologyType implements HasURI {
 		Circular(URINameSpace.SO.local("0000988")),
 		Linear(URINameSpace.SO.local("0000987"));
 		
-
 		private URI uri;
 
 		TopologyType(URI uri) {
@@ -67,12 +75,39 @@ public enum ComponentType {
 			return lookup.get(uri);
 		}
 	}
+	
+	public enum StrandType implements HasURI {
+		Single(URINameSpace.SO.local("0000984")),
+		Double(URINameSpace.SO.local("0000985"));
+		
+		private URI uri;
+
+		StrandType(URI uri) {
+			this.uri = uri;
+		}
+		
+		public URI getUri() {
+			return uri;
+		}
+		
+		private static final Map<URI, StrandType> lookup = new HashMap<>();
+
+		static {
+			for (StrandType value : StrandType.values()) {
+				lookup.put(value.getUri(), value);
+			}
+		}
+
+		public static StrandType get(URI uri) {
+			return lookup.get(uri);
+		}
+	}
 
 	private static final Map<URI, ComponentType> lookup = new HashMap<>();
 
 	static {
 		for (ComponentType value : ComponentType.values()) {
-			lookup.put(value.getUrl(), value);
+			lookup.put(value.getUri(), value);
 		}
 	}
 

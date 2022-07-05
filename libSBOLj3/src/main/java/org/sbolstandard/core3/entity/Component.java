@@ -95,7 +95,7 @@ public class Component extends TopLevel {
 				for (URI componentType : types) {
 					boolean foundType = false;
 					for(ComponentType thisComponentType: ComponentType.values()) {
-						if(componentType.equals(thisComponentType.getUrl())){
+						if(componentType.equals(thisComponentType.getUri())){
 							foundType = true;
 						}
 					}

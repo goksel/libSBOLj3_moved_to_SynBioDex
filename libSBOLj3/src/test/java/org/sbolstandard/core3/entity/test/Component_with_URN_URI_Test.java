@@ -28,7 +28,7 @@ public class Component_with_URN_URI_Test extends TestCase {
         URI uri=getUniqueURN();
         URI namespace=getUniqueURN();
         
-        Component comp=doc.createComponent(uri, namespace, Arrays.asList(ComponentType.Protein.getUrl()));
+        Component comp=doc.createComponent(uri, namespace, Arrays.asList(ComponentType.Protein.getUri()));
         comp.setName("TetR");
         Component compRead=(Component)doc.getIdentified(uri, Component.class);
         assertNotNull("Could not retrieve the compoenent identitied by a urn:uuid URI ",compRead);

@@ -21,9 +21,9 @@ public class ExternallyDefinedTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-    	Component ilab16_dev1=doc.createComponent("interlab16device1", Arrays.asList(ComponentType.FunctionalEntity.getUrl())); 
-    	ExternallyDefined exDefined= ilab16_dev1.createExternallyDefined(Arrays.asList(ComponentType.Protein.getUrl()), URI.create("http://uniprot.org/gfp"));
-    	ExternallyDefined exDefined2= ilab16_dev1.createExternallyDefined(Arrays.asList(ComponentType.Protein.getUrl()), URI.create("http://uniprot.org/rfp"));
+    	Component ilab16_dev1=doc.createComponent("interlab16device1", Arrays.asList(ComponentType.FunctionalEntity.getUri())); 
+    	ExternallyDefined exDefined= ilab16_dev1.createExternallyDefined(Arrays.asList(ComponentType.Protein.getUri()), URI.create("http://uniprot.org/gfp"));
+    	ExternallyDefined exDefined2= ilab16_dev1.createExternallyDefined(Arrays.asList(ComponentType.Protein.getUri()), URI.create("http://uniprot.org/rfp"));
     	 
     	TestUtil.serialise(doc, "entity_additional/externallydefined", "externallydefined");    	     
 		System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
@@ -44,11 +44,11 @@ public class ExternallyDefinedTest extends TestCase {
         exDefined2.setDefinition(null);
         TestUtil.validateIdentified(exDefined2,doc,1,4); 
         
-        exDefined2.setTypes(Arrays.asList(ComponentType.DNA.getUrl(), ComponentType.Protein.getUrl() ));
+        exDefined2.setTypes(Arrays.asList(ComponentType.DNA.getUri(), ComponentType.Protein.getUri() ));
 	    TestUtil.validateIdentified(ilab16_dev1,doc,5);
 	    
 	    // EXTERNALLYDEFINED_TYPE_IN_TABLE2
-	    exDefined2.setTypes(Arrays.asList(ComponentType.DNA.getUrl() ));
+	    exDefined2.setTypes(Arrays.asList(ComponentType.DNA.getUri() ));
 	    TestUtil.validateIdentified(ilab16_dev1,doc,4);
 
 	    exDefined2.setTypes(Arrays.asList(ComponentType.OptionalComponentType.Cell.getUri() ));

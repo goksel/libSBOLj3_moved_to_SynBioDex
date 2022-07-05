@@ -24,12 +24,12 @@ public class InvalidDisplayIdTest extends TestCase {
         Configuration.getInstance().setValidateBeforeSaving(false);
         Configuration.getInstance().setValidateAfterSettingProperties(false);
  	    
-        Component TetR_protein=SBOLAPI.createComponent(doc, "TetR_protein", ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
+        Component TetR_protein=SBOLAPI.createComponent(doc, "TetR_protein", ComponentType.Protein.getUri(), "TetR", "TetR protein", Role.TF);
         TetR_protein.setDisplayId("1TetR");
         //Component LacI_protein=SBOLAPI.createComponent(doc, "LacI_protein", ComponentType.Protein.getUrl(), "LacI", "LacI protein", Role.TF);
         TetR_protein.setNamespace(URI.create("https://sbolstandard.org/examples/"));
         
-        Component rbs=doc.createComponent(URI.create("https://sbolstandard.org/examples/rbs"), URI.create("https://sbolstandard.org/examples"), Arrays.asList(ComponentType.DNA.getUrl())); 
+        Component rbs=doc.createComponent(URI.create("https://sbolstandard.org/examples/rbs"), URI.create("https://sbolstandard.org/examples"), Arrays.asList(ComponentType.DNA.getUri())); 
 		rbs.setName("B0034");
 		rbs.setDisplayId("B0034 rbs");
 		rbs.setDescription("RBS (Elowitz 1999)");

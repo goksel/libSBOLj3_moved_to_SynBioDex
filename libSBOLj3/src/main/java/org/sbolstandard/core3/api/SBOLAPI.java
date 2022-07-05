@@ -405,7 +405,7 @@ public class SBOLAPI {
 	    
 	    public static Component createDnaComponent(SBOLDocument doc, String displayId, String name, String description, URI role, String sequence) throws SBOLGraphException
 	    {
-	    	Component dna=createComponent(doc, displayId, ComponentType.DNA.getUrl(), name, description, role);	
+	    	Component dna=createComponent(doc, displayId, ComponentType.DNA.getUri(), name, description, role);	
 	    	if (sequence!=null && sequence.length()>0)
 	    	{
 	    		createSequence(doc, dna, Encoding.NucleicAcid, sequence);
@@ -415,7 +415,7 @@ public class SBOLAPI {
 	    
 	    public static Component createProteinComponent(SBOLDocument doc, Component container, String displayId, String name, String description, URI role, String sequence) throws SBOLGraphException
 	    {
-	    	Component protein=createComponent(doc, displayId, ComponentType.Protein.getUrl(), name, description, role);
+	    	Component protein=createComponent(doc, displayId, ComponentType.Protein.getUri(), name, description, role);
 	    	container.createSubComponent(protein);
 	    	if (sequence!=null && sequence.length()>0)
 	    	{
@@ -732,7 +732,7 @@ public class SBOLAPI {
 				
 				for (Component compDef:doc.getComponents())
 				{
-					if (compDef.getSubComponents()!=null && compDef.getTypes().contains(type.getUrl()))
+					if (compDef.getSubComponents()!=null && compDef.getTypes().contains(type.getUri()))
 					{
 						for (SubComponent comp:compDef.getSubComponents())
 						{
@@ -749,7 +749,7 @@ public class SBOLAPI {
 				}
 				for (Component compDef:doc.getComponents())
 				{
-					if (!childNodes.contains(compDef.getUri()) && compDef.getTypes().contains(type.getUrl()))
+					if (!childNodes.contains(compDef.getUri()) && compDef.getTypes().contains(type.getUri()))
 					{
 						if (rootNodes==null)
 						{

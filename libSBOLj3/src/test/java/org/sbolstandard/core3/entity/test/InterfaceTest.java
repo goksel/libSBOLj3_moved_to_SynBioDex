@@ -26,9 +26,9 @@ public class InterfaceTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component TetR_protein=SBOLAPI.createComponent(doc, "TetR_protein", ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
-        Component LacI_protein=SBOLAPI.createComponent(doc, "LacI_protein", ComponentType.Protein.getUrl(), "LacI", "LacI protein", Role.TF);
-        Component aTC=SBOLAPI.createComponent(doc, "aTC", ComponentType.SimpleChemical.getUrl(), "aTC","aTC", Role.Effector);
+        Component TetR_protein=SBOLAPI.createComponent(doc, "TetR_protein", ComponentType.Protein.getUri(), "TetR", "TetR protein", Role.TF);
+        Component LacI_protein=SBOLAPI.createComponent(doc, "LacI_protein", ComponentType.Protein.getUri(), "LacI", "LacI protein", Role.TF);
+        Component aTC=SBOLAPI.createComponent(doc, "aTC", ComponentType.SimpleChemical.getUri(), "aTC","aTC", Role.Effector);
         
   
         //LacI producer

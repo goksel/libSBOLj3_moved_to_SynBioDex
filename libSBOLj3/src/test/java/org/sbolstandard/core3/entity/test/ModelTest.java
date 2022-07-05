@@ -21,7 +21,7 @@ public class ModelTest extends TestCase {
 		String baseUri=namespace + "/examples/";
         
 		SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
-        Component toggleSwitch=SBOLAPI.createComponent(doc, "toggle_switch", ComponentType.FunctionalEntity.getUrl(), "Toggle Switch", "Toggle Switch genetic circuit", null);
+        Component toggleSwitch=SBOLAPI.createComponent(doc, "toggle_switch", ComponentType.FunctionalEntity.getUri(), "Toggle Switch", "Toggle Switch genetic circuit", null);
         Model model=doc.createModel("model1", URI.create("http://virtualparts.org"), ModelFramework.Continuous,ModelLanguage.SBML);
         model.setNamespace(URI.create(namespace));
         toggleSwitch.setModels(Arrays.asList(model));

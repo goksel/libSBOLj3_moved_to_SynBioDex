@@ -27,14 +27,14 @@ public class ParticipantTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component device=doc.createComponent("i13504", Arrays.asList(ComponentType.DNA.getUrl())); 
+        Component device=doc.createComponent("i13504", Arrays.asList(ComponentType.DNA.getUri())); 
         String gfp_na="atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa";
 		Component gfp=SBOLAPI.createDnaComponent(doc, "E0040", "gfp", "gfp coding sequence", Role.CDS, gfp_na);
 		
         SubComponent gfpSubComponent=SBOLAPI.appendComponent(doc, device,gfp, Orientation.inline);
 		
-        Component i13504_system=SBOLAPI.createComponent(doc,"i13504_system", ComponentType.DNA.getUrl(), "i13504 system", null, Role.FunctionalCompartment);
-		Component GFP=SBOLAPI.createComponent(doc, "GFP_protein", ComponentType.Protein.getUrl(), "GFP", "GFP", null);//MSKGEELFTG 
+        Component i13504_system=SBOLAPI.createComponent(doc,"i13504_system", ComponentType.DNA.getUri(), "i13504 system", null, Role.FunctionalCompartment);
+		Component GFP=SBOLAPI.createComponent(doc, "GFP_protein", ComponentType.Protein.getUri(), "GFP", "GFP", null);//MSKGEELFTG 
 		SubComponent i13504SubComponent=SBOLAPI.addSubComponent(i13504_system, device);
 		SubComponent gfpProteinSubComponent=SBOLAPI.addSubComponent(i13504_system, GFP);
 		Sequence seqGfpStart=doc.createSequence("gfp_start");
@@ -51,7 +51,7 @@ public class ParticipantTest extends TestCase {
 	    
 		
 		Interaction interaction2= i13504_system.createInteraction(Arrays.asList(InteractionType.Inhibition));
-		Component inhibitor=doc.createComponent("TetR", Arrays.asList(ComponentType.Protein.getUrl())); 
+		Component inhibitor=doc.createComponent("TetR", Arrays.asList(ComponentType.Protein.getUri())); 
 		Participation participation2=interaction2.createHigherOrderParticipation(Arrays.asList(ParticipationRole.Inhibitor), interaction.getUri());
 			
 		 

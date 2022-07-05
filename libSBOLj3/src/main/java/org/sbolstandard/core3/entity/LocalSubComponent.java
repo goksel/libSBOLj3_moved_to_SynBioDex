@@ -17,6 +17,7 @@ import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.ComponentType;
+import org.sbolstandard.core3.vocabulary.ComponentType.StrandType;
 import org.sbolstandard.core3.vocabulary.ComponentType.TopologyType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
@@ -66,7 +67,7 @@ public class LocalSubComponent extends FeatureWithLocation{
 				
 				//LOCALSUBCOMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE
 				int counter=0;
-				if (types.contains(ComponentType.DNA.getUrl()) || types.contains(ComponentType.RNA.getUrl()) ){
+				if (types.contains(ComponentType.DNA.getUri()) || types.contains(ComponentType.RNA.getUri()) ){
 					for(URI typeURI: types) {
 						TopologyType topologyType = TopologyType.get(typeURI);
 						if (topologyType!=null)
@@ -76,6 +77,30 @@ public class LocalSubComponent extends FeatureWithLocation{
 					}
 					if(counter>1){
 						validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE}", DataModel.type, types));      		
+					}
+				}
+				
+				//LOCALSUBCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY
+				boolean checkDNAOrRNA = false;
+				for(URI typeURI: types) {
+					TopologyType topologyType = TopologyType.get(typeURI);
+					if (topologyType!=null)
+					{
+						checkDNAOrRNA=true;
+						break;
+					}
+					StrandType strandType = StrandType.get(typeURI);
+					if (strandType!=null)
+					{
+						checkDNAOrRNA=true;
+						break;
+					}
+				}
+				
+				if (checkDNAOrRNA)
+				{
+					if (!types.contains(ComponentType.DNA.getUri()) && !types.contains(ComponentType.RNA.getUri()) ){
+						validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY}", DataModel.type, types));      			
 					}
 				}
 			}

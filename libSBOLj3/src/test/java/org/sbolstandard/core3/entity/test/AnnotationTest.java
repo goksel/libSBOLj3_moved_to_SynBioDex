@@ -23,7 +23,7 @@ public class AnnotationTest extends TestCase {
         URINameSpace igem=new URINameSpace(URI.create("http://parts.igem.org/"), "igem");
         doc.addNameSpacePrefixes(igem);
         
-        Component part=SBOLAPI.createComponent(doc, "BBa_J23119", ComponentType.DNA.getUrl(), "BBa_J23119 part", "Parts J23100 through J23119 are a family of constitutive promoter parts isolated from a small combinatorial library.", Role.Promoter);
+        Component part=SBOLAPI.createComponent(doc, "BBa_J23119", ComponentType.DNA.getUri(), "BBa_J23119 part", "Parts J23100 through J23119 are a family of constitutive promoter parts isolated from a small combinatorial library.", Role.Promoter);
         part.addAnnotion(igem.local("group"), "iGEM2006_Berkeley");
         part.addAnnotion(igem.local("experienceURL"), URI.create("http://parts.igem.org/Part:BBa_J23119:Experience"));
         

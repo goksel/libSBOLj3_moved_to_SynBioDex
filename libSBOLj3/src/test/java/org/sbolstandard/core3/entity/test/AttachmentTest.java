@@ -40,7 +40,7 @@ public class AttachmentTest extends TestCase {
         
         
         
-        Component TetR_protein=SBOLAPI.createComponent(doc,"TetR_protein", ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
+        Component TetR_protein=SBOLAPI.createComponent(doc,"TetR_protein", ComponentType.Protein.getUri(), "TetR", "TetR protein", Role.TF);
       
         Attachment attachment=doc.createAttachment("attachment1", URI.create("https://sbolstandard.org/attachment1"));
         attachment.setFormat(ModelLanguage.SBML);

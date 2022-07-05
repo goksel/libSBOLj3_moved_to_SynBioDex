@@ -29,8 +29,8 @@ public class ValidationReadWriteTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         Configuration.getInstance().setValidateAfterSettingProperties(false);
-	    Component media=SBOLAPI.createComponent(doc, "M9_Glucose_CAA", ComponentType.FunctionalEntity.getUrl(), "M9 Glucose CAA", "M9 Glucose CAA growth media", null);
-        ExternallyDefined CaCl2=media.createExternallyDefined(Arrays.asList(ComponentType.SimpleChemical.getUrl()), URINameSpace.CHEBI.local("3312"));
+	    Component media=SBOLAPI.createComponent(doc, "M9_Glucose_CAA", ComponentType.FunctionalEntity.getUri(), "M9 Glucose CAA", "M9 Glucose CAA growth media", null);
+        ExternallyDefined CaCl2=media.createExternallyDefined(Arrays.asList(ComponentType.SimpleChemical.getUri()), URINameSpace.CHEBI.local("3312"));
         
         
         SingularUnit liter=doc.createSingularUnit("litre", "l", "liter");

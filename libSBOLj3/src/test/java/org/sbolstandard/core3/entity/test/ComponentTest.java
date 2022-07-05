@@ -138,7 +138,7 @@ public class ComponentTest extends TestCase {
         // COMPONENT_TYPE_MATCH_PROPERTY
 		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org")));
 		TestUtil.validateIdentified(pTetR,doc,2); // will also error against COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
-		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUrl()));
+		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri()));
 		TestUtil.validateIdentified(pTetR,doc,0); 
 		//also check that the configuration option properly disables the check and allows an invalid type
 		Configuration.getInstance().setValidateRecommendedRules(false);
@@ -166,9 +166,9 @@ public class ComponentTest extends TestCase {
 	    TestUtil.validateIdentified(seq,doc,1,2); // will also error against COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
 		
 	    //One main component type must be provided.
-	    pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUrl(), ComponentType.Protein.getUrl() ));
+	    pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri(), ComponentType.Protein.getUri() ));
 	    TestUtil.validateIdentified(pTetR,doc,3,4); // will also error against COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
-	    pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUrl()));
+	    pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri()));
 	    seq.setEncoding(Encoding.NucleicAcid);
 	    TestUtil.validateIdentified(pTetR,doc,0);
 	    
@@ -178,7 +178,7 @@ public class ComponentTest extends TestCase {
         TestUtil.validateIdentified(popsReceiver,doc,1);
         
         Interaction interaction2= popsReceiver.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
-        Component TetR=SBOLAPI.createComponent(doc, URI.create("https://synbiohub.org/public/igem/TetR"),ComponentType.Protein.getUrl(), "TetR", "TetR repressor", Role.TF);
+        Component TetR=SBOLAPI.createComponent(doc, URI.create("https://synbiohub.org/public/igem/TetR"),ComponentType.Protein.getUri(), "TetR", "TetR repressor", Role.TF);
         SubComponent gfpProteinSubComponent=SBOLAPI.addSubComponent(popsReceiver, TetR);
         Participation participation= interaction2.createParticipation(SBOLAPI.append(base, "inhibitor_participation"), Arrays.asList(ParticipationRole.Inhibitor), gfpProteinSubComponent);
         TestUtil.validateIdentified(popsReceiver,doc,2);
@@ -191,7 +191,7 @@ public class ComponentTest extends TestCase {
         TestUtil.validateIdentified(interaction3, 1);
 
         //SUBCOMPONENT_OBJECTS_CIRCULAR_REFERENCE_CHAIN
-        Component TetRbindingDomain=SBOLAPI.createComponent(doc, URI.create("https://synbiohub.org/public/igem/TetR_binding"),ComponentType.Protein.getUrl(), "TetRbinding", "TetR binding domain", Role.TF);
+        Component TetRbindingDomain=SBOLAPI.createComponent(doc, URI.create("https://synbiohub.org/public/igem/TetR_binding"),ComponentType.Protein.getUri(), "TetRbinding", "TetR binding domain", Role.TF);
         SubComponent tetRProteinSubComponent=SBOLAPI.addSubComponent(popsReceiver, TetR);//Valid
 	    TestUtil.validateIdentified(TetR,doc, 0, 4);
         SubComponent tetRBindingProteinSubComponent=SBOLAPI.addSubComponent(TetR, TetRbindingDomain);//Valid
