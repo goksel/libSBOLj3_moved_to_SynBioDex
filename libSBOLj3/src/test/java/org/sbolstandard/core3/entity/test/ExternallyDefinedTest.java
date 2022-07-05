@@ -39,13 +39,25 @@ public class ExternallyDefinedTest extends TestCase {
         
         TestUtil.validateProperty(exDefined, "setTypes", new Object[] {null}, List.class);
         exDefined.setTypes(null);
-        TestUtil.validateIdentified(exDefined,doc,2);
+        TestUtil.validateIdentified(exDefined,doc,3);
         
         exDefined2.setDefinition(null);
-        TestUtil.validateIdentified(exDefined2,doc,1,3); 
+        TestUtil.validateIdentified(exDefined2,doc,1,4); 
         
         exDefined2.setTypes(Arrays.asList(ComponentType.DNA.getUrl(), ComponentType.Protein.getUrl() ));
+	    TestUtil.validateIdentified(ilab16_dev1,doc,5);
+	    
+	    // EXTERNALLYDEFINED_TYPE_IN_TABLE2
+	    exDefined2.setTypes(Arrays.asList(ComponentType.DNA.getUrl() ));
 	    TestUtil.validateIdentified(ilab16_dev1,doc,4);
+
+	    exDefined2.setTypes(Arrays.asList(ComponentType.Cell.getUrl() ));
+	    TestUtil.validateIdentified(ilab16_dev1,doc,5);
+	    
+	    Configuration.getConfiguration().setValidateRecommendedRules(false);
+	    TestUtil.validateIdentified(ilab16_dev1,doc,3);
+
+	    Configuration.getConfiguration().setValidateRecommendedRules(true);
         
     }
 }
