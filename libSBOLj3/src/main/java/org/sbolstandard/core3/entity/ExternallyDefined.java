@@ -44,11 +44,11 @@ public class ExternallyDefined extends Feature{
 			validationMessages= addToValidations(validationMessages,new ValidationMessage("{EXTERNALLYDEFINED_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type));      	
 		}
 		
-		if (Configuration.getConfiguration().isValidateRecommendedRules()){
+		if (Configuration.getInstance().isValidateRecommendedRules()){
 			boolean foundType = false;
 			if(types!=null) {
 				for(URI type: types) {
-					ComponentType recommendType = ComponentType.getRecommendedType(type);
+					ComponentType recommendType = ComponentType.get(type);
 					if(recommendType != null){
 						foundType = true;
 					}

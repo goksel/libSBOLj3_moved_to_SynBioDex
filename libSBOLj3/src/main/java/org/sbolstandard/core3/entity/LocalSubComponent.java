@@ -64,6 +64,7 @@ public class LocalSubComponent extends FeatureWithLocation{
 					validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_FROM_TABLE2}", DataModel.type, types));      		
 				}
 				
+				//LOCALSUBCOMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE
 				int counter=0;
 				if (types.contains(ComponentType.DNA.getUrl()) || types.contains(ComponentType.RNA.getUrl()) ){
 					for(URI typeURI: types) {

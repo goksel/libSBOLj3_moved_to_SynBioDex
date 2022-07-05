@@ -51,13 +51,13 @@ public class ExternallyDefinedTest extends TestCase {
 	    exDefined2.setTypes(Arrays.asList(ComponentType.DNA.getUrl() ));
 	    TestUtil.validateIdentified(ilab16_dev1,doc,4);
 
-	    exDefined2.setTypes(Arrays.asList(ComponentType.Cell.getUrl() ));
+	    exDefined2.setTypes(Arrays.asList(ComponentType.OptionalComponentType.Cell.getUri() ));
 	    TestUtil.validateIdentified(ilab16_dev1,doc,5);
 	    
-	    Configuration.getConfiguration().setValidateRecommendedRules(false);
+	    Configuration.getInstance().setValidateRecommendedRules(false);
 	    TestUtil.validateIdentified(ilab16_dev1,doc,3);
 
-	    Configuration.getConfiguration().setValidateRecommendedRules(true);
+	    Configuration.getInstance().setValidateRecommendedRules(true);
         
     }
 }
