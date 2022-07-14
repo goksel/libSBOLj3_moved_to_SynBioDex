@@ -51,15 +51,15 @@ public class ConstraintTest extends TestCase {
         TestUtil.validateIdentified(constraint,doc,0);
         TestUtil.validateProperty(constraint, "setRestriction", new Object[] {null}, URI.class);
 		constraint.setRestriction(null);
-		TestUtil.validateIdentified(constraint,doc,1);
+		TestUtil.validateIdentified(constraint,doc,2);
 		
 		TestUtil.validateProperty(constraint, "setObject", new Object[] {null}, Feature.class);
 		constraint.setObject(null);
-		TestUtil.validateIdentified(constraint,doc,2);
+		TestUtil.validateIdentified(constraint,doc,3);
 		
 		TestUtil.validateProperty(constraint, "setSubject", new Object[] {null}, Feature.class);
 		constraint.setSubject(null);
-		TestUtil.validateIdentified(constraint,doc,3);
+		TestUtil.validateIdentified(constraint,doc,4);
 		
 		constraint.setRestriction(tempRestriction);
 		constraint.setSubject(tempSubject);
@@ -93,6 +93,24 @@ public class ConstraintTest extends TestCase {
 		constraint.setSubject(tempSubject);
 		constraint.setObject(tempObject);
 		TestUtil.validateIdentified(constraint,doc,0);
+		
+		// CONSTRAINT_RESTRICTION_VALUE_FROM_TABLE_8_9_10_37
+		constraint.setRestriction(null);
+		TestUtil.validateIdentified(constraint,doc,2);
+		Configuration.getInstance().setValidateRecommendedRules(false);
+		TestUtil.validateIdentified(constraint,doc,1);
+		Configuration.getInstance().setValidateRecommendedRules(true);
+		
+		constraint.setRestriction(tempRestriction);
+		TestUtil.validateIdentified(constraint,doc,0);
+		
+		// CONSTRAINT_RESTRICTION_TABLE8_MUST_MATCH_FEATURE
+		constraint.setRestriction(RestrictionType.Identity.verifyIdentical);
+		TestUtil.validateIdentified(constraint,doc,1);
+
+		constraint.setRestriction(tempRestriction);
+		TestUtil.validateIdentified(constraint,doc,0);
+		
 		
 		
     }
