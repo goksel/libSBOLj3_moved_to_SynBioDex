@@ -55,7 +55,7 @@
      ] ,
     "http://sbols.org/v3#hasNamespace" : [ { 
       "type" : "uri" ,
-      "value" : "https://sbolstandard.org/examples"
+      "value" : "https://sbolstandard.org/examples/"
     }
      ] ,
     "http://sbols.org/v3#name" : [ { 

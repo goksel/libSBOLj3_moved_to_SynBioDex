@@ -48,8 +48,8 @@
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://synbiohub.org/public/igem"
   } ],
-  "http://sbols.org/v3#input" : [ {
-    "@id" : "http://sbolstandard.org/template"
+  "http://sbols.org/v3#template" : [ {
+    "@id" : "https://synbiohub.org/public/igem/BBa_R0040"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "cs1"

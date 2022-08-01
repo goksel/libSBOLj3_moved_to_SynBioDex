@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.sbolstandard.core3.entity.Identified;
+import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.util.Configuration;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -15,14 +15,37 @@ import jakarta.validation.ValidatorFactory;
 import jakarta.validation.executable.ExecutableValidator;
 
 public class PropertyValidator {
-	private static PropertyValidator propertyValidator = null;
-	protected ExecutableValidator validator;
+	//private static PropertyValidator propertyValidator = null;
+	private ExecutableValidator validator;
 	
-	private PropertyValidator()
+	private PropertyValidator() throws SBOLGraphException
 	{	
+		try
+		{
+			ValidatorFactory factory = Validation.byDefaultProvider()
+	 	            .configure()
+	 	            .buildValidatorFactory();
+			
+			//propertyValidator.validator = factory.getValidator().forExecutables();	
+			this.setExecutableValidator(factory.getValidator().forExecutables());	
+		}
+		catch (Exception exception)
+		{
+			throw new SBOLGraphException("Could not initialize the property validator. " + exception.getMessage(), exception);
+		}
 	}
 	
-	public static PropertyValidator getValidator() throws SBOLGraphException
+	private void setExecutableValidator(ExecutableValidator executableValidator) throws SBOLGraphException	
+	{
+		if (executableValidator==null)
+		{
+			throw new SBOLGraphException("Unable to create an ExecutableValidator");
+		}
+			
+		this.validator=executableValidator;
+	}
+	
+	/*public static PropertyValidator getValidator() throws SBOLGraphException
 	{
 		if (propertyValidator == null)
 		{
@@ -32,19 +55,90 @@ public class PropertyValidator {
 				ValidatorFactory factory = Validation.byDefaultProvider()
 		 	            .configure()
 		 	            .buildValidatorFactory();
-				propertyValidator.validator = factory.getValidator().forExecutables();	
+				
+				//propertyValidator.validator = factory.getValidator().forExecutables();	
+				propertyValidator.setExecutableValidator(factory.getValidator().forExecutables());	
 			}
 			catch (Exception exception)
 			{
-				throw new SBOLGraphException("Could not initialize the property validator", exception);
+				throw new SBOLGraphException("Could not initialize the property validator. " + exception.getMessage(), exception);
 			}
 		}
 		return propertyValidator;
+	}*/
+
+	public static PropertyValidator getValidator() throws SBOLGraphException {
+		return SingletonHelper.INSTANCE;
 	}
 
+	private static class SingletonHelper {
+        private static final PropertyValidator INSTANCE ;
+        static {
+            try {
+                INSTANCE = new PropertyValidator();
+            } catch (SBOLGraphException e) {
+                throw new ExceptionInInitializerError(e);
+            }
+        }
+    }
+	
+	
+	public void validateReturnValue(Identified identified, String methodName, Object returnValue, Class<?>... parameterTypes) throws SBOLGraphException
+	{
+		Method method;
+		try {
+			method = identified.getClass().getMethod(methodName, parameterTypes);
+		} 
+		catch (NoSuchMethodException | SecurityException e) {
+			throw new SBOLGraphException(e.getMessage(),e);
+		}
+		
+		Set<ConstraintViolation<Identified>> violations = this.validator.validateReturnValue(identified, method,returnValue);
+		processViolations(violations);
+	}
+	
+	public static String  getViolotionMessage(ConstraintViolation<?> violation)
+	{
+		List<String> fragments=new ArrayList<String>();
+    	fragments.add(violation.getMessage());
+    	fragments.add(String.format("Property: %s",violation.getPropertyPath().toString()));
+    	if (violation.getLeafBean()!=null && violation.getLeafBean() instanceof Identified ){
+    	    Identified identifiedLeaf= (Identified) violation.getLeafBean();
+    	    fragments.add(String.format("Entity URI: %s",identifiedLeaf.getUri().toString()));
+    	    fragments.add(String.format("Entity Type: %s",identifiedLeaf.getClass()));    
+    	}
+    	if (violation.getInvalidValue()!=null && !(violation.getInvalidValue() instanceof Identified) && !(violation.getInvalidValue() instanceof SBOLDocument)){    	
+    		fragments.add("Value: " + violation.getInvalidValue().toString());
+    	}
+    	String message=StringUtils.join(fragments, "," + System.lineSeparator()  + "\t");
+    	return message;
+	}
+	
+	public static List<String>  getViolotionMessages(Set<ConstraintViolation<Identified>> violations)
+	{
+		List<String> messages=null;
+		if (violations!=null && violations.size()>0){
+			messages=new ArrayList<String>();
+			for (ConstraintViolation<Identified> violation : violations) {
+		    	messages.add(getViolotionMessage(violation));
+			}
+		}
+		return messages;
+	}
+	private void processViolations(Set<ConstraintViolation<Identified>> violations) throws SBOLGraphException
+	{
+		List<String> messages=PropertyValidator.getViolotionMessages(violations);
+		if (messages!=null && messages.size()>0)
+		{	
+			String errorMessage=StringUtils.join(messages, "," + System.lineSeparator()  + "\t");	
+			throw new SBOLGraphException(errorMessage);
+		
+		}
+	}
+	
 	public void validate(Identified identified, String methodName, Object[] parameterValues, Class<?>... parameterTypes) throws SBOLGraphException
 	{
-		if (Configuration.getConfiguration().getPropertyValidationType()==PropertyValidationType.ValidateAfterSettingProperties)
+		if (Configuration.getInstance().isValidateAfterSettingProperties())
 		{
 			Method method;
 			try {
@@ -54,33 +148,8 @@ public class PropertyValidator {
 				throw new SBOLGraphException(e.getMessage(),e);
 			}
 			
-			Set<ConstraintViolation<Identified>> violations = validator.validateParameters(identified, method,parameterValues);
-			if (violations!=null && violations.size()>0){
-				List<String> messages=new ArrayList<String>();
-				for (ConstraintViolation<Identified> violation : violations) {
-			    	List<String> fragments=new ArrayList<String>();
-			    	fragments.add(violation.getMessage());
-			    	fragments.add(String.format("Property: %s",violation.getPropertyPath().toString()));
-			    	if (violation.getLeafBean()!=null && violation.getLeafBean() instanceof Identified ){
-			    	    Identified identifiedLeaf= (Identified) violation.getLeafBean();
-			    	    fragments.add(String.format("Entity URI: %s",identifiedLeaf.getUri().toString()));
-			    	    fragments.add(String.format("Entity type: %s",identifiedLeaf.getClass()));    
-			    	}
-			    	/*if (violation.getRootBean()!=null && violation.getRootBean() instanceof Identified ){
-			    	    Identified identifiedRoot= (Identified) violation.getRootBean();
-			    	    fragments.add(String.format("Parent entity URI: %s",identifiedRoot.getUri().toString()));
-			    	    fragments.add(String.format("Parent entity type: %s",identifiedRoot.getClass()));    
-			    	}*/
-			    	if (violation.getInvalidValue()!=null){
-			    		fragments.add("Value:" + violation.getInvalidValue().toString());
-			    	}
-			    	String message=StringUtils.join(fragments, ",\r\n\t");
-			    	messages.add(message);
-				}
-				
-				String errorMessage= StringUtils.join(messages, ",\r\n\t");
-				throw new SBOLGraphException(errorMessage);
-			}
+			Set<ConstraintViolation<Identified>> violations = this.validator.validateParameters(identified, method,parameterValues);
+			processViolations(violations);
 		}
 	}
 	

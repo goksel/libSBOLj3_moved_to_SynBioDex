@@ -22,23 +22,36 @@ import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
-
 public class SBOLValidator {
 
-	private static SBOLValidator sbolValidator = null;
+	//private static SBOLValidator sbolValidator = null;
 	protected Validator validator;
 	
-	private SBOLValidator()
+	private SBOLValidator() throws SBOLGraphException
 	{	
+		ValidatorFactory factory = Validation.byDefaultProvider()
+ 	            .configure()
+ 	            //.addValueExtractor(new ...ValueExtractor())
+ 	            .buildValidatorFactory();
+		this.setValidator(factory.getValidator());	
 	}
 	
-	public static SBOLValidator getValidator() throws SBOLGraphException
+	private void setValidator(Validator validator) throws SBOLGraphException	
+	{
+		if (validator==null)
+		{
+			throw new SBOLGraphException("Unable to create a Validator");
+		}
+			
+		this.validator=validator;
+	}
+	
+	/*public static SBOLValidator getValidator() throws SBOLGraphException
 	{
 		if (sbolValidator == null)
 		{
@@ -49,7 +62,7 @@ public class SBOLValidator {
 		 	            .configure()
 		 	            //.addValueExtractor(new ...ValueExtractor())
 		 	            .buildValidatorFactory();
-				sbolValidator.validator = factory.getValidator();	
+				sbolValidator.setValidator(factory.getValidator());	
 			}
 			catch (Exception exception)
 			{
@@ -57,14 +70,30 @@ public class SBOLValidator {
 			}
 		}
 		return sbolValidator;
+	}*/
+	
+	public static SBOLValidator getValidator() throws SBOLGraphException {
+		return SingletonHelper.INSTANCE;
 	}
+
+	private static class SingletonHelper {
+        private static final SBOLValidator INSTANCE ;
+        static {
+            try {
+                INSTANCE = new SBOLValidator();
+            } catch (SBOLGraphException e) {
+                throw new ExceptionInInitializerError(e);
+            }
+        }
+    }
+
 	
 	public List<String> validate(SBOLDocument document)
 	{
 	    Set<ConstraintViolation<SBOLDocument>> violations = validator.validate(document);
 	    List<String> messages=new ArrayList<String>();
 	    for (ConstraintViolation<SBOLDocument> violation : violations) {
-	    	List<String> fragments=new ArrayList<String>();
+	    	/*List<String> fragments=new ArrayList<String>();
 	    	fragments.add(violation.getMessage());
 	    	fragments.add(String.format("Property: %s",violation.getPropertyPath().toString()));
 	    	if (violation.getLeafBean()!=null && violation.getLeafBean() instanceof Identified ){
@@ -72,11 +101,11 @@ public class SBOLValidator {
 	    	    fragments.add(String.format("Entity URI: %s",identified.getUri().toString()));
 	    	    fragments.add(String.format("Entity type: %s",identified.getClass()));    
 	    	}
-	    	if (violation.getInvalidValue()!=null){
+	    	if (violation.getInvalidValue()!=null && !(violation.getInvalidValue() instanceof Identified)){
 	    		fragments.add("Value:" + violation.getInvalidValue().toString());
 	    	}
-	    	String message=StringUtils.join(fragments, String.format(",%s\t", System.lineSeparator()));
-	    	messages.add(message);
+	    	String message=StringUtils.join(fragments, String.format(",%s\t", System.lineSeparator()));*/
+	    	messages.add(PropertyValidator.getViolotionMessage(violation));
 	    }
 	    return messages;
 	}

@@ -39,7 +39,7 @@ public class GettingStartedTutorial {
 		 * role: SO:0000804 (Engineered Region)
 		 */
 		System.out.println("Creating GFP expression cassette");
-		Component device=doc.createComponent("i13504", Arrays.asList(ComponentType.DNA.getUrl())); 
+		Component device=doc.createComponent("i13504", Arrays.asList(ComponentType.DNA.getUri())); 
 		device.setName("i13504");
 		device.setDescription("Screening plasmid intermediate");
 		device.setRoles(Arrays.asList(Role.EngineeredGene));
@@ -50,7 +50,7 @@ public class GettingStartedTutorial {
 		-------------------------------------------------- */
 		//Add the RBS subcomponent:
 		//Create the RBS component
-		Component rbs=doc.createComponent("B0034", Arrays.asList(ComponentType.DNA.getUrl())); 
+		Component rbs=doc.createComponent("B0034", Arrays.asList(ComponentType.DNA.getUri())); 
 		rbs.setName("B0034");
 		rbs.setDescription("RBS (Elowitz 1999)");
 		rbs.setRoles(Arrays.asList(Role.RBS));
@@ -59,7 +59,7 @@ public class GettingStartedTutorial {
 		Sequence rbs_seq=doc.createSequence("B0034_Sequence");
 		rbs_seq.setElements("aaagaggagaaa");
 		rbs_seq.setEncoding(Encoding.NucleicAcid);
-		rbs.setSequences(Arrays.asList(rbs_seq.getUri()));
+		rbs.setSequences(Arrays.asList(rbs_seq));
 		
 		//Start assembling the i13504 device's sequence by adding the RBS component.
 		SBOLAPI.appendComponent(doc, device,rbs,Orientation.inline);
@@ -84,9 +84,11 @@ public class GettingStartedTutorial {
 		Component term=SBOLAPI.createDnaComponent(doc, "B0015", "terminator", "B0015 double terminator", Role.Terminator,term_na);
 		
 		//Add the terminator as a subcomponent. This time we will be using low level API methods, which can be used to create features and locations.
-		SubComponent termSubComponent=device.createSubComponent(term.getUri());
+		SubComponent termSubComponent=device.createSubComponent(term);
 		termSubComponent.setOrientation(Orientation.inline);
-		Sequence i13504Sequence= doc.getIdentified(device.getSequences().get(0),Sequence.class);
+		//Sequence i13504Sequence= doc.getIdentified(device.getSequences().get(0),Sequence.class);
+		Sequence i13504Sequence= device.getSequences().get(0);
+		
 		
 		
 		
@@ -94,16 +96,16 @@ public class GettingStartedTutorial {
 		int end=start + term_na.length()-1;
     	
 		i13504Sequence.setElements(i13504Sequence.getElements() + term_na);
-		LocationBuilder locationBuilder=new Location.RangeLocationBuilder(start, end,i13504Sequence.getUri());
-		locationBuilder.setOrientation(Orientation.inline);
-		termSubComponent.createLocation(locationBuilder);
+		Range range=termSubComponent.createRange(start, end,i13504Sequence);
+		range.setOrientation(Orientation.inline);
+		
 		System.out.println(String.format("Added the terminator subcomponent %s", term.getUri()));
 		
 		//Iterate through sub components
 		System.out.println("Subcomponents:");
 		for (SubComponent subComp: device.getSubComponents())
 		{
-			System.out.println(subComp.getIsInstanceOf());
+			System.out.println(subComp.getInstanceOf());
 		}
 
 		//Search for components using the SPARQL graph query language.
@@ -117,37 +119,37 @@ public class GettingStartedTutorial {
 		/* --------------------------------------------------
  		Slide 32: GFP production from expression cassette
 		-------------------------------------------------- */
-		Component i13504_system=SBOLAPI.createComponent(doc,"i13504_system", ComponentType.DNA.getUrl(), "i13504 system", null, Role.FunctionalCompartment);
-		Component GFP=SBOLAPI.createComponent(doc, "GFP_protein", ComponentType.Protein.getUrl(), "GFP", "GFP", null); 
+		Component i13504_system=SBOLAPI.createComponent(doc,"i13504_system", ComponentType.DNA.getUri(), "i13504 system", null, Role.FunctionalCompartment);
+		Component GFP=SBOLAPI.createComponent(doc, "GFP_protein", ComponentType.Protein.getUri(), "GFP", "GFP", null); 
 		SubComponent i13504SubComponent=SBOLAPI.addSubComponent(i13504_system, device);
 		SubComponent gfpProteinSubComponent=SBOLAPI.addSubComponent(i13504_system, GFP);
 		  
 		ComponentReference gfpCDSReference=i13504_system.createComponentReference(gfpSubComponent, i13504SubComponent);
 					    
 		Interaction interaction= i13504_system.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
-		interaction.createParticipation(Arrays.asList(ParticipationRole.Template), gfpCDSReference.getUri());
-		interaction.createParticipation(Arrays.asList(ParticipationRole.Product), gfpProteinSubComponent.getUri());
+		interaction.createParticipation(Arrays.asList(ParticipationRole.Template), gfpCDSReference);
+		interaction.createParticipation(Arrays.asList(ParticipationRole.Product), gfpProteinSubComponent);
 	    	
 		 /* --------------------------------------------------
 		  Slide 34: Example: concatenating & reusing components
 		  -------------------------------------------------- */
 		 //Left hand side of slide: interlab16device1
-		 Component ilab16_dev1=doc.createComponent("interlab16device1", Arrays.asList(ComponentType.DNA.getUrl())); 
-		 Component j23101=doc.createComponent("j23101", Arrays.asList(ComponentType.DNA.getUrl())); 
+		 Component ilab16_dev1=doc.createComponent("interlab16device1", Arrays.asList(ComponentType.DNA.getUri())); 
+		 Component j23101=doc.createComponent("j23101", Arrays.asList(ComponentType.DNA.getUri())); 
 		 SubComponent sc_j23101=SBOLAPI.addSubComponent(ilab16_dev1, j23101);	
 		 SubComponent sc_i13504_system=SBOLAPI.addSubComponent(ilab16_dev1, i13504_system);	
 		 
 		 ComponentReference compRef_i13504_dev1=ilab16_dev1.createComponentReference(i13504SubComponent, sc_i13504_system);
-		 ilab16_dev1.createConstraint(RestrictionType.Topology.meets, sc_j23101.getUri(), compRef_i13504_dev1.getUri());
+		 ilab16_dev1.createConstraint(RestrictionType.Topology.meets, sc_j23101, compRef_i13504_dev1);
 	        
 		 // Right hand side of slide: interlab16device2
-		 Component ilab16_dev2=doc.createComponent("interlab16device2", Arrays.asList(ComponentType.DNA.getUrl())); 
-		 Component j23106=doc.createComponent("j23106", Arrays.asList(ComponentType.DNA.getUrl())); 
+		 Component ilab16_dev2=doc.createComponent("interlab16device2", Arrays.asList(ComponentType.DNA.getUri())); 
+		 Component j23106=doc.createComponent("j23106", Arrays.asList(ComponentType.DNA.getUri())); 
 		 SubComponent sc_j23106=SBOLAPI.addSubComponent(ilab16_dev2, j23106);	
 		 SubComponent sc_i13504_system_dev2=SBOLAPI.addSubComponent(ilab16_dev2, i13504_system);	
 		 
 		 ComponentReference compRef_i13504_dev2=ilab16_dev2.createComponentReference(i13504SubComponent, sc_i13504_system_dev2);
-		 ilab16_dev2.createConstraint(RestrictionType.Topology.meets, sc_j23106.getUri(), compRef_i13504_dev2.getUri());
+		 ilab16_dev2.createConstraint(RestrictionType.Topology.meets, sc_j23106, compRef_i13504_dev2);
 		 
 		 System.out.println(System.lineSeparator() + "SBOL:");
 		 String output=SBOLIO.write(doc, SBOLFormat.TURTLE);

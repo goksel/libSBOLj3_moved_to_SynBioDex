@@ -19,6 +19,16 @@
     "size" : "1000",
     "source" : "https://sbolstandard.org/attachment1"
   }, {
+    "@id" : "https://sbolstandard.org/examples/attachment2",
+    "@type" : "sbol:Attachment",
+    "displayId" : "attachment2",
+    "format" : "EDAM:format_2585",
+    "hasNamespace" : "https://sbolstandard.org/examples",
+    "hash" : "aaa",
+    "hashAlgorithm" : "HashAlg",
+    "size" : "1000",
+    "source" : "https://sbolstandard.org/attachment2"
+  }, {
     "@id" : "https://sbolstandard.org/examples/impl1",
     "@type" : "sbol:Implementation",
     "built" : "https://sbolstandard.org/examples/TetR_protein",

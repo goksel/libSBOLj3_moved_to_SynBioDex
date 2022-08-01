@@ -1,23 +1,19 @@
 package org.sbolstandard.core3.entity.provenance.test;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.nio.charset.Charset;
-
 import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.provenance.Agent;
+import org.sbolstandard.core3.entity.*;
+import org.sbolstandard.core3.entity.provenance.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-
+import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
 public class AgentTest extends TestCase {
@@ -27,7 +23,7 @@ public class AgentTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        SBOLAPI.createComponent(doc, "toggle_switch", ComponentType.FunctionalEntity.getUrl(), "Toggle Switch", "Toggle Switch genetic circuit", null);
+        SBOLAPI.createComponent(doc, "toggle_switch", ComponentType.FunctionalEntity.getUri(), "Toggle Switch", "Toggle Switch genetic circuit", null);
         
         Agent agent=doc.createAgent("CodonOptimiserSoftware");
         agent.setName("Codon Optimiser Software");

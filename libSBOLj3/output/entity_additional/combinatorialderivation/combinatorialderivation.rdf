@@ -31,7 +31,7 @@
    </sbol:Sequence>
    <sbol:CombinatorialDerivation rdf:about="cs1">
       <sbol:hasNamespace rdf:resource="../igem"/>
-      <sbol:input rdf:resource="http://sbolstandard.org/template"/>
+      <sbol:template rdf:resource="BBa_R0040"/>
       <sbol:displayId>cs1</sbol:displayId>
    </sbol:CombinatorialDerivation>
 </rdf:RDF>

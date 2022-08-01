@@ -98,6 +98,7 @@
          <sbol:SubComponent rdf:about="i13504/SubComponent3">
             <sbol:hasLocation>
                <sbol:Range rdf:about="i13504/SubComponent3/Range1">
+                  <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
                   <sbol:end>826</sbol:end>
                   <sbol:start>747</sbol:start>
                   <sbol:hasSequence>
@@ -120,6 +121,7 @@
             <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
             <sbol:hasLocation>
                <sbol:Range rdf:about="i13504/SequenceFeature2/Range1">
+                  <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
                   <sbol:end>746</sbol:end>
                   <sbol:start>739</sbol:start>
                   <sbol:hasSequence>
@@ -140,6 +142,7 @@
             <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
             <sbol:hasLocation>
                <sbol:Range rdf:about="i13504/SequenceFeature1/Range1">
+                  <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
                   <sbol:end>18</sbol:end>
                   <sbol:start>13</sbol:start>
                   <sbol:hasSequence>

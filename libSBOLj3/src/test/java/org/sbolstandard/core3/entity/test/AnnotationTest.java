@@ -5,20 +5,13 @@ import java.net.URI;
 import java.util.List;
 
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.Identified;
-import org.sbolstandard.core3.entity.Metadata;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.TopLevel;
-import org.sbolstandard.core3.entity.TopLevelMetadata;
+import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.URINameSpace;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.Role;
-
+import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
 public class AnnotationTest extends TestCase {
@@ -30,7 +23,7 @@ public class AnnotationTest extends TestCase {
         URINameSpace igem=new URINameSpace(URI.create("http://parts.igem.org/"), "igem");
         doc.addNameSpacePrefixes(igem);
         
-        Component part=SBOLAPI.createComponent(doc, "BBa_J23119", ComponentType.DNA.getUrl(), "BBa_J23119 part", "Parts J23100 through J23119 are a family of constitutive promoter parts isolated from a small combinatorial library.", Role.Promoter);
+        Component part=SBOLAPI.createComponent(doc, "BBa_J23119", ComponentType.DNA.getUri(), "BBa_J23119 part", "Parts J23100 through J23119 are a family of constitutive promoter parts isolated from a small combinatorial library.", Role.Promoter);
         part.addAnnotion(igem.local("group"), "iGEM2006_Berkeley");
         part.addAnnotion(igem.local("experienceURL"), URI.create("http://parts.igem.org/Part:BBa_J23119:Experience"));
         

@@ -6,8 +6,10 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.util.SBOLUtil;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -28,6 +30,18 @@ public class Participation extends Identified{
 		super(resource);
 	}
 	
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		if ((this.getParticipant()==null && this.getHigherOrderParticipant()==null) || (this.getParticipant()!=null && this.getHigherOrderParticipant()!=null))
+		{
+			validationMessages= addToValidations(validationMessages,new ValidationMessage("{PARTICIPANT_MUST_HAVE_ONE_PARTICIPANT_OR_HIGHERORDERPARTICIPANT}", DataModel.Participation.participant));      	
+		}
+		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.Participation.participant, this.resource, getParticipant(), validationMessages);
+		return validationMessages;
+	}
+	
 	@NotEmpty(message = "{PARTICIPANT_ROLES_NOT_EMPTY}")
 	public List<URI> getRoles() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.role);
@@ -38,16 +52,17 @@ public class Participation extends Identified{
 		RDFUtil.setProperty(resource, DataModel.role, roles);
 	}
 	
-	public URI getParticipant() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Participation.participant);	
+	public Feature getParticipant() throws SBOLGraphException {
+		//return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Participation.participant);	
+		return contsructIdentified(DataModel.Participation.participant, Feature.getSubClassTypes());
 	}
 
-	public void setParticipant(URI participant) {
-		RDFUtil.setProperty(resource, DataModel.Participation.participant, participant);
+	public void setParticipant(Feature participant) {
+		RDFUtil.setProperty(resource, DataModel.Participation.participant, SBOLUtil.toURI(participant));
 	}
 	
 	public URI getHigherOrderParticipant() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Participation.higherOrderParticipant);	
+		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Participation.higherOrderParticipant);	
 	}
 
 	public void setHigherOrderParticipant(URI higherOrderParticipant) {

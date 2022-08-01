@@ -194,6 +194,9 @@
   "@type" : [ "http://sbols.org/v3#SequenceFeature" ]
 }, {
   "@id" : "https://synbiohub.org/public/igem/i13504/SequenceFeature1/Range1",
+  "http://sbols.org/v3#orientation" : [ {
+    "@id" : "https://identifiers.org/SO:0001030"
+  } ],
   "http://sbols.org/v3#end" : [ {
     "@value" : "18"
   } ],
@@ -221,6 +224,9 @@
   "@type" : [ "http://sbols.org/v3#SequenceFeature" ]
 }, {
   "@id" : "https://synbiohub.org/public/igem/i13504/SequenceFeature2/Range1",
+  "http://sbols.org/v3#orientation" : [ {
+    "@id" : "https://identifiers.org/SO:0001030"
+  } ],
   "http://sbols.org/v3#end" : [ {
     "@value" : "746"
   } ],
@@ -317,6 +323,9 @@
   "@type" : [ "http://sbols.org/v3#SubComponent" ]
 }, {
   "@id" : "https://synbiohub.org/public/igem/i13504/SubComponent3/Range1",
+  "http://sbols.org/v3#orientation" : [ {
+    "@id" : "https://identifiers.org/SO:0001030"
+  } ],
   "http://sbols.org/v3#end" : [ {
     "@value" : "826"
   } ],

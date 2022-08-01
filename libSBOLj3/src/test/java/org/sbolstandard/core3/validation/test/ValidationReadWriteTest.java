@@ -6,23 +6,13 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.ExternallyDefined;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.measure.Measure;
-import org.sbolstandard.core3.entity.measure.PrefixedUnit;
-import org.sbolstandard.core3.entity.measure.SIPrefix;
-import org.sbolstandard.core3.entity.measure.SingularUnit;
-import org.sbolstandard.core3.entity.measure.UnitDivision;
-import org.sbolstandard.core3.entity.measure.UnitExponentiation;
-import org.sbolstandard.core3.entity.measure.UnitMultiplication;
+import org.sbolstandard.core3.entity.*;
+import org.sbolstandard.core3.entity.measure.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.validation.SBOLValidator;
@@ -34,11 +24,13 @@ public class ValidationReadWriteTest extends TestCase {
 	
 	public void test() throws SBOLGraphException, IOException
     {
+		Configuration.getInstance().setValidateAfterReadingSBOLDocuments(true);
+	    
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
-        Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
-        Component media=SBOLAPI.createComponent(doc, "M9_Glucose_CAA", ComponentType.FunctionalEntity.getUrl(), "M9 Glucose CAA", "M9 Glucose CAA growth media", null);
-        ExternallyDefined CaCl2=media.createExternallyDefined(Arrays.asList(ComponentType.SimpleChemical.getUrl()), URINameSpace.CHEBI.local("3312"));
+        Configuration.getInstance().setValidateAfterSettingProperties(false);
+	    Component media=SBOLAPI.createComponent(doc, "M9_Glucose_CAA", ComponentType.FunctionalEntity.getUri(), "M9 Glucose CAA", "M9 Glucose CAA growth media", null);
+        ExternallyDefined CaCl2=media.createExternallyDefined(Arrays.asList(ComponentType.SimpleChemical.getUri()), URINameSpace.CHEBI.local("3312"));
         
         
         SingularUnit liter=doc.createSingularUnit("litre", "l", "liter");
@@ -56,19 +48,19 @@ public class ValidationReadWriteTest extends TestCase {
         milli.setAlternativeSymbols(Arrays.asList("m1", "m2"));
         milli.setLongComment("This is an example long comment for the milli prefix.");
         
-        PrefixedUnit millimole=doc.createPrexiedUnit("millimole", "mmol", "millimole", mole.getUri(),milli.getUri());
+        PrefixedUnit millimole=doc.createPrexiedUnit("millimole", "mmol", "millimole", mole,milli);
         
-        UnitDivision milliMolePerLiter=doc.createUnitDivision("millimolePerLitre", "mmol/l", "millimolar", millimole.getUri(), liter.getUri());
+        UnitDivision milliMolePerLiter=doc.createUnitDivision("millimolePerLitre", "mmol/l", "millimolar", millimole, liter);
         
         //URI milliMolePerLiter=URINameSpace.OM.local("millimolePerLitre");
-        Measure measure=CaCl2.createMeasure(SBOLAPI.append(CaCl2.getUri(), "measure1"), 0.1f, milliMolePerLiter.getUri());
+        Measure measure=CaCl2.createMeasure(SBOLAPI.append(CaCl2.getUri(), "measure1"), 0.1f, milliMolePerLiter);
         measure.setTypes(Arrays.asList(URINameSpace.SBO.local("0000196"),URINameSpace.SBO.local("0000197")));
         
         SingularUnit kelvin=doc.createSingularUnit("kelvin", "kelvin", "kelvin");
-        UnitMultiplication um= doc.createUnitMultiplication("kelvinMole", "K mol", "kelvinMole", kelvin.getUri(), mole.getUri());
+        UnitMultiplication um= doc.createUnitMultiplication("kelvinMole", "K mol", "kelvinMole", kelvin, mole);
         
         SingularUnit meter=doc.createSingularUnit("meter", "m", "meter");
-        UnitExponentiation m3=doc.createUnitExponentiation("cubicMeter", "m3", "cubicMeter", meter.getUri(), 3);
+        UnitExponentiation m3=doc.createUnitExponentiation("cubicMeter", "m3", "cubicMeter", meter, 3);
         
         TestUtil.serialise(doc, "measurement_entity/measurement", "measurement");
         SBOLDocument doc2=SBOLIO.read(new File("output/measurement_entity/measurement/measurement.ttl"), SBOLFormat.TURTLE);
@@ -147,6 +139,8 @@ public class ValidationReadWriteTest extends TestCase {
      
  	    String output=null;
        
+ 	   Configuration.getInstance().setValidateBeforeSaving(true);  
+	   
  	   	//Writing the invalid SBOL document will fail	   
         exception=false;
 	    try
@@ -161,7 +155,7 @@ public class ValidationReadWriteTest extends TestCase {
 	    
        
 	    //Write the invalid SBOL document
-	    Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.NoValidation);
+	    Configuration.getInstance().setValidateBeforeSaving(false);  
 	    exception=false;
 	    try
 	    {
@@ -179,7 +173,11 @@ public class ValidationReadWriteTest extends TestCase {
 	    exception=false;
 	    try
 	    {
+	    	String str2="";
 	    	doc3=SBOLIO.read(output, SBOLFormat.TURTLE);
+	      	boolean isValid=SBOLValidator.getValidator().isValid(doc);
+	      	String str="";
+	    	
 	    }
 	    catch (SBOLGraphException e)
 	    {
@@ -189,7 +187,7 @@ public class ValidationReadWriteTest extends TestCase {
 	   
 	    
 	    //Read the invalid SBOL document with errors and validate programmatically
-	    Configuration.getConfiguration().setValidateAfterReadingSBOLDocuments(false);
+	    Configuration.getInstance().setValidateAfterReadingSBOLDocuments(false);
 	    exception=false;
 	    try
 	    {
@@ -202,6 +200,8 @@ public class ValidationReadWriteTest extends TestCase {
 	    assertTrue(!exception);
 	  
 	   TestUtil.validateDocument(doc3,11);  
+	   Configuration.getInstance().setValidateAfterReadingSBOLDocuments(true);
+	    
         
     }
 }

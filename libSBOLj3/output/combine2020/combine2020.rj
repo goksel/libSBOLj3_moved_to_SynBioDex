@@ -234,6 +234,11 @@
       "value" : "https://synbiohub.org/public/igem/i13504_Sequence1"
     }
      ] ,
+    "http://sbols.org/v3#orientation" : [ { 
+      "type" : "uri" ,
+      "value" : "https://identifiers.org/SO:0001030"
+    }
+     ] ,
     "http://sbols.org/v3#end" : [ { 
       "type" : "literal" ,
       "value" : "18"
@@ -324,6 +329,11 @@
     "http://sbols.org/v3#hasSequence" : [ { 
       "type" : "uri" ,
       "value" : "https://synbiohub.org/public/igem/i13504_Sequence1"
+    }
+     ] ,
+    "http://sbols.org/v3#orientation" : [ { 
+      "type" : "uri" ,
+      "value" : "https://identifiers.org/SO:0001030"
     }
      ] ,
     "http://sbols.org/v3#end" : [ { 
@@ -883,6 +893,11 @@
     "http://sbols.org/v3#hasSequence" : [ { 
       "type" : "uri" ,
       "value" : "https://synbiohub.org/public/igem/i13504_Sequence1"
+    }
+     ] ,
+    "http://sbols.org/v3#orientation" : [ { 
+      "type" : "uri" ,
+      "value" : "https://identifiers.org/SO:0001030"
     }
      ] ,
     "http://sbols.org/v3#end" : [ { 

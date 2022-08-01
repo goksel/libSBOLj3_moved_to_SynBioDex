@@ -6,24 +6,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.ComponentReference;
-import org.sbolstandard.core3.entity.Implementation;
-import org.sbolstandard.core3.entity.Interaction;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.SubComponent;
+import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
+import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.Configuration.PropertyValidationType;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.InteractionType;
-import org.sbolstandard.core3.vocabulary.Orientation;
-import org.sbolstandard.core3.vocabulary.ParticipationRole;
-import org.sbolstandard.core3.vocabulary.Role;
+import org.sbolstandard.core3.vocabulary.*;
 
 import junit.framework.TestCase;
 
@@ -34,7 +26,7 @@ public class InteractionTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component i13504_system=SBOLAPI.createComponent(doc,"i13504_system", ComponentType.DNA.getUrl(), "i13504 system", null, Role.FunctionalCompartment);
+        Component i13504_system=SBOLAPI.createComponent(doc,"i13504_system", ComponentType.DNA.getUri(), "i13504 system", null, Role.FunctionalCompartment);
 		
         Interaction interaction= i13504_system.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
        
@@ -42,7 +34,7 @@ public class InteractionTest extends TestCase {
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc); 
         
-    	Configuration.getConfiguration().setPropertyValidationType(PropertyValidationType.ValidateBeforeSavingSBOLDocuments);
+        Configuration.getInstance().setValidateAfterSettingProperties(false);
         
         TestUtil.validateIdentified(interaction,doc,0);
         
@@ -53,6 +45,18 @@ public class InteractionTest extends TestCase {
         interaction.setTypes(null);
         
         TestUtil.validateIdentified(interaction,doc,1);
+        interaction.setTypes(Arrays.asList(InteractionType.GeneticProduction));
+        TestUtil.validateIdentified(interaction,doc,0);
+        
+        Resource resource = TestUtil.getResource(interaction);
+        
+		//SBOL_VALID_ENTITY_TYPES - Interaction.participation
+		RDFUtil.setProperty(resource, DataModel.Interaction.participation, i13504_system.getUri());
+		TestUtil.validateIdentified(interaction,doc,1);
+		URI tmp=null;
+		RDFUtil.setProperty(resource, DataModel.Interaction.participation, tmp);
+		TestUtil.validateIdentified(interaction,doc,0);
+	
     }
 	
 }

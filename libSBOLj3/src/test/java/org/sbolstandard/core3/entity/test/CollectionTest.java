@@ -23,8 +23,8 @@ public class CollectionTest extends TestCase {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
-        Component TetR_protein=SBOLAPI.createComponent(doc, "TetR_protein", ComponentType.Protein.getUrl(), "TetR", "TetR protein", Role.TF);
-        Component LacI_protein=SBOLAPI.createComponent(doc, "LacI_protein", ComponentType.Protein.getUrl(), "LacI", "LacI protein", Role.TF);
+        Component TetR_protein=SBOLAPI.createComponent(doc, "TetR_protein", ComponentType.Protein.getUri(), "TetR", "TetR protein", Role.TF);
+        Component LacI_protein=SBOLAPI.createComponent(doc, "LacI_protein", ComponentType.Protein.getUri(), "LacI", "LacI protein", Role.TF);
       
         Collection col=doc.createCollection("col1");
         //Collections can be empty
@@ -37,6 +37,11 @@ public class CollectionTest extends TestCase {
         TestUtil.serialise(doc, "entity/collection", "collection");
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
+        
+        col.setMembers(Arrays.asList(TetR_protein.getUri(), LacI_protein.getUri(), URI.create("http://invalidmemberuri.org")));
+        TestUtil.validateIdentified(col,doc,0,1);
+        
+        
     }
 
 }

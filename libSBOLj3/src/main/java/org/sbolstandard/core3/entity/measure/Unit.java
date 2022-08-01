@@ -1,14 +1,22 @@
 package org.sbolstandard.core3.entity.measure;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.entity.ComponentReference;
 import org.sbolstandard.core3.entity.ControlledTopLevel;
+import org.sbolstandard.core3.entity.ExternallyDefined;
+import org.sbolstandard.core3.entity.Identified;
+import org.sbolstandard.core3.entity.LocalSubComponent;
+import org.sbolstandard.core3.entity.SequenceFeature;
+import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentityValidator;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -36,7 +44,7 @@ public abstract class Unit extends ControlledTopLevel{
 	
 	@NotEmpty(message = "{UNIT_SYMBOL_NOT_EMPTY}")	
 	public String getSymbol() throws SBOLGraphException{
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.symbol);
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.symbol);
 	}
 	
 	public void setSymbol(@NotEmpty(message = "{UNIT_SYMBOL_NOT_EMPTY}") String symbol) throws SBOLGraphException {
@@ -45,7 +53,7 @@ public abstract class Unit extends ControlledTopLevel{
 	}
 	
 	public List<String> getAlternativeSymbols() {
-		return RDFUtil.getPropertiesAsStrings(this.resource, MeasureDataModel.Unit.alternativeSymbol);
+		return RDFUtil.getLiteralPropertiesAsStrings(this.resource, MeasureDataModel.Unit.alternativeSymbol);
 	}
 	
 	public void setAlternativeSymbols(List<String> alternativeSymbols) {
@@ -54,7 +62,7 @@ public abstract class Unit extends ControlledTopLevel{
 	
 	@NotEmpty(message = "{UNIT_LABEL_NOT_EMPTY}")	
 	public String getLabel() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.label);
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.label);
 	}
 	
 	public void setLabel(@NotEmpty(message = "{UNIT_LABEL_NOT_EMPTY}") String label) throws SBOLGraphException{
@@ -67,7 +75,7 @@ public abstract class Unit extends ControlledTopLevel{
 	}
 	
 	public List<String> getAlternativeLabels() {
-		return RDFUtil.getPropertiesAsStrings(this.resource, MeasureDataModel.Unit.alternativeLabel);
+		return RDFUtil.getLiteralPropertiesAsStrings(this.resource, MeasureDataModel.Unit.alternativeLabel);
 	}
 	
 	public void setAlternativeLabels(List<String> alternativeLabels) {
@@ -97,7 +105,7 @@ public abstract class Unit extends ControlledTopLevel{
 	}
 	
 	public String getComment() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.comment);
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.comment);
 	}
 	
 	
@@ -110,7 +118,7 @@ public abstract class Unit extends ControlledTopLevel{
 	}
 	
 	public String getLongComment() throws SBOLGraphException {
-		return IdentityValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.longComment);
+		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, MeasureDataModel.Unit.longComment);
 	}
 	
 	public void setLongComment(String longComment) {
@@ -121,4 +129,19 @@ public abstract class Unit extends ControlledTopLevel{
 	public URI getResourceType() {
 		return MeasureDataModel.Unit.uri;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T extends Identified> HashMap<URI, Class<T>> getSubClassTypes()
+	{
+		HashMap<URI, Class<T>> subclasses=new HashMap<URI, Class<T>>();
+		subclasses.put(MeasureDataModel.BinaryPrefix.uri, (Class<T>) BinaryPrefix.class);
+		subclasses.put(MeasureDataModel.PrefixedUnit.uri, (Class<T>) PrefixedUnit.class);
+		subclasses.put(MeasureDataModel.SingularUnit.uri, (Class<T>) SingularUnit.class);
+		subclasses.put(MeasureDataModel.SIPrefix.uri, (Class<T>) SIPrefix.class);
+		subclasses.put(MeasureDataModel.UnitDivision.uri, (Class<T>) UnitDivision.class);
+		subclasses.put(MeasureDataModel.UnitExponentiation.uri, (Class<T>) UnitExponentiation.class);
+		subclasses.put(MeasureDataModel.UnitMultiplication.uri, (Class<T>) UnitMultiplication.class);	
+		return subclasses;
+	}
+	
 }

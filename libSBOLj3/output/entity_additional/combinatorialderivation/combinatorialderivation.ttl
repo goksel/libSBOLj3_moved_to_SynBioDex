@@ -21,7 +21,7 @@
 :cs1    a                  sbol:CombinatorialDerivation ;
         sbol:displayId     "cs1" ;
         sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
-        sbol:input         <http://sbolstandard.org/template> .
+        sbol:template      :BBa_R0040 .
 
 :BBa_R0040_Sequence1  a    sbol:Sequence ;
         sbol:description   "pTetR sequence" ;

@@ -2,14 +2,12 @@ package org.sbolstandard.core3.entity.provenance.test;
 
 import java.io.IOException;
 import java.net.URI;
-
 import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.entity.provenance.Plan;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-
 import junit.framework.TestCase;
 
 public class PlanTest extends TestCase {

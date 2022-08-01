@@ -6,6 +6,8 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class Collection extends TopLevel{
@@ -21,6 +23,7 @@ public class Collection extends TopLevel{
 		super(resource);
 	}
 	
+
 	public List<URI> getMembers() throws SBOLGraphException {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Collection.member);	
 	}
@@ -28,11 +31,21 @@ public class Collection extends TopLevel{
 	public void setMembers(List<URI> members) {
 		RDFUtil.setProperty(resource, DataModel.Collection.member, members);
 	}	
+	
+	/*
+	public List<TopLevel> getMembers() throws SBOLGraphException {
+		List<URI> members = RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Collection.member);	
+		
+	}
 
+	public void setMembers(List<URI> members) {
+		RDFUtil.setProperty(resource, DataModel.Collection.member, members);
+	}	
+	 */
+	
 	@Override
 	public URI getResourceType() {
 		return DataModel.Collection.uri;
 	}
-	
 	
 }

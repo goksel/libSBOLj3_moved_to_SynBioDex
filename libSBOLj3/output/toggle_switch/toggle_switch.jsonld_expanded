@@ -69,6 +69,8 @@
   "http://sbols.org/v3#hasFeature" : [ {
     "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent1"
   }, {
+    "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent11"
+  }, {
     "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent5"
   }, {
     "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent10"
@@ -266,7 +268,7 @@
     "@id" : "https://identifiers.org/SBO:0000011"
   } ],
   "http://sbols.org/v3#participant" : [ {
-    "@id" : "https://sbolstandard.org/examples/TetR_producer/SubComponent9"
+    "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent11"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "Participation3"
@@ -291,6 +293,15 @@
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "SubComponent10"
+  } ],
+  "@type" : [ "http://sbols.org/v3#SubComponent" ]
+}, {
+  "@id" : "https://sbolstandard.org/examples/LacI_producer/SubComponent11",
+  "http://sbols.org/v3#instanceOf" : [ {
+    "@id" : "https://sbolstandard.org/examples/atC_TetR"
+  } ],
+  "http://sbols.org/v3#displayId" : [ {
+    "@value" : "SubComponent11"
   } ],
   "@type" : [ "http://sbols.org/v3#SubComponent" ]
 }, {
@@ -419,8 +430,6 @@
     "@id" : "https://sbolstandard.org/examples/TetR_producer/SubComponent6"
   }, {
     "@id" : "https://sbolstandard.org/examples/TetR_producer/SubComponent4"
-  }, {
-    "@id" : "https://sbolstandard.org/examples/TetR_producer/SubComponent9"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "TetR_producer"
@@ -658,15 +667,6 @@
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "SubComponent8"
-  } ],
-  "@type" : [ "http://sbols.org/v3#SubComponent" ]
-}, {
-  "@id" : "https://sbolstandard.org/examples/TetR_producer/SubComponent9",
-  "http://sbols.org/v3#instanceOf" : [ {
-    "@id" : "https://sbolstandard.org/examples/atC_TetR"
-  } ],
-  "http://sbols.org/v3#displayId" : [ {
-    "@value" : "SubComponent9"
   } ],
   "@type" : [ "http://sbols.org/v3#SubComponent" ]
 }, {

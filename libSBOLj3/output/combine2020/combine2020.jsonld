@@ -85,6 +85,7 @@
     "displayId" : "Range1",
     "end" : "18",
     "hasSequence" : "https://synbiohub.org/public/igem/i13504_Sequence1",
+    "orientation" : "SO:0001030",
     "start" : "13"
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504/SequenceFeature2",
@@ -98,6 +99,7 @@
     "displayId" : "Range1",
     "end" : "746",
     "hasSequence" : "https://synbiohub.org/public/igem/i13504_Sequence1",
+    "orientation" : "SO:0001030",
     "start" : "739"
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504/SubComponent1",
@@ -142,6 +144,7 @@
     "displayId" : "Range1",
     "end" : "826",
     "hasSequence" : "https://synbiohub.org/public/igem/i13504_Sequence1",
+    "orientation" : "SO:0001030",
     "start" : "747"
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504_Sequence1",
