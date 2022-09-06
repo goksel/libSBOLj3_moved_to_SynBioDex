@@ -42,7 +42,7 @@ public class ActivityTest extends TestCase {
         plan.setDescription("Optimisation protocol to improve the translation of mRNAs.");
         
         Activity activity=doc.createActivity("codon_optimization_activity");
-        activity.setTypes(Arrays.asList(ActivityType.Design.getUrl()));
+        activity.setTypes(Arrays.asList(ActivityType.Design.getUri()));
         activity.setName("Codon optimization activity");
         activity.setDescription("An activity that is used to optimise codons");
         Calendar calendar=Calendar.getInstance();
@@ -59,13 +59,13 @@ public class ActivityTest extends TestCase {
         
         Association association=activity.createAssociation(agent);
         association.setPlan(plan);
-        association.setRoles(Arrays.asList(ActivityType.Design.getUrl()));
+        association.setRoles(Arrays.asList(ActivityType.Design.getUri()));
         
         toggleSwitchOptimised.setWasGeneratedBy(Arrays.asList(activity));
         toggleSwitchOptimised.setWasDerivedFrom(Arrays.asList(toggleSwitch.getUri()));
         
         Activity rbsactivity=doc.createActivity("RBS_optimisation_activity");
-        rbsactivity.setTypes(Arrays.asList(ActivityType.Design.getUrl()));
+        rbsactivity.setTypes(Arrays.asList(ActivityType.Design.getUri()));
         rbsactivity.setName("RBS optimization activity");
         rbsactivity.setDescription("An activity that is used to RBSs");
         rbsactivity.setWasInformedBys(Arrays.asList(activity));

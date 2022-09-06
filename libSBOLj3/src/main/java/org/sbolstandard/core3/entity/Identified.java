@@ -19,7 +19,8 @@ import org.apache.jena.rdf.model.StmtIterator;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.measure.Measure;
 import org.sbolstandard.core3.entity.measure.Unit;
-import org.sbolstandard.core3.entity.provenance.Activity;
+import org.sbolstandard.core3.entity.provenance.*;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
@@ -29,6 +30,7 @@ import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidSBOLEntity;
 import org.sbolstandard.core3.validation.ValidatableSBOLEntity;
 import org.sbolstandard.core3.validation.ValidationMessage;
+import org.sbolstandard.core3.vocabulary.ActivityType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
@@ -200,7 +202,53 @@ public abstract class Identified implements ValidatableSBOLEntity {
     	validationMessages=IdentifiedValidator.getValidator().assertOneSBOLEntityType(this, this.resource, validationMessages);
     	validationMessages= IdentifiedValidator.assertExists(this, DataModel.Identified.wasGeneratedBy, this.resource, this.getWasGeneratedBy(), validationMessages);
     	validationMessages= IdentifiedValidator.assertExists(this, DataModel.Identified.measure, this.resource, this.getMeasures(), validationMessages);
-        return validationMessages;
+        
+    	if (Configuration.getInstance().isValidateRecommendedRules())
+    	{
+    		validationMessages=checkActivityTypes(validationMessages);
+    	}
+    	
+    	return validationMessages;
+	}
+	
+	private List<ValidationMessage> checkActivityTypes(List<ValidationMessage> validationMessages) throws SBOLGraphException
+	{
+		List<Activity> activities=this.getWasGeneratedBy();
+		if (activities!=null)
+		{
+			for (Activity activity:activities)
+			{
+				List<URI> activityTypes=activity.getTypes();
+				List<Association> associations=activity.getAssociations();
+				if (associations!=null)
+				{
+					for (Association association:associations)
+					{
+						List<URI> roles=association.getRoles();
+						if (roles!=null)
+						{
+							for (URI role:roles)
+							{
+								ActivityType activityType= ActivityType.get(role);
+								if (activityType!=null)
+								{
+									if (!activityTypes.contains(activityType.getUri()))
+									{
+										ValidationMessage message=new ValidationMessage("{IDENTIFIED_ACTIVITY_TYPE_MATCHES_WITH_ASSOCIATION_ROLE}", DataModel.Identified.wasDerivedFrom, activity, role);      
+										message.childPath(ProvenanceDataModel.Activity.qualifiedAssociation, association);
+										validationMessages= addToValidations(validationMessages,message);
+									
+									}
+								}
+								
+							}
+						}
+						
+					}
+				}	
+			}
+		}
+		return validationMessages;
 	}
 	
 	protected <T extends Identified> Identified createIdentified(Resource res, Class<T> identified) throws SBOLGraphException

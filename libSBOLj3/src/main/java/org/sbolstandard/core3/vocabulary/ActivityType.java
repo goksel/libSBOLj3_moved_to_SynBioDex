@@ -1,6 +1,8 @@
 package org.sbolstandard.core3.vocabulary;
 
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.sbolstandard.core3.util.URINameSpace;
 
@@ -16,7 +18,21 @@ public enum ActivityType {
 		this.url = envUrl;
 	}
 
-	public URI getUrl() {
+	public URI getUri() {
 		return url;
 	}
+	
+	private static final Map<URI, ActivityType> lookup = new HashMap<>();
+	    
+	static{
+		for(ActivityType activity: ActivityType.values()){
+			lookup.put(activity.getUri(), activity);
+		}
+	}
+
+	public static ActivityType get(URI uri) {
+		return lookup.get(uri);
+	}
+	    
+	    
 }

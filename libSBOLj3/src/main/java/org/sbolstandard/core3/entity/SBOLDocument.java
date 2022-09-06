@@ -1027,9 +1027,10 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 			}
 		}
 		
-		return messages;
 		
-	
+		return messages;
 	}
+	
+	
 			
 }
