@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.util.FileManager;
 import org.sbolstandard.core3.api.SBOLAPI;
@@ -46,15 +47,13 @@ public class SBOLUtil {
 	 
 	 public static void sort(File inputFile, File outputFile, Charset encoding) throws IOException
 	 {
-		 	FileInputStream inputStream=new FileInputStream(inputFile);
-		 	FileOutputStream outputStream=new FileOutputStream(outputFile);
-			sort(inputStream, encoding, outputStream);
+		 FileInputStream inputStream=new FileInputStream(inputFile);
+		 FileOutputStream outputStream=new FileOutputStream(outputFile);
+		sort(inputStream, encoding, outputStream);
 			
-		 	if (outputStream!=null)
-			{
-		 		outputStream.close();
-			}
-			
+		if (outputStream!=null){
+			outputStream.close();
+		}
 	 }
 	 
 	 public static String sort(String input, Charset encoding) throws IOException
@@ -211,9 +210,9 @@ public class SBOLUtil {
 			}
 		}
 	    
-	    public static Model getModelFromFileResource(String fileResource) {
+	    public static Model getModelFromFileResource(String fileResource, Lang lang) {
 	        File file = new File(SBOLAPI.class.getClassLoader().getResource(fileResource).getFile());
-	        return RDFDataMgr.loadModel(file.getPath());
+	        return RDFDataMgr.loadModel(file.getPath(), lang);
 	    }
 	    
 	    

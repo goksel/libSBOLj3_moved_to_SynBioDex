@@ -1,5 +1,7 @@
 package org.sbolstandard.core3.util;
 
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
 
 public class Configuration {
 	private static Configuration configuration = null;
@@ -61,9 +63,10 @@ public class Configuration {
 		this.enforceOneToOneRelationships = enforceOneToOneRelationships;
 	}
 
+	private Model edamOntology=null;
 	private Configuration()
 	{
-		
+		this.edamOntology=SBOLUtil.getModelFromFileResource("edam.owl.reduced", Lang.TURTLE);
 	}
 	
 	private static class SingletonHelper {
@@ -73,6 +76,11 @@ public class Configuration {
 	public static Configuration getInstance()
 	{
 		return SingletonHelper.INSTANCE;
+	}
+	
+	public Model getEDAMOntology()
+	{
+		return this.edamOntology;   
 	}
 	
 	/*public static Configuration getConfiguration()

@@ -4,8 +4,10 @@ import java.lang.reflect.Constructor;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.Map.Entry;
@@ -30,6 +32,7 @@ import org.sbolstandard.core3.entity.measure.UnitDivision;
 import org.sbolstandard.core3.entity.measure.UnitExponentiation;
 import org.sbolstandard.core3.entity.measure.UnitMultiplication;
 import org.sbolstandard.core3.entity.provenance.*;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
@@ -1027,7 +1030,29 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 			}
 		}
 		
-		
+		//SEQUENCE_ENCODING_VALID_SUBTERM
+		if (Configuration.getInstance().isValidateRecommendedRules()){
+			List<Sequence> sequences=this.getSequences();
+			if (sequences!=null){
+				Map<URI,Boolean> validity=new HashMap<URI, Boolean>();
+				for (Sequence sequence:sequences){
+					URI encodingValue=sequence.getEncoding();
+					if (encodingValue!=null && Encoding.get(encodingValue)==null){//Check for uncontrolled URIs only.
+						Boolean valid=validity.get(encodingValue);
+						if (valid==null){
+							valid=RDFUtil.hasParentRecursively(Configuration.getInstance().getEDAMOntology(), encodingValue.toString() , Encoding.PARENT_TERM.toString());
+					    	validity.put(encodingValue, valid);
+						}
+						if (!valid){
+							ValidationMessage message = new ValidationMessage("{SEQUENCE_ENCODING_VALID_SUBTERM}", DataModel.Sequence.uri, sequence, encodingValue);
+							message.childPath(DataModel.Sequence.encoding, null);
+							messages=IdentifiedValidator.addToValidations(messages, message);
+
+						}
+					}
+				}
+			}
+		}
 		return messages;
 	}
 	

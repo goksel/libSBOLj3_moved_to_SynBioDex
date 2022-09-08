@@ -1,12 +1,26 @@
 package org.sbolstandard.core3.test;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
+import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.List;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Component;
 import org.sbolstandard.core3.entity.SBOLDocument;
+import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.SBOLUtil;
+import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.vocabulary.InteractionType;
 import org.sbolstandard.core3.vocabulary.ParticipationRole;
 import org.sbolstandard.core3.vocabulary.Role;
@@ -55,7 +69,6 @@ public class AppTest
         Component pTetR=SBOLAPI.createDnaComponent(doc, "BBa_R0040", "pTetR", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
         Component TetR_protein=SBOLAPI.createProteinComponent(doc,popsReceiver, "TetR_protein", "TetR", "TetR protein", Role.TF, "NNNNNNNNNNN");
           
-        
         SBOLAPI.appendComponent(doc, popsReceiver,pTetR);
         
         long start,end,middle;
@@ -107,7 +120,6 @@ public class AppTest
         end= System.nanoTime();
         print(start,end);
         
-        
         start=System.nanoTime();
         
         for (int i=0;i<3000;i++)
@@ -115,17 +127,94 @@ public class AppTest
         	popsReceiver.getInteractions(); 
         }
         
-        
         end= System.nanoTime();
-        print(start, end);
-       
-        
-        
+        print(start, end);  
     }
     
     private void print(long start, long end)
     {
-    	 long first=end-start;
-         System.out.println(String.format("Execution time: %s ns, %s ms", first, first/1000000));
+    	long first=end-start;
+    	System.out.println(String.format("   Execution time: %s ns, %s ms", first, first/1000000));
     }
+    
+    public void testCreateReducedResourceOntologies() throws IOException
+    {
+    	reduce("../ontologies/edam.owl", "src/main/resources/edam.owl.reduced");		
+    }
+    
+    private void reduce(String sourceFile, String destinationFile) throws IOException
+    {
+    	List<String> propertiesToKeep=Arrays.asList("http://www.w3.org/2000/01/rdf-schema#subClassOf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#about");
+    	Model model=RDFUtil.read(new File(sourceFile));
+    	RDFUtil.removePropertiesExcept(model, propertiesToKeep );
+    	RDFUtil.write(model, new File(destinationFile), RDFFormat.TURTLE); 
+    	String ontology=IOUtils.toString(new FileInputStream(destinationFile),Charset.defaultCharset());
+    	ontology=ontology.replace("http://edamontology.org/", URINameSpace.EDAM.getUri().toString());
+		IOUtils.write(ontology, new FileOutputStream(destinationFile), Charset.defaultCharset());
+    }
+    
+   /* public void testParentType() throws FileNotFoundException
+    {
+    	//3331 --> 1333 --> 2330
+    	
+    	//3331 -->1333
+    		//1333 --> 2066 --> 2350 --> 1915
+    		//1333 --> 2330 --> 1915
+    	//3331-->2332 -->1915
+    	
+    	//Model model=SBOLUtil.getModelFromFileResource("edam.owl");
+    	Model model=RDFUtil.read(new File("../ontologies/edam.owl"));
+    	
+    	executeParentFinding(model);
+    	
+    	long start=System.nanoTime();
+    	System.out.print("Removing unncessary lines!..."); 
+        RDFUtil.removePropertiesExcept(model, Arrays.asList("http://www.w3.org/2000/01/rdf-schema#subClassOf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#about"));
+        System.out.println("Removed");
+        print(start, System.nanoTime());  
+        
+        executeParentFinding(model);
+    }
+    
+     private void executeParentFinding(Model model)
+    {
+    	
+    	String child= "http://edamontology.org/format_3331"; //BLAST XML results format
+    	String parent= "http://edamontology.org/format_2330";
+    	
+    	long start=System.nanoTime();
+    	int n=1000;
+    	System.out.println("Executing finding parent recursively for " + n + " times:");
+    	for (int i=0;i<1000;i++){
+    		boolean result=RDFUtil.hasParentRecursively(model, child , parent);
+    		assertTrue(String.format("The child entity %s does not have the parent %s", child, parent), result);
+        }
+        print(start, System.nanoTime());  
+    }
+    
+    */
+    
+    public void testEDAMParentType() throws FileNotFoundException
+    {
+    	//3331 --> 1333 --> 2330
+    	
+    	//3331 -->1333
+    		//1333 --> 2066 --> 2350 --> 1915
+    		//1333 --> 2330 --> 1915
+    	//3331-->2332 -->1915
+    	
+    	//Model model=SBOLUtil.getModelFromFileResource("edam.owl");
+    	Model model=SBOLUtil.getModelFromFileResource("edam.owl.reduced", Lang.TURTLE);
+    	String child= "https://identifiers.org/edam:format_3331"; //BLAST XML results format
+    	String parent= "https://identifiers.org/edam:format_2330";
+    	boolean result=RDFUtil.hasParentRecursively(model, child , parent);
+    	assertTrue(String.format("The child entity %s does not have the parent %s", child, parent), result);
+    	
+    	child= "https://identifiers.org/edam:format_3162"; //
+    	result=RDFUtil.hasParentRecursively(model, child , parent);
+    	assertTrue(String.format("The child entity %s does not have the parent %s", child, parent), result);
+    	
+    	
+    }
+    
 }

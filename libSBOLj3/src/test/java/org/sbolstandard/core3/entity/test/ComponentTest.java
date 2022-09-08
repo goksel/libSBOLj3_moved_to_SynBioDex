@@ -162,7 +162,8 @@ public class ComponentTest extends TestCase {
 	    
 	    //Encoding must be provided if elements are set
 	    Sequence seq=doc.getSequences().get(0);
-	    seq.setEncoding(null);
+	    URI encodingValue=null;
+	    seq.setEncoding(encodingValue);
 	    TestUtil.validateIdentified(seq,doc,1,2); // will also error against COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
 		
 	    //One main component type must be provided.

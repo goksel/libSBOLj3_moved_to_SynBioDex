@@ -140,7 +140,7 @@ public class Component extends TopLevel {
 					List<Encoding> typeMatches = ComponentType.checkComponentTypeMatch(componentType);
 					outerloop:
 					for (Sequence sequence : sequences) {
-						Encoding encoding = sequence.getEncoding();
+						Encoding encoding = Encoding.get(sequence.getEncoding());
 						if (encoding != null) {
 							for (Encoding typeURI: typeMatches) {
 								if(typeURI.getUri().equals(encoding.getUri())) {
@@ -171,17 +171,20 @@ public class Component extends TopLevel {
 			HashMap<Encoding, ArrayList<Integer>> elementLengths = new HashMap<>();
 			// loop through all sequences, get the elements for each sequence and store them in a hashmap for later comparison
 			for(Sequence sequence: sequences) {
-				Encoding encoding = sequence.getEncoding();
-				String elements = sequence.getElements();
-				int elementLength = elements.length();
-				if(elementLengths.containsKey(encoding)) {
-					ArrayList<Integer> lengthList = elementLengths.get(encoding);
-					lengthList.add(elementLength);
-					elementLengths.put(encoding, lengthList);
-				}else {
-					ArrayList<Integer> lengthList = new ArrayList<>();
-					lengthList.add(elementLength);
-					elementLengths.put(encoding, lengthList);
+				Encoding encoding = Encoding.get(sequence.getEncoding());
+				if (encoding!=null)
+				{
+					String elements = sequence.getElements();
+					int elementLength = elements.length();
+					if(elementLengths.containsKey(encoding)) {
+						ArrayList<Integer> lengthList = elementLengths.get(encoding);
+						lengthList.add(elementLength);
+						elementLengths.put(encoding, lengthList);
+					}else {
+						ArrayList<Integer> lengthList = new ArrayList<>();
+						lengthList.add(elementLength);
+						elementLengths.put(encoding, lengthList);
+					}
 				}
 			}
 			

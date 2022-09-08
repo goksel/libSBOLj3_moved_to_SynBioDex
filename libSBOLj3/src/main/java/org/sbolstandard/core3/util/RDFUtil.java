@@ -19,6 +19,7 @@ import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QueryFactory;
+import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFactory;
 import org.apache.jena.query.Syntax;
@@ -112,6 +113,26 @@ public class RDFUtil {
 			{
 				resource.getModel().remove(stmt);
 			}
+		}
+	}
+	
+	public static void removePropertiesExcept(Model model, List<String> properties)
+	{
+		StmtIterator stmtIterator=model.listStatements();
+		List<Statement> statements=new ArrayList<Statement>();
+		while (stmtIterator.hasNext())
+		{
+			Statement stmt= stmtIterator.next();
+			String property=stmt.getPredicate().getURI();
+			if (!properties.contains(property))
+			{
+				statements.add(stmt);
+			}
+		}
+		
+		if (statements.size()>0)
+		{
+			model.remove(statements);
 		}
 	}
 	
@@ -568,6 +589,26 @@ public class RDFUtil {
 		    return rsMemory;		          
 	    }
 	    
+	    public static boolean hasParentRecursively(Model model, String childResourceURI, String parentResourceURI)
+	    {
+	    	String query= "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
+	    			+ "select ?o where {<" + childResourceURI + "> rdfs:subClassOf* ?o .}";
+	    		
+	    	ResultSet rs= executeSPARQLSelectQuery(model, query, Syntax.syntaxSPARQL_11);
+	    	boolean found=false;
+	    	while (rs.hasNext()){
+				QuerySolution qs=rs.next();
+				RDFNode parent=qs.get(rs.getResultVars().get(0));
+				String parentUri=RDFUtil.toLiteralString(parent);
+				//System.out.println ("Parent:" + parentUri);
+				if (parentUri!=null && parentUri.equalsIgnoreCase(parentResourceURI)){
+					found=true;
+					break;
+				}
+			}
+	    	return found;
+	    }
+	    
 	    /**
 	     * 
 	     * @param path The file path or remote web URL
@@ -580,6 +621,12 @@ public class RDFUtil {
 		{
 			Model model = RDFDataMgr.loadModel(file.getPath()) ;
 			return model;			
+		}
+	    
+	    public static void write(Model model, File file, RDFFormat format) throws FileNotFoundException
+		{
+			FileOutputStream stream=new FileOutputStream(file);
+	    	RDFDataMgr.write(stream, model, format); 			
 		}
 	    
 	    /**

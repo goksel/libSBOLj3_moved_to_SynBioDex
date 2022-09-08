@@ -36,6 +36,7 @@ public enum Encoding
 	        return lookup.get(uri);
 	    }
 	    
+	    public static final URI PARENT_TERM= URINameSpace.EDAM.local("format_2330");
 	    
 }
 
