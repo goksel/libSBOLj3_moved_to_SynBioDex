@@ -14,8 +14,11 @@ import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.util.URINameSpace;
+import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
+import org.sbolstandard.core3.vocabulary.ComponentType.TopologyType;
+
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -224,6 +227,25 @@ public class IdentifiedValidator {
 		return messages;
 	}
 
+	
+	 public static List<ValidationMessage> assertAtMostOneTopologyType(List<URI> types, List<ValidationMessage> validationMessages, String message)
+	    {
+	    	int counter=0;
+			if (types!=null && (types.contains(ComponentType.DNA.getUri()) || types.contains(ComponentType.RNA.getUri()))){
+				for(URI typeURI: types) {
+					TopologyType topologyType = TopologyType.get(typeURI);
+					if (topologyType!=null)
+					{
+						counter++;
+					}
+				}
+				if(counter>1){
+					validationMessages= IdentifiedValidator.addToValidations(validationMessages,new ValidationMessage(message, DataModel.type, types));      		
+				}
+			}
+			return validationMessages;
+	    }
+	 
 	/*
 	 * public List<String> validate2(Identified identified) {
 	 * Set<ConstraintViolation<Identified>> violations =

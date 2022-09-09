@@ -27,9 +27,11 @@ import org.apache.jena.util.FileManager;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.entity.SBOLDocument;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
+import org.sbolstandard.core3.vocabulary.ComponentType.TopologyType;
 
 public class SBOLUtil {
 
@@ -214,6 +216,9 @@ public class SBOLUtil {
 	        File file = new File(SBOLAPI.class.getClassLoader().getResource(fileResource).getFile());
 	        return RDFDataMgr.loadModel(file.getPath(), lang);
 	    }
+	    
+	    
+	   
 	    
 	    
 }

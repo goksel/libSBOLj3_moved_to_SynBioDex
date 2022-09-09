@@ -86,6 +86,26 @@ public class ComponentTest extends TestCase {
 		TestUtil.validateIdentified(pTetR,doc,0);
 		pTetR.setSequences(tempSequences);
 		
+		//COMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE
+		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri()));
+		TestUtil.validateIdentified(pTetR,doc,0);
+		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri(), ComponentType.TopologyType.Circular.getUri()));
+		TestUtil.validateIdentified(pTetR,doc,0);
+		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri(), ComponentType.TopologyType.Circular.getUri(), ComponentType.TopologyType.Linear.getUri()));
+		TestUtil.validateIdentified(pTetR,doc,1);
+		pTetR.setTypes(Arrays.asList(ComponentType.Protein.getUri(), ComponentType.TopologyType.Circular.getUri(), ComponentType.TopologyType.Linear.getUri()));
+		tempSequences=pTetR.getSequences();
+		pTetR.setSequences(null);
+		TestUtil.validateIdentified(pTetR,doc,0);
+		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri()));
+		pTetR.setSequences(tempSequences);
+		TestUtil.validateIdentified(pTetR,doc,0);
+		
+		
+		
+		
+
+		
 		Resource resource = TestUtil.getResource(pTetR);
 		
 		//SBOL_VALID_ENTITY_TYPES - Component.Sequences
@@ -137,13 +157,17 @@ public class ComponentTest extends TestCase {
 
         // COMPONENT_TYPE_MATCH_PROPERTY
 		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org")));
-		TestUtil.validateIdentified(pTetR,doc,2); // will also error against COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
+		TestUtil.validateIdentified(pTetR,doc,1); 
+		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org"),URI.create("http://invalidtype2.org")));
+		TestUtil.validateIdentified(pTetR,doc,1); 
+		
 		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri()));
 		TestUtil.validateIdentified(pTetR,doc,0); 
+		
 		//also check that the configuration option properly disables the check and allows an invalid type
 		Configuration.getInstance().setValidateRecommendedRules(false);
 		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org")));
-		TestUtil.validateIdentified(pTetR,doc,1); // will also error against COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
+		TestUtil.validateIdentified(pTetR,doc,0);
 		//Reset the values
 		pTetR.setTypes(tempList);
 		Configuration.getInstance().setValidateRecommendedRules(true);

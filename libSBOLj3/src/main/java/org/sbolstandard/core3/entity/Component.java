@@ -92,16 +92,18 @@ public class Component extends TopLevel {
 		if (Configuration.getInstance().isValidateRecommendedRules())
 		{
 			if(types != null) {
+				boolean foundType = false;
+				
 				for (URI componentType : types) {
-					boolean foundType = false;
 					for(ComponentType thisComponentType: ComponentType.values()) {
 						if(componentType.equals(thisComponentType.getUri())){
 							foundType = true;
+							break;
 						}
 					}
-					if(!foundType) {
-						validationMessages = addToValidations(validationMessages, new ValidationMessage("{COMPONENT_TYPE_MATCH_PROPERTY}", DataModel.type,componentType));
-					}
+				}
+				if(!foundType) {
+					validationMessages = addToValidations(validationMessages, new ValidationMessage("{COMPONENT_TYPE_MATCH_PROPERTY}", DataModel.type,types));
 				}
 			}
 		}
@@ -124,13 +126,12 @@ public class Component extends TopLevel {
 			}
 		}
 		
+		//COMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE
+		validationMessages=IdentifiedValidator.assertAtMostOneTopologyType(types, validationMessages, "{COMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE}");
 		
 		
 		// COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
 		List<Sequence> sequences = this.getSequences();
-		// check nothing is null before continuing
-		
-		
 		if (sequences != null && types != null) {
 			for (URI componentTypeURI : types) {
 				boolean foundTypeMatch = false;
@@ -150,13 +151,13 @@ public class Component extends TopLevel {
 							}
 						}
 					}
-				}
+					
+					if (!foundTypeMatch) {
+						validationMessages = addToValidations(validationMessages,
+								new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE}",
+										DataModel.type, componentType));
+					}
 				
-
-				if (!foundTypeMatch) {
-					validationMessages = addToValidations(validationMessages,
-							new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE}",
-									DataModel.type, componentType));
 				}
 			}
 		}

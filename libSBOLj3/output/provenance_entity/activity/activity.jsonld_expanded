@@ -55,10 +55,7 @@
     "@id" : "http://sbols.org/v3#design"
   } ],
   "http://www.w3.org/ns/prov#endedAtTime" : [ {
-    "@value" : "2020-08-30T12:15:03.062Z"
-  } ],
-  "http://www.w3.org/ns/prov#startedAtTime" : [ {
-    "@value" : "2019-07-29T12:15:03.062Z"
+    "@value" : "2020-08-30T11:08:47.168Z"
   } ],
   "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.w3.org/ns/prov#Activity" ],
   "http://sbols.org/v3#name" : [ {
@@ -71,6 +68,9 @@
     "@id" : "https://sbolstandard.org/examples/codon_optimization_activity/Usage2"
   }, {
     "@id" : "https://sbolstandard.org/examples/codon_optimization_activity/Usage1"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@value" : "2019-07-29T11:08:47.168Z"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "codon_optimization_activity"

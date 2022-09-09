@@ -14,6 +14,7 @@ import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.ComponentType;
@@ -66,19 +67,7 @@ public class LocalSubComponent extends FeatureWithLocation{
 				}
 				
 				//LOCALSUBCOMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE
-				int counter=0;
-				if (types.contains(ComponentType.DNA.getUri()) || types.contains(ComponentType.RNA.getUri()) ){
-					for(URI typeURI: types) {
-						TopologyType topologyType = TopologyType.get(typeURI);
-						if (topologyType!=null)
-						{
-							counter++;
-						}
-					}
-					if(counter>1){
-						validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE}", DataModel.type, types));      		
-					}
-				}
+				validationMessages=IdentifiedValidator.assertAtMostOneTopologyType(types, validationMessages, "{LOCALSUBCOMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE}");
 				
 				//LOCALSUBCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY
 				boolean checkDNAOrRNA = false;
