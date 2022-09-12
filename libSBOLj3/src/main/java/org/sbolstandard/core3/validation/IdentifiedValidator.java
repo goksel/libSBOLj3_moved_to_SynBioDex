@@ -17,6 +17,7 @@ import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
+import org.sbolstandard.core3.vocabulary.ComponentType.StrandType;
 import org.sbolstandard.core3.vocabulary.ComponentType.TopologyType;
 
 import jakarta.validation.ConstraintViolation;
@@ -246,6 +247,33 @@ public class IdentifiedValidator {
 			return validationMessages;
 	    }
 	 
+		public static List<ValidationMessage> assertOnlyDNAOrRNAComponentsIncludeStrandOrTopology(List<URI> types, List<ValidationMessage> validationMessages, String message) {
+			boolean checkDNAOrRNA = false;
+			if (types!=null)
+			{
+				for (URI typeURI : types) {
+					TopologyType topologyType = TopologyType.get(typeURI);
+					if (topologyType != null) {
+						checkDNAOrRNA = true;
+						break;
+					} else {
+						StrandType strandType = StrandType.get(typeURI);
+						if (strandType != null) {
+							checkDNAOrRNA = true;
+							break;
+						}
+					}
+				}
+	
+				if (checkDNAOrRNA) {
+					if (!types.contains(ComponentType.DNA.getUri()) && !types.contains(ComponentType.RNA.getUri())) {
+						validationMessages = IdentifiedValidator.addToValidations(validationMessages, new ValidationMessage(message, DataModel.type, types));
+					}
+				}
+			}
+			return validationMessages;
+		}
+
 	/*
 	 * public List<String> validate2(Identified identified) {
 	 * Set<ConstraintViolation<Identified>> violations =

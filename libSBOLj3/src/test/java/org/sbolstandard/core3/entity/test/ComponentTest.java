@@ -96,10 +96,28 @@ public class ComponentTest extends TestCase {
 		pTetR.setTypes(Arrays.asList(ComponentType.Protein.getUri(), ComponentType.TopologyType.Circular.getUri(), ComponentType.TopologyType.Linear.getUri()));
 		tempSequences=pTetR.getSequences();
 		pTetR.setSequences(null);
+		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri()));
 		TestUtil.validateIdentified(pTetR,doc,0);
 		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri()));
 		pTetR.setSequences(tempSequences);
 		TestUtil.validateIdentified(pTetR,doc,0);
+		
+		
+		pTetR.setTypes(Arrays.asList(ComponentType.TopologyType.Linear.getUri(), ComponentType.OptionalComponentType.Cell.getUri()));
+	    TestUtil.validateIdentified(pTetR,doc,1);
+	    pTetR.setTypes(Arrays.asList(ComponentType.Protein.getUri(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
+	    TestUtil.validateIdentified(pTetR,doc,2);
+	    pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
+	    TestUtil.validateIdentified(pTetR,doc,1);
+	    pTetR.setTypes(Arrays.asList(ComponentType.RNA.getUri(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
+	    TestUtil.validateIdentified(pTetR,doc,1);
+	    pTetR.setTypes(Arrays.asList(ComponentType.RNA.getUri(), ComponentType.TopologyType.Linear.getUri()));
+	    TestUtil.validateIdentified(pTetR,doc,0);
+	    pTetR.setTypes(Arrays.asList(ComponentType.StrandType.Double.getUri(), ComponentType.Protein.getUri()));
+	    TestUtil.validateIdentified(pTetR,doc,2);
+	    pTetR.setTypes(Arrays.asList(ComponentType.StrandType.Double.getUri(), ComponentType.DNA.getUri()));
+	    TestUtil.validateIdentified(pTetR,doc,0);
+		
 		
 		
 		
@@ -156,10 +174,11 @@ public class ComponentTest extends TestCase {
 		TestUtil.validateIdentified(pTetR,doc,0);		
 
         // COMPONENT_TYPE_MATCH_PROPERTY
-		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org")));
+		/* Removed the validation for sbol3-10604 ⋆ A Component SHOULD have a type property from Table 2.
+		 * pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org")));
 		TestUtil.validateIdentified(pTetR,doc,1); 
 		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org"),URI.create("http://invalidtype2.org")));
-		TestUtil.validateIdentified(pTetR,doc,1); 
+		TestUtil.validateIdentified(pTetR,doc,1);*/
 		
 		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri()));
 		TestUtil.validateIdentified(pTetR,doc,0); 

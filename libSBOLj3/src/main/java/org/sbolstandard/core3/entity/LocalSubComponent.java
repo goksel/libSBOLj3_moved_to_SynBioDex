@@ -70,7 +70,9 @@ public class LocalSubComponent extends FeatureWithLocation{
 				validationMessages=IdentifiedValidator.assertAtMostOneTopologyType(types, validationMessages, "{LOCALSUBCOMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE}");
 				
 				//LOCALSUBCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY
-				boolean checkDNAOrRNA = false;
+				validationMessages=IdentifiedValidator.assertOnlyDNAOrRNAComponentsIncludeStrandOrTopology(types, validationMessages, "{LOCALSUBCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY}");
+				
+				/*boolean checkDNAOrRNA = false;
 				for(URI typeURI: types) {
 					TopologyType topologyType = TopologyType.get(typeURI);
 					if (topologyType!=null)
@@ -91,7 +93,7 @@ public class LocalSubComponent extends FeatureWithLocation{
 					if (!types.contains(ComponentType.DNA.getUri()) && !types.contains(ComponentType.RNA.getUri()) ){
 						validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY}", DataModel.type, types));      			
 					}
-				}
+				}*/
 			}
 		}
 		

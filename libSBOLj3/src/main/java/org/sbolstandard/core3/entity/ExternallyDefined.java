@@ -44,7 +44,8 @@ public class ExternallyDefined extends Feature{
 			validationMessages= addToValidations(validationMessages,new ValidationMessage("{EXTERNALLYDEFINED_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type));      	
 		}
 		
-		if (Configuration.getInstance().isValidateRecommendedRules()){
+		/*Removed this best practise rule
+		 * if (Configuration.getInstance().isValidateRecommendedRules()){
 			boolean foundType = false;
 			if(types!=null) {
 				for(URI type: types) {
@@ -57,7 +58,7 @@ public class ExternallyDefined extends Feature{
 			if(!foundType) {
 				validationMessages = addToValidations(validationMessages,new ValidationMessage("{EXTERNALLYDEFINED_TYPE_IN_TABLE2}", DataModel.type));      	
 			}
-		}
+		}*/
 		
 		return validationMessages;
 	}

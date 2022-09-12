@@ -70,7 +70,7 @@ public class LocalSubComponentTest extends TestCase {
 		RDFUtil.setProperty(resource, lsComponent.getDefaultLocationProperty(), tempURIs);
 		TestUtil.validateIdentified(lsComponent,doc,0);
 
-	    //LOCALSUBCOMPONENT_TYPE_FROM_TABLE2
+	    //LOCALSUBCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY
         lsComponent.setTypes(tempTypes);
 	    lsComponent.setTypes(Arrays.asList(ComponentType.OptionalComponentType.Cell.getUri()));
 	    TestUtil.validateIdentified(lsComponent,doc,1);

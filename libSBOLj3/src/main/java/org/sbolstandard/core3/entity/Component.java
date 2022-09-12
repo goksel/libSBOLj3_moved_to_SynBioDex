@@ -89,7 +89,9 @@ public class Component extends TopLevel {
 			}
 		}
 		
-		if (Configuration.getInstance().isValidateRecommendedRules())
+		/*Removed the validation for sbol3-10604 ⋆ A Component SHOULD have a type property from Table 2.
+		 * This is a best practise rule.
+		 * if (Configuration.getInstance().isValidateRecommendedRules())
 		{
 			if(types != null) {
 				boolean foundType = false;
@@ -106,7 +108,7 @@ public class Component extends TopLevel {
 					validationMessages = addToValidations(validationMessages, new ValidationMessage("{COMPONENT_TYPE_MATCH_PROPERTY}", DataModel.type,types));
 				}
 			}
-		}
+		}*/
 		
 		List<Feature> features=this.getFeatures();
 		List<Constraint> constraints=this.getConstraints();
@@ -128,6 +130,9 @@ public class Component extends TopLevel {
 		
 		//COMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE
 		validationMessages=IdentifiedValidator.assertAtMostOneTopologyType(types, validationMessages, "{COMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE}");
+		
+		//COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY
+		validationMessages=IdentifiedValidator.assertOnlyDNAOrRNAComponentsIncludeStrandOrTopology(types, validationMessages, "{COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY}");
 		
 		
 		// COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
