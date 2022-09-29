@@ -2,10 +2,13 @@ package org.sbolstandard.core3.validation;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
 import org.sbolstandard.core3.entity.Identified;
@@ -17,6 +20,7 @@ import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
+import org.sbolstandard.core3.vocabulary.Role;
 import org.sbolstandard.core3.vocabulary.ComponentType.StrandType;
 import org.sbolstandard.core3.vocabulary.ComponentType.TopologyType;
 
@@ -274,6 +278,24 @@ public class IdentifiedValidator {
 			return validationMessages;
 		}
 
+		
+		public static Pair<List<ValidationMessage>, Map<URI, Boolean>>  assertOnlyDNAOrRNAComponentsIncludeSOFeatureRole(List<URI> types, List<URI> roles, List<ValidationMessage> validationMessages, ValidationMessage message, Map<URI, Boolean> validity) {
+			if (types!=null && roles!=null && !types.contains(ComponentType.DNA.getUri()) && !types.contains(ComponentType.RNA.getUri())) {
+				for (URI role: roles)
+				{
+					Boolean valid = validity.get(role);
+					if (valid == null) {
+						valid = RDFUtil.hasParentRecursively(Configuration.getInstance().getSOOntology(), role.toString(), Role.SequenceFeature.toString());
+						validity.put(role, valid);
+					}
+					if (valid) {
+						message.setInvalidValue(role);
+						validationMessages = IdentifiedValidator.addToValidations(validationMessages, message);
+					}
+				}
+			}
+			return Pair.of(validationMessages, validity);
+		}
 	/*
 	 * public List<String> validate2(Identified identified) {
 	 * Set<ConstraintViolation<Identified>> violations =
@@ -396,6 +418,8 @@ public class IdentifiedValidator {
 		return messages;
 
 	}
+
+	
 
 	/*
 	 * public Optional<?> getPropertyAsOptional(Resource resource, URI property)

@@ -64,9 +64,12 @@ public class Configuration {
 	}
 
 	private Model edamOntology=null;
+	private Model soOntology=null;
+	
 	private Configuration()
 	{
 		this.edamOntology=SBOLUtil.getModelFromFileResource("edam.owl.reduced", Lang.TURTLE);
+		this.soOntology=SBOLUtil.getModelFromFileResource("so-simple.owl.reduced", Lang.TURTLE);	
 	}
 	
 	private static class SingletonHelper {
@@ -81,6 +84,11 @@ public class Configuration {
 	public Model getEDAMOntology()
 	{
 		return this.edamOntology;   
+	}
+	
+	public Model getSOOntology()
+	{
+		return this.soOntology;   
 	}
 	
 	/*public static Configuration getConfiguration()

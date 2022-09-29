@@ -86,8 +86,9 @@ public abstract class Identified implements ValidatableSBOLEntity {
 		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.displayId);
 	}
 	
+	//public void setDisplayId(String displayId) throws SBOLGraphException {
 	public void setDisplayId(@Pattern(regexp = "^[a-zA-Z_]+[a-zA-Z0-9_]*$", message = "{IDENTIFIED_DISPLAYID}") String displayId) throws SBOLGraphException {
-		PropertyValidator.getValidator().validate(this, "setDisplayId", new Object[] {displayId}, String.class);
+				PropertyValidator.getValidator().validate(this, "setDisplayId", new Object[] {displayId}, String.class);
 		RDFUtil.setProperty(resource, DataModel.Identified.displayId, displayId);		
 	}
 	

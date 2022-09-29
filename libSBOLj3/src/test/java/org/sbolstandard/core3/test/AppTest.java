@@ -11,20 +11,26 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.jena.iri.IRI;
+import org.apache.jena.iri.IRIFactory;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Component;
 import org.sbolstandard.core3.entity.SBOLDocument;
+import org.sbolstandard.core3.io.SBOLFormat;
+import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.util.URINameSpace;
+import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.InteractionType;
 import org.sbolstandard.core3.vocabulary.ParticipationRole;
 import org.sbolstandard.core3.vocabulary.Role;
 
+import junit.framework.Assert;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -61,6 +67,43 @@ public class AppTest
         assertTrue( true );
     }
     
+    public void testIRI() throws SBOLGraphException, IOException
+    {
+    	boolean shouldPass=false;
+    	try {
+    	SBOLDocument doc=SBOLIO.read(new File ("/Users/gokselmisirli/Downloads/uri-iri_2.ttl"));
+    	URI uri=doc.getComponents().get(0).getUri();
+    	System.out.println(uri);
+    	String out=SBOLIO.write(doc, SBOLFormat.TURTLE);
+    	System.out.println(out);
+    	doc.setBaseURI(URI.create("http://keele.ac.uk/scm/"));
+    	Component comp2=doc.createComponent("päypal", Arrays.asList(ComponentType.DNA.getUri()));
+    	System.out.println(comp2.getUri());
+    	Component comp3=doc.createComponent("清华大学", Arrays.asList(ComponentType.DNA.getUri()));
+    	System.out.println(comp3.getUri());
+    	
+    	Component temp=doc.getIdentified(URI.create("http://keele.ac.uk/scm/清华大学"), Component.class);
+    	System.out.println(temp.getUri());
+    	
+    	//URI test=URI.create("\"Howareyou?");
+    	//URI test2=URI.create("'Howareyou?");
+    	
+    	//IRI testiri=IRIFactory.iriImplementation().construct("'Howareyou?");
+    	/*Component comp4=doc.createComponent("\"How are you?\"", Arrays.asList(ComponentType.DNA.getUri()));
+    	System.out.println(comp4.getUri());
+    	*/
+    	SBOLIO.write(doc, new File("/Users/gokselmisirli/Downloads/uri-iri_2_modified.ttl"), SBOLFormat.TURTLE);
+    	}
+    	catch (SBOLGraphException so)
+    	{
+    		shouldPass=true;
+    	}
+    	finally
+    	{
+    		assertTrue("Check the IRI validation", shouldPass);
+    	}
+    	
+    }
     public void testReflection() throws SBOLGraphException
     {
         SBOLDocument doc=new SBOLDocument(URI.create("https://synbiohub.org/public/igem/"));
@@ -139,18 +182,26 @@ public class AppTest
     
     public void testCreateReducedResourceOntologies() throws IOException
     {
-    	reduce("../ontologies/edam.owl", "src/main/resources/edam.owl.reduced");		
+    	reduce("../ontologies/edam.owl", "src/main/resources/edam.owl.reduced", "http://edamontology.org/", URINameSpace.EDAM.getUri().toString());	
+    	reduce("../ontologies/so-simple.owl", "src/main/resources/so-simple.owl.reduced", "http://purl.obolibrary.org/obo/SO_", URINameSpace.SO.getUri().toString());	
+    	
     }
-    
-    private void reduce(String sourceFile, String destinationFile) throws IOException
+    //http://purl.obolibrary.org/obo/SO_
+    private void reduce(String sourceFile, String destinationFile, String search, String replaceWith) throws IOException
     {
     	List<String> propertiesToKeep=Arrays.asList("http://www.w3.org/2000/01/rdf-schema#subClassOf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#about");
     	Model model=RDFUtil.read(new File(sourceFile));
     	RDFUtil.removePropertiesExcept(model, propertiesToKeep );
-    	RDFUtil.write(model, new File(destinationFile), RDFFormat.TURTLE); 
+    	RDFUtil.write(model, new File(destinationFile), RDFFormat.RDFXML); 
     	String ontology=IOUtils.toString(new FileInputStream(destinationFile),Charset.defaultCharset());
-    	ontology=ontology.replace("http://edamontology.org/", URINameSpace.EDAM.getUri().toString());
+    	int index=ontology.indexOf(search);
+    	System.out.println("index:" + index);
+    	ontology=ontology.replace(search, replaceWith);
 		IOUtils.write(ontology, new FileOutputStream(destinationFile), Charset.defaultCharset());
+    
+		//Serialize in Turtle
+		model=RDFUtil.read(new File(destinationFile), RDFFormat.RDFXML);
+		RDFUtil.write(model, new File(destinationFile), RDFFormat.TURTLE); 
     }
     
    /* public void testParentType() throws FileNotFoundException
