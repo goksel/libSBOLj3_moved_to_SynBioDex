@@ -128,15 +128,20 @@ public class Component extends TopLevel {
 			}
 		}
 		
-		//COMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE
-		validationMessages=IdentifiedValidator.assertAtMostOneTopologyType(types, validationMessages, "{COMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE}");
-		
-		//COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY
-		validationMessages=IdentifiedValidator.assertOnlyDNAOrRNAComponentsIncludeStrandOrTopology(types, validationMessages, "{COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY}");
-		
-		//COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE
-		//validationMessages=IdentifiedValidator.assertOnlyDNAOrRNAComponentsIncludeSOFeatureRole(types, validationMessages, "{COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE}");
-				
+		if (Configuration.getInstance().isValidateRecommendedRules())
+		{
+			//COMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE
+			validationMessages=IdentifiedValidator.assertAtMostOneTopologyType(types, validationMessages, "{COMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE}");
+			
+			//COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY
+			validationMessages=IdentifiedValidator.assertOnlyDNAOrRNAComponentsIncludeStrandOrTopology(types, validationMessages, "{COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY}");
+			
+			//COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE
+			validationMessages=IdentifiedValidator.assertOnlyDNAOrRNAIdentifiedsIncludeSOFeatureRole(types, Configuration.getInstance().getSoSequenceFeatures(), this.getRoles(), validationMessages, "{COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE}", getResourceType(),this); 
+					
+			//COMPONENT_TYPE_IF_DNA_OR_RNA_SHOULD_INCLUDE_ONE_SO_FEATURE_ROLE
+			validationMessages=IdentifiedValidator.assertIfDNAOrRNAThenIdentifiedShouldIncludeOneSOFeatureRole(types, getRoles(), validationMessages, "{COMPONENT_TYPE_IF_DNA_OR_RNA_SHOULD_INCLUDE_ONE_SO_FEATURE_ROLE}", this);					
+		}
 		
 		// COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
 		List<Sequence> sequences = this.getSequences();
@@ -215,9 +220,13 @@ public class Component extends TopLevel {
 					}
 				}
 				if(!sizesMatch) {
-					validationMessages = addToValidations(validationMessages,
-							new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH}",
-									DataModel.Sequence.encoding, encoding));
+					
+					//validationMessages = addToValidations(validationMessages,new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH}",DataModel.Sequence.encoding, encoding));
+					//ValidationMessage message=new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH}",DataModel.Component.sequence, "test");
+					ValidationMessage message=new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH}",DataModel.Component.sequence, SBOLUtil.getURIs(getSequences()));
+					
+					//message.childPath(DataModel.Sequence.encoding);
+					validationMessages = addToValidations(validationMessages,message);
 				}
 			}
 		}
@@ -317,7 +326,7 @@ public class Component extends TopLevel {
 		{
 			for (Sequence sequence: sequences)
 			{
-				if (sequence.getEncoding().equals(encoding))
+				if (sequence.getEncoding().equals(encoding.getUri()))
 				{
 					if (result==null)
 					{

@@ -4,7 +4,7 @@
     "@id" : "https://sbolstandard.org/examples/i13504_system/Interaction1"
   } ],
   "http://sbols.org/v3#role" : [ {
-    "@id" : "https://identifiers.org/SBO:0000289"
+    "@id" : "https://identifiers.org/SO:0000704"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "i13504 system"

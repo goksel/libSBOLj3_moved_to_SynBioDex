@@ -5,6 +5,11 @@
       "value" : "simpleDevice"
     }
      ] ,
+    "http://sbols.org/v3#role" : [ { 
+      "type" : "uri" ,
+      "value" : "https://identifiers.org/SO:0000704"
+    }
+     ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
       "value" : "http://sbols.org/v3#Component"
@@ -41,6 +46,10 @@
     "http://sbols.org/v3#role" : [ { 
       "type" : "uri" ,
       "value" : "https://identifiers.org/SBO:0000289"
+    }
+    , { 
+      "type" : "uri" ,
+      "value" : "https://identifiers.org/SO:0000704"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
@@ -152,6 +161,11 @@
       "value" : "i13504"
     }
      ] ,
+    "http://sbols.org/v3#role" : [ { 
+      "type" : "uri" ,
+      "value" : "https://identifiers.org/SO:0000704"
+    }
+     ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
       "value" : "http://sbols.org/v3#Component"
@@ -257,6 +271,11 @@
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
       "value" : "interlab16device1"
+    }
+     ] ,
+    "http://sbols.org/v3#role" : [ { 
+      "type" : "uri" ,
+      "value" : "https://identifiers.org/SO:0000704"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 

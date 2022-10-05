@@ -120,6 +120,8 @@ public class GettingStartedTutorial {
  		Slide 32: GFP production from expression cassette
 		-------------------------------------------------- */
 		Component i13504_system=SBOLAPI.createComponent(doc,"i13504_system", ComponentType.DNA.getUri(), "i13504 system", null, Role.FunctionalCompartment);
+		i13504_system.setRoles(Arrays.asList(Role.EngineeredGene));
+		
 		Component GFP=SBOLAPI.createComponent(doc, "GFP_protein", ComponentType.Protein.getUri(), "GFP", "GFP", null); 
 		SubComponent i13504SubComponent=SBOLAPI.addSubComponent(i13504_system, device);
 		SubComponent gfpProteinSubComponent=SBOLAPI.addSubComponent(i13504_system, GFP);
@@ -135,7 +137,11 @@ public class GettingStartedTutorial {
 		  -------------------------------------------------- */
 		 //Left hand side of slide: interlab16device1
 		 Component ilab16_dev1=doc.createComponent("interlab16device1", Arrays.asList(ComponentType.DNA.getUri())); 
+		 ilab16_dev1.setRoles(Arrays.asList(Role.EngineeredGene));
+			
 		 Component j23101=doc.createComponent("j23101", Arrays.asList(ComponentType.DNA.getUri())); 
+		 j23101.setRoles(Arrays.asList(Role.EngineeredGene));
+			
 		 SubComponent sc_j23101=SBOLAPI.addSubComponent(ilab16_dev1, j23101);	
 		 SubComponent sc_i13504_system=SBOLAPI.addSubComponent(ilab16_dev1, i13504_system);	
 		 
@@ -144,7 +150,10 @@ public class GettingStartedTutorial {
 	        
 		 // Right hand side of slide: interlab16device2
 		 Component ilab16_dev2=doc.createComponent("interlab16device2", Arrays.asList(ComponentType.DNA.getUri())); 
+		 ilab16_dev2.setRoles(Arrays.asList(Role.EngineeredGene));
+		 
 		 Component j23106=doc.createComponent("j23106", Arrays.asList(ComponentType.DNA.getUri())); 
+		 j23106.setRoles(Arrays.asList(Role.EngineeredGene));
 		 SubComponent sc_j23106=SBOLAPI.addSubComponent(ilab16_dev2, j23106);	
 		 SubComponent sc_i13504_system_dev2=SBOLAPI.addSubComponent(ilab16_dev2, i13504_system);	
 		 

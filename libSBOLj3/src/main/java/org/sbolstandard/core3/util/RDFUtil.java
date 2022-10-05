@@ -10,9 +10,11 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.OptionalInt;
+import java.util.Set;
 
 import org.apache.jena.datatypes.xsd.impl.XSDFloat;
 import org.apache.jena.query.Query;
@@ -607,6 +609,25 @@ public class RDFUtil {
 				}
 			}
 	    	return found;
+	    }
+	    
+	    public static Set<String> childResourcesRecursively(Model model, String parentResourceURI)
+	    {
+	    	String query= "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
+	    			+ "select ?child where {?child rdfs:subClassOf* <" + parentResourceURI + "> .}";
+	    		
+	    	ResultSet rs= executeSPARQLSelectQuery(model, query, Syntax.syntaxSPARQL_11);
+	    	Set<String> childURIs=new HashSet<String>();
+	    	while (rs.hasNext()){
+				QuerySolution qs=rs.next();
+				RDFNode parent=qs.get(rs.getResultVars().get(0));
+				String childUri=RDFUtil.toLiteralString(parent);
+				System.out.println ("Child:" + childUri);
+				if (childUri!=null){
+					childURIs.add(childUri);
+				}
+			}
+	    	return childURIs;
 	    }
 	    
 	    /**

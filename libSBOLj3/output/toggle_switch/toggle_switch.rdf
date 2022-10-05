@@ -250,6 +250,7 @@
       </sbol:hasFeature>
       <sbol:displayId>toggle_switch</sbol:displayId>
       <sbol:description>Toggle Switch genetic circuit</sbol:description>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasFeature>
          <sbol:ComponentReference rdf:about="toggle_switch/ComponentReference3">
             <sbol:refersTo>

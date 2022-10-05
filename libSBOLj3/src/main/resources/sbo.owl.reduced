@@ -1,0 +1,2083 @@
+@prefix :       <http://biomodels.net/SBO/> .
+@prefix daml:   <http://www.daml.org/2001/03/daml+oil#> .
+@prefix mathml: <http://www.w3.org/1998/Math/MathML> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+<https://identifiers.org/SBO:0000497>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000389> .
+
+<https://identifiers.org/SBO:0000244>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000241> .
+
+<https://identifiers.org/SBO:0000419>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000286> .
+
+<https://identifiers.org/SBO:0000290>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000240> .
+
+<https://identifiers.org/SBO:0000465>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000212>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000210> , <https://identifiers.org/SBO:0000208> .
+
+<https://identifiers.org/SBO:0000686>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000683> .
+
+<https://identifiers.org/SBO:0000433>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000429> .
+
+<https://identifiers.org/SBO:0000608>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000607> .
+
+<https://identifiers.org/SBO:0000188>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000654>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000655> .
+
+<https://identifiers.org/SBO:0000401>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000211> .
+
+<https://identifiers.org/SBO:0000156>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000009> .
+
+<https://identifiers.org/SBO:0000622>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000619> .
+
+<https://identifiers.org/SBO:0000377>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000176> .
+
+<https://identifiers.org/SBO:0000124>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000123> .
+
+<https://identifiers.org/SBO:0000170>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000168> .
+
+<https://identifiers.org/SBO:0000345>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000255> .
+
+<https://identifiers.org/SBO:0000391>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000064> .
+
+<https://identifiers.org/SBO:0000566>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000538> .
+
+<https://identifiers.org/SBO:0000313>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000334> .
+
+<https://identifiers.org/SBO:0000068>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000155> , <https://identifiers.org/SBO:0000024> .
+
+<https://identifiers.org/SBO:0000534>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000461> .
+
+<https://identifiers.org/SBO:0000289>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000003> .
+
+<https://identifiers.org/SBO:0000036>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000154> , <https://identifiers.org/SBO:0000023> .
+
+<https://identifiers.org/SBO:0000580>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000571> .
+
+<https://identifiers.org/SBO:0000502>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000343> .
+
+<https://identifiers.org/SBO:0000082>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000081> .
+
+<https://identifiers.org/SBO:0000257>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000004>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000000> .
+
+<https://identifiers.org/SBO:0000050>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000045> .
+
+<https://identifiers.org/SBO:0000478>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000193> .
+
+<https://identifiers.org/SBO:0000225>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000346> .
+
+<https://identifiers.org/SBO:0000271>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000270> .
+
+<https://identifiers.org/SBO:0000446>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000444> .
+
+<https://identifiers.org/SBO:0000492>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000667>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000666> .
+
+<https://identifiers.org/SBO:0000414>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000413> .
+
+<https://identifiers.org/SBO:0000169>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000168> .
+
+<https://identifiers.org/SBO:0000460>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000013> .
+
+<https://identifiers.org/SBO:0000635>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000354> .
+
+<https://identifiers.org/SBO:0000681>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000004> .
+
+<https://identifiers.org/SBO:0000137>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000136> .
+
+<https://identifiers.org/SBO:0000603>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000011> .
+
+<https://identifiers.org/SBO:0000183>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000205> .
+
+<https://identifiers.org/SBO:0000358>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000375> .
+
+<https://identifiers.org/SBO:0000105>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000099> .
+
+<https://identifiers.org/SBO:0000151>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000150> .
+
+<https://identifiers.org/SBO:0000579>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000577> .
+
+<https://identifiers.org/SBO:0000326>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000269> .
+
+<https://identifiers.org/SBO:0000372>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000370> .
+
+<https://identifiers.org/SBO:0000547>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000234> .
+
+<https://identifiers.org/SBO:0000593>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000592> .
+
+<https://identifiers.org/SBO:0000049>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000163> , <https://identifiers.org/SBO:0000044> .
+
+<https://identifiers.org/SBO:0000340>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000341> , <https://identifiers.org/SBO:0000037> .
+
+<https://identifiers.org/SBO:0000515>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000509> .
+
+<https://identifiers.org/SBO:0000095>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000089> .
+
+<https://identifiers.org/SBO:0000561>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000166> .
+
+<https://identifiers.org/SBO:0000017>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000009> .
+
+<https://identifiers.org/SBO:0000063>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000004> .
+
+<https://identifiers.org/SBO:0000238>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000237> .
+
+<https://identifiers.org/SBO:0000284>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000241> .
+
+<https://identifiers.org/SBO:0000031>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000028> .
+
+<https://identifiers.org/SBO:0000459>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000019> .
+
+<https://identifiers.org/SBO:0000206>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000020> .
+
+<https://identifiers.org/SBO:0000252>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000246> .
+
+<https://identifiers.org/SBO:0000427>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000426> .
+
+<https://identifiers.org/SBO:0000473>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000552> .
+
+<https://identifiers.org/SBO:0000220>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000210> .
+
+<https://identifiers.org/SBO:0000648>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000647> .
+
+<https://identifiers.org/SBO:0000694>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000693> .
+
+<https://identifiers.org/SBO:0000441>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000275> .
+
+<https://identifiers.org/SBO:0000616>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000613> .
+
+<https://identifiers.org/SBO:0000196>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000226> .
+
+<https://identifiers.org/SBO:0000662>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000118>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000116> .
+
+<https://identifiers.org/SBO:0000164>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000005> .
+
+<https://identifiers.org/SBO:0000339>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000341> , <https://identifiers.org/SBO:0000036> .
+
+<https://identifiers.org/SBO:0000630>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000395> .
+
+<https://identifiers.org/SBO:0000385>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000381> .
+
+<https://identifiers.org/SBO:0000132>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000130> .
+
+<https://identifiers.org/SBO:0000307>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000310> , <https://identifiers.org/SBO:0000306> .
+
+<https://identifiers.org/SBO:0000353>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000352> .
+
+<https://identifiers.org/SBO:0000100>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000099> .
+
+<https://identifiers.org/SBO:0000528>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000527> .
+
+<https://identifiers.org/SBO:0000574>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000573> .
+
+<https://identifiers.org/SBO:0000321>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000025> .
+
+<https://identifiers.org/SBO:0000076>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000074> .
+
+<https://identifiers.org/SBO:0000542>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000297>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000296> .
+
+<https://identifiers.org/SBO:0000044>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000041> .
+
+<https://identifiers.org/SBO:0000219>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000210> .
+
+<https://identifiers.org/SBO:0000510>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000504> .
+
+<https://identifiers.org/SBO:0000090>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000089> .
+
+<https://identifiers.org/SBO:0000265>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000275> .
+
+<https://identifiers.org/SBO:0000012>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000001> .
+
+<https://identifiers.org/SBO:0000486>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000381> .
+
+<https://identifiers.org/SBO:0000233>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000210> .
+
+<https://identifiers.org/SBO:0000408>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000003> .
+
+<https://identifiers.org/SBO:0000454>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000430> .
+
+<https://identifiers.org/SBO:0000201>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000200> .
+
+<https://identifiers.org/SBO:0000629>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000395> .
+
+<https://identifiers.org/SBO:0000675>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000293> .
+
+<https://identifiers.org/SBO:0000422>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000261> .
+
+<https://identifiers.org/SBO:0000177>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000176> .
+
+<https://identifiers.org/SBO:0000643>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000644> .
+
+<https://identifiers.org/SBO:0000398>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000374> .
+
+<https://identifiers.org/SBO:0000145>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000166> , <https://identifiers.org/SBO:0000058> .
+
+<https://identifiers.org/SBO:0000611>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000009> .
+
+<https://identifiers.org/SBO:0000191>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000193> .
+
+<https://identifiers.org/SBO:0000366>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000160> , <https://identifiers.org/SBO:0000155> .
+
+<https://identifiers.org/SBO:0000113>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000110> .
+
+<https://identifiers.org/SBO:0000587>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000185> .
+
+<https://identifiers.org/SBO:0000334>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000404> .
+
+<https://identifiers.org/SBO:0000509>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000196> .
+
+<https://identifiers.org/SBO:0000089>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000088> .
+
+<https://identifiers.org/SBO:0000380>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000555>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000557> .
+
+<https://identifiers.org/SBO:0000302>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000036> .
+
+<https://identifiers.org/SBO:0000057>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000163> , <https://identifiers.org/SBO:0000056> .
+
+<https://identifiers.org/SBO:0000523>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000517> .
+
+<https://identifiers.org/SBO:0000278>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000404> .
+
+<https://identifiers.org/SBO:0000025>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000035> .
+
+<https://identifiers.org/SBO:0000071>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000069> .
+
+<https://identifiers.org/SBO:0000499>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000231> .
+
+<https://identifiers.org/SBO:0000246>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000245> .
+
+<https://identifiers.org/SBO:0000292>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000062> .
+
+<https://identifiers.org/SBO:0000467>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000465> .
+
+<https://identifiers.org/SBO:0000214>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000210> .
+
+<https://identifiers.org/SBO:0000260>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000270> , <https://identifiers.org/SBO:0000267> .
+
+<https://identifiers.org/SBO:0000688>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000683> .
+
+<https://identifiers.org/SBO:0000435>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000429> .
+
+<https://identifiers.org/SBO:0000481>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000380> .
+
+<https://identifiers.org/SBO:0000656>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000182> .
+
+<https://identifiers.org/SBO:0000403>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000402> .
+
+<https://identifiers.org/SBO:0000158>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000382> .
+
+<https://identifiers.org/SBO:0000624>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000694> .
+
+<https://identifiers.org/SBO:0000379>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000430> .
+
+<https://identifiers.org/SBO:0000670>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000668> .
+
+<https://identifiers.org/SBO:0000126>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000120> .
+
+<https://identifiers.org/SBO:0000172>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000170> .
+
+<https://identifiers.org/SBO:0000347>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000346> .
+
+<https://identifiers.org/SBO:0000393>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000168> .
+
+<https://identifiers.org/SBO:0000140>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000166> , <https://identifiers.org/SBO:0000043> .
+
+<https://identifiers.org/SBO:0000568>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000565> .
+
+<https://identifiers.org/SBO:0000315>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000241> .
+
+<https://identifiers.org/SBO:0000361>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000360> .
+
+<https://identifiers.org/SBO:0000536>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000207> .
+
+<https://identifiers.org/SBO:0000038>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000032> .
+
+<https://identifiers.org/SBO:0000582>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000581> .
+
+<https://identifiers.org/SBO:0000504>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000361> .
+
+<https://identifiers.org/SBO:0000084>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000078> .
+
+<https://identifiers.org/SBO:0000259>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000550>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000544> .
+
+<https://identifiers.org/SBO:0000006>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000052>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000163> , <https://identifiers.org/SBO:0000050> .
+
+<https://identifiers.org/SBO:0000227>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000226> .
+
+<https://identifiers.org/SBO:0000273>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000430> .
+
+<https://identifiers.org/SBO:0000020>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000019> .
+
+<https://identifiers.org/SBO:0000448>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000444> .
+
+<https://identifiers.org/SBO:0000494>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000493> .
+
+<https://identifiers.org/SBO:0000241>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000236> .
+
+<https://identifiers.org/SBO:0000669>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000668> .
+
+<https://identifiers.org/SBO:0000416>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000390> .
+
+<https://identifiers.org/SBO:0000462>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000459> .
+
+<https://identifiers.org/SBO:0000637>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000021> .
+
+<https://identifiers.org/SBO:0000139>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000136> .
+
+<https://identifiers.org/SBO:0000683>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000681> .
+
+<https://identifiers.org/SBO:0000430>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000269> .
+
+<https://identifiers.org/SBO:0000605>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000244> .
+
+<https://identifiers.org/SBO:0000185>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000167> .
+
+<https://identifiers.org/SBO:0000107>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000105> .
+
+<https://identifiers.org/SBO:0000651>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000375> .
+
+<https://identifiers.org/SBO:0000153>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000009> .
+
+<https://identifiers.org/SBO:0000328>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000247> .
+
+<https://identifiers.org/SBO:0000374>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000231> .
+
+<https://identifiers.org/SBO:0000121>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000120> .
+
+<https://identifiers.org/SBO:0000549>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000547> .
+
+<https://identifiers.org/SBO:0000595>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000019> .
+
+<https://identifiers.org/SBO:0000342>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000375> .
+
+<https://identifiers.org/SBO:0000517>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000503> .
+
+<https://identifiers.org/SBO:0000097>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000095> .
+
+<https://identifiers.org/SBO:0000563>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000562> .
+
+<https://identifiers.org/SBO:0000019>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000003> .
+
+<https://identifiers.org/SBO:0000310>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000309> .
+
+<https://identifiers.org/SBO:0000065>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000162> , <https://identifiers.org/SBO:0000155> .
+
+<https://identifiers.org/SBO:0000531>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000527> .
+
+<https://identifiers.org/SBO:0000286>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000253> .
+
+<https://identifiers.org/SBO:0000033>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000156> , <https://identifiers.org/SBO:0000017> .
+
+<https://identifiers.org/SBO:0000208>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000176> .
+
+<https://identifiers.org/SBO:0000254>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000001>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000064> .
+
+<https://identifiers.org/SBO:0000429>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000268> .
+
+<https://identifiers.org/SBO:0000475>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000474> .
+
+<https://identifiers.org/SBO:0000222>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000221> .
+
+<https://identifiers.org/SBO:0000443>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000430> .
+
+<https://identifiers.org/SBO:0000618>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000581> .
+
+<https://identifiers.org/SBO:0000198>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000192> .
+
+<https://identifiers.org/SBO:0000664>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000003> .
+
+<https://identifiers.org/SBO:0000411>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000170> .
+
+<https://identifiers.org/SBO:0000166>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000041> .
+
+<https://identifiers.org/SBO:0000632>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000631> .
+
+<https://identifiers.org/SBO:0000387>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000270> .
+
+<https://identifiers.org/SBO:0000134>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000133> .
+
+<https://identifiers.org/SBO:0000309>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000308> .
+
+<https://identifiers.org/SBO:0000600>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000599> .
+
+<https://identifiers.org/SBO:0000180>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000176> .
+
+<https://identifiers.org/SBO:0000355>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000064> .
+
+<https://identifiers.org/SBO:0000102>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000099> .
+
+<https://identifiers.org/SBO:0000576>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000571> .
+
+<https://identifiers.org/SBO:0000323>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000027> .
+
+<https://identifiers.org/SBO:0000078>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000042> .
+
+<https://identifiers.org/SBO:0000544>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000000> .
+
+<https://identifiers.org/SBO:0000299>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000241> .
+
+<https://identifiers.org/SBO:0000590>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000369> .
+
+<https://identifiers.org/SBO:0000046>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000009> .
+
+<https://identifiers.org/SBO:0000512>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000196> .
+
+<https://identifiers.org/SBO:0000092>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000089> .
+
+<https://identifiers.org/SBO:0000267>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000273> .
+
+<https://identifiers.org/SBO:0000014>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000241> .
+
+<https://identifiers.org/SBO:0000060>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000055> .
+
+<https://identifiers.org/SBO:0000488>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000487> .
+
+<https://identifiers.org/SBO:0000235>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000000> .
+
+<https://identifiers.org/SBO:0000281>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000193> .
+
+<https://identifiers.org/SBO:0000456>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000430> .
+
+<https://identifiers.org/SBO:0000203>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000232> .
+
+<https://identifiers.org/SBO:0000677>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000294> .
+
+<https://identifiers.org/SBO:0000424>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000194> .
+
+<https://identifiers.org/SBO:0000179>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000176> .
+
+<https://identifiers.org/SBO:0000470>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000540> .
+
+<https://identifiers.org/SBO:0000645>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000003> .
+
+<https://identifiers.org/SBO:0000691>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000689> .
+
+<https://identifiers.org/SBO:0000147>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000613>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000193>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000308> .
+
+<https://identifiers.org/SBO:0000368>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000161> .
+
+<https://identifiers.org/SBO:0000115>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000113> .
+
+<https://identifiers.org/SBO:0000161>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000159> , <https://identifiers.org/SBO:0000156> .
+
+<https://identifiers.org/SBO:0000589>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000205> .
+
+<https://identifiers.org/SBO:0000336>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000010> .
+
+<https://identifiers.org/SBO:0000382>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000380> .
+
+<https://identifiers.org/SBO:0000557>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000550> .
+
+<https://identifiers.org/SBO:0000304>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000303> .
+
+<https://identifiers.org/SBO:0000059>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000163> , <https://identifiers.org/SBO:0000058> .
+
+<https://identifiers.org/SBO:0000350>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000048> .
+
+<https://identifiers.org/SBO:0000525>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000519> .
+
+<https://identifiers.org/SBO:0000571>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000027>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000193> .
+
+<https://identifiers.org/SBO:0000073>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000071> .
+
+<https://identifiers.org/SBO:0000248>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000245> .
+
+<https://identifiers.org/SBO:0000294>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000063> .
+
+<https://identifiers.org/SBO:0000041>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000012> .
+
+<https://identifiers.org/SBO:0000469>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000413> .
+
+<https://identifiers.org/SBO:0000216>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000210> .
+
+<https://identifiers.org/SBO:0000262>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000458> .
+
+<https://identifiers.org/SBO:0000437>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000326> .
+
+<https://identifiers.org/SBO:0000483>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000482> .
+
+<https://identifiers.org/SBO:0000230>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000227> .
+
+<https://identifiers.org/SBO:0000658>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000655> .
+
+<https://identifiers.org/SBO:0000405>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000240> .
+
+<https://identifiers.org/SBO:0000451>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000430> .
+
+<https://identifiers.org/SBO:0000626>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000625> .
+
+<https://identifiers.org/SBO:0000672>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000176> .
+
+<https://identifiers.org/SBO:0000128>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000126> .
+
+<https://identifiers.org/SBO:0000174>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000237> .
+
+<https://identifiers.org/SBO:0000349>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000035> .
+
+<https://identifiers.org/SBO:0000640>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000020> .
+
+<https://identifiers.org/SBO:0000395>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000375> .
+
+<https://identifiers.org/SBO:0000142>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000166> , <https://identifiers.org/SBO:0000050> .
+
+<https://identifiers.org/SBO:0000317>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000241> .
+
+<https://identifiers.org/SBO:0000363>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000282> .
+
+<https://identifiers.org/SBO:0000110>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000109> .
+
+<https://identifiers.org/SBO:0000538>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000584>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000346> .
+
+<https://identifiers.org/SBO:0000331>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000346> , <https://identifiers.org/SBO:0000009> .
+
+<https://identifiers.org/SBO:0000506>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000504> .
+
+<https://identifiers.org/SBO:0000086>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000084> .
+
+<https://identifiers.org/SBO:0000552>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000550> .
+
+<https://identifiers.org/SBO:0000008>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000004> .
+
+<https://identifiers.org/SBO:0000054>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000163> , <https://identifiers.org/SBO:0000053> .
+
+<https://identifiers.org/SBO:0000229>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000227> .
+
+<https://identifiers.org/SBO:0000520>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000517> .
+
+<https://identifiers.org/SBO:0000275>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000430> .
+
+<https://identifiers.org/SBO:0000022>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000153> , <https://identifiers.org/SBO:0000016> .
+
+<https://identifiers.org/SBO:0000496>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000493> .
+
+<https://identifiers.org/SBO:0000243>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000404> , <https://identifiers.org/SBO:0000240> .
+
+<https://identifiers.org/SBO:0000418>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000286> .
+
+<https://identifiers.org/SBO:0000464>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000375> .
+
+<https://identifiers.org/SBO:0000211>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000182> .
+
+<https://identifiers.org/SBO:0000639>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000020> .
+
+<https://identifiers.org/SBO:0000685>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000683> .
+
+<https://identifiers.org/SBO:0000432>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000429> .
+
+<https://identifiers.org/SBO:0000607>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000296> .
+
+<https://identifiers.org/SBO:0000187>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000005> .
+
+<https://identifiers.org/SBO:0000653>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000182> .
+
+<https://identifiers.org/SBO:0000109>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000042> .
+
+<https://identifiers.org/SBO:0000400>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000211> .
+
+<https://identifiers.org/SBO:0000155>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000153> .
+
+<https://identifiers.org/SBO:0000621>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000619> .
+
+<https://identifiers.org/SBO:0000376>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000178> .
+
+<https://identifiers.org/SBO:0000123>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000120> .
+
+<https://identifiers.org/SBO:0000597>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000020> .
+
+<https://identifiers.org/SBO:0000344>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000342> .
+
+<https://identifiers.org/SBO:0000519>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000504> .
+
+<https://identifiers.org/SBO:0000099>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000088> .
+
+<https://identifiers.org/SBO:0000390>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000389> .
+
+<https://identifiers.org/SBO:0000565>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000545> .
+
+<https://identifiers.org/SBO:0000312>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000278> .
+
+<https://identifiers.org/SBO:0000067>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000155> , <https://identifiers.org/SBO:0000023> .
+
+<https://identifiers.org/SBO:0000533>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000461> .
+
+<https://identifiers.org/SBO:0000288>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000193> .
+
+<https://identifiers.org/SBO:0000035>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000154> , <https://identifiers.org/SBO:0000022> .
+
+<https://identifiers.org/SBO:0000501>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000343> .
+
+<https://identifiers.org/SBO:0000081>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000078> .
+
+<https://identifiers.org/SBO:0000256>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000003>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000000> .
+
+<https://identifiers.org/SBO:0000477>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000346> .
+
+<https://identifiers.org/SBO:0000224>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000210> .
+
+<https://identifiers.org/SBO:0000270>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000430> .
+
+<https://identifiers.org/SBO:0000445>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000444> .
+
+<https://identifiers.org/SBO:0000491>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000009> .
+
+<https://identifiers.org/SBO:0000666>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000413>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000374> .
+
+<https://identifiers.org/SBO:0000168>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000374> .
+
+<https://identifiers.org/SBO:0000634>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000354> .
+
+<https://identifiers.org/SBO:0000389>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000680>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000295> .
+
+<https://identifiers.org/SBO:0000136>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000130> .
+
+<https://identifiers.org/SBO:0000602>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000546> .
+
+<https://identifiers.org/SBO:0000182>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000176> .
+
+<https://identifiers.org/SBO:0000357>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000375> .
+
+<https://identifiers.org/SBO:0000104>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000102> .
+
+<https://identifiers.org/SBO:0000150>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000268> .
+
+<https://identifiers.org/SBO:0000578>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000577> .
+
+<https://identifiers.org/SBO:0000325>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000353> , <https://identifiers.org/SBO:0000186> .
+
+<https://identifiers.org/SBO:0000371>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000370> .
+
+<https://identifiers.org/SBO:0000546>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000545> .
+
+<https://identifiers.org/SBO:0000592>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000361> .
+
+<https://identifiers.org/SBO:0000048>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000162> , <https://identifiers.org/SBO:0000154> .
+
+<https://identifiers.org/SBO:0000514>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000508> .
+
+<https://identifiers.org/SBO:0000094>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000092> .
+
+<https://identifiers.org/SBO:0000269>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000268> .
+
+<https://identifiers.org/SBO:0000560>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000163> .
+
+<https://identifiers.org/SBO:0000016>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000009> .
+
+<https://identifiers.org/SBO:0000062>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000004> .
+
+<https://identifiers.org/SBO:0000237>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000374> .
+
+<https://identifiers.org/SBO:0000283>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000310> , <https://identifiers.org/SBO:0000282> .
+
+<https://identifiers.org/SBO:0000030>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000028> .
+
+<https://identifiers.org/SBO:0000458>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000430> .
+
+<https://identifiers.org/SBO:0000205>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000375> .
+
+<https://identifiers.org/SBO:0000251>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000246> .
+
+<https://identifiers.org/SBO:0000679>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000295> .
+
+<https://identifiers.org/SBO:0000426>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000425> .
+
+<https://identifiers.org/SBO:0000472>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000196> .
+
+<https://identifiers.org/SBO:0000647>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000693>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000004> .
+
+<https://identifiers.org/SBO:0000149>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000157> .
+
+<https://identifiers.org/SBO:0000440>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000430> .
+
+<https://identifiers.org/SBO:0000615>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000612> .
+
+<https://identifiers.org/SBO:0000195>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000192> .
+
+<https://identifiers.org/SBO:0000661>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000117>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000116> .
+
+<https://identifiers.org/SBO:0000163>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000041> .
+
+<https://identifiers.org/SBO:0000338>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000038> , <https://identifiers.org/SBO:0000035> .
+
+<https://identifiers.org/SBO:0000384>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000381> .
+
+<https://identifiers.org/SBO:0000131>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000130> .
+
+<https://identifiers.org/SBO:0000559>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000306>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000309> , <https://identifiers.org/SBO:0000303> .
+
+<https://identifiers.org/SBO:0000352>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000156> , <https://identifiers.org/SBO:0000046> .
+
+<https://identifiers.org/SBO:0000527>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000001> .
+
+<https://identifiers.org/SBO:0000573>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000572> .
+
+<https://identifiers.org/SBO:0000029>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000028> .
+
+<https://identifiers.org/SBO:0000320>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000025> .
+
+<https://identifiers.org/SBO:0000075>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000074> .
+
+<https://identifiers.org/SBO:0000541>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000540> .
+
+<https://identifiers.org/SBO:0000296>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000253> .
+
+<https://identifiers.org/SBO:0000043>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000041> .
+
+<https://identifiers.org/SBO:0000218>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000210> .
+
+<https://identifiers.org/SBO:0000264>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000263> .
+
+<https://identifiers.org/SBO:0000011>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000003> .
+
+<https://identifiers.org/SBO:0000439>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000326> .
+
+<https://identifiers.org/SBO:0000485>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000046> .
+
+<https://identifiers.org/SBO:0000232>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000231> .
+
+<https://identifiers.org/SBO:0000407>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000169> .
+
+<https://identifiers.org/SBO:0000453>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000451> .
+
+<https://identifiers.org/SBO:0000200>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000176> .
+
+<https://identifiers.org/SBO:0000628>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000631> .
+
+<https://identifiers.org/SBO:0000674>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000611> .
+
+<https://identifiers.org/SBO:0000421>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000286> .
+
+<https://identifiers.org/SBO:0000176>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000167> .
+
+<https://identifiers.org/SBO:0000642>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000644> .
+
+<https://identifiers.org/SBO:0000397>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000375> .
+
+<https://identifiers.org/SBO:0000144>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000166> , <https://identifiers.org/SBO:0000056> .
+
+<https://identifiers.org/SBO:0000319>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000334> .
+
+<https://identifiers.org/SBO:0000610>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000190>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000382> .
+
+<https://identifiers.org/SBO:0000365>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000160> , <https://identifiers.org/SBO:0000154> .
+
+<https://identifiers.org/SBO:0000112>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000110> .
+
+<https://identifiers.org/SBO:0000586>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000346> .
+
+<https://identifiers.org/SBO:0000333>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000049> .
+
+<https://identifiers.org/SBO:0000508>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000503> .
+
+<https://identifiers.org/SBO:0000088>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000042> .
+
+<https://identifiers.org/SBO:0000554>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000552> .
+
+<https://identifiers.org/SBO:0000301>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000035> .
+
+<https://identifiers.org/SBO:0000056>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000055> .
+
+<https://identifiers.org/SBO:0000522>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000519> .
+
+<https://identifiers.org/SBO:0000277>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000276> .
+
+<https://identifiers.org/SBO:0000024>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000153> , <https://identifiers.org/SBO:0000018> .
+
+<https://identifiers.org/SBO:0000070>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000069> .
+
+<https://identifiers.org/SBO:0000498>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000381> .
+
+<https://identifiers.org/SBO:0000245>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000240> .
+
+<https://identifiers.org/SBO:0000291>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000240> .
+
+<https://identifiers.org/SBO:0000466>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000465> .
+
+<https://identifiers.org/SBO:0000213>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000211> , <https://identifiers.org/SBO:0000208> .
+
+<https://identifiers.org/SBO:0000687>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000683> .
+
+<https://identifiers.org/SBO:0000434>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000429> .
+
+<https://identifiers.org/SBO:0000609>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000607> .
+
+<https://identifiers.org/SBO:0000189>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000188> .
+
+<https://identifiers.org/SBO:0000480>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000478> .
+
+<https://identifiers.org/SBO:0000655>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000167> .
+
+<https://identifiers.org/SBO:0000402>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000182> .
+
+<https://identifiers.org/SBO:0000157>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000188> .
+
+<https://identifiers.org/SBO:0000623>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000378>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000270> .
+
+<https://identifiers.org/SBO:0000125>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000123> .
+
+<https://identifiers.org/SBO:0000171>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000170> .
+
+<https://identifiers.org/SBO:0000599>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000473> .
+
+<https://identifiers.org/SBO:0000346>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000392>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000374> .
+
+<https://identifiers.org/SBO:0000567>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000565> .
+
+<https://identifiers.org/SBO:0000314>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000334> .
+
+<https://identifiers.org/SBO:0000069>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000042> .
+
+<https://identifiers.org/SBO:0000360>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000535>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000461> .
+
+<https://identifiers.org/SBO:0000581>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000580> .
+
+<https://identifiers.org/SBO:0000037>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000154> , <https://identifiers.org/SBO:0000024> .
+
+<https://identifiers.org/SBO:0000503>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000361> .
+
+<https://identifiers.org/SBO:0000083>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000081> .
+
+<https://identifiers.org/SBO:0000258>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000005>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000064> .
+
+<https://identifiers.org/SBO:0000051>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000005> .
+
+<https://identifiers.org/SBO:0000479>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000478> .
+
+<https://identifiers.org/SBO:0000226>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000360> .
+
+<https://identifiers.org/SBO:0000272>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000188> .
+
+<https://identifiers.org/SBO:0000447>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000444> .
+
+<https://identifiers.org/SBO:0000493>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000241> .
+
+<https://identifiers.org/SBO:0000240>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000236> .
+
+<https://identifiers.org/SBO:0000668>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000241> .
+
+<https://identifiers.org/SBO:0000415>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000413> .
+
+<https://identifiers.org/SBO:0000461>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000459> .
+
+<https://identifiers.org/SBO:0000636>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000021> .
+
+<https://identifiers.org/SBO:0000682>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000681> .
+
+<https://identifiers.org/SBO:0000138>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000136> .
+
+<https://identifiers.org/SBO:0000604>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000015> .
+
+<https://identifiers.org/SBO:0000184>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000205> .
+
+<https://identifiers.org/SBO:0000359>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000355> .
+
+<https://identifiers.org/SBO:0000650>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000375> .
+
+<https://identifiers.org/SBO:0000106>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000105> .
+
+<https://identifiers.org/SBO:0000152>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000150> .
+
+<https://identifiers.org/SBO:0000327>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000247> .
+
+<https://identifiers.org/SBO:0000373>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000027> .
+
+<https://identifiers.org/SBO:0000120>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000109> .
+
+<https://identifiers.org/SBO:0000548>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000547> .
+
+<https://identifiers.org/SBO:0000594>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000003> .
+
+<https://identifiers.org/SBO:0000341>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000154> .
+
+<https://identifiers.org/SBO:0000516>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000510> .
+
+<https://identifiers.org/SBO:0000096>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000095> .
+
+<https://identifiers.org/SBO:0000018>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000009> .
+
+<https://identifiers.org/SBO:0000562>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000045> .
+
+<https://identifiers.org/SBO:0000064>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000000> .
+
+<https://identifiers.org/SBO:0000239>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000168> .
+
+<https://identifiers.org/SBO:0000530>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000527> .
+
+<https://identifiers.org/SBO:0000285>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000240> .
+
+<https://identifiers.org/SBO:0000032>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000156> , <https://identifiers.org/SBO:0000016> .
+
+<https://identifiers.org/SBO:0000207>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000020> .
+
+<https://identifiers.org/SBO:0000253>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000240> .
+
+<https://identifiers.org/SBO:0000428>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000426> .
+
+<https://identifiers.org/SBO:0000474>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000064> .
+
+<https://identifiers.org/SBO:0000221>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000210> .
+
+<https://identifiers.org/SBO:0000649>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000241> .
+
+<https://identifiers.org/SBO:0000442>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000265> .
+
+<https://identifiers.org/SBO:0000617>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000581> .
+
+<https://identifiers.org/SBO:0000197>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000196> .
+
+<https://identifiers.org/SBO:0000119>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000116> .
+
+<https://identifiers.org/SBO:0000663>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000545> .
+
+<https://identifiers.org/SBO:0000410>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000290> .
+
+<https://identifiers.org/SBO:0000165>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000005> .
+
+<https://identifiers.org/SBO:0000631>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000375> .
+
+<https://identifiers.org/SBO:0000386>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000378> .
+
+<https://identifiers.org/SBO:0000133>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000130> .
+
+<https://identifiers.org/SBO:0000308>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000354>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000240> .
+
+<https://identifiers.org/SBO:0000101>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000099> .
+
+<https://identifiers.org/SBO:0000529>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000527> .
+
+<https://identifiers.org/SBO:0000575>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000573> .
+
+<https://identifiers.org/SBO:0000322>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000027> .
+
+<https://identifiers.org/SBO:0000077>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000074> .
+
+<https://identifiers.org/SBO:0000543>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000296> .
+
+<https://identifiers.org/SBO:0000298>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000241> .
+
+<https://identifiers.org/SBO:0000045>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000041> .
+
+<https://identifiers.org/SBO:0000511>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000503> .
+
+<https://identifiers.org/SBO:0000091>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000089> .
+
+<https://identifiers.org/SBO:0000266>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000442> .
+
+<https://identifiers.org/SBO:0000013>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000459> .
+
+<https://identifiers.org/SBO:0000487>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000474> .
+
+<https://identifiers.org/SBO:0000234>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000004> .
+
+<https://identifiers.org/SBO:0000409>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000236> .
+
+<https://identifiers.org/SBO:0000280>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000241> .
+
+<https://identifiers.org/SBO:0000455>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000454> .
+
+<https://identifiers.org/SBO:0000202>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000200> .
+
+<https://identifiers.org/SBO:0000676>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000293> .
+
+<https://identifiers.org/SBO:0000423>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000194> .
+
+<https://identifiers.org/SBO:0000178>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000182> .
+
+<https://identifiers.org/SBO:0000644>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000003> .
+
+<https://identifiers.org/SBO:0000399>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000211> .
+
+<https://identifiers.org/SBO:0000690>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000689> .
+
+<https://identifiers.org/SBO:0000146>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000166> , <https://identifiers.org/SBO:0000060> .
+
+<https://identifiers.org/SBO:0000612>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000613> .
+
+<https://identifiers.org/SBO:0000192>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000001> .
+
+<https://identifiers.org/SBO:0000367>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000161> .
+
+<https://identifiers.org/SBO:0000114>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000113> .
+
+<https://identifiers.org/SBO:0000160>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000159> , <https://identifiers.org/SBO:0000153> .
+
+<https://identifiers.org/SBO:0000588>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000185> .
+
+<https://identifiers.org/SBO:0000335>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000354> .
+
+<https://identifiers.org/SBO:0000381>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000380> .
+
+<https://identifiers.org/SBO:0000556>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000557> .
+
+<https://identifiers.org/SBO:0000303>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000308> .
+
+<https://identifiers.org/SBO:0000058>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000055> .
+
+<https://identifiers.org/SBO:0000524>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000518> .
+
+<https://identifiers.org/SBO:0000279>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000570>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000569> .
+
+<https://identifiers.org/SBO:0000026>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000006> .
+
+<https://identifiers.org/SBO:0000072>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000071> .
+
+<https://identifiers.org/SBO:0000247>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000240> .
+
+<https://identifiers.org/SBO:0000293>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000062> .
+
+<https://identifiers.org/SBO:0000040>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000034> .
+
+<https://identifiers.org/SBO:0000468>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000465> .
+
+<https://identifiers.org/SBO:0000215>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000210> .
+
+<https://identifiers.org/SBO:0000261>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000282> .
+
+<https://identifiers.org/SBO:0000689>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000683> .
+
+<https://identifiers.org/SBO:0000436>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000429> .
+
+<https://identifiers.org/SBO:0000482>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000009> .
+
+<https://identifiers.org/SBO:0000657>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000655> .
+
+<https://identifiers.org/SBO:0000404>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000241> .
+
+<https://identifiers.org/SBO:0000159>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000009> .
+
+<https://identifiers.org/SBO:0000450>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000448> .
+
+<https://identifiers.org/SBO:0000625>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000613> .
+
+<https://identifiers.org/SBO:0000127>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000126> .
+
+<https://identifiers.org/SBO:0000671>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000013> .
+
+<https://identifiers.org/SBO:0000173>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000237> .
+
+<https://identifiers.org/SBO:0000348>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000346> , <https://identifiers.org/SBO:0000009> .
+
+<https://identifiers.org/SBO:0000394>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000168> .
+
+<https://identifiers.org/SBO:0000141>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000166> , <https://identifiers.org/SBO:0000044> .
+
+<https://identifiers.org/SBO:0000569>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000391> .
+
+<https://identifiers.org/SBO:0000316>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000334> .
+
+<https://identifiers.org/SBO:0000362>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000359> .
+
+<https://identifiers.org/SBO:0000537>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000207> .
+
+<https://identifiers.org/SBO:0000583>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000581> .
+
+<https://identifiers.org/SBO:0000039>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000033> .
+
+<https://identifiers.org/SBO:0000330>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000211> .
+
+<https://identifiers.org/SBO:0000505>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000518> .
+
+<https://identifiers.org/SBO:0000085>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000084> .
+
+<https://identifiers.org/SBO:0000551>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000555> .
+
+<https://identifiers.org/SBO:0000007>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000235> .
+
+<https://identifiers.org/SBO:0000053>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000045> .
+
+<https://identifiers.org/SBO:0000228>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000227> .
+
+<https://identifiers.org/SBO:0000274>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000379> , <https://identifiers.org/SBO:0000273> .
+
+<https://identifiers.org/SBO:0000021>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000459> .
+
+<https://identifiers.org/SBO:0000449>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000447> .
+
+<https://identifiers.org/SBO:0000495>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000493> .
+
+<https://identifiers.org/SBO:0000242>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000241> .
+
+<https://identifiers.org/SBO:0000417>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000390> .
+
+<https://identifiers.org/SBO:0000463>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000303> .
+
+<https://identifiers.org/SBO:0000210>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000182> .
+
+<https://identifiers.org/SBO:0000638>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000020> .
+
+<https://identifiers.org/SBO:0000684>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000683> .
+
+<https://identifiers.org/SBO:0000431>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000425> .
+
+<https://identifiers.org/SBO:0000606>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000244> .
+
+<https://identifiers.org/SBO:0000186>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000046> .
+
+<https://identifiers.org/SBO:0000652>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000182> .
+
+<https://identifiers.org/SBO:0000108>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000105> .
+
+<https://identifiers.org/SBO:0000154>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000153> .
+
+<https://identifiers.org/SBO:0000329>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000404> .
+
+<https://identifiers.org/SBO:0000620>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000619> .
+
+<https://identifiers.org/SBO:0000375>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000231> .
+
+<https://identifiers.org/SBO:0000122>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000120> .
+
+<https://identifiers.org/SBO:0000596>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000019> .
+
+<https://identifiers.org/SBO:0000343>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000342> .
+
+<https://identifiers.org/SBO:0000518>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000196> .
+
+<https://identifiers.org/SBO:0000098>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000095> .
+
+<https://identifiers.org/SBO:0000564>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000562> .
+
+<https://identifiers.org/SBO:0000311>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000278> .
+
+<https://identifiers.org/SBO:0000066>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000155> , <https://identifiers.org/SBO:0000022> .
+
+<https://identifiers.org/SBO:0000532>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000527> .
+
+<https://identifiers.org/SBO:0000287>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000193> .
+
+<https://identifiers.org/SBO:0000034>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000156> , <https://identifiers.org/SBO:0000018> .
+
+<https://identifiers.org/SBO:0000209>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000176> .
+
+<https://identifiers.org/SBO:0000500>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000343> .
+
+<https://identifiers.org/SBO:0000080>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000078> .
+
+<https://identifiers.org/SBO:0000255>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000002>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000545> .
+
+<https://identifiers.org/SBO:0000476>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000347> .
+
+<https://identifiers.org/SBO:0000223>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000221> .
+
+<https://identifiers.org/SBO:0000444>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000443> .
+
+<https://identifiers.org/SBO:0000619>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000580> .
+
+<https://identifiers.org/SBO:0000199>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000028> .
+
+<https://identifiers.org/SBO:0000490>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000188> .
+
+<https://identifiers.org/SBO:0000665>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000182> .
+
+<https://identifiers.org/SBO:0000412>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000231> .
+
+<https://identifiers.org/SBO:0000167>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000375> .
+
+<https://identifiers.org/SBO:0000633>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000473> .
+
+<https://identifiers.org/SBO:0000388>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000378> .
+
+<https://identifiers.org/SBO:0000135>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000133> .
+
+<https://identifiers.org/SBO:0000601>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000599> .
+
+<https://identifiers.org/SBO:0000181>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000176> .
+
+<https://identifiers.org/SBO:0000356>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000035> .
+
+<https://identifiers.org/SBO:0000103>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000102> .
+
+<https://identifiers.org/SBO:0000577>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000576> .
+
+<https://identifiers.org/SBO:0000324>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000350> , <https://identifiers.org/SBO:0000186> .
+
+<https://identifiers.org/SBO:0000079>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000078> .
+
+<https://identifiers.org/SBO:0000370>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000027> .
+
+<https://identifiers.org/SBO:0000545>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000000> .
+
+<https://identifiers.org/SBO:0000591>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000464> .
+
+<https://identifiers.org/SBO:0000047>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000163> , <https://identifiers.org/SBO:0000043> .
+
+<https://identifiers.org/SBO:0000513>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000504> .
+
+<https://identifiers.org/SBO:0000093>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000092> .
+
+<https://identifiers.org/SBO:0000268>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000001> .
+
+<https://identifiers.org/SBO:0000015>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000010> .
+
+<https://identifiers.org/SBO:0000061>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000163> , <https://identifiers.org/SBO:0000060> .
+
+<https://identifiers.org/SBO:0000489>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000487> .
+
+<https://identifiers.org/SBO:0000236>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000000> .
+
+<https://identifiers.org/SBO:0000282>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000309> , <https://identifiers.org/SBO:0000281> .
+
+<https://identifiers.org/SBO:0000457>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000456> .
+
+<https://identifiers.org/SBO:0000204>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000205> .
+
+<https://identifiers.org/SBO:0000250>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000246> .
+
+<https://identifiers.org/SBO:0000678>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000294> .
+
+<https://identifiers.org/SBO:0000425>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000268> .
+
+<https://identifiers.org/SBO:0000471>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000196> .
+
+<https://identifiers.org/SBO:0000646>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000042> .
+
+<https://identifiers.org/SBO:0000692>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000694> .
+
+<https://identifiers.org/SBO:0000148>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000614>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000612> .
+
+<https://identifiers.org/SBO:0000194>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000193> .
+
+<https://identifiers.org/SBO:0000369>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000354> .
+
+<https://identifiers.org/SBO:0000660>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000654> .
+
+<https://identifiers.org/SBO:0000116>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000110> .
+
+<https://identifiers.org/SBO:0000162>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000153> , <https://identifiers.org/SBO:0000046> .
+
+<https://identifiers.org/SBO:0000337>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000281> .
+
+<https://identifiers.org/SBO:0000383>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000381> .
+
+<https://identifiers.org/SBO:0000130>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000109> .
+
+<https://identifiers.org/SBO:0000558>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000305>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000303> .
+
+<https://identifiers.org/SBO:0000526>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000344> .
+
+<https://identifiers.org/SBO:0000572>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000571> .
+
+<https://identifiers.org/SBO:0000028>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000326> , <https://identifiers.org/SBO:0000150> .
+
+<https://identifiers.org/SBO:0000074>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000069> .
+
+<https://identifiers.org/SBO:0000249>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000248> .
+
+<https://identifiers.org/SBO:0000540>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000360> .
+
+<https://identifiers.org/SBO:0000295>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000063> .
+
+<https://identifiers.org/SBO:0000042>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000012> .
+
+<https://identifiers.org/SBO:0000217>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000210> .
+
+<https://identifiers.org/SBO:0000263>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000308> .
+
+<https://identifiers.org/SBO:0000010>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000003> .
+
+<https://identifiers.org/SBO:0000438>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000326> .
+
+<https://identifiers.org/SBO:0000484>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000482> .
+
+<https://identifiers.org/SBO:0000231>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000000> .
+
+<https://identifiers.org/SBO:0000659>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000654> .
+
+<https://identifiers.org/SBO:0000406>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000240> .
+
+<https://identifiers.org/SBO:0000452>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000451> .
+
+<https://identifiers.org/SBO:0000627>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000631> .
+
+<https://identifiers.org/SBO:0000673>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000611> .
+
+<https://identifiers.org/SBO:0000129>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000126> .
+
+<https://identifiers.org/SBO:0000420>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000296> , <https://identifiers.org/SBO:0000286> .
+
+<https://identifiers.org/SBO:0000175>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000237> .
+
+<https://identifiers.org/SBO:0000641>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000303> .
+
+<https://identifiers.org/SBO:0000396>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000375> .
+
+<https://identifiers.org/SBO:0000143>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000166> , <https://identifiers.org/SBO:0000053> .
+
+<https://identifiers.org/SBO:0000318>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000334> .
+
+<https://identifiers.org/SBO:0000364>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000188> .
+
+<https://identifiers.org/SBO:0000111>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000110> .
+
+<https://identifiers.org/SBO:0000539>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000585>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000347> .
+
+<https://identifiers.org/SBO:0000332>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000331> .
+
+<https://identifiers.org/SBO:0000507>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000517> .
+
+<https://identifiers.org/SBO:0000087>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000084> .
+
+<https://identifiers.org/SBO:0000553>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000552> .
+
+<https://identifiers.org/SBO:0000009>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000002> .
+
+<https://identifiers.org/SBO:0000300>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000006> .
+
+<https://identifiers.org/SBO:0000055>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000041> .
+
+<https://identifiers.org/SBO:0000521>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000518> .
+
+<https://identifiers.org/SBO:0000276>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000275> .
+
+<https://identifiers.org/SBO:0000023>
+        rdfs:subClassOf  <https://identifiers.org/SBO:0000153> , <https://identifiers.org/SBO:0000017> .

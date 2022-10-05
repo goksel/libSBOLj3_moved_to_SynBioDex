@@ -34,6 +34,7 @@
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="i13504_Sequence1"/>
       </sbol:hasSequence>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:displayId>i13504</sbol:displayId>

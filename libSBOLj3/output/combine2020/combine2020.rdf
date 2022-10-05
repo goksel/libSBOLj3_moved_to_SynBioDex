@@ -22,6 +22,7 @@
       <sbol:displayId>E0040</sbol:displayId>
    </sbol:Component>
    <sbol:Component rdf:about="j23106">
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:displayId>j23106</sbol:displayId>
@@ -36,7 +37,6 @@
             <sbol:displayId>SubComponent2</sbol:displayId>
          </sbol:SubComponent>
       </sbol:hasFeature>
-      <sbol:role rdf:resource="https://identifiers.org/SBO:0000289"/>
       <sbol:hasFeature>
          <sbol:ComponentReference rdf:about="i13504_system/ComponentReference1">
             <sbol:inChildOf>
@@ -89,6 +89,7 @@
          </sbol:Interaction>
       </sbol:hasInteraction>
       <sbol:name>i13504 system</sbol:name>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasFeature rdf:resource="i13504_system/SubComponent1"/>
       <sbol:displayId>i13504_system</sbol:displayId>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
@@ -220,6 +221,7 @@
       <sbol:hasFeature rdf:resource="interlab16device1/ComponentReference1"/>
       <sbol:hasFeature rdf:resource="interlab16device1/SubComponent2"/>
       <sbol:hasFeature rdf:resource="interlab16device1/SubComponent1"/>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:displayId>interlab16device1</sbol:displayId>
@@ -263,11 +265,13 @@
       <sbol:hasFeature rdf:resource="interlab16device2/ComponentReference1"/>
       <sbol:hasFeature rdf:resource="interlab16device2/SubComponent2"/>
       <sbol:hasFeature rdf:resource="interlab16device2/SubComponent1"/>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:displayId>interlab16device2</sbol:displayId>
    </sbol:Component>
    <sbol:Component rdf:about="j23101">
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:displayId>j23101</sbol:displayId>

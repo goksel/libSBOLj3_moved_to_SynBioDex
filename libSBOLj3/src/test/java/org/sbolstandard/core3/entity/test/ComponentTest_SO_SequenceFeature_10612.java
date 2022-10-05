@@ -39,6 +39,7 @@ import junit.framework.TestCase;
 
 public class ComponentTest_SO_SequenceFeature_10612 extends TestCase {
 	
+	//COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE
 	public void testComponent() throws SBOLGraphException, IOException, Exception
     {
 		URI base=URI.create("https://synbiohub.org/public/igem/");
@@ -48,10 +49,10 @@ public class ComponentTest_SO_SequenceFeature_10612 extends TestCase {
 		TestUtil.validateDocument(doc,0);
 		
 		Component TetR_protein=SBOLAPI.createProteinComponent(doc,popsReceiver, "TetR_protein", "TetR", "TetR protein", Role.CDS, "NNNNNNNNNNN");
-		TestUtil.validateDocument(doc,1);
+		TestUtil.validateIdentified(TetR_protein, doc,1);
 		
 		Component LuxR_protein=SBOLAPI.createProteinComponent(doc,popsReceiver, "BBa_C0062_protein", "LuxR",  "LuxR protein", Role.CDS, "NNNNNNNNNNN");
-		TestUtil.validateDocument(doc,2);
+		TestUtil.validateIdentified(LuxR_protein, doc,1, 2);
 		
 		
 		

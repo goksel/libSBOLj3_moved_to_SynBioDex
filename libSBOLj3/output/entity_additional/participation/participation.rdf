@@ -34,6 +34,7 @@
             <sbol:displayId>SubComponent1</sbol:displayId>
          </sbol:SubComponent>
       </sbol:hasFeature>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:displayId>i13504</sbol:displayId>
@@ -108,6 +109,7 @@
       <sbol:hasFeature rdf:resource="i13504_system/SubComponent1"/>
       <sbol:displayId>i13504_system</sbol:displayId>
       <sbol:hasFeature rdf:resource="i13504_system/ComponentReference1"/>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
    </sbol:Component>
    <sbol:Component rdf:about="E0040">
       <sbol:hasFeature>

@@ -27,6 +27,7 @@ public class InteractionTest extends TestCase {
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
         Component i13504_system=SBOLAPI.createComponent(doc,"i13504_system", ComponentType.DNA.getUri(), "i13504 system", null, Role.FunctionalCompartment);
+        i13504_system.setRoles(Arrays.asList(Role.EngineeredGene));
 		
         Interaction interaction= i13504_system.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
        
@@ -44,7 +45,7 @@ public class InteractionTest extends TestCase {
         
         interaction.setTypes(null);
         
-        TestUtil.validateIdentified(interaction,doc,1);
+        TestUtil.validateIdentified(interaction,doc,2);
         interaction.setTypes(Arrays.asList(InteractionType.GeneticProduction));
         TestUtil.validateIdentified(interaction,doc,0);
         

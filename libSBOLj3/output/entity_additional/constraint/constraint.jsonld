@@ -6,7 +6,7 @@
     "displayId" : "i13504",
     "hasNamespace" : "https://synbiohub.org/public/igem",
     "name" : "i13504",
-    "role" : "SBO:0000251",
+    "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504_system",
@@ -29,6 +29,7 @@
     "hasConstraint" : "https://synbiohub.org/public/igem/interlab16device1/Constraint1",
     "hasFeature" : [ "https://synbiohub.org/public/igem/interlab16device1/SubComponent2", "https://synbiohub.org/public/igem/interlab16device1/ComponentReference1", "https://synbiohub.org/public/igem/interlab16device1/SubComponent1" ],
     "hasNamespace" : "https://synbiohub.org/public/igem",
+    "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
     "@id" : "https://synbiohub.org/public/igem/interlab16device1/ComponentReference1",
@@ -58,6 +59,7 @@
     "@type" : "sbol:Component",
     "displayId" : "j23101",
     "hasNamespace" : "https://synbiohub.org/public/igem",
+    "role" : "SO:0000704",
     "type" : "SBO:0000251"
   } ],
   "@context" : {

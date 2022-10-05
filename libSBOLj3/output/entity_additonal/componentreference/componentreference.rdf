@@ -22,6 +22,7 @@
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="simpleDevice_Sequence1"/>
       </sbol:hasSequence>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:displayId>simpleDevice</sbol:displayId>
@@ -35,6 +36,7 @@
             <sbol:displayId>SubComponent1</sbol:displayId>
          </sbol:SubComponent>
       </sbol:hasFeature>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:role rdf:resource="https://identifiers.org/SBO:0000289"/>
       <sbol:name>i13504 system</sbol:name>
       <sbol:hasNamespace rdf:resource="../igem"/>
@@ -42,6 +44,7 @@
       <sbol:displayId>i13504_system</sbol:displayId>
    </sbol:Component>
    <sbol:Component rdf:about="i13504">
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:displayId>i13504</sbol:displayId>
@@ -71,6 +74,7 @@
          </sbol:ComponentReference>
       </sbol:hasFeature>
       <sbol:hasFeature rdf:resource="interlab16device1/SubComponent1"/>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:displayId>interlab16device1</sbol:displayId>

@@ -4,7 +4,7 @@
     "@id" : "https://sbolstandard.org/examples/i13504_system/LocalSubComponent1"
   } ],
   "http://sbols.org/v3#role" : [ {
-    "@id" : "https://identifiers.org/SBO:0000289"
+    "@id" : "https://identifiers.org/SO:0000804"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "i13504 system"
@@ -21,6 +21,9 @@
   "@type" : [ "http://sbols.org/v3#Component" ]
 }, {
   "@id" : "https://sbolstandard.org/examples/i13504_system/LocalSubComponent1",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SO:0000316"
+  } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000251"
   } ],

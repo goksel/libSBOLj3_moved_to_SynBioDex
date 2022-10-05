@@ -52,7 +52,9 @@ public class LocalSubComponent extends FeatureWithLocation{
 		
 		if (Configuration.getInstance().isValidateRecommendedRules()) {
 			if(types != null) {
+				
 				// LOCALSUBCOMPONENT_TYPE_FROM_TABLE2
+				/* Removed this best practise rule
 				boolean found=false;
 				for(URI typeURI: types) {
 					ComponentType recommendType = ComponentType.get(typeURI);
@@ -65,6 +67,7 @@ public class LocalSubComponent extends FeatureWithLocation{
 				if(!found){
 					validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_FROM_TABLE2}", DataModel.type, types));      		
 				}
+				*/
 				
 				//LOCALSUBCOMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE
 				validationMessages=IdentifiedValidator.assertAtMostOneTopologyType(types, validationMessages, "{LOCALSUBCOMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE}");
@@ -72,6 +75,12 @@ public class LocalSubComponent extends FeatureWithLocation{
 				//LOCALSUBCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY
 				validationMessages=IdentifiedValidator.assertOnlyDNAOrRNAComponentsIncludeStrandOrTopology(types, validationMessages, "{LOCALSUBCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY}");
 				
+				//LOCALCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE
+				validationMessages=IdentifiedValidator.assertOnlyDNAOrRNAIdentifiedsIncludeSOFeatureRole(types, Configuration.getInstance().getSoSequenceFeatures(), this.getRoles(), validationMessages, "{LOCALCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE}", getResourceType(),this); 
+				
+				//LOCALCOMPONENT_TYPE_IF_DNA_OR_RNA_SHOULD_INCLUDE_ONE_SO_FEATURE_ROLE
+				validationMessages=IdentifiedValidator.assertIfDNAOrRNAThenIdentifiedShouldIncludeOneSOFeatureRole(types, getRoles(), validationMessages, "{LOCALCOMPONENT_TYPE_IF_DNA_OR_RNA_SHOULD_INCLUDE_ONE_SO_FEATURE_ROLE}", this);
+
 				/*boolean checkDNAOrRNA = false;
 				for(URI typeURI: types) {
 					TopologyType topologyType = TopologyType.get(typeURI);

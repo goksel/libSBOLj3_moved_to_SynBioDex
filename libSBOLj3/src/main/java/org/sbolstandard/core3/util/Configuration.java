@@ -1,7 +1,12 @@
 package org.sbolstandard.core3.util;
 
+import java.net.URI;
+import java.util.Set;
+
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
+import org.sbolstandard.core3.vocabulary.Encoding;
+import org.sbolstandard.core3.vocabulary.Role;
 
 public class Configuration {
 	private static Configuration configuration = null;
@@ -63,13 +68,22 @@ public class Configuration {
 		this.enforceOneToOneRelationships = enforceOneToOneRelationships;
 	}
 
-	private Model edamOntology=null;
-	private Model soOntology=null;
+	//private Model edamOntology=null;
+	//private Model soOntology=null;
+	//private Model sboOntology=null;
+	
+	private Set<String> SboOccurringEntityInteractionTypes=null;
+	private Set<String> SoSequenceFeatures=null;
+	private Set<String> EdamEncodingTerms=null;
 	
 	private Configuration()
 	{
-		this.edamOntology=SBOLUtil.getModelFromFileResource("edam.owl.reduced", Lang.TURTLE);
-		this.soOntology=SBOLUtil.getModelFromFileResource("so-simple.owl.reduced", Lang.TURTLE);	
+		Model edamOntology=SBOLUtil.getModelFromFileResource("edam.owl.reduced", Lang.TURTLE);
+		Model soOntology=SBOLUtil.getModelFromFileResource("so-simple.owl.reduced", Lang.TURTLE);
+		Model sboOntology=SBOLUtil.getModelFromFileResource("sbo.owl.reduced", Lang.TURTLE);
+		this.SboOccurringEntityInteractionTypes=RDFUtil.childResourcesRecursively(sboOntology,URINameSpace.SBO.local("0000231").toString());
+		this.SoSequenceFeatures=RDFUtil.childResourcesRecursively(soOntology,Role.SequenceFeature.toString());
+		this.EdamEncodingTerms= RDFUtil.childResourcesRecursively(edamOntology,Encoding.PARENT_TERM.toString());
 	}
 	
 	private static class SingletonHelper {
@@ -81,14 +95,20 @@ public class Configuration {
 		return SingletonHelper.INSTANCE;
 	}
 	
-	public Model getEDAMOntology()
+	
+	public Set<String> getSboOccurringEntityInteractionTypes()
 	{
-		return this.edamOntology;   
+		return this.SboOccurringEntityInteractionTypes;   
 	}
 	
-	public Model getSOOntology()
+	public Set<String> getSoSequenceFeatures()
 	{
-		return this.soOntology;   
+		return this.SoSequenceFeatures;   
+	}
+	
+	public Set<String> getEdamEncodingTerms()
+	{
+		return this.EdamEncodingTerms;   
 	}
 	
 	/*public static Configuration getConfiguration()

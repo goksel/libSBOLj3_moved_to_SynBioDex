@@ -44,6 +44,14 @@ public class ExternallyDefined extends Feature{
 			validationMessages= addToValidations(validationMessages,new ValidationMessage("{EXTERNALLYDEFINED_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type));      	
 		}
 		
+		if (Configuration.getInstance().isValidateRecommendedRules()) {			
+			//EXTERNALLYDEFINED_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE
+			validationMessages=IdentifiedValidator.assertAtMostOneTopologyType(types, validationMessages, "{EXTERNALLYDEFINED_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE}");
+			
+			//EXTERNALLYDEFINED_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY
+			validationMessages=IdentifiedValidator.assertOnlyDNAOrRNAComponentsIncludeStrandOrTopology(types, validationMessages, "{EXTERNALLYDEFINED_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY}");
+			
+		}						
 		/*Removed this best practise rule
 		 * if (Configuration.getInstance().isValidateRecommendedRules()){
 			boolean foundType = false;

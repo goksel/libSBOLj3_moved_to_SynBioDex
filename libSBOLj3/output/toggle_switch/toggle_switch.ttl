@@ -188,6 +188,7 @@
         sbol:hasFeature     <toggle_switch/SubComponent1> , <toggle_switch/ComponentReference4> , <toggle_switch/ComponentReference3> , <toggle_switch/ComponentReference2> , <toggle_switch/ComponentReference1> , <toggle_switch/SubComponent2> ;
         sbol:hasNamespace   <https://sbolstandard.org/examples> ;
         sbol:name           "Toggle Switch" ;
+        sbol:role           SO:0000704 ;
         sbol:type           SBO:0000251 .
 
 <LacI_producer/SubComponent4>

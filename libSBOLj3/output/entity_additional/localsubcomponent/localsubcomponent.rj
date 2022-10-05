@@ -7,7 +7,7 @@
      ] ,
     "http://sbols.org/v3#role" : [ { 
       "type" : "uri" ,
-      "value" : "https://identifiers.org/SBO:0000289"
+      "value" : "https://identifiers.org/SO:0000804"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
@@ -41,6 +41,11 @@
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
       "value" : "LocalSubComponent1"
+    }
+     ] ,
+    "http://sbols.org/v3#role" : [ { 
+      "type" : "uri" ,
+      "value" : "https://identifiers.org/SO:0000316"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 

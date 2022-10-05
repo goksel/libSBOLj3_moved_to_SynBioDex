@@ -9,11 +9,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.OptionalInt;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.Syntax;
@@ -21,7 +19,6 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.vocabulary.RDF;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.measure.BinaryPrefix;
 import org.sbolstandard.core3.entity.measure.Prefix;
@@ -1032,83 +1029,7 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 				}
 			}
 		}
-		
-		//SEQUENCE_ENCODING_VALID_SUBTERM
-		if (Configuration.getInstance().isValidateRecommendedRules()){
-			List<Sequence> sequences=this.getSequences();
-			if (sequences!=null){
-				Map<URI,Boolean> validity=new HashMap<URI, Boolean>();
-				for (Sequence sequence:sequences){
-					URI encodingValue=sequence.getEncoding();
-					if (encodingValue!=null && Encoding.get(encodingValue)==null){//Check for uncontrolled URIs only.
-						Boolean valid=validity.get(encodingValue);
-						if (valid==null){
-							valid=RDFUtil.hasParentRecursively(Configuration.getInstance().getEDAMOntology(), encodingValue.toString() , Encoding.PARENT_TERM.toString());
-					    	validity.put(encodingValue, valid);
-						}
-						if (!valid){
-							ValidationMessage message = new ValidationMessage("{SEQUENCE_ENCODING_VALID_SUBTERM}", DataModel.Sequence.uri, sequence, encodingValue);
-							message.childPath(DataModel.Sequence.encoding, null);
-							messages=IdentifiedValidator.addToValidations(messages, message);
-
-						}
-					}
-				}
-			}
-		}
-		
-		//COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE & LOCALCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE
-		if (Configuration.getInstance().isValidateRecommendedRules()) {
-			List<Component> components= this.getComponents();
-			if (components != null) {
-				Map<URI, Boolean> validity = new HashMap<URI, Boolean>();
-				for (Component component: components) {
-					//COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE
-					ValidationMessage message = new ValidationMessage("{COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE}", DataModel.Component.uri, component, "test");
-					message.childPath(DataModel.role);
-					//messages=IdentifiedValidator.addToValidations(messages, message);
-					Pair <List<ValidationMessage>, Map<URI, Boolean>> pair=IdentifiedValidator.assertOnlyDNAOrRNAComponentsIncludeSOFeatureRole(component.getTypes(), component.getRoles(), messages, message, validity);
-					messages=pair.getLeft();
-					validity=pair.getRight();
-					
-					
-					/*if (componentTypes!=null && componentRoles!=null && componentTypes.contains(ComponentType.DNA.getUri()) || componentTypes.contains(ComponentType.RNA.getUri())) {
-						for (URI componentRole: componentRoles)
-						{
-							Boolean valid = validity.get(componentRole);
-							if (valid == null) {
-								valid = RDFUtil.hasParentRecursively(Configuration.getInstance().getSOOntology(), componentRole.toString(), Role.SequenceFeature.toString());
-								validity.put(componentRole, valid);
-							}
-							if (!valid) {
-								ValidationMessage message = new ValidationMessage("{COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE}", DataModel.role, component, componentRole);
-								message.childPath(DataModel.Sequence.encoding, null);
-								messages = IdentifiedValidator.addToValidations(messages, message);
-
-							}
-
-						}
-					}*/
-					
-					//LOCALCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE
-					List<LocalSubComponent> localSubComponents=component.getLocalSubComponents();
-					if (localSubComponents!=null)
-					{
-						for (LocalSubComponent localSubComponent: localSubComponents)
-						{
-							message = new ValidationMessage("{LOCALCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE}", DataModel.Component.uri, component,null);
-							message.childPath(DataModel.Component.feature, localSubComponent).childPath(DataModel.role);
-							//message.childPath(DataModel.role);
-							pair=IdentifiedValidator.assertOnlyDNAOrRNAComponentsIncludeSOFeatureRole(localSubComponent.getTypes(), localSubComponent.getRoles(), messages, message, validity);
-							messages=pair.getLeft();
-							validity=pair.getRight();
-						}
-					}
-					
-				}
-			}
-		}
-		
+						
 		return messages;
 	}
 	

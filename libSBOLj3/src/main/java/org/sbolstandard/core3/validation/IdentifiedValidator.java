@@ -2,13 +2,9 @@ package org.sbolstandard.core3.validation;
 
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
 import org.sbolstandard.core3.entity.Identified;
@@ -279,7 +275,7 @@ public class IdentifiedValidator {
 		}
 
 		
-		public static Pair<List<ValidationMessage>, Map<URI, Boolean>>  assertOnlyDNAOrRNAComponentsIncludeSOFeatureRole(List<URI> types, List<URI> roles, List<ValidationMessage> validationMessages, ValidationMessage message, Map<URI, Boolean> validity) {
+		/*public static Pair<List<ValidationMessage>, Map<URI, Boolean>>  assertOnlyDNAOrRNAIdentifiedsIncludeSOFeatureRole(List<URI> types, List<URI> roles, List<ValidationMessage> validationMessages, ValidationMessage message, Map<URI, Boolean> validity) {
 			if (types!=null && roles!=null && !types.contains(ComponentType.DNA.getUri()) && !types.contains(ComponentType.RNA.getUri())) {
 				for (URI role: roles)
 				{
@@ -295,7 +291,124 @@ public class IdentifiedValidator {
 				}
 			}
 			return Pair.of(validationMessages, validity);
+		}*/
+		
+		public static List<ValidationMessage> assertOnlyDNAOrRNAIdentifiedsIncludeSOFeatureRole(List<URI> types, Set<String> sequenceFeatures, List<URI> roles, List<ValidationMessage> validationMessages, String message, URI entityType, Identified entity) throws SBOLGraphException {
+			if (types!=null && roles!=null && !types.contains(ComponentType.DNA.getUri()) && !types.contains(ComponentType.RNA.getUri())) {
+				validationMessages= assertDoesNotExists(sequenceFeatures, roles, validationMessages, message, entityType, entity, DataModel.role);
+			}
+			return validationMessages;
 		}
+		
+		public static List<ValidationMessage> assertDoesNotExists(Set<String> items, List<URI> searchItems, List<ValidationMessage> validationMessages, String message, URI entityType, Identified entity, URI property) throws SBOLGraphException {
+			if (searchItems!=null){
+			for (URI uri: searchItems)
+				{
+				if (items.contains(uri.toString()))
+				{
+					ValidationMessage validationMessage = new ValidationMessage(message, property, uri);
+					/*ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Component.uri, entity, uri);
+					validationMessage.childPath(property);*/
+					validationMessages = IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+				}
+			}
+			}
+			return validationMessages;
+		}
+		
+		public static List<ValidationMessage> assertOneExists(Set<String> items, List<URI> searchURIs, List<ValidationMessage> validationMessages, String message, Identified entity, URI property) throws SBOLGraphException
+		{
+			int count=0;
+			if (searchURIs!=null)
+			{
+				for (URI uri:searchURIs)
+				{
+					if (items.contains(uri.toString()))
+					{
+						count++;
+					}
+				}
+			}
+			if (count!=1)
+			{
+				ValidationMessage validationMessage= new ValidationMessage(message, property, searchURIs);
+				validationMessages = IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+			}
+			return validationMessages;
+		}
+		
+		public static List<ValidationMessage> assertAtMostOneExists(Set<String> items, List<URI> searchURIs, List<ValidationMessage> validationMessages, String message, Identified entity, URI property) throws SBOLGraphException
+		{
+			int count=0;
+			if (searchURIs!=null)
+			{
+				for (URI uri:searchURIs)
+				{
+					if (items.contains(uri.toString()))
+					{
+						count++;
+					}
+				}
+			}
+			if (count>1)
+			{
+				ValidationMessage validationMessage= new ValidationMessage(message, property, searchURIs);
+				validationMessages = IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+			}
+			return validationMessages;
+		}
+		
+		public static List<ValidationMessage> assertIfDNAOrRNAThenIdentifiedShouldIncludeOneSOFeatureRole(List<URI> types, List<URI> roles, List<ValidationMessage> validationMessages, String message, Identified entity) throws SBOLGraphException {
+			if (types!=null && (types.contains(ComponentType.DNA.getUri()) || types.contains(ComponentType.RNA.getUri()))) 
+			{
+				validationMessages=assertOneExists(Configuration.getInstance().getSoSequenceFeatures(), roles, validationMessages, message, entity, DataModel.role);
+			}
+			return validationMessages;
+		}
+			
+		/*public static Pair<List<ValidationMessage>, Map<URI, Boolean>>  assertIfDNAOrRNAThenIdentifiedShouldIncludeAtMostOneSOFeatureRole(List<URI> types, List<URI> roles, List<ValidationMessage> validationMessages, String message, Map<URI, Boolean> validity, URI entityType, Identified entity) throws SBOLGraphException {
+			if (types!=null && (types.contains(ComponentType.DNA.getUri()) || types.contains(ComponentType.RNA.getUri()))) {
+				int validRoles=0;
+				if (roles!=null && roles.size()>0)
+				{
+					for (URI role: roles)
+					{
+						Boolean valid = validity.get(role);
+						if (valid == null) {
+							valid = RDFUtil.hasParentRecursively(Configuration.getInstance().getSOOntology(), role.toString(), Role.SequenceFeature.toString());
+							validity.put(role, valid);
+						}
+						if (valid) {
+							
+							validRoles++;
+							if (validRoles>1)
+							{
+								ValidationMessage validationMessage= new ValidationMessage(message, entityType, entity, role);
+								validationMessage.childPath(DataModel.role);
+								validationMessages = IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+							}
+						}
+					}
+				}
+				if (validRoles==0)
+				{
+					ValidationMessage validationMessage=null;
+					if (roles!=null && roles.size()>0) 
+					{
+						validationMessage = new ValidationMessage(message, entityType, entity, roles);
+					}
+					else
+					{
+						validationMessage = new ValidationMessage(message, entityType, entity, null);
+					}
+					validationMessage.childPath(DataModel.role);
+					validationMessages = IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+				}
+			}
+			return Pair.of(validationMessages, validity);
+		}
+		*/
+			
 	/*
 	 * public List<String> validate2(Identified identified) {
 	 * Set<ConstraintViolation<Identified>> violations =

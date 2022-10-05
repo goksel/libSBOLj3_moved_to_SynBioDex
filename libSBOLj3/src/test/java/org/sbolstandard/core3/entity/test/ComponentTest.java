@@ -102,11 +102,11 @@ public class ComponentTest extends TestCase {
 		pTetR.setSequences(tempSequences);
 		TestUtil.validateIdentified(pTetR,doc,0);
 		
-		
+		//COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY
 		pTetR.setTypes(Arrays.asList(ComponentType.TopologyType.Linear.getUri(), ComponentType.OptionalComponentType.Cell.getUri()));
-	    TestUtil.validateIdentified(pTetR,doc,1);
-	    pTetR.setTypes(Arrays.asList(ComponentType.Protein.getUri(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
 	    TestUtil.validateIdentified(pTetR,doc,2);
+	    pTetR.setTypes(Arrays.asList(ComponentType.Protein.getUri(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
+	    TestUtil.validateIdentified(pTetR,doc,3);
 	    pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
 	    TestUtil.validateIdentified(pTetR,doc,1);
 	    pTetR.setTypes(Arrays.asList(ComponentType.RNA.getUri(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
@@ -114,15 +114,10 @@ public class ComponentTest extends TestCase {
 	    pTetR.setTypes(Arrays.asList(ComponentType.RNA.getUri(), ComponentType.TopologyType.Linear.getUri()));
 	    TestUtil.validateIdentified(pTetR,doc,0);
 	    pTetR.setTypes(Arrays.asList(ComponentType.StrandType.Double.getUri(), ComponentType.Protein.getUri()));
-	    TestUtil.validateIdentified(pTetR,doc,2);
+	    TestUtil.validateIdentified(pTetR,doc,3);
 	    pTetR.setTypes(Arrays.asList(ComponentType.StrandType.Double.getUri(), ComponentType.DNA.getUri()));
 	    TestUtil.validateIdentified(pTetR,doc,0);
 		
-		
-		
-		
-		
-
 		
 		Resource resource = TestUtil.getResource(pTetR);
 		
@@ -292,10 +287,10 @@ public class ComponentTest extends TestCase {
         seqINCHI.setElements("InChI=1S/C6H8O6/c7-1-2(8)5-3(9)4(10)6(11)12-5/h2,5,7-10H,1H2/t2-,5+/m0/s1"); //L-ascorbic acid with InChI
         TestUtil.validateIdentified(seqINCHI, 0);        
 	    
-        ComponentType[] values=ComponentType.values();
+        /*ComponentType[] values=ComponentType.values();
         System.out.println(values.length);
         OptionalComponentType[] optionalValues2=ComponentType.OptionalComponentType.values();
-        System.out.println(optionalValues2.length);
+        System.out.println(optionalValues2.length);*/
         
         
     }

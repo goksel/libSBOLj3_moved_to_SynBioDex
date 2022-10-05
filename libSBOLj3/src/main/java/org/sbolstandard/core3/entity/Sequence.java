@@ -1,12 +1,15 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
@@ -37,6 +40,40 @@ public class Sequence extends TopLevel {
 			validationMessages= addToValidations(validationMessages,new ValidationMessage("{SEQUENCE_MUST_HAVE_ENCODING}", DataModel.Sequence.encoding));      	   
 		}
 		validationMessages = checkEncodingType(validationMessages);
+		
+		if (Configuration.getInstance().isValidateRecommendedRules()){
+			URI encodingValue=this.getEncoding();
+			
+			if (!Configuration.getInstance().getEdamEncodingTerms().contains(encodingValue.toString()))
+			{
+				ValidationMessage message = new ValidationMessage("{SEQUENCE_ENCODING_VALID_SUBTERM}", DataModel.Sequence.encoding, encodingValue);
+				validationMessages=IdentifiedValidator.addToValidations(validationMessages, message);
+			}
+		}
+		//SEQUENCE_ENCODING_VALID_SUBTERM
+		/*		if (Configuration.getInstance().isValidateRecommendedRules()){
+					List<Sequence> sequences=this.getSequences();
+					if (sequences!=null){
+						Map<URI,Boolean> validity=new HashMap<URI, Boolean>();
+						for (Sequence sequence:sequences){
+							URI encodingValue=sequence.getEncoding();
+							if (encodingValue!=null && Encoding.get(encodingValue)==null){//Check for uncontrolled URIs only.
+								Boolean valid=validity.get(encodingValue);
+								if (valid==null){
+									valid=RDFUtil.hasParentRecursively(Configuration.getInstance().getEDAMOntology(), encodingValue.toString() , Encoding.PARENT_TERM.toString());
+							    	validity.put(encodingValue, valid);
+								}
+								if (!valid){
+									ValidationMessage message = new ValidationMessage("{SEQUENCE_ENCODING_VALID_SUBTERM}", DataModel.Sequence.uri, sequence, encodingValue);
+									message.childPath(DataModel.Sequence.encoding, null);
+									messages=IdentifiedValidator.addToValidations(messages, message);
+
+								}
+							}
+						}
+					}
+				}
+*/
     	return validationMessages;
 	}
 	

@@ -27,6 +27,8 @@ public class SubComponentTest extends TestCase {
 		
 		String term_na="ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc";
 		Component device=doc.createComponent("i13504", Arrays.asList(ComponentType.DNA.getUri())); 
+		device.setRoles(Arrays.asList(Role.EngineeredGene));
+		
 		SBOLAPI.addSequence(doc, device, Encoding.NucleicAcid, "");
 		
 		Component term=SBOLAPI.createDnaComponent(doc, "B0015", "terminator", "B0015 double terminator", Role.Terminator,term_na);

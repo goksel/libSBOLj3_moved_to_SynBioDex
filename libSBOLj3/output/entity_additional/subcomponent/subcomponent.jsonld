@@ -25,6 +25,7 @@
     "hasFeature" : "https://synbiohub.org/public/igem/i13504/SubComponent1",
     "hasNamespace" : "https://synbiohub.org/public/igem",
     "hasSequence" : "https://synbiohub.org/public/igem/i13504_Sequence1",
+    "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504/SubComponent1",
@@ -94,12 +95,12 @@
       "@id" : "http://sbols.org/v3#hasFeature",
       "@type" : "@id"
     },
-    "type" : {
-      "@id" : "http://sbols.org/v3#type",
-      "@type" : "@id"
-    },
     "role" : {
       "@id" : "http://sbols.org/v3#role",
+      "@type" : "@id"
+    },
+    "type" : {
+      "@id" : "http://sbols.org/v3#type",
       "@type" : "@id"
     },
     "sourceLocation" : {

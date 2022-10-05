@@ -99,7 +99,8 @@ public class ToggleSwitch extends TestCase {
         
         //Toggle Switch
         Component toggleSwitch=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "toggle_switch"), ComponentType.DNA.getUri(), "Toggle Switch", "Toggle Switch genetic circuit", null);
-       
+        toggleSwitch.setRoles(Arrays.asList(Role.EngineeredGene));
+		
         /*SubComponent TetRSubComponent=SBOLAPI.addSubComponent(toggleSwitch, TetR_protein);
         SubComponent LacISubComponent=SBOLAPI.addSubComponent(toggleSwitch, LacI_protein);
         

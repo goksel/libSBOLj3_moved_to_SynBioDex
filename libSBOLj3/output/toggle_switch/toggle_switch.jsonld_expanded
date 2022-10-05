@@ -966,6 +966,9 @@
   "http://sbols.org/v3#description" : [ {
     "@value" : "Toggle Switch genetic circuit"
   } ],
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SO:0000704"
+  } ],
   "http://sbols.org/v3#hasConstraint" : [ {
     "@id" : "https://sbolstandard.org/examples/toggle_switch/Constraint1"
   }, {

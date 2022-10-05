@@ -20,7 +20,7 @@
         sbol:hasInteraction  <i13504_system/Interaction2> , <i13504_system/Interaction1> ;
         sbol:hasNamespace    <https://sbolstandard.org/examples> ;
         sbol:name            "i13504 system" ;
-        sbol:role            SBO:0000289 ;
+        sbol:role            SBO:0000289 , SO:0000704 ;
         sbol:type            SBO:0000251 .
 
 <i13504_system/SubComponent1>
@@ -90,6 +90,7 @@
         sbol:hasFeature    <i13504/SubComponent1> ;
         sbol:hasNamespace  <https://sbolstandard.org/examples> ;
         sbol:hasSequence   :i13504_Sequence1 ;
+        sbol:role          SO:0000704 ;
         sbol:type          SBO:0000251 .
 
 <i13504_system/Interaction1>

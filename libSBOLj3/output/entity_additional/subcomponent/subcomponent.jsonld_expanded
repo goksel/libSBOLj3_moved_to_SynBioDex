@@ -51,6 +51,9 @@
   "http://sbols.org/v3#hasSequence" : [ {
     "@id" : "https://synbiohub.org/public/igem/i13504_Sequence1"
   } ],
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SO:0000704"
+  } ],
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://synbiohub.org/public/igem"
   } ],

@@ -6,7 +6,7 @@
     "hasInteraction" : "https://sbolstandard.org/examples/i13504_system/Interaction1",
     "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "i13504 system",
-    "role" : "SBO:0000289",
+    "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
     "@id" : "https://sbolstandard.org/examples/i13504_system/Interaction1",

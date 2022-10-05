@@ -56,7 +56,6 @@
    <sbol:TopLevel rdf:about="codon_optimization_activity">
       <sbol:type rdf:resource="http://sbols.org/v3#design"/>
       <sbol:name>Codon optimization activity</sbol:name>
-      <prov:endedAtTime>2020-08-30T11:23:04.844Z</prov:endedAtTime>
       <sbol:description>An activity that is used to optimise codons</sbol:description>
       <prov:qualifiedUsage>
          <sbol:Identified rdf:about="codon_optimization_activity/Usage2">
@@ -68,7 +67,7 @@
       </prov:qualifiedUsage>
       <rdf:type rdf:resource="http://www.w3.org/ns/prov#Activity"/>
       <sbol:displayId>codon_optimization_activity</sbol:displayId>
-      <prov:startedAtTime>2019-07-29T11:23:04.844Z</prov:startedAtTime>
+      <prov:startedAtTime>2019-07-29T16:00:05.84Z</prov:startedAtTime>
       <prov:qualifiedAssociation>
          <sbol:Identified rdf:about="codon_optimization_activity/Association1">
             <prov:hadRole rdf:resource="http://sbols.org/v3#design"/>
@@ -87,5 +86,6 @@
             <rdf:type rdf:resource="http://www.w3.org/ns/prov#Usage"/>
          </sbol:Identified>
       </prov:qualifiedUsage>
+      <prov:endedAtTime>2020-08-30T16:00:05.84Z</prov:endedAtTime>
    </sbol:TopLevel>
 </rdf:RDF>

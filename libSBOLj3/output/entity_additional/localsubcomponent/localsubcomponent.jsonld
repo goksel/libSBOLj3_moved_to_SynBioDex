@@ -6,15 +6,20 @@
     "hasFeature" : "https://sbolstandard.org/examples/i13504_system/LocalSubComponent1",
     "hasNamespace" : "https://sbolstandard.org/examples",
     "name" : "i13504 system",
-    "role" : "SBO:0000289",
+    "role" : "SO:0000804",
     "type" : "SBO:0000251"
   }, {
     "@id" : "https://sbolstandard.org/examples/i13504_system/LocalSubComponent1",
     "@type" : "sbol:LocalSubComponent",
     "displayId" : "LocalSubComponent1",
+    "role" : "SO:0000316",
     "type" : "SBO:0000251"
   } ],
   "@context" : {
+    "role" : {
+      "@id" : "http://sbols.org/v3#role",
+      "@type" : "@id"
+    },
     "type" : {
       "@id" : "http://sbols.org/v3#type",
       "@type" : "@id"
@@ -24,10 +29,6 @@
     },
     "hasFeature" : {
       "@id" : "http://sbols.org/v3#hasFeature",
-      "@type" : "@id"
-    },
-    "role" : {
-      "@id" : "http://sbols.org/v3#role",
       "@type" : "@id"
     },
     "name" : {

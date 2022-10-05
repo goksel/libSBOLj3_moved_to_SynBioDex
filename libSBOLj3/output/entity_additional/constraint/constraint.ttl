@@ -21,7 +21,7 @@
         sbol:displayId     "i13504" ;
         sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
         sbol:name          "i13504" ;
-        sbol:role          SBO:0000251 ;
+        sbol:role          SO:0000704 ;
         sbol:type          SBO:0000251 .
 
 :interlab16device1  a       sbol:Component ;
@@ -29,6 +29,7 @@
         sbol:hasConstraint  <interlab16device1/Constraint1> ;
         sbol:hasFeature     <interlab16device1/SubComponent2> , <interlab16device1/ComponentReference1> , <interlab16device1/SubComponent1> ;
         sbol:hasNamespace   <https://synbiohub.org/public/igem> ;
+        sbol:role           SO:0000704 ;
         sbol:type           SBO:0000251 .
 
 <interlab16device1/ComponentReference1>
@@ -50,6 +51,7 @@
 :j23101  a                 sbol:Component ;
         sbol:displayId     "j23101" ;
         sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:role          SO:0000704 ;
         sbol:type          SBO:0000251 .
 
 :i13504_system  a          sbol:Component ;

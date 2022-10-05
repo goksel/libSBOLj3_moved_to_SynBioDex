@@ -372,15 +372,15 @@
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504_system/SubComponent1"
   } ],
-  "http://sbols.org/v3#role" : [ {
-    "@id" : "https://identifiers.org/SBO:0000289"
-  } ],
   "@type" : [ "http://sbols.org/v3#Component" ],
   "http://sbols.org/v3#hasInteraction" : [ {
     "@id" : "https://synbiohub.org/public/igem/i13504_system/Interaction1"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "i13504 system"
+  } ],
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SO:0000704"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "i13504_system"
@@ -468,6 +468,9 @@
   }, {
     "@id" : "https://synbiohub.org/public/igem/interlab16device1/SubComponent1"
   } ],
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SO:0000704"
+  } ],
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://synbiohub.org/public/igem"
   } ],
@@ -535,6 +538,9 @@
   }, {
     "@id" : "https://synbiohub.org/public/igem/interlab16device2/SubComponent1"
   } ],
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SO:0000704"
+  } ],
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://synbiohub.org/public/igem"
   } ],
@@ -592,6 +598,9 @@
   "@type" : [ "http://sbols.org/v3#SubComponent" ]
 }, {
   "@id" : "https://synbiohub.org/public/igem/j23101",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SO:0000704"
+  } ],
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://synbiohub.org/public/igem"
   } ],
@@ -604,6 +613,9 @@
   "@type" : [ "http://sbols.org/v3#Component" ]
 }, {
   "@id" : "https://synbiohub.org/public/igem/j23106",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SO:0000704"
+  } ],
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://synbiohub.org/public/igem"
   } ],

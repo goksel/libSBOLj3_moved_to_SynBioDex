@@ -184,7 +184,7 @@ public class AppTest
     {
     	reduce("../ontologies/edam.owl", "src/main/resources/edam.owl.reduced", "http://edamontology.org/", URINameSpace.EDAM.getUri().toString());	
     	reduce("../ontologies/so-simple.owl", "src/main/resources/so-simple.owl.reduced", "http://purl.obolibrary.org/obo/SO_", URINameSpace.SO.getUri().toString());	
-    	
+    	reduce("../ontologies/sbo.owl", "src/main/resources/sbo.owl.reduced", "http://biomodels.net/SBO/SBO_", URINameSpace.SBO.getUri().toString());	
     }
     //http://purl.obolibrary.org/obo/SO_
     private void reduce(String sourceFile, String destinationFile, String search, String replaceWith) throws IOException

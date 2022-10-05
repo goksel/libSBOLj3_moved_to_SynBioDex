@@ -23,6 +23,7 @@
     "@type" : "sbol:Component",
     "displayId" : "i13504",
     "hasNamespace" : "https://synbiohub.org/public/igem",
+    "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504_system",
@@ -31,7 +32,7 @@
     "hasFeature" : "https://synbiohub.org/public/igem/i13504_system/SubComponent1",
     "hasNamespace" : "https://synbiohub.org/public/igem",
     "name" : "i13504 system",
-    "role" : "SBO:0000289",
+    "role" : [ "SO:0000704", "SBO:0000289" ],
     "type" : "SBO:0000251"
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504_system/SubComponent1",
@@ -44,6 +45,7 @@
     "displayId" : "interlab16device1",
     "hasFeature" : [ "https://synbiohub.org/public/igem/interlab16device1/ComponentReference1", "https://synbiohub.org/public/igem/interlab16device1/SubComponent1" ],
     "hasNamespace" : "https://synbiohub.org/public/igem",
+    "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
     "@id" : "https://synbiohub.org/public/igem/interlab16device1/ComponentReference1",
@@ -63,6 +65,7 @@
     "hasFeature" : "https://synbiohub.org/public/igem/simpleDevice/SubComponent1",
     "hasNamespace" : "https://synbiohub.org/public/igem",
     "hasSequence" : "https://synbiohub.org/public/igem/simpleDevice_Sequence1",
+    "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
     "@id" : "https://synbiohub.org/public/igem/simpleDevice/SubComponent1",
@@ -100,6 +103,10 @@
     "displayId" : {
       "@id" : "http://sbols.org/v3#displayId"
     },
+    "role" : {
+      "@id" : "http://sbols.org/v3#role",
+      "@type" : "@id"
+    },
     "type" : {
       "@id" : "http://sbols.org/v3#type",
       "@type" : "@id"
@@ -114,10 +121,6 @@
     },
     "hasSequence" : {
       "@id" : "http://sbols.org/v3#hasSequence",
-      "@type" : "@id"
-    },
-    "role" : {
-      "@id" : "http://sbols.org/v3#role",
       "@type" : "@id"
     },
     "hasFeature" : {

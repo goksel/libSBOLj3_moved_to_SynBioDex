@@ -139,6 +139,7 @@
 <https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#hasFeature> <https://sbolstandard.org/examples/toggle_switch/ComponentReference4> .
 <https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#displayId> "toggle_switch" .
 <https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#description> "Toggle Switch genetic circuit" .
+<https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#role> <https://identifiers.org/SO:0000704> .
 <https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#hasFeature> <https://sbolstandard.org/examples/toggle_switch/ComponentReference3> .
 <https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#hasConstraint> <https://sbolstandard.org/examples/toggle_switch/Constraint1> .
 <https://sbolstandard.org/examples/toggle_switch> <http://sbols.org/v3#hasFeature> <https://sbolstandard.org/examples/toggle_switch/ComponentReference2> .

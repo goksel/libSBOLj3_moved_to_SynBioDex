@@ -27,9 +27,9 @@ public class LocalSubComponentTest extends TestCase {
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
         
         Component i13504_system=SBOLAPI.createComponent(doc,"i13504_system", ComponentType.DNA.getUri(), "i13504 system", null, Role.FunctionalCompartment);
-		
+        i13504_system.setRoles(Arrays.asList(Role.EngineeredRegion));
         LocalSubComponent lsComponent = i13504_system.createLocalSubComponent(Arrays.asList(ComponentType.DNA.getUri()));
-        
+        lsComponent.setRoles(Arrays.asList(Role.CDS));
         TestUtil.serialise(doc, "entity_additional/localsubcomponent", "localsubcomponent");
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
         TestUtil.assertReadWrite(doc);
@@ -71,26 +71,34 @@ public class LocalSubComponentTest extends TestCase {
 		TestUtil.validateIdentified(lsComponent,doc,0);
 
 	    //LOCALSUBCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY
-        lsComponent.setTypes(tempTypes);
-	    lsComponent.setTypes(Arrays.asList(ComponentType.OptionalComponentType.Cell.getUri()));
-	    TestUtil.validateIdentified(lsComponent,doc,1);
-        lsComponent.setTypes(tempTypes);
+        lsComponent.setTypes(Arrays.asList(ComponentType.OptionalComponentType.Cell.getUri()));
+	    TestUtil.validateDocument(doc,1);
+        
+	    
 	    lsComponent.setTypes(Arrays.asList(ComponentType.DNA.getUri()));
 	    TestUtil.validateIdentified(lsComponent,doc,0);
+	    
 	    lsComponent.setTypes(Arrays.asList(ComponentType.DNA.getUri(), ComponentType.OptionalComponentType.Cell.getUri()));
 	    TestUtil.validateIdentified(lsComponent,doc,0);
+	    
 	    lsComponent.setTypes(Arrays.asList(ComponentType.TopologyType.Linear.getUri(), ComponentType.OptionalComponentType.Cell.getUri()));
-	    TestUtil.validateIdentified(lsComponent,doc,2);
+	    TestUtil.validateDocument(doc,2);
+	    
 	    lsComponent.setTypes(Arrays.asList(ComponentType.Protein.getUri(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
-	    TestUtil.validateIdentified(lsComponent,doc,1);
+	    TestUtil.validateDocument(doc,2);
+	    
 	    lsComponent.setTypes(Arrays.asList(ComponentType.DNA.getUri(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
 	    TestUtil.validateIdentified(lsComponent,doc,1);
+	    
 	    lsComponent.setTypes(Arrays.asList(ComponentType.RNA.getUri(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
 	    TestUtil.validateIdentified(lsComponent,doc,1);
+	    
 	    lsComponent.setTypes(Arrays.asList(ComponentType.RNA.getUri(), ComponentType.TopologyType.Linear.getUri()));
 	    TestUtil.validateIdentified(lsComponent,doc,0);
+	    
 	    lsComponent.setTypes(Arrays.asList(ComponentType.StrandType.Double.getUri(), ComponentType.Protein.getUri()));
-	    TestUtil.validateIdentified(lsComponent,doc,1);
+	    TestUtil.validateDocument(doc,2);
+	    
 	    lsComponent.setTypes(Arrays.asList(ComponentType.StrandType.Double.getUri(), ComponentType.DNA.getUri()));
 	    TestUtil.validateIdentified(lsComponent,doc,0);
 		    

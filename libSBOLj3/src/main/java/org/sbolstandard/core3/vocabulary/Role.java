@@ -22,6 +22,9 @@ public class Role {
 		public static URI FunctionalCompartment = URINameSpace.SBO.local("0000289");
 		public static URI PhysicalCompartment = URINameSpace.SBO.local("0000290");
 		
+		public static URI[] SequenceFeatures= {Promoter, RBS, CDS, Terminator, Gene, Operator, EngineeredGene, EngineeredRegion, SequenceFeature, mRNA};
+		
+		
 		
 		
 		

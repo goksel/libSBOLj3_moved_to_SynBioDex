@@ -163,7 +163,7 @@
     "hasInteraction" : "https://synbiohub.org/public/igem/i13504_system/Interaction1",
     "hasNamespace" : "https://synbiohub.org/public/igem",
     "name" : "i13504 system",
-    "role" : "SBO:0000289",
+    "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504_system/ComponentReference1",
@@ -206,6 +206,7 @@
     "hasConstraint" : "https://synbiohub.org/public/igem/interlab16device1/Constraint1",
     "hasFeature" : [ "https://synbiohub.org/public/igem/interlab16device1/ComponentReference1", "https://synbiohub.org/public/igem/interlab16device1/SubComponent2", "https://synbiohub.org/public/igem/interlab16device1/SubComponent1" ],
     "hasNamespace" : "https://synbiohub.org/public/igem",
+    "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
     "@id" : "https://synbiohub.org/public/igem/interlab16device1/ComponentReference1",
@@ -237,6 +238,7 @@
     "hasConstraint" : "https://synbiohub.org/public/igem/interlab16device2/Constraint1",
     "hasFeature" : [ "https://synbiohub.org/public/igem/interlab16device2/ComponentReference1", "https://synbiohub.org/public/igem/interlab16device2/SubComponent2", "https://synbiohub.org/public/igem/interlab16device2/SubComponent1" ],
     "hasNamespace" : "https://synbiohub.org/public/igem",
+    "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
     "@id" : "https://synbiohub.org/public/igem/interlab16device2/ComponentReference1",
@@ -266,12 +268,14 @@
     "@type" : "sbol:Component",
     "displayId" : "j23101",
     "hasNamespace" : "https://synbiohub.org/public/igem",
+    "role" : "SO:0000704",
     "type" : "SBO:0000251"
   }, {
     "@id" : "https://synbiohub.org/public/igem/j23106",
     "@type" : "sbol:Component",
     "displayId" : "j23106",
     "hasNamespace" : "https://synbiohub.org/public/igem",
+    "role" : "SO:0000704",
     "type" : "SBO:0000251"
   } ],
   "@context" : {
@@ -308,16 +312,16 @@
       "@id" : "http://sbols.org/v3#hasFeature",
       "@type" : "@id"
     },
+    "role" : {
+      "@id" : "http://sbols.org/v3#role",
+      "@type" : "@id"
+    },
     "hasNamespace" : {
       "@id" : "http://sbols.org/v3#hasNamespace",
       "@type" : "@id"
     },
     "participant" : {
       "@id" : "http://sbols.org/v3#participant",
-      "@type" : "@id"
-    },
-    "role" : {
-      "@id" : "http://sbols.org/v3#role",
       "@type" : "@id"
     },
     "hasLocation" : {

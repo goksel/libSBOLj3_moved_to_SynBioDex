@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
@@ -104,6 +105,12 @@ public class Interaction extends Identified{
 	{
 		List<ValidationMessage> validationMessages=super.getValidationMessages();
 		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Interaction.participation, this.resource, this.getParticipations(), validationMessages);
+		
+		if (Configuration.getInstance().isValidateRecommendedRules())
+		{
+			validationMessages= IdentifiedValidator.assertOneExists(Configuration.getInstance().getSboOccurringEntityInteractionTypes(), getTypes(),validationMessages,"{INTERACTION_VALID_TYPE}",this,DataModel.type);
+		}
+		
 		return validationMessages;
 	}
 }
