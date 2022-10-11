@@ -35,8 +35,8 @@ public class Multicellular extends TestCase {
         Component receiverCell=SBOLAPI.createComponent(doc, "OrganismB", ComponentType.OptionalComponentType.Cell.getUri(), "OrganismB", "Organism B", Role.PhysicalCompartment);
         Component AHL=SBOLAPI.createComponent(doc, "AHL", ComponentType.SimpleChemical.getUri(), "AHL", "AHL", Role.Effector);
        
-        SBOLAPI.createConstraint(senderSystem, senderCell, AHL, RestrictionType.Topology.contains);
-        SBOLAPI.createConstraint(receiverSystem, receiverCell, AHL, RestrictionType.Topology.contains);       
+        SBOLAPI.createConstraint(senderSystem, senderCell, AHL, RestrictionType.TopologyRestriction.contains.getUri());
+        SBOLAPI.createConstraint(receiverSystem, receiverCell, AHL, RestrictionType.TopologyRestriction.contains.getUri());       
         
         SubComponent senderSubComponent=SBOLAPI.addSubComponent(multicellularSystem, senderSystem);
         SubComponent receiverSubComponent=SBOLAPI.addSubComponent(multicellularSystem, receiverSystem);
@@ -55,7 +55,7 @@ public class Multicellular extends TestCase {
         SBOLAPI.appendComponent(doc, AHLProducer,luxI);
         SBOLAPI.appendComponent(doc, AHLProducer,ter_luxI);
         SBOLAPI.addSubComponent(AHLProducer, AHL);
-        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),AHLProducer, luxI, Arrays.asList(ParticipationRole.Template), AHL, Arrays.asList(ParticipationRole.Product));       
+        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction.getUri()),AHLProducer, luxI, Arrays.asList(ParticipationRole.Template.getUri()), AHL, Arrays.asList(ParticipationRole.Product.getUri()));       
         
         //AHL Receiver
         Component AHLReceiver=SBOLAPI.createDnaComponent(doc, "AHL_receiver", "AHL receiver","AHL receiver", Role.EngineeredGene, null);  
@@ -85,22 +85,22 @@ public class Multicellular extends TestCase {
         SubComponent LuxRAHLSubComponent=SBOLAPI.addSubComponent(AHLReceiver, LuxR_AHL);
         
         
-        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),AHLReceiver, luxR, Arrays.asList(ParticipationRole.Template), LuxR, Arrays.asList(ParticipationRole.Product));  
-        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),AHLReceiver, gfp, Arrays.asList(ParticipationRole.Template), GFP, Arrays.asList(ParticipationRole.Product));  
-        SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation),AHLReceiver, pLuxR, Arrays.asList(ParticipationRole.Stimulated), LuxR_AHL, Arrays.asList(ParticipationRole.Stimulator));
+        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction.getUri()),AHLReceiver, luxR, Arrays.asList(ParticipationRole.Template.getUri()), LuxR, Arrays.asList(ParticipationRole.Product.getUri()));  
+        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction.getUri()),AHLReceiver, gfp, Arrays.asList(ParticipationRole.Template.getUri()), GFP, Arrays.asList(ParticipationRole.Product.getUri()));  
+        SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation.getUri()),AHLReceiver, pLuxR, Arrays.asList(ParticipationRole.Stimulated.getUri()), LuxR_AHL, Arrays.asList(ParticipationRole.Stimulator.getUri()));
                 
     	//LuxR AHL binding
-        Interaction interaction= AHLReceiver.createInteraction(Arrays.asList(InteractionType.NonCovalentBinding));
-    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Reactant), LuxRProteinSubComponent);
-    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Reactant), AHLSubComponent);
-    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Product), LuxRAHLSubComponent);
+        Interaction interaction= AHLReceiver.createInteraction(Arrays.asList(InteractionType.NonCovalentBinding.getUri()));
+    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Reactant.getUri()), LuxRProteinSubComponent);
+    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Reactant.getUri()), AHLSubComponent);
+    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Product.getUri()), LuxRAHLSubComponent);
        
         
     	SBOLAPI.addSubComponent(senderSystem, AHLProducer);
     	SBOLAPI.addSubComponent(receiverSystem, AHLReceiver);
     	
-    	SBOLAPI.createConstraint(senderSystem, senderCell, AHLProducer, RestrictionType.Topology.contains);
-    	SBOLAPI.createConstraint(receiverSystem, receiverCell, AHLReceiver, RestrictionType.Topology.contains);
+    	SBOLAPI.createConstraint(senderSystem, senderCell, AHLProducer, RestrictionType.TopologyRestriction.contains.getUri());
+    	SBOLAPI.createConstraint(receiverSystem, receiverCell, AHLReceiver, RestrictionType.TopologyRestriction.contains.getUri());
     	
     	SBOLAPI.mapTo(senderSystem, AHLProducer, AHL, AHL);
     	SBOLAPI.mapTo(receiverSystem, AHLReceiver, AHL, AHL);

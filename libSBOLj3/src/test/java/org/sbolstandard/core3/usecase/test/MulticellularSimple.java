@@ -31,8 +31,8 @@ public class MulticellularSimple extends TestCase {
         Component receiverCell=SBOLAPI.createComponent(doc, "OrganismB", ComponentType.OptionalComponentType.Cell.getUri(), "OrganismB", "Organism B", Role.PhysicalCompartment);
         Component ahl=SBOLAPI.createComponent(doc, "AHL", ComponentType.SimpleChemical.getUri(), "AHL", "AHL", Role.Effector);
        
-        SBOLAPI.createConstraint(senderSystem, senderCell, ahl, RestrictionType.Topology.contains);
-        SBOLAPI.createConstraint(receiverSystem, receiverCell, ahl, RestrictionType.Topology.contains);       
+        SBOLAPI.createConstraint(senderSystem, senderCell, ahl, RestrictionType.TopologyRestriction.contains.getUri());
+        SBOLAPI.createConstraint(receiverSystem, receiverCell, ahl, RestrictionType.TopologyRestriction.contains.getUri());       
         
         SubComponent senderSubComponent=SBOLAPI.addSubComponent(multicellularSystem, senderSystem);
         SubComponent receiverSubComponent=SBOLAPI.addSubComponent(multicellularSystem, receiverSystem);

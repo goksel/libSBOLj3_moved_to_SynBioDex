@@ -39,7 +39,7 @@ public class ConstraintTest extends TestCase {
 		
 		SubComponent sc_j23101=SBOLAPI.addSubComponent(ilab16_dev1, j23101);	
 			
-		org.sbolstandard.core3.entity.Constraint constraint=ilab16_dev1.createConstraint(RestrictionType.Topology.meets, sc_j23101, compRef_i13504_dev1);
+		org.sbolstandard.core3.entity.Constraint constraint=ilab16_dev1.createConstraint(RestrictionType.TopologyRestriction.meets.getUri(), sc_j23101, compRef_i13504_dev1);
 		
 	    TestUtil.serialise(doc, "entity_additional/constraint", "constraint");
       
@@ -55,16 +55,17 @@ public class ConstraintTest extends TestCase {
  
         TestUtil.validateIdentified(constraint,doc,0);
         TestUtil.validateProperty(constraint, "setRestriction", new Object[] {null}, URI.class);
-		constraint.setRestriction(null);
-		TestUtil.validateIdentified(constraint,doc,1);
+        URI testURI=null;
+		constraint.setRestriction(testURI);
+		TestUtil.validateIdentified(constraint,doc,2);
 		
 		TestUtil.validateProperty(constraint, "setObject", new Object[] {null}, Feature.class);
 		constraint.setObject(null);
-		TestUtil.validateIdentified(constraint,doc,2);
+		TestUtil.validateIdentified(constraint,doc,3);
 		
 		TestUtil.validateProperty(constraint, "setSubject", new Object[] {null}, Feature.class);
 		constraint.setSubject(null);
-		TestUtil.validateIdentified(constraint,doc,3);
+		TestUtil.validateIdentified(constraint,doc,4);
 		
 		constraint.setRestriction(tempRestriction);
 		constraint.setSubject(tempSubject);

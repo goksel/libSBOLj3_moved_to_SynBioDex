@@ -20,7 +20,6 @@ import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.entity.Sequence;
 import org.sbolstandard.core3.entity.SequenceFeature;
 import org.sbolstandard.core3.entity.SubComponent;
-import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.ComponentType;
@@ -543,7 +542,7 @@ public class SBOLAPI {
 				 {
 					 for (ComponentReference compRef2: childReferences2)
 					 {
-						 container.createConstraint(RestrictionType.Identity.verifyIdentical, compRef1, compRef2);
+						 container.createConstraint(RestrictionType.IdentityRestriction.verifyIdentical.getUri(), compRef1, compRef2);
 					 }
 				 } 
 			 }	 
@@ -575,7 +574,7 @@ public class SBOLAPI {
 				 {
 					 for (SubComponent compRef2: childReferences2)
 					 {
-						 container.createConstraint(RestrictionType.Identity.verifyIdentical, compRef1, compRef2);
+						 container.createConstraint(RestrictionType.IdentityRestriction.verifyIdentical.getUri(), compRef1, compRef2);
 					 }
 				 } 
 			 }	 
@@ -638,7 +637,7 @@ public class SBOLAPI {
 	    		{
 	    			for (SubComponent subComponent2:subComponents2)
 		    		{	
-	    		        Constraint constraint=container.createConstraint(RestrictionType.Topology.contains, subComponent1, subComponent2);
+	    		        Constraint constraint=container.createConstraint(restriction, subComponent1, subComponent2);
 	    		        if (result==null)
 	    		        {
 	    		        	result=new ArrayList<Constraint>();

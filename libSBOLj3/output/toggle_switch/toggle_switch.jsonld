@@ -88,7 +88,7 @@
     "@type" : "sbol:Participation",
     "displayId" : "Participation2",
     "participant" : "https://sbolstandard.org/examples/LacI_producer/SubComponent9",
-    "role" : "SBO:0000019"
+    "role" : "SBO:0000020"
   }, {
     "@id" : "https://sbolstandard.org/examples/LacI_producer/Interaction4",
     "@type" : "sbol:Interaction",
@@ -229,7 +229,7 @@
     "@type" : "sbol:Participation",
     "displayId" : "Participation2",
     "participant" : "https://sbolstandard.org/examples/TetR_producer/SubComponent6",
-    "role" : "SBO:0000019"
+    "role" : "SBO:0000020"
   }, {
     "@id" : "https://sbolstandard.org/examples/TetR_producer/Interaction3",
     "@type" : "sbol:Interaction",

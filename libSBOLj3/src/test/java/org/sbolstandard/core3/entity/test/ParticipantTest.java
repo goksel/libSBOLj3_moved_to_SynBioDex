@@ -46,15 +46,15 @@ public class ParticipantTest extends TestCase {
 		
         ComponentReference gfpCDSReference=i13504_system.createComponentReference(gfpSubComponent, i13504SubComponent);
 		
-        Interaction interaction= i13504_system.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
+        Interaction interaction= i13504_system.createInteraction(Arrays.asList(InteractionType.GeneticProduction.getUri()));
        
-        Participation participation= interaction.createParticipation(Arrays.asList(ParticipationRole.Template), gfpCDSReference);
-		interaction.createParticipation(Arrays.asList(ParticipationRole.Product), gfpProteinSubComponent);
+        Participation participation= interaction.createParticipation(Arrays.asList(ParticipationRole.Template.getUri()), gfpCDSReference);
+		interaction.createParticipation(Arrays.asList(ParticipationRole.Product.getUri()), gfpProteinSubComponent);
 	    
 		
-		Interaction interaction2= i13504_system.createInteraction(Arrays.asList(InteractionType.Inhibition));
+		Interaction interaction2= i13504_system.createInteraction(Arrays.asList(InteractionType.Inhibition.getUri()));
 		Component inhibitor=doc.createComponent("TetR", Arrays.asList(ComponentType.Protein.getUri())); 
-		Participation participation2=interaction2.createHigherOrderParticipation(Arrays.asList(ParticipationRole.Inhibitor), interaction.getUri());
+		Participation participation2=interaction2.createHigherOrderParticipation(Arrays.asList(ParticipationRole.Inhibitor.getUri()), interaction.getUri());
 			
 		 
 		TestUtil.serialise(doc, "entity_additional/participation", "participation");
@@ -70,23 +70,23 @@ public class ParticipantTest extends TestCase {
 	    
 	    List<URI> tempRoles=participation.getRoles();
 	    participation.setRoles(null);
-	    TestUtil.validateIdentified(participation,doc,1);
+	    TestUtil.validateIdentified(participation,doc,1,2);
 		
 	    participation.setRoles(new ArrayList<URI>());
-	    TestUtil.validateIdentified(participation,doc,1);
+	    TestUtil.validateIdentified(participation,doc,1,2);
 	    
 	    //PARTICIPANT_MUST_HAVE_ONE_PARTICIPANT_OR_HIGHERORDERPARTICIPANT
 	    Feature temp=participation.getParticipant();
 	    participation.setParticipant(null);
-	    TestUtil.validateIdentified(participation,doc,2);
+	    TestUtil.validateIdentified(participation,doc,2,3);
 	    
 	    participation.setHigherOrderParticipant(interaction2.getUri());
-	    TestUtil.validateIdentified(participation,doc,1);
+	    TestUtil.validateIdentified(participation,doc,1,2);
 	    
 	   //PARTICIPANT_MUST_HAVE_ONE_PARTICIPANT_OR_HIGHERORDERPARTICIPANT 
 	    participation.setHigherOrderParticipant(interaction2.getUri());
 	    participation.setParticipant(temp);
-	    TestUtil.validateIdentified(participation,doc,2);
+	    TestUtil.validateIdentified(participation,doc,2,3);
 	    
 	    participation.setHigherOrderParticipant(null);
 	    participation.setRoles(tempRoles);

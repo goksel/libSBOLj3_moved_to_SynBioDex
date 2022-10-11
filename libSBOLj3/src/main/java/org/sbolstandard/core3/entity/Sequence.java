@@ -44,7 +44,7 @@ public class Sequence extends TopLevel {
 		if (Configuration.getInstance().isValidateRecommendedRules()){
 			URI encodingValue=this.getEncoding();
 			
-			if (!Configuration.getInstance().getEdamEncodingTerms().contains(encodingValue.toString()))
+			if (encodingValue!=null && !Configuration.getInstance().getEdamEncodingTerms().contains(encodingValue.toString()))
 			{
 				ValidationMessage message = new ValidationMessage("{SEQUENCE_ENCODING_VALID_SUBTERM}", DataModel.Sequence.encoding, encodingValue);
 				validationMessages=IdentifiedValidator.addToValidations(validationMessages, message);

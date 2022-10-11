@@ -622,7 +622,7 @@ public class RDFUtil {
 				QuerySolution qs=rs.next();
 				RDFNode parent=qs.get(rs.getResultVars().get(0));
 				String childUri=RDFUtil.toLiteralString(parent);
-				System.out.println ("Child:" + childUri);
+				//System.out.println ("Child:" + childUri);
 				if (childUri!=null){
 					childURIs.add(childUri);
 				}

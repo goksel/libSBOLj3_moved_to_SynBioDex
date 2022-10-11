@@ -107,7 +107,7 @@
             </sbol:hasParticipation>
             <sbol:hasParticipation>
                <sbol:Participation rdf:about="TetR_producer/Interaction2/Participation2">
-                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000019"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000020"/>
                   <sbol:participant>
                      <sbol:SubComponent rdf:about="TetR_producer/SubComponent6">
                         <sbol:instanceOf>
@@ -362,7 +362,7 @@
             </sbol:hasParticipation>
             <sbol:hasParticipation>
                <sbol:Participation rdf:about="LacI_producer/Interaction3/Participation2">
-                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000019"/>
+                  <sbol:role rdf:resource="https://identifiers.org/SBO:0000020"/>
                   <sbol:participant rdf:resource="LacI_producer/SubComponent9"/>
                   <sbol:displayId>Participation2</sbol:displayId>
                </sbol:Participation>

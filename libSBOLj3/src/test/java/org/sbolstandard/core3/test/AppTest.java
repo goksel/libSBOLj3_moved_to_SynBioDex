@@ -65,6 +65,20 @@ public class AppTest
     public void testApp()
     {
         assertTrue( true );
+        URI a=URI.create("http://abc.org");
+        URI b=URI.create("http://abc.org/");
+        URI c=URI.create("http://abc.org:443");
+        URI d=URI.create("http://abc.org");
+        
+        
+        System.out.print(a.equals(b));
+        System.out.print(a.equals(c));
+        System.out.print(a.equals(d));
+        
+        
+        String test="";
+        
+        		
     }
     
     public void testIRI() throws SBOLGraphException, IOException
@@ -155,7 +169,7 @@ public class AppTest
         
         for (int i=0;i<50;i++)
         {
-        	SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation),popsReceiver, pTetR, Arrays.asList(ParticipationRole.Stimulated), TetR_protein, Arrays.asList(ParticipationRole.Stimulator));
+        	SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation.getUri()),popsReceiver, pTetR, Arrays.asList(ParticipationRole.Stimulated.getUri()), TetR_protein, Arrays.asList(ParticipationRole.Stimulator.getUri()));
         }
         //middle= System.nanoTime();
         

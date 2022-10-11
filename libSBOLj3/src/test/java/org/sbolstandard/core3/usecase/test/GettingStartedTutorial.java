@@ -128,9 +128,9 @@ public class GettingStartedTutorial {
 		  
 		ComponentReference gfpCDSReference=i13504_system.createComponentReference(gfpSubComponent, i13504SubComponent);
 					    
-		Interaction interaction= i13504_system.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
-		interaction.createParticipation(Arrays.asList(ParticipationRole.Template), gfpCDSReference);
-		interaction.createParticipation(Arrays.asList(ParticipationRole.Product), gfpProteinSubComponent);
+		Interaction interaction= i13504_system.createInteraction(Arrays.asList(InteractionType.GeneticProduction.getUri()));
+		interaction.createParticipation(Arrays.asList(ParticipationRole.Template.getUri()), gfpCDSReference);
+		interaction.createParticipation(Arrays.asList(ParticipationRole.Product.getUri()), gfpProteinSubComponent);
 	    	
 		 /* --------------------------------------------------
 		  Slide 34: Example: concatenating & reusing components
@@ -146,7 +146,7 @@ public class GettingStartedTutorial {
 		 SubComponent sc_i13504_system=SBOLAPI.addSubComponent(ilab16_dev1, i13504_system);	
 		 
 		 ComponentReference compRef_i13504_dev1=ilab16_dev1.createComponentReference(i13504SubComponent, sc_i13504_system);
-		 ilab16_dev1.createConstraint(RestrictionType.Topology.meets, sc_j23101, compRef_i13504_dev1);
+		 ilab16_dev1.createConstraint(RestrictionType.TopologyRestriction.meets.getUri(), sc_j23101, compRef_i13504_dev1);
 	        
 		 // Right hand side of slide: interlab16device2
 		 Component ilab16_dev2=doc.createComponent("interlab16device2", Arrays.asList(ComponentType.DNA.getUri())); 
@@ -158,7 +158,7 @@ public class GettingStartedTutorial {
 		 SubComponent sc_i13504_system_dev2=SBOLAPI.addSubComponent(ilab16_dev2, i13504_system);	
 		 
 		 ComponentReference compRef_i13504_dev2=ilab16_dev2.createComponentReference(i13504SubComponent, sc_i13504_system_dev2);
-		 ilab16_dev2.createConstraint(RestrictionType.Topology.meets, sc_j23106, compRef_i13504_dev2);
+		 ilab16_dev2.createConstraint(RestrictionType.TopologyRestriction.meets.getUri(), sc_j23106, compRef_i13504_dev2);
 		 
 		 System.out.println(System.lineSeparator() + "SBOL:");
 		 String output=SBOLIO.write(doc, SBOLFormat.TURTLE);

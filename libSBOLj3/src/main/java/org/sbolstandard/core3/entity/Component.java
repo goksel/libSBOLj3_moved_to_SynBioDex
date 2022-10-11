@@ -2,9 +2,12 @@ package org.sbolstandard.core3.entity;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
@@ -19,6 +22,10 @@ import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
+import org.sbolstandard.core3.vocabulary.RestrictionType;
+import org.sbolstandard.core3.vocabulary.RestrictionType.ConstraintRestriction;
+import org.sbolstandard.core3.vocabulary.RestrictionType.IdentityRestriction;
+import org.sbolstandard.core3.vocabulary.RestrictionType.OrientationRestriction;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
@@ -125,6 +132,10 @@ public class Component extends TopLevel {
 				validationMessages= IdentifiedValidator.assertExists(this, validationMessages, constraint.getObject(), features, message);			
 				//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, constraint.getSubject(), features, "{CONSTRAINT_SUBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Constraint.subject);
 				//validationMessages=IdentifiedValidator.assertExists(this, validationMessages, constraint.getObject(), features, "{CONSTRAINT_OBJECT_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Constraint.object);
+			
+				//CONSTRAINT_RESTRICTION_FEATURES_COMPATIBLE
+				validationMessages=assertValidConstraintsAreCompatibleWithFeatures(constraint, validationMessages);
+				
 			}
 		}
 		
@@ -220,12 +231,7 @@ public class Component extends TopLevel {
 					}
 				}
 				if(!sizesMatch) {
-					
-					//validationMessages = addToValidations(validationMessages,new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH}",DataModel.Sequence.encoding, encoding));
-					//ValidationMessage message=new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH}",DataModel.Component.sequence, "test");
 					ValidationMessage message=new ValidationMessage("{COMPONENT_TYPE_SEQUENCE_LENGTH_MATCH}",DataModel.Component.sequence, SBOLUtil.getURIs(getSequences()));
-					
-					//message.childPath(DataModel.Sequence.encoding);
 					validationMessages = addToValidations(validationMessages,message);
 				}
 			}
@@ -276,6 +282,7 @@ public class Component extends TopLevel {
 			//validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getNonDirectionals(), features, "{INTERFACE_NONDIRECTIONAL_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Interface.nondirectional);
 		}
 		
+		
 		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.sequence, this.resource, getSequences(), validationMessages);
 		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.feature, this.resource, getFeatures(), validationMessages);
 		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.interaction, this.resource, getInteractions(), validationMessages);
@@ -283,6 +290,134 @@ public class Component extends TopLevel {
 		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.model, this.resource, getModels(), validationMessages);
 		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.Component.hasInterface, this.resource, getInterface(), validationMessages);
 		return validationMessages;
+	}
+	
+	//CONSTRAINT_RESTRICTION_FEATURES_COMPATIBLE
+	private List<ValidationMessage> assertValidOrientationConstraintRestrictions(Constraint constraint, List<ValidationMessage> validationMessages) throws SBOLGraphException
+	{
+		Feature object=constraint.getObject();
+		Feature subject=constraint.getSubject();
+		boolean valid=true;
+		if (object.getOrientation()!=null && subject.getOrientation()!=null)
+		{
+			if (constraint.getRestriction().equals(OrientationRestriction.sameOrientationAs.getUri()) && !object.getOrientation().equals(subject.getOrientation()))
+			{
+				valid=false;
+			}
+			else if (constraint.getRestriction().equals(OrientationRestriction.oppositeOrientationAs.getUri())
+				&& object.getOrientation().equals(subject.getOrientation()))
+			{
+				valid=false;
+			}
+				
+			if (!valid)
+			{
+				ValidationMessage message=new ValidationMessage("{CONSTRAINT_RESTRICTION_FEATURES_COMPATIBLE}" + " Restricton:" + constraint.getRestriction(), DataModel.Component.constraint, object, object.getOrientation().getUri());
+				message.childPath(DataModel.orientation);
+				validationMessages=IdentifiedValidator.addToValidations(validationMessages, message);
+			}
+		}
+		
+		return validationMessages;
+	}
+	
+	//CONSTRAINT_RESTRICTION_FEATURES_COMPATIBLE
+	private List<ValidationMessage> assertValidIdentityConstraintRestrictions(Constraint constraint, List<ValidationMessage> validationMessages) throws SBOLGraphException {
+		Feature object = constraint.getObject();
+		Feature subject = constraint.getSubject();
+		if ((subject instanceof ComponentReference) && (object instanceof ComponentReference)) {
+			ComponentReference objectCompRef = (ComponentReference) object;
+			ComponentReference subjectCompRef = (ComponentReference) subject;
+			ValidationMessage message = null;
+			
+			Feature referredObject = getReferred(objectCompRef);
+			Feature referredSubject = getReferred(subjectCompRef);
+			if (referredObject != null && referredSubject != null) {
+				if ((referredSubject instanceof SubComponent) && (referredObject instanceof SubComponent)) {
+					SubComponent subjectSubComponent = (SubComponent) referredSubject;
+					SubComponent objectSubComponent = (SubComponent) referredObject;
+					boolean valid=true;
+					if (constraint.getRestriction().equals(RestrictionType.IdentityRestriction.verifyIdentical.getUri()) && !subjectSubComponent.getInstanceOf().getUri().equals(objectSubComponent.getInstanceOf().getUri())) {
+						valid=false;
+					} 
+					else if (constraint.getRestriction().equals(RestrictionType.IdentityRestriction.differentFrom.getUri()) && subjectSubComponent.getInstanceOf().getUri().equals(objectSubComponent.getInstanceOf().getUri())) {
+						valid=false;
+					}
+					if (!valid)
+					{
+						message = new ValidationMessage("{CONSTRAINT_RESTRICTION_FEATURES_COMPATIBLE}" + " Restriction:" + constraint.getRestriction(), DataModel.Component.constraint, constraint, SBOLUtil.getURIs(Arrays.asList(subjectSubComponent.getInstanceOf(), objectSubComponent.getInstanceOf())));
+						message.childPath(DataModel.Constraint.subject, subjectCompRef).childPath(DataModel.ComponentReference.refersTo, referredSubject).childPath(DataModel.SubComponent.instanceOf, subjectSubComponent.getInstanceOf());
+					}
+				} 
+				else if ((referredSubject instanceof ExternallyDefined) && (referredObject instanceof ExternallyDefined)) {
+					boolean valid=true;
+					ExternallyDefined subjectExternallyDef = (ExternallyDefined) referredSubject;
+					ExternallyDefined objectExternallyDef = (ExternallyDefined) referredObject;
+					if (constraint.getRestriction().equals(RestrictionType.IdentityRestriction.verifyIdentical.getUri()) && !subjectExternallyDef.getDefinition().equals(objectExternallyDef.getDefinition())) {
+						valid=false;
+					} 
+					else if (constraint.getRestriction().equals(RestrictionType.IdentityRestriction.differentFrom.getUri()) && subjectExternallyDef.getDefinition().equals(objectExternallyDef.getDefinition())) {
+						valid=false;
+					}
+					if (!valid)
+					{
+						message = new ValidationMessage("{CONSTRAINT_RESTRICTION_FEATURES_COMPATIBLE}" + " Restriction:" + constraint.getRestriction(), DataModel.Component.constraint, constraint, Arrays.asList(subjectExternallyDef.getDefinition(), objectExternallyDef.getDefinition()));
+						message.childPath(DataModel.Constraint.subject, subjectCompRef).childPath(DataModel.ComponentReference.refersTo, referredSubject).childPath(DataModel.ExternalyDefined.definition);
+		
+					}
+				} 
+				else// subject and object have different types
+				{
+					//message=constructMessage(subjectCompRef, constraint, referredSubject,null);
+					message = new ValidationMessage("{CONSTRAINT_RESTRICTION_FEATURES_COMPATIBLE}" + " Restriction:" + constraint.getRestriction(), DataModel.Component.constraint, constraint, SBOLUtil.getURIs(Arrays.asList(referredSubject, referredObject)));
+					message.childPath(DataModel.Constraint.subject, subjectCompRef).childPath(DataModel.ComponentReference.refersTo, referredSubject);
+
+				}
+			}
+			if (message!=null) {
+				validationMessages = IdentifiedValidator.addToValidations(validationMessages, message);
+			}
+		}
+		return validationMessages;
+	}
+		
+	//CONSTRAINT_RESTRICTION_FEATURES_COMPATIBLE
+	private List<ValidationMessage> assertValidConstraintsAreCompatibleWithFeatures(Constraint constraint, List<ValidationMessage> validationMessages) throws SBOLGraphException
+	{
+		if (constraint.getRestriction()!=null)
+		{
+			if (constraint.getRestriction().equals(RestrictionType.IdentityRestriction.verifyIdentical.getUri()) ||
+					constraint.getRestriction().equals(RestrictionType.IdentityRestriction.differentFrom.getUri())) {
+				validationMessages= assertValidIdentityConstraintRestrictions(constraint, validationMessages);
+			}
+			else if (RestrictionType.OrientationRestriction.get(constraint.getRestriction())!=null) {
+				validationMessages= assertValidOrientationConstraintRestrictions(constraint, validationMessages);
+			}
+		}
+		
+		return validationMessages;
+	}
+	
+	private Feature getReferred(ComponentReference initialCompRef) throws SBOLGraphException
+	{
+		Feature referredTo=initialCompRef.getRefersTo();
+		Set<URI> visited=new HashSet<URI>();
+		visited.add(initialCompRef.getUri());
+		
+		while (referredTo instanceof ComponentReference)
+		{
+			if (visited.contains(referredTo.getUri()))
+			{
+				break;//Cycle detected, referredTo will refer to a ComponentReference, rather than SubComponent or ExternallyDefined
+			}
+			else
+			{
+				visited.add(referredTo.getUri());			
+			}
+			ComponentReference referredToCompRef= (ComponentReference) referredTo;
+			referredTo=referredToCompRef.getRefersTo();
+		}
+		return referredTo;
 	}
 	
 	@Valid
@@ -611,6 +746,10 @@ public class Component extends TopLevel {
 	public Constraint createConstraint(URI restriction, Feature subject, Feature object) throws SBOLGraphException {
 		String displayId=SBOLAPI.createLocalName(DataModel.Constraint.uri, getConstraints());	
 		return createConstraint(displayId, restriction, subject, object);
+	}
+	
+	public Constraint createConstraint(ConstraintRestriction restriction, Feature subject, Feature object) throws SBOLGraphException {
+		return createConstraint(restriction.getUri(), subject, object);
 	}
 	
 	@Valid

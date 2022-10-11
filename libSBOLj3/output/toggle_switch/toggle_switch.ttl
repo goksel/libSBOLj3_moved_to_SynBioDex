@@ -276,7 +276,7 @@
         a                 sbol:Participation ;
         sbol:displayId    "Participation2" ;
         sbol:participant  <LacI_producer/SubComponent9> ;
-        sbol:role         SBO:0000019 .
+        sbol:role         SBO:0000020 .
 
 <LacI_producer/Interaction4/Participation2>
         a                 sbol:Participation ;
@@ -455,7 +455,7 @@
         a                 sbol:Participation ;
         sbol:displayId    "Participation2" ;
         sbol:participant  <TetR_producer/SubComponent6> ;
-        sbol:role         SBO:0000019 .
+        sbol:role         SBO:0000020 .
 
 <TetR_producer/Interaction3/Participation2>
         a                 sbol:Participation ;

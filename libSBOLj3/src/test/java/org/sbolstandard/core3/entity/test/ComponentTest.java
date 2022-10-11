@@ -213,19 +213,19 @@ public class ComponentTest extends TestCase {
 	    
 		
 	   //IDENTIFIED_URI_MUST_BE_USED_AS_A_PREFIX_FOR_CHILDREN
-        Interaction interaction= popsReceiver.createInteraction(SBOLAPI.append(base, "protein_production"), Arrays.asList(InteractionType.GeneticProduction));
+        Interaction interaction= popsReceiver.createInteraction(SBOLAPI.append(base, "protein_production"), Arrays.asList(InteractionType.GeneticProduction.getUri()));
         TestUtil.validateIdentified(popsReceiver,doc,1);
         
-        Interaction interaction2= popsReceiver.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
+        Interaction interaction2= popsReceiver.createInteraction(Arrays.asList(InteractionType.Inhibition.getUri()));
         Component TetR=SBOLAPI.createComponent(doc, URI.create("https://synbiohub.org/public/igem/TetR"),ComponentType.Protein.getUri(), "TetR", "TetR repressor", Role.TF);
         SubComponent gfpProteinSubComponent=SBOLAPI.addSubComponent(popsReceiver, TetR);
-        Participation participation= interaction2.createParticipation(SBOLAPI.append(base, "inhibitor_participation"), Arrays.asList(ParticipationRole.Inhibitor), gfpProteinSubComponent);
+        Participation participation= interaction2.createParticipation(SBOLAPI.append(base, "inhibitor_participation"), Arrays.asList(ParticipationRole.Inhibitor.getUri()), gfpProteinSubComponent);
         TestUtil.validateIdentified(popsReceiver,doc,2);
         TestUtil.validateIdentified(interaction2,1);
         
         //Introduce two more errors. 
-        Interaction interaction3= popsReceiver.createInteraction(SBOLAPI.append(base, "protein_production3"), Arrays.asList(InteractionType.GeneticProduction));
-        Participation participation3= interaction3.createParticipation(SBOLAPI.append(base, "inhibitor_participation3"), Arrays.asList(ParticipationRole.Inhibitor), gfpProteinSubComponent);
+        Interaction interaction3= popsReceiver.createInteraction(SBOLAPI.append(base, "protein_production3"), Arrays.asList(InteractionType.Inhibition.getUri()));
+        Participation participation3= interaction3.createParticipation(SBOLAPI.append(base, "inhibitor_participation3"), Arrays.asList(ParticipationRole.Inhibitor.getUri()), gfpProteinSubComponent);
         TestUtil.validateIdentified(popsReceiver, doc,4);
         TestUtil.validateIdentified(interaction3, 1);
 

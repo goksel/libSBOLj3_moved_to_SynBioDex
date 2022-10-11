@@ -54,9 +54,9 @@ public class PoPSReceiverExample extends TestCase {
         SBOLAPI.appendComponent(doc, popsReceiver,pLuxR);
         
         
-        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),popsReceiver, luxR, Arrays.asList(ParticipationRole.Template), LuxR_protein, Arrays.asList(ParticipationRole.Product));  
-        SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation),popsReceiver, pLuxR, Arrays.asList(ParticipationRole.Stimulated), LuxR_protein, Arrays.asList(ParticipationRole.Stimulator));
-        SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation),popsReceiver, pTetR, Arrays.asList(ParticipationRole.Stimulated), TetR_protein, Arrays.asList(ParticipationRole.Stimulator));
+        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction.getUri()),popsReceiver, luxR, Arrays.asList(ParticipationRole.Template.getUri()), LuxR_protein, Arrays.asList(ParticipationRole.Product.getUri()));  
+        SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation.getUri()),popsReceiver, pLuxR, Arrays.asList(ParticipationRole.Stimulated.getUri()), LuxR_protein, Arrays.asList(ParticipationRole.Stimulator.getUri()));
+        SBOLAPI.createInteraction(Arrays.asList(InteractionType.Stimulation.getUri()),popsReceiver, pTetR, Arrays.asList(ParticipationRole.Stimulated.getUri()), TetR_protein, Arrays.asList(ParticipationRole.Stimulator.getUri()));
         
         String output=SBOLIO.write(doc, SBOLFormat.TURTLE);
         System.out.print(output);

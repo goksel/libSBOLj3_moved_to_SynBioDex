@@ -5,11 +5,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.sbolstandard.core3.util.URINameSpace;
 
 interface HasURI{
     URI getUri();
+    
     /*static Map<URI, HasURI> lookup = new HashMap<>();
     static <T extends HasURI> T get(URI uri)
     {
@@ -35,6 +35,34 @@ public enum ComponentType implements HasURI{
 		return uri;
 	}
 
+	private static final Map<URI, ComponentType> lookup = new HashMap<>();
+
+	static {
+		for (ComponentType value : ComponentType.values()) {
+			lookup.put(value.getUri(), value);
+		}
+	}
+
+	public static ComponentType get(URI url) {
+		return lookup.get(url);
+	}
+
+	// hardcoded list of matches from table 2 to table 1
+	public static List<Encoding> checkComponentTypeMatch(ComponentType type) {
+		switch (type) {
+		case DNA:
+			return Arrays.asList(Encoding.NucleicAcid);
+		case RNA:
+			return Arrays.asList(Encoding.NucleicAcid);
+		case Protein:
+			return Arrays.asList(Encoding.AminoAcid);
+		case SimpleChemical:
+			return Arrays.asList(Encoding.INCHI, Encoding.SMILES);
+		default:
+			return null;
+		}
+	}
+	
 	public enum OptionalComponentType implements HasURI {
 		Cell(URINameSpace.GO.local("0005623"));
 
@@ -102,33 +130,4 @@ public enum ComponentType implements HasURI{
 			return lookup.get(uri);
 		}
 	}
-
-	private static final Map<URI, ComponentType> lookup = new HashMap<>();
-
-	static {
-		for (ComponentType value : ComponentType.values()) {
-			lookup.put(value.getUri(), value);
-		}
-	}
-
-	public static ComponentType get(URI url) {
-		return lookup.get(url);
-	}
-
-	// hardcoded list of matches from table 2 to table 1
-	public static List<Encoding> checkComponentTypeMatch(ComponentType type) {
-		switch (type) {
-		case DNA:
-			return Arrays.asList(Encoding.NucleicAcid);
-		case RNA:
-			return Arrays.asList(Encoding.NucleicAcid);
-		case Protein:
-			return Arrays.asList(Encoding.AminoAcid);
-		case SimpleChemical:
-			return Arrays.asList(Encoding.INCHI, Encoding.SMILES);
-		default:
-			return null;
-		}
-	}
-
 }

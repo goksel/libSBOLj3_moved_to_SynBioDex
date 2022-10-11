@@ -53,9 +53,9 @@ public class ActivityTest extends TestCase {
         activity.setEndedAtTime(new XSDDateTime(calendar));
            
         Usage usage1=activity.createUsage(toggleSwitch.getUri());
-        usage1.setRoles(Arrays.asList(ParticipationRole.Template));
+        usage1.setRoles(Arrays.asList(ParticipationRole.Template.getUri()));
         Usage usage2=activity.createUsage(toggleSwitchOptimised.getUri());
-        usage2.setRoles(Arrays.asList(ParticipationRole.Product));
+        usage2.setRoles(Arrays.asList(ParticipationRole.Product.getUri()));
         
         Association association=activity.createAssociation(agent);
         association.setPlan(plan);

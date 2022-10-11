@@ -330,7 +330,7 @@
      ] ,
     "http://sbols.org/v3#role" : [ { 
       "type" : "uri" ,
-      "value" : "https://identifiers.org/SBO:0000019"
+      "value" : "https://identifiers.org/SBO:0000020"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
@@ -2017,7 +2017,7 @@
      ] ,
     "http://sbols.org/v3#role" : [ { 
       "type" : "uri" ,
-      "value" : "https://identifiers.org/SBO:0000019"
+      "value" : "https://identifiers.org/SBO:0000020"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 

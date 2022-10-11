@@ -31,11 +31,11 @@ public class InteractionTest_11803 extends TestCase {
         i13504_system.setRoles(Arrays.asList(Role.EngineeredGene));
 		
         //Valid: Only one occurring entity type
-        Interaction interaction= i13504_system.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
+        Interaction interaction= i13504_system.createInteraction(Arrays.asList(InteractionType.GeneticProduction.getUri()));
         TestUtil.validateIdentified(interaction,0);
         
         //Valid: Only one occurring entity type. 4--> modelling framework
-        interaction.setTypes(Arrays.asList(InteractionType.GeneticProduction, URINameSpace.SBO.local("0000004")));
+        interaction.setTypes(Arrays.asList(InteractionType.GeneticProduction.getUri(), URINameSpace.SBO.local("0000004")));
         TestUtil.validateIdentified(interaction,0);
         
         //Invalid: no valid type
@@ -43,7 +43,7 @@ public class InteractionTest_11803 extends TestCase {
         TestUtil.validateIdentified(interaction,1);
         
         //Invalid: Two valid types.
-        interaction.setTypes(Arrays.asList(InteractionType.GeneticProduction,InteractionType.Degradation));
+        interaction.setTypes(Arrays.asList(InteractionType.GeneticProduction.getUri(),InteractionType.Degradation.getUri()));
         TestUtil.validateIdentified(interaction,1); 
     }
 	
