@@ -127,61 +127,37 @@ public class Interaction extends Identified{
 					// If interaction type comes from Table 11
 					if (interactionType != null) {
 						List<ParticipationRole> expectedRoles = InteractionType.mapParticipationRoles(interactionType);
-						if (participations!=null)
-						{
-							for (Participation participation: participations)
-							{
-								boolean valid=true;
-								
-								List<URI> roles=participation.getRoles();
-								if (CollectionUtils.isEmpty(roles))
-								{
-									valid=false;
-								}
-								else
-								{
-									boolean found=false;
-									for (ParticipationRole expectedRole: expectedRoles)
-									{
-										if (roles.contains(expectedRole.getUri()))
-										{
-											found=true;
+						if (participations != null) {
+							for (Participation participation : participations) {
+								boolean valid = true;
+
+								List<URI> roles = participation.getRoles();
+								if (CollectionUtils.isEmpty(roles)) {
+									valid = false;
+								} 
+								else {
+									boolean found = false;
+									for (ParticipationRole expectedRole : expectedRoles) {
+										if (roles.contains(expectedRole.getUri())) {
+											found = true;
 											break;
 										}
 									}
-									if (!found)
-									{
-										valid=false;
+									if (!found) {
+										valid = false;
 									}
 								}
-								if (!valid)
-								{
-									//ValidationMessage message = new ValidationMessage("{INTERACTION_PARTICIPANT_TYPES_COMPATIBLE}", DataModel.Interaction.participation, SBOLUtil.getURIs(participations));
-									ValidationMessage message = new ValidationMessage("{INTERACTION_PARTICIPANT_TYPES_COMPATIBLE}", DataModel.Interaction.participation, participation,roles);
+								if (!valid) {
+									// ValidationMessage message = new
+									// ValidationMessage("{INTERACTION_PARTICIPANT_TYPES_COMPATIBLE}",
+									// DataModel.Interaction.participation, SBOLUtil.getURIs(participations));
+									ValidationMessage message = new ValidationMessage("{INTERACTION_PARTICIPANT_TYPES_COMPATIBLE}", DataModel.Interaction.participation, participation, roles);
 									message.childPath(DataModel.role);
 									validationMessages = IdentifiedValidator.addToValidations(validationMessages, message);
 								}
 							}
-							
+
 						}
-						/*Set<ParticipationRole>foundExpectedRoles=new HashSet<ParticipationRole>();
-						for (ParticipationRole expectedRole : expectedRoles) {
-							for (Participation participation : participations) {
-								List<URI> roles=participation.getRoles();
-								if (roles.contains(expectedRole.getUri())) {
-									foundExpectedRoles.add(expectedRole);
-								}
-							}
-						}
-						
-						for (ParticipationRole expectedRole:expectedRoles)
-						{
-							if (!foundExpectedRoles.contains(expectedRole))
-							{
-								ValidationMessage message = new ValidationMessage("{INTERACTION_PARTICIPANT_TYPES_COMPATIBLE}", DataModel.Interaction.participation, SBOLUtil.getURIs(participations));
-								validationMessages = IdentifiedValidator.addToValidations(validationMessages, message);
-							}
-						}*/
 					}
 				}
 			}

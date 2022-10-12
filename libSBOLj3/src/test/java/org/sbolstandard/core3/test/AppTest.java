@@ -81,7 +81,7 @@ public class AppTest
         		
     }
     
-    public void testIRI() throws SBOLGraphException, IOException
+    public void IRI() throws SBOLGraphException, IOException
     {
     	boolean shouldPass=false;
     	try {

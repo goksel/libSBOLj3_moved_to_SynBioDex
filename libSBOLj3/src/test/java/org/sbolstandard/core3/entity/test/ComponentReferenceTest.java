@@ -88,7 +88,7 @@ public class ComponentReferenceTest extends TestCase {
 		
 		//inchildOf must refer to a subcomponent in parent component.
 		compRef.setInChildOf(termSubComponent);
-		TestUtil.validateIdentified(ilab16_dev1,doc, 1);
+		TestUtil.validateIdentified(ilab16_dev1,doc, 2);
 		compRef.setInChildOf(tempSubComponent);
 		TestUtil.validateIdentified(ilab16_dev1,doc,0);
 		
