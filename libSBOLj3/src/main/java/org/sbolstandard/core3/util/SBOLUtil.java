@@ -173,6 +173,17 @@ public class SBOLUtil {
 			}
 			return URI.create(uriString);
 		}
+	   
+	    public static <T extends Identified>  boolean contains(List<T> identifieds, T identified)
+	    {
+	    	boolean contains=false;
+	    	if (identifieds!=null && identified!=null)
+	    	{
+	    		contains=SBOLUtil.getURIs(identifieds).contains(identified.getUri());
+	    	}
+	    	return contains;
+	    }
+		
 	    
 	    public static <T extends Identified>  List<URI> getURIs(List<T> identifieds)
 		{

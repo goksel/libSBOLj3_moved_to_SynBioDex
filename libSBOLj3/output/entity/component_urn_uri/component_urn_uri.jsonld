@@ -1,7 +1,7 @@
 {
-  "@id" : "urn:uuid:211c52cf-2c2f-45e8-b275-88dbde086ede",
+  "@id" : "urn:uuid:3e2a8d9b-9650-44b1-a91b-d1c77ff446d6",
   "@type" : "sbol:Component",
-  "hasNamespace" : "urn:uuid:79fd282e-2bdc-449c-a78a-26f14ec912c8",
+  "hasNamespace" : "urn:uuid:977d92ac-472f-49c8-8c78-5d8e64c9850f",
   "name" : "TetR",
   "type" : "SBO:0000252",
   "@context" : {

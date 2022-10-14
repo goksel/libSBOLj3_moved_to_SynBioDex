@@ -28,7 +28,7 @@ import junit.framework.TestCase;
 
 public class CutTest extends TestCase {
 	
-	public void testConstraintReference() throws SBOLGraphException, IOException, Exception
+	public void testSut() throws SBOLGraphException, IOException, Exception
     {
 		URI base=URI.create("https://synbiohub.org/public/igem/");
 		SBOLDocument doc=new SBOLDocument(base);
@@ -68,7 +68,7 @@ public class CutTest extends TestCase {
     	//Location.sequence can't be null
     	TestUtil.validateProperty(cut, "setSequence", new Object[] {null}, Sequence.class);
     	cut.setSequence(null);
-    	TestUtil.validateIdentified(cut,doc,1);
+    	TestUtil.validateIdentified(cut,doc,1,2);
     	
     	 //SBOL_VALID_ENTITY_TYPES - Component.interface
 	    Resource resource= TestUtil.getResource(cut);

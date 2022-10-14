@@ -56,6 +56,9 @@ public class LocalSubComponentTest extends TestCase {
 	    TestUtil.validateIdentified(lsComponent,doc,0);
 	    
 	    Sequence seq=doc.createSequence("seq1");
+	    seq.setEncoding(Encoding.NucleicAcid);
+	    
+	    i13504_system.setSequences(Arrays.asList(seq));
 	    lsComponent.createCut(2, seq);
 	    TestUtil.validateIdentified(lsComponent,doc,0);
 		

@@ -216,15 +216,18 @@ public class Component extends TopLevel {
 				if (encoding!=null)
 				{
 					String elements = sequence.getElements();
-					int elementLength = elements.length();
-					if(elementLengths.containsKey(encoding)) {
-						ArrayList<Integer> lengthList = elementLengths.get(encoding);
-						lengthList.add(elementLength);
-						elementLengths.put(encoding, lengthList);
-					}else {
-						ArrayList<Integer> lengthList = new ArrayList<>();
-						lengthList.add(elementLength);
-						elementLengths.put(encoding, lengthList);
+					if (elements!=null)
+					{
+						int elementLength = elements.length();
+						if(elementLengths.containsKey(encoding)) {
+							ArrayList<Integer> lengthList = elementLengths.get(encoding);
+							lengthList.add(elementLength);
+							elementLengths.put(encoding, lengthList);
+						}else {
+							ArrayList<Integer> lengthList = new ArrayList<>();
+							lengthList.add(elementLength);
+							elementLengths.put(encoding, lengthList);
+						}
 					}
 				}
 			}
@@ -298,7 +301,21 @@ public class Component extends TopLevel {
 			//validationMessages= IdentifiedValidator.assertExists(compInterface, validationMessages, compInterface.getNonDirectionals(), features, "{INTERFACE_NONDIRECTIONAL_MUST_REFER_TO_A_FEATURE_OF_THE_PARENT}", DataModel.Interface.nondirectional);
 		}
 		
-		
+		if (features != null) {
+			List<Sequence> entireSequences = getEntireSequences(features);
+			for (Feature feature : features) {
+				if (feature instanceof FeatureWithLocation) {
+					FeatureWithLocation locFeature = (FeatureWithLocation) feature;
+					List<Location> locations = locFeature.getLocations();
+					validationMessages= validateComponentLocation(validationMessages, locations, locFeature, sequences, entireSequences,DataModel.SequenceFeature.location, "{LOCATION_SEQUENCE_VALID}");
+				}
+				if (feature instanceof SubComponent){
+					SubComponent subComponent=(SubComponent) feature;
+					List<Location> locations = subComponent.getSourceLocations();
+					validationMessages= validateComponentLocation(validationMessages, locations, subComponent, sequences, entireSequences, DataModel.SubComponent.sourceLocation, "{LOCATION_SOURCE_SEQUENCE_VALID}");		
+				}
+			}
+		}
 		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.sequence, this.resource, getSequences(), validationMessages);
 		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.feature, this.resource, getFeatures(), validationMessages);
 		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.interaction, this.resource, getInteractions(), validationMessages);
@@ -306,6 +323,55 @@ public class Component extends TopLevel {
 		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Component.model, this.resource, getModels(), validationMessages);
 		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.Component.hasInterface, this.resource, getInterface(), validationMessages);
 		return validationMessages;
+	}
+
+	private List<ValidationMessage> validateComponentLocation(List<ValidationMessage> validationMessages, List<Location> locations, Feature feature, List<Sequence> sequences, List<Sequence> entireSequences, URI locationProperty,String message) throws SBOLGraphException {
+		if (locations != null) {
+			for (Location location : locations) {
+				boolean valid = false;
+				if (!(location instanceof EntireSequence)) {
+					Sequence locSequence = location.getSequence();
+					if (locSequence != null) {
+						if (sequences != null && SBOLUtil.contains(sequences, locSequence)) {
+							valid = true;
+						} else if (entireSequences != null && SBOLUtil.contains(entireSequences, locSequence)) {
+							valid = true;
+						}
+					}
+					if (!valid) {
+						ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Component.feature, feature, locSequence);
+						validationMessage.childPath(locationProperty, location).childPath(DataModel.Location.sequence);
+						validationMessages = IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+					}
+				}
+			}
+		}
+		return validationMessages;
+	}
+			
+
+	private List<Sequence> getEntireSequences(List<Feature> features) throws SBOLGraphException {
+		List<Sequence> entireSequences = null;
+		if (features != null) {
+			for (Feature feature : features) {
+				if (feature instanceof FeatureWithLocation) {
+					FeatureWithLocation locFeature = (FeatureWithLocation) feature;
+					List<Location> locations = locFeature.getLocations();
+					if (locations != null) {
+						for (Location location : locations) {
+							if (location instanceof EntireSequence) {
+								Sequence entireSequence = location.getSequence();
+								if (entireSequences == null) {
+									entireSequences = new ArrayList<Sequence>();
+								}
+								entireSequences.add(entireSequence);
+							}
+						}
+					}
+				}
+			}
+		}
+		return entireSequences;
 	}
 	
 	//CONSTRAINT_RESTRICTION_FEATURES_COMPATIBLE
