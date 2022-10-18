@@ -119,6 +119,34 @@ public abstract class  Location extends Identified {
 		return subclasses;
 	}
 	
+	protected List<ValidationMessage> assertLocationNotBiggerThanSequence(List<ValidationMessage> validationMessages, Sequence  sequence, Optional<Integer> location, String message, URI property) throws SBOLGraphException
+	{
+		boolean valid=true;
+		String elements=sequence.getElements();
+		if (location!=null && !location.isEmpty())
+		{
+			if (elements!=null)
+			{
+				if (location.get()>elements.length())
+				{
+					valid=false;
+				}
+			}
+			else
+			{
+				valid=false;
+			}
+			
+			if (!valid)
+			{
+				ValidationMessage validationMessage=new ValidationMessage(message, property, location.get());
+				validationMessages = IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+			}
+		}
+		
+		return validationMessages;
+	}
+	
 	public static class LocationFactory
 	{
 		public static Location create(Resource resource) throws SBOLGraphException

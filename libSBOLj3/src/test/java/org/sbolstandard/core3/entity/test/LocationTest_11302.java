@@ -49,6 +49,8 @@ public class LocationTest_11302 extends TestCase {
 		
 		
 		Sequence secondTermSeq=doc.createSequence("term_na2");
+		secondTermSeq.setElements("ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc");
+		secondTermSeq.setEncoding(Encoding.NucleicAcid);
 		SequenceFeature seqFeature=device.createSequenceFeature(secondTermSeq);
 		//Use a sequence that has been added to the parent (device) as an EntireSequence entity.
 		range.setSequence(secondTermSeq);
