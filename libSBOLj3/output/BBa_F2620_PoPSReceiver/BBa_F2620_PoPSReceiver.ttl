@@ -12,7 +12,7 @@
 <BBa_F2620/SubComponent3/Range1>
         a                 sbol:Range ;
         sbol:displayId    "Range1" ;
-        sbol:end          "53" ;
+        sbol:end          "54" ;
         sbol:hasSequence  :BBa_F2620_Sequence1 ;
         sbol:orientation  SO:0001030 ;
         sbol:start        "1" .
@@ -25,7 +25,7 @@
         sbol:orientation  SO:0001030 .
 
 :BBa_C0062_Sequence1  a    sbol:Sequence ;
-        sbol:description   "luxR sequence" ;
+        sbol:description   "BBa_C0062 sequence" ;
         sbol:displayId     "BBa_C0062_Sequence1" ;
         sbol:elements      "atgaaaaacataaatgccgacgacacatacagaataattaataaaattaaagcttgtagaagcaataatgatattaatcaatgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcac" ;
         sbol:encoding      EDAM:format_1207 ;
@@ -147,7 +147,7 @@
 
 :TetR_protein_Sequence1
         a                  sbol:Sequence ;
-        sbol:description   "TetR sequence" ;
+        sbol:description   "TetR_protein sequence" ;
         sbol:displayId     "TetR_protein_Sequence1" ;
         sbol:elements      "NNNNNNNNNNN" ;
         sbol:encoding      EDAM:format_1208 ;
@@ -207,7 +207,7 @@
 <BBa_B0015/SubComponent1/Range1>
         a                 sbol:Range ;
         sbol:displayId    "Range1" ;
-        sbol:end          "79" ;
+        sbol:end          "80" ;
         sbol:hasSequence  :BBa_B0015_Sequence1 ;
         sbol:orientation  SO:0001030 ;
         sbol:start        "1" .
@@ -229,7 +229,7 @@
         sbol:type          SBO:0000251 .
 
 :BBa_R0062_Sequence1  a    sbol:Sequence ;
-        sbol:description   "lux pR sequence" ;
+        sbol:description   "BBa_R0062 sequence" ;
         sbol:displayId     "BBa_R0062_Sequence1" ;
         sbol:elements      "acctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa" ;
         sbol:encoding      EDAM:format_1207 ;
@@ -276,7 +276,7 @@
 
 :BBa_C0062_protein_Sequence1
         a                  sbol:Sequence ;
-        sbol:description   "LuxR sequence" ;
+        sbol:description   "BBa_C0062_protein sequence" ;
         sbol:displayId     "BBa_C0062_protein_Sequence1" ;
         sbol:elements      "NNNNNNNNNNN" ;
         sbol:encoding      EDAM:format_1208 ;
@@ -331,7 +331,7 @@
         sbol:start        "848" .
 
 :BBa_R0040_Sequence1  a    sbol:Sequence ;
-        sbol:description   "pTetR sequence" ;
+        sbol:description   "BBa_R0040 sequence" ;
         sbol:displayId     "BBa_R0040_Sequence1" ;
         sbol:elements      "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac" ;
         sbol:encoding      EDAM:format_1207 ;

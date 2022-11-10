@@ -18,7 +18,7 @@
 <i13504/SubComponent1/Range1>
         a                 sbol:Range ;
         sbol:displayId    "Range1" ;
-        sbol:end          "11" ;
+        sbol:end          "12" ;
         sbol:hasSequence  :i13504_Sequence1 ;
         sbol:orientation  SO:0001030 ;
         sbol:start        "1" .
@@ -78,7 +78,7 @@
         sbol:refersTo   <i13504_system/SubComponent1> .
 
 :B0015_Sequence1  a        sbol:Sequence ;
-        sbol:description   "terminator sequence" ;
+        sbol:description   "B0015 sequence" ;
         sbol:displayId     "B0015_Sequence1" ;
         sbol:elements      "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc" ;
         sbol:encoding      EDAM:format_1207 ;
@@ -207,7 +207,7 @@
         sbol:orientation  SO:0001030 .
 
 :E0040_Sequence1  a        sbol:Sequence ;
-        sbol:description   "gfp sequence" ;
+        sbol:description   "E0040 sequence" ;
         sbol:displayId     "E0040_Sequence1" ;
         sbol:elements      "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa" ;
         sbol:encoding      EDAM:format_1207 ;

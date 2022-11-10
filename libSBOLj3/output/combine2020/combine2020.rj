@@ -437,7 +437,7 @@
      ] ,
     "http://sbols.org/v3#description" : [ { 
       "type" : "literal" ,
-      "value" : "terminator sequence"
+      "value" : "B0015 sequence"
     }
      ]
   }
@@ -470,7 +470,7 @@
      ] ,
     "http://sbols.org/v3#end" : [ { 
       "type" : "literal" ,
-      "value" : "11"
+      "value" : "12"
     }
      ]
   }
@@ -792,7 +792,7 @@
      ] ,
     "http://sbols.org/v3#description" : [ { 
       "type" : "literal" ,
-      "value" : "gfp sequence"
+      "value" : "E0040 sequence"
     }
      ]
   }

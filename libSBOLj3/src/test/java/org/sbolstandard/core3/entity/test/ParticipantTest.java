@@ -21,7 +21,7 @@ import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
 public class ParticipantTest extends TestCase {
-	
+
 	public void testParticipation() throws SBOLGraphException, IOException, Exception
     {
 		String baseUri="https://sbolstandard.org/examples/";
@@ -31,13 +31,16 @@ public class ParticipantTest extends TestCase {
         device.setRoles(Arrays.asList(Role.EngineeredGene));
         String gfp_na="atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa";
 		Component gfp=SBOLAPI.createDnaComponent(doc, "E0040", "gfp", "gfp coding sequence", Role.CDS, gfp_na);
-		
+		TestUtil.validateDocument(doc, 0);
         SubComponent gfpSubComponent=SBOLAPI.appendComponent(doc, device,gfp, Orientation.inline);
+        TestUtil.validateDocument(doc, 0);
 		
         Component i13504_system=SBOLAPI.createComponent(doc,"i13504_system", ComponentType.DNA.getUri(), "i13504 system", null, Role.FunctionalCompartment);
         i13504_system.setRoles(Arrays.asList(Role.FunctionalCompartment, Role.EngineeredGene));
 		Component GFP=SBOLAPI.createComponent(doc, "GFP_protein", ComponentType.Protein.getUri(), "GFP", "GFP", null);//MSKGEELFTG 
+		
 		SubComponent i13504SubComponent=SBOLAPI.addSubComponent(i13504_system, device);
+		
 		SubComponent gfpProteinSubComponent=SBOLAPI.addSubComponent(i13504_system, GFP);
 		Sequence seqGfpStart=doc.createSequence("gfp_start");
 		SequenceFeature sf=gfp.createSequenceFeature(seqGfpStart);

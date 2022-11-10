@@ -12,7 +12,7 @@
 <https://synbiohub.org/public/igem/cs1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#CombinatorialDerivation> .
 <https://synbiohub.org/public/igem/BBa_R0040_Sequence1> <http://sbols.org/v3#encoding> <https://identifiers.org/edam:format_1207> .
 <https://synbiohub.org/public/igem/BBa_R0040_Sequence1> <http://sbols.org/v3#elements> "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac" .
-<https://synbiohub.org/public/igem/BBa_R0040_Sequence1> <http://sbols.org/v3#description> "pTetR sequence" .
+<https://synbiohub.org/public/igem/BBa_R0040_Sequence1> <http://sbols.org/v3#description> "BBa_R0040 sequence" .
 <https://synbiohub.org/public/igem/BBa_R0040_Sequence1> <http://sbols.org/v3#name> "Sequence1" .
 <https://synbiohub.org/public/igem/BBa_R0040_Sequence1> <http://sbols.org/v3#hasNamespace> <https://synbiohub.org/public/igem> .
 <https://synbiohub.org/public/igem/BBa_R0040_Sequence1> <http://sbols.org/v3#displayId> "BBa_R0040_Sequence1" .

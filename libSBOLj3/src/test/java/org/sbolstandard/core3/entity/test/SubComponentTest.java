@@ -20,7 +20,7 @@ import junit.framework.TestCase;
 
 public class SubComponentTest extends TestCase {
 	
-	public void testRange() throws SBOLGraphException, IOException, Exception
+	public void testSubComponent() throws SBOLGraphException, IOException, Exception
     {
 		URI base=URI.create("https://synbiohub.org/public/igem/");
 		SBOLDocument doc=new SBOLDocument(base);
@@ -47,7 +47,7 @@ public class SubComponentTest extends TestCase {
 		Range range=(Range)termSubComponent.createRange(start, end,i13504Sequence);
 		range.setOrientation(Orientation.inline);
 		
-		Range range2=(Range)termSubComponent.createSourceRange(start+1, end,i13504Sequence);
+		Range range2=(Range)termSubComponent.createSourceRange(start, end,i13504Sequence);
 		
 		TestUtil.serialise(doc, "entity_additional/subcomponent", "subcomponent");
 	    System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
@@ -97,8 +97,8 @@ public class SubComponentTest extends TestCase {
 	  	
 	  	Cut cutSource=termSubComponent.createSourceCut(1, i13504Sequence);
 	  	RDFUtil.setProperty(resource, DataModel.SubComponent.sourceLocation, Arrays.asList(cutSource.getUri(), i13504Sequence.getUri()));
-	  	TestUtil.validateIdentified(termSubComponent,doc,1);
-	  	RDFUtil.setProperty(resource, DataModel.SubComponent.sourceLocation, Arrays.asList(cutSource.getUri()));
+	  	TestUtil.validateIdentified(termSubComponent,doc,2);
+	  	RDFUtil.setProperty(resource, DataModel.SubComponent.sourceLocation, Arrays.asList(range2.getUri()));
 	  	TestUtil.validateIdentified(termSubComponent,doc,0);	
 	  	
 	  

@@ -31,7 +31,7 @@
     "@value" : "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc"
   } ],
   "http://sbols.org/v3#description" : [ {
-    "@value" : "terminator sequence"
+    "@value" : "B0015 sequence"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"
@@ -106,7 +106,7 @@
     "@id" : "https://identifiers.org/edam:format_1207"
   } ],
   "http://sbols.org/v3#description" : [ {
-    "@value" : "null sequence"
+    "@value" : "i13504 sequence"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"

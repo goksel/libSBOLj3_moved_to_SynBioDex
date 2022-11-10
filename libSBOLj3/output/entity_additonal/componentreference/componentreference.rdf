@@ -82,7 +82,7 @@
    <sbol:Sequence rdf:about="B0015_Sequence1">
       <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
       <sbol:elements>ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc</sbol:elements>
-      <sbol:description>terminator sequence</sbol:description>
+      <sbol:description>B0015 sequence</sbol:description>
       <sbol:name>Sequence1</sbol:name>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>B0015_Sequence1</sbol:displayId>
@@ -90,7 +90,7 @@
    <sbol:Sequence rdf:about="simpleDevice_Sequence1">
       <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
       <sbol:elements></sbol:elements>
-      <sbol:description>null sequence</sbol:description>
+      <sbol:description>simpleDevice sequence</sbol:description>
       <sbol:name>Sequence1</sbol:name>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>simpleDevice_Sequence1</sbol:displayId>

@@ -12,7 +12,7 @@
   }, {
     "@id" : "https://synbiohub.org/public/igem/BBa_R0040_Sequence1",
     "@type" : "sbol:Sequence",
-    "description" : "pTetR sequence",
+    "description" : "BBa_R0040 sequence",
     "displayId" : "BBa_R0040_Sequence1",
     "elements" : "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac",
     "encoding" : "EDAM:format_1207",

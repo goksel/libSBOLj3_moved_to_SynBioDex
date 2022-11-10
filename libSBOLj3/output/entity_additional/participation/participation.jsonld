@@ -23,7 +23,7 @@
   }, {
     "@id" : "https://sbolstandard.org/examples/E0040_Sequence1",
     "@type" : "sbol:Sequence",
-    "description" : "gfp sequence",
+    "description" : "E0040 sequence",
     "displayId" : "E0040_Sequence1",
     "elements" : "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa",
     "encoding" : "EDAM:format_1207",
@@ -68,14 +68,14 @@
     "@id" : "https://sbolstandard.org/examples/i13504/SubComponent1/Range1",
     "@type" : "sbol:Range",
     "displayId" : "Range1",
-    "end" : "719",
+    "end" : "720",
     "hasSequence" : "https://sbolstandard.org/examples/i13504_Sequence1",
     "orientation" : "SO:0001030",
     "start" : "1"
   }, {
     "@id" : "https://sbolstandard.org/examples/i13504_Sequence1",
     "@type" : "sbol:Sequence",
-    "description" : "null sequence",
+    "description" : "i13504 sequence",
     "displayId" : "i13504_Sequence1",
     "elements" : "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa",
     "encoding" : "EDAM:format_1207",

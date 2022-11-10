@@ -161,7 +161,7 @@
             <sbol:hasLocation>
                <sbol:Range rdf:about="i13504/SubComponent1/Range1">
                   <sbol:orientation rdf:resource="https://identifiers.org/SO:0001030"/>
-                  <sbol:end>11</sbol:end>
+                  <sbol:end>12</sbol:end>
                   <sbol:start>1</sbol:start>
                   <sbol:hasSequence>
                      <sbol:Sequence rdf:about="i13504_Sequence1"/>
@@ -300,7 +300,7 @@
    <sbol:Sequence rdf:about="B0015_Sequence1">
       <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
       <sbol:elements>ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc</sbol:elements>
-      <sbol:description>terminator sequence</sbol:description>
+      <sbol:description>B0015 sequence</sbol:description>
       <sbol:name>Sequence1</sbol:name>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>B0015_Sequence1</sbol:displayId>
@@ -308,7 +308,7 @@
    <sbol:Sequence rdf:about="E0040_Sequence1">
       <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
       <sbol:elements>atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa</sbol:elements>
-      <sbol:description>gfp sequence</sbol:description>
+      <sbol:description>E0040 sequence</sbol:description>
       <sbol:name>Sequence1</sbol:name>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>E0040_Sequence1</sbol:displayId>

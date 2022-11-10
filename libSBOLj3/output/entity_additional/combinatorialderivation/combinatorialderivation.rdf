@@ -24,7 +24,7 @@
    <sbol:Sequence rdf:about="BBa_R0040_Sequence1">
       <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
       <sbol:elements>tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac</sbol:elements>
-      <sbol:description>pTetR sequence</sbol:description>
+      <sbol:description>BBa_R0040 sequence</sbol:description>
       <sbol:name>Sequence1</sbol:name>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>BBa_R0040_Sequence1</sbol:displayId>

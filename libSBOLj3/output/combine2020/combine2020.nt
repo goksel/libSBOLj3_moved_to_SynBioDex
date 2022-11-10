@@ -4,7 +4,7 @@
 <https://synbiohub.org/public/igem/i13504_system/Interaction1> <http://sbols.org/v3#displayId> "Interaction1" .
 <https://synbiohub.org/public/igem/i13504_system/Interaction1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Interaction> .
 <https://synbiohub.org/public/igem/i13504/SubComponent1/Range1> <http://sbols.org/v3#orientation> <https://identifiers.org/SO:0001030> .
-<https://synbiohub.org/public/igem/i13504/SubComponent1/Range1> <http://sbols.org/v3#end> "11" .
+<https://synbiohub.org/public/igem/i13504/SubComponent1/Range1> <http://sbols.org/v3#end> "12" .
 <https://synbiohub.org/public/igem/i13504/SubComponent1/Range1> <http://sbols.org/v3#start> "1" .
 <https://synbiohub.org/public/igem/i13504/SubComponent1/Range1> <http://sbols.org/v3#hasSequence> <https://synbiohub.org/public/igem/i13504_Sequence1> .
 <https://synbiohub.org/public/igem/i13504/SubComponent1/Range1> <http://sbols.org/v3#displayId> "Range1" .
@@ -54,7 +54,7 @@
 <https://synbiohub.org/public/igem/interlab16device2/ComponentReference1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#ComponentReference> .
 <https://synbiohub.org/public/igem/B0015_Sequence1> <http://sbols.org/v3#encoding> <https://identifiers.org/edam:format_1207> .
 <https://synbiohub.org/public/igem/B0015_Sequence1> <http://sbols.org/v3#elements> "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc" .
-<https://synbiohub.org/public/igem/B0015_Sequence1> <http://sbols.org/v3#description> "terminator sequence" .
+<https://synbiohub.org/public/igem/B0015_Sequence1> <http://sbols.org/v3#description> "B0015 sequence" .
 <https://synbiohub.org/public/igem/B0015_Sequence1> <http://sbols.org/v3#name> "Sequence1" .
 <https://synbiohub.org/public/igem/B0015_Sequence1> <http://sbols.org/v3#hasNamespace> <https://synbiohub.org/public/igem> .
 <https://synbiohub.org/public/igem/B0015_Sequence1> <http://sbols.org/v3#displayId> "B0015_Sequence1" .
@@ -162,7 +162,7 @@
 <https://synbiohub.org/public/igem/i13504/SubComponent2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#SubComponent> .
 <https://synbiohub.org/public/igem/E0040_Sequence1> <http://sbols.org/v3#encoding> <https://identifiers.org/edam:format_1207> .
 <https://synbiohub.org/public/igem/E0040_Sequence1> <http://sbols.org/v3#elements> "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa" .
-<https://synbiohub.org/public/igem/E0040_Sequence1> <http://sbols.org/v3#description> "gfp sequence" .
+<https://synbiohub.org/public/igem/E0040_Sequence1> <http://sbols.org/v3#description> "E0040 sequence" .
 <https://synbiohub.org/public/igem/E0040_Sequence1> <http://sbols.org/v3#name> "Sequence1" .
 <https://synbiohub.org/public/igem/E0040_Sequence1> <http://sbols.org/v3#hasNamespace> <https://synbiohub.org/public/igem> .
 <https://synbiohub.org/public/igem/E0040_Sequence1> <http://sbols.org/v3#displayId> "E0040_Sequence1" .

@@ -70,7 +70,7 @@
      ] ,
     "http://sbols.org/v3#description" : [ { 
       "type" : "literal" ,
-      "value" : "gfp sequence"
+      "value" : "E0040 sequence"
     }
      ]
   }
@@ -131,7 +131,7 @@
      ] ,
     "http://sbols.org/v3#end" : [ { 
       "type" : "literal" ,
-      "value" : "719"
+      "value" : "720"
     }
      ]
   }
@@ -338,7 +338,7 @@
      ] ,
     "http://sbols.org/v3#description" : [ { 
       "type" : "literal" ,
-      "value" : "null sequence"
+      "value" : "i13504 sequence"
     }
      ]
   }

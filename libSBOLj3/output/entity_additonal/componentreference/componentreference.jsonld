@@ -12,7 +12,7 @@
   }, {
     "@id" : "https://synbiohub.org/public/igem/B0015_Sequence1",
     "@type" : "sbol:Sequence",
-    "description" : "terminator sequence",
+    "description" : "B0015 sequence",
     "displayId" : "B0015_Sequence1",
     "elements" : "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc",
     "encoding" : "EDAM:format_1207",
@@ -75,7 +75,7 @@
   }, {
     "@id" : "https://synbiohub.org/public/igem/simpleDevice_Sequence1",
     "@type" : "sbol:Sequence",
-    "description" : "null sequence",
+    "description" : "simpleDevice sequence",
     "displayId" : "simpleDevice_Sequence1",
     "elements" : "",
     "encoding" : "EDAM:format_1207",

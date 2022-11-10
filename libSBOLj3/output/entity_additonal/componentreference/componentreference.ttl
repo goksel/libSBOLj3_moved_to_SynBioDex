@@ -10,7 +10,7 @@
 @prefix sbol:  <http://sbols.org/v3#> .
 
 :B0015_Sequence1  a        sbol:Sequence ;
-        sbol:description   "terminator sequence" ;
+        sbol:description   "B0015 sequence" ;
         sbol:displayId     "B0015_Sequence1" ;
         sbol:elements      "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc" ;
         sbol:encoding      EDAM:format_1207 ;
@@ -19,7 +19,7 @@
 
 :simpleDevice_Sequence1
         a                  sbol:Sequence ;
-        sbol:description   "null sequence" ;
+        sbol:description   "simpleDevice sequence" ;
         sbol:displayId     "simpleDevice_Sequence1" ;
         sbol:elements      "" ;
         sbol:encoding      EDAM:format_1207 ;

@@ -10,7 +10,7 @@
 @prefix sbol:  <http://sbols.org/v3#> .
 
 :B0015_Sequence1  a        sbol:Sequence ;
-        sbol:description   "terminator sequence" ;
+        sbol:description   "B0015 sequence" ;
         sbol:displayId     "B0015_Sequence1" ;
         sbol:elements      "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc" ;
         sbol:encoding      EDAM:format_1207 ;
@@ -18,7 +18,7 @@
         sbol:name          "Sequence1" .
 
 :i13504_Sequence1  a       sbol:Sequence ;
-        sbol:description   "null sequence" ;
+        sbol:description   "i13504 sequence" ;
         sbol:displayId     "i13504_Sequence1" ;
         sbol:elements      "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc" ;
         sbol:encoding      EDAM:format_1207 ;
@@ -30,7 +30,7 @@
         sbol:displayId    "Range2" ;
         sbol:end          "80" ;
         sbol:hasSequence  :i13504_Sequence1 ;
-        sbol:start        "2" .
+        sbol:start        "1" .
 
 :i13504  a                 sbol:Component ;
         sbol:displayId     "i13504" ;

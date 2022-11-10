@@ -58,7 +58,7 @@ public class DataModel {
 		{
 			public static URI uri=URINameSpace.SBOL.local("SubComponent");
 			public static URI instanceOf=URINameSpace.SBOL.local("instanceOf");
-			public static URI location=URINameSpace.SBOL.local("hasLocation");	
+			public static URI location=FeatureWithLocation.location;	
 			public static URI sourceLocation=URINameSpace.SBOL.local("sourceLocation");	
 			public static URI roleIntegration=URINameSpace.SBOL.local("roleIntegration");
 			
@@ -73,7 +73,7 @@ public class DataModel {
 		public static final class LocalSubComponent
 		{
 			public static URI uri=URINameSpace.SBOL.local("LocalSubComponent");
-			public static URI location=SubComponent.location;
+			public static URI location=FeatureWithLocation.location;
 		}
 		
 		public static final class ExternalyDefined
@@ -82,10 +82,16 @@ public class DataModel {
 			public static URI definition=URINameSpace.SBOL.local("definition");
 		}
 		
+		//abstract
+		public static final class FeatureWithLocation
+		{
+			public static URI uri =URINameSpace.SBOL.local("FeatureWithLocation");
+			public static URI location=URINameSpace.SBOL.local("hasLocation");	
+		}
 		public static final class SequenceFeature
 		{
 			public static URI uri =URINameSpace.SBOL.local("SequenceFeature");
-			public static URI location=SubComponent.location;	
+			public static URI location=FeatureWithLocation.location;	
 		}
 		
 		public static final class Interaction

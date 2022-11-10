@@ -12,7 +12,7 @@
   }, {
     "@id" : "https://synbiohub.org/public/igem/B0015_Sequence1",
     "@type" : "sbol:Sequence",
-    "description" : "terminator sequence",
+    "description" : "B0015 sequence",
     "displayId" : "B0015_Sequence1",
     "elements" : "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc",
     "encoding" : "EDAM:format_1207",
@@ -48,7 +48,7 @@
   }, {
     "@id" : "https://synbiohub.org/public/igem/E0040_Sequence1",
     "@type" : "sbol:Sequence",
-    "description" : "gfp sequence",
+    "description" : "E0040 sequence",
     "displayId" : "E0040_Sequence1",
     "elements" : "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa",
     "encoding" : "EDAM:format_1207",
@@ -112,7 +112,7 @@
     "@id" : "https://synbiohub.org/public/igem/i13504/SubComponent1/Range1",
     "@type" : "sbol:Range",
     "displayId" : "Range1",
-    "end" : "11",
+    "end" : "12",
     "hasSequence" : "https://synbiohub.org/public/igem/i13504_Sequence1",
     "orientation" : "SO:0001030",
     "start" : "1"

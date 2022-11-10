@@ -31,7 +31,7 @@
         sbol:type          SBO:0000251 .
 
 :BBa_R0040_Sequence1  a    sbol:Sequence ;
-        sbol:description   "pTetR sequence" ;
+        sbol:description   "BBa_R0040 sequence" ;
         sbol:displayId     "BBa_R0040_Sequence1" ;
         sbol:elements      "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac" ;
         sbol:encoding      EDAM:format_1207 ;

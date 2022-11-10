@@ -307,7 +307,7 @@ public class Component extends TopLevel {
 				if (feature instanceof FeatureWithLocation) {
 					FeatureWithLocation locFeature = (FeatureWithLocation) feature;
 					List<Location> locations = locFeature.getLocations();
-					validationMessages= validateComponentLocation(validationMessages, locations, locFeature, sequences, entireSequences,DataModel.SequenceFeature.location, "{LOCATION_SEQUENCE_VALID}");
+					validationMessages= validateComponentLocation(validationMessages, locations, locFeature, sequences, entireSequences,DataModel.FeatureWithLocation.location, "{LOCATION_SEQUENCE_VALID}");
 				}
 				if (feature instanceof SubComponent){
 					SubComponent subComponent=(SubComponent) feature;

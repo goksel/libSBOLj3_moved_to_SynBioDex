@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.jena.rdf.model.Model;
@@ -228,7 +229,10 @@ public class SBOLUtil {
 	        return RDFDataMgr.loadModel(file.getPath(), lang);
 	    }
 	    
-	    
+	    public static boolean isNullOrEmpty(Optional<?> optional)
+	    {
+	    	return (optional==null || optional.isEmpty());
+	    }
 	   
 	    
 	    

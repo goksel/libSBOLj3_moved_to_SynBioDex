@@ -347,7 +347,7 @@ public class SBOLAPI {
 		    	{
 		    		sequence=createSequence(document, parent, Encoding.NucleicAcid, "");	
 			    	start=1;
-		        	end=elements.length()-1;
+		        	end=elements.length();
 		    	}
 		    	
 		    	if (orientation==Orientation.inline)
@@ -434,7 +434,8 @@ public class SBOLAPI {
 	    public static Sequence createSequence(SBOLDocument doc, Component component, Encoding encoding, String elements) throws SBOLGraphException
 	    {
 	    	String localName=createLocalName(DataModel.Sequence.uri, component.getSequences());
-	    	Sequence seq=createSequence(doc, URI.create(component.getUri().toString() + "_" + localName), localName, component.getName() + " sequence", elements, encoding);
+	    	
+	    	Sequence seq=createSequence(doc, URI.create(component.getUri().toString() + "_" + localName), localName, component.getDisplayId() + " sequence", elements, encoding);
 	    	component.setSequences(Arrays.asList(seq)); 
 	 		return seq;
 	    }
@@ -442,7 +443,7 @@ public class SBOLAPI {
 	    public static Sequence addSequence(SBOLDocument doc, Component component, Encoding encoding, String elements) throws SBOLGraphException
 	    {
 	    	String localName=createLocalName(DataModel.Sequence.uri, doc.getSequences());
-	    	Sequence seq=createSequence(doc, URI.create(component.getUri().toString() + "_" + localName), localName, component.getName() + " sequence", elements, encoding);
+	    	Sequence seq=createSequence(doc, URI.create(component.getUri().toString() + "_" + localName), localName, component.getDisplayId() + " sequence", elements, encoding);
 	    	List<Sequence> sequences=component.getSequences();
 	    	if (sequences==null)
 	    	{

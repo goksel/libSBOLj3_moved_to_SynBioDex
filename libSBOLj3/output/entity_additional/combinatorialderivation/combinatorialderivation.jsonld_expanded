@@ -31,7 +31,7 @@
     "@value" : "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac"
   } ],
   "http://sbols.org/v3#description" : [ {
-    "@value" : "pTetR sequence"
+    "@value" : "BBa_R0040 sequence"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"

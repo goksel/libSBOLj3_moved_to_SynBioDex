@@ -122,23 +122,18 @@ public abstract class  Location extends Identified {
 	protected List<ValidationMessage> assertLocationNotBiggerThanSequence(List<ValidationMessage> validationMessages, Sequence  sequence, Optional<Integer> location, String message, URI property) throws SBOLGraphException
 	{
 		boolean valid=true;
-		String elements=sequence.getElements();
-		if (location!=null && !location.isEmpty())
-		{
-			if (elements!=null)
-			{
-				if (location.get()>elements.length())
-				{
+		if (location!=null && !location.isEmpty()){
+			if (sequence!=null && sequence.getElements()!=null){
+				String elements=sequence.getElements();
+				if (location.get()>elements.length()){
 					valid=false;
 				}
 			}
-			else
-			{
+			else{
 				valid=false;
 			}
 			
-			if (!valid)
-			{
+			if (!valid){
 				ValidationMessage validationMessage=new ValidationMessage(message, property, location.get());
 				validationMessages = IdentifiedValidator.addToValidations(validationMessages, validationMessage);
 			}

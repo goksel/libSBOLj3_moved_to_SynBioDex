@@ -55,21 +55,21 @@ public class RangeTest extends TestCase {
 	    TestUtil.validateProperty(range, "setEnd", new Object[] {Optional.empty()}, Optional.class);        
 	    range.setStart(Optional.empty());
 	    range.setEnd(Optional.empty());
-	    TestUtil.validateIdentified(range,doc,2);
+	    TestUtil.validateIdentified(range,doc,2,3);
 	    
 	    //Range.start cannot be negative
 	    range.setStart(Optional.of(-1));
 	    range.setEnd(Optional.of(-1));
-	    TestUtil.validateIdentified(range,doc,2);
+	    TestUtil.validateIdentified(range,doc,2,3);
 	    
 	    //Range.start cannot be negative
 	    range.setStart(Optional.of(0));
 	    range.setEnd(Optional.of(0));
-		TestUtil.validateIdentified(range,doc,2);
+		TestUtil.validateIdentified(range,doc,2,3);
 	    
 	   //Range.start cannot be negative
-	    range.setStart(Optional.of(1));
-	    range.setEnd(Optional.of(2));
+	    range.setStart(Optional.of(start));
+	    range.setEnd(Optional.of(end));
 	    TestUtil.validateIdentified(range,doc,0);
 	    
 	    	

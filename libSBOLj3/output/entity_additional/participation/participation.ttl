@@ -34,7 +34,7 @@
         sbol:hasSequence  :gfp_start .
 
 :i13504_Sequence1  a       sbol:Sequence ;
-        sbol:description   "null sequence" ;
+        sbol:description   "i13504 sequence" ;
         sbol:displayId     "i13504_Sequence1" ;
         sbol:elements      "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa" ;
         sbol:encoding      EDAM:format_1207 ;
@@ -49,7 +49,7 @@
 <i13504/SubComponent1/Range1>
         a                 sbol:Range ;
         sbol:displayId    "Range1" ;
-        sbol:end          "719" ;
+        sbol:end          "720" ;
         sbol:hasSequence  :i13504_Sequence1 ;
         sbol:orientation  SO:0001030 ;
         sbol:start        "1" .
@@ -110,7 +110,7 @@
         sbol:type          SBO:0000251 .
 
 :E0040_Sequence1  a        sbol:Sequence ;
-        sbol:description   "gfp sequence" ;
+        sbol:description   "E0040 sequence" ;
         sbol:displayId     "E0040_Sequence1" ;
         sbol:elements      "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa" ;
         sbol:encoding      EDAM:format_1207 ;
