@@ -23,7 +23,7 @@ import junit.framework.TestCase;
  */
 public class GettingStartedTutorialTest  extends TestCase {
 
-	public void testApp() throws SBOLGraphException, IOException{
+	public void testGettingStartedTutorial() throws SBOLGraphException, IOException{
 		GettingStartedTutorial tutorial=new GettingStartedTutorial();
 		SBOLDocument doc=tutorial.runExample();
 	    TestUtil.serialise(doc, "combine2020", "combine2020");   

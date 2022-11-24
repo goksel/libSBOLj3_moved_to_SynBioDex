@@ -19,7 +19,7 @@ import junit.framework.TestCase;
 
 public class MulticellularSimple extends TestCase {
 
-	public void testApp() throws SBOLGraphException, IOException
+	public void testMulticellularSimple() throws SBOLGraphException, IOException
     {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));

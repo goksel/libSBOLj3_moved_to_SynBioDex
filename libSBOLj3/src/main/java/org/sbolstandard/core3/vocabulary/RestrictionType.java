@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.sbolstandard.core3.util.URINameSpace;
 
 public class RestrictionType {
@@ -153,6 +154,59 @@ public class RestrictionType {
 		
 		public static SequentialRestriction get(URI url) {
 			return lookup.get(url);
+		}
+		
+		
+		
+		public static boolean checkPrecedes(Pair<Integer, Integer> subject, Pair<Integer, Integer> object)
+		{
+			return subject.getLeft() < object.getLeft();
+		}
+	
+		public static boolean checkStrictlyPrecedes(Pair<Integer, Integer> subject, Pair<Integer, Integer> object)
+		{
+			return subject.getRight() < object.getLeft();
+		}
+		
+		public static boolean checkMeets(Pair<Integer, Integer> subject, Pair<Integer, Integer> object)
+		{
+			return subject.getRight() == object.getLeft();
+		}
+		
+		public static boolean checkStarts(Pair<Integer, Integer> subject, Pair<Integer, Integer> object)
+		{
+			return subject.getLeft() == object.getLeft() && subject.getRight() < object.getRight();
+		}
+		
+		public static boolean checkFinishes(Pair<Integer, Integer> subject, Pair<Integer, Integer> object)
+		{
+			return subject.getRight() == object.getRight() && subject.getLeft() > object.getLeft();
+		}
+		
+		public static boolean checkOverlaps(Pair<Integer, Integer> subject, Pair<Integer, Integer> object)
+		{
+			//return existsBetween(subject.getLeft(), object.getLeft(), object.getRight()) || existsBetween(subject.getRight(), object.getLeft(), object.getRight()); 
+			return existsBetween(subject.getLeft(), object.getLeft(), object.getRight()) || existsBetween(object.getLeft(), subject.getLeft(), subject.getRight()); 
+		}
+		
+		public static boolean checkContains(Pair<Integer, Integer> subject, Pair<Integer, Integer> object)
+		{
+			return subject.getLeft() <= object.getLeft() &&  subject.getRight() >= object.getRight();
+		}
+		
+		public static boolean checkStrictlyContains(Pair<Integer, Integer> subject, Pair<Integer, Integer> object)
+		{
+			return subject.getLeft() < object.getLeft() &&  subject.getRight() > object.getRight();
+		}
+		
+		public static boolean checkEquals(Pair<Integer, Integer> subject, Pair<Integer, Integer> object)
+		{
+			return subject.getLeft() == object.getLeft() &&  subject.getRight() == object.getRight();
+		}
+		
+		private static boolean existsBetween (int location, int start, int end)
+		{
+			return (location>=start && location<=end);
 		}
 	}	
 	

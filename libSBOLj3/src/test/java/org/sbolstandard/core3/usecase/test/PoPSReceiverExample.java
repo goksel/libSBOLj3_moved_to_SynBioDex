@@ -26,7 +26,7 @@ import junit.framework.TestCase;
 
 public class PoPSReceiverExample extends TestCase {
 
-	public void testApp() throws SBOLGraphException, IOException
+	public void testPoPSReceiverExample() throws SBOLGraphException, IOException
     {
         SBOLDocument doc=new SBOLDocument(URI.create("https://synbiohub.org/public/igem/"));
         //SBOLDocument doc=new SBOLDocument();

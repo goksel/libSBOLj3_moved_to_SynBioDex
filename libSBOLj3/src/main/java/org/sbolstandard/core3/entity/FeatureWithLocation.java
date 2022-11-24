@@ -298,7 +298,7 @@ public abstract class FeatureWithLocation extends Feature{
 		return validationMessages;	
 	}
 	
-	private boolean existsBetween (int location, int start, int end)
+	public static boolean existsBetween (int location, int start, int end)
 	{
 		return (location>=start && location<=end);
 	}

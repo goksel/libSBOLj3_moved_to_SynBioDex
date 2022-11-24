@@ -22,7 +22,7 @@ import junit.framework.TestCase;
 
 public class ToggleSwitch extends TestCase {
 
-	public void testApp() throws SBOLGraphException, IOException
+	public void testToggleSwitch() throws SBOLGraphException, IOException
     {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
