@@ -1,10 +1,12 @@
 package org.sbolstandard.core3.util;
 
+import java.io.FileNotFoundException;
 import java.net.URI;
 import java.util.Set;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.Role;
 
@@ -78,15 +80,22 @@ public class Configuration {
 	
 	private Configuration()
 	{
-		Model edamOntology=SBOLUtil.getModelFromFileResource("edam.owl.reduced", Lang.TURTLE);
-		Model soOntology=SBOLUtil.getModelFromFileResource("so-simple.owl.reduced", Lang.TURTLE);
-		Model sboOntology=SBOLUtil.getModelFromFileResource("sbo.owl.reduced", Lang.TURTLE);
-		this.SboOccurringEntityInteractionTypes=RDFUtil.childResourcesRecursively(sboOntology,URINameSpace.SBO.local("0000231").toString());
-		this.SoSequenceFeatures=RDFUtil.childResourcesRecursively(soOntology,Role.SequenceFeature.toString());
-		this.EdamEncodingTerms= RDFUtil.childResourcesRecursively(edamOntology,Encoding.PARENT_TERM.toString());
+		try
+		{
+			Model edamOntology=SBOLUtil.getModelFromFileResource("edam.owl.reduced", RDFFormat.TURTLE);
+			Model soOntology=SBOLUtil.getModelFromFileResource("so-simple.owl.reduced", RDFFormat.TURTLE);
+			Model sboOntology=SBOLUtil.getModelFromFileResource("sbo.owl.reduced", RDFFormat.TURTLE);
+			this.SboOccurringEntityInteractionTypes=RDFUtil.childResourcesRecursively(sboOntology,URINameSpace.SBO.local("0000231").toString());
+			this.SoSequenceFeatures=RDFUtil.childResourcesRecursively(soOntology,Role.SequenceFeature.toString());
+			this.EdamEncodingTerms= RDFUtil.childResourcesRecursively(edamOntology,Encoding.PARENT_TERM.toString());
+		}
+		catch (FileNotFoundException ex)
+		{
+			throw new Error(ex);
+		}
 	}
 	
-	private static class SingletonHelper {
+	private static class SingletonHelper  {
         private static final Configuration INSTANCE = new Configuration();
     }
 	

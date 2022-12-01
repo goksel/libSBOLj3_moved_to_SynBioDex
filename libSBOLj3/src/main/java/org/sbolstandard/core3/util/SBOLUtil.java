@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +25,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.riot.RDFFormat;
 import org.apache.jena.util.FileManager;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Identified;
@@ -211,7 +213,7 @@ public class SBOLUtil {
 	    }
 	    
 	    
-	    private static String readFromFileResource(String fileResource) throws IOException
+	    /*private static String readFromFileResource(String fileResource) throws IOException
 		{
 			try
 			{
@@ -222,12 +224,22 @@ public class SBOLUtil {
 			{
 				throw new IOException("Could not load the file " + fileResource,e);
 			}
-		}
+		}*/
 	    
-	    public static Model getModelFromFileResource(String fileResource, Lang lang) {
+	    public static Model getModelFromFileResourceOld(String fileResource, Lang lang) {
 	        File file = new File(SBOLAPI.class.getClassLoader().getResource(fileResource).getFile());
 	        return RDFDataMgr.loadModel(file.getPath(), lang);
 	    }
+	    
+	    
+	    public static Model getModelFromFileResource(String fileResource,RDFFormat format) throws FileNotFoundException {
+	    	InputStream is = SBOLAPI.class.getClassLoader().getResourceAsStream(fileResource);
+	    	Model model= RDFUtil.read(is, format);
+	    	//RDFDataMgr.read(null, is, lang);
+	    	return model;
+	    	
+	    }
+	    
 	    
 	    public static boolean isNullOrEmpty(Optional<?> optional)
 	    {

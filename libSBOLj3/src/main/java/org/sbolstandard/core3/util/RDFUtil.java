@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,7 +17,9 @@ import java.util.Map;
 import java.util.OptionalInt;
 import java.util.Set;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.jena.datatypes.xsd.impl.XSDFloat;
+import org.apache.jena.query.ARQ;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -686,28 +689,40 @@ public class RDFUtil {
 	    
 	    public static Model read(InputStream stream, RDFFormat format) throws FileNotFoundException
 		{
+	    	if (ARQ.getContext()==null)
+	    	{
+	    		ARQ.init();
+	    		System.out.println("**************");
+	    		System.out.println("Initialised ARQ");
+	    		System.out.println("**************");
+	    	}
 	    	Model model = ModelFactory.createDefaultModel();
-	        RDFParserBuilder rdfBuilder= RDFParser.create().source(stream);
+	    	RDFDataMgr.read(model, stream, format.getLang());
+	    	
+	        /*RDFParserBuilder rdfBuilder= RDFParser.create().source(stream);
 	        if (format!=null)
 	        {
 	        	rdfBuilder.lang(format.getLang());
 	        }
 	        RDFParser parser=rdfBuilder.build();
-	        parser.parse(model);    
+	        parser.parse(model); */ 
 			return model;			
 		}
 	    
 	    public static Model read(String input, RDFFormat format) throws FileNotFoundException
 		{
-	    	Model model = ModelFactory.createDefaultModel();
-	        RDFParserBuilder rdfBuilder= RDFParser.create().fromString(input);
+	    	InputStream stream=IOUtils.toInputStream(input, Charset.defaultCharset());
+	    	return read(stream, format);
+	    	/*
+	        Model model = ModelFactory.createDefaultModel();
+	    	RDFParserBuilder rdfBuilder= RDFParser.create().fromString(input);
 	        if (format!=null)
 	        {
 	        	rdfBuilder.lang(format.getLang());
 	        }
 	        RDFParser parser=rdfBuilder.build();
-	        parser.parse(model);    
-			return model;			
+	        parser.parse(model);  
+			return model;	*/		
 		}
 	    
 	    public static List<URI> filterItems(Model model, List<URI> resources, URI property, URI value)

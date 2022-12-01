@@ -269,7 +269,7 @@ public class AppTest
     	//3331-->2332 -->1915
     	
     	//Model model=SBOLUtil.getModelFromFileResource("edam.owl");
-    	Model model=SBOLUtil.getModelFromFileResource("edam.owl.reduced", Lang.TURTLE);
+    	Model model=SBOLUtil.getModelFromFileResource("edam.owl.reduced", RDFFormat.TURTLE);
     	String child= "https://identifiers.org/edam:format_3331"; //BLAST XML results format
     	String parent= "https://identifiers.org/edam:format_2330";
     	boolean result=RDFUtil.hasParentRecursively(model, child , parent);
