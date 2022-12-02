@@ -46,7 +46,7 @@
 }, {
   "@id" : "https://synbiohub.org/public/igem/B0034",
   "http://sbols.org/v3#hasSequence" : [ {
-    "@id" : "https://synbiohub.org/public/igem/B0034_Sequence"
+    "@id" : "https://synbiohub.org/public/igem/B0034_Sequence1"
   } ],
   "http://sbols.org/v3#role" : [ {
     "@id" : "https://identifiers.org/SO:0000139"
@@ -55,7 +55,7 @@
     "@value" : "RBS (Elowitz 1999)"
   } ],
   "http://sbols.org/v3#name" : [ {
-    "@value" : "B0034"
+    "@value" : "rbs"
   } ],
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://synbiohub.org/public/igem"
@@ -68,18 +68,24 @@
   } ],
   "@type" : [ "http://sbols.org/v3#Component" ]
 }, {
-  "@id" : "https://synbiohub.org/public/igem/B0034_Sequence",
+  "@id" : "https://synbiohub.org/public/igem/B0034_Sequence1",
   "http://sbols.org/v3#encoding" : [ {
     "@id" : "https://identifiers.org/edam:format_1207"
   } ],
   "http://sbols.org/v3#elements" : [ {
     "@value" : "aaagaggagaaa"
   } ],
+  "http://sbols.org/v3#description" : [ {
+    "@value" : "B0034 sequence"
+  } ],
+  "http://sbols.org/v3#name" : [ {
+    "@value" : "Sequence1"
+  } ],
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://synbiohub.org/public/igem"
   } ],
   "http://sbols.org/v3#displayId" : [ {
-    "@value" : "B0034_Sequence"
+    "@value" : "B0034_Sequence1"
   } ],
   "@type" : [ "http://sbols.org/v3#Sequence" ]
 }, {
@@ -165,9 +171,6 @@
     "@value" : "i13504"
   } ],
   "@type" : [ "http://sbols.org/v3#Component" ],
-  "http://sbols.org/v3#role" : [ {
-    "@id" : "https://identifiers.org/SO:0000704"
-  } ],
   "http://sbols.org/v3#hasSequence" : [ {
     "@id" : "https://synbiohub.org/public/igem/i13504_Sequence1"
   } ],
@@ -176,6 +179,9 @@
   } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "https://identifiers.org/SBO:0000251"
+  } ],
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SO:0000804"
   } ],
   "http://sbols.org/v3#description" : [ {
     "@value" : "Screening plasmid intermediate"
@@ -372,6 +378,9 @@
   }, {
     "@id" : "https://synbiohub.org/public/igem/i13504_system/SubComponent1"
   } ],
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SBO:0000289"
+  } ],
   "@type" : [ "http://sbols.org/v3#Component" ],
   "http://sbols.org/v3#hasInteraction" : [ {
     "@id" : "https://synbiohub.org/public/igem/i13504_system/Interaction1"
@@ -379,14 +388,11 @@
   "http://sbols.org/v3#name" : [ {
     "@value" : "i13504 system"
   } ],
-  "http://sbols.org/v3#role" : [ {
-    "@id" : "https://identifiers.org/SO:0000704"
-  } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "i13504_system"
   } ],
   "http://sbols.org/v3#type" : [ {
-    "@id" : "https://identifiers.org/SBO:0000251"
+    "@id" : "https://identifiers.org/SBO:0000241"
   } ]
 }, {
   "@id" : "https://synbiohub.org/public/igem/i13504_system/ComponentReference1",

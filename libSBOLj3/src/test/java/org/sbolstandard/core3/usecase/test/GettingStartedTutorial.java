@@ -105,7 +105,7 @@ public class GettingStartedTutorial {
 		System.out.println("Subcomponents:");
 		for (SubComponent subComp: device.getSubComponents())
 		{
-			System.out.println(subComp.getInstanceOf());
+			System.out.println(subComp.getInstanceOf().getUri());
 		}
 
 		//Search for components using the SPARQL graph query language.

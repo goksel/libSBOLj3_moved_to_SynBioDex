@@ -16,16 +16,18 @@
 <https://synbiohub.org/public/igem/B0034> <http://sbols.org/v3#description> "RBS (Elowitz 1999)" .
 <https://synbiohub.org/public/igem/B0034> <http://sbols.org/v3#displayId> "B0034" .
 <https://synbiohub.org/public/igem/B0034> <http://sbols.org/v3#hasNamespace> <https://synbiohub.org/public/igem> .
-<https://synbiohub.org/public/igem/B0034> <http://sbols.org/v3#hasSequence> <https://synbiohub.org/public/igem/B0034_Sequence> .
-<https://synbiohub.org/public/igem/B0034> <http://sbols.org/v3#name> "B0034" .
+<https://synbiohub.org/public/igem/B0034> <http://sbols.org/v3#hasSequence> <https://synbiohub.org/public/igem/B0034_Sequence1> .
+<https://synbiohub.org/public/igem/B0034> <http://sbols.org/v3#name> "rbs" .
 <https://synbiohub.org/public/igem/B0034> <http://sbols.org/v3#role> <https://identifiers.org/SO:0000139> .
 <https://synbiohub.org/public/igem/B0034> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000251> .
 <https://synbiohub.org/public/igem/B0034> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Component> .
-<https://synbiohub.org/public/igem/B0034_Sequence> <http://sbols.org/v3#displayId> "B0034_Sequence" .
-<https://synbiohub.org/public/igem/B0034_Sequence> <http://sbols.org/v3#elements> "aaagaggagaaa" .
-<https://synbiohub.org/public/igem/B0034_Sequence> <http://sbols.org/v3#encoding> <https://identifiers.org/edam:format_1207> .
-<https://synbiohub.org/public/igem/B0034_Sequence> <http://sbols.org/v3#hasNamespace> <https://synbiohub.org/public/igem> .
-<https://synbiohub.org/public/igem/B0034_Sequence> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Sequence> .
+<https://synbiohub.org/public/igem/B0034_Sequence1> <http://sbols.org/v3#description> "B0034 sequence" .
+<https://synbiohub.org/public/igem/B0034_Sequence1> <http://sbols.org/v3#displayId> "B0034_Sequence1" .
+<https://synbiohub.org/public/igem/B0034_Sequence1> <http://sbols.org/v3#elements> "aaagaggagaaa" .
+<https://synbiohub.org/public/igem/B0034_Sequence1> <http://sbols.org/v3#encoding> <https://identifiers.org/edam:format_1207> .
+<https://synbiohub.org/public/igem/B0034_Sequence1> <http://sbols.org/v3#hasNamespace> <https://synbiohub.org/public/igem> .
+<https://synbiohub.org/public/igem/B0034_Sequence1> <http://sbols.org/v3#name> "Sequence1" .
+<https://synbiohub.org/public/igem/B0034_Sequence1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Sequence> .
 <https://synbiohub.org/public/igem/E0040> <http://sbols.org/v3#description> "gfp coding sequence" .
 <https://synbiohub.org/public/igem/E0040> <http://sbols.org/v3#displayId> "E0040" .
 <https://synbiohub.org/public/igem/E0040> <http://sbols.org/v3#hasNamespace> <https://synbiohub.org/public/igem> .
@@ -110,7 +112,7 @@
 <https://synbiohub.org/public/igem/i13504> <http://sbols.org/v3#hasNamespace> <https://synbiohub.org/public/igem> .
 <https://synbiohub.org/public/igem/i13504> <http://sbols.org/v3#hasSequence> <https://synbiohub.org/public/igem/i13504_Sequence1> .
 <https://synbiohub.org/public/igem/i13504> <http://sbols.org/v3#name> "i13504" .
-<https://synbiohub.org/public/igem/i13504> <http://sbols.org/v3#role> <https://identifiers.org/SO:0000704> .
+<https://synbiohub.org/public/igem/i13504> <http://sbols.org/v3#role> <https://identifiers.org/SO:0000804> .
 <https://synbiohub.org/public/igem/i13504> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000251> .
 <https://synbiohub.org/public/igem/i13504> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Component> .
 <https://synbiohub.org/public/igem/i13504_Sequence1> <http://sbols.org/v3#description> "i13504 sequence" .
@@ -150,8 +152,8 @@
 <https://synbiohub.org/public/igem/i13504_system> <http://sbols.org/v3#hasInteraction> <https://synbiohub.org/public/igem/i13504_system/Interaction1> .
 <https://synbiohub.org/public/igem/i13504_system> <http://sbols.org/v3#hasNamespace> <https://synbiohub.org/public/igem> .
 <https://synbiohub.org/public/igem/i13504_system> <http://sbols.org/v3#name> "i13504 system" .
-<https://synbiohub.org/public/igem/i13504_system> <http://sbols.org/v3#role> <https://identifiers.org/SO:0000704> .
-<https://synbiohub.org/public/igem/i13504_system> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000251> .
+<https://synbiohub.org/public/igem/i13504_system> <http://sbols.org/v3#role> <https://identifiers.org/SBO:0000289> .
+<https://synbiohub.org/public/igem/i13504_system> <http://sbols.org/v3#type> <https://identifiers.org/SBO:0000241> .
 <https://synbiohub.org/public/igem/i13504_system> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sbols.org/v3#Component> .
 <https://synbiohub.org/public/igem/interlab16device1/ComponentReference1> <http://sbols.org/v3#displayId> "ComponentReference1" .
 <https://synbiohub.org/public/igem/interlab16device1/ComponentReference1> <http://sbols.org/v3#inChildOf> <https://synbiohub.org/public/igem/interlab16device1/SubComponent2> .

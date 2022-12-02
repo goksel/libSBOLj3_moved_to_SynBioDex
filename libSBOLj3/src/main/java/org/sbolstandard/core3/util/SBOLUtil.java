@@ -247,5 +247,20 @@ public class SBOLUtil {
 	    }
 	   
 	    
+	    public static void printValidationMessages(List<String> messages)
+		{	 
+	    	if (messages!=null && messages.size()>0)
+	        {
+				for (String message: messages){
+		        	System.out.println(message);
+		        } 
+	        }
+	        else
+	        {
+	        	System.out.println("\tNo errors!");
+	        }
+	        System.out.println("--------------------");
+		}
+	    
 	    
 }

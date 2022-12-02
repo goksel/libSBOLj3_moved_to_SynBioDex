@@ -31,6 +31,14 @@
         sbol:role           SO:0000704 ;
         sbol:type           SBO:0000251 .
 
+:B0034_Sequence1  a        sbol:Sequence ;
+        sbol:description   "B0034 sequence" ;
+        sbol:displayId     "B0034_Sequence1" ;
+        sbol:elements      "aaagaggagaaa" ;
+        sbol:encoding      EDAM:format_1207 ;
+        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:name          "Sequence1" .
+
 <i13504_system/Interaction1/Participation1>
         a                 sbol:Participation ;
         sbol:displayId    "Participation1" ;
@@ -50,12 +58,6 @@
         sbol:hasSequence  :i13504_Sequence1 ;
         sbol:orientation  SO:0001030 ;
         sbol:start        "13" .
-
-:B0034_Sequence  a         sbol:Sequence ;
-        sbol:displayId     "B0034_Sequence" ;
-        sbol:elements      "aaagaggagaaa" ;
-        sbol:encoding      EDAM:format_1207 ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> .
 
 :E0040  a                  sbol:Component ;
         sbol:description   "gfp coding sequence" ;
@@ -111,7 +113,7 @@
         sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
         sbol:hasSequence   :i13504_Sequence1 ;
         sbol:name          "i13504" ;
-        sbol:role          SO:0000704 ;
+        sbol:role          SO:0000804 ;
         sbol:type          SBO:0000251 .
 
 :j23101  a                 sbol:Component ;
@@ -163,8 +165,8 @@
         sbol:description   "RBS (Elowitz 1999)" ;
         sbol:displayId     "B0034" ;
         sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
-        sbol:hasSequence   :B0034_Sequence ;
-        sbol:name          "B0034" ;
+        sbol:hasSequence   :B0034_Sequence1 ;
+        sbol:name          "rbs" ;
         sbol:role          SO:0000139 ;
         sbol:type          SBO:0000251 .
 
@@ -174,8 +176,8 @@
         sbol:hasInteraction  <i13504_system/Interaction1> ;
         sbol:hasNamespace    <https://synbiohub.org/public/igem> ;
         sbol:name            "i13504 system" ;
-        sbol:role            SO:0000704 ;
-        sbol:type            SBO:0000251 .
+        sbol:role            SBO:0000289 ;
+        sbol:type            SBO:0000241 .
 
 <i13504/SubComponent3/Range1>
         a                 sbol:Range ;
