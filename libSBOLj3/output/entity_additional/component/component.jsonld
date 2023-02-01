@@ -1,41 +1,26 @@
 {
-  "@id" : "https://synbiohub.org/public/igem/BBa_F2620",
-  "@type" : "sbol:Component",
-  "description" : "PoPS Receiver",
-  "displayId" : "BBa_F2620",
-  "hasNamespace" : "https://synbiohub.org/public/igem",
-  "name" : "BBa_F2620",
-  "role" : "SO:0000704",
-  "type" : "SBO:0000251",
-  "@context" : {
-    "role" : {
-      "@id" : "http://sbols.org/v3#role",
-      "@type" : "@id"
+    "@id": "https://synbiohub.org/public/igem/BBa_F2620",
+    "sbol:role": {
+        "@id": "SO:0000704"
     },
-    "description" : {
-      "@id" : "http://sbols.org/v3#description"
+    "sbol:description": "PoPS Receiver",
+    "sbol:name": "BBa_F2620",
+    "sbol:hasNamespace": {
+        "@id": "https://synbiohub.org/public/igem"
     },
-    "name" : {
-      "@id" : "http://sbols.org/v3#name"
+    "sbol:type": {
+        "@id": "SBO:0000251"
     },
-    "hasNamespace" : {
-      "@id" : "http://sbols.org/v3#hasNamespace",
-      "@type" : "@id"
-    },
-    "type" : {
-      "@id" : "http://sbols.org/v3#type",
-      "@type" : "@id"
-    },
-    "displayId" : {
-      "@id" : "http://sbols.org/v3#displayId"
-    },
-    "SBO" : "https://identifiers.org/SBO:",
-    "CHEBI" : "https://identifiers.org/CHEBI:",
-    "GO" : "https://identifiers.org/GO:",
-    "sbol" : "http://sbols.org/v3#",
-    "EDAM" : "https://identifiers.org/edam:",
-    "SO" : "https://identifiers.org/SO:",
-    "prov" : "http://www.w3.org/ns/prov#",
-    "om" : "http://www.ontology-of-units-of-measure.org/resource/om-2/"
-  }
+    "sbol:displayId": "BBa_F2620",
+    "@type": "sbol:Component",
+    "@context": {
+        "SBO": "https://identifiers.org/SBO:",
+        "CHEBI": "https://identifiers.org/CHEBI:",
+        "GO": "https://identifiers.org/GO:",
+        "sbol": "http://sbols.org/v3#",
+        "EDAM": "https://identifiers.org/edam:",
+        "SO": "https://identifiers.org/SO:",
+        "prov": "http://www.w3.org/ns/prov#",
+        "om": "http://www.ontology-of-units-of-measure.org/resource/om-2/"
+    }
 }

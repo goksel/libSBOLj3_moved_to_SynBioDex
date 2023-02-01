@@ -171,6 +171,8 @@ public class Component extends TopLevel {
 					
 			//COMPONENT_TYPE_IF_DNA_OR_RNA_SHOULD_INCLUDE_ONE_SO_FEATURE_ROLE
 			validationMessages=IdentifiedValidator.assertIfDNAOrRNAThenIdentifiedShouldIncludeOneSOFeatureRole(types, getRoles(), validationMessages, "{COMPONENT_TYPE_IF_DNA_OR_RNA_SHOULD_INCLUDE_ONE_SO_FEATURE_ROLE}", this);					
+		
+		
 		}
 		
 		// COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
@@ -331,7 +333,7 @@ public class Component extends TopLevel {
 		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.Component.hasInterface, this.resource, getInterface(), validationMessages);
 		return validationMessages;
 	}
-
+			
 	private List<ValidationMessage> validateComponentLocation(List<ValidationMessage> validationMessages, List<Location> locations, Feature feature, List<Sequence> sequences, List<Sequence> entireSequences, URI locationProperty,String message) throws SBOLGraphException {
 		if (locations != null) {
 			for (Location location : locations) {
@@ -523,6 +525,11 @@ public class Component extends TopLevel {
 		PropertyValidator.getValidator().validate(this, "setTypes", new Object[] {types}, List.class);
 		RDFUtil.setProperty(resource, DataModel.type, types);
 	}
+	
+	public void addType(URI type) {
+		RDFUtil.addProperty(resource, DataModel.type, type);
+	}
+	
 	
 	public List<URI> getRoles() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.role);

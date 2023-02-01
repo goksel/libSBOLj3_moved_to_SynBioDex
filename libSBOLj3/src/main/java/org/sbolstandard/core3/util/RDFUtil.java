@@ -196,15 +196,19 @@ public class RDFUtil {
 	
 	public static void addProperty(Resource resource, URI property, String value)
 	{
-		Property p=resource.getModel().createProperty(property.toString());
-		resource.addProperty(p, value);	
+		if (value!=null){
+			Property p=resource.getModel().createProperty(property.toString());
+			resource.addProperty(p, value);	
+		}
 	}
 	
 	public static void addProperty(Resource resource, URI property, URI value)
 	{
-		Property p=resource.getModel().createProperty(property.toString());
-		Resource resourceValue = resource.getModel().createResource(value.toString());
-		resource.addProperty(p, resourceValue);	
+		if (value!=null){
+			Property p=resource.getModel().createProperty(property.toString());
+			Resource resourceValue = resource.getModel().createResource(value.toString());
+			resource.addProperty(p, resourceValue);	
+		}
 	}
 	
 	public static void addProperty(Resource resource, URI property, List<URI> values)
@@ -757,6 +761,22 @@ public class RDFUtil {
 	    	 return filtered; 
 		 }
 	   
+	    
+	    public static boolean exists(Model model, URI resURI, URI propertyURI, URI objectURI) 
+	    {
+	    	Resource res=model.getResource(resURI.toString());
+	    	Property property=model.getProperty(propertyURI.toString());
+	    	RDFNode object=model.getResource(objectURI.toString());
+	    	StmtIterator it=model.listStatements(res, property, object);
+	    	if (it.hasNext())
+	    	{
+	    		return false;
+	    	}
+	    	else
+	    	{
+	    		return false;
+	    	}
+	    }
 }
 
 /*

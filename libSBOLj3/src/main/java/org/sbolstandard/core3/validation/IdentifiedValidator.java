@@ -337,6 +337,27 @@ public class IdentifiedValidator {
 			return validationMessages;
 		}
 		
+		public static boolean assertOneURIExists(List<URI> items, List<URI> toSearchURIs) throws SBOLGraphException
+		{
+			int count=0;
+			if (items!=null && toSearchURIs!=null)
+			{
+				for (URI uri:toSearchURIs){
+					if (items.contains(uri)){
+						count++;
+					}
+				}
+			}
+			if (count==1)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		
 		public static List<ValidationMessage> assertAtMostOneExists(Set<String> items, List<URI> searchURIs, List<ValidationMessage> validationMessages, String message, Identified entity, URI property) throws SBOLGraphException
 		{
 			int count=0;

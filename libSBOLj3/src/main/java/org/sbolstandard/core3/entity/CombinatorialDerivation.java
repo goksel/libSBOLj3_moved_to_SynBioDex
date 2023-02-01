@@ -10,6 +10,7 @@ import java.util.Set;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
@@ -82,11 +83,30 @@ public class CombinatorialDerivation extends TopLevel{
 				}
 			}			
 		}
-		
+		if (Configuration.getInstance().isValidateRecommendedRules())
+		{
+			validationMessages= assertTemplateHasAtLeastOneFeature(validationMessages);
+		}
 		validationMessages= IdentifiedValidator.assertExists(this, DataModel.CombinatorialDerivation.variableFeature, this.resource, getVariableFeatures(), validationMessages);
 		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.CombinatorialDerivation.template, this.resource, getTemplate(), validationMessages);
 			
 		return validationMessages;
+	}
+	
+	private List<ValidationMessage> assertTemplateHasAtLeastOneFeature(List<ValidationMessage> messages) throws SBOLGraphException
+	{
+		Component templateComponent = this.getTemplate();
+		if (templateComponent!=null)
+		{
+			List<Feature> features=templateComponent.getFeatures();
+			if (features==null || features.size()==0)
+			{
+				ValidationMessage message = new ValidationMessage("{COMBINATORIALDERIVATION_TEMPLATECOMPONENT_HAS_ATLEAST_ONE_FEATURE}", DataModel.CombinatorialDerivation.template,templateComponent, null);
+				message.childPath(DataModel.Component.feature);
+				messages= addToValidations(messages,message);	
+			}
+		}
+		return messages;
 	}
 	
 	/*@NotNull(message = "{COMBINATORIALDERIVATION_TEMPLATE_NOT_NULL}")

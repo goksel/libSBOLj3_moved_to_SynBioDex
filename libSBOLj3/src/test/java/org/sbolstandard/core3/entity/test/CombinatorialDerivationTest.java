@@ -26,6 +26,12 @@ public class CombinatorialDerivationTest extends TestCase {
 		
 		
 		Component pTetR=SBOLAPI.createDnaComponent(doc, "BBa_R0040", "pTetR", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
+		Component start=SBOLAPI.createDnaComponent(doc, "BBa_R0040_start", "pTetR_start", "promoter_start", Role.EngineeredRegion, "tccctat");
+		
+        SubComponent startFeature=pTetR.createSubComponent(start);
+        SubComponent startCodonFeature=pTetR.createSubComponent(start);
+        SubComponent endCodonFeature=pTetR.createSubComponent(start);
+        
 		CombinatorialDerivation cd=doc.createCombinatorialDerivation("cs1", pTetR);
 		
 		
@@ -53,11 +59,6 @@ public class CombinatorialDerivationTest extends TestCase {
 		RDFUtil.setProperty(resource, DataModel.CombinatorialDerivation.template, pTetR.getUri());
 		TestUtil.validateIdentified(cd,doc,0);
 		
-        Component start=SBOLAPI.createDnaComponent(doc, "BBa_R0040_start", "pTetR_start", "promoter_start", Role.EngineeredRegion, "tccctat");
-		
-        SubComponent startFeature=pTetR.createSubComponent(start);
-        SubComponent startCodonFeature=pTetR.createSubComponent(start);
-        SubComponent endCodonFeature=pTetR.createSubComponent(start);
         
         
         VariableFeature vf=cd.createVariableFeature(VariableFeatureCardinality.One,startFeature);
