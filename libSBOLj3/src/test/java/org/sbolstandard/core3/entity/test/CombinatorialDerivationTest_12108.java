@@ -17,7 +17,7 @@ import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
-public class CombinatorialDerivationTest_12106 extends TestCase {
+public class CombinatorialDerivationTest_12108 extends TestCase {
 	
 	public void testCombinatorialDerivation() throws SBOLGraphException, IOException, Exception
     {
@@ -28,27 +28,28 @@ public class CombinatorialDerivationTest_12106 extends TestCase {
 		
 		Component pTetR=SBOLAPI.createDnaComponent(doc, "BBa_R0040", "pTetR", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
 	    Component pTetR2=SBOLAPI.createDnaComponent(doc, "BBa_R0040_2", "pTetR2", "TetR repressible promoter", Role.Promoter, "accctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
-	    Component pTetR3=SBOLAPI.createDnaComponent(doc, "BBa_R0040_3", "pTetR3", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
 	    
-	    
-	    //pTetR.setWasDerivedFrom(Arrays.asList(genericpromoter.getUri()));
-	    //col.addMember(pTetR);
-	    col.addMembers(Arrays.asList(pTetR2, pTetR3));
 	    TestUtil.validateDocument(doc, 0);
 	    
 	    CombinatorialDerivation cd=doc.createCombinatorialDerivation("cs1", pTetR);
 		   
-	    col.setWasDerivedFrom(Arrays.asList(cd.getUri()));
 	    
 	    Component start=SBOLAPI.createDnaComponent(doc, "BBa_R0040_start", "pTetR_start", "promoter_start", Role.EngineeredRegion, "tccctat");	
 	    SubComponent sc_start=pTetR.createSubComponent(start);	    
 	    
 	    
-	    TestUtil.validateDocument(doc, 2,"sbol3-12106");
-		
-	    col.addMember(pTetR);
-	    TestUtil.validateDocument(doc, 2,"sbol3-12106");
-		
+	    pTetR2.setWasDerivedFrom(Arrays.asList(cd.getUri()));
+	    SubComponent sc_start2=pTetR2.createSubComponent(start);	    
+	    sc_start2.setWasDerivedFrom(Arrays.asList(sc_start.getUri()));
+	  
+	    
+	    TestUtil.validateDocument(doc, 0);
+	    pTetR.addRole(URI.create("http://sbolstandard.org/testrole"));
+	    TestUtil.validateDocument(doc, 1,"sbol3-12108");
+	    
+	    pTetR2.setRoles(null);
+	    TestUtil.validateDocument(doc, 2, "sbol3-12108,sbol3-10613");
+		   
 	    
     }
 

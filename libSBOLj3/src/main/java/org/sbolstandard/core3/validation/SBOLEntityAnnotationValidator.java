@@ -71,7 +71,12 @@ public class SBOLEntityAnnotationValidator implements ConstraintValidator<ValidS
     	    				Identified invalidIdentified= (Identified ) message.getInvalidValue() ;
     	    				messageString = String.format("%s%sChild Entity URI: %s",messageString, separator, invalidIdentified.getUri().toString());
     	    				messageString = String.format("%s%sChild Entity Type: %s",messageString, separator, invalidIdentified.getClass());  	
-    	    			}
+    	    				String name=invalidIdentified.getName();
+    	    				if (name!=null && name.length()<0)
+    	    				{
+    	    					messageString = String.format("%s%sChild Entity Name: %s",messageString, separator, name);  	
+    	    				}
+	    				}
         	    			
     	    				  //context.buildConstraintViolationWithTemplate(messageString)
     	                      //.addPropertyNode(message.getProperty()).addConstraintViolation();

@@ -27,7 +27,7 @@ public class CombinatorialDerivationTest_12104 extends TestCase {
 		
 		Component pTetR=SBOLAPI.createDnaComponent(doc, "BBa_R0040", "pTetR", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
 		CombinatorialDerivation cd=doc.createCombinatorialDerivation("cs1", pTetR);
-		TestUtil.validateIdentified(cd, doc, 1);
+		TestUtil.validateIdentified(cd, doc, 1, "sbol3-12104");
 		
 		Component start=SBOLAPI.createDnaComponent(doc, "BBa_R0040_start", "pTetR_start", "promoter_start", Role.EngineeredRegion, "tccctat");	
 	    pTetR.createSubComponent(start);

@@ -777,6 +777,81 @@ public class RDFUtil {
 	    		return false;
 	    	}
 	    }
+	    
+	    public static Set<String> getNotExistingTemplateProperties(Model model, URI templateURI, URI derivedURI, Set<URI> ignoredProperties)
+	    {
+	    	Set<String> messages=null;
+	    	Resource resTemplate=model.getResource(templateURI.toString());
+	    	Resource resDerived=model.getResource(derivedURI.toString());
+	    	
+	    	StmtIterator it=resTemplate.listProperties();
+	    	while (it.hasNext())
+	    	{
+	    		Statement stmt=it.next();
+	    		Property property=stmt.getPredicate();
+	    		if (ignoredProperties!=null && ignoredProperties.contains(URI.create(property.getURI())))
+	    		{
+	    			continue;
+	    		}
+	    		
+	    		RDFNode object=stmt.getObject();
+	    		boolean found=false;
+	    		
+	    		StmtIterator itDerived =resDerived.listProperties(property);
+	    		if (itDerived.hasNext())
+	    		{
+		    		while (itDerived.hasNext())
+			    	{
+		    			Statement stmtDerived=itDerived.next();
+		    			RDFNode objectDerived= stmtDerived.getObject();
+		    			if (objectDerived.equals(object))
+		    			{
+		    				found=true;
+		    				break;
+		    			}
+			    	}
+	    		}
+	    		if (!found) {
+	    			if (messages==null) {
+	    				messages=new HashSet<String>();
+	    			}
+	    			String message=property.getURI() + "=" + object.toString();
+	    			messages.add(message);
+	    		}
+	    	}	    		
+	    	return messages;
+	    }
+	    
+	    public static Set<String> getNotExistingTemplatePropertiesv2(Model model, URI templateURI, URI derivedURI)
+	    {
+	    	Set<String> messages=null;
+	    	Resource resTemplate=model.getResource(templateURI.toString());
+	    	Resource resDerived=model.getResource(derivedURI.toString());
+	    	
+	    	StmtIterator it=resTemplate.listProperties();
+	    	while (it.hasNext())
+	    	{
+	    		Statement stmt=it.next();
+	    		Property property=stmt.getPredicate();	    			    		
+	    		RDFNode object=stmt.getObject();
+	    		boolean found=false;
+	    		
+	    		StmtIterator itDerived =resDerived.listProperties(property);
+	    		if (itDerived.hasNext())
+	    		{
+		    		found=true;		    		
+	    		}
+	    		if (!found) {
+	    			if (messages==null) {
+	    				messages=new HashSet<String>();
+	    			}
+	    			String message=property.getURI() + "=" + object.toString();
+	    			messages.add(message);
+	    		}
+	    	}	    		
+	    	return messages;
+	    }
+	    
 }
 
 /*

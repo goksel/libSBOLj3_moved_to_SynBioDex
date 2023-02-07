@@ -39,12 +39,15 @@ public class CombinatorialDerivationTest_12107 extends TestCase {
 	    
 	    
 	    pTetR2.setWasDerivedFrom(Arrays.asList(cd.getUri()));
-		  
+		 
+	    SubComponent sc_start2=pTetR2.createSubComponent(start);	    
+	    sc_start2.setWasDerivedFrom(Arrays.asList(sc_start.getUri()));
+	      
+	    
 	    TestUtil.validateDocument(doc, 0);
 	    pTetR.addType(URI.create("http://sbolstandard.org/testtype"));
-	    TestUtil.validateDocument(doc, 1);
+	    TestUtil.validateDocument(doc, 1, "sbol3-12107");
 		   
-	    
     }
 
 }

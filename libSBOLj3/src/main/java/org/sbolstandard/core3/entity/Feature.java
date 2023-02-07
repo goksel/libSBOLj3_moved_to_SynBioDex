@@ -38,6 +38,10 @@ public abstract class Feature extends Identified{
 		RDFUtil.setProperty(resource, DataModel.role, roles);
 	}
 	
+	public void addRole(URI role) {
+		RDFUtil.addProperty(resource, DataModel.role, role);
+	}
+	
 	public Orientation getOrientation() throws SBOLGraphException {
 		Orientation orientation=null;
 		

@@ -539,6 +539,11 @@ public class Component extends TopLevel {
 		RDFUtil.setProperty(resource, DataModel.role, roles);
 	}
 	
+
+	public void addRole(URI role) {
+		RDFUtil.addProperty(resource, DataModel.role, role);
+	}
+	
 	
 	/*public List<URI> getSequences() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Component.sequence);

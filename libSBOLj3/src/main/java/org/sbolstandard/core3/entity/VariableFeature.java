@@ -113,7 +113,7 @@ public class VariableFeature extends Identified{
 		return addToList(DataModel.VariableFeature.variantDerivation, CombinatorialDerivation.class, DataModel.CombinatorialDerivation.uri);
 	}
 	
-	public void setVariantDerivations(List<Collection> variantDerivations) {
+	public void setVariantDerivations(List<CombinatorialDerivation> variantDerivations) {
 		RDFUtil.setProperty(resource, DataModel.VariableFeature.variantDerivation, SBOLUtil.getURIs(variantDerivations));
 	}
 	

@@ -2,6 +2,7 @@ package org.sbolstandard.core3.validation;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -337,25 +338,22 @@ public class IdentifiedValidator {
 			return validationMessages;
 		}
 		
-		public static boolean assertOneURIExists(List<URI> items, List<URI> toSearchURIs) throws SBOLGraphException
+		public static Set<URI> assertOneURIExists(List<URI> items, List<URI> toSearchURIs) throws SBOLGraphException
 		{
-			int count=0;
+			Set<URI> result=null;
 			if (items!=null && toSearchURIs!=null)
 			{
 				for (URI uri:toSearchURIs){
 					if (items.contains(uri)){
-						count++;
+						if (result==null)
+						{
+							result=new HashSet<URI>();
+						}
+						result.add(uri);
 					}
 				}
 			}
-			if (count==1)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return result;
 		}
 		
 		public static List<ValidationMessage> assertAtMostOneExists(Set<String> items, List<URI> searchURIs, List<ValidationMessage> validationMessages, String message, Identified entity, URI property) throws SBOLGraphException

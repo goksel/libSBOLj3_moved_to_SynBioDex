@@ -30,18 +30,18 @@ public class CombinatorialDerivationTest_12105 extends TestCase {
 	    SubComponent sc_start=pTetR.createSubComponent(start);	    
 	    
 	    Component pTetR2=SBOLAPI.createDnaComponent(doc, "BBa_R0040_2", "pTetR2", "TetR repressible promoter", Role.Promoter, "accctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
-	    Component start2=SBOLAPI.createDnaComponent(doc, "BBa_R0040_2_start", "pTetR2_start", "promoter_start", Role.EngineeredRegion, "accctat");	
-	    SubComponent sc_start2=pTetR2.createSubComponent(start2);	    
+	    //Component start2=SBOLAPI.createDnaComponent(doc, "BBa_R0040_2_start", "pTetR2_start", "promoter_start", Role.EngineeredRegion, "accctat");	
+	    SubComponent sc_start2=pTetR2.createSubComponent(start);	    
 	    
 	    
 	    CombinatorialDerivation cd=doc.createCombinatorialDerivation("cs1", pTetR);
 	    TestUtil.validateDocument(doc, 0);
 		   
 	    pTetR2.setWasDerivedFrom(Arrays.asList(cd.getUri()));
-	    TestUtil.validateDocument(doc, 1);
+	    TestUtil.validateDocument(doc, 2, "sbol3-12105,sbol3-12110");
 	    
 	    sc_start2.setWasDerivedFrom(Arrays.asList(pTetR.getUri()));
-	    TestUtil.validateDocument(doc, 1);
+	    TestUtil.validateDocument(doc, 2, "sbol3-12105,sbol3-12110");
 	    
 	    sc_start2.setWasDerivedFrom(Arrays.asList(sc_start.getUri()));
 	    TestUtil.validateDocument(doc, 0);
