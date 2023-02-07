@@ -44,12 +44,14 @@ public class CombinatorialDerivationTest_12111 extends TestCase {
 	    pTetR2.setWasDerivedFrom(Arrays.asList(cd.getUri()));
 	    //sc_start2.setWasDerivedFrom(Arrays.asList(sc_start.getUri()));
 	   
-	    TestUtil.validateDocument(doc, 2);
-	    cd.createVariableFeature(VariableFeatureCardinality.ZeroOrOne, sc_start);
-	    TestUtil.validateDocument(doc, 1);
-	       
-		   
-		
+	    TestUtil.validateDocument(doc, 2, "sbol3-12105,sbol3-12110");
+	    VariableFeature varFeature=cd.createVariableFeature(VariableFeatureCardinality.ZeroOrMore, sc_start);
+	    TestUtil.validateDocument(doc, 1,"sbol3-12105");
+	    varFeature.setCardinality(VariableFeatureCardinality.One);
+	    TestUtil.validateDocument(doc, 2,"sbol3-12105,sbol3-12111");	    
+	    sc_start2.setWasDerivedFrom(Arrays.asList(sc_start.getUri()));
+	    TestUtil.validateDocument(doc, 0);
+	           
 	    
 	    /*
 	    Component end=SBOLAPI.createDnaComponent(doc, "BBa_R0040_end", "pTetR_end", "promoter_end", Role.EngineeredRegion, "tccctat");	
@@ -63,14 +65,37 @@ public class CombinatorialDerivationTest_12111 extends TestCase {
 		   
 
 	    TestUtil.validateDocument(doc, 0);
+	    */
 	    SequenceFeature cut1=pTetR.createSequenceFeature(5, pTetR.getSequences().get(0));
 	    SequenceFeature cut2=pTetR2.createSequenceFeature(5, pTetR2.getSequences().get(0));
 	    cut2.setWasDerivedFrom(Arrays.asList(cut1.getUri()));
 	    TestUtil.validateDocument(doc, 0);
 	    
-	    cut2.setWasDerivedFrom(Arrays.asList(cut1.getUri(), sc_end.getUri()));
-	    TestUtil.validateDocument(doc, 2);
-	    */ 
+	    //sc_start derived by two, cardinality is one : Error
+	    cut2.setWasDerivedFrom(Arrays.asList(cut1.getUri(), sc_start.getUri()));
+	    TestUtil.validateDocument(doc, 1,"sbol3-12111");
+	    
+	    varFeature.setCardinality(VariableFeatureCardinality.OneOrMore);
+	    TestUtil.validateDocument(doc, 0);
+	    
+	    //sc_start is not used to derive anything,cardinality is one more error: Error
+	    sc_start2.setWasDerivedFrom(null);
+	    cut2.setWasDerivedFrom(Arrays.asList(cut1.getUri()));
+	    TestUtil.validateDocument(doc, 2, "sbol3-12105,sbol3-12111");
+	    
+	    varFeature.setCardinality(VariableFeatureCardinality.ZeroOrMore);	    
+	    sc_start2.setWasDerivedFrom(Arrays.asList(sc_start.getUri()));
+	    TestUtil.validateDocument(doc, 0);
+	    
+		   
+	    
+	    
+	    
+	    
+	    //cut2.setWasDerivedFrom(Arrays.asList(sc_start.getUri()));
+	    //TestUtil.validateDocument(doc, 1);
+		    
+	    
     }
 
 }

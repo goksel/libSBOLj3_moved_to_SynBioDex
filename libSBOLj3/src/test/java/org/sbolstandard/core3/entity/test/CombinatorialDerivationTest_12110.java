@@ -61,6 +61,6 @@ public class CombinatorialDerivationTest_12110 extends TestCase {
 	    TestUtil.validateDocument(doc, 0);
 	    
 	    cut2.setWasDerivedFrom(Arrays.asList(cut1.getUri(), sc_end.getUri()));
-	    TestUtil.validateDocument(doc, 1, "sbol3-12109");	 
+	    TestUtil.validateDocument(doc, 2, "sbol3-12109,sbol3-12110");	 
     }
 }

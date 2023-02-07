@@ -45,6 +45,7 @@ import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 import org.sbolstandard.core3.vocabulary.Role;
+import org.sbolstandard.core3.vocabulary.VariableFeatureCardinality;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -1078,11 +1079,9 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 								}
 								
 								//COMBINATORIALDERIVATION_COMPONENT_STATIC_FEATURE_ONLYONE_RESTRICTION
-								validationMessages= assertStaticFeatureWasDerivedFromExactlyOne(validationMessages,cd, template, component);
-								
 								//COMBINATORIALDERIVATION_COMPONENT_VARIABLE_FEATURE_CARDINALITY_RESTRICTION
-								validationMessages= assertVariableFeatureCardinality(validationMessages, component, template);
-								
+								validationMessages= assertStaticAndVariableFeatureCardinality(validationMessages,cd, template, component);
+																
 								//COMBINATORIALDERIVATION_COMPONENT_TYPE_RESTRICTION
 								validationMessages=assertCombDerComponentTypeRestriction(validationMessages, component, template);
 								
@@ -1097,14 +1096,88 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		return validationMessages;
 	}
 	
-	//COMBINATORIALDERIVATION_COMPONENT_VARIABLE_FEATURE_CARDINALITY_RESTRICTION = sbol3-12111 - If the prov:wasDerivedFrom property of a Component refers to a CombinatorialDerivation, then each variable Feature in the template Component SHOULD be referred to by a prov:wasDerivedFrom property from a number of Feature objects in the derived Component. that is compatible with the cardinality property of the corresponding VariableFeature.	
-	private List<ValidationMessage>  assertVariableFeatureCardinality(List<ValidationMessage> validationMessages, Component component, Component template) throws SBOLGraphException
-	{
-		if (Configuration.getInstance().isValidateRecommendedRules())
-		{
-			//GMGM
-			
+	
+	
+	private List<ValidationMessage>  assertStaticAndVariableFeatureCardinality(List<ValidationMessage> validationMessages,CombinatorialDerivation cd,  Component template, Component derived) throws SBOLGraphException
+	{		
+		if (Configuration.getInstance().isValidateRecommendedRules()) {	
+			List<Feature> templateFeatures=template.getFeatures();
+			List<Feature> derivedFeatures=derived.getFeatures();	
+			List<VariableFeature> variableFeatures=cd.getVariableFeatures();
+			if (templateFeatures!=null){
+				for (Feature templateFeature: templateFeatures){
+					URI templateFeatureURI= templateFeature.getUri();
+ 					VariableFeature varFeature=getVariableFeature(variableFeatures, templateFeatureURI);
+ 					
+ 					int count=0;
+					if (derivedFeatures!=null){
+						for (Feature derivedFeature: derivedFeatures){
+							List<URI> featureDerivedFroms=derivedFeature.getWasDerivedFrom();
+							if (featureDerivedFroms!=null && featureDerivedFroms.contains(templateFeatureURI)){
+								count ++;								
+							}
+						}
+					}
+					if (varFeature!=null)//Variable feature
+					{
+						//COMBINATORIALDERIVATION_COMPONENT_VARIABLE_FEATURE_CARDINALITY_RESTRICTION = sbol3-12111 - If the prov:wasDerivedFrom property of a Component refers to a CombinatorialDerivation, then each variable Feature in the template Component SHOULD be referred to by a prov:wasDerivedFrom property from a number of Feature objects in the derived Component. that is compatible with the cardinality property of the corresponding VariableFeature.							
+						VariableFeatureCardinality cardinality= varFeature.getCardinality();
+						boolean error=false;
+						if (cardinality==VariableFeatureCardinality.One && count!=1)
+						{
+							error=true;
+						}
+						else if (cardinality==VariableFeatureCardinality.OneOrMore && count==0)
+						{
+							error=true;
+						}
+						else if (cardinality==VariableFeatureCardinality.ZeroOrOne && count>1)
+						{
+							error=true;
+						}
+						if (error)
+						{
+							String message=String.format("{COMBINATORIALDERIVATION_COMPONENT_VARIABLE_FEATURE_CARDINALITY_RESTRICTION}%s wasDerivedFrom count: %s, Cardinality: %s",ValidationMessage.INFORMATION_SEPARATOR, count, cardinality);
+							ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Component.uri, template, templateFeature);
+							validationMessage.childPath(DataModel.Component.feature);
+							validationMessages=IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+						}
+					}
+					else if (varFeature==null && count!=1){//static feature										
+						//COMBINATORIALDERIVATION_COMPONENT_STATIC_FEATURE_ONLYONE_RESTRICTION = sbol3-12110 - If the prov:wasDerivedFrom property of a Component refers to a CombinatorialDerivation, then each static Feature in the template Component SHOULD be referred to by a prov:wasDerivedFrom property from exactly one Feature in the derived Component.						
+						String message=String.format("{COMBINATORIALDERIVATION_COMPONENT_STATIC_FEATURE_ONLYONE_RESTRICTION}%s wasDerivedFrom count: %s",ValidationMessage.INFORMATION_SEPARATOR, count);
+						ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Component.uri, template, templateFeature);
+						validationMessage.childPath(DataModel.Component.feature);
+						validationMessages=IdentifiedValidator.addToValidations(validationMessages, validationMessage);											
+ 					}
+				}
+			}
 		}
+		return validationMessages;
+	}
+	private List<ValidationMessage>  assertCombDerComponentStaticFeaturePropertyRestriction(List<ValidationMessage> validationMessages, CombinatorialDerivation cd, Component component, Feature feature, Set<URI> foundTemplateFeatureURIs) throws SBOLGraphException
+	{
+		//COMBINATORIALDERIVATION_COMPONENT_STATIC_FEATUREPROPERTY_RESTRICTION - Blue		
+			if (foundTemplateFeatureURIs!=null && foundTemplateFeatureURIs.size()>0){			
+				//Implement validation rules for static features
+				for (URI foundTemplateFeatureURI:foundTemplateFeatureURIs){
+					VariableFeature varFeature=getVariableFeature(cd.getVariableFeatures(), foundTemplateFeatureURI);															
+					
+					if (varFeature==null){//If a  static feature
+						Set<String> notFoundProperties=RDFUtil.getNotExistingTemplatePropertiesv2(this.getRDFModel(),foundTemplateFeatureURI, feature.getUri());
+						if (notFoundProperties!=null){
+							for (String notFoundProperty:notFoundProperties){
+								String message=String.format("{COMBINATORIALDERIVATION_COMPONENT_STATIC_FEATUREPROPERTY_RESTRICTION}%sTemplate feature property is missing: %s",ValidationMessage.INFORMATION_SEPARATOR, notFoundProperty);
+								ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Component.uri, component, feature);
+								validationMessage.childPath(DataModel.Component.feature);
+								validationMessages=IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+							}
+						}
+						
+					}												
+				}
+			}
+		
 		return validationMessages;
 	}
 	
@@ -1175,95 +1248,25 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		return validationMessages;
 	}
 	
-	private boolean isVariableFeature(List<VariableFeature> varFeatures, URI templateFeatureURI ) throws SBOLGraphException
+	private VariableFeature getVariableFeature(List<VariableFeature> varFeatures, URI templateFeatureURI ) throws SBOLGraphException
 	{
-		boolean isVariableFeature=false;
+		VariableFeature varFeature=null;
 		if (varFeatures!=null) {
 			for (VariableFeature variableFeature:varFeatures){
 				Feature variable=variableFeature.getVariable();
 				if (variable!=null){
 					if (variable.getUri().equals(templateFeatureURI)){
-						isVariableFeature=true;
+						varFeature=variableFeature;
 						break;
 					}
 				}
 			}
 		}
-		return isVariableFeature;
-	}
-	private List<ValidationMessage>  assertCombDerComponentStaticFeaturePropertyRestriction(List<ValidationMessage> validationMessages, CombinatorialDerivation cd, Component component, Feature feature, Set<URI> foundTemplateFeatureURIs) throws SBOLGraphException
-	{
-		//COMBINATORIALDERIVATION_COMPONENT_STATIC_FEATUREPROPERTY_RESTRICTION - Blue		
-			if (foundTemplateFeatureURIs!=null && foundTemplateFeatureURIs.size()>0){			
-				//Implement validation rules for static features
-				for (URI foundTemplateFeatureURI:foundTemplateFeatureURIs){
-					boolean isVariableFeature=isVariableFeature(cd.getVariableFeatures(), foundTemplateFeatureURI);
-					/*List<VariableFeature> varFeatures=cd.getVariableFeatures();
-					if (varFeatures!=null) {
-						for (VariableFeature variableFeature:varFeatures){
-							Feature variable=variableFeature.getVariable();
-							if (variable!=null){
-								if (variable.getUri().equals(foundTemplateFeatureURI)){
-									isVariableFeature=true;
-									break;
-								}
-							}
-						}
-					}*/											
-					
-					if (!isVariableFeature){//If a  static feature
-						Set<String> notFoundProperties=RDFUtil.getNotExistingTemplatePropertiesv2(this.getRDFModel(),foundTemplateFeatureURI, feature.getUri());
-						if (notFoundProperties!=null){
-							for (String notFoundProperty:notFoundProperties){
-								String message=String.format("{COMBINATORIALDERIVATION_COMPONENT_STATIC_FEATUREPROPERTY_RESTRICTION}%sTemplate feature property is missing: %s",ValidationMessage.INFORMATION_SEPARATOR, notFoundProperty);
-								ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Component.uri, component, feature);
-								validationMessage.childPath(DataModel.Component.feature);
-								validationMessages=IdentifiedValidator.addToValidations(validationMessages, validationMessage);
-							}
-						}
-						
-					}												
-				}
-			}
-		
-		return validationMessages;
+		return varFeature;
 	}
 	
-	private List<ValidationMessage>  assertStaticFeatureWasDerivedFromExactlyOne(List<ValidationMessage> validationMessages,CombinatorialDerivation cd,  Component template, Component derived) throws SBOLGraphException
-	{		
-		//COMBINATORIALDERIVATION_COMPONENT_STATIC_FEATURE_ONLYONE_RESTRICTION = sbol3-12110 - If the prov:wasDerivedFrom property of a Component refers to a CombinatorialDerivation, then each static Feature in the template Component SHOULD be referred to by a prov:wasDerivedFrom property from exactly one Feature in the derived Component.
-		if (Configuration.getInstance().isValidateRecommendedRules()) {	
-			List<Feature> templateFeatures=template.getFeatures();
-			List<Feature> features=derived.getFeatures();	
-			List<VariableFeature> variableFeatures=cd.getVariableFeatures();
-			if (templateFeatures!=null){
-				for (Feature templateFeature: templateFeatures){
-					URI templateFeatureURI= templateFeature.getUri();
- 					boolean isStaticFeature=!isVariableFeature(variableFeatures, templateFeatureURI);
- 					if (isStaticFeature){
-						int count=0;
-						if (features!=null){
-							for (Feature derivedFeature: features){
-								List<URI> featureDerivedFroms=derivedFeature.getWasDerivedFrom();
-								if (featureDerivedFroms!=null && featureDerivedFroms.contains(templateFeatureURI)){
-									count ++;
-									break;
-								}
-							}
-						}
-						if (count!=1){
-							String message=String.format("{COMBINATORIALDERIVATION_COMPONENT_STATIC_FEATURE_ONLYONE_RESTRICTION}%s wasDerivedFrom count: %s",ValidationMessage.INFORMATION_SEPARATOR, count);
-							ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Component.uri, template, templateFeature);
-							validationMessage.childPath(DataModel.Component.feature);
-							validationMessages=IdentifiedValidator.addToValidations(validationMessages, validationMessage);
-					
-						}
- 					}
-				}
-			}
-		}
-		return validationMessages;
-	}
+	
+	
 	
 	private List<ValidationMessage> assertCombDerWasDerivedRestrictionForCollections(List<ValidationMessage> validationMessages) throws SBOLGraphException
 	{
