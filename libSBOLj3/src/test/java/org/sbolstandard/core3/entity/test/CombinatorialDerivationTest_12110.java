@@ -43,12 +43,13 @@ public class CombinatorialDerivationTest_12110 extends TestCase {
 	    pTetR2.setWasDerivedFrom(Arrays.asList(cd.getUri()));
 	    sc_start2.setWasDerivedFrom(Arrays.asList(sc_start.getUri()));
 	   
-	    cd.createVariableFeature(VariableFeatureCardinality.One, sc_start);
+	    VariableFeature varFeature=cd.createVariableFeature(VariableFeatureCardinality.One, sc_start);
 	    	    
 	    Component end=SBOLAPI.createDnaComponent(doc, "BBa_R0040_end", "pTetR_end", "promoter_end", Role.EngineeredRegion, "tccctat");	
 	    SubComponent sc_end=pTetR.createSubComponent(end);	    
 	   
 	    SubComponent sc_end2=pTetR2.createSubComponent(end);	    
+	    varFeature.setVariants(Arrays.asList(start2));
 	    
 	    TestUtil.validateDocument(doc, 2, "sbol3-12105,sbol3-12110");		   
 	    sc_end2.setWasDerivedFrom(Arrays.asList(sc_end.getUri()));

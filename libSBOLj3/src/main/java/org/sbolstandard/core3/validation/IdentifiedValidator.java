@@ -338,7 +338,7 @@ public class IdentifiedValidator {
 			return validationMessages;
 		}
 		
-		public static Set<URI> assertOneURIExists(List<URI> items, List<URI> toSearchURIs) throws SBOLGraphException
+		public static Set<URI> getMatchingSearchURIs(List<URI> items, List<URI> toSearchURIs) throws SBOLGraphException
 		{
 			Set<URI> result=null;
 			if (items!=null && toSearchURIs!=null)

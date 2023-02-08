@@ -1068,27 +1068,30 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 								if (features!=null){
 									for (Feature feature:features){
 										//Each feature must be derived from a template's feature.
-										Set<URI> foundTemplateFeatureURIs=IdentifiedValidator.assertOneURIExists(SBOLUtil.getURIs(template.getFeatures()), feature.getWasDerivedFrom());
+										Set<URI> foundTemplateFeatureURIs=IdentifiedValidator.getMatchingSearchURIs(SBOLUtil.getURIs(template.getFeatures()), feature.getWasDerivedFrom());
 										
 										//COMBINATORIALDERIVATION_COMPONENT_WASDERIVEDFROM_RESTRICTION
 										validationMessages=assertCombDerComponentWasDerivedFromRestriction(validationMessages, component, feature, foundTemplateFeatureURIs);
 										
 										//COMBINATORIALDERIVATION_COMPONENT_STATIC_FEATUREPROPERTY_RESTRICTION
 										validationMessages=assertCombDerComponentStaticFeaturePropertyRestriction(validationMessages, cd, component, feature, foundTemplateFeatureURIs);
+									
+										//COMBINATORIALDERIVATION_COMPONENT_SUBCOMPONENT_INSTANCEOF_VALID
+										validationMessages = assertCombDerSubComponentInstanceOfValuesAreValid(validationMessages, cd, component, feature);
 									}
 								}
 								
 								//COMBINATORIALDERIVATION_COMPONENT_STATIC_FEATURE_ONLYONE_RESTRICTION
 								//COMBINATORIALDERIVATION_COMPONENT_VARIABLE_FEATURE_CARDINALITY_RESTRICTION
-								validationMessages= assertStaticAndVariableFeatureCardinality(validationMessages,cd, template, component);
+								validationMessages= assertStaticAndVariableFeatureCardinality(validationMessages,cd, component, template);
 																
 								//COMBINATORIALDERIVATION_COMPONENT_TYPE_RESTRICTION
 								validationMessages=assertCombDerComponentTypeRestriction(validationMessages, component, template);
 								
 								//COMBINATORIALDERIVATION_COMPONENT_ROLE_RESTRICTION
-								validationMessages = assertCombDerComponentRoleRestriction(validationMessages, component, template);							
-							}
-						}
+								validationMessages = assertCombDerComponentRoleRestriction(validationMessages, component, template);																						
+							}							
+						}			
 					}		
 				}
 			}
@@ -1096,9 +1099,130 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		return validationMessages;
 	}
 	
+	//COMBINATORIALDERIVATION_COMPONENT_SUBCOMPONENT_INSTANCEOF_VALID= sbol3-12112  If the prov:wasDerivedFrom property of a Component refers to a CombinatorialDerivation, then for any SubComponent in the Component with a prov:wasDerivedFrom property referring to a variable Feature in the template Component of the CombinatorialDerivation, that derived SubComponent MUST have an instanceOf property that refers to a Component specified by the corresponding VariableFeature. In particular, that Component must be a value of the variant property, a member or recursive member of a Collection that is a value of the variantCollection property, or a Component with a prov:wasDerivedFrom property that refers to a CombinatorialDerivation specified by a variantDerivation property of the VariableFeature.
+	private List<ValidationMessage>  assertCombDerSubComponentInstanceOfValuesAreValid(List<ValidationMessage> validationMessages,CombinatorialDerivation cd, Component derived, Feature feature) throws SBOLGraphException
+	{	
+		//TODO
+		if (feature instanceof SubComponent){
+			SubComponent subComp= (SubComponent) feature;
+			   
+			VariableFeature varFeature=getVariableFeature(feature, cd.getVariableFeatures());
+			if (varFeature!=null)//Variable feature
+			{
+				Set<Component> validComponents=getVariableFeatureComponents(varFeature);
+				Component instanceOf=subComp.getInstanceOf();
+				if (instanceOf!=null){
+					if (validComponents==null || !SBOLUtil.contains(validComponents,instanceOf)){												
+						String message=String.format("{COMBINATORIALDERIVATION_COMPONENT_SUBCOMPONENT_INSTANCEOF_VALID}%s wasDerivedFroms:%s",ValidationMessage.INFORMATION_SEPARATOR, subComp.getWasDerivedFrom());						
+						ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Component.uri, derived, instanceOf);
+						validationMessage.childPath(DataModel.Component.feature, subComp).childPath(DataModel.SubComponent.instanceOf);
+						validationMessages=IdentifiedValidator.addToValidations(validationMessages, validationMessage);				
+					}					
+				}				
+			}			
+		}		
+		return validationMessages;
+	}
 	
+	private <T extends Identified> Set<T> addToSet(Set<T> current, java.util.Collection<T> newItems){
+		if (newItems!=null && newItems.size()>0){
+			if (current==null){
+				current=new HashSet<>();
+			}
+			current.addAll(newItems);
+		}
+		return current;
+	}
 	
-	private List<ValidationMessage>  assertStaticAndVariableFeatureCardinality(List<ValidationMessage> validationMessages,CombinatorialDerivation cd,  Component template, Component derived) throws SBOLGraphException
+	private <T extends Identified> Set<T> addToSet(Set<T> current, T item){
+		if (item!=null){
+			if (current==null){
+				current=new HashSet<>();
+			}
+			current.add(item);
+		}
+		return current;
+	}
+	
+	private Set<Component> getVariableFeatureComponents(VariableFeature varFeature) throws SBOLGraphException
+	{
+		Set<Component> validComponents=new HashSet<Component>();
+		if (varFeature!=null)
+		{
+			//Components in getVariants
+			List<Component> variants=varFeature.getVariants();
+			validComponents=addToSet(validComponents, variants);
+						
+			//Components in getVariantCollections recursively
+			List<Collection> collections=varFeature.getVariantCollections();
+			if (collections!=null){
+				for (Collection collection: collections){
+					Set<Component> componentsInVariantCollection=getMembers(collection, null,null);
+					validComponents=addToSet(validComponents, componentsInVariantCollection);					
+				}
+			}
+			
+			//Components in getVariantDerivations
+			List<CombinatorialDerivation> cds= varFeature.getVariantDerivations();
+			if (cds!=null){
+				for (CombinatorialDerivation cd: cds){
+					Set<Component> derivedComponents=getDerivedComponents(cd);
+					validComponents=addToSet(validComponents, derivedComponents);					
+				}
+			}			
+		}
+		return validComponents;
+	}
+	
+	private Set<Component> getDerivedComponents(CombinatorialDerivation cd) throws SBOLGraphException
+	{
+		Set<Component> derivedComps=null;
+		List<Component> components=this.getComponents();
+		URI cdURI=cd.getUri();
+		
+		for (Component component:components){
+			List<URI> wasDerivedFroms=component.getWasDerivedFrom();
+			if (wasDerivedFroms!=null && wasDerivedFroms.contains(cdURI)){
+				derivedComps=addToSet(derivedComps, component);								
+			}
+		}
+		return derivedComps;		
+	}
+	
+	private Set<Component> getMembers(Collection collection, Set<Component> memberComponents, Set<Collection> visited) throws SBOLGraphException
+	{
+		if (collection!=null){
+			if (visited==null){
+				visited=new HashSet<Collection>();
+			}
+			
+			if (visited.contains(collection)){
+				return memberComponents;
+			}
+			else{
+				visited.add(collection);
+			}
+			
+			List<URI> members=collection.getMembers();
+			if (members!=null){
+				for (URI memberURI:members){
+					Component memberComponent=this.getIdentified(memberURI, Component.class);
+					if (memberComponent!=null){
+						memberComponents=addToSet(memberComponents, memberComponent);
+					}
+					else{
+						Collection memberCollection=this.getIdentified(memberURI, Collection.class);
+						if (memberCollection!=null){
+							memberComponents=getMembers(memberCollection, memberComponents,visited);
+						}						
+					}
+				}
+			}			
+		}
+		return memberComponents;
+	}
+	
+	private List<ValidationMessage>  assertStaticAndVariableFeatureCardinality(List<ValidationMessage> validationMessages,CombinatorialDerivation cd, Component derived, Component template) throws SBOLGraphException
 	{		
 		if (Configuration.getInstance().isValidateRecommendedRules()) {	
 			List<Feature> templateFeatures=template.getFeatures();
@@ -1123,20 +1247,16 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 						//COMBINATORIALDERIVATION_COMPONENT_VARIABLE_FEATURE_CARDINALITY_RESTRICTION = sbol3-12111 - If the prov:wasDerivedFrom property of a Component refers to a CombinatorialDerivation, then each variable Feature in the template Component SHOULD be referred to by a prov:wasDerivedFrom property from a number of Feature objects in the derived Component. that is compatible with the cardinality property of the corresponding VariableFeature.							
 						VariableFeatureCardinality cardinality= varFeature.getCardinality();
 						boolean error=false;
-						if (cardinality==VariableFeatureCardinality.One && count!=1)
-						{
+						if (cardinality==VariableFeatureCardinality.One && count!=1){
 							error=true;
 						}
-						else if (cardinality==VariableFeatureCardinality.OneOrMore && count==0)
-						{
+						else if (cardinality==VariableFeatureCardinality.OneOrMore && count==0){
 							error=true;
 						}
-						else if (cardinality==VariableFeatureCardinality.ZeroOrOne && count>1)
-						{
+						else if (cardinality==VariableFeatureCardinality.ZeroOrOne && count>1){
 							error=true;
 						}
-						if (error)
-						{
+						if (error){
 							String message=String.format("{COMBINATORIALDERIVATION_COMPONENT_VARIABLE_FEATURE_CARDINALITY_RESTRICTION}%s wasDerivedFrom count: %s, Cardinality: %s",ValidationMessage.INFORMATION_SEPARATOR, count, cardinality);
 							ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Component.uri, template, templateFeature);
 							validationMessage.childPath(DataModel.Component.feature);
@@ -1246,6 +1366,25 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 			}
 		}
 		return validationMessages;
+	}
+	
+	private VariableFeature getVariableFeature(Feature derivedFeature, List<VariableFeature> variableFeatures) throws SBOLGraphException
+	{
+		VariableFeature varFeature=null;
+		List<URI> derivedFroms=derivedFeature.getWasDerivedFrom();
+		if (derivedFroms!=null)
+		{
+			for (URI wasDerivedFrom: derivedFroms)
+			{
+				varFeature=getVariableFeature(variableFeatures, wasDerivedFrom);
+				if (varFeature!=null)
+				{
+					break;
+				}
+				
+			}
+		}
+		return varFeature;		
 	}
 	
 	private VariableFeature getVariableFeature(List<VariableFeature> varFeatures, URI templateFeatureURI ) throws SBOLGraphException

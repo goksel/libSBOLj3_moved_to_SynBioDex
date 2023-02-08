@@ -50,6 +50,9 @@ public class CombinatorialDerivationTest_12111 extends TestCase {
 	    varFeature.setCardinality(VariableFeatureCardinality.One);
 	    TestUtil.validateDocument(doc, 2,"sbol3-12105,sbol3-12111");	    
 	    sc_start2.setWasDerivedFrom(Arrays.asList(sc_start.getUri()));
+	    
+	    varFeature.setVariants(Arrays.asList(start2));
+	    
 	    TestUtil.validateDocument(doc, 0);
 	           
 	    
