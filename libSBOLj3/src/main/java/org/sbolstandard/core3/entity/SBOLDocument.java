@@ -1078,10 +1078,13 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 									
 										//COMBINATORIALDERIVATION_COMPONENT_SUBCOMPONENT_INSTANCEOF_VALID
 										validationMessages = assertCombDerSubComponentInstanceOfValuesAreValid(validationMessages, cd, component, feature);
+										
+										//COMBINATORIALDERIVATION_COMPONENT_FEATURE_CONSTRAINT_RESTRICTION = sbol3-12113  If the prov:wasDerivedFrom property of a Component refers to a CombinatorialDerivation and the template Component of the CombinatorialDerivation contains Constraint objects, then for any Feature contained by the Component that has a prov:wasDerivedFrom property that refers to the subject or object Feature of any of the template Constraint objects, that feature MUST adhere to the restriction properties of the template Constraint objects.
+										validationMessages=assertCombDerComponentFeatureConstraintRestriction(validationMessages, component, template, feature, foundTemplateFeatureURIs);
+										
 									}
 								}
 								
-								//COMBINATORIALDERIVATION_COMPONENT_STATIC_FEATURE_ONLYONE_RESTRICTION
 								//COMBINATORIALDERIVATION_COMPONENT_VARIABLE_FEATURE_CARDINALITY_RESTRICTION
 								validationMessages= assertStaticAndVariableFeatureCardinality(validationMessages,cd, component, template);
 																
@@ -1099,10 +1102,84 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		return validationMessages;
 	}
 	
+	//COMBINATORIALDERIVATION_COMPONENT_FEATURE_CONSTRAINT_RESTRICTION = sbol3-12113  If the prov:wasDerivedFrom property of a Component refers to a CombinatorialDerivation and the template Component of the CombinatorialDerivation contains Constraint objects, then for any Feature contained by the Component that has a prov:wasDerivedFrom property that refers to the subject or object Feature of any of the template Constraint objects, that feature MUST adhere to the restriction properties of the template Constraint objects.
+	private List<ValidationMessage> assertCombDerComponentFeatureConstraintRestriction(List<ValidationMessage> validationMessages, Component derived, Component template, Feature featureOfDerived, Set<URI> foundTemplateFeatureURIs) throws SBOLGraphException
+	{
+		if (foundTemplateFeatureURIs!=null){
+			for (URI templateFeatureURI: foundTemplateFeatureURIs){
+				List<Constraint> templateConstraints=template.getConstraints();
+				
+				Set<Constraint> templateConstraintsWithFeature=getConstraints(templateConstraints,templateFeatureURI);
+				if (templateConstraintsWithFeature!=null){
+					List<Constraint> derivedConstraints=derived.getConstraints();
+					for (Constraint templateConstraint: templateConstraintsWithFeature){
+						boolean isSubject=false;
+						Feature constraintSubject=templateConstraint.getSubject();
+						if (constraintSubject!=null && constraintSubject.getUri().equals(templateFeatureURI))
+						{
+							isSubject=true;
+						}												
+						Set<Constraint> derivedContraintsWithFeature=getConstraints(derivedConstraints,featureOfDerived.getUri(), templateConstraint.getRestriction(), isSubject);
+						if (derivedContraintsWithFeature==null || derivedContraintsWithFeature.size()==0){
+							String message=String.format("{COMBINATORIALDERIVATION_COMPONENT_FEATURE_CONSTRAINT_RESTRICTION}%s Missing constraint from template:%s, Missing constraint feature in derived.constraints:%s, Missing restriction in derived.constraints:%s",
+									ValidationMessage.INFORMATION_SEPARATOR, 
+									templateConstraint.getUri(),
+									featureOfDerived.getUri(),
+									templateConstraint.getRestriction()									
+									);						
+							ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Component.uri, derived, SBOLUtil.getURIs(derivedConstraints));
+							validationMessage.childPath(DataModel.Component.constraint);
+							validationMessages=IdentifiedValidator.addToValidations(validationMessages, validationMessage);				
+				
+						}						
+					}
+				}
+			}
+		}
+		return validationMessages;
+	}
+
+	
+	private Set<Constraint> getConstraints(List<Constraint> constraints,URI featureURI) throws SBOLGraphException
+	{
+		Set<Constraint> found=null;
+		if (constraints!=null){
+			for (Constraint constraint: constraints){
+				Feature subject=constraint.getSubject();
+				Feature object=constraint.getObject();
+				if (subject!=null && subject.getUri().equals(featureURI)){
+					found=addToSet(found, constraint);
+				}
+				else if (object!=null && object.getUri().equals(featureURI)){
+					found=addToSet(found, constraint);
+				}				
+			}
+		}
+		return found;		
+	}
+	
+	
+	private Set<Constraint> getConstraints(List<Constraint> constraints,URI featureURI, URI restrictionURI, boolean isSubject) throws SBOLGraphException
+	{
+		Set<Constraint> found=null;
+		if (constraints!=null){
+			for (Constraint constraint: constraints){
+				Feature subject=constraint.getSubject();
+				Feature object=constraint.getObject();
+				if (isSubject && subject!=null && subject.getUri().equals(featureURI) && constraint.getRestriction().equals(restrictionURI)){
+					found=addToSet(found, constraint);
+				}
+				else if (!isSubject && object!=null && object.getUri().equals(featureURI) && constraint.getRestriction().equals(restrictionURI)){
+					found=addToSet(found, constraint);
+				}				
+			}
+		}
+		return found;		
+	}
+	
 	//COMBINATORIALDERIVATION_COMPONENT_SUBCOMPONENT_INSTANCEOF_VALID= sbol3-12112  If the prov:wasDerivedFrom property of a Component refers to a CombinatorialDerivation, then for any SubComponent in the Component with a prov:wasDerivedFrom property referring to a variable Feature in the template Component of the CombinatorialDerivation, that derived SubComponent MUST have an instanceOf property that refers to a Component specified by the corresponding VariableFeature. In particular, that Component must be a value of the variant property, a member or recursive member of a Collection that is a value of the variantCollection property, or a Component with a prov:wasDerivedFrom property that refers to a CombinatorialDerivation specified by a variantDerivation property of the VariableFeature.
 	private List<ValidationMessage>  assertCombDerSubComponentInstanceOfValuesAreValid(List<ValidationMessage> validationMessages,CombinatorialDerivation cd, Component derived, Feature feature) throws SBOLGraphException
 	{	
-		//TODO
 		if (feature instanceof SubComponent){
 			SubComponent subComp= (SubComponent) feature;
 			   
