@@ -62,7 +62,7 @@ public class CombinatorialDerivationTest_12112 extends TestCase {
 	    innerCol.addMembers(Arrays.asList(start2, start3));
 	    col.addMember(innerCol);
 	    varFeature.setVariantCollections(Arrays.asList(col));
-	    TestUtil.validateDocument(doc, 0);
+	    TestUtil.validateDocument(doc, 1, "sbol3-12203");
 	    
 	    varFeature.setVariantCollections(null);
 	    TestUtil.validateDocument(doc, 1, "sbol3-12112");

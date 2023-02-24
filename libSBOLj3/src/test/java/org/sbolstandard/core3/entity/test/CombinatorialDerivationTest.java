@@ -69,7 +69,7 @@ public class CombinatorialDerivationTest extends TestCase {
         
         TestUtil.validateProperty(vf, "setVariable", new Object[] {null}, Feature.class);
         vf.setVariable(null);
-        TestUtil.validateIdentified(vf, doc, 2);
+        TestUtil.validateDocument(doc, 3);
         
         vf.setCardinality(VariableFeatureCardinality.One);
         vf.setVariable(startFeature);
@@ -93,8 +93,8 @@ public class CombinatorialDerivationTest extends TestCase {
         //SBOL_VALID_ENTITY_TYPES - VariableFeature.Variable
         //VARIABLEFEATURE_FEATURE_NOT_NULL
         Resource resvf4= TestUtil.getResource(vf4);
-        RDFUtil.setProperty(resvf4, DataModel.VariableFeature.variable, pTetR.getUri());
-        TestUtil.validateIdentified(cd, doc, 3);
+        RDFUtil.setProperty(resvf4, DataModel.VariableFeature.variable, startFeature.getUri());
+        TestUtil.validateIdentified(cd, doc, 2);
         
         //Clear the errors
         vf4.setVariable(startCodonFeature);

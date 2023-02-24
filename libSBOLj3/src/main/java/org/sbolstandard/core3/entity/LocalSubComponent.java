@@ -121,6 +121,10 @@ public class LocalSubComponent extends FeatureWithLocation{
 		RDFUtil.setProperty(resource, DataModel.type, types);
 	}
 	
+	public void addType(URI type) {
+		RDFUtil.addProperty(resource, DataModel.type, type);
+	}
+	
 	@Override
 	public URI getResourceType() {
 		return DataModel.LocalSubComponent.uri;

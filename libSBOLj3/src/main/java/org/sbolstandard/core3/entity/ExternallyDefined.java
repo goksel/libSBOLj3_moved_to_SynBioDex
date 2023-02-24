@@ -82,6 +82,10 @@ public class ExternallyDefined extends Feature{
 		RDFUtil.setProperty(resource, DataModel.type, types);
 	}
 	
+	public void addType(URI type) {
+		RDFUtil.addProperty(resource, DataModel.type, type);
+	}
+		
 	@NotNull(message = "{EXTERNALLYDEFINED_DEFINITION_NOT_NULL}")
 	public URI getDefinition() throws SBOLGraphException {
 		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ExternalyDefined.definition);

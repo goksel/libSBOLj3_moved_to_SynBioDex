@@ -76,10 +76,10 @@ public class CombinatorialDerivationTest_12111 extends TestCase {
 	    
 	    //sc_start derived by two, cardinality is one : Error
 	    cut2.setWasDerivedFrom(Arrays.asList(cut1.getUri(), sc_start.getUri()));
-	    TestUtil.validateDocument(doc, 1,"sbol3-12111");
+	    TestUtil.validateDocument(doc, 2,"sbol3-12111,sbol3-12115");//Two errors, the second one is due to not having the types from the sc_start.types on cut1
 	    
 	    varFeature.setCardinality(VariableFeatureCardinality.OneOrMore);
-	    TestUtil.validateDocument(doc, 0);
+	    TestUtil.validateDocument(doc, 1, "sbol3-12115");//The type error remains 
 	    
 	    //sc_start is not used to derive anything,cardinality is one more error: Error
 	    sc_start2.setWasDerivedFrom(null);

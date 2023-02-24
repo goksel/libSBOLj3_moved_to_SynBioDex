@@ -12,6 +12,8 @@ import java.util.Optional;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.Syntax;
@@ -1046,7 +1048,12 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		{
 			messages=assertCombDerWasDerivedRestrictionForCollections(messages);			
 		}		
+		
+		messages=assertCombDerVariantCollectionsIncludeComponentMembers(messages);
 		messages=assertCombDerRestrictionForComponents(messages);
+		
+		//COMBINATORIALDERIVATION_VARIABLEFEATURE_NOT_CIRCULAR		
+		messages=assertCombDerVariantFeaturesNotCircular(messages);
 		
 		return messages;
 	}
@@ -1081,6 +1088,12 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 										
 										//COMBINATORIALDERIVATION_COMPONENT_FEATURE_CONSTRAINT_RESTRICTION = sbol3-12113  If the prov:wasDerivedFrom property of a Component refers to a CombinatorialDerivation and the template Component of the CombinatorialDerivation contains Constraint objects, then for any Feature contained by the Component that has a prov:wasDerivedFrom property that refers to the subject or object Feature of any of the template Constraint objects, that feature MUST adhere to the restriction properties of the template Constraint objects.
 										validationMessages=assertCombDerComponentFeatureConstraintRestriction(validationMessages, component, template, feature, foundTemplateFeatureURIs);
+
+										//COMBINATORIALDERIVATION_COMPONENT_FEATURE_ROLE_RESTRICTION = sbol3-12114 - If the prov:wasDerivedFrom property of a Component refers to a CombinatorialDerivation, then for any Feature in the Component with a prov:wasDerivedFrom property referring to a variable Feature in the template Component of the CombinatorialDerivation, then the role properties of that Feature SHOULD contain all URIs contained by the role properties of the template Feature.
+										validationMessages=assertCombDerComponentFeatureRoleRestriction(validationMessages, component, template, feature, foundTemplateFeatureURIs);
+										
+										//COMBINATORIALDERIVATION_COMPONENT_FEATURE_TYPE_RESTRICTION = sbol3-12115 - Let the type-determining referent of a Feature be the Feature itself for a LocalSubComponent or ExternallyDefined, the Component referred by the instanceOf property of a SubComponent and the type-determining referent of the Feature referred to be a ComponentReference. If the prov:wasDerivedFrom property of a Component refers to a CombinatorialDerivation, then for any Feature in the Component with a prov:wasDerivedFrom property referring to a variable Feature in the template Component of the CombinatorialDerivation, then the type properties of the Feature\u2019s type-determining referent SHOULD contain all URIs contained by the type properties of the template Feature\u2019s type-determining referent.
+										validationMessages=assertCombDerComponentFeatureTypeRestriction(validationMessages, component, template, feature, foundTemplateFeatureURIs);
 										
 									}
 								}
@@ -1096,6 +1109,114 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 							}							
 						}			
 					}		
+				}
+			}
+		}
+		return validationMessages;
+	}
+	
+	//COMBINATORIALDERIVATION_COMPONENT_FEATURE_TYPE_RESTRICTION 
+		private List<ValidationMessage> assertCombDerComponentFeatureTypeRestriction(List<ValidationMessage> validationMessages, Component derived, Component template, Feature featureOfDerived, Set<URI> foundTemplateFeatureURIs) throws SBOLGraphException
+		{
+			if (Configuration.getInstance().isValidateRecommendedRules()) {
+				if (foundTemplateFeatureURIs!=null){
+					List<Feature> templateFeatures=template.getFeatures();			
+					for (URI templateFeatureURI: foundTemplateFeatureURIs){
+						for (Feature templateFeature:templateFeatures){
+							if (templateFeature.getUri().equals(templateFeatureURI)) {
+								List<URI> urisTemplate= getFeatureTypes(templateFeature,null);
+								List<URI> urisDerived =getFeatureTypes(featureOfDerived,null);
+								if (urisTemplate!=null){
+									if (urisDerived==null){
+										String message=String.format("{COMBINATORIALDERIVATION_COMPONENT_FEATURE_TYPE_RESTRICTION}%sTemplate feature types: %s",ValidationMessage.INFORMATION_SEPARATOR, urisTemplate);									
+										ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Component.uri, derived, urisDerived);
+										validationMessage.childPath(DataModel.Component.feature, featureOfDerived).childPath(DataModel.type);
+										validationMessages=IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+									}
+									else{
+										for (URI uriTemplate:urisTemplate){
+											boolean exists=urisDerived.contains(uriTemplate);
+											if (!exists){
+												String message=String.format("{COMBINATORIALDERIVATION_COMPONENT_FEATURE_TYPE_RESTRICTION}%sTemplate feature type: %s",ValidationMessage.INFORMATION_SEPARATOR, uriTemplate);
+												ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Component.uri, derived, urisDerived);
+												validationMessage.childPath(DataModel.Component.feature, featureOfDerived).childPath(DataModel.type);
+												validationMessages=IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		return validationMessages;
+	}
+		 
+	private List<URI> getFeatureTypes(Feature feature, Set<URI> visitedComponentRefs) throws SBOLGraphException{
+		if (feature instanceof SubComponent){
+			SubComponent referred = (SubComponent) feature;
+			Component instanceOf=referred.getInstanceOf();
+			if (instanceOf!=null){
+				return instanceOf.getTypes();
+			}			
+		}		
+		else if (feature instanceof ComponentReference){
+			URI featureURI=feature.getUri();
+			if (visitedComponentRefs==null || !visitedComponentRefs.contains(featureURI) ) {
+				if (visitedComponentRefs==null){//Prevent loops, if ComponentReferences refersTo themselves hierarchically
+					visitedComponentRefs=new HashSet<URI>();
+				}
+				visitedComponentRefs.add(featureURI);
+				ComponentReference referred= (ComponentReference) feature;
+				Feature crFeature=referred.getRefersTo();
+				return getFeatureTypes(crFeature,visitedComponentRefs);	//Return the type recursively.
+			}
+		}
+		else if (feature instanceof ExternallyDefined){
+			ExternallyDefined exDefined= (ExternallyDefined) feature;
+			return exDefined.getTypes();			
+		}
+		else if (feature instanceof LocalSubComponent){
+			LocalSubComponent referred = (LocalSubComponent) feature;
+			return referred.getTypes();			
+		}		
+		return null;
+	}
+	
+	
+	//COMBINATORIALDERIVATION_COMPONENT_FEATURE_ROLE_RESTRICTION 
+	private List<ValidationMessage> assertCombDerComponentFeatureRoleRestriction(List<ValidationMessage> validationMessages, Component derived, Component template, Feature featureOfDerived, Set<URI> foundTemplateFeatureURIs) throws SBOLGraphException
+	{
+		if (Configuration.getInstance().isValidateRecommendedRules()) {
+			if (foundTemplateFeatureURIs!=null){
+				List<Feature> templateFeatures=template.getFeatures();			
+				for (URI templateFeatureURI: foundTemplateFeatureURIs){
+					for (Feature templateFeature:templateFeatures){
+						if (templateFeature.getUri().equals(templateFeatureURI)) {
+							List<URI> rolesTemplate= templateFeature.getRoles();
+							List<URI> rolesDerived =featureOfDerived.getRoles();
+							if (rolesTemplate!=null){
+								if (rolesDerived==null){
+									String message=String.format("{COMBINATORIALDERIVATION_COMPONENT_FEATURE_ROLE_RESTRICTION}%sTemplate feature roles: %s",ValidationMessage.INFORMATION_SEPARATOR, rolesTemplate);									
+									ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Component.uri, derived, rolesDerived);
+									validationMessage.childPath(DataModel.Component.feature, featureOfDerived).childPath(DataModel.role);
+									validationMessages=IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+								}
+								else{
+									for (URI role:rolesTemplate){
+										boolean exists=rolesDerived.contains(role);
+										if (!exists){
+											String message=String.format("{COMBINATORIALDERIVATION_COMPONENT_FEATURE_ROLE_RESTRICTION}%sTemplate feature role: %s",ValidationMessage.INFORMATION_SEPARATOR, role);
+											ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Component.uri, derived, rolesDerived);
+											validationMessage.childPath(DataModel.Component.feature, featureOfDerived).childPath(DataModel.role);
+											validationMessages=IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
@@ -1391,6 +1512,7 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		}
 		return validationMessages;
 	}
+	
 	private List<ValidationMessage>  assertCombDerComponentRoleRestriction(List<ValidationMessage> validationMessages, Component component, Component template) throws SBOLGraphException
 	{
 		//COMBINATORIALDERIVATION_COMPONENT_ROLE_RESTRICTION
@@ -1419,7 +1541,7 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 			}
 		}
 		return validationMessages;
-	}
+	}	
 	
 	private List<ValidationMessage>  assertCombDerComponentTypeRestriction(List<ValidationMessage> validationMessages, Component component, Component template) throws SBOLGraphException
 	{
@@ -1518,6 +1640,118 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		return validationMessages;
 	}
 	
+	//COMBINATORIALDERIVATION_VARIABLEFEATURE_VARIANTCOLLECTION_RESTRICTION
+	private List<ValidationMessage> assertCombDerVariantCollectionsIncludeComponentMembers(List<ValidationMessage> validationMessages) throws SBOLGraphException
+	{	
+		List<CombinatorialDerivation> cds=this.getCombinatorialDerivations();
+		if (cds!=null){
+			for (CombinatorialDerivation cd: cds) {
+				List<VariableFeature> vfs=cd.getVariableFeatures();
+				if (vfs!=null){										
+					MutablePair<List<ValidationMessage>, Set<Collection>> collectionsVisited=new MutablePair<List<ValidationMessage>, Set<Collection>>(validationMessages, null);
+					for (VariableFeature vf:vfs) {
+						// getVariantCollections recursively
+						List<Collection> collections=vf.getVariantCollections();
+						if (collections!=null){
+							for (Collection collection: collections){
+								collectionsVisited=assertComponentOrCollectionMembersOnly(cd, vf, collection,collectionsVisited);													
+							}
+						}
+						validationMessages=collectionsVisited.getLeft();						
+					}
+						
+				}
+			}
+		}
+		return validationMessages;
+	}
+	
+	//COMBINATORIALDERIVATION_VARIABLEFEATURE_NOT_CIRCULAR = sbol3-12204 - VariableFeature objects MUST NOT form circular reference chains via their variantDerivation properties and parent CombinatorialDerivation objects.
+	private List<ValidationMessage> assertCombDerVariantFeaturesNotCircular(List<ValidationMessage> validationMessages) throws SBOLGraphException
+	{	
+		List<CombinatorialDerivation> cds=this.getCombinatorialDerivations();
+		if (cds!=null){
+			for (CombinatorialDerivation cd: cds) {
+				validationMessages=assertCombDerNotCircular(cd, null,cd, validationMessages);	
+			}
+		}
+		return validationMessages;
+	}
+	
+	//COMBINATORIALDERIVATION_VARIABLEFEATURE_NOT_CIRCULAR
+	private List<ValidationMessage> assertCombDerNotCircular(CombinatorialDerivation rootCd, VariableFeature rootFeature, CombinatorialDerivation cdReferred, List<ValidationMessage> validationMessages) throws SBOLGraphException
+	{		
+		List<VariableFeature> vfs=cdReferred.getVariableFeatures();
+		if (vfs!=null){										
+			for (VariableFeature vf:vfs) {				
+				// getVariantCollections recursively
+				if (cdReferred==rootCd){//First iteration, cdReferred and rootCd are the same objects
+					rootFeature=vf;
+				}
+				List<CombinatorialDerivation> cds=vf.getVariantDerivations();
+				if (cds!=null && cds.size()>0){
+					if (SBOLUtil.getURIs(cds).contains(rootCd.getUri())){
+						String message=String.format("{COMBINATORIALDERIVATION_VARIABLEFEATURE_NOT_CIRCULAR}%s Linked from a referred CombinatorialDerivation: %s, VariableFeature:%s",ValidationMessage.INFORMATION_SEPARATOR, cdReferred.getUri(), vf.getUri());
+						ValidationMessage validationMessage = new ValidationMessage(message, DataModel.CombinatorialDerivation.uri, rootCd, rootFeature);
+						validationMessage.childPath(DataModel.CombinatorialDerivation.variableFeature);
+						validationMessages=IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+					}
+					else{
+						for (CombinatorialDerivation cdNextReferred:cds){
+							validationMessages=assertCombDerNotCircular(rootCd, rootFeature, cdNextReferred, validationMessages);
+						}
+					}
+				}
+			}
+				
+		}
+		return validationMessages;
+	}
+		
+	
+	private MutablePair<List<ValidationMessage>, Set<Collection>> assertComponentOrCollectionMembersOnly(CombinatorialDerivation cd, VariableFeature vf,  Collection collection, MutablePair<List<ValidationMessage>, Set<Collection>> visited) throws SBOLGraphException
+	{
+		if (collection!=null){
+			if (visited.getRight()==null){
+				visited.setRight(new HashSet<Collection>());
+			}
+			
+			if (visited.getRight().contains(collection)){
+				return visited;
+			}
+			else{
+				visited.getRight().add(collection);
+			}
+			
+			List<URI> members=collection.getMembers();
+			if (members!=null){
+				for (URI memberURI:members){
+					boolean validMember=false;
+					Component memberComponent=this.getIdentified(memberURI, Component.class);
+					if (memberComponent!=null){
+						validMember=true;
+					}
+					else{
+						Collection memberCollection=this.getIdentified(memberURI, Collection.class);
+						if (memberCollection!=null){
+							validMember=true;
+							visited=assertComponentOrCollectionMembersOnly(cd, vf, memberCollection, visited);
+						}	
+						else{
+							validMember=false;
+						}
+					}
+					if (!validMember) {
+						String message=String.format("{COMBINATORIALDERIVATION_VARIABLEFEATURE_VARIANTCOLLECTION_RESTRICTION}%s CombinatorialDerivation:%s, VariableFeature:%s",ValidationMessage.INFORMATION_SEPARATOR, cd.getUri(), vf.getUri());
+						ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Collection.uri, collection, memberURI);
+						validationMessage.childPath(DataModel.Collection.member);
+						visited.setLeft(IdentifiedValidator.addToValidations(visited.getLeft(), validationMessage));		
+					}				
+				}
+			}			
+		}
+		return visited;
+	}
 	
 	private Set<URI> ignoredProperties()
 	{

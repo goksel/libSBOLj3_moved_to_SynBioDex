@@ -117,6 +117,14 @@ public abstract class Identified implements ValidatableSBOLEntity {
 	public void setWasDerivedFrom(@Valid List<URI> wasDerivedFrom) {
 		RDFUtil.setProperty(resource, DataModel.Identified.wasDerivedFrom, wasDerivedFrom);
 	}
+	public void addWasDerivedFrom(@Valid URI wasDerivedFrom) {
+		RDFUtil.addProperty(resource, DataModel.Identified.wasDerivedFrom, wasDerivedFrom);
+	}
+	public void addWasDerivedFrom(Identified wasDerivedFrom) {
+		if (wasDerivedFrom!=null){
+			addWasDerivedFrom(wasDerivedFrom.getUri());
+		}
+	}
 	
 	public List<Activity> getWasGeneratedBy() throws SBOLGraphException {
 		//return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.Identified.wasGeneratedBy);

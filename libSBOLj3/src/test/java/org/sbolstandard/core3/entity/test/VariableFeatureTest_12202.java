@@ -17,7 +17,7 @@ import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
-public class CombinatorialDerivationTest_12109 extends TestCase {
+public class VariableFeatureTest_12202 extends TestCase {
 	
 	public void testCombinatorialDerivation() throws SBOLGraphException, IOException, Exception
     {
@@ -28,41 +28,27 @@ public class CombinatorialDerivationTest_12109 extends TestCase {
 		
 		Component pTetR=SBOLAPI.createDnaComponent(doc, "BBa_R0040", "pTetR", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
 	    Component pTetR2=SBOLAPI.createDnaComponent(doc, "BBa_R0040_2", "pTetR2", "TetR repressible promoter", Role.Promoter, "accctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
-	    
-	    TestUtil.validateDocument(doc, 0);
-	    
-	    CombinatorialDerivation cd=doc.createCombinatorialDerivation("cs1", pTetR);
-		   
-	    
+	    	    	    
 	    Component start=SBOLAPI.createDnaComponent(doc, "BBa_R0040_start", "pTetR_start", "promoter_start", Role.EngineeredRegion, "tccctat");	
 	    SubComponent sc_start=pTetR.createSubComponent(start);	    
+	    SequenceFeature pTetRSequenceFeature=pTetR.createSequenceFeature(pTetR.getSequences().get(0));
 	    
-	    Component start2=SBOLAPI.createDnaComponent(doc, "BBa_R0040_start2", "pTetR_start", "promoter_start", Role.EngineeredRegion, "tccctat");	
+	    Component start2=SBOLAPI.createDnaComponent(doc, "BBa_R0040_start2", "pTetR_start2", "promoter_start2", Role.EngineeredRegion, "accctat");	
 	    SubComponent sc_start2=pTetR2.createSubComponent(start2);	    
+	    SequenceFeature pTetRSequenceFeature2=pTetR2.createSequenceFeature(pTetR2.getSequences().get(0));
 	    
-	    
+	    CombinatorialDerivation cd=doc.createCombinatorialDerivation("cd1", pTetR);	   	    
 	    pTetR2.setWasDerivedFrom(Arrays.asList(cd.getUri()));
-	    sc_start2.setWasDerivedFrom(Arrays.asList(sc_start.getUri()));
 	   
 	    VariableFeature varFeature=cd.createVariableFeature(VariableFeatureCardinality.One, sc_start);
-	    
-	    
-	    Component end=SBOLAPI.createDnaComponent(doc, "BBa_R0040_end", "pTetR_end", "promoter_end", Role.EngineeredRegion, "tccctat");	
-	    SubComponent sc_end=pTetR.createSubComponent(end);	    
-	   
-	    SubComponent sc_end2=pTetR2.createSubComponent(end);	    
-	    sc_end2.setWasDerivedFrom(Arrays.asList(sc_end.getUri()));
-		   
 	    varFeature.setVariants(Arrays.asList(start2));
+	    sc_start2.setWasDerivedFrom(Arrays.asList(sc_start.getUri()));
+	    pTetRSequenceFeature2.setWasDerivedFrom(Arrays.asList(pTetRSequenceFeature.getUri()));
+	    		  	    
 	    TestUtil.validateDocument(doc, 0);
+	    VariableFeature varFeature2=cd.createVariableFeature(VariableFeatureCardinality.One, sc_start2);
+	    TestUtil.validateDocument(doc, 1, "sbol3-12202");
+		  
 	    
-	    sc_end.addAnnotion(URI.create("http://sbolstandard.org/testproperty"), "testvalue");
-	    sc_end.addRole(URI.create("http://sbolstandard.org/testrole"));
-	    sc_end.setRoleIntegration(RoleIntegration.mergeRoles);	   
-	    TestUtil.validateDocument(doc, 4,"sbol3-12109, sbol3-12114");
-	    
-	       
-	    
-    }
-
+	}
 }
