@@ -135,8 +135,7 @@ public class VariableFeatureTest_12204 extends TestCase {
 		Derivation_Generated.setWasDerivedFrom(Arrays.asList(compDerPro.getUri(),Derivation_example.getUri()));
 		sc_pAmtR_DerivationGenerated.setWasDerivedFrom(Arrays.asList(sc_Pro_Derivation.getUri()));
 		sc_GenGenerated_DerivationGenerated.setWasDerivedFrom(Arrays.asList(sc_Gen_Derivation.getUri()));
-		
-		
+				
 		
 		Configuration.getInstance().setValidateBeforeSaving(false);
 		System.out.print(SBOLIO.write(doc, SBOLFormat.TURTLE));
@@ -146,10 +145,6 @@ public class VariableFeatureTest_12204 extends TestCase {
 		     
 		varFeatureTer.setVariantDerivations(Arrays.asList(compDerPro));
 		TestUtil.validateDocument(doc, 2, "sbol3-12204");// First: compDerPro.varFeatureGen.VariantDerivation = compDerTer, Second: compDerTer.varFeatureTer.VariantDerivation = compDerPro
-		
-		  
-	    
-		  
-	    
+		 
 	}
 }

@@ -77,6 +77,8 @@ public class Configuration {
 	private Set<String> SboOccurringEntityInteractionTypes=null;
 	private Set<String> SoSequenceFeatures=null;
 	private Set<String> EdamEncodingTerms=null;
+	private Set<String> SboModelFrameworkTerms=null;
+	private Set<String> EdamFileFormatTerms=null;
 	
 	private Configuration()
 	{
@@ -88,6 +90,8 @@ public class Configuration {
 			this.SboOccurringEntityInteractionTypes=RDFUtil.childResourcesRecursively(sboOntology,URINameSpace.SBO.local("0000231").toString());
 			this.SoSequenceFeatures=RDFUtil.childResourcesRecursively(soOntology,Role.SequenceFeature.toString());
 			this.EdamEncodingTerms= RDFUtil.childResourcesRecursively(edamOntology,Encoding.PARENT_TERM.toString());
+			this.SboModelFrameworkTerms= RDFUtil.childResourcesRecursively(sboOntology, URINameSpace.SBO.local("0000004").toString());				
+			this.EdamFileFormatTerms= RDFUtil.childResourcesRecursively(edamOntology,URINameSpace.EDAM.local("format_1915").toString());
 		}
 		catch (FileNotFoundException ex)
 		{
@@ -118,6 +122,21 @@ public class Configuration {
 	public Set<String> getEdamEncodingTerms()
 	{
 		return this.EdamEncodingTerms;   
+	}
+	
+	public Set<String> getEdamModelLanguageTerms()
+	{
+		return this.EdamFileFormatTerms;   
+	}
+	
+	public Set<String> getSboModelFrameworkTerms()
+	{
+		return this.SboModelFrameworkTerms;   
+	}
+	
+	public Set<String> getEdamFileFormatTerms()
+	{
+		return this.EdamFileFormatTerms;   
 	}
 	
 	/*public static Configuration getConfiguration()

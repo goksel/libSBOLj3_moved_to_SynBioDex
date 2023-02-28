@@ -7,9 +7,6 @@ import java.util.Optional;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Location.LocationBuilder;
-import org.sbolstandard.core3.entity.Location.LocationFactory;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
@@ -17,9 +14,6 @@ import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.ComponentType.StrandType;
-import org.sbolstandard.core3.vocabulary.ComponentType.TopologyType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 import jakarta.validation.Valid;

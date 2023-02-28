@@ -4,10 +4,13 @@ import java.net.URI;
 import java.util.List;
 
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 import jakarta.validation.constraints.NotNull;
@@ -61,5 +64,42 @@ public class Model extends TopLevel{
 	public URI getResourceType() {
 		return DataModel.Model.uri;
 	}
-	
+	    
+    @Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		
+		//MODEL_LANGUAGE_EDAM_URI
+		validationMessages =  assertValidModellingLanguage(validationMessages);
+		
+		//MODEL_FRAMEWORK_SBO_URI
+		validationMessages =  assertValidModellingFramework(validationMessages);		
+		return validationMessages;
+	}
+    
+    private List<ValidationMessage> assertValidModellingLanguage(List<ValidationMessage> validationMessages) throws SBOLGraphException
+    {
+    	if (Configuration.getInstance().isValidateRecommendedRules()){
+			URI language=this.getLanguage();
+			if (language!=null && !Configuration.getInstance().getEdamModelLanguageTerms().contains(language.toString())){
+				ValidationMessage message = new ValidationMessage("{MODEL_LANGUAGE_EDAM_URI}", DataModel.Model.language, language);
+				validationMessages=IdentifiedValidator.addToValidations(validationMessages, message);
+			}
+		}	
+    	return validationMessages;
+    }
+
+    
+    private List<ValidationMessage> assertValidModellingFramework(List<ValidationMessage> validationMessages) throws SBOLGraphException
+    {
+    	if (Configuration.getInstance().isValidateRecommendedRules()){
+			URI framework=this.getFramework();			
+			if (framework!=null && !Configuration.getInstance().getSboModelFrameworkTerms().contains(framework.toString())){
+				ValidationMessage message = new ValidationMessage("{MODEL_FRAMEWORK_SBO_URI}", DataModel.Model.framework, framework);
+				validationMessages=IdentifiedValidator.addToValidations(validationMessages, message);
+			}
+		}	
+    	return validationMessages;
+    }
 }

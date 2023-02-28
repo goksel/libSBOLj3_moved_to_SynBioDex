@@ -15,7 +15,6 @@ import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
-import org.sbolstandard.core3.vocabulary.Orientation;
 import org.sbolstandard.core3.vocabulary.VariableFeatureCardinality;
 
 import jakarta.validation.constraints.NotNull;

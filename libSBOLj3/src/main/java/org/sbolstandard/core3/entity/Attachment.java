@@ -4,8 +4,10 @@ import java.net.URI;
 import java.util.List;
 import java.util.OptionalLong;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
+import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
@@ -39,8 +41,24 @@ public class Attachment extends TopLevel{
 		{
 			validationMessages= addToValidations(validationMessages,new ValidationMessage("{ATTACHMENT_HASHGORITHM_NOT_NULL_IF_HASH_IS_PROVIDED}", DataModel.Attachment.hashAlgorithm));      	
 		}
+		
+		//ATTACHMENT_FORMAT_EDAM_URI
+		validationMessages=assertValidAttachmentFormat(validationMessages);
+		
 		return validationMessages;
-	}		
+	}	
+	
+    private List<ValidationMessage> assertValidAttachmentFormat(List<ValidationMessage> validationMessages) throws SBOLGraphException
+    {
+    	if (Configuration.getInstance().isValidateRecommendedRules()){
+			URI format=this.getFormat();			
+			if (format!=null && !Configuration.getInstance().getEdamFileFormatTerms().contains(format.toString())){
+				ValidationMessage message = new ValidationMessage("{ATTACHMENT_FORMAT_EDAM_URI}", DataModel.Attachment.format, format);
+				validationMessages=IdentifiedValidator.addToValidations(validationMessages, message);
+			}
+		}	
+    	return validationMessages;
+    }	
 	
 	//@NotNull(message = "Attachment.source cannot be null")
 	@NotNull(message = "{ATTACHMENT_SOURCE_NOT_NULL}")
@@ -158,5 +176,5 @@ public class Attachment extends TopLevel{
 	public URI getResourceType() {
 		return DataModel.Attachment.uri;
 	}
-	
+		   
 }
