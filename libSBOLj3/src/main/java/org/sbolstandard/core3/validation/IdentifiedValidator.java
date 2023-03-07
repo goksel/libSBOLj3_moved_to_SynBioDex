@@ -2,6 +2,7 @@ package org.sbolstandard.core3.validation;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -338,7 +339,7 @@ public class IdentifiedValidator {
 			return validationMessages;
 		}
 		
-		public static Set<URI> getMatchingSearchURIs(List<URI> items, List<URI> toSearchURIs) throws SBOLGraphException
+		public static Set<URI> getMatchingSearchURIs(Collection<URI> items, Collection<URI> toSearchURIs) throws SBOLGraphException
 		{
 			Set<URI> result=null;
 			if (items!=null && toSearchURIs!=null)
@@ -452,6 +453,18 @@ public class IdentifiedValidator {
 			messages = IdentifiedValidator.addToValidations(messages, message);
 		}
 		return messages;
+	}
+	
+	public static List<ValidationMessage> assertTwoPropertyValueIdenticalEqual(List<ValidationMessage> validationMessages, String message, String first, String second, URI firstPropertyURI, URI secondPropertyURI) throws SBOLGraphException
+	{
+		if (first!=null && !first.isEmpty() && second!=null && !second.isEmpty()) {
+			if (!first.equals(second)){
+				String messageString=String.format("%s%s%s: %s",message,ValidationMessage.INFORMATION_SEPARATOR, secondPropertyURI, second);				
+				ValidationMessage valMessage=new ValidationMessage(messageString, firstPropertyURI, first);  				
+				validationMessages= IdentifiedValidator.addToValidations(validationMessages,valMessage);											
+			}
+		}
+		return validationMessages;
 	}
 
 	public URI getPropertyAsURI(Resource resource, URI property) throws SBOLGraphException {

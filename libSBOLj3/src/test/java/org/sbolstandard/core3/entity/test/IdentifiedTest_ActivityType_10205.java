@@ -32,7 +32,7 @@ public class IdentifiedTest_ActivityType_10205 extends TestCase {
         Attachment attachment=doc.createAttachment("attachment1", URI.create("https://sbolstandard.org/attachment1"));
         attachment.setFormat(ModelLanguage.SBML);
         attachment.setSize(OptionalLong.of(1000));
-        attachment.setHashAlgorithm("Alg1");
+        attachment.setHashAlgorithm(HashAlgorithm.sha3_224);
         attachment.setHash("aaa");
         
         Configuration.getInstance().setValidateAfterSettingProperties(false);
@@ -52,9 +52,9 @@ public class IdentifiedTest_ActivityType_10205 extends TestCase {
         TestUtil.validateIdentified(attachment, doc, 0);
         
         association.setRoles(Arrays.asList(ActivityType.Build.getUri()));
-        TestUtil.validateIdentified(attachment, doc, 1);
+        TestUtil.validateDocument(doc, 2,"sbol3-10205, sbol3-12902");
         
-        activity.setTypes(Arrays.asList(ActivityType.Design.getUri(), ActivityType.Build.getUri()));
+        association.setRoles(Arrays.asList(ActivityType.Design.getUri()));        
         TestUtil.validateIdentified(attachment, doc, 0);
         
         

@@ -37,11 +37,11 @@
             "sbol:type": {
                 "@id": "sbol:design"
             },
-            "prov:startedAtTime": "2019-07-29T12:29:31.327Z",
             "@type": [
                 "sbol:TopLevel",
                 "prov:Activity"
             ],
+            "prov:startedAtTime": "2019-07-29T14:16:03.164Z",
             "sbol:name": "Codon optimization activity",
             "sbol:description": "An activity that is used to optimise codons",
             "prov:qualifiedUsage": [
@@ -52,8 +52,8 @@
                     "@id": "https://sbolstandard.org/examples/codon_optimization_activity/Usage1"
                 }
             ],
-            "prov:endedAtTime": "2020-08-30T12:29:31.327Z",
             "sbol:displayId": "codon_optimization_activity",
+            "prov:endedAtTime": "2020-08-30T14:16:03.164Z",
             "prov:qualifiedAssociation": {
                 "@id": "https://sbolstandard.org/examples/codon_optimization_activity/Association1"
             },
@@ -126,7 +126,7 @@
         {
             "@id": "https://sbolstandard.org/examples/codon_optimization_activity/Usage1",
             "prov:hadRole": {
-                "@id": "SBO:0000645"
+                "@id": "sbol:learn"
             },
             "prov:entity": {
                 "@id": "https://sbolstandard.org/examples/toggle_switch"
@@ -140,7 +140,7 @@
         {
             "@id": "https://sbolstandard.org/examples/codon_optimization_activity/Usage2",
             "prov:hadRole": {
-                "@id": "SBO:0000011"
+                "@id": "sbol:design"
             },
             "prov:entity": {
                 "@id": "https://sbolstandard.org/examples/toggle_switch_optimised"

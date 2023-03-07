@@ -1,4 +1,4 @@
-package org.sbolstandard.core3.entity.test;
+package org.sbolstandard.core3.usecase.test;
 
 import java.io.IOException;
 import java.net.URI;

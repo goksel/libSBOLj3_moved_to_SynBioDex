@@ -14,7 +14,7 @@
         sbol:format         EDAM:format_2585 ;
         sbol:hasNamespace   <https://sbolstandard.org/examples> ;
         sbol:hash           "aaa" ;
-        sbol:hashAlgorithm  "Alg1" ;
+        sbol:hashAlgorithm  "sha-256" ;
         sbol:size           "1000" ;
         sbol:source         <https://sbolstandard.org/attachment1> .
 
@@ -37,6 +37,6 @@
         sbol:format         EDAM:format_2585 ;
         sbol:hasNamespace   <https://sbolstandard.org/examples> ;
         sbol:hash           "aaa" ;
-        sbol:hashAlgorithm  "HashAlg" ;
+        sbol:hashAlgorithm  "sha-256" ;
         sbol:size           "1000" ;
         sbol:source         <https://sbolstandard.org/attachment2> .

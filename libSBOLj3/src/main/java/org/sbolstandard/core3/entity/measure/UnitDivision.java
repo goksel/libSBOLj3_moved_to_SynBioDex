@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
@@ -27,6 +28,12 @@ public class UnitDivision extends CompoundUnit{
 	protected  UnitDivision(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
+	}
+	
+	public static UnitDivision create(SBOLDocument sbolDocument, URI uri, URI namespace) throws SBOLGraphException {
+		UnitDivision identified = new UnitDivision(sbolDocument.getRDFModel(), uri);
+		identified.setNamespace(namespace);
+		return identified;
 	}
 	
 	@NotNull(message = "{UNITDIVISION_NUMERATOR_NOT_NULL}")	

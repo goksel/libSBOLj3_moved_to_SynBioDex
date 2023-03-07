@@ -7,6 +7,7 @@ import java.util.OptionalInt;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
@@ -32,6 +33,12 @@ public class UnitExponentiation extends CompoundUnit{
 	protected  UnitExponentiation(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
+	}
+	
+	public static UnitExponentiation create(SBOLDocument sbolDocument, URI uri, URI namespace) throws SBOLGraphException {
+		UnitExponentiation identified = new UnitExponentiation(sbolDocument.getRDFModel(), uri);
+		identified.setNamespace(namespace);
+		return identified;
 	}
 	
 	@NotNull(message = "{UNITEXPONENTIATION_BASE_NOT_NULL}")	

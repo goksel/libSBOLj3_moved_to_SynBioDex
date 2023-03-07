@@ -50,6 +50,7 @@ import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.CombinatorialDerivationStrategy;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
+import org.sbolstandard.core3.vocabulary.HashAlgorithm;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 import org.sbolstandard.core3.vocabulary.Orientation;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
@@ -375,7 +376,7 @@ public class SBOLComparator {
 		if (entity1!=null & entity2!=null) {
 			output = add(output, assertEqual(entity1, entity2, entity1.getFormat(),entity2.getFormat(), DataModel.Attachment.format));
 			output = add(output, assertEqual(entity1, entity2, entity1.getHash(),entity2.getHash(), DataModel.Attachment.hash));
-			output = add(output, assertEqual(entity1, entity2, entity1.getHashAlgorithm(),entity2.getHashAlgorithm(), DataModel.Attachment.hashAlgorithm));
+			output = add(output, assertEqualEnum(entity1, entity2, entity1.getHashAlgorithm(),entity2.getHashAlgorithm(), DataModel.Attachment.hashAlgorithm));
 			output = add(output, assertEqual(entity1, entity2, entity1.getSource(),entity2.getSource(), DataModel.Attachment.source));
 			output = add(output, assertEqual(entity1, entity2, entity1.getSize().toString(),entity2.getSize().toString(), DataModel.Attachment.size));
 		}
@@ -750,21 +751,33 @@ public class SBOLComparator {
 		return output;	
 	}
 	
+	private static StringBuilder assertEqual(Identified identified1, Identified identified2, URI value1, URI value2, URI property)
+	{
+		StringBuilder output=null;
+		String message=String.format("Could not read the %s property. Entity:%s, Value1:%s, Value2:%s", property.toString(), identified1.getUri().toString(), value1, value2);
+		if (!stringEquals(String.valueOf(value1),String.valueOf(value2)))
+		{
+			output = add(output,message);
+		}
+		return output;
+	}
+	
 	private static StringBuilder assertEqualEnum(Identified identified1, Identified identified2, Object value1, Object value2, URI property)
 	{
 		StringBuilder output=null;
 		output=add(output, assertBothNullOrNotNull(identified1, identified2, value1, value2, property));
 		if (value1!=null && value2!=null)
 		{
-			URI uri1=enumToURI(value1);
-			URI uri2=enumToURI(value2);
-			output=add(output,  assertEqual(identified1, identified2, uri1, uri2, property));
+			Object converted1=enumToValue(value1);
+			Object converted2=enumToValue(value2);
+			output=add(output,  assertEqual(identified1, identified2, String.valueOf(converted1), String.valueOf(converted2), property));
 		}
 		return output;
 	}
-		
 	
-	private static URI enumToURI(Object value)
+	
+	
+	private static Object enumToValue(Object value)
 	{
 		if (value!=null)
 		{
@@ -787,6 +800,10 @@ public class SBOLComparator {
 			else if (value instanceof Orientation)
 			{
 				return ((Orientation) value).getUri();
+			}
+			else if (value instanceof HashAlgorithm)
+			{
+				return ((HashAlgorithm) value).getValue();
 			}
 		}
 		return null;
@@ -841,16 +858,7 @@ public class SBOLComparator {
 	    }
 	}
 	
-	private static StringBuilder assertEqual(Identified identified1, Identified identified2, URI value1, URI value2, URI property)
-	{
-		StringBuilder output=null;
-		String message=String.format("Could not read the %s property. Entity:%s, Value1:%s, Value2:%s", property.toString(), identified1.getUri().toString(), value1, value2);
-		if (!stringEquals(String.valueOf(value1),String.valueOf(value2)))
-		{
-			output = add(output,message);
-		}
-		return output;
-	}
+	
 	
 	private static StringBuilder assertEqual(Identified identified1, Identified identified2, Identified value1, Identified value2, URI property) throws SBOLGraphException
 	{

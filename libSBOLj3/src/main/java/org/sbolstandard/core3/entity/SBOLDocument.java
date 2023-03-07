@@ -21,6 +21,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.vocabulary.RDF;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.measure.BinaryPrefix;
 import org.sbolstandard.core3.entity.measure.Prefix;
@@ -41,6 +42,7 @@ import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.ValidSBOLEntity;
 import org.sbolstandard.core3.validation.ValidatableSBOLEntity;
 import org.sbolstandard.core3.validation.ValidationMessage;
+import org.sbolstandard.core3.vocabulary.ActivityType;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
@@ -423,12 +425,13 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 			throw new SBOLGraphException("Display ids can be used to construct entities only if the base URI property of the document is set. Displayid:" + displayId);
 		}
 	}
-	
-	
+		
 	public Agent createAgent(URI uri, URI namespace) throws SBOLGraphException {
 
-		Agent agent = new Agent(this.model, uri) {};
-		agent.setNamespace(namespace);
+		//Agent agent = new Agent(this.model, uri) {};
+		//agent.setNamespace(namespace);
+		Agent agent=Agent.create(this, uri, namespace);
+		
 		addToInMemoryList(agent, agents);
 		return agent;
 	}
@@ -451,12 +454,13 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 	}
 	
 	public Plan createPlan(URI uri, URI namespace) throws SBOLGraphException {
-		Plan plan = new Plan(this.model, uri) {};
-		plan.setNamespace(namespace);
+		//Plan plan = new Plan(this.model, uri) {};
+		//plan.setNamespace(namespace);
+		Plan plan=Plan.create(this, uri, namespace);
 		addToInMemoryList(plan, plans);
 		return plan;
 	}
-	
+		
 	public Plan createPlan(String displayId) throws SBOLGraphException {
 		if (this.getBaseURI()!=null)
 		{
@@ -476,8 +480,9 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 	
 	public Activity createActivity(URI uri, URI namespace) throws SBOLGraphException {
 
-		Activity activity = new Activity(this.model, uri) {};
-		activity.setNamespace(namespace);
+		//Activity activity = new Activity(this.model, uri) {};
+		//activity.setNamespace(namespace);
+		Activity activity=Activity.create(this, uri, namespace);
 		addToInMemoryList(activity, activities);
 		return activity;
 	}
@@ -506,8 +511,9 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 	}
 	
 	public SIPrefix createSIPrefix(URI uri, URI namespace, String symbol, String name, float factor) throws SBOLGraphException {		
-		SIPrefix prefix = new SIPrefix(this.model, uri) {};
-		prefix.setNamespace(namespace);
+		//SIPrefix prefix = new SIPrefix(this.model, uri) {};
+		//prefix.setNamespace(namespace);
+		SIPrefix prefix =SIPrefix.create(this, uri, namespace);
 		initialisePrefix(prefix, symbol, name, factor);
 		addToInMemoryList(prefix, siPrefixes);
 		return prefix;
@@ -532,8 +538,9 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 	
 	public BinaryPrefix createBinaryPrefix(URI uri, URI namespace, String symbol, String name, float factor) throws SBOLGraphException {
 
-		BinaryPrefix prefix = new BinaryPrefix(this.model, uri) {};
-		prefix.setNamespace(namespace);
+		//BinaryPrefix prefix = new BinaryPrefix(this.model, uri) {};
+		//prefix.setNamespace(namespace);
+		BinaryPrefix prefix =BinaryPrefix.create(this, uri, namespace);		
 		initialisePrefix(prefix, symbol, name, factor);
 		addToInMemoryList(prefix, binaryPrefixes);
 		return prefix;
@@ -558,8 +565,9 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 	
 	public SingularUnit createSingularUnit(URI uri, URI namespace, String symbol, String name) throws SBOLGraphException {
 
-		SingularUnit unit = new SingularUnit(this.model, uri) {};
-		unit.setNamespace(namespace);
+		//SingularUnit unit = new SingularUnit(this.model, uri) {};
+		//unit.setNamespace(namespace);
+		SingularUnit unit = SingularUnit.create(this, uri, namespace);				
 		unit.setSymbol(symbol);
 		unit.setLabel(name);
 		addToInMemoryList(unit, singularUnits);
@@ -585,8 +593,10 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 	
 	public UnitMultiplication createUnitMultiplication(URI uri, URI namespace, String symbol, String name, Unit unit1, Unit unit2) throws SBOLGraphException {
 
-		UnitMultiplication unit = new UnitMultiplication(this.model, uri) {};
-		unit.setNamespace(namespace);
+		//UnitMultiplication unit = new UnitMultiplication(this.model, uri) {};
+		//unit.setNamespace(namespace);
+		UnitMultiplication unit = UnitMultiplication.create(this, uri, namespace);		
+		
 		unit.setSymbol(symbol);
 		unit.setLabel(name);
 		unit.setTerm1(unit1);
@@ -614,8 +624,10 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 	
 	public UnitDivision createUnitDivision(URI uri, URI namespace, String symbol, String name, Unit numerator, Unit denominator) throws SBOLGraphException {
 
-		UnitDivision unit = new UnitDivision(this.model, uri) {};
-		unit.setNamespace(namespace);
+		//UnitDivision unit = new UnitDivision(this.model, uri) {};
+		//unit.setNamespace(namespace);
+		UnitDivision unit = UnitDivision.create(this, uri, namespace);		
+		
 		unit.setSymbol(symbol);
 		unit.setLabel(name);
 		unit.setNumerator(numerator);
@@ -643,8 +655,10 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 	
 	public UnitExponentiation createUnitExponentiation(URI uri, URI namespace, String symbol, String name, Unit baseUnit, int exponent) throws SBOLGraphException {
 
-		UnitExponentiation unit = new UnitExponentiation(this.model, uri) {};
-		unit.setNamespace(namespace);
+		//UnitExponentiation unit = new UnitExponentiation(this.model, uri) {};
+		//unit.setNamespace(namespace);
+		UnitExponentiation unit = UnitExponentiation.create(this, uri, namespace);		
+		
 		unit.setSymbol(symbol);
 		unit.setLabel(name);
 		unit.setBase(baseUnit);
@@ -672,8 +686,10 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 	
 	public PrefixedUnit createPrexiedUnit(URI uri, URI namespace, String symbol, String name, Unit unit, Prefix prefix) throws SBOLGraphException {
 
-		PrefixedUnit prefixedUnit = new PrefixedUnit(this.model, uri) {};
-		prefixedUnit.setNamespace(namespace);
+		//PrefixedUnit prefixedUnit = new PrefixedUnit(this.model, uri) {};
+		//prefixedUnit.setNamespace(namespace);
+		PrefixedUnit prefixedUnit = PrefixedUnit.create(this, uri, namespace);		
+		
 		prefixedUnit.setSymbol(symbol);
 		prefixedUnit.setLabel(name);
 		prefixedUnit.setUnit(unit);
@@ -1054,6 +1070,9 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		
 		//COMBINATORIALDERIVATION_VARIABLEFEATURE_NOT_CIRCULAR		
 		messages=assertCombDerVariantFeaturesNotCircular(messages);
+		
+		//USAGE_ENTITY_TYPE_VALID
+		messages = assertCorrectEntityTypesforDBTLUsage(messages);
 		
 		return messages;
 	}
@@ -1751,6 +1770,84 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 			}			
 		}
 		return visited;
+	}
+	
+	private List<ValidationMessage> assertCorrectEntityTypesforDBTLUsage(List<ValidationMessage> validationMessages) throws SBOLGraphException
+	{
+		if (Configuration.getInstance().isValidateRecommendedRules()){
+			List<Activity> activities=this.getActivities();
+			if (activities!=null){
+				for (Activity activity: activities){
+					List<Usage> usages=activity.getUsages();
+					if (usages!=null){
+						for (Usage usage: usages){
+							List<URI> roles=usage.getRoles();							
+							if (roles!=null){
+								Set<URI> matches = IdentifiedValidator.getMatchingSearchURIs(roles,ActivityType.getURIs());
+								if (matches!=null && matches.size()>0){//has DBTL role
+									URI entityURI=usage.getEntity();
+									if (entityURI!=null){
+										Resource resUsageEntity=this.getRDFModel().getResource(entityURI.toString());
+										List<URI> usageEntityTypes=RDFUtil.getPropertiesAsURIs(resUsageEntity, URI.create(RDF.type.getURI()));
+										for (URI role: roles)
+										{
+											boolean validReferredType=isValidEntityTypeforDBTLUsage(usageEntityTypes, role);
+											if (!validReferredType){
+												ValidationMessage message=new ValidationMessage("{USAGE_ENTITY_TYPE_VALID}", ProvenanceDataModel.Activity.uri, activity, entityURI);      
+												message.childPath(ProvenanceDataModel.Activity.qualifiedUsage, usage).childPath(ProvenanceDataModel.Usage.entity);
+												validationMessages= IdentifiedValidator.addToValidations(validationMessages,message);									
+											}
+										}
+									}
+									
+								}
+							}
+						}
+					}
+					
+				}
+			}			
+		}		
+		return validationMessages;
+	}
+	
+	private boolean isValidEntityTypeforDBTLUsage(List<URI> usageEntityTypes, URI role) throws SBOLGraphException
+	{
+		boolean validReferredType=true;
+		ActivityType activityType= ActivityType.get(role);
+		if (activityType!=null){//DBTL role	
+			validReferredType=false;
+			
+			if (activityType.getUri().equals(ActivityType.Design.getUri())){//OK		
+				//In Association: Learn
+				if (!(usageEntityTypes.contains(DataModel.Implementation.uri))){
+					Set<URI> topLevelTypes=this.getTopLevelResourceTypes();
+					topLevelTypes.add(DataModel.TopLevel.uri);
+					Set<URI> topLevelTypeMatches=IdentifiedValidator.getMatchingSearchURIs(usageEntityTypes, topLevelTypes);
+					if (topLevelTypeMatches!=null && topLevelTypeMatches.size()>0){
+						validReferredType=true;
+					}														
+				}																														
+			}
+			else if (activityType.getUri().equals(ActivityType.Build.getUri())){//OK
+				if (usageEntityTypes.contains(DataModel.Implementation.uri)){
+					validReferredType=true;
+				}
+				//In Association: Design				
+				/**/					
+			}
+			else if (activityType.getUri().equals(ActivityType.Test.getUri())){//OK			
+				if (usageEntityTypes.contains(DataModel.ExperimentalData.uri)){
+					validReferredType=true;
+				}
+			}
+			else if (activityType.getUri().equals(ActivityType.Learn.getUri())){		
+				if (!(usageEntityTypes.contains(DataModel.Implementation.uri))){
+					validReferredType=true;
+				}
+			}	
+		}			
+		return validReferredType;
 	}
 	
 	private Set<URI> ignoredProperties()

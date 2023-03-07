@@ -18,6 +18,7 @@ import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.ComponentType;
+import org.sbolstandard.core3.vocabulary.HashAlgorithm;
 import org.sbolstandard.core3.vocabulary.ModelFramework;
 import org.sbolstandard.core3.vocabulary.ModelLanguage;
 import org.sbolstandard.core3.vocabulary.Role;
@@ -34,7 +35,7 @@ public class AttachmentTest_12803 extends TestCase {
         Attachment attachment2=doc.createAttachment("attachment2", URI.create("https://sbolstandard.org/attachment2"));
         attachment2.setFormat(ModelLanguage.SBML);
         attachment2.setSize(OptionalLong.of(1000));
-        attachment2.setHashAlgorithm("HashAlg");
+        attachment2.setHashAlgorithm(HashAlgorithm.blake2b_256);
         attachment2.setHash("aaa");
         
         TestUtil.validateIdentified(attachment2,doc,0);
@@ -43,7 +44,6 @@ public class AttachmentTest_12803 extends TestCase {
      	TestUtil.validateIdentified(attachment2,doc,1,"sbol3-12803");
      	attachment2.setFormat(ModelLanguage.CellML);		
      	TestUtil.validateIdentified(attachment2,doc,0);     	
-
     }
 
 	/*public  List<String> validateAttachment32(Attachment attachment)

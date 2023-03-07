@@ -79,6 +79,8 @@ public class Configuration {
 	private Set<String> EdamEncodingTerms=null;
 	private Set<String> SboModelFrameworkTerms=null;
 	private Set<String> EdamFileFormatTerms=null;
+	private Set<String> SboSystemDescriptionParameters=null;
+	
 	
 	private Configuration()
 	{
@@ -92,6 +94,7 @@ public class Configuration {
 			this.EdamEncodingTerms= RDFUtil.childResourcesRecursively(edamOntology,Encoding.PARENT_TERM.toString());
 			this.SboModelFrameworkTerms= RDFUtil.childResourcesRecursively(sboOntology, URINameSpace.SBO.local("0000004").toString());				
 			this.EdamFileFormatTerms= RDFUtil.childResourcesRecursively(edamOntology,URINameSpace.EDAM.local("format_1915").toString());
+			this.SboSystemDescriptionParameters= RDFUtil.childResourcesRecursively(sboOntology, URINameSpace.SBO.local("0000545").toString());							
 		}
 		catch (FileNotFoundException ex)
 		{
@@ -137,6 +140,12 @@ public class Configuration {
 	public Set<String> getEdamFileFormatTerms()
 	{
 		return this.EdamFileFormatTerms;   
+	}
+
+	
+	public Set<String> getSboSystemDescriptionParameters()
+	{
+		return this.SboSystemDescriptionParameters;   
 	}
 	
 	/*public static Configuration getConfiguration()

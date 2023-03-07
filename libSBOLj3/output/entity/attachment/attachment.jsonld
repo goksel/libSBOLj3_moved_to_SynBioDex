@@ -3,7 +3,7 @@
         {
             "@id": "https://sbolstandard.org/examples/attachment1",
             "sbol:hash": "aaa",
-            "sbol:hashAlgorithm": "Alg1",
+            "sbol:hashAlgorithm": "sha-256",
             "sbol:size": "1000",
             "sbol:format": {
                 "@id": "EDAM:format_2585"
@@ -50,7 +50,7 @@
         {
             "@id": "https://sbolstandard.org/examples/attachment2",
             "sbol:hash": "aaa",
-            "sbol:hashAlgorithm": "HashAlg",
+            "sbol:hashAlgorithm": "sha-256",
             "sbol:size": "1000",
             "sbol:format": {
                 "@id": "EDAM:format_2585"

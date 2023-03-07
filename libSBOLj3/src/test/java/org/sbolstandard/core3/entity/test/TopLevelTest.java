@@ -30,7 +30,7 @@ public class TopLevelTest extends TestCase {
         Attachment attachment=doc.createAttachment("attachment1", URI.create("https://sbolstandard.org/attachment1"));
         attachment.setFormat(ModelLanguage.SBML);
         attachment.setSize(OptionalLong.of(1000));
-        attachment.setHashAlgorithm("Alg1");
+        attachment.setHashAlgorithm(HashAlgorithm.sha3_256);
         attachment.setHash("aaa");
         //attachment.setNamespace(URI.create("https://sbolstandard.org/examples"));
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));

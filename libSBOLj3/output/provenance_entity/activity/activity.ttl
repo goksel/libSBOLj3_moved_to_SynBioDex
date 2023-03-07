@@ -53,13 +53,13 @@
         a               sbol:Identified , prov:Usage ;
         sbol:displayId  "Usage1" ;
         prov:entity     :toggle_switch ;
-        prov:hadRole    SBO:0000645 .
+        prov:hadRole    sbol:learn .
 
 <codon_optimization_activity/Usage2>
         a               sbol:Identified , prov:Usage ;
         sbol:displayId  "Usage2" ;
         prov:entity     :toggle_switch_optimised ;
-        prov:hadRole    SBO:0000011 .
+        prov:hadRole    sbol:design .
 
 :CodonOptimisationProtocol
         a                  sbol:TopLevel , prov:Plan ;
@@ -75,7 +75,7 @@
         sbol:hasNamespace          <https://sbolstandard.org/examples> ;
         sbol:name                  "Codon optimization activity" ;
         sbol:type                  sbol:design ;
-        prov:endedAtTime           "2020-08-30T12:29:31.327Z" ;
+        prov:endedAtTime           "2020-08-30T14:16:03.164Z" ;
         prov:qualifiedAssociation  <codon_optimization_activity/Association1> ;
         prov:qualifiedUsage        <codon_optimization_activity/Usage2> , <codon_optimization_activity/Usage1> ;
-        prov:startedAtTime         "2019-07-29T12:29:31.327Z" .
+        prov:startedAtTime         "2019-07-29T14:16:03.164Z" .

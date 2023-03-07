@@ -117,9 +117,11 @@ public abstract class Identified implements ValidatableSBOLEntity {
 	public void setWasDerivedFrom(@Valid List<URI> wasDerivedFrom) {
 		RDFUtil.setProperty(resource, DataModel.Identified.wasDerivedFrom, wasDerivedFrom);
 	}
+	
 	public void addWasDerivedFrom(@Valid URI wasDerivedFrom) {
 		RDFUtil.addProperty(resource, DataModel.Identified.wasDerivedFrom, wasDerivedFrom);
 	}
+	
 	public void addWasDerivedFrom(Identified wasDerivedFrom) {
 		if (wasDerivedFrom!=null){
 			addWasDerivedFrom(wasDerivedFrom.getUri());
@@ -133,6 +135,13 @@ public abstract class Identified implements ValidatableSBOLEntity {
 	
 	public void setWasGeneratedBy(List<Activity> wasGeneratedBy) {
 		RDFUtil.setProperty(resource, DataModel.Identified.wasGeneratedBy, SBOLUtil.getURIs(wasGeneratedBy));
+	}
+	
+	public void addWasGeneratedBy(Activity wasGeneratedBy) {
+		if (wasGeneratedBy!=null)
+		{
+			RDFUtil.addProperty(resource, DataModel.Identified.wasGeneratedBy, wasGeneratedBy.getUri());
+		}
 	}
 	
 	@Valid
@@ -223,30 +232,42 @@ public abstract class Identified implements ValidatableSBOLEntity {
 	private List<ValidationMessage> checkActivityTypes(List<ValidationMessage> validationMessages) throws SBOLGraphException
 	{
 		List<Activity> activities=this.getWasGeneratedBy();
-		if (activities!=null)
-		{
-			for (Activity activity:activities)
-			{
-				List<URI> activityTypes=activity.getTypes();
+		if (activities!=null){
+			for (Activity activity:activities){
 				List<Association> associations=activity.getAssociations();
-				if (associations!=null)
-				{
-					for (Association association:associations)
-					{
+				if (associations!=null){
+					for (Association association:associations){
 						List<URI> roles=association.getRoles();
-						if (roles!=null)
-						{
-							for (URI role:roles)
-							{
+						if (roles!=null){
+							for (URI role:roles){
 								ActivityType activityType= ActivityType.get(role);
-								if (activityType!=null)
-								{
-									if (!activityTypes.contains(activityType.getUri()))
-									{
+								if (activityType!=null){	
+									boolean validReferredType=false;
+									if (activityType.getUri().equals(ActivityType.Design.getUri())){
+										if (!(this instanceof Implementation) && (this instanceof TopLevel)){
+											validReferredType=true;
+										}
+									}
+									else if (activityType.getUri().equals(ActivityType.Build.getUri())){
+										if (this instanceof Implementation){
+											validReferredType=true;
+										}
+									}
+									else if (activityType.getUri().equals(ActivityType.Test.getUri())){
+										if (this instanceof ExperimentalData){
+											validReferredType=true;
+										}
+									}
+									else if (activityType.getUri().equals(ActivityType.Learn.getUri())){
+										if (!(this instanceof Implementation)){
+											validReferredType=true;
+										}
+									}
+									
+									if (!validReferredType){
 										ValidationMessage message=new ValidationMessage("{IDENTIFIED_ACTIVITY_TYPE_MATCHES_WITH_ASSOCIATION_ROLE}", DataModel.Identified.wasDerivedFrom, activity, role);      
 										message.childPath(ProvenanceDataModel.Activity.qualifiedAssociation, association);
-										validationMessages= addToValidations(validationMessages,message);
-									
+										validationMessages= addToValidations(validationMessages,message);									
 									}
 								}
 								

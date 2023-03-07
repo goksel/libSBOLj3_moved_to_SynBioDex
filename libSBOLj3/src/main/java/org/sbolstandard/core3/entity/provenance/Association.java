@@ -41,6 +41,10 @@ public class Association extends ControlledIdentified{
 		RDFUtil.setProperty(resource, ProvenanceDataModel.Association.role, roles);
 	}
 	
+	public void addRole(URI role) {
+		RDFUtil.addProperty(resource, ProvenanceDataModel.Association.role, role);
+	}
+	
 	public Plan getPlan() throws SBOLGraphException {
 		//return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, ProvenanceDataModel.Association.plan);
 		return contsructIdentified(ProvenanceDataModel.Association.plan, Plan.class, ProvenanceDataModel.Plan.uri);
