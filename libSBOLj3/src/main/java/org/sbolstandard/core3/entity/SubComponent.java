@@ -58,8 +58,7 @@ public class SubComponent extends FeatureWithLocation{
 		}
 		
 		validationMessages=assertDoNotHaveOverlappingRegions(validationMessages, "{SUBCOMPONENT_LOCATIONS_REGIONS_NOT_OVERLAPPING}");
-		
-		
+				
 		List<Location> sourceLocations= getSourceLocations();
 		List<Location> locations= getLocations();
 		if (!CollectionUtils.isEmpty(locations))

@@ -55,7 +55,7 @@ public class InteractionTest_11804 extends TestCase {
         SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Product.getUri()), atC_TetR_subComponent);
         TestUtil.validateIdentified(interaction,1);
         
-        testParticipation.setRoles(Arrays.asList(URINameSpace.SBO.local("0000015"), ParticipationRole.Reactant.getUri()));
+        testParticipation.setRoles(Arrays.asList(ParticipationRole.Reactant.getUri()));
         TestUtil.validateIdentified(interaction,0);
         
        // Interaction interaction2= LacIProducer.createInteraction(Arrays.asList(InteractionType.NonCovalentBinding.getUri()));

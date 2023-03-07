@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -265,5 +266,15 @@ public class SBOLUtil {
 	        System.out.println("--------------------");
 		}
 	    
+	    
+	    public static Set<URI> addToSet(Set<URI> current, URI item){
+			if (item!=null){
+				if (current==null){
+					current=new HashSet<URI>();
+				}
+				current.add(item);
+			}
+			return current;
+		}
 	    
 }

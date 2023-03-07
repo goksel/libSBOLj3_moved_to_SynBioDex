@@ -80,12 +80,10 @@ public class Configuration {
 	private Set<String> SboModelFrameworkTerms=null;
 	private Set<String> EdamFileFormatTerms=null;
 	private Set<String> SboSystemDescriptionParameters=null;
+	private Set<String> SboParticipantRoles= null;
 	
-	
-	private Configuration()
-	{
-		try
-		{
+	private Configuration(){
+		try{
 			Model edamOntology=SBOLUtil.getModelFromFileResource("edam.owl.reduced", RDFFormat.TURTLE);
 			Model soOntology=SBOLUtil.getModelFromFileResource("so-simple.owl.reduced", RDFFormat.TURTLE);
 			Model sboOntology=SBOLUtil.getModelFromFileResource("sbo.owl.reduced", RDFFormat.TURTLE);
@@ -94,10 +92,10 @@ public class Configuration {
 			this.EdamEncodingTerms= RDFUtil.childResourcesRecursively(edamOntology,Encoding.PARENT_TERM.toString());
 			this.SboModelFrameworkTerms= RDFUtil.childResourcesRecursively(sboOntology, URINameSpace.SBO.local("0000004").toString());				
 			this.EdamFileFormatTerms= RDFUtil.childResourcesRecursively(edamOntology,URINameSpace.EDAM.local("format_1915").toString());
-			this.SboSystemDescriptionParameters= RDFUtil.childResourcesRecursively(sboOntology, URINameSpace.SBO.local("0000545").toString());							
+			this.SboSystemDescriptionParameters= RDFUtil.childResourcesRecursively(sboOntology, URINameSpace.SBO.local("0000545").toString());
+			this.SboParticipantRoles = RDFUtil.childResourcesRecursively(sboOntology, URINameSpace.SBO.local("0000003").toString());
 		}
-		catch (FileNotFoundException ex)
-		{
+		catch (FileNotFoundException ex){
 			throw new Error(ex);
 		}
 	}
@@ -106,47 +104,43 @@ public class Configuration {
         private static final Configuration INSTANCE = new Configuration();
     }
 	
-	public static Configuration getInstance()
-	{
+	public static Configuration getInstance(){
 		return SingletonHelper.INSTANCE;
 	}
 	
 	
-	public Set<String> getSboOccurringEntityInteractionTypes()
-	{
+	public Set<String> getSboOccurringEntityInteractionTypes(){
 		return this.SboOccurringEntityInteractionTypes;   
 	}
 	
-	public Set<String> getSoSequenceFeatures()
-	{
+	public Set<String> getSoSequenceFeatures(){
 		return this.SoSequenceFeatures;   
 	}
 	
-	public Set<String> getEdamEncodingTerms()
-	{
+	public Set<String> getEdamEncodingTerms(){
 		return this.EdamEncodingTerms;   
 	}
 	
-	public Set<String> getEdamModelLanguageTerms()
-	{
+	public Set<String> getEdamModelLanguageTerms(){
 		return this.EdamFileFormatTerms;   
 	}
 	
-	public Set<String> getSboModelFrameworkTerms()
-	{
+	public Set<String> getSboModelFrameworkTerms(){
 		return this.SboModelFrameworkTerms;   
 	}
 	
-	public Set<String> getEdamFileFormatTerms()
-	{
+	public Set<String> getEdamFileFormatTerms(){
 		return this.EdamFileFormatTerms;   
 	}
 
-	
-	public Set<String> getSboSystemDescriptionParameters()
-	{
+	public Set<String> getSboSystemDescriptionParameters(){
 		return this.SboSystemDescriptionParameters;   
 	}
+	
+	public Set<String> getSboParticipantRoles(){
+		return this.SboParticipantRoles;   
+	}
+	
 	
 	/*public static Configuration getConfiguration()
 	{

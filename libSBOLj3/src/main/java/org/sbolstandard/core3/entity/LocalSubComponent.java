@@ -44,6 +44,8 @@ public class LocalSubComponent extends FeatureWithLocation{
 			validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type));      	
 		}
 		
+		validationMessages=assertDoNotHaveOverlappingRegions(validationMessages, "{LOCALSUBCOMPONENT_LOCATIONS_REGIONS_NOT_OVERLAPPING}");
+		
 		if (Configuration.getInstance().isValidateRecommendedRules()) {
 			if(types != null) {
 				
