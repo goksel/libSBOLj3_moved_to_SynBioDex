@@ -415,7 +415,10 @@ public class SBOLAPI {
 	    public static Component createProteinComponent(SBOLDocument doc, Component container, String displayId, String name, String description, URI role, String sequence) throws SBOLGraphException
 	    {
 	    	Component protein=createComponent(doc, displayId, ComponentType.Protein.getUri(), name, description, role);
-	    	container.createSubComponent(protein);
+	    	if (container!=null)
+	    	{
+	    		container.createSubComponent(protein);
+	    	}
 	    	if (sequence!=null && sequence.length()>0)
 	    	{
 	    		createSequence(doc, protein, Encoding.AminoAcid, sequence);
@@ -423,6 +426,10 @@ public class SBOLAPI {
 	    	return protein;
 	    }
 	    
+	    public static Component createProteinComponent(SBOLDocument doc, String displayId, String name, String description, URI role, String sequence) throws SBOLGraphException
+	    {
+	    	return createProteinComponent(doc, null, displayId, name, description, role, sequence);
+	    }	    
 	    
 	    public static SubComponent addSubComponent(Component parent, Component child) throws SBOLGraphException
 	    {

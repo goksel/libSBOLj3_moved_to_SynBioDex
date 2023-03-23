@@ -28,6 +28,8 @@ public class PoPSReceiverExample extends TestCase {
 
 	public void testPoPSReceiverExample() throws SBOLGraphException, IOException
     {
+		//http://parts.igem.org/Part:BBa_F2620
+			
         SBOLDocument doc=new SBOLDocument(URI.create("https://synbiohub.org/public/igem/"));
         //SBOLDocument doc=new SBOLDocument();
         Component popsReceiver=SBOLAPI.createDnaComponent(doc, "BBa_F2620", "BBa_F2620", "PoPS Receiver", Role.EngineeredGene, null); 
