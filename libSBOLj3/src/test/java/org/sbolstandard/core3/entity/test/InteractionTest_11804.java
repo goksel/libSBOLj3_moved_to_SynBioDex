@@ -2,18 +2,10 @@ package org.sbolstandard.core3.entity.test;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
-import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
-import org.sbolstandard.core3.io.SBOLFormat;
-import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
-import org.sbolstandard.core3.util.Configuration;
-import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.vocabulary.*;
@@ -55,7 +47,7 @@ public class InteractionTest_11804 extends TestCase {
         SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Product.getUri()), atC_TetR_subComponent);
         TestUtil.validateIdentified(interaction,1);
         
-        testParticipation.setRoles(Arrays.asList(URINameSpace.SBO.local("0000015"), ParticipationRole.Reactant.getUri()));
+        testParticipation.setRoles(Arrays.asList(ParticipationRole.Reactant.getUri()));
         TestUtil.validateIdentified(interaction,0);
         
        // Interaction interaction2= LacIProducer.createInteraction(Arrays.asList(InteractionType.NonCovalentBinding.getUri()));

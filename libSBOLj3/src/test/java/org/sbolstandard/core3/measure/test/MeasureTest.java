@@ -17,7 +17,6 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
-import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
 import junit.framework.TestCase;
 
@@ -203,6 +202,9 @@ public class MeasureTest extends TestCase {
         um.setTerm2(tempTerm2);
         TestUtil.validateIdentified(um,doc,0);     
         
+        BinaryPrefix kilo=doc.createBinaryPrefix("kilo", "kilo", "kilo", 1000f);
+        
+        
     	//SBOL_VALID_ENTITY_TYPES - Measure.Unit
 		TestUtil.testValidEntity(doc, measure, measure.getUnit(), Arrays.asList(measure.getUnit(), measure), MeasureDataModel.Measure.unit);
 		
@@ -227,6 +229,9 @@ public class MeasureTest extends TestCase {
 				
 		//SBOL_VALID_ENTITY_TYPES - UnitMultiplication.Base
 		TestUtil.testValidEntity(doc, um, um.getTerm2(), Arrays.asList(um.getTerm2(), measure), MeasureDataModel.UnitMultiplication.term2);		
+    
+		TestUtil.assertReadWrite(doc);
+	       
     }
 }
 

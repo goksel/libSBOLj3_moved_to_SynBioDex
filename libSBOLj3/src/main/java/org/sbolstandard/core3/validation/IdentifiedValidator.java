@@ -2,6 +2,8 @@ package org.sbolstandard.core3.validation;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -16,10 +18,8 @@ import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
-import org.sbolstandard.core3.vocabulary.Role;
 import org.sbolstandard.core3.vocabulary.ComponentType.StrandType;
 import org.sbolstandard.core3.vocabulary.ComponentType.TopologyType;
-
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -337,6 +337,24 @@ public class IdentifiedValidator {
 			return validationMessages;
 		}
 		
+		public static Set<URI> getMatchingSearchURIs(Collection<URI> items, Collection<URI> toSearchURIs) throws SBOLGraphException
+		{
+			Set<URI> result=null;
+			if (items!=null && toSearchURIs!=null)
+			{
+				for (URI uri:toSearchURIs){
+					if (items.contains(uri)){
+						if (result==null)
+						{
+							result=new HashSet<URI>();
+						}
+						result.add(uri);
+					}
+				}
+			}
+			return result;
+		}
+		
 		public static List<ValidationMessage> assertAtMostOneExists(Set<String> items, List<URI> searchURIs, List<ValidationMessage> validationMessages, String message, Identified entity, URI property) throws SBOLGraphException
 		{
 			int count=0;
@@ -433,6 +451,18 @@ public class IdentifiedValidator {
 			messages = IdentifiedValidator.addToValidations(messages, message);
 		}
 		return messages;
+	}
+	
+	public static List<ValidationMessage> assertTwoPropertyValueIdenticalEqual(List<ValidationMessage> validationMessages, String message, String first, String second, URI firstPropertyURI, URI secondPropertyURI) throws SBOLGraphException
+	{
+		if (first!=null && !first.isEmpty() && second!=null && !second.isEmpty()) {
+			if (!first.equals(second)){
+				String messageString=String.format("%s%s%s: %s",message,ValidationMessage.INFORMATION_SEPARATOR, secondPropertyURI, second);				
+				ValidationMessage valMessage=new ValidationMessage(messageString, firstPropertyURI, first);  				
+				validationMessages= IdentifiedValidator.addToValidations(validationMessages,valMessage);											
+			}
+		}
+		return validationMessages;
 	}
 
 	public URI getPropertyAsURI(Resource resource, URI property) throws SBOLGraphException {

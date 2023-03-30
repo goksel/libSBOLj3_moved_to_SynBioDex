@@ -13,7 +13,6 @@ import org.sbolstandard.core3.entity.Constraint;
 import org.sbolstandard.core3.entity.Feature;
 import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.entity.Interaction;
-import org.sbolstandard.core3.entity.Location;
 import org.sbolstandard.core3.entity.Participation;
 import org.sbolstandard.core3.entity.Range;
 import org.sbolstandard.core3.entity.SBOLDocument;
@@ -198,17 +197,38 @@ public class SBOLAPI {
 	    	return local;
 	    }
 	    
-	    public static String createLocalName(URI entityType, List items)
+	    public static <T extends Identified> String createLocalName(URI entityType, List<T> items)
 	    {
 	    	int suffix=getIndex(items);
-	    	return createLocalName(entityType, suffix);
+	    	String name=null;
+	    	boolean valid=false;
+	    	while (!valid) {
+	    		name = createLocalName(entityType, suffix);
+	    		boolean uniqueName=true;
+	    		if (items!=null) {
+		    		for (Identified identified: items){
+		    			if (identified.getUri().toString().endsWith(name)){
+		    				suffix++;
+		    				uniqueName=false;
+		    				break;
+		    			}
+		    		}
+	    		}
+	    		
+	    		if (uniqueName) {
+	    			valid=true;
+	    			break;
+	    		}
+	    	}
+	    	return name;
 	    }
 	    
+	    /* GM: 20230324
 	    public static String createLocalName(URI entityType, List items, Class entityClass)
 	    {
 	    	int suffix=getIndex(items,entityClass);
 	    	return createLocalName(entityType, suffix);
-	    }
+	    }*/
 	    
 	    private static String createLocalName(URI entityType, int suffix)
 	    {
@@ -222,12 +242,13 @@ public class SBOLAPI {
 	    	return uri;
 	    }
 	    
-	    public static URI createLocalUri(Identified identified, URI entityType, List items, Class entityClass)
+	    /* GM: 20230324
+	     public static URI createLocalUri2(Identified identified, URI entityType, List items, Class entityClass)
 	    {
 	    	String displayId=SBOLAPI.createLocalName(entityType, items,entityClass);	
 	    	URI uri=SBOLAPI.append(identified.getUri(), displayId);
 	    	return uri;
-	    }
+	    }*/
 		
 	    private static String createLocalName(URI entityType, String suffix)
 	    {
@@ -415,7 +436,10 @@ public class SBOLAPI {
 	    public static Component createProteinComponent(SBOLDocument doc, Component container, String displayId, String name, String description, URI role, String sequence) throws SBOLGraphException
 	    {
 	    	Component protein=createComponent(doc, displayId, ComponentType.Protein.getUri(), name, description, role);
-	    	container.createSubComponent(protein);
+	    	if (container!=null)
+	    	{
+	    		container.createSubComponent(protein);
+	    	}
 	    	if (sequence!=null && sequence.length()>0)
 	    	{
 	    		createSequence(doc, protein, Encoding.AminoAcid, sequence);
@@ -423,6 +447,10 @@ public class SBOLAPI {
 	    	return protein;
 	    }
 	    
+	    public static Component createProteinComponent(SBOLDocument doc, String displayId, String name, String description, URI role, String sequence) throws SBOLGraphException
+	    {
+	    	return createProteinComponent(doc, null, displayId, name, description, role, sequence);
+	    }	    
 	    
 	    public static SubComponent addSubComponent(Component parent, Component child) throws SBOLGraphException
 	    {
@@ -445,12 +473,10 @@ public class SBOLAPI {
 	    	String localName=createLocalName(DataModel.Sequence.uri, doc.getSequences());
 	    	Sequence seq=createSequence(doc, URI.create(component.getUri().toString() + "_" + localName), localName, component.getDisplayId() + " sequence", elements, encoding);
 	    	List<Sequence> sequences=component.getSequences();
-	    	if (sequences==null)
-	    	{
+	    	if (sequences==null){
 	    		component.setSequences(Arrays.asList(seq)); 
 	    	}
-	    	else
-	    	{
+	    	else{
 	    		sequences.add(seq); 
 	    		component.setSequences(sequences);
 	    	}
@@ -460,11 +486,14 @@ public class SBOLAPI {
 	    
 	    public static Component createComponent(SBOLDocument doc, URI uri, URI type, String name, String description, URI role) throws SBOLGraphException
 	    {
-	    	Component component=doc.createComponent(uri, SBOLUtil.toNameSpace(doc.getBaseURI()), Arrays.asList(type)); 
+	    	URI namespace=null;
+	    	if (doc.getBaseURI()!=null){
+	    		namespace= SBOLUtil.toNameSpace(doc.getBaseURI());
+	    	}
+	    	Component component=doc.createComponent(uri, namespace, Arrays.asList(type)); 
 	    	component.setName(name);
 	    	component.setDescription(description);
-	        if (role!=null)
-	        {
+	        if (role!=null){
 	        	component.setRoles(Arrays.asList(role));
 	        }
 	        
@@ -476,8 +505,7 @@ public class SBOLAPI {
 	    	Component component=doc.createComponent(displayId, Arrays.asList(type)); 
 	    	component.setName(name);
 	    	component.setDescription(description);
-	        if (role!=null)
-	        {
+	        if (role!=null){
 	        	component.setRoles(Arrays.asList(role));
 	        }
 	        
@@ -493,12 +521,10 @@ public class SBOLAPI {
 	    
 	    public static URI append(String text, String add)
 	    {
-	    	if (text.endsWith("/") || text.endsWith("#"))
-	    	{
+	    	if (text.endsWith("/") || text.endsWith("#")){
 	    		return URI.create(String.format("%s%s", text,add));
 	    	}
-	    	else
-	    	{	
+	    	else{	
 	    		return URI.create(String.format("%s/%s", text,add));
 	    	}
 	    }

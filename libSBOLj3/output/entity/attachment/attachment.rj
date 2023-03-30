@@ -65,7 +65,7 @@
      ] ,
     "http://sbols.org/v3#hashAlgorithm" : [ { 
       "type" : "literal" ,
-      "value" : "HashAlg"
+      "value" : "sha-256"
     }
      ]
   }
@@ -108,7 +108,7 @@
      ] ,
     "http://sbols.org/v3#hashAlgorithm" : [ { 
       "type" : "literal" ,
-      "value" : "Alg1"
+      "value" : "sha-256"
     }
      ]
   }

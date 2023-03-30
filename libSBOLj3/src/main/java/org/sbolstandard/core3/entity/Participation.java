@@ -2,8 +2,10 @@ package org.sbolstandard.core3.entity;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
@@ -11,9 +13,7 @@ import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
-
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 public class Participation extends Identified{
 	/*private List<URI> roles=null;
@@ -38,6 +38,7 @@ public class Participation extends Identified{
 		{
 			validationMessages= addToValidations(validationMessages,new ValidationMessage("{PARTICIPANT_MUST_HAVE_ONE_PARTICIPANT_OR_HIGHERORDERPARTICIPANT}", DataModel.Participation.participant));      	
 		}
+		validationMessages = assertValidSBORole(validationMessages);
 		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.Participation.participant, this.resource, getParticipant(), validationMessages);
 		return validationMessages;
 	}
@@ -72,6 +73,36 @@ public class Participation extends Identified{
 	@Override
 	public URI getResourceType() {
 		return DataModel.Participation.uri;
+	}
+	
+	//PARTICIPANT_ROLE_SBO_VALID
+	public List<ValidationMessage> assertValidSBORole(List<ValidationMessage> validationMessages) throws SBOLGraphException {		
+		if (Configuration.getInstance().isValidateRecommendedRules()) {
+			List<URI> roles=this.getRoles();
+			if (roles!=null){
+				Set<URI> sboRoles=null;
+				for (URI role:roles){
+					if (Configuration.getInstance().getSboParticipantRoles().contains(role.toString())) {
+						sboRoles=SBOLUtil.addToSet(sboRoles, role);
+					}
+				}
+				String message=null;
+				//count should be zero
+				if (sboRoles==null || sboRoles.size()==0){
+					message="{PARTICIPANT_ROLE_SBO_VALID}";
+				}
+				else if (sboRoles.size()>1){
+						message=String.format("{PARTICIPANT_ROLE_SBO_VALID}%s Multiple valid SBO roles: %s", ValidationMessage.INFORMATION_SEPARATOR, sboRoles);
+				}
+				
+				if (message!=null) {
+					ValidationMessage valMessage = new ValidationMessage(message, DataModel.role, roles);
+					validationMessages=IdentifiedValidator.addToValidations(validationMessages, valMessage);
+				}
+				
+			}
+		}
+		return validationMessages;
 	}
 	
 }

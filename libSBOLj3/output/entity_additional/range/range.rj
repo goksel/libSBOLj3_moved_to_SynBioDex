@@ -190,6 +190,11 @@
       "value" : "Range1"
     }
      ] ,
+    "http://sbols.org/v3#order" : [ { 
+      "type" : "literal" ,
+      "value" : "1"
+    }
+     ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 
       "type" : "uri" ,
       "value" : "http://sbols.org/v3#Range"

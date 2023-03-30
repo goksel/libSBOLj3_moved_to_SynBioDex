@@ -1,9 +1,7 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.Configuration;
@@ -13,9 +11,7 @@ import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
-import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -82,6 +78,10 @@ public class ExternallyDefined extends Feature{
 		RDFUtil.setProperty(resource, DataModel.type, types);
 	}
 	
+	public void addType(URI type) {
+		RDFUtil.addProperty(resource, DataModel.type, type);
+	}
+		
 	@NotNull(message = "{EXTERNALLYDEFINED_DEFINITION_NOT_NULL}")
 	public URI getDefinition() throws SBOLGraphException {
 		return IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.ExternalyDefined.definition);

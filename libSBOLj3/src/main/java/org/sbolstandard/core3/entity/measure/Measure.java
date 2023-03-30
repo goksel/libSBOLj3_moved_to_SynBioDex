@@ -3,13 +3,10 @@ package org.sbolstandard.core3.entity.measure;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
-
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.ControlledIdentified;
-import org.sbolstandard.core3.entity.Feature;
-import org.sbolstandard.core3.entity.Interface;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
@@ -18,11 +15,6 @@ import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
-import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
-
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public class Measure extends ControlledIdentified{
@@ -132,9 +124,32 @@ public class Measure extends ControlledIdentified{
 	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
 	{
 		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		validationMessages=assertSBOTypesIncluded(validationMessages);
 		validationMessages= IdentifiedValidator.assertEquals(this, MeasureDataModel.Measure.unit, this.resource, getUnit(), validationMessages);
 		return validationMessages;
 	}
+	
+	public List<ValidationMessage> assertSBOTypesIncluded(List<ValidationMessage> validationMessages) throws SBOLGraphException
+	{
+		if (Configuration.getInstance().isValidateRecommendedRules()) {
+			List<URI> types=this.getTypes();
+			if (types!=null && types.size()>0){
+				boolean valid=false;
+				for (URI type:types) {
+					if (Configuration.getInstance().getSboSystemDescriptionParameters().contains(type.toString())) {
+						valid=true;
+						break;
+					}						
+				}
+				if (!valid){
+					ValidationMessage message=new ValidationMessage("{MEASURE_TYPE_SBO}", MeasureDataModel.Measure.type, types);      
+					validationMessages= IdentifiedValidator.addToValidations(validationMessages,message);											
+				}
+			}
+		}
+		return validationMessages;
+	}
+	
 
 	
 }

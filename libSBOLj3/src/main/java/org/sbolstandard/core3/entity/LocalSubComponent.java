@@ -1,15 +1,9 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Location.LocationBuilder;
-import org.sbolstandard.core3.entity.Location.LocationFactory;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
@@ -17,14 +11,9 @@ import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.ComponentType.StrandType;
-import org.sbolstandard.core3.vocabulary.ComponentType.TopologyType;
 import org.sbolstandard.core3.vocabulary.DataModel;
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 public class LocalSubComponent extends FeatureWithLocation{
 	/*private List<URI> types=new ArrayList<URI>();
@@ -49,6 +38,8 @@ public class LocalSubComponent extends FeatureWithLocation{
 		{
 			validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type));      	
 		}
+		
+		validationMessages=assertDoNotHaveOverlappingRegions(validationMessages, "{LOCALSUBCOMPONENT_LOCATIONS_REGIONS_NOT_OVERLAPPING}");
 		
 		if (Configuration.getInstance().isValidateRecommendedRules()) {
 			if(types != null) {
@@ -119,6 +110,10 @@ public class LocalSubComponent extends FeatureWithLocation{
 	public void setTypes(@NotEmpty(message = "{LOCALSUBCOMPONENT_TYPES_NOT_EMPTY}") List<URI> types) throws SBOLGraphException {
 		PropertyValidator.getValidator().validate(this, "setTypes", new Object[] {types}, List.class);
 		RDFUtil.setProperty(resource, DataModel.type, types);
+	}
+	
+	public void addType(URI type) {
+		RDFUtil.addProperty(resource, DataModel.type, type);
 	}
 	
 	@Override

@@ -2,11 +2,9 @@ package org.sbolstandard.core3.entity.test;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Arrays;
 
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
-import org.sbolstandard.core3.entity.Location.RangeLocationBuilder;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
@@ -27,7 +25,7 @@ public class SubComponentTest_10807 extends TestCase {
 		Sequence seq= gfp.getSequences().get(0);
 		
 		Component region=SBOLAPI.createDnaComponent(doc, "child", "child", "child", Role.EngineeredRegion, "atgaaa");//atgaaagga
-		Sequence seqRegion= region.getSequences().get(0);
+		region.getSequences().get(0);
 		
 		SubComponent feature=gfp.createSubComponent(region);
 		feature.setOrientation(Orientation.inline);

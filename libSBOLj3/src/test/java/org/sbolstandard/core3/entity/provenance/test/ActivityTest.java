@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
-
 import org.apache.jena.datatypes.xsd.XSDDateTime;
-import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.entity.provenance.*;
@@ -15,9 +12,7 @@ import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
-import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.SBOLComparator;
 import org.sbolstandard.core3.vocabulary.*;
 
@@ -53,9 +48,9 @@ public class ActivityTest extends TestCase {
         activity.setEndedAtTime(new XSDDateTime(calendar));
            
         Usage usage1=activity.createUsage(toggleSwitch.getUri());
-        usage1.setRoles(Arrays.asList(ParticipationRole.Template.getUri()));
+        usage1.setRoles(Arrays.asList(ActivityType.Learn.getUri()));
         Usage usage2=activity.createUsage(toggleSwitchOptimised.getUri());
-        usage2.setRoles(Arrays.asList(ParticipationRole.Product.getUri()));
+        usage2.setRoles(Arrays.asList(ActivityType.Design.getUri()));
         
         Association association=activity.createAssociation(agent);
         association.setPlan(plan);

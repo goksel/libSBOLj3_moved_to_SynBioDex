@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
-import org.sbolstandard.core3.entity.Location.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.util.SBOLGraphException;

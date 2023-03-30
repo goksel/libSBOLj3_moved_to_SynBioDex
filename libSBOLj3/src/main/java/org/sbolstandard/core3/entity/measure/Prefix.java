@@ -3,7 +3,6 @@ package org.sbolstandard.core3.entity.measure;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Optional;
-
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.Identified;
@@ -11,7 +10,6 @@ import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
-
 import jakarta.validation.constraints.NotNull;
 
 public abstract class Prefix extends Unit{
@@ -50,4 +48,18 @@ public abstract class Prefix extends Unit{
 		subclasses.put(MeasureDataModel.SIPrefix.uri, (Class<T>) SIPrefix.class);
 		return subclasses;
 	}
+	
+	@Override
+	protected String getNameLabelMessage()
+	{
+		return "{PREFIX_NAME_LABEL_EQUAL}";
+	}
+	
+	@Override
+	
+	protected String getDescriptionCommentMessage()
+	{
+		return "{PREFIX_DESCRIPTION_COMMENT_EQUAL}";
+	}
+		
 }

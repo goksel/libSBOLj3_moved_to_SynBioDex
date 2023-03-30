@@ -4,30 +4,22 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.Sequence;
+import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.SBOLComparator;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.DataModel;
-import org.sbolstandard.core3.vocabulary.Encoding;
-import org.sbolstandard.core3.vocabulary.InteractionType;
-import org.sbolstandard.core3.vocabulary.ParticipationRole;
-import org.sbolstandard.core3.vocabulary.Role;
-
+import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
 public class PoPSReceiverExample extends TestCase {
 
 	public void testPoPSReceiverExample() throws SBOLGraphException, IOException
     {
+		//http://parts.igem.org/Part:BBa_F2620
+			
         SBOLDocument doc=new SBOLDocument(URI.create("https://synbiohub.org/public/igem/"));
         //SBOLDocument doc=new SBOLDocument();
         Component popsReceiver=SBOLAPI.createDnaComponent(doc, "BBa_F2620", "BBa_F2620", "PoPS Receiver", Role.EngineeredGene, null); 
@@ -69,7 +61,6 @@ public class PoPSReceiverExample extends TestCase {
         TestUtil.serialise(doc2, "BBa_F2620_PoPSReceiver", "BBa_F2620_PoPSReceiver");     
         
 
-        TestUtil.assertReadWrite(doc); 
         
         System.out.print(SBOLIO.write(doc2, SBOLFormat.JSONLD));
         
@@ -85,7 +76,7 @@ public class PoPSReceiverExample extends TestCase {
         Component comp=doc2.getIdentified(pTetR.getUri(), Component.class);
         SBOLComparator.assertEqualEntity(pTetR, comp);
         
-        
+    	TestUtil.assertReadWrite(doc);	 
 	  
         System.out.println("done");   
     }

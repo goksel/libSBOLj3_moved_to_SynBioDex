@@ -2,10 +2,9 @@ package org.sbolstandard.core3.entity.measure;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
-
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
@@ -13,7 +12,6 @@ import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
-
 import jakarta.validation.constraints.NotNull;
 
 public class PrefixedUnit extends Unit{
@@ -29,6 +27,12 @@ public class PrefixedUnit extends Unit{
 	protected  PrefixedUnit(Resource resource) throws SBOLGraphException
 	{
 		super(resource);
+	}
+	
+	public static PrefixedUnit create(SBOLDocument sbolDocument, URI uri, URI namespace) throws SBOLGraphException {
+		PrefixedUnit identified = new PrefixedUnit(sbolDocument.getRDFModel(), uri);
+		identified.setNamespace(namespace);
+		return identified;
 	}
 	
 	@NotNull(message = "{PREFIXEDUNIT_PREFIX_NOT_NULL}")	

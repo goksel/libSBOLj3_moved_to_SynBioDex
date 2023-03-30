@@ -4,12 +4,14 @@ import java.net.URI;
 import java.util.List;
 import java.util.OptionalLong;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
+import org.sbolstandard.core3.vocabulary.HashAlgorithm;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
@@ -39,8 +41,41 @@ public class Attachment extends TopLevel{
 		{
 			validationMessages= addToValidations(validationMessages,new ValidationMessage("{ATTACHMENT_HASHGORITHM_NOT_NULL_IF_HASH_IS_PROVIDED}", DataModel.Attachment.hashAlgorithm));      	
 		}
+		
+		//ATTACHMENT_FORMAT_EDAM_URI
+		validationMessages=assertValidAttachmentFormat(validationMessages);
+		
+		//ATTACHMENT_ALGORITHM_VALID_IF_NOT_NULL
+		validationMessages= assertValidHashAlgorithm(validationMessages);
+		
 		return validationMessages;
-	}		
+	}	
+	
+    private List<ValidationMessage> assertValidAttachmentFormat(List<ValidationMessage> validationMessages) throws SBOLGraphException
+    {
+    	if (Configuration.getInstance().isValidateRecommendedRules()){
+			URI format=this.getFormat();			
+			if (format!=null && !Configuration.getInstance().getEdamFileFormatTerms().contains(format.toString())){
+				ValidationMessage message = new ValidationMessage("{ATTACHMENT_FORMAT_EDAM_URI}", DataModel.Attachment.format, format);
+				validationMessages=IdentifiedValidator.addToValidations(validationMessages, message);
+			}
+		}	
+    	return validationMessages;
+    }
+    
+    private List<ValidationMessage> assertValidHashAlgorithm(List<ValidationMessage> validationMessages) throws SBOLGraphException{
+    	if (Configuration.getInstance().isValidateRecommendedRules()){
+			String value=this.getHashAlgorithm();
+			if (value!=null){
+				HashAlgorithm alg=HashAlgorithm.get(value);
+				if (alg==null){										
+					ValidationMessage message = new ValidationMessage("{ATTACHMENT_ALGORITHM_VALID_IF_NOT_NULL}", DataModel.Attachment.hashAlgorithm, value);
+					validationMessages=IdentifiedValidator.addToValidations(validationMessages, message);
+				}
+			}
+		}	
+    	return validationMessages;
+    }
 	
 	//@NotNull(message = "Attachment.source cannot be null")
 	@NotNull(message = "{ATTACHMENT_SOURCE_NOT_NULL}")
@@ -146,17 +181,39 @@ public class Attachment extends TopLevel{
 		}
 		return hashAlgorithm;*/
 		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hashAlgorithm);	
+		/*HashAlgorithm alg=null;
+		
+		String value=IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Attachment.hashAlgorithm);	
 
+		if (value!=null){			
+			alg=toHashAlgorithm(value); 
+			if (Configuration.getInstance().isValidateRecommendedRules()) {
+				PropertyValidator.getValidator().validateReturnValue(this, "toHashAlgorithm", alg, String.class);
+			}
+		}
+		return alg;	*/	
 	}
+	
+	/*@NotNull(message = "{ATTACHMENT_ALGORITHM_VALID_IF_NOT_NULL}")   
+	public HashAlgorithm toHashAlgorithm (String value)
+	{
+		return HashAlgorithm.get(value); 
+	}*/
+	
 
-	public void setHashAlgorithm(String hashAlgorithm) {
+	public void setHashAlgorithm(HashAlgorithm hashAlgorithm) {
 		//this.hashAlgorithm = hashAlgorithm;
-		RDFUtil.setProperty(resource, DataModel.Attachment.hashAlgorithm, hashAlgorithm);
+		String value=null;
+		if (hashAlgorithm!=null)
+		{
+			value=hashAlgorithm.getValue();
+		}
+		RDFUtil.setProperty(resource, DataModel.Attachment.hashAlgorithm, value);
 	}
-
+	
 	@Override
 	public URI getResourceType() {
 		return DataModel.Attachment.uri;
 	}
-	
+		   
 }

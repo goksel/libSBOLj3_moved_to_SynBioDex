@@ -3,10 +3,7 @@ package org.sbolstandard.core3.vocabulary;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.sbolstandard.core3.util.URINameSpace;
-
-import jakarta.validation.constraints.NotNull;
 
 public enum RoleIntegration {
 	overrideRoles(URINameSpace.SBOL.local("overrideRoles")), 

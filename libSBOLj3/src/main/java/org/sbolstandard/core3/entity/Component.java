@@ -7,13 +7,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
-
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
@@ -25,14 +21,9 @@ import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.RestrictionType;
-import org.sbolstandard.core3.vocabulary.RestrictionType.ConstraintRestriction;
-import org.sbolstandard.core3.vocabulary.RestrictionType.IdentityRestriction;
-import org.sbolstandard.core3.vocabulary.RestrictionType.OrientationRestriction;
-import org.sbolstandard.core3.vocabulary.RestrictionType.SequentialRestriction;
-
+import org.sbolstandard.core3.vocabulary.RestrictionType.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 public class Component extends TopLevel {
 	
@@ -171,6 +162,8 @@ public class Component extends TopLevel {
 					
 			//COMPONENT_TYPE_IF_DNA_OR_RNA_SHOULD_INCLUDE_ONE_SO_FEATURE_ROLE
 			validationMessages=IdentifiedValidator.assertIfDNAOrRNAThenIdentifiedShouldIncludeOneSOFeatureRole(types, getRoles(), validationMessages, "{COMPONENT_TYPE_IF_DNA_OR_RNA_SHOULD_INCLUDE_ONE_SO_FEATURE_ROLE}", this);					
+		
+		
 		}
 		
 		// COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
@@ -239,7 +232,6 @@ public class Component extends TopLevel {
 			for (Map.Entry<Encoding, ArrayList<Integer>> entry : elementLengths.entrySet()) {
 				boolean sizesMatch = true;
 				
-				Encoding encoding = entry.getKey();
 				ArrayList<Integer> lengthList = entry.getValue();
 				if(lengthList.size()>1) {
 					int firstSize = lengthList.get(0);
@@ -331,7 +323,7 @@ public class Component extends TopLevel {
 		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.Component.hasInterface, this.resource, getInterface(), validationMessages);
 		return validationMessages;
 	}
-
+			
 	private List<ValidationMessage> validateComponentLocation(List<ValidationMessage> validationMessages, List<Location> locations, Feature feature, List<Sequence> sequences, List<Sequence> entireSequences, URI locationProperty,String message) throws SBOLGraphException {
 		if (locations != null) {
 			for (Location location : locations) {
@@ -524,12 +516,22 @@ public class Component extends TopLevel {
 		RDFUtil.setProperty(resource, DataModel.type, types);
 	}
 	
+	public void addType(URI type) {
+		RDFUtil.addProperty(resource, DataModel.type, type);
+	}
+	
+	
 	public List<URI> getRoles() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, DataModel.role);
 	}
 	
 	public void setRoles(List<URI> roles) {
 		RDFUtil.setProperty(resource, DataModel.role, roles);
+	}
+	
+
+	public void addRole(URI role) {
+		RDFUtil.addProperty(resource, DataModel.role, role);
 	}
 	
 	

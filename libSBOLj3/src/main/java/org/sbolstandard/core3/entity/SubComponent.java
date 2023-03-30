@@ -5,26 +5,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Location.LocationBuilder;
-import org.sbolstandard.core3.entity.Location.LocationFactory;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
-import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
-import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.RoleIntegration;
-
-import jakarta.validation.ConstraintTarget;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
@@ -58,8 +50,7 @@ public class SubComponent extends FeatureWithLocation{
 		}
 		
 		validationMessages=assertDoNotHaveOverlappingRegions(validationMessages, "{SUBCOMPONENT_LOCATIONS_REGIONS_NOT_OVERLAPPING}");
-		
-		
+				
 		List<Location> sourceLocations= getSourceLocations();
 		List<Location> locations= getLocations();
 		if (!CollectionUtils.isEmpty(locations))

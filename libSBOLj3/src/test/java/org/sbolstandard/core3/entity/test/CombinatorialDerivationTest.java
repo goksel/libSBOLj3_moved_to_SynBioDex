@@ -3,7 +3,6 @@ package org.sbolstandard.core3.entity.test;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
-
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
@@ -13,7 +12,6 @@ import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
@@ -26,6 +24,12 @@ public class CombinatorialDerivationTest extends TestCase {
 		
 		
 		Component pTetR=SBOLAPI.createDnaComponent(doc, "BBa_R0040", "pTetR", "TetR repressible promoter", Role.Promoter, "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac");
+		Component start=SBOLAPI.createDnaComponent(doc, "BBa_R0040_start", "pTetR_start", "promoter_start", Role.EngineeredRegion, "tccctat");
+		
+        SubComponent startFeature=pTetR.createSubComponent(start);
+        SubComponent startCodonFeature=pTetR.createSubComponent(start);
+        SubComponent endCodonFeature=pTetR.createSubComponent(start);
+        
 		CombinatorialDerivation cd=doc.createCombinatorialDerivation("cs1", pTetR);
 		
 		
@@ -53,11 +57,6 @@ public class CombinatorialDerivationTest extends TestCase {
 		RDFUtil.setProperty(resource, DataModel.CombinatorialDerivation.template, pTetR.getUri());
 		TestUtil.validateIdentified(cd,doc,0);
 		
-        Component start=SBOLAPI.createDnaComponent(doc, "BBa_R0040_start", "pTetR_start", "promoter_start", Role.EngineeredRegion, "tccctat");
-		
-        SubComponent startFeature=pTetR.createSubComponent(start);
-        SubComponent startCodonFeature=pTetR.createSubComponent(start);
-        SubComponent endCodonFeature=pTetR.createSubComponent(start);
         
         
         VariableFeature vf=cd.createVariableFeature(VariableFeatureCardinality.One,startFeature);
@@ -68,7 +67,7 @@ public class CombinatorialDerivationTest extends TestCase {
         
         TestUtil.validateProperty(vf, "setVariable", new Object[] {null}, Feature.class);
         vf.setVariable(null);
-        TestUtil.validateIdentified(vf, doc, 2);
+        TestUtil.validateDocument(doc, 3);
         
         vf.setCardinality(VariableFeatureCardinality.One);
         vf.setVariable(startFeature);
@@ -92,8 +91,8 @@ public class CombinatorialDerivationTest extends TestCase {
         //SBOL_VALID_ENTITY_TYPES - VariableFeature.Variable
         //VARIABLEFEATURE_FEATURE_NOT_NULL
         Resource resvf4= TestUtil.getResource(vf4);
-        RDFUtil.setProperty(resvf4, DataModel.VariableFeature.variable, pTetR.getUri());
-        TestUtil.validateIdentified(cd, doc, 3);
+        RDFUtil.setProperty(resvf4, DataModel.VariableFeature.variable, startFeature.getUri());
+        TestUtil.validateIdentified(cd, doc, 2);
         
         //Clear the errors
         vf4.setVariable(startCodonFeature);

@@ -6,8 +6,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.IdentifiedValidator;
-import org.sbolstandard.core3.validation.ValidationMessage;
+import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.DataModel;
 
 public class Collection extends TopLevel{
@@ -30,7 +29,17 @@ public class Collection extends TopLevel{
 
 	public void setMembers(List<URI> members) {
 		RDFUtil.setProperty(resource, DataModel.Collection.member, members);
-	}	
+	}
+	
+	public void addMember(TopLevel member) {
+		RDFUtil.addProperty(resource, DataModel.Collection.member, member.getUri());
+	}
+	
+	
+	public void addMembers(List<TopLevel> members) {
+		RDFUtil.addProperty(resource, DataModel.Collection.member, SBOLUtil.getURIs(members));
+	}
+	
 	
 	/*
 	public List<TopLevel> getMembers() throws SBOLGraphException {

@@ -1,21 +1,12 @@
 package org.sbolstandard.core3.validation;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
 import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
-import org.sbolstandard.core3.util.URINameSpace;
-
-import com.google.protobuf.Message;
-
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import jakarta.validation.ConstraintValidatorContext.ConstraintViolationBuilder;
-import jakarta.validation.ConstraintValidatorContext.ConstraintViolationBuilder.LeafNodeBuilderCustomizableContext;
 import jakarta.validation.ConstraintValidatorContext.ConstraintViolationBuilder.LeafNodeBuilderDefinedContext;
 import jakarta.validation.ConstraintValidatorContext.ConstraintViolationBuilder.NodeBuilderCustomizableContext;
 
@@ -71,7 +62,12 @@ public class SBOLEntityAnnotationValidator implements ConstraintValidator<ValidS
     	    				Identified invalidIdentified= (Identified ) message.getInvalidValue() ;
     	    				messageString = String.format("%s%sChild Entity URI: %s",messageString, separator, invalidIdentified.getUri().toString());
     	    				messageString = String.format("%s%sChild Entity Type: %s",messageString, separator, invalidIdentified.getClass());  	
-    	    			}
+    	    				String name=invalidIdentified.getName();
+    	    				if (name!=null && name.length()<0)
+    	    				{
+    	    					messageString = String.format("%s%sChild Entity Name: %s",messageString, separator, name);  	
+    	    				}
+	    				}
         	    			
     	    				  //context.buildConstraintViolationWithTemplate(messageString)
     	                      //.addPropertyNode(message.getProperty()).addConstraintViolation();

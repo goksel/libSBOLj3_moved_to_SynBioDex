@@ -8,7 +8,6 @@ import java.util.Optional;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
-import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
@@ -35,7 +34,7 @@ public class SubComponentTest extends TestCase {
 		SubComponent termSubComponent=device.createSubComponent(term);
 		termSubComponent.setOrientation(Orientation.inline);
 		
-		RoleIntegration ri2=termSubComponent.getRoleIntegration();
+		termSubComponent.getRoleIntegration();
 		TestUtil.validateReturnValue(termSubComponent, "toRoleIntegration", new Object[] {URI.create("http://invalidroleintegration.org")}, URI.class);
 		
 		Sequence i13504Sequence= device.getSequences().get(0);
@@ -101,6 +100,6 @@ public class SubComponentTest extends TestCase {
 	  	RDFUtil.setProperty(resource, DataModel.SubComponent.sourceLocation, Arrays.asList(range2.getUri()));
 	  	TestUtil.validateIdentified(termSubComponent,doc,0);	
 	  	
-	  
+	  	TestUtil.assertReadWrite(doc);	  		  
     }
 }

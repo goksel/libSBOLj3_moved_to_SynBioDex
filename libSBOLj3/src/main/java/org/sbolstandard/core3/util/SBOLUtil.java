@@ -15,26 +15,23 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+import java.util.Set;
 import org.apache.commons.io.IOUtils;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
-import org.apache.jena.util.FileManager;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.validation.IdentifiedValidator;
-import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.DataModel;
-import org.sbolstandard.core3.vocabulary.ComponentType.TopologyType;
 
 public class SBOLUtil {
 
@@ -177,10 +174,11 @@ public class SBOLUtil {
 			return URI.create(uriString);
 		}
 	   
-	    public static <T extends Identified>  boolean contains(List<T> identifieds, T identified)
+	    
+	    public static <T extends Identified>  boolean contains(Collection<T> identifieds, T identified)
 	    {
 	    	boolean contains=false;
-	    	if (identifieds!=null && identified!=null)
+	    	if (identifieds!=null && identifieds.size()>0 && identified!=null)
 	    	{
 	    		contains=SBOLUtil.getURIs(identifieds).contains(identified.getUri());
 	    	}
@@ -188,7 +186,7 @@ public class SBOLUtil {
 	    }
 		
 	    
-	    public static <T extends Identified>  List<URI> getURIs(List<T> identifieds)
+	    public static <T extends Identified>  List<URI> getURIs(Collection<T> identifieds)
 		{
 			ArrayList<URI> uris=null;
 			if (identifieds!=null && identifieds.size()>0 )
@@ -262,5 +260,15 @@ public class SBOLUtil {
 	        System.out.println("--------------------");
 		}
 	    
+	    
+	    public static Set<URI> addToSet(Set<URI> current, URI item){
+			if (item!=null){
+				if (current==null){
+					current=new HashSet<URI>();
+				}
+				current.add(item);
+			}
+			return current;
+		}
 	    
 }

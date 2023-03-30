@@ -18,6 +18,7 @@ import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.ComponentType;
+import org.sbolstandard.core3.vocabulary.HashAlgorithm;
 import org.sbolstandard.core3.vocabulary.ModelLanguage;
 import org.sbolstandard.core3.vocabulary.Role;
 
@@ -33,7 +34,7 @@ public class AttachmentTest extends TestCase {
         Attachment attachment2=doc.createAttachment("attachment2", URI.create("https://sbolstandard.org/attachment2"));
         attachment2.setFormat(ModelLanguage.SBML);
         attachment2.setSize(OptionalLong.of(1000));
-        attachment2.setHashAlgorithm("HashAlg");
+        attachment2.setHashAlgorithm(HashAlgorithm.sha_256);
         attachment2.setHash("aaa");
         System.out.println(SBOLIO.write(doc, RDFFormat.TURTLE));
         System.out.println(SBOLValidator.getValidator().isValid(doc));
@@ -45,7 +46,7 @@ public class AttachmentTest extends TestCase {
         Attachment attachment=doc.createAttachment("attachment1", URI.create("https://sbolstandard.org/attachment1"));
         attachment.setFormat(ModelLanguage.SBML);
         attachment.setSize(OptionalLong.of(1000));
-        attachment.setHashAlgorithm("Alg1");
+        attachment.setHashAlgorithm(HashAlgorithm.sha_256);
         attachment.setHash("aaa");
         
         Implementation impl=doc.createImplementation("impl1");
@@ -77,16 +78,16 @@ public class AttachmentTest extends TestCase {
         attachment.setFormat(temp);
         
         //Attachment.hashAlgorithm: optional
-        String tempString=attachment.getHashAlgorithm();
+        String tempAlg=attachment.getHashAlgorithm();
         String tempHash=attachment.getHash();
         attachment.setHashAlgorithm(null);
         attachment.setHash(null);
         TestUtil.validateIdentified(attachment,doc,0);
-        attachment.setHashAlgorithm(tempString);
+        attachment.setHashAlgorithm(HashAlgorithm.get(tempAlg));
         attachment.setHash(tempHash);
         
         //Attachment.hash: optional
-        tempString=attachment.getHash();
+        String tempString=attachment.getHash();
         attachment.setHash(null);
         TestUtil.validateIdentified(attachment,doc,0);
         attachment.setHash(tempString);

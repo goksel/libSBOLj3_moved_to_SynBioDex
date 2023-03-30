@@ -5,19 +5,12 @@ import java.net.URI;
 import java.util.Arrays;
 
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.Interaction;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.SubComponent;
+import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.InteractionType;
-import org.sbolstandard.core3.vocabulary.ParticipationRole;
-import org.sbolstandard.core3.vocabulary.RestrictionType;
-import org.sbolstandard.core3.vocabulary.Role;
+import org.sbolstandard.core3.vocabulary.*;
 
 import junit.framework.TestCase;
 
