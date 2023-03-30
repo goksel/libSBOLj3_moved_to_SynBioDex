@@ -7,19 +7,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.nio.charset.Charset;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-
-import org.apache.commons.lang3.CharSet;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
-import org.sbolstandard.core3.entity.measure.*;
-import org.sbolstandard.core3.entity.provenance.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.util.Configuration;
@@ -31,9 +25,6 @@ import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.SBOLComparator;
 import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.DataModel;
-import org.sbolstandard.core3.vocabulary.MeasureDataModel;
-import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
 import static org.junit.Assert.*;
 

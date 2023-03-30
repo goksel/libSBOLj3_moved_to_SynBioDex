@@ -4,16 +4,12 @@ import java.lang.reflect.Constructor;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Map.Entry;
 import java.util.Set;
-
 import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.Syntax;
@@ -43,16 +39,12 @@ import org.sbolstandard.core3.validation.ValidSBOLEntity;
 import org.sbolstandard.core3.validation.ValidatableSBOLEntity;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.ActivityType;
-import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
-import org.sbolstandard.core3.vocabulary.Role;
 import org.sbolstandard.core3.vocabulary.VariableFeatureCardinality;
-
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 
 @ValidSBOLEntity
 public class SBOLDocument implements ValidatableSBOLEntity {
@@ -155,7 +147,9 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 
 		Component component = new Component(this.model, uri);
 		component.setTypes(types);
-		component.setNamespace(namespace);
+		if (namespace!=null){
+			component.setNamespace(namespace);
+		}
 		addToInMemoryList(component, components);
 		return component;
 	}
@@ -940,11 +934,11 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		list.add(item);
 	}
 	
-	private Set<URI> topLevelResourceTypes;
+	//private Set<URI> topLevelResourceTypes;
 	public Set<URI> getTopLevelResourceTypes()
 	{
-		if (topLevelResourceTypes==null)
-		{
+		/*if (topLevelResourceTypes==null)
+		{*/
 			List<URI> types = Arrays.asList(DataModel.Component.uri,
 					DataModel.Sequence.uri,
 					DataModel.Model.uri,
@@ -966,19 +960,21 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 					MeasureDataModel.UnitExponentiation.uri,
 					MeasureDataModel.PrefixedUnit.uri
 					);
-			topLevelResourceTypes=new HashSet<URI>(types);
-		}
+			Set<URI> topLevelResourceTypes=new HashSet<URI>(types);
+			
+			
+		//}
 		return topLevelResourceTypes;
 	}
 	
-	public void addTopLevelResourceType(URI type)
+	/*public void addTopLevelResourceType2(URI type)
 	{
 		getTopLevelResourceTypes();
 		if (type!=null)
 		{
 			topLevelResourceTypes.add(type);
 		}
-	}	
+	}*/
 	
 	public List<URI> filterIdentifieds(List<URI> identifieds, URI property, String value)
 	{
@@ -1622,9 +1618,6 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		return varFeature;
 	}
 	
-	
-	
-	
 	private List<ValidationMessage> assertCombDerWasDerivedRestrictionForCollections(List<ValidationMessage> validationMessages) throws SBOLGraphException
 	{
 		List<Collection> collections=this.getCollections();
@@ -1818,7 +1811,7 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		if (activityType!=null){//DBTL role	
 			validReferredType=false;
 			
-			if (activityType.getUri().equals(ActivityType.Design.getUri())){//OK		
+			if (activityType.getUri().equals(ActivityType.Design.getUri())){		
 				//In Association: Learn
 				if (!(usageEntityTypes.contains(DataModel.Implementation.uri))){
 					Set<URI> topLevelTypes=this.getTopLevelResourceTypes();
@@ -1829,14 +1822,14 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 					}														
 				}																														
 			}
-			else if (activityType.getUri().equals(ActivityType.Build.getUri())){//OK
+			else if (activityType.getUri().equals(ActivityType.Build.getUri())){
 				if (usageEntityTypes.contains(DataModel.Implementation.uri)){
 					validReferredType=true;
 				}
 				//In Association: Design				
 				/**/					
 			}
-			else if (activityType.getUri().equals(ActivityType.Test.getUri())){//OK			
+			else if (activityType.getUri().equals(ActivityType.Test.getUri())){		
 				if (usageEntityTypes.contains(DataModel.ExperimentalData.uri)){
 					validReferredType=true;
 				}
@@ -1849,14 +1842,5 @@ public class SBOLDocument implements ValidatableSBOLEntity {
 		}			
 		return validReferredType;
 	}
-	
-	private Set<URI> ignoredProperties()
-	{
-		Set<URI> props=new HashSet<URI>();
-		props.add(DataModel.Identified.displayId);
-		return props;
-	}
-	
-	
-			
+				
 }

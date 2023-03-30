@@ -2,8 +2,6 @@ package org.sbolstandard.core3.entity.measure;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
-
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.SBOLDocument;

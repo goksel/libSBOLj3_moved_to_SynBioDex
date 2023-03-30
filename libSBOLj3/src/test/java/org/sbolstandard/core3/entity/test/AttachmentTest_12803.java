@@ -2,27 +2,13 @@ package org.sbolstandard.core3.entity.test;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.OptionalLong;
-
-import org.apache.jena.riot.RDFFormat;
-import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Attachment;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.Implementation;
 import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.io.SBOLFormat;
-import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
-import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.SBOLValidator;
-import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.HashAlgorithm;
-import org.sbolstandard.core3.vocabulary.ModelFramework;
 import org.sbolstandard.core3.vocabulary.ModelLanguage;
-import org.sbolstandard.core3.vocabulary.Role;
-
 import junit.framework.TestCase;
 
 public class AttachmentTest_12803 extends TestCase {

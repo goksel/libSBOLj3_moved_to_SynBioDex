@@ -3,9 +3,6 @@ package org.sbolstandard.core3.validation;
 import java.net.URI;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
-
 import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.sbolstandard.core3.entity.Attachment;
 import org.sbolstandard.core3.entity.Collection;
@@ -202,6 +199,10 @@ public class SBOLComparator {
 		{
 			output = add(output, assertEqualBinaryPrefix((BinaryPrefix)identified1, (BinaryPrefix) identified2));
 		}
+		else if (identified1 instanceof Experiment)
+		{
+			output = add(output, assertEqualExperiment((Experiment)identified1, (Experiment) identified2));
+		}
 		else if (identified1 instanceof Collection)
 		{
 			output = add(output, assertEqualCollection((Collection)identified1, (Collection) identified2));
@@ -209,8 +210,7 @@ public class SBOLComparator {
 		else if (identified1 instanceof CombinatorialDerivation)
 		{
 			output = add(output, assertEqualCombinatorialDerivation((CombinatorialDerivation)identified1, (CombinatorialDerivation) identified2));
-		}
-		
+		}		
 		else if (identified1 instanceof Component)
 		{
 			output = add(output, assertEqualComponent((Component)identified1,  (Component) identified2));
@@ -218,10 +218,6 @@ public class SBOLComparator {
 		else if (identified1 instanceof ExperimentalData)
 		{
 			output = add(output, assertEqualExperimentalData((ExperimentalData)identified1, (ExperimentalData) identified2));
-		}
-		else if (identified1 instanceof Experiment)
-		{
-			output = add(output, assertEqualExperiment((Experiment)identified1, (Experiment) identified2));
 		}
 		else if (identified1 instanceof Implementation)
 		{
@@ -376,7 +372,7 @@ public class SBOLComparator {
 		if (entity1!=null & entity2!=null) {
 			output = add(output, assertEqual(entity1, entity2, entity1.getFormat(),entity2.getFormat(), DataModel.Attachment.format));
 			output = add(output, assertEqual(entity1, entity2, entity1.getHash(),entity2.getHash(), DataModel.Attachment.hash));
-			output = add(output, assertEqualEnum(entity1, entity2, entity1.getHashAlgorithm(),entity2.getHashAlgorithm(), DataModel.Attachment.hashAlgorithm));
+			output = add(output, assertEqual(entity1, entity2, entity1.getHashAlgorithm(),entity2.getHashAlgorithm(), DataModel.Attachment.hashAlgorithm));
 			output = add(output, assertEqual(entity1, entity2, entity1.getSource(),entity2.getSource(), DataModel.Attachment.source));
 			output = add(output, assertEqual(entity1, entity2, entity1.getSize().toString(),entity2.getSize().toString(), DataModel.Attachment.size));
 		}
@@ -655,7 +651,7 @@ public class SBOLComparator {
 		output = add(output, assertEqual(entity1, entity2));		
 		if (entity1!=null & entity2!=null) {
 			output = add(output, assertEqual(entity1, entity2, entity1.getElements(), entity2.getElements(),DataModel.Sequence.elements));
-			output = add(output, assertEqualEnum(entity1, entity2, entity1.getEncoding(),entity2.getEncoding(), DataModel.Sequence.encoding));		
+			output = add(output, assertEqual(entity1, entity2, entity1.getEncoding(),entity2.getEncoding(), DataModel.Sequence.encoding));		
 		}
 		return output;
 	}
@@ -762,7 +758,7 @@ public class SBOLComparator {
 		return output;
 	}
 	
-	private static StringBuilder assertEqualEnum(Identified identified1, Identified identified2, Object value1, Object value2, URI property)
+	private static StringBuilder assertEqualEnum(Identified identified1, Identified identified2, Enum value1, Enum value2, URI property) throws SBOLGraphException
 	{
 		StringBuilder output=null;
 		output=add(output, assertBothNullOrNotNull(identified1, identified2, value1, value2, property));
@@ -777,7 +773,7 @@ public class SBOLComparator {
 	
 	
 	
-	private static Object enumToValue(Object value)
+	private static Object enumToValue(Object value) throws SBOLGraphException
 	{
 		if (value!=null)
 		{
@@ -785,10 +781,10 @@ public class SBOLComparator {
 			{
 				return ((RoleIntegration) value).getUri();
 			}
-			else if (value instanceof Encoding)
+			/*else if (value instanceof Encoding)
 			{
 				return ((Encoding) value).getUri();
-			}
+			}*/
 			else if (value instanceof CombinatorialDerivationStrategy)
 			{
 				return ((CombinatorialDerivationStrategy) value).getUri();
@@ -801,9 +797,13 @@ public class SBOLComparator {
 			{
 				return ((Orientation) value).getUri();
 			}
-			else if (value instanceof HashAlgorithm)
+			/*else if (value instanceof HashAlgorithm)
 			{
 				return ((HashAlgorithm) value).getValue();
+			}*/
+			else
+			{
+				throw new SBOLGraphException("Not implemented the enumToValue method for" + value);
 			}
 		}
 		return null;

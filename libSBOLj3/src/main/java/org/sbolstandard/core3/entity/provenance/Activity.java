@@ -9,7 +9,6 @@ import org.apache.jena.datatypes.xsd.impl.XSDDateType;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Component;
 import org.sbolstandard.core3.entity.ControlledTopLevel;
 import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.entity.SBOLDocument;
@@ -20,7 +19,6 @@ import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.ActivityType;
-import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
 import jakarta.validation.Valid;

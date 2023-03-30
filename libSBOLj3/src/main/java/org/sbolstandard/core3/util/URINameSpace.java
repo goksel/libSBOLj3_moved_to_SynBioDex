@@ -1,8 +1,6 @@
 package org.sbolstandard.core3.util;
 
 import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
 
 public class URINameSpace {
 

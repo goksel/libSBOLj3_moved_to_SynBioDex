@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.OptionalInt;
 import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
@@ -39,15 +38,11 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
-import org.apache.jena.riot.RDFParser;
-import org.apache.jena.riot.RDFParserBuilder;
 import org.apache.jena.riot.RDFWriter;
 import org.apache.jena.riot.RDFWriterBuilder;
 import org.apache.jena.riot.SysRIOT;
 import org.apache.jena.sparql.util.Context;
 import org.apache.jena.vocabulary.RDF;
-import org.sbolstandard.core3.validation.IdentifiedValidator;
-import org.sbolstandard.core3.vocabulary.DataModel;
 
 //IO: https://jena.apache.org/documentation/io/rdf-input.html
 //https://jena.apache.org/tutorials/rdf_api.html#ch-Writing-RDF
@@ -60,7 +55,7 @@ import org.sbolstandard.core3.vocabulary.DataModel;
 	
 public class RDFUtil {
 	
-    private static String RDFXMLABBREV = "RDF/XML-ABBREV";
+    //private static String RDFXMLABBREV = "RDF/XML-ABBREV";
     
 	public static void setBaseURI(Model model, URI uri)
 	{

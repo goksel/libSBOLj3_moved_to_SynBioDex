@@ -36,6 +36,7 @@ public class ExperimentTest extends TestCase {
         
         TestUtil.serialise(doc, "entity_additional/experiment", "experiment");
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
+        
         TestUtil.assertReadWrite(doc);
     }
 

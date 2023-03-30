@@ -18,10 +18,8 @@ import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
-import org.sbolstandard.core3.vocabulary.Role;
 import org.sbolstandard.core3.vocabulary.ComponentType.StrandType;
 import org.sbolstandard.core3.vocabulary.ComponentType.TopologyType;
-
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

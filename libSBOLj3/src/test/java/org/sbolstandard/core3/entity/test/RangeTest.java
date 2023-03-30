@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.OptionalInt;
+
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
-import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
@@ -40,8 +41,13 @@ public class RangeTest extends TestCase {
 		i13504Sequence.setElements(i13504Sequence.getElements() + term_na);
 		Range range=termSubComponent.createRange(start, end,i13504Sequence);
 		range.setOrientation(Orientation.inline);
+		Orientation orientation=range.getOrientation();
+		assertEquals(orientation, Orientation.inline);
 		
-		
+		range.setOrder(OptionalInt.of(1));
+		int order=range.getOrder().getAsInt();
+		assertEquals(order, 1);
+				
 		TestUtil.serialise(doc, "entity_additional/range", "range");
 	    System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));
 	    TestUtil.assertReadWrite(doc); 

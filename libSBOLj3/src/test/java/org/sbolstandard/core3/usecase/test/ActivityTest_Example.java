@@ -2,7 +2,6 @@ package org.sbolstandard.core3.usecase.test;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Arrays;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.entity.provenance.*;
@@ -121,6 +120,8 @@ public class ActivityTest_Example extends TestCase {
         model2.addWasDerivedFrom(exp);
         
         TestUtil.validateIdentified(activity,doc,0);
+        
+        TestUtil.assertReadWrite(doc);
        
     }
 

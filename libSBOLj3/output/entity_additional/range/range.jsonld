@@ -83,6 +83,7 @@
         },
         {
             "@id": "https://synbiohub.org/public/igem/i13504/SubComponent1/Range1",
+            "sbol:order": "1",
             "sbol:orientation": {
                 "@id": "SO:0001030"
             },

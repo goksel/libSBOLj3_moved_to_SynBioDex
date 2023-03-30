@@ -5,13 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.sbolstandard.core3.entity.ComponentReference;
 import org.sbolstandard.core3.entity.ControlledTopLevel;
-import org.sbolstandard.core3.entity.ExternallyDefined;
 import org.sbolstandard.core3.entity.Identified;
-import org.sbolstandard.core3.entity.LocalSubComponent;
-import org.sbolstandard.core3.entity.SequenceFeature;
-import org.sbolstandard.core3.entity.SubComponent;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
@@ -20,9 +15,7 @@ import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
-
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 public abstract class Unit extends ControlledTopLevel{
 	

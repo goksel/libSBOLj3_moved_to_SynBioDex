@@ -15,7 +15,6 @@ import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.*;
 
 import junit.framework.TestCase;

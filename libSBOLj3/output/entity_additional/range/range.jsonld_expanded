@@ -81,6 +81,9 @@
   "@type" : [ "http://sbols.org/v3#SubComponent" ]
 }, {
   "@id" : "https://synbiohub.org/public/igem/i13504/SubComponent1/Range1",
+  "http://sbols.org/v3#order" : [ {
+    "@value" : "1"
+  } ],
   "http://sbols.org/v3#orientation" : [ {
     "@id" : "https://identifiers.org/SO:0001030"
   } ],

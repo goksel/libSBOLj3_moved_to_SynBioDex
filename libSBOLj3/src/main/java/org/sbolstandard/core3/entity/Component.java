@@ -7,13 +7,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
-
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
@@ -25,14 +21,9 @@ import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.RestrictionType;
-import org.sbolstandard.core3.vocabulary.RestrictionType.ConstraintRestriction;
-import org.sbolstandard.core3.vocabulary.RestrictionType.IdentityRestriction;
-import org.sbolstandard.core3.vocabulary.RestrictionType.OrientationRestriction;
-import org.sbolstandard.core3.vocabulary.RestrictionType.SequentialRestriction;
-
+import org.sbolstandard.core3.vocabulary.RestrictionType.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 public class Component extends TopLevel {
 	
@@ -241,7 +232,6 @@ public class Component extends TopLevel {
 			for (Map.Entry<Encoding, ArrayList<Integer>> entry : elementLengths.entrySet()) {
 				boolean sizesMatch = true;
 				
-				Encoding encoding = entry.getKey();
 				ArrayList<Integer> lengthList = entry.getValue();
 				if(lengthList.size()>1) {
 					int firstSize = lengthList.get(0);

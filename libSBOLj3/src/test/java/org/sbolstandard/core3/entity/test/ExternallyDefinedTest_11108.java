@@ -3,12 +3,8 @@ package org.sbolstandard.core3.entity.test;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
-import java.util.List;
 import org.sbolstandard.core3.entity.*;
-import org.sbolstandard.core3.io.SBOLFormat;
-import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
-import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.vocabulary.ComponentType;
 

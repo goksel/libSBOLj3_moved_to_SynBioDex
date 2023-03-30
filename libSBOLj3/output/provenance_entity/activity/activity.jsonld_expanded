@@ -51,18 +51,15 @@
   } ]
 }, {
   "@id" : "https://sbolstandard.org/examples/codon_optimization_activity",
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@value" : "2019-07-29T10:25:01.554Z"
+  } ],
   "http://sbols.org/v3#type" : [ {
     "@id" : "http://sbols.org/v3#design"
-  } ],
-  "http://www.w3.org/ns/prov#endedAtTime" : [ {
-    "@value" : "2020-08-30T09:25:08.234Z"
   } ],
   "@type" : [ "http://sbols.org/v3#TopLevel", "http://www.w3.org/ns/prov#Activity" ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "Codon optimization activity"
-  } ],
-  "http://www.w3.org/ns/prov#startedAtTime" : [ {
-    "@value" : "2019-07-29T09:25:08.234Z"
   } ],
   "http://sbols.org/v3#description" : [ {
     "@value" : "An activity that is used to optimise codons"
@@ -71,6 +68,9 @@
     "@id" : "https://sbolstandard.org/examples/codon_optimization_activity/Usage2"
   }, {
     "@id" : "https://sbolstandard.org/examples/codon_optimization_activity/Usage1"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@value" : "2020-08-30T10:25:01.554Z"
   } ],
   "http://sbols.org/v3#displayId" : [ {
     "@value" : "codon_optimization_activity"

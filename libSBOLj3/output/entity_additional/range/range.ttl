@@ -54,5 +54,6 @@
         sbol:displayId    "Range1" ;
         sbol:end          "80" ;
         sbol:hasSequence  :i13504_Sequence1 ;
+        sbol:order        "1" ;
         sbol:orientation  SO:0001030 ;
         sbol:start        "1" .

@@ -1,24 +1,24 @@
 package org.sbolstandard.core3.util;
 
 import java.io.FileNotFoundException;
-import java.net.URI;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.Role;
 
 public class Configuration {
-	private static Configuration configuration = null;
+	//private static Configuration configuration = null;
 	
 	private boolean enforceOneToOneRelationships=true;
 	private boolean validateAfterSettingProperties=true;
 	private boolean validateBeforeSaving=true;
 	private boolean validateAfterReadingSBOLDocuments=true;
 	private boolean validateRecommendedRules=true;
-
+	private static final String displayIdRegex = "^[\\p{L}_]+[\\p{L}0-9_]*$";
+	
 	
 	public boolean isValidateAfterSettingProperties() {
 		return validateAfterSettingProperties;
@@ -81,6 +81,7 @@ public class Configuration {
 	private Set<String> EdamFileFormatTerms=null;
 	private Set<String> SboSystemDescriptionParameters=null;
 	private Set<String> SboParticipantRoles= null;
+	private Pattern displayIdPattern=null;
 	
 	private Configuration(){
 		try{
@@ -94,6 +95,7 @@ public class Configuration {
 			this.EdamFileFormatTerms= RDFUtil.childResourcesRecursively(edamOntology,URINameSpace.EDAM.local("format_1915").toString());
 			this.SboSystemDescriptionParameters= RDFUtil.childResourcesRecursively(sboOntology, URINameSpace.SBO.local("0000545").toString());
 			this.SboParticipantRoles = RDFUtil.childResourcesRecursively(sboOntology, URINameSpace.SBO.local("0000003").toString());
+			this.displayIdPattern=Pattern.compile(displayIdRegex);
 		}
 		catch (FileNotFoundException ex){
 			throw new Error(ex);
@@ -108,6 +110,9 @@ public class Configuration {
 		return SingletonHelper.INSTANCE;
 	}
 	
+	public Pattern getDisplayIdPattern(){
+		return this.displayIdPattern;   
+	}
 	
 	public Set<String> getSboOccurringEntityInteractionTypes(){
 		return this.SboOccurringEntityInteractionTypes;   

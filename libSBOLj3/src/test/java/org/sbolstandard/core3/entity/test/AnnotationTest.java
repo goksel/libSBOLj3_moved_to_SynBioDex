@@ -2,6 +2,7 @@ package org.sbolstandard.core3.entity.test;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 
 import org.sbolstandard.core3.api.SBOLAPI;
@@ -16,7 +17,7 @@ import junit.framework.TestCase;
 
 public class AnnotationTest extends TestCase {
 	
-	public void testImplementation() throws SBOLGraphException, IOException
+	public void testAnnotation() throws SBOLGraphException, IOException
     {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
@@ -64,6 +65,14 @@ public class AnnotationTest extends TestCase {
         
         TestUtil.serialise(doc, "entity/annotation", "annotation");
    
+        List<TopLevelMetadata> repositoryAnnotations=doc.getTopLevelMetadataList(igem.local("Repository"));
+        assertEquals(repositoryAnnotations.size(), 2);
+        TopLevelMetadata repAnnot1=repositoryAnnotations.get(0);
+        
+        List<URI> searchResult=part.filterIdentifieds(Arrays.asList(igemInf4.getUri(), igemInf5.getUri()), DataModel.Identified.name, "iGEM Registry");
+        assertEquals(searchResult.get(0), igemInf4.getUri());
+         
+        
         String output=SBOLIO.write(doc, SBOLFormat.TURTLE);
         System.out.println(output);
         SBOLDocument doc2=SBOLIO.read(output, SBOLFormat.TURTLE); 

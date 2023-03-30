@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
-
 import org.apache.jena.datatypes.xsd.XSDDateTime;
-import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.entity.provenance.*;
@@ -15,9 +12,7 @@ import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
-import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.SBOLComparator;
 import org.sbolstandard.core3.vocabulary.*;
 

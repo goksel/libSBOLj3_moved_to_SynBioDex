@@ -3,42 +3,15 @@ package org.sbolstandard.core3.usecase.test;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Attachment;
-import org.sbolstandard.core3.entity.CombinatorialDerivation;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.ExperimentalData;
-import org.sbolstandard.core3.entity.Model;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.Sequence;
-import org.sbolstandard.core3.entity.SubComponent;
-import org.sbolstandard.core3.entity.VariableFeature;
-import org.sbolstandard.core3.entity.measure.SingularUnit;
-import org.sbolstandard.core3.entity.measure.UnitDivision;
-import org.sbolstandard.core3.entity.provenance.Activity;
-import org.sbolstandard.core3.entity.provenance.Agent;
-import org.sbolstandard.core3.entity.provenance.Association;
-import org.sbolstandard.core3.entity.provenance.Plan;
-import org.sbolstandard.core3.entity.provenance.Usage;
+import org.sbolstandard.core3.entity.*;
+import org.sbolstandard.core3.entity.measure.*;
+import org.sbolstandard.core3.entity.provenance.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.validation.SBOLComparator;
-import org.sbolstandard.core3.vocabulary.ActivityType;
-import org.sbolstandard.core3.vocabulary.CombinatorialDerivationStrategy;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.DataModel;
-import org.sbolstandard.core3.vocabulary.Encoding;
-import org.sbolstandard.core3.vocabulary.InteractionType;
-import org.sbolstandard.core3.vocabulary.ModelFramework;
-import org.sbolstandard.core3.vocabulary.ModelLanguage;
-import org.sbolstandard.core3.vocabulary.ParticipationRole;
-import org.sbolstandard.core3.vocabulary.Role;
-import org.sbolstandard.core3.vocabulary.VariableFeatureCardinality;
+import org.sbolstandard.core3.vocabulary.*;
 import org.sbolstandard.core3.vocabulary.RestrictionType.SequentialRestriction;
 
 import junit.framework.TestCase;
@@ -140,7 +113,9 @@ public class PoPSReceiverExample_Detailed extends TestCase {
 		
         String output=SBOLIO.write(doc, SBOLFormat.TURTLE);
         System.out.print(output);
-        	  
+        
+        TestUtil.assertReadWrite(doc);
+        
         System.out.println("done");   
         //http://parts.igem.org/Part:BBa_F2620
     }

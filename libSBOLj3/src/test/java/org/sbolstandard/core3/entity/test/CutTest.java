@@ -11,8 +11,6 @@ import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Component;
 import org.sbolstandard.core3.entity.Cut;
 import org.sbolstandard.core3.entity.Feature;
-import org.sbolstandard.core3.entity.Location;
-import org.sbolstandard.core3.entity.Location.LocationBuilder;
 import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.entity.Sequence;
 import org.sbolstandard.core3.entity.SequenceFeature;

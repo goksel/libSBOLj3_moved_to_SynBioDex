@@ -219,7 +219,7 @@ public abstract class  Location extends Identified {
 		return Pair.of(locStart, locEnd);
 	}
 
-	
+/*	
 	public static class LocationFactory
 	{
 		public static Location create(Resource resource) throws SBOLGraphException
@@ -363,5 +363,5 @@ public abstract class  Location extends Identified {
 			return EntireSequence.class;
 		}
 	}
-	
+	*/
 }

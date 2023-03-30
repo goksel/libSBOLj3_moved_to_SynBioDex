@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.OptionalInt;
+import java.util.regex.Matcher;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.rdf.model.Model;
@@ -34,8 +34,8 @@ import org.sbolstandard.core3.vocabulary.ActivityType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
-
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Pattern;
 
 @ValidSBOLEntity
@@ -74,22 +74,48 @@ public abstract class Identified implements ValidatableSBOLEntity {
 		this.resource=resource;
 		inferDisplayId(URI.create(resource.getURI()));
 	}
-	
-	/*public Identified (String displayId)
-	{
-		this.displayId=displayId;
-		this.resource=ResourceFactory.createResource();	
-	}*/
-	
-	@Pattern(regexp = "^[a-zA-Z_]+[a-zA-Z0-9_]*$", message = "{IDENTIFIED_DISPLAYID}")
+			
+	//@Pattern(regexp = "^[a-zA-Z_]+[a-zA-Z0-9_]*$", message = "{IDENTIFIED_DISPLAYID}")	
+	//@Pattern(regexp = "^[\\p{L}_]+[\\p{L}0-9_]*$", message = "{IDENTIFIED_DISPLAYID}")
 	public String getDisplayId() throws SBOLGraphException{
 		return IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.displayId);
 	}
 	
-	//public void setDisplayId(String displayId) throws SBOLGraphException {
-	public void setDisplayId(@Pattern(regexp = "^[a-zA-Z_]+[a-zA-Z0-9_]*$", message = "{IDENTIFIED_DISPLAYID}") String displayId) throws SBOLGraphException {
-				PropertyValidator.getValidator().validate(this, "setDisplayId", new Object[] {displayId}, String.class);
-		RDFUtil.setProperty(resource, DataModel.Identified.displayId, displayId);		
+	/*@Valid
+	public String getDisplayId() throws SBOLGraphException{
+		String displayId=IdentifiedValidator.getValidator().getPropertyAsString(this.resource, DataModel.Identified.displayId);
+		boolean valid=isValidDisplayId(displayId); 
+		PropertyValidator.getValidator().validateReturnValue(this, "isValidDisplayId", valid, String.class);
+		return displayId;		
+	}*/
+	
+		
+	
+	public void setDisplayId(String displayId) throws SBOLGraphException {
+		boolean valid=isValidDisplayId(displayId); 
+		if (Configuration.getInstance().isValidateAfterSettingProperties()){
+			PropertyValidator.getValidator().validateReturnValue(this, "isValidDisplayId", valid, String.class);
+		}			
+		RDFUtil.setProperty(resource, DataModel.Identified.displayId, displayId);			
+	}
+	
+	@AssertTrue(message = "{IDENTIFIED_DISPLAYID}")   	
+	public boolean isValidDisplayId(String displayId)
+	{
+		/*String pattern="^[\\p{L}_]+[\\p{L}0-9_]*$";
+		//String pattern="[\\p{L}]*";		
+		//String pattern="[\\p{Alpha}]*";
+		boolean valid=true;
+		if (displayId!=null) {
+			valid=displayId.matches(pattern);
+		}*/
+		boolean valid=true;		
+		if (displayId!=null)
+		{
+			Matcher matcher=Configuration.getInstance().getDisplayIdPattern().matcher(displayId);
+			valid=matcher.find();
+		}
+		return valid;		
 	}
 	
 	public String getName() throws SBOLGraphException {
@@ -205,7 +231,12 @@ public abstract class Identified implements ValidatableSBOLEntity {
 	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
 	{
 		List<ValidationMessage> validationMessages=null;
-		List<URI> wasDerivedFroms=this.getWasDerivedFrom();
+		List<URI> wasDerivedFroms=this.getWasDerivedFrom();		
+		
+		if (!isValidDisplayId(this.getDisplayId())){
+			validationMessages= addToValidations(validationMessages,new ValidationMessage("{IDENTIFIED_DISPLAYID}", DataModel.Identified.displayId));      	 	   
+		}
+		
     	if (wasDerivedFroms!=null && wasDerivedFroms.contains(this.getUri()))
     	{
     		validationMessages= addToValidations(validationMessages,new ValidationMessage("{IDENTIFIED_CANNOT_BE_REFERREDBY_WASDERIVEDFROM}", DataModel.Identified.wasDerivedFrom));      
@@ -319,7 +350,8 @@ public abstract class Identified implements ValidatableSBOLEntity {
 		return items;
 	}*/
 	
-	protected <T extends Identified>  T contsructIdentified2(URI property, Class<T> identifiedClass) throws SBOLGraphException
+	
+	/*protected <T extends Identified>  T contsructIdentified2(URI property, Class<T> identifiedClass) throws SBOLGraphException
 	{
 		T identified=null;
 		List<Resource> resources=RDFUtil.getResourcesWithProperty(this.resource, property);
@@ -336,7 +368,7 @@ public abstract class Identified implements ValidatableSBOLEntity {
 			}
 		}		
 		return identified;
-	}
+	}*/
 	
 	protected <T extends Identified>  T contsructIdentified(URI property, Class<T> identifiedClass, URI identifiedResourceType ) throws SBOLGraphException
 	{
@@ -638,13 +670,12 @@ public abstract class Identified implements ValidatableSBOLEntity {
         		values.add(object.asLiteral().getValue());
         	}
         }
-        return values;
-		
+        return values;		
 	}
 	
 		 	 
 	 
-	private boolean hasSBOLType (List<URI> types){
+	/*private boolean hasSBOLType (List<URI> types){
 		boolean result=false;
 		if (types!=null)
 		{
@@ -658,7 +689,7 @@ public abstract class Identified implements ValidatableSBOLEntity {
 			}
 		}
 		return result;
-	}
+	}*/
 	
 	private void inferDisplayId(URI uri) throws SBOLGraphException {
 		String displayId = getDisplayId();
@@ -668,14 +699,16 @@ public abstract class Identified implements ValidatableSBOLEntity {
 
 			if (SBOLUtil.isURL(uriString))// .contains("://"))
 			{
-				String path=uri.getPath();
+				//String path=uriString;// uri.getPath();
+				String path= uri.getPath();
+				
 				int index = path.lastIndexOf("/");
 				if (path.length() > index + 1) {
 					result = path.substring(index + 1);
 				} else {
 					result = null;
 				}
-				if (result != null) {
+				if (result != null && uriString.endsWith(result)) {
 					setDisplayId(result);
 				}
 				else
@@ -690,9 +723,7 @@ public abstract class Identified implements ValidatableSBOLEntity {
 	public List<URI> filterIdentifieds(List<URI> identifieds, URI property, String value)
 	{
 		return RDFUtil.filterItems(this.resource.getModel(), identifieds, property, value);
-	}
-	
-	
+	}	
 	
 }
 
