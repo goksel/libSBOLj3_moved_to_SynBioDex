@@ -14,7 +14,7 @@
         sbol:displayId     "E0040_Sequence1" ;
         sbol:elements      "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa" ;
         sbol:encoding      EDAM:format_1207 ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace  </examples> ;
         sbol:name          "Sequence1" .
 
 <E0040/SequenceFeature1>
@@ -32,7 +32,7 @@
 :E0040  a                  sbol:Component ;
         sbol:displayId     "E0040" ;
         sbol:hasFeature    <E0040/SequenceFeature1> ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace  </examples> ;
         sbol:hasSequence   :E0040_Sequence1 ;
         sbol:name          "E0040" ;
         sbol:role          SO:0000316 ;

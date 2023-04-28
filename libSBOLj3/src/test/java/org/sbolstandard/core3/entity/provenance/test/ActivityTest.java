@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.TimeZone;
+
 import org.apache.jena.datatypes.xsd.XSDDateTime;
+import org.apache.jena.sparql.function.library.e;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.entity.provenance.*;
@@ -40,12 +43,66 @@ public class ActivityTest extends TestCase {
         activity.setTypes(Arrays.asList(ActivityType.Design.getUri()));
         activity.setName("Codon optimization activity");
         activity.setDescription("An activity that is used to optimise codons");
-        Calendar calendar=Calendar.getInstance();
-        calendar.set(2019,Calendar.JULY,29); 
-        
+        /*Calendar calendar=Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("GMT"));
+        calendar.set(2019,Calendar.JULY,29,0,0,0);
+        calendar.set(Calendar.MILLISECOND,0);     
         activity.setStartedAtTime(new XSDDateTime(calendar));
-        calendar.set(2020,Calendar.AUGUST,30);
+        calendar.set(2020,Calendar.AUGUST,30,0,0,0);
+        calendar.set(Calendar.MILLISECOND,0);
+       // calendar.setTimeZone(TimeZone.getTimeZone("BST"));
+        
         activity.setEndedAtTime(new XSDDateTime(calendar));
+        
+        */
+        try{
+        	activity.setStartedAtTime(2019, 7, 29, 16, 50, 60);
+        }
+        catch (Exception e){
+        	if (!(e instanceof SBOLGraphException)){
+        		throw e;
+        	}
+        }
+        
+        try{
+        	activity.setStartedAtTime(2019, 13, 29, 16, 50, 60);
+        }
+        catch (Exception e){
+        	if (!(e instanceof SBOLGraphException)){
+        		throw e;
+        	}
+        }
+        
+        try{
+        	activity.setStartedAtTime(2019, 0, 29, 16, 50, 60);
+        }
+        catch (Exception e){
+        	if (!(e instanceof SBOLGraphException)){
+        		throw e;
+        	}
+        }
+        
+        try{
+        	activity.setStartedAtTime(2019, 1, 0, 16, 50, 60);
+        }
+        catch (Exception e){
+        	if (!(e instanceof SBOLGraphException)){
+        		throw e;
+        	}
+        }
+        
+        try{
+        	activity.setStartedAtTime(2019, 1, 32, 16, 50, 60);
+        }
+        catch (Exception e){
+        	if (!(e instanceof SBOLGraphException)){
+        		throw e;
+        	}
+        }
+        activity.setStartedAtTime(2019, 7, 29, 16, 50, 59);
+        activity.setEndedAtTime(2019, 8, 30, 0, 0, 0);
+         
+       
            
         Usage usage1=activity.createUsage(toggleSwitch.getUri());
         usage1.setRoles(Arrays.asList(ActivityType.Learn.getUri()));
@@ -69,7 +126,9 @@ public class ActivityTest extends TestCase {
         TestUtil.serialise(doc, "provenance_entity/activity", "activity");
         
         String output=SBOLIO.write(doc, SBOLFormat.TURTLE);
-        System.out.print("-----Reading back from serialised data!");
+        System.out.println(output);
+        System.out.println("-----Reading back from serialised data!");
+          
         SBOLDocument doc2=SBOLIO.read(output, SBOLFormat.TURTLE); 
         for (Activity act: doc2.getActivities())
         {

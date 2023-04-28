@@ -11,7 +11,7 @@
 
 :cs1    a                  sbol:CombinatorialDerivation ;
         sbol:displayId     "cs1" ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:template      :BBa_R0040 .
 
 :BBa_R0040_start_Sequence1
@@ -20,7 +20,7 @@
         sbol:displayId     "BBa_R0040_start_Sequence1" ;
         sbol:elements      "tccctat" ;
         sbol:encoding      EDAM:format_1207 ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:name          "Sequence1" .
 
 :BBa_R0040_Sequence1  a    sbol:Sequence ;
@@ -28,7 +28,7 @@
         sbol:displayId     "BBa_R0040_Sequence1" ;
         sbol:elements      "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac" ;
         sbol:encoding      EDAM:format_1207 ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:name          "Sequence1" .
 
 <BBa_R0040/SubComponent2>
@@ -40,7 +40,7 @@
         sbol:description   "TetR repressible promoter" ;
         sbol:displayId     "BBa_R0040" ;
         sbol:hasFeature    <BBa_R0040/SubComponent2> , <BBa_R0040/SubComponent1> , <BBa_R0040/SubComponent3> ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:hasSequence   :BBa_R0040_Sequence1 ;
         sbol:name          "pTetR" ;
         sbol:role          SO:0000167 ;
@@ -54,7 +54,7 @@
 :BBa_R0040_start  a        sbol:Component ;
         sbol:description   "promoter_start" ;
         sbol:displayId     "BBa_R0040_start" ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:hasSequence   :BBa_R0040_start_Sequence1 ;
         sbol:name          "pTetR_start" ;
         sbol:role          SO:0000804 ;

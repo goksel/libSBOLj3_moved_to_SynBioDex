@@ -18,7 +18,7 @@
         sbol:displayId       "i13504_system" ;
         sbol:hasFeature      <i13504_system/SubComponent2> , <i13504_system/SubComponent1> , <i13504_system/ComponentReference1> ;
         sbol:hasInteraction  <i13504_system/Interaction2> , <i13504_system/Interaction1> ;
-        sbol:hasNamespace    <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace    </examples> ;
         sbol:name            "i13504 system" ;
         sbol:role            SBO:0000289 , SO:0000704 ;
         sbol:type            SBO:0000251 .
@@ -38,12 +38,12 @@
         sbol:displayId     "i13504_Sequence1" ;
         sbol:elements      "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa" ;
         sbol:encoding      EDAM:format_1207 ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace  </examples> ;
         sbol:name          "Sequence1" .
 
 :TetR   a                  sbol:Component ;
         sbol:displayId     "TetR" ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace  </examples> ;
         sbol:type          SBO:0000252 .
 
 <i13504/SubComponent1/Range1>
@@ -88,7 +88,7 @@
 :i13504  a                 sbol:Component ;
         sbol:displayId     "i13504" ;
         sbol:hasFeature    <i13504/SubComponent1> ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace  </examples> ;
         sbol:hasSequence   :i13504_Sequence1 ;
         sbol:role          SO:0000704 ;
         sbol:type          SBO:0000251 .
@@ -103,7 +103,7 @@
         sbol:description   "gfp coding sequence" ;
         sbol:displayId     "E0040" ;
         sbol:hasFeature    <E0040/SequenceFeature1> ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace  </examples> ;
         sbol:hasSequence   :E0040_Sequence1 ;
         sbol:name          "gfp" ;
         sbol:role          SO:0000316 ;
@@ -114,7 +114,7 @@
         sbol:displayId     "E0040_Sequence1" ;
         sbol:elements      "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa" ;
         sbol:encoding      EDAM:format_1207 ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace  </examples> ;
         sbol:name          "Sequence1" .
 
 <i13504_system/Interaction2/Participation1>
@@ -130,11 +130,11 @@
 
 :gfp_start  a              sbol:Sequence ;
         sbol:displayId     "gfp_start" ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> .
+        sbol:hasNamespace  </examples> .
 
 :GFP_protein  a            sbol:Component ;
         sbol:description   "GFP" ;
         sbol:displayId     "GFP_protein" ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace  </examples> ;
         sbol:name          "GFP" ;
         sbol:type          SBO:0000252 .

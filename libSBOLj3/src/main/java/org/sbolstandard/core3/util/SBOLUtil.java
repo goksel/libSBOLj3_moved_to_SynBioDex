@@ -15,6 +15,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,7 +24,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TimeZone;
+
 import org.apache.commons.io.IOUtils;
+import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
@@ -32,6 +36,10 @@ import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.vocabulary.ComponentType;
+
+import com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator;
+
+import jakarta.validation.constraints.NotNull;
 
 public class SBOLUtil {
 
@@ -271,4 +279,24 @@ public class SBOLUtil {
 			return current;
 		}
 	    
+	    
+		public static String getDateTimeString (int year, int month, int day, int hour, int min, int sec) throws SBOLGraphException
+	    {
+	    	String dateTimeString = null;			
+	    	if (year>=1900 && day>=1 && day<=31 && month>=1 && month<=12 && hour>=0 && hour<=23 && min>=0 && min<=59 && sec>=0 && sec<=59){
+				 Calendar calendar=Calendar.getInstance();
+			     TimeZone timeZone=calendar.getTimeZone();		     
+				 calendar.setTimeZone(TimeZone.getTimeZone("GMT"));
+			     calendar.set(year,month-1,day,hour,min,sec);
+			     calendar.set(Calendar.MILLISECOND,0);   
+			     XSDDateTime dateTime= new XSDDateTime(calendar);
+			     dateTimeString= dateTime.toString();
+			     calendar.setTimeZone(timeZone);		     
+			}
+	    	else{
+	    		String message=String.format("Invalid datetime. Year:%d, Month:%d, Day:%d, hour: %d, min:%d, sec:%d", year, month, day, hour, min, sec);
+	    		throw new SBOLGraphException(message);
+	    	}
+	    	return dateTimeString;
+	    }
 }

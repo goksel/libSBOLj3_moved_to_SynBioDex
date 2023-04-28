@@ -4858,7 +4858,7 @@ oboInOwl:ObsoleteClass
 
 :data_2794  rdfs:subClassOf  :data_2091 , :data_2795 , :data_1893 .
 
-:format_3773  rdfs:subClassOf  :format_2571 , :format_1920 , :format_1919 , :format_3750 , :format_1921 ;
+:format_3773  rdfs:subClassOf  :format_1920 , :format_2571 , :format_1919 , :format_3750 , :format_1921 ;
         rdfs:subClassOf  []  ;
         rdfs:subClassOf  []  ;
         rdfs:subClassOf  []  ;

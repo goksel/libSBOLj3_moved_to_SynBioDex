@@ -1,8 +1,11 @@
 package org.sbolstandard.core3.entity.provenance;
 
 import java.net.URI;
+import java.time.Month;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 
 import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.apache.jena.datatypes.xsd.impl.XSDDateType;
@@ -47,7 +50,8 @@ public class Activity extends ControlledTopLevel{
 		activity.setNamespace(namespace);
 		return activity;		
 	}
-		
+	
+	@Valid
 	public XSDDateTime getStartedAtTime() throws SBOLGraphException {
 		XSDDateTime startedAtTime=null;
 		
@@ -63,14 +67,22 @@ public class Activity extends ControlledTopLevel{
 		return startedAtTime;
 	}
 	
-	public void setStartedAtTime(XSDDateTime dateTime) {
+	/*public void setStartedAtTime(XSDDateTime dateTime) {
 		if (dateTime!=null)
 		{
 			String timestring=dateTime.toString();
 			RDFUtil.setProperty(resource, ProvenanceDataModel.Activity.startedAtTime, timestring);
 		}
+	}*/
+	
+	public void setStartedAtTime(int year, int month, int day, int hour, int min, int sec) throws SBOLGraphException {
+		String dateTimeString = SBOLUtil.getDateTimeString(year, month, day, hour, min, sec);					
+		if (dateTimeString!=null){
+			RDFUtil.setProperty(resource, ProvenanceDataModel.Activity.startedAtTime, dateTimeString);
+		}
 	}
 	
+	@Valid
 	public XSDDateTime getEndedAtTime() throws SBOLGraphException {
 		XSDDateTime endedAtTime=null;
 		
@@ -86,12 +98,20 @@ public class Activity extends ControlledTopLevel{
 		return endedAtTime;
 	}
 	
-	public void setEndedAtTime(XSDDateTime dateTime) {
+	/*public void setEndedAtTime(XSDDateTime dateTime) {
 		if (dateTime!=null) {
 			String timestring=dateTime.toString();
 			RDFUtil.setProperty(resource, ProvenanceDataModel.Activity.endedAtTime, timestring);
 		}
+	}*/
+	
+	public void setEndedAtTime(int year, int month, int day, int hour, int min, int sec) throws SBOLGraphException {
+		String dateTimeString = SBOLUtil.getDateTimeString(year, month, day, hour, min, sec);					
+		if (dateTimeString!=null){
+			RDFUtil.setProperty(resource, ProvenanceDataModel.Activity.endedAtTime, dateTimeString);
+		}
 	}
+
 
 	public List<URI> getTypes() {
 		return RDFUtil.getPropertiesAsURIs(this.resource, ProvenanceDataModel.Activity.type);

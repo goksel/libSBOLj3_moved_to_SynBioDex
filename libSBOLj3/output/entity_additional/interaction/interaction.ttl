@@ -17,7 +17,7 @@
 :i13504_system  a            sbol:Component ;
         sbol:displayId       "i13504_system" ;
         sbol:hasInteraction  <i13504_system/Interaction1> ;
-        sbol:hasNamespace    <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace    </examples> ;
         sbol:name            "i13504 system" ;
         sbol:role            SO:0000704 ;
         sbol:type            SBO:0000251 .

@@ -11,15 +11,15 @@
 
 :attachment1  a            sbol:Attachment ;
         sbol:displayId     "attachment1" ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
-        sbol:source        <https://sbolstandard.org/attachment1> .
+        sbol:hasNamespace  </examples> ;
+        sbol:source        </attachment1> .
 
 :exp1   a                  sbol:Experiment ;
         sbol:displayId     "exp1" ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace  </examples> ;
         sbol:member        :attachment2 , :attachment1 .
 
 :attachment2  a            sbol:Attachment ;
         sbol:displayId     "attachment2" ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
-        sbol:source        <https://sbolstandard.org/attachment2> .
+        sbol:hasNamespace  </examples> ;
+        sbol:source        </attachment2> .

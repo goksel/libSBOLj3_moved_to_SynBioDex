@@ -12,12 +12,12 @@
 :impl1  a                  sbol:Implementation ;
         sbol:built         :TetR_protein ;
         sbol:displayId     "impl1" ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> .
+        sbol:hasNamespace  </examples> .
 
 :TetR_protein  a           sbol:Component ;
         sbol:description   "TetR protein" ;
         sbol:displayId     "TetR_protein" ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace  </examples> ;
         sbol:name          "TetR" ;
         sbol:role          GO:0003700 ;
         sbol:type          SBO:0000252 .

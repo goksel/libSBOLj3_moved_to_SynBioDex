@@ -13,5 +13,5 @@
         a                  sbol:TopLevel , prov:Plan ;
         sbol:description   "Optimisation protocol to improve the translation of mRNAs." ;
         sbol:displayId     "CodonOptimisationProtocol" ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace  </examples> ;
         sbol:name          "Codon Optimisation Protocol" .
