@@ -1,29 +1,19 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Location.LocationBuilder;
-import org.sbolstandard.core3.entity.Location.LocationFactory;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
+import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.ComponentType.StrandType;
-import org.sbolstandard.core3.vocabulary.ComponentType.TopologyType;
 import org.sbolstandard.core3.vocabulary.DataModel;
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 public class LocalSubComponent extends FeatureWithLocation{
 	/*private List<URI> types=new ArrayList<URI>();
@@ -49,9 +39,13 @@ public class LocalSubComponent extends FeatureWithLocation{
 			validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPES_INCLUDE_ONE_ROOT_TYPE}", DataModel.type));      	
 		}
 		
+		validationMessages=assertDoNotHaveOverlappingRegions(validationMessages, "{LOCALSUBCOMPONENT_LOCATIONS_REGIONS_NOT_OVERLAPPING}");
+		
 		if (Configuration.getInstance().isValidateRecommendedRules()) {
 			if(types != null) {
+				
 				// LOCALSUBCOMPONENT_TYPE_FROM_TABLE2
+				/* Removed this best practise rule
 				boolean found=false;
 				for(URI typeURI: types) {
 					ComponentType recommendType = ComponentType.get(typeURI);
@@ -64,24 +58,21 @@ public class LocalSubComponent extends FeatureWithLocation{
 				if(!found){
 					validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_FROM_TABLE2}", DataModel.type, types));      		
 				}
+				*/
 				
 				//LOCALSUBCOMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE
-				int counter=0;
-				if (types.contains(ComponentType.DNA.getUri()) || types.contains(ComponentType.RNA.getUri()) ){
-					for(URI typeURI: types) {
-						TopologyType topologyType = TopologyType.get(typeURI);
-						if (topologyType!=null)
-						{
-							counter++;
-						}
-					}
-					if(counter>1){
-						validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE}", DataModel.type, types));      		
-					}
-				}
+				validationMessages=IdentifiedValidator.assertAtMostOneTopologyType(types, validationMessages, "{LOCALSUBCOMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE}");
 				
 				//LOCALSUBCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY
-				boolean checkDNAOrRNA = false;
+				validationMessages=IdentifiedValidator.assertOnlyDNAOrRNAComponentsIncludeStrandOrTopology(types, validationMessages, "{LOCALSUBCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY}");
+				
+				//LOCALCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE
+				validationMessages=IdentifiedValidator.assertOnlyDNAOrRNAIdentifiedsIncludeSOFeatureRole(types, Configuration.getInstance().getSoSequenceFeatures(), this.getRoles(), validationMessages, "{LOCALCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_SO_FEATURE_ROLE}", getResourceType(),this); 
+				
+				//LOCALCOMPONENT_TYPE_IF_DNA_OR_RNA_SHOULD_INCLUDE_ONE_SO_FEATURE_ROLE
+				validationMessages=IdentifiedValidator.assertIfDNAOrRNAThenIdentifiedShouldIncludeOneSOFeatureRole(types, getRoles(), validationMessages, "{LOCALCOMPONENT_TYPE_IF_DNA_OR_RNA_SHOULD_INCLUDE_ONE_SO_FEATURE_ROLE}", this);
+
+				/*boolean checkDNAOrRNA = false;
 				for(URI typeURI: types) {
 					TopologyType topologyType = TopologyType.get(typeURI);
 					if (topologyType!=null)
@@ -102,7 +93,7 @@ public class LocalSubComponent extends FeatureWithLocation{
 					if (!types.contains(ComponentType.DNA.getUri()) && !types.contains(ComponentType.RNA.getUri()) ){
 						validationMessages= addToValidations(validationMessages,new ValidationMessage("{LOCALSUBCOMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY}", DataModel.type, types));      			
 					}
-				}
+				}*/
 			}
 		}
 		
@@ -119,6 +110,10 @@ public class LocalSubComponent extends FeatureWithLocation{
 	public void setTypes(@NotEmpty(message = "{LOCALSUBCOMPONENT_TYPES_NOT_EMPTY}") List<URI> types) throws SBOLGraphException {
 		PropertyValidator.getValidator().validate(this, "setTypes", new Object[] {types}, List.class);
 		RDFUtil.setProperty(resource, DataModel.type, types);
+	}
+	
+	public void addType(URI type) {
+		RDFUtil.addProperty(resource, DataModel.type, type);
 	}
 	
 	@Override

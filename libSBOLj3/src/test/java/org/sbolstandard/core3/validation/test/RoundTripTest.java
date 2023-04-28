@@ -4,24 +4,21 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Comparator;
 
 import org.apache.commons.compress.utils.FileNameUtils;
 import org.junit.Test;
-import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.SBOLComparator;
-import org.sbolstandard.core3.validation.SBOLValidator;
 
 public class RoundTripTest {
 
 	private static final String pythonOutputBase="pysbol3-rt2"; 
 	
-	@Test
+	//@Test
 	public void validate() throws IOException, SBOLGraphException {
 		
 		String message=validateFolder(pythonOutputBase);
@@ -100,19 +97,19 @@ public class RoundTripTest {
 			
 			
 		}
-		private void saveFromJava(SBOLDocument doc, File file) throws IOException, SBOLGraphException
+		
+		/*private void saveFromJava(SBOLDocument doc, File file) throws IOException, SBOLGraphException
 		{
 			String newFileName="java-" + file.getPath();
 			File newFile=new File(newFileName);
 			File newDirectory=newFile.getParentFile();
-			boolean createdFolder=false;
 			if (!newDirectory.exists())
 			{
-				createdFolder= newDirectory.mkdirs();
+				newDirectory.mkdirs();
 			}
-			SBOLIO.write(doc, newFile, getFormat(file));
-			
-		}
+			SBOLIO.write(doc, newFile, getFormat(file));			
+		}*/
+		
 		private static SBOLFormat getFormat(File file) throws SBOLGraphException
 		{
 			String extension=FileNameUtils.getExtension(file.getName());

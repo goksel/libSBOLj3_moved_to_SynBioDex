@@ -5,22 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.sbolstandard.core3.entity.ComponentReference;
 import org.sbolstandard.core3.entity.ControlledTopLevel;
-import org.sbolstandard.core3.entity.ExternallyDefined;
 import org.sbolstandard.core3.entity.Identified;
-import org.sbolstandard.core3.entity.LocalSubComponent;
-import org.sbolstandard.core3.entity.SequenceFeature;
-import org.sbolstandard.core3.entity.SubComponent;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
+import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
-
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 public abstract class Unit extends ControlledTopLevel{
 	
@@ -143,5 +138,50 @@ public abstract class Unit extends ControlledTopLevel{
 		subclasses.put(MeasureDataModel.UnitMultiplication.uri, (Class<T>) UnitMultiplication.class);	
 		return subclasses;
 	}
+	
+	@Override
+	public List<ValidationMessage> getValidationMessages() throws SBOLGraphException
+	{
+		List<ValidationMessage> validationMessages=super.getValidationMessages();
+		validationMessages=assertNameLabelEqual(validationMessages);
+		validationMessages=assertDescriptionCommentEqual(validationMessages);		
+		return validationMessages;
+	}
+	
+	public List<ValidationMessage> assertNameLabelEqual(List<ValidationMessage> validationMessages) throws SBOLGraphException{
+		if (Configuration.getInstance().isValidateRecommendedRules()) {
+			String label=this.getLabel();
+			String name=this.getName();
+			validationMessages=IdentifiedValidator.assertTwoPropertyValueIdenticalEqual (validationMessages, getNameLabelMessage(), name, label, DataModel.Identified.name, MeasureDataModel.Unit.label); 
+			/*if (label!=null && !label.isEmpty() && name!=null && !name.isEmpty()) {
+				if (!label.equals(name)){
+					String message=String.format("{UNIT_NAME_LABEL_EQUAL}%sLabel: %s",ValidationMessage.INFORMATION_SEPARATOR, label);				
+					ValidationMessage valMessage=new ValidationMessage(message, DataModel.Identified.name, name);  				
+					validationMessages= IdentifiedValidator.addToValidations(validationMessages,valMessage);											
+				}
+			}*/
+		}
+		return validationMessages;
+	}
+	
+	public List<ValidationMessage> assertDescriptionCommentEqual(List<ValidationMessage> validationMessages) throws SBOLGraphException {		
+		if (Configuration.getInstance().isValidateRecommendedRules()) {
+			String desc=this.getDescription();
+			String comment=this.getComment();
+			validationMessages=IdentifiedValidator.assertTwoPropertyValueIdenticalEqual (validationMessages,getDescriptionCommentMessage() , desc, comment, DataModel.Identified.description, MeasureDataModel.Unit.comment); 
+		}
+		return validationMessages;
+	}
+	
+	protected String getNameLabelMessage()
+	{
+		return "{UNIT_NAME_LABEL_EQUAL}";
+	}
+	
+	protected String getDescriptionCommentMessage()
+	{
+		return "{UNIT_DESCRIPTION_COMMENT_EQUAL}";
+	}
+	
 	
 }

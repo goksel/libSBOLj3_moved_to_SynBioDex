@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
-import org.sbolstandard.core3.entity.Location.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.util.SBOLGraphException;
@@ -105,7 +104,7 @@ public class GettingStartedTutorial {
 		System.out.println("Subcomponents:");
 		for (SubComponent subComp: device.getSubComponents())
 		{
-			System.out.println(subComp.getInstanceOf());
+			System.out.println(subComp.getInstanceOf().getUri());
 		}
 
 		//Search for components using the SPARQL graph query language.
@@ -120,36 +119,45 @@ public class GettingStartedTutorial {
  		Slide 32: GFP production from expression cassette
 		-------------------------------------------------- */
 		Component i13504_system=SBOLAPI.createComponent(doc,"i13504_system", ComponentType.DNA.getUri(), "i13504 system", null, Role.FunctionalCompartment);
+		i13504_system.setRoles(Arrays.asList(Role.EngineeredGene));
+		
 		Component GFP=SBOLAPI.createComponent(doc, "GFP_protein", ComponentType.Protein.getUri(), "GFP", "GFP", null); 
 		SubComponent i13504SubComponent=SBOLAPI.addSubComponent(i13504_system, device);
 		SubComponent gfpProteinSubComponent=SBOLAPI.addSubComponent(i13504_system, GFP);
 		  
 		ComponentReference gfpCDSReference=i13504_system.createComponentReference(gfpSubComponent, i13504SubComponent);
 					    
-		Interaction interaction= i13504_system.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
-		interaction.createParticipation(Arrays.asList(ParticipationRole.Template), gfpCDSReference);
-		interaction.createParticipation(Arrays.asList(ParticipationRole.Product), gfpProteinSubComponent);
+		Interaction interaction= i13504_system.createInteraction(Arrays.asList(InteractionType.GeneticProduction.getUri()));
+		interaction.createParticipation(Arrays.asList(ParticipationRole.Template.getUri()), gfpCDSReference);
+		interaction.createParticipation(Arrays.asList(ParticipationRole.Product.getUri()), gfpProteinSubComponent);
 	    	
 		 /* --------------------------------------------------
 		  Slide 34: Example: concatenating & reusing components
 		  -------------------------------------------------- */
 		 //Left hand side of slide: interlab16device1
 		 Component ilab16_dev1=doc.createComponent("interlab16device1", Arrays.asList(ComponentType.DNA.getUri())); 
+		 ilab16_dev1.setRoles(Arrays.asList(Role.EngineeredGene));
+			
 		 Component j23101=doc.createComponent("j23101", Arrays.asList(ComponentType.DNA.getUri())); 
+		 j23101.setRoles(Arrays.asList(Role.EngineeredGene));
+			
 		 SubComponent sc_j23101=SBOLAPI.addSubComponent(ilab16_dev1, j23101);	
 		 SubComponent sc_i13504_system=SBOLAPI.addSubComponent(ilab16_dev1, i13504_system);	
 		 
 		 ComponentReference compRef_i13504_dev1=ilab16_dev1.createComponentReference(i13504SubComponent, sc_i13504_system);
-		 ilab16_dev1.createConstraint(RestrictionType.Topology.meets, sc_j23101, compRef_i13504_dev1);
+		 ilab16_dev1.createConstraint(RestrictionType.TopologyRestriction.meets.getUri(), sc_j23101, compRef_i13504_dev1);
 	        
 		 // Right hand side of slide: interlab16device2
 		 Component ilab16_dev2=doc.createComponent("interlab16device2", Arrays.asList(ComponentType.DNA.getUri())); 
+		 ilab16_dev2.setRoles(Arrays.asList(Role.EngineeredGene));
+		 
 		 Component j23106=doc.createComponent("j23106", Arrays.asList(ComponentType.DNA.getUri())); 
+		 j23106.setRoles(Arrays.asList(Role.EngineeredGene));
 		 SubComponent sc_j23106=SBOLAPI.addSubComponent(ilab16_dev2, j23106);	
 		 SubComponent sc_i13504_system_dev2=SBOLAPI.addSubComponent(ilab16_dev2, i13504_system);	
 		 
 		 ComponentReference compRef_i13504_dev2=ilab16_dev2.createComponentReference(i13504SubComponent, sc_i13504_system_dev2);
-		 ilab16_dev2.createConstraint(RestrictionType.Topology.meets, sc_j23106, compRef_i13504_dev2);
+		 ilab16_dev2.createConstraint(RestrictionType.TopologyRestriction.meets.getUri(), sc_j23106, compRef_i13504_dev2);
 		 
 		 System.out.println(System.lineSeparator() + "SBOL:");
 		 String output=SBOLIO.write(doc, SBOLFormat.TURTLE);

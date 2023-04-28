@@ -2,10 +2,11 @@ package org.sbolstandard.core3.validation;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
 import org.sbolstandard.core3.entity.Identified;
@@ -14,8 +15,11 @@ import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.util.URINameSpace;
+import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
+import org.sbolstandard.core3.vocabulary.ComponentType.StrandType;
+import org.sbolstandard.core3.vocabulary.ComponentType.TopologyType;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -224,6 +228,205 @@ public class IdentifiedValidator {
 		return messages;
 	}
 
+	
+	 public static List<ValidationMessage> assertAtMostOneTopologyType(List<URI> types, List<ValidationMessage> validationMessages, String message)
+	    {
+	    	int counter=0;
+			if (types!=null && (types.contains(ComponentType.DNA.getUri()) || types.contains(ComponentType.RNA.getUri()))){
+				for(URI typeURI: types) {
+					TopologyType topologyType = TopologyType.get(typeURI);
+					if (topologyType!=null)
+					{
+						counter++;
+					}
+				}
+				if(counter>1){
+					validationMessages= IdentifiedValidator.addToValidations(validationMessages,new ValidationMessage(message, DataModel.type, types));      		
+				}
+			}
+			return validationMessages;
+	    }
+	 
+		public static List<ValidationMessage> assertOnlyDNAOrRNAComponentsIncludeStrandOrTopology(List<URI> types, List<ValidationMessage> validationMessages, String message) {
+			boolean checkDNAOrRNA = false;
+			if (types!=null)
+			{
+				for (URI typeURI : types) {
+					TopologyType topologyType = TopologyType.get(typeURI);
+					if (topologyType != null) {
+						checkDNAOrRNA = true;
+						break;
+					} else {
+						StrandType strandType = StrandType.get(typeURI);
+						if (strandType != null) {
+							checkDNAOrRNA = true;
+							break;
+						}
+					}
+				}
+	
+				if (checkDNAOrRNA) {
+					if (!types.contains(ComponentType.DNA.getUri()) && !types.contains(ComponentType.RNA.getUri())) {
+						validationMessages = IdentifiedValidator.addToValidations(validationMessages, new ValidationMessage(message, DataModel.type, types));
+					}
+				}
+			}
+			return validationMessages;
+		}
+
+		
+		/*public static Pair<List<ValidationMessage>, Map<URI, Boolean>>  assertOnlyDNAOrRNAIdentifiedsIncludeSOFeatureRole(List<URI> types, List<URI> roles, List<ValidationMessage> validationMessages, ValidationMessage message, Map<URI, Boolean> validity) {
+			if (types!=null && roles!=null && !types.contains(ComponentType.DNA.getUri()) && !types.contains(ComponentType.RNA.getUri())) {
+				for (URI role: roles)
+				{
+					Boolean valid = validity.get(role);
+					if (valid == null) {
+						valid = RDFUtil.hasParentRecursively(Configuration.getInstance().getSOOntology(), role.toString(), Role.SequenceFeature.toString());
+						validity.put(role, valid);
+					}
+					if (valid) {
+						message.setInvalidValue(role);
+						validationMessages = IdentifiedValidator.addToValidations(validationMessages, message);
+					}
+				}
+			}
+			return Pair.of(validationMessages, validity);
+		}*/
+		
+		public static List<ValidationMessage> assertOnlyDNAOrRNAIdentifiedsIncludeSOFeatureRole(List<URI> types, Set<String> sequenceFeatures, List<URI> roles, List<ValidationMessage> validationMessages, String message, URI entityType, Identified entity) throws SBOLGraphException {
+			if (types!=null && roles!=null && !types.contains(ComponentType.DNA.getUri()) && !types.contains(ComponentType.RNA.getUri())) {
+				validationMessages= assertDoesNotExists(sequenceFeatures, roles, validationMessages, message, entityType, entity, DataModel.role);
+			}
+			return validationMessages;
+		}
+		
+		public static List<ValidationMessage> assertDoesNotExists(Set<String> items, List<URI> searchItems, List<ValidationMessage> validationMessages, String message, URI entityType, Identified entity, URI property) throws SBOLGraphException {
+			if (searchItems!=null){
+			for (URI uri: searchItems)
+				{
+				if (items.contains(uri.toString()))
+				{
+					ValidationMessage validationMessage = new ValidationMessage(message, property, uri);
+					/*ValidationMessage validationMessage = new ValidationMessage(message, DataModel.Component.uri, entity, uri);
+					validationMessage.childPath(property);*/
+					validationMessages = IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+				}
+			}
+			}
+			return validationMessages;
+		}
+		
+		public static List<ValidationMessage> assertOneExists(Set<String> items, List<URI> searchURIs, List<ValidationMessage> validationMessages, String message, Identified entity, URI property) throws SBOLGraphException
+		{
+			int count=0;
+			if (searchURIs!=null)
+			{
+				for (URI uri:searchURIs)
+				{
+					if (items.contains(uri.toString()))
+					{
+						count++;
+					}
+				}
+			}
+			if (count!=1)
+			{
+				ValidationMessage validationMessage= new ValidationMessage(message, property, searchURIs);
+				validationMessages = IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+			}
+			return validationMessages;
+		}
+		
+		public static Set<URI> getMatchingSearchURIs(Collection<URI> items, Collection<URI> toSearchURIs) throws SBOLGraphException
+		{
+			Set<URI> result=null;
+			if (items!=null && toSearchURIs!=null)
+			{
+				for (URI uri:toSearchURIs){
+					if (items.contains(uri)){
+						if (result==null)
+						{
+							result=new HashSet<URI>();
+						}
+						result.add(uri);
+					}
+				}
+			}
+			return result;
+		}
+		
+		public static List<ValidationMessage> assertAtMostOneExists(Set<String> items, List<URI> searchURIs, List<ValidationMessage> validationMessages, String message, Identified entity, URI property) throws SBOLGraphException
+		{
+			int count=0;
+			if (searchURIs!=null)
+			{
+				for (URI uri:searchURIs)
+				{
+					if (items.contains(uri.toString()))
+					{
+						count++;
+					}
+				}
+			}
+			if (count>1)
+			{
+				ValidationMessage validationMessage= new ValidationMessage(message, property, searchURIs);
+				validationMessages = IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+			}
+			return validationMessages;
+		}
+		
+		public static List<ValidationMessage> assertIfDNAOrRNAThenIdentifiedShouldIncludeOneSOFeatureRole(List<URI> types, List<URI> roles, List<ValidationMessage> validationMessages, String message, Identified entity) throws SBOLGraphException {
+			if (types!=null && (types.contains(ComponentType.DNA.getUri()) || types.contains(ComponentType.RNA.getUri()))) 
+			{
+				validationMessages=assertOneExists(Configuration.getInstance().getSoSequenceFeatures(), roles, validationMessages, message, entity, DataModel.role);
+			}
+			return validationMessages;
+		}
+			
+		/*public static Pair<List<ValidationMessage>, Map<URI, Boolean>>  assertIfDNAOrRNAThenIdentifiedShouldIncludeAtMostOneSOFeatureRole(List<URI> types, List<URI> roles, List<ValidationMessage> validationMessages, String message, Map<URI, Boolean> validity, URI entityType, Identified entity) throws SBOLGraphException {
+			if (types!=null && (types.contains(ComponentType.DNA.getUri()) || types.contains(ComponentType.RNA.getUri()))) {
+				int validRoles=0;
+				if (roles!=null && roles.size()>0)
+				{
+					for (URI role: roles)
+					{
+						Boolean valid = validity.get(role);
+						if (valid == null) {
+							valid = RDFUtil.hasParentRecursively(Configuration.getInstance().getSOOntology(), role.toString(), Role.SequenceFeature.toString());
+							validity.put(role, valid);
+						}
+						if (valid) {
+							
+							validRoles++;
+							if (validRoles>1)
+							{
+								ValidationMessage validationMessage= new ValidationMessage(message, entityType, entity, role);
+								validationMessage.childPath(DataModel.role);
+								validationMessages = IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+							}
+						}
+					}
+				}
+				if (validRoles==0)
+				{
+					ValidationMessage validationMessage=null;
+					if (roles!=null && roles.size()>0) 
+					{
+						validationMessage = new ValidationMessage(message, entityType, entity, roles);
+					}
+					else
+					{
+						validationMessage = new ValidationMessage(message, entityType, entity, null);
+					}
+					validationMessage.childPath(DataModel.role);
+					validationMessages = IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+				}
+			}
+			return Pair.of(validationMessages, validity);
+		}
+		*/
+			
 	/*
 	 * public List<String> validate2(Identified identified) {
 	 * Set<ConstraintViolation<Identified>> violations =
@@ -248,6 +451,18 @@ public class IdentifiedValidator {
 			messages = IdentifiedValidator.addToValidations(messages, message);
 		}
 		return messages;
+	}
+	
+	public static List<ValidationMessage> assertTwoPropertyValueIdenticalEqual(List<ValidationMessage> validationMessages, String message, String first, String second, URI firstPropertyURI, URI secondPropertyURI) throws SBOLGraphException
+	{
+		if (first!=null && !first.isEmpty() && second!=null && !second.isEmpty()) {
+			if (!first.equals(second)){
+				String messageString=String.format("%s%s%s: %s",message,ValidationMessage.INFORMATION_SEPARATOR, secondPropertyURI, second);				
+				ValidationMessage valMessage=new ValidationMessage(messageString, firstPropertyURI, first);  				
+				validationMessages= IdentifiedValidator.addToValidations(validationMessages,valMessage);											
+			}
+		}
+		return validationMessages;
 	}
 
 	public URI getPropertyAsURI(Resource resource, URI property) throws SBOLGraphException {
@@ -346,6 +561,8 @@ public class IdentifiedValidator {
 		return messages;
 
 	}
+
+	
 
 	/*
 	 * public Optional<?> getPropertyAsOptional(Resource resource, URI property)

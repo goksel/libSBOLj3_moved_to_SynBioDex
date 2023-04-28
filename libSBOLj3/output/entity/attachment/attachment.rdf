@@ -30,7 +30,7 @@
    </sbol:Component>
    <sbol:Attachment rdf:about="attachment2">
       <sbol:hash>aaa</sbol:hash>
-      <sbol:hashAlgorithm>HashAlg</sbol:hashAlgorithm>
+      <sbol:hashAlgorithm>sha-256</sbol:hashAlgorithm>
       <sbol:size>1000</sbol:size>
       <sbol:format rdf:resource="https://identifiers.org/edam:format_2585"/>
       <sbol:source rdf:resource="/attachment2"/>
@@ -39,7 +39,7 @@
    </sbol:Attachment>
    <sbol:Attachment rdf:about="attachment1">
       <sbol:hash>aaa</sbol:hash>
-      <sbol:hashAlgorithm>Alg1</sbol:hashAlgorithm>
+      <sbol:hashAlgorithm>sha-256</sbol:hashAlgorithm>
       <sbol:size>1000</sbol:size>
       <sbol:format rdf:resource="https://identifiers.org/edam:format_2585"/>
       <sbol:source rdf:resource="/attachment1"/>

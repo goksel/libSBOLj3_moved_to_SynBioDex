@@ -1,9 +1,7 @@
 package org.sbolstandard.core3.entity;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.measure.Measure;
@@ -15,9 +13,7 @@ import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
-import org.sbolstandard.core3.vocabulary.Orientation;
 import org.sbolstandard.core3.vocabulary.VariableFeatureCardinality;
-
 import jakarta.validation.constraints.NotNull;
 
 public class VariableFeature extends Identified{
@@ -113,7 +109,7 @@ public class VariableFeature extends Identified{
 		return addToList(DataModel.VariableFeature.variantDerivation, CombinatorialDerivation.class, DataModel.CombinatorialDerivation.uri);
 	}
 	
-	public void setVariantDerivations(List<Collection> variantDerivations) {
+	public void setVariantDerivations(List<CombinatorialDerivation> variantDerivations) {
 		RDFUtil.setProperty(resource, DataModel.VariableFeature.variantDerivation, SBOLUtil.getURIs(variantDerivations));
 	}
 	

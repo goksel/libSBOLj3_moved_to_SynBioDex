@@ -5,24 +5,18 @@ import java.net.URI;
 import java.util.Arrays;
 
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.Interaction;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.SubComponent;
+import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.InteractionType;
-import org.sbolstandard.core3.vocabulary.ParticipationRole;
-import org.sbolstandard.core3.vocabulary.Role;
+import org.sbolstandard.core3.vocabulary.*;
 
 import junit.framework.TestCase;
 
 public class ToggleSwitch extends TestCase {
 
-	public void testApp() throws SBOLGraphException, IOException
+	public void testToggleSwitch() throws SBOLGraphException, IOException
     {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
@@ -55,13 +49,13 @@ public class ToggleSwitch extends TestCase {
         SubComponent IPTG_LacI_subComponent= SBOLAPI.addSubComponent(TetRProducer, IPTG_LacI);
         
         
-        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),TetRProducer, tetR, Arrays.asList(ParticipationRole.Template), TetR_protein, Arrays.asList(ParticipationRole.Product));  
-        SBOLAPI.createInteraction(Arrays.asList(InteractionType.Inhibition),TetRProducer, pLacI, Arrays.asList(ParticipationRole.Inhibited), LacI_protein, Arrays.asList(ParticipationRole.Modifier));
+        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction.getUri()),TetRProducer, tetR, Arrays.asList(ParticipationRole.Template.getUri()), TetR_protein, Arrays.asList(ParticipationRole.Product.getUri()));  
+        SBOLAPI.createInteraction(Arrays.asList(InteractionType.Inhibition.getUri()),TetRProducer, pLacI, Arrays.asList(ParticipationRole.Inhibited.getUri()), LacI_protein, Arrays.asList(ParticipationRole.Inhibitor.getUri()));
         //IPTG LacIbinding
-     	Interaction interaction= TetRProducer.createInteraction(Arrays.asList(InteractionType.NonCovalentBinding));
-    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Reactant), LacI_protein_subComponent);
-    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Reactant), IPTG_subComponent);
-    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Product), IPTG_LacI_subComponent);
+     	Interaction interaction= TetRProducer.createInteraction(Arrays.asList(InteractionType.NonCovalentBinding.getUri()));
+    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Reactant.getUri()), LacI_protein_subComponent);
+    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Reactant.getUri()), IPTG_subComponent);
+    	SBOLAPI.createParticipation(interaction, Arrays.asList(ParticipationRole.Product.getUri()), IPTG_LacI_subComponent);
        
         //LacI producer
         Component LacIProducer=SBOLAPI.createDnaComponent(doc, "LacI_producer", "LacI producer", "LacI producer", Role.EngineeredGene, null); 
@@ -86,20 +80,21 @@ public class ToggleSwitch extends TestCase {
         SubComponent aTC_subComponent=SBOLAPI.addSubComponent(LacIProducer, aTC);
         SubComponent atC_TetR_subComponent= SBOLAPI.addSubComponent(LacIProducer, atC_TetR);
         
-        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),LacIProducer, lacI, Arrays.asList(ParticipationRole.Template), LacI_protein, Arrays.asList(ParticipationRole.Product));  
-        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction),LacIProducer, gfp, Arrays.asList(ParticipationRole.Template), GFP, Arrays.asList(ParticipationRole.Product));  
-        SBOLAPI.createInteraction(Arrays.asList(InteractionType.Inhibition),LacIProducer, pTetR, Arrays.asList(ParticipationRole.Inhibited), TetR_protein, Arrays.asList(ParticipationRole.Modifier));
+        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction.getUri()),LacIProducer, lacI, Arrays.asList(ParticipationRole.Template.getUri()), LacI_protein, Arrays.asList(ParticipationRole.Product.getUri()));  
+        SBOLAPI.createInteraction(Arrays.asList(InteractionType.GeneticProduction.getUri()),LacIProducer, gfp, Arrays.asList(ParticipationRole.Template.getUri()), GFP, Arrays.asList(ParticipationRole.Product.getUri()));  
+        SBOLAPI.createInteraction(Arrays.asList(InteractionType.Inhibition.getUri()),LacIProducer, pTetR, Arrays.asList(ParticipationRole.Inhibited.getUri()), TetR_protein, Arrays.asList(ParticipationRole.Inhibitor.getUri()));
         //aTC TetR binding
-      	Interaction aTCTetRbinding= LacIProducer.createInteraction(Arrays.asList(InteractionType.NonCovalentBinding));
-    	SBOLAPI.createParticipation(aTCTetRbinding, Arrays.asList(ParticipationRole.Reactant), TetR_protein_subComponent);
-    	SBOLAPI.createParticipation(aTCTetRbinding, Arrays.asList(ParticipationRole.Reactant), aTC_subComponent);
-    	SBOLAPI.createParticipation(aTCTetRbinding, Arrays.asList(ParticipationRole.Product), atC_TetR_subComponent);
+      	Interaction aTCTetRbinding= LacIProducer.createInteraction(Arrays.asList(InteractionType.NonCovalentBinding.getUri()));
+    	SBOLAPI.createParticipation(aTCTetRbinding, Arrays.asList(ParticipationRole.Reactant.getUri()), TetR_protein_subComponent);
+    	SBOLAPI.createParticipation(aTCTetRbinding, Arrays.asList(ParticipationRole.Reactant.getUri()), aTC_subComponent);
+    	SBOLAPI.createParticipation(aTCTetRbinding, Arrays.asList(ParticipationRole.Product.getUri()), atC_TetR_subComponent);
        
     	
         
         //Toggle Switch
         Component toggleSwitch=SBOLAPI.createComponent(doc, SBOLAPI.append(baseUri, "toggle_switch"), ComponentType.DNA.getUri(), "Toggle Switch", "Toggle Switch genetic circuit", null);
-       
+        toggleSwitch.setRoles(Arrays.asList(Role.EngineeredGene));
+		
         /*SubComponent TetRSubComponent=SBOLAPI.addSubComponent(toggleSwitch, TetR_protein);
         SubComponent LacISubComponent=SBOLAPI.addSubComponent(toggleSwitch, LacI_protein);
         

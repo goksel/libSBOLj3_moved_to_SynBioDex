@@ -12,7 +12,7 @@
 :rbs    a                  sbol:Component ;
         sbol:description   "RBS (Elowitz 1999)" ;
         sbol:displayId     "B0034 rbs" ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace  </examples> ;
         sbol:name          "B0034" ;
         sbol:role          SO:0000139 ;
         sbol:type          SBO:0000251 .

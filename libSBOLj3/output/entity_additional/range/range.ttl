@@ -10,32 +10,33 @@
 @prefix sbol:  <http://sbols.org/v3#> .
 
 :B0015_Sequence1  a        sbol:Sequence ;
-        sbol:description   "terminator sequence" ;
+        sbol:description   "B0015 sequence" ;
         sbol:displayId     "B0015_Sequence1" ;
         sbol:elements      "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc" ;
         sbol:encoding      EDAM:format_1207 ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:name          "Sequence1" .
 
 :i13504_Sequence1  a       sbol:Sequence ;
-        sbol:description   "null sequence" ;
+        sbol:description   "i13504 sequence" ;
         sbol:displayId     "i13504_Sequence1" ;
         sbol:elements      "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc" ;
         sbol:encoding      EDAM:format_1207 ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:name          "Sequence1" .
 
 :i13504  a                 sbol:Component ;
         sbol:displayId     "i13504" ;
         sbol:hasFeature    <i13504/SubComponent1> ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:hasSequence   :i13504_Sequence1 ;
+        sbol:role          SO:0000704 ;
         sbol:type          SBO:0000251 .
 
 :B0015  a                  sbol:Component ;
         sbol:description   "B0015 double terminator" ;
         sbol:displayId     "B0015" ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:hasSequence   :B0015_Sequence1 ;
         sbol:name          "terminator" ;
         sbol:role          SO:0000141 ;
@@ -53,5 +54,6 @@
         sbol:displayId    "Range1" ;
         sbol:end          "80" ;
         sbol:hasSequence  :i13504_Sequence1 ;
+        sbol:order        "1" ;
         sbol:orientation  SO:0001030 ;
         sbol:start        "1" .

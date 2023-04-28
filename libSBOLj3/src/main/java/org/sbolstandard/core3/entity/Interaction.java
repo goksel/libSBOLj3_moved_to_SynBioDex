@@ -2,19 +2,21 @@ package org.sbolstandard.core3.entity;
 
 import java.net.URI;
 import java.util.List;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.DataModel;
-
+import org.sbolstandard.core3.vocabulary.InteractionType;
+import org.sbolstandard.core3.vocabulary.ParticipationRole;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 public class Interaction extends Identified{
 	/*private List<URI> types=null;
@@ -104,6 +106,57 @@ public class Interaction extends Identified{
 	{
 		List<ValidationMessage> validationMessages=super.getValidationMessages();
 		validationMessages= IdentifiedValidator.assertExists(this, DataModel.Interaction.participation, this.resource, this.getParticipations(), validationMessages);
+		
+		if (Configuration.getInstance().isValidateRecommendedRules()){
+			//INTERACTION_VALID_TYPE
+			validationMessages= IdentifiedValidator.assertOneExists(Configuration.getInstance().getSboOccurringEntityInteractionTypes(), getTypes(),validationMessages,"{INTERACTION_VALID_TYPE}",this,DataModel.type);
+			
+			// INTERACTION_PARTICIPANT_TYPES_COMPATIBLE
+			List<Participation> participations = this.getParticipations();
+			if (!CollectionUtils.isEmpty(participations)) {
+				List<URI> interactionTypes = getTypes();
+				for (URI type : interactionTypes) {
+					InteractionType interactionType = InteractionType.get(type);
+					// If interaction type comes from Table 11
+					if (interactionType != null) {
+						List<ParticipationRole> expectedRoles = InteractionType.mapParticipationRoles(interactionType);
+						if (participations != null) {
+							for (Participation participation : participations) {
+								boolean valid = true;
+
+								List<URI> roles = participation.getRoles();
+								if (CollectionUtils.isEmpty(roles)) {
+									valid = false;
+								} 
+								else {
+									boolean found = false;
+									for (ParticipationRole expectedRole : expectedRoles) {
+										if (roles.contains(expectedRole.getUri())) {
+											found = true;
+											break;
+										}
+									}
+									if (!found) {
+										valid = false;
+									}
+								}
+								if (!valid) {
+									// ValidationMessage message = new
+									// ValidationMessage("{INTERACTION_PARTICIPANT_TYPES_COMPATIBLE}",
+									// DataModel.Interaction.participation, SBOLUtil.getURIs(participations));
+									ValidationMessage message = new ValidationMessage("{INTERACTION_PARTICIPANT_TYPES_COMPATIBLE}", DataModel.Interaction.participation, participation, roles);
+									message.childPath(DataModel.role);
+									validationMessages = IdentifiedValidator.addToValidations(validationMessages, message);
+								}
+							}
+
+						}
+					}
+				}
+			}
+		}
+		
 		return validationMessages;
 	}
+	
 }

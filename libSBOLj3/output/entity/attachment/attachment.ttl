@@ -12,22 +12,22 @@
 :attachment1  a             sbol:Attachment ;
         sbol:displayId      "attachment1" ;
         sbol:format         EDAM:format_2585 ;
-        sbol:hasNamespace   <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace   </examples> ;
         sbol:hash           "aaa" ;
-        sbol:hashAlgorithm  "Alg1" ;
+        sbol:hashAlgorithm  "sha-256" ;
         sbol:size           "1000" ;
-        sbol:source         <https://sbolstandard.org/attachment1> .
+        sbol:source         </attachment1> .
 
 :impl1  a                   sbol:Implementation ;
         sbol:built          :TetR_protein ;
         sbol:displayId      "impl1" ;
         sbol:hasAttachment  :attachment1 ;
-        sbol:hasNamespace   <https://sbolstandard.org/examples> .
+        sbol:hasNamespace   </examples> .
 
 :TetR_protein  a           sbol:Component ;
         sbol:description   "TetR protein" ;
         sbol:displayId     "TetR_protein" ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace  </examples> ;
         sbol:name          "TetR" ;
         sbol:role          GO:0003700 ;
         sbol:type          SBO:0000252 .
@@ -35,8 +35,8 @@
 :attachment2  a             sbol:Attachment ;
         sbol:displayId      "attachment2" ;
         sbol:format         EDAM:format_2585 ;
-        sbol:hasNamespace   <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace   </examples> ;
         sbol:hash           "aaa" ;
-        sbol:hashAlgorithm  "HashAlg" ;
+        sbol:hashAlgorithm  "sha-256" ;
         sbol:size           "1000" ;
-        sbol:source         <https://sbolstandard.org/attachment2> .
+        sbol:source         </attachment2> .

@@ -11,7 +11,6 @@ import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.URINameSpace;
 import org.sbolstandard.core3.vocabulary.*;
 import junit.framework.TestCase;
 
@@ -25,7 +24,7 @@ public class IdentifiedTest extends TestCase {
         Attachment attachment=doc.createAttachment("attachment1", URI.create("https://sbolstandard.org/attachment1"));
         attachment.setFormat(ModelLanguage.SBML);
         attachment.setSize(OptionalLong.of(1000));
-        attachment.setHashAlgorithm("Alg1");
+        attachment.setHashAlgorithm(HashAlgorithm.sha3_256);
         attachment.setHash("aaa");
         
         Configuration.getInstance().setValidateAfterSettingProperties(false);
@@ -49,8 +48,7 @@ public class IdentifiedTest extends TestCase {
         attachment.setWasDerivedFrom(Arrays.asList(attachment.getUri()));
         TestUtil.validateIdentified(attachment, doc, 1);
         attachment.setWasDerivedFrom(null);
-        TestUtil.validateIdentified(attachment, doc, 0);
-       
+        TestUtil.validateIdentified(attachment, doc, 0);       
         
         Resource resource = TestUtil.getResource(attachment);
         
@@ -65,20 +63,11 @@ public class IdentifiedTest extends TestCase {
 		URI tmp=null;
 		RDFUtil.setProperty(resource, DataModel.Identified.measure, tmp);
 		TestUtil.validateIdentified(attachment, doc, 0);
-		
-		
-		
-		
-	       
-		
+									       		
 		//IDENTIFIED_SUITABLE_SBOL_ENTITY_TYPES
         //This will cause an invalid attachment and will create an invalid sequence. Two document errors - one attachment error.
         attachment.addAnnotationType(DataModel.Sequence.uri);
         TestUtil.validateIdentified(attachment, doc, 1,2);
-       
-        
-        
-        
         
     }
 }

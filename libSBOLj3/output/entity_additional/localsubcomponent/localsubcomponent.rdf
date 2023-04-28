@@ -13,11 +13,12 @@
    <sbol:Component rdf:about="i13504_system">
       <sbol:hasFeature>
          <sbol:LocalSubComponent rdf:about="i13504_system/LocalSubComponent1">
+            <sbol:role rdf:resource="https://identifiers.org/SO:0000316"/>
             <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
             <sbol:displayId>LocalSubComponent1</sbol:displayId>
          </sbol:LocalSubComponent>
       </sbol:hasFeature>
-      <sbol:role rdf:resource="https://identifiers.org/SBO:0000289"/>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000804"/>
       <sbol:name>i13504 system</sbol:name>
       <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>

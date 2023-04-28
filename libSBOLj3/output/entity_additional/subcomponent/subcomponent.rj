@@ -32,7 +32,7 @@
      ] ,
     "http://sbols.org/v3#description" : [ { 
       "type" : "literal" ,
-      "value" : "null sequence"
+      "value" : "i13504 sequence"
     }
      ]
   }
@@ -70,7 +70,7 @@
      ] ,
     "http://sbols.org/v3#description" : [ { 
       "type" : "literal" ,
-      "value" : "terminator sequence"
+      "value" : "B0015 sequence"
     }
      ]
   }
@@ -121,7 +121,7 @@
      ] ,
     "http://sbols.org/v3#start" : [ { 
       "type" : "literal" ,
-      "value" : "2"
+      "value" : "1"
     }
      ] ,
     "http://sbols.org/v3#hasSequence" : [ { 
@@ -140,6 +140,11 @@
     "http://sbols.org/v3#displayId" : [ { 
       "type" : "literal" ,
       "value" : "i13504"
+    }
+     ] ,
+    "http://sbols.org/v3#role" : [ { 
+      "type" : "uri" ,
+      "value" : "https://identifiers.org/SO:0000704"
     }
      ] ,
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ { 

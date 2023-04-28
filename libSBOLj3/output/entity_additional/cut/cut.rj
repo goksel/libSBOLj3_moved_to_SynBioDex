@@ -103,7 +103,7 @@
      ] ,
     "http://sbols.org/v3#description" : [ { 
       "type" : "literal" ,
-      "value" : "pTetR sequence"
+      "value" : "BBa_R0040 sequence"
     }
      ]
   }

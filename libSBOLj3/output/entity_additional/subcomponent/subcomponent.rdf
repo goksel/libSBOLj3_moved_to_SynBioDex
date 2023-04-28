@@ -16,7 +16,7 @@
             <sbol:sourceLocation>
                <sbol:Range rdf:about="i13504/SubComponent1/Range2">
                   <sbol:end>80</sbol:end>
-                  <sbol:start>2</sbol:start>
+                  <sbol:start>1</sbol:start>
                   <sbol:hasSequence>
                      <sbol:Sequence rdf:about="i13504_Sequence1"/>
                   </sbol:hasSequence>
@@ -44,6 +44,7 @@
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="i13504_Sequence1"/>
       </sbol:hasSequence>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:displayId>i13504</sbol:displayId>
@@ -62,7 +63,7 @@
    <sbol:Sequence rdf:about="i13504_Sequence1">
       <sbol:elements>ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc</sbol:elements>
       <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
-      <sbol:description>null sequence</sbol:description>
+      <sbol:description>i13504 sequence</sbol:description>
       <sbol:name>Sequence1</sbol:name>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>i13504_Sequence1</sbol:displayId>
@@ -70,7 +71,7 @@
    <sbol:Sequence rdf:about="B0015_Sequence1">
       <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
       <sbol:elements>ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc</sbol:elements>
-      <sbol:description>terminator sequence</sbol:description>
+      <sbol:description>B0015 sequence</sbol:description>
       <sbol:name>Sequence1</sbol:name>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>B0015_Sequence1</sbol:displayId>

@@ -31,7 +31,7 @@
     "@value" : "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc"
   } ],
   "http://sbols.org/v3#description" : [ {
-    "@value" : "terminator sequence"
+    "@value" : "B0015 sequence"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"
@@ -50,6 +50,9 @@
   } ],
   "http://sbols.org/v3#hasSequence" : [ {
     "@id" : "https://synbiohub.org/public/igem/i13504_Sequence1"
+  } ],
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SO:0000704"
   } ],
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://synbiohub.org/public/igem"
@@ -78,6 +81,9 @@
   "@type" : [ "http://sbols.org/v3#SubComponent" ]
 }, {
   "@id" : "https://synbiohub.org/public/igem/i13504/SubComponent1/Range1",
+  "http://sbols.org/v3#order" : [ {
+    "@value" : "1"
+  } ],
   "http://sbols.org/v3#orientation" : [ {
     "@id" : "https://identifiers.org/SO:0001030"
   } ],
@@ -103,7 +109,7 @@
     "@id" : "https://identifiers.org/edam:format_1207"
   } ],
   "http://sbols.org/v3#description" : [ {
-    "@value" : "null sequence"
+    "@value" : "i13504 sequence"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"

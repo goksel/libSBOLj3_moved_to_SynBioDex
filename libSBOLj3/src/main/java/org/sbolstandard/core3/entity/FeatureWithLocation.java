@@ -8,20 +8,12 @@ import java.util.Optional;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Location.LocationBuilder;
-import org.sbolstandard.core3.entity.Location.LocationFactory;
-import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
-import org.sbolstandard.core3.validation.PropertyValidator;
-import org.sbolstandard.core3.validation.ValidationMessage;
-import org.sbolstandard.core3.vocabulary.ComponentType;
+import org.sbolstandard.core3.validation.*;
 import org.sbolstandard.core3.vocabulary.DataModel;
-
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 public abstract class FeatureWithLocation extends Feature{
 	/*private List<URI> types=new ArrayList<URI>();
@@ -222,6 +214,85 @@ public abstract class FeatureWithLocation extends Feature{
 	@Override
 	public URI getResourceType() {
 		return DataModel.Feature.uri;
+	}
+	
+	protected List<ValidationMessage> assertDoNotHaveOverlappingRegions(List<ValidationMessage>  validationMessages, String message) throws SBOLGraphException
+	{
+		List<Location> locations = getLocations(); 
+		if (locations != null) {
+			for (int i = 0; i < locations.size() - 1; i++) {
+				Location location = locations.get(i);
+				if (location instanceof Range) {
+					Range range1 = (Range) location;
+					for (int j = i + 1; j < locations.size(); j++) {	
+						Location location2 = locations.get(j);
+						if (location2 instanceof Range) {
+							Range range2 = (Range) location2;
+							validationMessages=assertDoNotOverlap(validationMessages, range1, range2, message);
+						} 
+						else {		
+							continue;
+						}
+					}
+					
+				} 
+				else {		
+					continue;
+				}
+			}
+		}
+		return  validationMessages;
+	}
+	
+	private List<ValidationMessage> assertDoNotOverlap(List<ValidationMessage>  validationMessages, Range range1, Range range2, String message) throws SBOLGraphException
+	{
+		if (range1!=null && range2!=null && !range1.getUri().equals(range2.getUri())){
+			ValidationMessage validationMessage=null;
+			Optional<Integer> start1Optional=range1.getStart();
+			Optional<Integer> start2Optional=range2.getStart();
+			Optional<Integer> end1Optional=range1.getEnd();
+			Optional<Integer> end2Optional=range2.getEnd();
+			
+			if (!SBOLUtil.isNullOrEmpty(start1Optional) && !SBOLUtil.isNullOrEmpty(start2Optional) 
+					&& !SBOLUtil.isNullOrEmpty(end1Optional) && !SBOLUtil.isNullOrEmpty(end2Optional)){
+				int start1=start1Optional.get();
+				int end1=end1Optional.get();
+				int start2=start2Optional.get();
+				int end2=end2Optional.get();
+				
+				if (existsBetween(end2, start1, end1)) //range2 overlaps with range 1start
+				{
+					validationMessage=new ValidationMessage(message, DataModel.FeatureWithLocation.location, range2, end2);
+					validationMessage.childPath(DataModel.Range.end);
+				}
+				else if (existsBetween(end1, start2, end2))
+				{
+					validationMessage=new ValidationMessage(message, DataModel.FeatureWithLocation.location, range1, end1);
+					validationMessage.childPath(DataModel.Range.end);
+				}
+				else if (existsBetween(start2, start1, end1)) //range2 overlaps with range1 end		
+				{
+					validationMessage=new ValidationMessage(message, DataModel.FeatureWithLocation.location, range2, start2);
+					validationMessage.childPath(DataModel.Range.start);
+				}
+				else if (existsBetween(start1, start2, end2)) 	
+				{
+					validationMessage=new ValidationMessage(message, DataModel.FeatureWithLocation.location, range1, start1);
+					validationMessage.childPath(DataModel.Range.start);
+				}
+				
+				if (validationMessage!=null)
+				{
+					validationMessages = IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+				}
+			}
+		}
+		return validationMessages;	
+	}
+	
+	public static boolean existsBetween (int location, int start, int end)
+	{
+		return (location>=start && location<=end);
 	}
 	
 }

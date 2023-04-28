@@ -7,19 +7,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.nio.charset.Charset;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-
-import org.apache.commons.lang3.CharSet;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
-import org.sbolstandard.core3.entity.measure.*;
-import org.sbolstandard.core3.entity.provenance.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.util.Configuration;
@@ -31,9 +25,6 @@ import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.SBOLComparator;
 import org.sbolstandard.core3.validation.SBOLValidator;
 import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.DataModel;
-import org.sbolstandard.core3.vocabulary.MeasureDataModel;
-import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
 
 import static org.junit.Assert.*;
 
@@ -731,7 +722,7 @@ public class TestUtil {
 		}
 	}
 	
-	private static void printMessages(List<String> messages, String type)
+	/*private static void printMessages(List<String> messages, String type)
 	{	 
         if (messages!=null && messages.size()>0)
         {
@@ -744,42 +735,91 @@ public class TestUtil {
         	System.out.println("\tNo errors. Type:" + type);
         }
         System.out.println("--------------------");
-	}
+	}*/
 	
-	public static void validateIdentified(Identified identified, SBOLDocument doc, int numberOfExpectedErrors) throws SBOLGraphException
+	private static String printMessages(List<String> messages, String type)
 	{	 
-		validateIdentified(identified, numberOfExpectedErrors);
-		validateDocument(doc, numberOfExpectedErrors);
+        String output="";
+		if (messages!=null && messages.size()>0)
+        {
+			for (String message: messages){
+	        	output=output + type +  " Validation test: " + message + System.lineSeparator();
+	        } 
+        }
+        else
+        {
+        	output=output + "\tNo errors. Type:" + type + System.lineSeparator();
+        }
+		output=output + "--------------------" + System.lineSeparator();
+		System.out.print(output);
+		return output;
 	}
 	
-	public static void validateIdentified(Identified identified, SBOLDocument doc, int numberOfExpectedErrorsInIdentified, int numberOfExpectedErrorsInDocument) throws SBOLGraphException
+	public static String validateIdentified(Identified identified, SBOLDocument doc, int numberOfExpectedErrors) throws SBOLGraphException
+	{	String output="";		
+		output=output + validateIdentified(identified, numberOfExpectedErrors);
+		output=output + validateDocument(doc, numberOfExpectedErrors);
+		return output;
+	}
+	
+	public static String validateIdentified(Identified identified, SBOLDocument doc, int numberOfExpectedErrorsInIdentified, int numberOfExpectedErrorsInDocument) throws SBOLGraphException
 	{	 
-		validateIdentified(identified, numberOfExpectedErrorsInIdentified);
-		validateDocument(doc, numberOfExpectedErrorsInDocument);
+		String output="";				
+		output=output + validateIdentified(identified, numberOfExpectedErrorsInIdentified);
+		output=output + validateDocument(doc, numberOfExpectedErrorsInDocument);
+		return output;
 	}
 	
-	public static void validateIdentified(Identified identified,int numberOfExpectedErrors) throws SBOLGraphException
+	public static String validateIdentified(Identified identified, SBOLDocument doc, int numberOfExpectedErrorsInIdentified, String errorCodes) throws SBOLGraphException	
+	{
+		String output=validateIdentified(identified, doc, numberOfExpectedErrorsInIdentified);
+		assertErrorCodes(errorCodes, output);		
+		return output;
+		
+	}
+	public static String validateIdentified(Identified identified,int numberOfExpectedErrors) throws SBOLGraphException
 	{	 
 		boolean isValidateAfterSettingPropertiesInitial=Configuration.getInstance().isValidateAfterSettingProperties();
 		Configuration.getInstance().setValidateAfterReadingSBOLDocuments(true);
 		List<String> messages=IdentifiedValidator.getValidator().validate(identified);
 		System.out.println("Identified:" + identified.getUri());
-		printMessages(messages, "Identified");
+		String output=printMessages(messages, "Identified");
 		int size= (messages==null)? 0 : messages.size();
 		assertEquals(numberOfExpectedErrors, size);
-	    Configuration.getInstance().setValidateAfterReadingSBOLDocuments(isValidateAfterSettingPropertiesInitial);    
+	    Configuration.getInstance().setValidateAfterReadingSBOLDocuments(isValidateAfterSettingPropertiesInitial); 
+	    return output;
 	}
 	
-	public static void validateDocument(SBOLDocument document ,int numberOfExpectedErrors) throws SBOLGraphException
+	public static String validateDocument(SBOLDocument document ,int numberOfExpectedErrors, String errorCodes) throws SBOLGraphException
+	{	 
+		String output=validateDocument(document, numberOfExpectedErrors);		
+		assertErrorCodes(errorCodes, output);
+		return output;
+	}
+	
+	private static void assertErrorCodes(String errorCodes, String output)
+	{
+		if (errorCodes!=null && errorCodes.length()>0)
+		{
+			String[] codes=errorCodes.split(",");
+			for (String errorCode: codes)
+			{
+				assertTrue("The error code coud not be tested:" + errorCode, output.contains(errorCode));
+			}
+		}
+	}
+	
+	public static String validateDocument(SBOLDocument document ,int numberOfExpectedErrors) throws SBOLGraphException
 	{	 
 		boolean isValidateAfterSettingPropertiesInitial=Configuration.getInstance().isValidateAfterSettingProperties();
 		Configuration.getInstance().setValidateAfterReadingSBOLDocuments(true);
 		
 		List<String> messages=SBOLValidator.getValidator().validate(document);
 		int size= (messages==null)? 0 : messages.size();
-		printMessages(messages, "Document");
+		String output=printMessages(messages, "Document");
 		assertEquals(numberOfExpectedErrors, size);
 	    Configuration.getInstance().setValidateAfterReadingSBOLDocuments(isValidateAfterSettingPropertiesInitial);
+	    return output;
 	}
 	
 	public static void validateProperty(Identified identified, String methodName, Object[] parameterValues, Class<?>... parameterTypes) throws SBOLGraphException, Exception

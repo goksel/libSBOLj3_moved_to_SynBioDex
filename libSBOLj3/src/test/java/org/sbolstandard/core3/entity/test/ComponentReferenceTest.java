@@ -33,14 +33,21 @@ public class ComponentReferenceTest extends TestCase {
 		
 		String term_na="ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc";
 		Component simpleDevice=doc.createComponent("simpleDevice", Arrays.asList(ComponentType.DNA.getUri())); 
+		simpleDevice.setRoles(Arrays.asList(Role.EngineeredGene));
+	       
 		SBOLAPI.addSequence(doc, simpleDevice, Encoding.NucleicAcid, "");
 		Component term=SBOLAPI.createDnaComponent(doc, "B0015", "terminator", "B0015 double terminator", Role.Terminator,term_na);
 		SubComponent termSubComponent=simpleDevice.createSubComponent(term);
 		
 		
 		Component i13504_system=SBOLAPI.createComponent(doc,"i13504_system", ComponentType.DNA.getUri(), "i13504 system", null, Role.FunctionalCompartment);
-		Component ilab16_dev1=doc.createComponent("interlab16device1", Arrays.asList(ComponentType.DNA.getUri())); 
+		i13504_system.setRoles(Arrays.asList(Role.FunctionalCompartment, Role.EngineeredGene));
+		
+		Component ilab16_dev1=doc.createComponent("interlab16device1", Arrays.asList(ComponentType.DNA.getUri()));
+		ilab16_dev1.setRoles(Arrays.asList(Role.EngineeredGene));
+		
 		Component device=doc.createComponent("i13504", Arrays.asList(ComponentType.DNA.getUri())); 
+		device.setRoles(Arrays.asList(Role.EngineeredGene));
 		SubComponent i13504SubComponent=SBOLAPI.addSubComponent(i13504_system, device);
 		SubComponent sc_i13504_system=SBOLAPI.addSubComponent(ilab16_dev1, i13504_system);	
 		 
@@ -81,7 +88,7 @@ public class ComponentReferenceTest extends TestCase {
 		
 		//inchildOf must refer to a subcomponent in parent component.
 		compRef.setInChildOf(termSubComponent);
-		TestUtil.validateIdentified(ilab16_dev1,doc, 1);
+		TestUtil.validateIdentified(ilab16_dev1,doc, 2);
 		compRef.setInChildOf(tempSubComponent);
 		TestUtil.validateIdentified(ilab16_dev1,doc,0);
 		

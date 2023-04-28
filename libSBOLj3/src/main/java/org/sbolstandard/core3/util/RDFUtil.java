@@ -8,17 +8,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.OptionalInt;
+import java.util.Set;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.jena.datatypes.xsd.impl.XSDFloat;
+import org.apache.jena.query.ARQ;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QueryFactory;
+import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFactory;
 import org.apache.jena.query.Syntax;
@@ -33,15 +38,11 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
-import org.apache.jena.riot.RDFParser;
-import org.apache.jena.riot.RDFParserBuilder;
 import org.apache.jena.riot.RDFWriter;
 import org.apache.jena.riot.RDFWriterBuilder;
 import org.apache.jena.riot.SysRIOT;
 import org.apache.jena.sparql.util.Context;
 import org.apache.jena.vocabulary.RDF;
-import org.sbolstandard.core3.validation.IdentifiedValidator;
-import org.sbolstandard.core3.vocabulary.DataModel;
 
 //IO: https://jena.apache.org/documentation/io/rdf-input.html
 //https://jena.apache.org/tutorials/rdf_api.html#ch-Writing-RDF
@@ -54,7 +55,7 @@ import org.sbolstandard.core3.vocabulary.DataModel;
 	
 public class RDFUtil {
 	
-    private static String RDFXMLABBREV = "RDF/XML-ABBREV";
+    //private static String RDFXMLABBREV = "RDF/XML-ABBREV";
     
 	public static void setBaseURI(Model model, URI uri)
 	{
@@ -115,6 +116,26 @@ public class RDFUtil {
 		}
 	}
 	
+	public static void removePropertiesExcept(Model model, List<String> properties)
+	{
+		StmtIterator stmtIterator=model.listStatements();
+		List<Statement> statements=new ArrayList<Statement>();
+		while (stmtIterator.hasNext())
+		{
+			Statement stmt= stmtIterator.next();
+			String property=stmt.getPredicate().getURI();
+			if (!properties.contains(property))
+			{
+				statements.add(stmt);
+			}
+		}
+		
+		if (statements.size()>0)
+		{
+			model.remove(statements);
+		}
+	}
+	
 	public static void setProperty(Resource resource, URI property, String value)
 	{
 		Property p=resource.getModel().createProperty(property.toString());
@@ -170,15 +191,19 @@ public class RDFUtil {
 	
 	public static void addProperty(Resource resource, URI property, String value)
 	{
-		Property p=resource.getModel().createProperty(property.toString());
-		resource.addProperty(p, value);	
+		if (value!=null){
+			Property p=resource.getModel().createProperty(property.toString());
+			resource.addProperty(p, value);	
+		}
 	}
 	
 	public static void addProperty(Resource resource, URI property, URI value)
 	{
-		Property p=resource.getModel().createProperty(property.toString());
-		Resource resourceValue = resource.getModel().createResource(value.toString());
-		resource.addProperty(p, resourceValue);	
+		if (value!=null){
+			Property p=resource.getModel().createProperty(property.toString());
+			Resource resourceValue = resource.getModel().createResource(value.toString());
+			resource.addProperty(p, resourceValue);	
+		}
 	}
 	
 	public static void addProperty(Resource resource, URI property, List<URI> values)
@@ -568,6 +593,45 @@ public class RDFUtil {
 		    return rsMemory;		          
 	    }
 	    
+	    public static boolean hasParentRecursively(Model model, String childResourceURI, String parentResourceURI)
+	    {
+	    	String query= "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
+	    			+ "select ?o where {<" + childResourceURI + "> rdfs:subClassOf* ?o .}";
+	    		
+	    	ResultSet rs= executeSPARQLSelectQuery(model, query, Syntax.syntaxSPARQL_11);
+	    	boolean found=false;
+	    	while (rs.hasNext()){
+				QuerySolution qs=rs.next();
+				RDFNode parent=qs.get(rs.getResultVars().get(0));
+				String parentUri=RDFUtil.toLiteralString(parent);
+				//System.out.println ("Parent:" + parentUri);
+				if (parentUri!=null && parentUri.equalsIgnoreCase(parentResourceURI)){
+					found=true;
+					break;
+				}
+			}
+	    	return found;
+	    }
+	    
+	    public static Set<String> childResourcesRecursively(Model model, String parentResourceURI)
+	    {
+	    	String query= "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
+	    			+ "select ?child where {?child rdfs:subClassOf* <" + parentResourceURI + "> .}";
+	    		
+	    	ResultSet rs= executeSPARQLSelectQuery(model, query, Syntax.syntaxSPARQL_11);
+	    	Set<String> childURIs=new HashSet<String>();
+	    	while (rs.hasNext()){
+				QuerySolution qs=rs.next();
+				RDFNode parent=qs.get(rs.getResultVars().get(0));
+				String childUri=RDFUtil.toLiteralString(parent);
+				//System.out.println ("Child:" + childUri);
+				if (childUri!=null){
+					childURIs.add(childUri);
+				}
+			}
+	    	return childURIs;
+	    }
+	    
 	    /**
 	     * 
 	     * @param path The file path or remote web URL
@@ -580,6 +644,12 @@ public class RDFUtil {
 		{
 			Model model = RDFDataMgr.loadModel(file.getPath()) ;
 			return model;			
+		}
+	    
+	    public static void write(Model model, File file, RDFFormat format) throws FileNotFoundException
+		{
+			FileOutputStream stream=new FileOutputStream(file);
+	    	RDFDataMgr.write(stream, model, format); 			
 		}
 	    
 	    /**
@@ -618,28 +688,40 @@ public class RDFUtil {
 	    
 	    public static Model read(InputStream stream, RDFFormat format) throws FileNotFoundException
 		{
+	    	if (ARQ.getContext()==null)
+	    	{
+	    		ARQ.init();
+	    		System.out.println("**************");
+	    		System.out.println("Initialised ARQ");
+	    		System.out.println("**************");
+	    	}
 	    	Model model = ModelFactory.createDefaultModel();
-	        RDFParserBuilder rdfBuilder= RDFParser.create().source(stream);
+	    	RDFDataMgr.read(model, stream, format.getLang());
+	    	
+	        /*RDFParserBuilder rdfBuilder= RDFParser.create().source(stream);
 	        if (format!=null)
 	        {
 	        	rdfBuilder.lang(format.getLang());
 	        }
 	        RDFParser parser=rdfBuilder.build();
-	        parser.parse(model);    
+	        parser.parse(model); */ 
 			return model;			
 		}
 	    
 	    public static Model read(String input, RDFFormat format) throws FileNotFoundException
 		{
-	    	Model model = ModelFactory.createDefaultModel();
-	        RDFParserBuilder rdfBuilder= RDFParser.create().fromString(input);
+	    	InputStream stream=IOUtils.toInputStream(input, Charset.defaultCharset());
+	    	return read(stream, format);
+	    	/*
+	        Model model = ModelFactory.createDefaultModel();
+	    	RDFParserBuilder rdfBuilder= RDFParser.create().fromString(input);
 	        if (format!=null)
 	        {
 	        	rdfBuilder.lang(format.getLang());
 	        }
 	        RDFParser parser=rdfBuilder.build();
-	        parser.parse(model);    
-			return model;			
+	        parser.parse(model);  
+			return model;	*/		
 		}
 	    
 	    public static List<URI> filterItems(Model model, List<URI> resources, URI property, URI value)
@@ -674,6 +756,97 @@ public class RDFUtil {
 	    	 return filtered; 
 		 }
 	   
+	    
+	    public static boolean exists(Model model, URI resURI, URI propertyURI, URI objectURI) 
+	    {
+	    	Resource res=model.getResource(resURI.toString());
+	    	Property property=model.getProperty(propertyURI.toString());
+	    	RDFNode object=model.getResource(objectURI.toString());
+	    	StmtIterator it=model.listStatements(res, property, object);
+	    	if (it.hasNext())
+	    	{
+	    		return false;
+	    	}
+	    	else
+	    	{
+	    		return false;
+	    	}
+	    }
+	    
+	    public static Set<String> getNotExistingTemplateProperties(Model model, URI templateURI, URI derivedURI, Set<URI> ignoredProperties)
+	    {
+	    	Set<String> messages=null;
+	    	Resource resTemplate=model.getResource(templateURI.toString());
+	    	Resource resDerived=model.getResource(derivedURI.toString());
+	    	
+	    	StmtIterator it=resTemplate.listProperties();
+	    	while (it.hasNext())
+	    	{
+	    		Statement stmt=it.next();
+	    		Property property=stmt.getPredicate();
+	    		if (ignoredProperties!=null && ignoredProperties.contains(URI.create(property.getURI())))
+	    		{
+	    			continue;
+	    		}
+	    		
+	    		RDFNode object=stmt.getObject();
+	    		boolean found=false;
+	    		
+	    		StmtIterator itDerived =resDerived.listProperties(property);
+	    		if (itDerived.hasNext())
+	    		{
+		    		while (itDerived.hasNext())
+			    	{
+		    			Statement stmtDerived=itDerived.next();
+		    			RDFNode objectDerived= stmtDerived.getObject();
+		    			if (objectDerived.equals(object))
+		    			{
+		    				found=true;
+		    				break;
+		    			}
+			    	}
+	    		}
+	    		if (!found) {
+	    			if (messages==null) {
+	    				messages=new HashSet<String>();
+	    			}
+	    			String message=property.getURI() + "=" + object.toString();
+	    			messages.add(message);
+	    		}
+	    	}	    		
+	    	return messages;
+	    }
+	    
+	    public static Set<String> getNotExistingTemplatePropertiesv2(Model model, URI templateURI, URI derivedURI)
+	    {
+	    	Set<String> messages=null;
+	    	Resource resTemplate=model.getResource(templateURI.toString());
+	    	Resource resDerived=model.getResource(derivedURI.toString());
+	    	
+	    	StmtIterator it=resTemplate.listProperties();
+	    	while (it.hasNext())
+	    	{
+	    		Statement stmt=it.next();
+	    		Property property=stmt.getPredicate();	    			    		
+	    		RDFNode object=stmt.getObject();
+	    		boolean found=false;
+	    		
+	    		StmtIterator itDerived =resDerived.listProperties(property);
+	    		if (itDerived.hasNext())
+	    		{
+		    		found=true;		    		
+	    		}
+	    		if (!found) {
+	    			if (messages==null) {
+	    				messages=new HashSet<String>();
+	    			}
+	    			String message=property.getURI() + "=" + object.toString();
+	    			messages.add(message);
+	    		}
+	    	}	    		
+	    	return messages;
+	    }
+	    
 }
 
 /*

@@ -2,10 +2,8 @@ package org.sbolstandard.core3.entity.test;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalLong;
-
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
@@ -30,7 +28,7 @@ public class TopLevelTest extends TestCase {
         Attachment attachment=doc.createAttachment("attachment1", URI.create("https://sbolstandard.org/attachment1"));
         attachment.setFormat(ModelLanguage.SBML);
         attachment.setSize(OptionalLong.of(1000));
-        attachment.setHashAlgorithm("Alg1");
+        attachment.setHashAlgorithm(HashAlgorithm.sha3_256);
         attachment.setHash("aaa");
         //attachment.setNamespace(URI.create("https://sbolstandard.org/examples"));
         System.out.println(SBOLIO.write(doc, SBOLFormat.TURTLE));

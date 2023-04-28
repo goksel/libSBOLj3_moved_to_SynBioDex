@@ -14,12 +14,17 @@ public class Role {
 		public static URI Operator = URINameSpace.SO.local("0000057");
 		public static URI EngineeredGene = URINameSpace.SO.local("0000704");
 		public static URI EngineeredRegion = URINameSpace.SO.local("0000804");
+		public static URI SequenceFeature = URINameSpace.SO.local("0000110");
 		
 		public static URI mRNA = URINameSpace.SO.local("0000234");
 		public static URI Effector = URINameSpace.CHEBI.local("35224");
 		public static URI TF = URINameSpace.GO.local("0003700");
 		public static URI FunctionalCompartment = URINameSpace.SBO.local("0000289");
 		public static URI PhysicalCompartment = URINameSpace.SBO.local("0000290");
+		
+		public static URI[] SequenceFeatures= {Promoter, RBS, CDS, Terminator, Gene, Operator, EngineeredGene, EngineeredRegion, SequenceFeature, mRNA};
+		
+		
 		
 		
 		

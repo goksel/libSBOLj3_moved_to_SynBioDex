@@ -24,16 +24,16 @@
         sbol:description   "TetR repressible promoter" ;
         sbol:displayId     "BBa_R0040" ;
         sbol:hasFeature    <BBa_R0040/SequenceFeature1> ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:hasSequence   :BBa_R0040_Sequence1 ;
         sbol:name          "pTetR" ;
         sbol:role          SO:0000167 ;
         sbol:type          SBO:0000251 .
 
 :BBa_R0040_Sequence1  a    sbol:Sequence ;
-        sbol:description   "pTetR sequence" ;
+        sbol:description   "BBa_R0040 sequence" ;
         sbol:displayId     "BBa_R0040_Sequence1" ;
         sbol:elements      "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac" ;
         sbol:encoding      EDAM:format_1207 ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:name          "Sequence1" .

@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
@@ -27,6 +28,13 @@ public class SingularUnit extends Unit{
 	{
 		super(resource);
 	}
+	
+	public static SingularUnit create(SBOLDocument sbolDocument, URI uri, URI namespace) throws SBOLGraphException {
+		SingularUnit identified = new SingularUnit(sbolDocument.getRDFModel(), uri);
+		identified.setNamespace(namespace);
+		return identified;
+	}
+	
 	
 	public void setFactor(Optional<Float>factor) throws SBOLGraphException {
 		IdentifiedValidator.getValidator().setPropertyAsOptional(this.resource, MeasureDataModel.SingularUnit.factor, factor);

@@ -3,9 +3,6 @@ package org.sbolstandard.core3.validation;
 import java.net.URI;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
-
 import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.sbolstandard.core3.entity.Attachment;
 import org.sbolstandard.core3.entity.Collection;
@@ -50,6 +47,7 @@ import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.CombinatorialDerivationStrategy;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
+import org.sbolstandard.core3.vocabulary.HashAlgorithm;
 import org.sbolstandard.core3.vocabulary.MeasureDataModel;
 import org.sbolstandard.core3.vocabulary.Orientation;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
@@ -201,6 +199,10 @@ public class SBOLComparator {
 		{
 			output = add(output, assertEqualBinaryPrefix((BinaryPrefix)identified1, (BinaryPrefix) identified2));
 		}
+		else if (identified1 instanceof Experiment)
+		{
+			output = add(output, assertEqualExperiment((Experiment)identified1, (Experiment) identified2));
+		}
 		else if (identified1 instanceof Collection)
 		{
 			output = add(output, assertEqualCollection((Collection)identified1, (Collection) identified2));
@@ -208,8 +210,7 @@ public class SBOLComparator {
 		else if (identified1 instanceof CombinatorialDerivation)
 		{
 			output = add(output, assertEqualCombinatorialDerivation((CombinatorialDerivation)identified1, (CombinatorialDerivation) identified2));
-		}
-		
+		}		
 		else if (identified1 instanceof Component)
 		{
 			output = add(output, assertEqualComponent((Component)identified1,  (Component) identified2));
@@ -217,10 +218,6 @@ public class SBOLComparator {
 		else if (identified1 instanceof ExperimentalData)
 		{
 			output = add(output, assertEqualExperimentalData((ExperimentalData)identified1, (ExperimentalData) identified2));
-		}
-		else if (identified1 instanceof Experiment)
-		{
-			output = add(output, assertEqualExperiment((Experiment)identified1, (Experiment) identified2));
 		}
 		else if (identified1 instanceof Implementation)
 		{
@@ -654,7 +651,7 @@ public class SBOLComparator {
 		output = add(output, assertEqual(entity1, entity2));		
 		if (entity1!=null & entity2!=null) {
 			output = add(output, assertEqual(entity1, entity2, entity1.getElements(), entity2.getElements(),DataModel.Sequence.elements));
-			output = add(output, assertEqualEnum(entity1, entity2, entity1.getEncoding(),entity2.getEncoding(), DataModel.Sequence.encoding));		
+			output = add(output, assertEqual(entity1, entity2, entity1.getEncoding(),entity2.getEncoding(), DataModel.Sequence.encoding));		
 		}
 		return output;
 	}
@@ -750,21 +747,33 @@ public class SBOLComparator {
 		return output;	
 	}
 	
-	private static StringBuilder assertEqualEnum(Identified identified1, Identified identified2, Object value1, Object value2, URI property)
+	private static StringBuilder assertEqual(Identified identified1, Identified identified2, URI value1, URI value2, URI property)
+	{
+		StringBuilder output=null;
+		String message=String.format("Could not read the %s property. Entity:%s, Value1:%s, Value2:%s", property.toString(), identified1.getUri().toString(), value1, value2);
+		if (!stringEquals(String.valueOf(value1),String.valueOf(value2)))
+		{
+			output = add(output,message);
+		}
+		return output;
+	}
+	
+	private static StringBuilder assertEqualEnum(Identified identified1, Identified identified2, Enum value1, Enum value2, URI property) throws SBOLGraphException
 	{
 		StringBuilder output=null;
 		output=add(output, assertBothNullOrNotNull(identified1, identified2, value1, value2, property));
 		if (value1!=null && value2!=null)
 		{
-			URI uri1=enumToURI(value1);
-			URI uri2=enumToURI(value2);
-			output=add(output,  assertEqual(identified1, identified2, uri1, uri2, property));
+			Object converted1=enumToValue(value1);
+			Object converted2=enumToValue(value2);
+			output=add(output,  assertEqual(identified1, identified2, String.valueOf(converted1), String.valueOf(converted2), property));
 		}
 		return output;
 	}
-		
 	
-	private static URI enumToURI(Object value)
+	
+	
+	private static Object enumToValue(Object value) throws SBOLGraphException
 	{
 		if (value!=null)
 		{
@@ -772,10 +781,10 @@ public class SBOLComparator {
 			{
 				return ((RoleIntegration) value).getUri();
 			}
-			else if (value instanceof Encoding)
+			/*else if (value instanceof Encoding)
 			{
 				return ((Encoding) value).getUri();
-			}
+			}*/
 			else if (value instanceof CombinatorialDerivationStrategy)
 			{
 				return ((CombinatorialDerivationStrategy) value).getUri();
@@ -787,6 +796,14 @@ public class SBOLComparator {
 			else if (value instanceof Orientation)
 			{
 				return ((Orientation) value).getUri();
+			}
+			/*else if (value instanceof HashAlgorithm)
+			{
+				return ((HashAlgorithm) value).getValue();
+			}*/
+			else
+			{
+				throw new SBOLGraphException("Not implemented the enumToValue method for" + value);
 			}
 		}
 		return null;
@@ -841,16 +858,7 @@ public class SBOLComparator {
 	    }
 	}
 	
-	private static StringBuilder assertEqual(Identified identified1, Identified identified2, URI value1, URI value2, URI property)
-	{
-		StringBuilder output=null;
-		String message=String.format("Could not read the %s property. Entity:%s, Value1:%s, Value2:%s", property.toString(), identified1.getUri().toString(), value1, value2);
-		if (!stringEquals(String.valueOf(value1),String.valueOf(value2)))
-		{
-			output = add(output,message);
-		}
-		return output;
-	}
+	
 	
 	private static StringBuilder assertEqual(Identified identified1, Identified identified2, Identified value1, Identified value2, URI property) throws SBOLGraphException
 	{

@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,21 +15,31 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TimeZone;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
-import org.apache.jena.util.FileManager;
+import org.apache.jena.riot.RDFFormat;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.validation.ValidationMessage;
 import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.DataModel;
+
+import com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator;
+
+import jakarta.validation.constraints.NotNull;
 
 public class SBOLUtil {
 
@@ -46,15 +57,13 @@ public class SBOLUtil {
 	 
 	 public static void sort(File inputFile, File outputFile, Charset encoding) throws IOException
 	 {
-		 	FileInputStream inputStream=new FileInputStream(inputFile);
-		 	FileOutputStream outputStream=new FileOutputStream(outputFile);
-			sort(inputStream, encoding, outputStream);
+		 FileInputStream inputStream=new FileInputStream(inputFile);
+		 FileOutputStream outputStream=new FileOutputStream(outputFile);
+		sort(inputStream, encoding, outputStream);
 			
-		 	if (outputStream!=null)
-			{
-		 		outputStream.close();
-			}
-			
+		if (outputStream!=null){
+			outputStream.close();
+		}
 	 }
 	 
 	 public static String sort(String input, Charset encoding) throws IOException
@@ -172,8 +181,20 @@ public class SBOLUtil {
 			}
 			return URI.create(uriString);
 		}
+	   
 	    
-	    public static <T extends Identified>  List<URI> getURIs(List<T> identifieds)
+	    public static <T extends Identified>  boolean contains(Collection<T> identifieds, T identified)
+	    {
+	    	boolean contains=false;
+	    	if (identifieds!=null && identifieds.size()>0 && identified!=null)
+	    	{
+	    		contains=SBOLUtil.getURIs(identifieds).contains(identified.getUri());
+	    	}
+	    	return contains;
+	    }
+		
+	    
+	    public static <T extends Identified>  List<URI> getURIs(Collection<T> identifieds)
 		{
 			ArrayList<URI> uris=null;
 			if (identifieds!=null && identifieds.size()>0 )
@@ -198,7 +219,7 @@ public class SBOLUtil {
 	    }
 	    
 	    
-	    private static String readFromFileResource(String fileResource) throws IOException
+	    /*private static String readFromFileResource(String fileResource) throws IOException
 		{
 			try
 			{
@@ -209,12 +230,73 @@ public class SBOLUtil {
 			{
 				throw new IOException("Could not load the file " + fileResource,e);
 			}
-		}
+		}*/
 	    
-	    public static Model getModelFromFileResource(String fileResource) {
+	    public static Model getModelFromFileResourceOld(String fileResource, Lang lang) {
 	        File file = new File(SBOLAPI.class.getClassLoader().getResource(fileResource).getFile());
-	        return RDFDataMgr.loadModel(file.getPath());
+	        return RDFDataMgr.loadModel(file.getPath(), lang);
 	    }
 	    
 	    
+	    public static Model getModelFromFileResource(String fileResource,RDFFormat format) throws FileNotFoundException {
+	    	InputStream is = SBOLAPI.class.getClassLoader().getResourceAsStream(fileResource);
+	    	Model model= RDFUtil.read(is, format);
+	    	//RDFDataMgr.read(null, is, lang);
+	    	return model;
+	    	
+	    }
+	    
+	    
+	    public static boolean isNullOrEmpty(Optional<?> optional)
+	    {
+	    	return (optional==null || optional.isEmpty());
+	    }
+	   
+	    
+	    public static void printValidationMessages(List<String> messages)
+		{	 
+	    	if (messages!=null && messages.size()>0)
+	        {
+				for (String message: messages){
+		        	System.out.println(message);
+		        } 
+	        }
+	        else
+	        {
+	        	System.out.println("\tNo errors!");
+	        }
+	        System.out.println("--------------------");
+		}
+	    
+	    
+	    public static Set<URI> addToSet(Set<URI> current, URI item){
+			if (item!=null){
+				if (current==null){
+					current=new HashSet<URI>();
+				}
+				current.add(item);
+			}
+			return current;
+		}
+	    
+	    
+		public static String getDateTimeString (int year, int month, int day, int hour, int min, int sec) throws SBOLGraphException
+	    {
+	    	String dateTimeString = null;			
+	    	if (year>=1900 && day>=1 && day<=31 && month>=1 && month<=12 && hour>=0 && hour<=23 && min>=0 && min<=59 && sec>=0 && sec<=59){
+				 Calendar calendar=Calendar.getInstance();
+			     TimeZone timeZone=calendar.getTimeZone();		     
+				 calendar.setTimeZone(TimeZone.getTimeZone("GMT"));
+			     calendar.set(year,month-1,day,hour,min,sec);
+			     calendar.set(Calendar.MILLISECOND,0);   
+			     XSDDateTime dateTime= new XSDDateTime(calendar);
+			     dateTimeString= dateTime.toString();
+			     calendar.setTimeZone(timeZone);		     
+			}
+	    	else{
+	    		String message=String.format("Invalid datetime. Year:%d, Month:%d, Day:%d, hour: %d, min:%d, sec:%d", year, month, day, hour, min, sec);
+	    		throw new SBOLGraphException(message);
+	    	}
+	    	return dateTimeString;
+	    }
 }

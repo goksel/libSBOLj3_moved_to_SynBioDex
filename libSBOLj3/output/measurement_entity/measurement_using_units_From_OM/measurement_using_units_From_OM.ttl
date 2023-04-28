@@ -57,7 +57,7 @@ om:litre  a                sbol:TopLevel , om:SingularUnit ;
         sbol:description   "M9 Glucose CAA growth media" ;
         sbol:displayId     "M9_Glucose_CAA" ;
         sbol:hasFeature    <M9_Glucose_CAA/ExternallyDefined1> ;
-        sbol:hasNamespace  <https://sbolstandard.org/examples> ;
+        sbol:hasNamespace  </examples> ;
         sbol:name          "M9 Glucose CAA" ;
         sbol:type          SBO:0000241 .
 

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.util.RDFUtil;
@@ -119,6 +120,106 @@ public abstract class  Location extends Identified {
 		return subclasses;
 	}
 	
+	protected List<ValidationMessage> assertLocationNotBiggerThanSequence(List<ValidationMessage> validationMessages, Sequence  sequence, Optional<Integer> location, String message, URI property) throws SBOLGraphException
+	{
+		boolean valid=true;
+		if (location!=null && !location.isEmpty()){
+			if (sequence!=null && sequence.getElements()!=null){
+				String elements=sequence.getElements();
+				if (location.get()>elements.length()){
+					valid=false;
+				}
+			}
+			else{
+				valid=false;
+			}
+			
+			if (!valid){
+				ValidationMessage validationMessage=new ValidationMessage(message, property, location.get());
+				validationMessages = IdentifiedValidator.addToValidations(validationMessages, validationMessage);
+			}
+		}
+		
+		return validationMessages;
+	}
+	
+	
+	public static Pair<Integer,Integer> getStartEnd(List<Location> locations) throws SBOLGraphException
+	{
+		int start=-1,end=-1; //Something less than 1 (min number in SBOL)
+		if (locations!=null)
+		{
+			for (Location location:locations)
+			{
+				Pair<Integer, Integer> coordinates=getStartEnd(location);
+				//Initialise with the first location
+				if (start==-1)
+				{
+					start=coordinates.getLeft();
+					end=coordinates.getRight();
+					continue;
+				}
+				else
+				{
+					//Find the smallest start and the biggest end.
+					if (coordinates.getLeft()<start)
+					{
+						start=coordinates.getLeft();
+					}
+					if (coordinates.getRight()>end)
+					{
+						end=coordinates.getRight();
+					}
+				}
+			}
+		}
+		return Pair.of(start, end);
+	}
+	
+	public static Pair<Integer,Integer> getStartEnd(Location location) throws SBOLGraphException
+	{
+		int locStart=-1, locEnd=-1;
+		if (location instanceof Range)
+		{
+			Range rangeLocation=(Range) location;
+			Optional<Integer> rangeStart= rangeLocation.getStart();
+			if (rangeStart.isPresent())
+			{
+				locStart=rangeStart.get();
+			}
+			Optional<Integer> rangeEnd = rangeLocation.getEnd();
+			if (rangeEnd.isPresent())
+			{
+				locEnd=rangeEnd.get();
+			}	
+		}
+		else if (location instanceof Cut)
+		{
+			Cut cutLocation=(Cut) location;
+			Optional<Integer> at= cutLocation.getAt();
+			if (at.isPresent())
+			{
+				locStart = at.get();
+				locEnd=locStart;
+			}
+		}
+		else if (location instanceof EntireSequence)
+		{
+			locStart=1;
+			Sequence seq=location.getSequence();
+			if (seq!=null)
+			{
+				String elements= seq.getElements();
+				if (elements!=null)
+				{
+					locEnd=elements.length();
+				}
+			}
+		}
+		return Pair.of(locStart, locEnd);
+	}
+
+/*	
 	public static class LocationFactory
 	{
 		public static Location create(Resource resource) throws SBOLGraphException
@@ -262,5 +363,5 @@ public abstract class  Location extends Identified {
 			return EntireSequence.class;
 		}
 	}
-	
+	*/
 }

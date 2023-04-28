@@ -1,7 +1,7 @@
 [ {
   "@id" : "https://synbiohub.org/public/igem/i13504",
   "http://sbols.org/v3#role" : [ {
-    "@id" : "https://identifiers.org/SBO:0000251"
+    "@id" : "https://identifiers.org/SO:0000704"
   } ],
   "http://sbols.org/v3#description" : [ {
     "@value" : "Screening plasmid intermediate"
@@ -61,6 +61,9 @@
   }, {
     "@id" : "https://synbiohub.org/public/igem/interlab16device1/SubComponent1"
   } ],
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SO:0000704"
+  } ],
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://synbiohub.org/public/igem"
   } ],
@@ -118,6 +121,9 @@
   "@type" : [ "http://sbols.org/v3#SubComponent" ]
 }, {
   "@id" : "https://synbiohub.org/public/igem/j23101",
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SO:0000704"
+  } ],
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://synbiohub.org/public/igem"
   } ],

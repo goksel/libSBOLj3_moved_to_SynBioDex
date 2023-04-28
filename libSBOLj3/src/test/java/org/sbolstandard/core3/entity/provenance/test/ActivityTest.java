@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
+import java.util.TimeZone;
 
 import org.apache.jena.datatypes.xsd.XSDDateTime;
-import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.sparql.function.library.e;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.entity.provenance.*;
@@ -15,9 +15,7 @@ import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.Configuration;
-import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.SBOLComparator;
 import org.sbolstandard.core3.vocabulary.*;
 
@@ -42,30 +40,84 @@ public class ActivityTest extends TestCase {
         plan.setDescription("Optimisation protocol to improve the translation of mRNAs.");
         
         Activity activity=doc.createActivity("codon_optimization_activity");
-        activity.setTypes(Arrays.asList(ActivityType.Design.getUrl()));
+        activity.setTypes(Arrays.asList(ActivityType.Design.getUri()));
         activity.setName("Codon optimization activity");
         activity.setDescription("An activity that is used to optimise codons");
-        Calendar calendar=Calendar.getInstance();
-        calendar.set(2019,Calendar.JULY,29); 
-        
+        /*Calendar calendar=Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("GMT"));
+        calendar.set(2019,Calendar.JULY,29,0,0,0);
+        calendar.set(Calendar.MILLISECOND,0);     
         activity.setStartedAtTime(new XSDDateTime(calendar));
-        calendar.set(2020,Calendar.AUGUST,30);
+        calendar.set(2020,Calendar.AUGUST,30,0,0,0);
+        calendar.set(Calendar.MILLISECOND,0);
+       // calendar.setTimeZone(TimeZone.getTimeZone("BST"));
+        
         activity.setEndedAtTime(new XSDDateTime(calendar));
+        
+        */
+        try{
+        	activity.setStartedAtTime(2019, 7, 29, 16, 50, 60);
+        }
+        catch (Exception e){
+        	if (!(e instanceof SBOLGraphException)){
+        		throw e;
+        	}
+        }
+        
+        try{
+        	activity.setStartedAtTime(2019, 13, 29, 16, 50, 60);
+        }
+        catch (Exception e){
+        	if (!(e instanceof SBOLGraphException)){
+        		throw e;
+        	}
+        }
+        
+        try{
+        	activity.setStartedAtTime(2019, 0, 29, 16, 50, 60);
+        }
+        catch (Exception e){
+        	if (!(e instanceof SBOLGraphException)){
+        		throw e;
+        	}
+        }
+        
+        try{
+        	activity.setStartedAtTime(2019, 1, 0, 16, 50, 60);
+        }
+        catch (Exception e){
+        	if (!(e instanceof SBOLGraphException)){
+        		throw e;
+        	}
+        }
+        
+        try{
+        	activity.setStartedAtTime(2019, 1, 32, 16, 50, 60);
+        }
+        catch (Exception e){
+        	if (!(e instanceof SBOLGraphException)){
+        		throw e;
+        	}
+        }
+        activity.setStartedAtTime(2019, 7, 29, 16, 50, 59);
+        activity.setEndedAtTime(2019, 8, 30, 0, 0, 0);
+         
+       
            
         Usage usage1=activity.createUsage(toggleSwitch.getUri());
-        usage1.setRoles(Arrays.asList(ParticipationRole.Template));
+        usage1.setRoles(Arrays.asList(ActivityType.Learn.getUri()));
         Usage usage2=activity.createUsage(toggleSwitchOptimised.getUri());
-        usage2.setRoles(Arrays.asList(ParticipationRole.Product));
+        usage2.setRoles(Arrays.asList(ActivityType.Design.getUri()));
         
         Association association=activity.createAssociation(agent);
         association.setPlan(plan);
-        association.setRoles(Arrays.asList(ActivityType.Design.getUrl()));
+        association.setRoles(Arrays.asList(ActivityType.Design.getUri()));
         
         toggleSwitchOptimised.setWasGeneratedBy(Arrays.asList(activity));
         toggleSwitchOptimised.setWasDerivedFrom(Arrays.asList(toggleSwitch.getUri()));
         
         Activity rbsactivity=doc.createActivity("RBS_optimisation_activity");
-        rbsactivity.setTypes(Arrays.asList(ActivityType.Design.getUrl()));
+        rbsactivity.setTypes(Arrays.asList(ActivityType.Design.getUri()));
         rbsactivity.setName("RBS optimization activity");
         rbsactivity.setDescription("An activity that is used to RBSs");
         rbsactivity.setWasInformedBys(Arrays.asList(activity));
@@ -74,7 +126,9 @@ public class ActivityTest extends TestCase {
         TestUtil.serialise(doc, "provenance_entity/activity", "activity");
         
         String output=SBOLIO.write(doc, SBOLFormat.TURTLE);
-        System.out.print("-----Reading back from serialised data!");
+        System.out.println(output);
+        System.out.println("-----Reading back from serialised data!");
+          
         SBOLDocument doc2=SBOLIO.read(output, SBOLFormat.TURTLE); 
         for (Activity act: doc2.getActivities())
         {

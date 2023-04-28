@@ -1,18 +1,15 @@
 package org.sbolstandard.core3.entity.test;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalLong;
-
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Attachment;
 import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.entity.Interaction;
 import org.sbolstandard.core3.entity.Model;
 import org.sbolstandard.core3.entity.Participation;
@@ -27,14 +24,12 @@ import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.ComponentType.OptionalComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.InteractionType;
 import org.sbolstandard.core3.vocabulary.ModelLanguage;
 import org.sbolstandard.core3.vocabulary.ParticipationRole;
 import org.sbolstandard.core3.vocabulary.Role;
-
 import junit.framework.TestCase;
 
 public class ComponentTest extends TestCase {
@@ -86,6 +81,39 @@ public class ComponentTest extends TestCase {
 		TestUtil.validateIdentified(pTetR,doc,0);
 		pTetR.setSequences(tempSequences);
 		
+		//COMPONENT_TYPE_AT_MOST_ONE_TOPOLOGY_TYPE
+		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri()));
+		TestUtil.validateIdentified(pTetR,doc,0);
+		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri(), ComponentType.TopologyType.Circular.getUri()));
+		TestUtil.validateIdentified(pTetR,doc,0);
+		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri(), ComponentType.TopologyType.Circular.getUri(), ComponentType.TopologyType.Linear.getUri()));
+		TestUtil.validateIdentified(pTetR,doc,1);
+		pTetR.setTypes(Arrays.asList(ComponentType.Protein.getUri(), ComponentType.TopologyType.Circular.getUri(), ComponentType.TopologyType.Linear.getUri()));
+		tempSequences=pTetR.getSequences();
+		pTetR.setSequences(null);
+		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri()));
+		TestUtil.validateIdentified(pTetR,doc,0);
+		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri()));
+		pTetR.setSequences(tempSequences);
+		TestUtil.validateIdentified(pTetR,doc,0);
+		
+		//COMPONENT_TYPE_ONLY_DNA_OR_RNA_INCLUDE_STRAND_OR_TOPOLOGY
+		pTetR.setTypes(Arrays.asList(ComponentType.TopologyType.Linear.getUri(), ComponentType.OptionalComponentType.Cell.getUri()));
+	    TestUtil.validateIdentified(pTetR,doc,2);
+	    pTetR.setTypes(Arrays.asList(ComponentType.Protein.getUri(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
+	    TestUtil.validateIdentified(pTetR,doc,3);
+	    pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
+	    TestUtil.validateIdentified(pTetR,doc,1);
+	    pTetR.setTypes(Arrays.asList(ComponentType.RNA.getUri(), ComponentType.TopologyType.Linear.getUri(), ComponentType.TopologyType.Circular.getUri()));
+	    TestUtil.validateIdentified(pTetR,doc,1);
+	    pTetR.setTypes(Arrays.asList(ComponentType.RNA.getUri(), ComponentType.TopologyType.Linear.getUri()));
+	    TestUtil.validateIdentified(pTetR,doc,0);
+	    pTetR.setTypes(Arrays.asList(ComponentType.StrandType.Double.getUri(), ComponentType.Protein.getUri()));
+	    TestUtil.validateIdentified(pTetR,doc,3);
+	    pTetR.setTypes(Arrays.asList(ComponentType.StrandType.Double.getUri(), ComponentType.DNA.getUri()));
+	    TestUtil.validateIdentified(pTetR,doc,0);
+		
+		
 		Resource resource = TestUtil.getResource(pTetR);
 		
 		//SBOL_VALID_ENTITY_TYPES - Component.Sequences
@@ -136,14 +164,19 @@ public class ComponentTest extends TestCase {
 		TestUtil.validateIdentified(pTetR,doc,0);		
 
         // COMPONENT_TYPE_MATCH_PROPERTY
-		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org")));
-		TestUtil.validateIdentified(pTetR,doc,2); // will also error against COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
+		/* Removed the validation for sbol3-10604 ⋆ A Component SHOULD have a type property from Table 2.
+		 * pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org")));
+		TestUtil.validateIdentified(pTetR,doc,1); 
+		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org"),URI.create("http://invalidtype2.org")));
+		TestUtil.validateIdentified(pTetR,doc,1);*/
+		
 		pTetR.setTypes(Arrays.asList(ComponentType.DNA.getUri()));
 		TestUtil.validateIdentified(pTetR,doc,0); 
+		
 		//also check that the configuration option properly disables the check and allows an invalid type
 		Configuration.getInstance().setValidateRecommendedRules(false);
 		pTetR.setTypes(Arrays.asList(URI.create("http://invalidtype.org")));
-		TestUtil.validateIdentified(pTetR,doc,1); // will also error against COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
+		TestUtil.validateIdentified(pTetR,doc,0);
 		//Reset the values
 		pTetR.setTypes(tempList);
 		Configuration.getInstance().setValidateRecommendedRules(true);
@@ -162,7 +195,8 @@ public class ComponentTest extends TestCase {
 	    
 	    //Encoding must be provided if elements are set
 	    Sequence seq=doc.getSequences().get(0);
-	    seq.setEncoding(null);
+	    URI encodingValue=null;
+	    seq.setEncoding(encodingValue);
 	    TestUtil.validateIdentified(seq,doc,1,2); // will also error against COMPONENT_TYPE_SEQUENCE_TYPE_MATCH_COMPONENT_TYPE
 		
 	    //One main component type must be provided.
@@ -174,19 +208,19 @@ public class ComponentTest extends TestCase {
 	    
 		
 	   //IDENTIFIED_URI_MUST_BE_USED_AS_A_PREFIX_FOR_CHILDREN
-        Interaction interaction= popsReceiver.createInteraction(SBOLAPI.append(base, "protein_production"), Arrays.asList(InteractionType.GeneticProduction));
+        Interaction interaction= popsReceiver.createInteraction(SBOLAPI.append(base, "protein_production"), Arrays.asList(InteractionType.GeneticProduction.getUri()));
         TestUtil.validateIdentified(popsReceiver,doc,1);
         
-        Interaction interaction2= popsReceiver.createInteraction(Arrays.asList(InteractionType.GeneticProduction));
+        Interaction interaction2= popsReceiver.createInteraction(Arrays.asList(InteractionType.Inhibition.getUri()));
         Component TetR=SBOLAPI.createComponent(doc, URI.create("https://synbiohub.org/public/igem/TetR"),ComponentType.Protein.getUri(), "TetR", "TetR repressor", Role.TF);
         SubComponent gfpProteinSubComponent=SBOLAPI.addSubComponent(popsReceiver, TetR);
-        Participation participation= interaction2.createParticipation(SBOLAPI.append(base, "inhibitor_participation"), Arrays.asList(ParticipationRole.Inhibitor), gfpProteinSubComponent);
+        Participation participation= interaction2.createParticipation(SBOLAPI.append(base, "inhibitor_participation"), Arrays.asList(ParticipationRole.Inhibitor.getUri()), gfpProteinSubComponent);
         TestUtil.validateIdentified(popsReceiver,doc,2);
         TestUtil.validateIdentified(interaction2,1);
         
         //Introduce two more errors. 
-        Interaction interaction3= popsReceiver.createInteraction(SBOLAPI.append(base, "protein_production3"), Arrays.asList(InteractionType.GeneticProduction));
-        Participation participation3= interaction3.createParticipation(SBOLAPI.append(base, "inhibitor_participation3"), Arrays.asList(ParticipationRole.Inhibitor), gfpProteinSubComponent);
+        Interaction interaction3= popsReceiver.createInteraction(SBOLAPI.append(base, "protein_production3"), Arrays.asList(InteractionType.Inhibition.getUri()));
+        Participation participation3= interaction3.createParticipation(SBOLAPI.append(base, "inhibitor_participation3"), Arrays.asList(ParticipationRole.Inhibitor.getUri()), gfpProteinSubComponent);
         TestUtil.validateIdentified(popsReceiver, doc,4);
         TestUtil.validateIdentified(interaction3, 1);
 
@@ -248,10 +282,10 @@ public class ComponentTest extends TestCase {
         seqINCHI.setElements("InChI=1S/C6H8O6/c7-1-2(8)5-3(9)4(10)6(11)12-5/h2,5,7-10H,1H2/t2-,5+/m0/s1"); //L-ascorbic acid with InChI
         TestUtil.validateIdentified(seqINCHI, 0);        
 	    
-        ComponentType[] values=ComponentType.values();
+        /*ComponentType[] values=ComponentType.values();
         System.out.println(values.length);
         OptionalComponentType[] optionalValues2=ComponentType.OptionalComponentType.values();
-        System.out.println(optionalValues2.length);
+        System.out.println(optionalValues2.length);*/
         
         
     }

@@ -52,7 +52,7 @@
     "@value" : "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa"
   } ],
   "http://sbols.org/v3#description" : [ {
-    "@value" : "gfp sequence"
+    "@value" : "E0040 sequence"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"
@@ -111,6 +111,9 @@
   "http://sbols.org/v3#hasFeature" : [ {
     "@id" : "https://sbolstandard.org/examples/i13504/SubComponent1"
   } ],
+  "http://sbols.org/v3#role" : [ {
+    "@id" : "https://identifiers.org/SO:0000704"
+  } ],
   "http://sbols.org/v3#hasNamespace" : [ {
     "@id" : "https://sbolstandard.org/examples"
   } ],
@@ -142,7 +145,7 @@
     "@id" : "https://identifiers.org/SO:0001030"
   } ],
   "http://sbols.org/v3#end" : [ {
-    "@value" : "719"
+    "@value" : "720"
   } ],
   "http://sbols.org/v3#start" : [ {
     "@value" : "1"
@@ -163,7 +166,7 @@
     "@id" : "https://identifiers.org/edam:format_1207"
   } ],
   "http://sbols.org/v3#description" : [ {
-    "@value" : "null sequence"
+    "@value" : "i13504 sequence"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "Sequence1"
@@ -191,6 +194,8 @@
   } ],
   "http://sbols.org/v3#role" : [ {
     "@id" : "https://identifiers.org/SBO:0000289"
+  }, {
+    "@id" : "https://identifiers.org/SO:0000704"
   } ],
   "http://sbols.org/v3#name" : [ {
     "@value" : "i13504 system"

@@ -17,7 +17,7 @@
             <sbol:displayId>Interaction1</sbol:displayId>
          </sbol:Interaction>
       </sbol:hasInteraction>
-      <sbol:role rdf:resource="https://identifiers.org/SBO:0000289"/>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:name>i13504 system</sbol:name>
       <sbol:hasNamespace rdf:resource="/examples"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>

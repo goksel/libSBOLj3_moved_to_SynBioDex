@@ -1,26 +1,16 @@
 package org.sbolstandard.core3.validation;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URI;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
 import org.apache.commons.compress.utils.FileNameUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.jena.query.QuerySolution;
-import org.apache.jena.query.ResultSet;
-import org.apache.jena.query.Syntax;
-import org.apache.jena.rdf.model.RDFNode;
-import org.sbolstandard.core3.api.SBOLAPI;
 import org.sbolstandard.core3.entity.Identified;
 import org.sbolstandard.core3.entity.SBOLDocument;
 import org.sbolstandard.core3.io.SBOLIO;
-import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -198,7 +188,7 @@ public class SBOLValidator {
 	public static void validateFile(StringBuilder output, File file) throws IOException, SBOLGraphException
 	{ 
 		try {
-			SBOLDocument doc=SBOLIO.read(file);
+			SBOLIO.read(file);
 			/*String folder=SBOLAPI.class.getClassLoader().getResource("validation").getFile();
 			String[] files=new File(folder).list();
 			
@@ -223,7 +213,7 @@ public class SBOLValidator {
 		//validateFileWithQuery(output, doc, sparqlDisplayId, file, "displayid");
 	}
 	
-	private static void validateFileWithQuery(StringBuilder output, SBOLDocument doc, String query, File file, String queryName)
+	/*private static void validateFileWithQuery(StringBuilder output, SBOLDocument doc, String query, File file, String queryName)
 	{
 		ResultSet rs=RDFUtil.executeSPARQLSelectQuery(doc.getRDFModel(), query, Syntax.syntaxSPARQL_11);
 		while (rs.hasNext())
@@ -241,7 +231,7 @@ public class SBOLValidator {
 			output.append(System.lineSeparator());
 		}
 	
-	}
+	}*/
 	//   FILTER (!regex(?displayId, "^[a-zA-Z_]+[a-zA-Z0-9_]*$")) .
 	   
 	//   FILTER (!regex(?displayId, "^[a-zA-Z0-9_]*$")) .
@@ -257,7 +247,7 @@ public class SBOLValidator {
 		}
 	}	*/
 	
-	private static String loadQuery(String queryFile) throws IOException
+	/*private static String loadQuery(String queryFile) throws IOException
 	{
 		try
 		{
@@ -268,7 +258,7 @@ public class SBOLValidator {
 		{
 			throw new IOException("Could not load the sparql file " + queryFile,e);
 		}
-	}
+	}*/
 	
 	
 

@@ -4,22 +4,18 @@ import java.io.IOException;
 import java.net.URI;
 
 import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Component;
-import org.sbolstandard.core3.entity.SBOLDocument;
-import org.sbolstandard.core3.entity.SubComponent;
+import org.sbolstandard.core3.entity.*;
 import org.sbolstandard.core3.io.SBOLFormat;
 import org.sbolstandard.core3.io.SBOLIO;
 import org.sbolstandard.core3.test.TestUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
-import org.sbolstandard.core3.vocabulary.ComponentType;
-import org.sbolstandard.core3.vocabulary.RestrictionType;
-import org.sbolstandard.core3.vocabulary.Role;
+import org.sbolstandard.core3.vocabulary.*;
 
 import junit.framework.TestCase;
 
 public class MulticellularSimple extends TestCase {
 
-	public void testApp() throws SBOLGraphException, IOException
+	public void testMulticellularSimple() throws SBOLGraphException, IOException
     {
 		String baseUri="https://sbolstandard.org/examples/";
         SBOLDocument doc=new SBOLDocument(URI.create(baseUri));
@@ -31,8 +27,8 @@ public class MulticellularSimple extends TestCase {
         Component receiverCell=SBOLAPI.createComponent(doc, "OrganismB", ComponentType.OptionalComponentType.Cell.getUri(), "OrganismB", "Organism B", Role.PhysicalCompartment);
         Component ahl=SBOLAPI.createComponent(doc, "AHL", ComponentType.SimpleChemical.getUri(), "AHL", "AHL", Role.Effector);
        
-        SBOLAPI.createConstraint(senderSystem, senderCell, ahl, RestrictionType.Topology.contains);
-        SBOLAPI.createConstraint(receiverSystem, receiverCell, ahl, RestrictionType.Topology.contains);       
+        SBOLAPI.createConstraint(senderSystem, senderCell, ahl, RestrictionType.TopologyRestriction.contains.getUri());
+        SBOLAPI.createConstraint(receiverSystem, receiverCell, ahl, RestrictionType.TopologyRestriction.contains.getUri());       
         
         SubComponent senderSubComponent=SBOLAPI.addSubComponent(multicellularSystem, senderSystem);
         SubComponent receiverSubComponent=SBOLAPI.addSubComponent(multicellularSystem, receiverSystem);

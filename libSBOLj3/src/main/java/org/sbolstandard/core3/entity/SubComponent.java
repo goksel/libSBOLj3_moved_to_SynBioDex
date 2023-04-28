@@ -4,24 +4,19 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.sbolstandard.core3.api.SBOLAPI;
-import org.sbolstandard.core3.entity.Location.LocationBuilder;
-import org.sbolstandard.core3.entity.Location.LocationFactory;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
-import org.sbolstandard.core3.vocabulary.ComponentType;
 import org.sbolstandard.core3.vocabulary.DataModel;
-import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.RoleIntegration;
-
-import jakarta.validation.ConstraintTarget;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
@@ -47,21 +42,83 @@ public class SubComponent extends FeatureWithLocation{
 	{
 		List<ValidationMessage> validationMessages=super.getValidationMessages();
 		List<URI> roles=this.getRoles();
-		if (roles!=null && roles.size()>0)
-		{
+		if (roles!=null && roles.size()>0){
 			RoleIntegration roleIntegration=this.getRoleIntegration();
-			if (roleIntegration==null)
-			{
+			if (roleIntegration==null){
 				validationMessages= addToValidations(validationMessages,new ValidationMessage("{SUBCOMPONENT_ROLEINTEGRATION_NOT_NULL_IF_ROLES_EXIST}", DataModel.SubComponent.roleIntegration));      	
 			}
 		}
 		
+		validationMessages=assertDoNotHaveOverlappingRegions(validationMessages, "{SUBCOMPONENT_LOCATIONS_REGIONS_NOT_OVERLAPPING}");
+				
+		List<Location> sourceLocations= getSourceLocations();
+		List<Location> locations= getLocations();
+		if (!CollectionUtils.isEmpty(locations))
+		{
+			if (!CollectionUtils.isEmpty(sourceLocations))
+			{ //SUBCOMPONENT_LOCATIONS_AND_SOURCE_LOCATION_LENGTHS_MATCH
+				
+				int sourceLength= getLocationLength(sourceLocations);
+				int locationLength= getLocationLength(locations);
+				if (sourceLength!=locationLength)
+				{
+					String message=String.format("%s ADDITIONAL INFORMATION: Calculated source location length:%s, Calculated location length:%s", 
+							"{SUBCOMPONENT_LOCATIONS_AND_SOURCE_LOCATION_LENGTHS_MATCH}", sourceLength, locationLength);
+					
+					validationMessages= addToValidations(validationMessages,new ValidationMessage(message, DataModel.SubComponent.location, SBOLUtil.getURIs(locations)));      		
+				}
+			}
+			else
+			{//SUBCOMPONENT_LOCATIONS_AND_NO_SOURCE_LOCATION_LENGTHS_MATCH = 
+			//sbol3-10807 - If a SubComponent object has at least one hasLocation and zero sourceLocation properties, and the Component linked by its instanceOf has precisely one hasSequence property whose Sequence has a value for its elements property, then the sum of the lengths of the Location objects referred to by the hasLocation properties MUST equal the length of the elements value of the Sequence.
+				Component instanceOfComponent = this.getInstanceOf();
+				List<Sequence> seqsOfInstanceOfComponent= instanceOfComponent.getSequences();
+				if (seqsOfInstanceOfComponent!=null && seqsOfInstanceOfComponent.size()==1)
+				{
+					String elements=seqsOfInstanceOfComponent.get(0).getElements();
+					if (elements!=null)
+					{
+						int locationLength= getLocationLength(locations);
+						int elementsLength=elements.length();
+						if (elementsLength!=locationLength)
+						{
+							String message=String.format("%s ADDITIONAL INFORMATION: Sequence length:%s, Calculated location length:%s, Sequence: %s", 
+									"{SUBCOMPONENT_LOCATIONS_AND_NO_SOURCE_LOCATION_LENGTHS_MATCH}", elementsLength, locationLength, seqsOfInstanceOfComponent.get(0).getUri());
+							validationMessages= addToValidations(validationMessages,new ValidationMessage(message, DataModel.SubComponent.location, SBOLUtil.getURIs(locations)));      		
+						}
+					}
+				}
+			}
+		}
+		
+		
+		
 		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.SubComponent.instanceOf, this.resource, this.getInstanceOf(), validationMessages);
-		validationMessages= IdentifiedValidator.assertExists(this, DataModel.SubComponent.sourceLocation, this.resource, getSourceLocations(), validationMessages);
+		validationMessages= IdentifiedValidator.assertExists(this, DataModel.SubComponent.sourceLocation, this.resource, sourceLocations, validationMessages);
 
 		return validationMessages;
 	}
 	
+	private int getLocationLength(List<Location> locations) throws SBOLGraphException
+	{
+		int length = 0;
+		for (Location location: locations)
+		{
+			if (location instanceof Range)
+			{
+				Range range= (Range) location;
+				Optional<Integer> start=range.getStart();
+				Optional<Integer> end=range.getEnd();
+				
+				if (!SBOLUtil.isNullOrEmpty(start) && !SBOLUtil.isNullOrEmpty(end))
+				{
+					int rangeLength=Math.abs(end.get() - start.get()) + 1;
+					length= length + rangeLength;
+				}
+			}
+		}
+		return length;
+	}
 	public RoleIntegration getRoleIntegration() throws SBOLGraphException {		
 		RoleIntegration roleIntegration=null;
 		URI value=IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.SubComponent.roleIntegration);

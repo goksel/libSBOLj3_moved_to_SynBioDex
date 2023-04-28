@@ -26,7 +26,7 @@
       <sbol:displayId>i13504_system</sbol:displayId>
    </sbol:Component>
    <sbol:Component rdf:about="i13504">
-      <sbol:role rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:description>Screening plasmid intermediate</sbol:description>
       <sbol:name>i13504</sbol:name>
       <sbol:hasNamespace rdf:resource="../igem"/>
@@ -63,11 +63,13 @@
       <sbol:hasFeature rdf:resource="interlab16device1/SubComponent2"/>
       <sbol:hasFeature rdf:resource="interlab16device1/ComponentReference1"/>
       <sbol:hasFeature rdf:resource="interlab16device1/SubComponent1"/>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:displayId>interlab16device1</sbol:displayId>
    </sbol:Component>
    <sbol:Component rdf:about="j23101">
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000704"/>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
       <sbol:displayId>j23101</sbol:displayId>

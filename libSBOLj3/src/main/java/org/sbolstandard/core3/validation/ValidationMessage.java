@@ -94,6 +94,7 @@ public class ValidationMessage {
 		}
 	}
 	
+	public static final String INFORMATION_SEPARATOR=System.lineSeparator() + "\tADDITIONAL INFORMATION = ";
 
 
 }

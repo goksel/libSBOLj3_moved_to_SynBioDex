@@ -10,25 +10,26 @@
 @prefix sbol:  <http://sbols.org/v3#> .
 
 :B0015_Sequence1  a        sbol:Sequence ;
-        sbol:description   "terminator sequence" ;
+        sbol:description   "B0015 sequence" ;
         sbol:displayId     "B0015_Sequence1" ;
         sbol:elements      "ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctc" ;
         sbol:encoding      EDAM:format_1207 ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:name          "Sequence1" .
 
 :simpleDevice_Sequence1
         a                  sbol:Sequence ;
-        sbol:description   "null sequence" ;
+        sbol:description   "simpleDevice sequence" ;
         sbol:displayId     "simpleDevice_Sequence1" ;
         sbol:elements      "" ;
         sbol:encoding      EDAM:format_1207 ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:name          "Sequence1" .
 
 :i13504  a                 sbol:Component ;
         sbol:displayId     "i13504" ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
+        sbol:role          SO:0000704 ;
         sbol:type          SBO:0000251 .
 
 <interlab16device1/ComponentReference1>
@@ -40,7 +41,7 @@
 :B0015  a                  sbol:Component ;
         sbol:description   "B0015 double terminator" ;
         sbol:displayId     "B0015" ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:hasSequence   :B0015_Sequence1 ;
         sbol:name          "terminator" ;
         sbol:role          SO:0000141 ;
@@ -49,7 +50,8 @@
 :interlab16device1  a      sbol:Component ;
         sbol:displayId     "interlab16device1" ;
         sbol:hasFeature    <interlab16device1/ComponentReference1> , <interlab16device1/SubComponent1> ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
+        sbol:role          SO:0000704 ;
         sbol:type          SBO:0000251 .
 
 <simpleDevice/SubComponent1>
@@ -70,14 +72,15 @@
 :simpleDevice  a           sbol:Component ;
         sbol:displayId     "simpleDevice" ;
         sbol:hasFeature    <simpleDevice/SubComponent1> ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:hasSequence   :simpleDevice_Sequence1 ;
+        sbol:role          SO:0000704 ;
         sbol:type          SBO:0000251 .
 
 :i13504_system  a          sbol:Component ;
         sbol:displayId     "i13504_system" ;
         sbol:hasFeature    <i13504_system/SubComponent1> ;
-        sbol:hasNamespace  <https://synbiohub.org/public/igem> ;
+        sbol:hasNamespace  <../igem> ;
         sbol:name          "i13504 system" ;
-        sbol:role          SBO:0000289 ;
+        sbol:role          SO:0000704 , SBO:0000289 ;
         sbol:type          SBO:0000251 .

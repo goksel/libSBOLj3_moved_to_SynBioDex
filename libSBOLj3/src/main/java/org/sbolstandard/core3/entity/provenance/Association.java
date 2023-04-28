@@ -2,20 +2,16 @@ package org.sbolstandard.core3.entity.provenance;
 
 import java.net.URI;
 import java.util.List;
-
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.sbolstandard.core3.entity.ControlledIdentified;
-import org.sbolstandard.core3.entity.Feature;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.util.SBOLUtil;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
 import org.sbolstandard.core3.validation.PropertyValidator;
 import org.sbolstandard.core3.validation.ValidationMessage;
-import org.sbolstandard.core3.vocabulary.DataModel;
 import org.sbolstandard.core3.vocabulary.ProvenanceDataModel;
-
 import jakarta.validation.constraints.NotNull;
 
 public class Association extends ControlledIdentified{
@@ -39,6 +35,10 @@ public class Association extends ControlledIdentified{
 	
 	public void setRoles(List<URI> roles) {
 		RDFUtil.setProperty(resource, ProvenanceDataModel.Association.role, roles);
+	}
+	
+	public void addRole(URI role) {
+		RDFUtil.addProperty(resource, ProvenanceDataModel.Association.role, role);
 	}
 	
 	public Plan getPlan() throws SBOLGraphException {

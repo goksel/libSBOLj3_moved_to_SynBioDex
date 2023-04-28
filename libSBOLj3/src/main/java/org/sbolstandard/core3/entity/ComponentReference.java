@@ -62,6 +62,37 @@ public class ComponentReference extends Feature{
 		List<ValidationMessage> validationMessages=super.getValidationMessages();
 		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.ComponentReference.refersTo, this.resource, getRefersTo(), validationMessages);
 		validationMessages= IdentifiedValidator.assertEquals(this, DataModel.ComponentReference.inChildOf, this.resource, this.getInChildOf(), validationMessages);
+		
+		Feature referredFeature=this.getRefersTo();
+		if (referredFeature!=null && referredFeature instanceof ComponentReference)
+		{
+			ComponentReference referredCompRef=(ComponentReference) referredFeature;
+			SubComponent childSubComponent=referredCompRef.getInChildOf();
+			
+			SubComponent subComponent=this.getInChildOf();
+			if (subComponent!=null)
+			{
+				Component parentComponent=subComponent.getInstanceOf();
+				
+				ValidationMessage message = new ValidationMessage("{COMPONENTREFERENCE_INCHILDOF_SUBCOMPONENT_VALID}", DataModel.ComponentReference.refersTo,referredCompRef, childSubComponent.getUri());
+				message.childPath(DataModel.ComponentReference.inChildOf);
+				validationMessages= IdentifiedValidator.assertExists(this, validationMessages, childSubComponent, parentComponent.getSubComponents(), message);			
+			
+				message = new ValidationMessage("{COMPONENTREFERENCE_REFERSTO_CHILDCOMPONENTREFERENCE_VIA_SUBCOMPONENT}", DataModel.ComponentReference.refersTo, referredCompRef);
+				validationMessages= IdentifiedValidator.assertExists(this, validationMessages, referredCompRef, parentComponent.getComponentReferences(), message);				
+			}
+		}
+		else if (referredFeature!=null && !(referredFeature instanceof ComponentReference))
+		{
+			SubComponent subComponent=this.getInChildOf();
+			if (subComponent!=null)
+			{
+				Component parentComponent=subComponent.getInstanceOf();	
+				ValidationMessage message = new ValidationMessage("{COMPONENTREFERNCE_REFERSTO_FEATURE_VIA_SUBCOMPONENT}", DataModel.ComponentReference.refersTo, referredFeature);
+				validationMessages= IdentifiedValidator.assertExists(this, validationMessages, referredFeature, parentComponent.getFeatures(), message);				
+			}
+		}
+		
 		return validationMessages;
 	}
 }

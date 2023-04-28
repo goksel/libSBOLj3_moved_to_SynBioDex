@@ -4,9 +4,9 @@ import java.net.URI;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
+import org.sbolstandard.core3.util.Configuration;
 import org.sbolstandard.core3.util.RDFUtil;
 import org.sbolstandard.core3.util.SBOLGraphException;
 import org.sbolstandard.core3.validation.IdentifiedValidator;
@@ -37,13 +37,47 @@ public class Sequence extends TopLevel {
 			validationMessages= addToValidations(validationMessages,new ValidationMessage("{SEQUENCE_MUST_HAVE_ENCODING}", DataModel.Sequence.encoding));      	   
 		}
 		validationMessages = checkEncodingType(validationMessages);
+		
+		if (Configuration.getInstance().isValidateRecommendedRules()){
+			URI encodingValue=this.getEncoding();
+			
+			if (encodingValue!=null && !Configuration.getInstance().getEdamEncodingTerms().contains(encodingValue.toString()))
+			{
+				ValidationMessage message = new ValidationMessage("{SEQUENCE_ENCODING_VALID_SUBTERM}", DataModel.Sequence.encoding, encodingValue);
+				validationMessages=IdentifiedValidator.addToValidations(validationMessages, message);
+			}
+		}
+		//SEQUENCE_ENCODING_VALID_SUBTERM
+		/*		if (Configuration.getInstance().isValidateRecommendedRules()){
+					List<Sequence> sequences=this.getSequences();
+					if (sequences!=null){
+						Map<URI,Boolean> validity=new HashMap<URI, Boolean>();
+						for (Sequence sequence:sequences){
+							URI encodingValue=sequence.getEncoding();
+							if (encodingValue!=null && Encoding.get(encodingValue)==null){//Check for uncontrolled URIs only.
+								Boolean valid=validity.get(encodingValue);
+								if (valid==null){
+									valid=RDFUtil.hasParentRecursively(Configuration.getInstance().getEDAMOntology(), encodingValue.toString() , Encoding.PARENT_TERM.toString());
+							    	validity.put(encodingValue, valid);
+								}
+								if (!valid){
+									ValidationMessage message = new ValidationMessage("{SEQUENCE_ENCODING_VALID_SUBTERM}", DataModel.Sequence.uri, sequence, encodingValue);
+									message.childPath(DataModel.Sequence.encoding, null);
+									messages=IdentifiedValidator.addToValidations(messages, message);
+
+								}
+							}
+						}
+					}
+				}
+*/
     	return validationMessages;
 	}
 	
 	private List<ValidationMessage> checkEncodingType(List<ValidationMessage> validationMessages) throws SBOLGraphException {
 
 		String elements = this.getElements();
-		Encoding enc = this.getEncoding();
+		Encoding enc = Encoding.get(this.getEncoding());
 		if (elements!=null && !elements.isEmpty() && enc != null) {
 			if (enc.equals(Encoding.AminoAcid)) {
 				Pattern patternAA = Pattern.compile("^[ARNDCQEGHILKMFPSTWYVX]+$", Pattern.CASE_INSENSITIVE); // compiled from list of characters at https://iupac.qmul.ac.uk/AminoAcid/AA1n2.html
@@ -91,13 +125,13 @@ public class Sequence extends TopLevel {
 		RDFUtil.setProperty(this.resource, DataModel.Sequence.elements, elements);
 	}
 	
-	public Encoding getEncoding() throws SBOLGraphException {
-		Encoding encoding=null;
+	public URI getEncoding() throws SBOLGraphException {
+		//Encoding encoding=null;
 		URI encodingValue=IdentifiedValidator.getValidator().getPropertyAsURI(this.resource, DataModel.Sequence.encoding);
-		if (encodingValue!=null){
+		/*if (encodingValue!=null){
 			encoding=Encoding.get(encodingValue); 
-		}
-		return encoding;
+		}*/
+		return encodingValue;
 	}
 	
 	public void setEncoding(Encoding encoding) {
@@ -107,6 +141,10 @@ public class Sequence extends TopLevel {
 			encodingURI=encoding.getUri();
 		}
 		RDFUtil.setProperty(this.resource, DataModel.Sequence.encoding, encodingURI);
+	}
+	
+	public void setEncoding(URI encoding) {
+		RDFUtil.setProperty(this.resource, DataModel.Sequence.encoding, encoding);
 	}
 
 	public URI getResourceType()

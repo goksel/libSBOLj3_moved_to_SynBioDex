@@ -11,20 +11,63 @@
     xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/"
    xml:base="https://synbiohub.org/public/igem/">
    <sbol:Component rdf:about="BBa_R0040">
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="BBa_R0040/SubComponent2">
+            <sbol:instanceOf>
+               <sbol:Component rdf:about="BBa_R0040_start"/>
+            </sbol:instanceOf>
+            <sbol:displayId>SubComponent2</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="BBa_R0040/SubComponent1">
+            <sbol:instanceOf>
+               <sbol:Component rdf:about="BBa_R0040_start"/>
+            </sbol:instanceOf>
+            <sbol:displayId>SubComponent1</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
+      <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:hasSequence>
          <sbol:Sequence rdf:about="BBa_R0040_Sequence1"/>
       </sbol:hasSequence>
       <sbol:role rdf:resource="https://identifiers.org/SO:0000167"/>
-      <sbol:description>TetR repressible promoter</sbol:description>
+      <sbol:displayId>BBa_R0040</sbol:displayId>
+      <sbol:hasFeature>
+         <sbol:SubComponent rdf:about="BBa_R0040/SubComponent3">
+            <sbol:instanceOf>
+               <sbol:Component rdf:about="BBa_R0040_start"/>
+            </sbol:instanceOf>
+            <sbol:displayId>SubComponent3</sbol:displayId>
+         </sbol:SubComponent>
+      </sbol:hasFeature>
       <sbol:name>pTetR</sbol:name>
+      <sbol:description>TetR repressible promoter</sbol:description>
+   </sbol:Component>
+   <sbol:Component rdf:about="BBa_R0040_start">
+      <sbol:hasSequence>
+         <sbol:Sequence rdf:about="BBa_R0040_start_Sequence1"/>
+      </sbol:hasSequence>
+      <sbol:role rdf:resource="https://identifiers.org/SO:0000804"/>
+      <sbol:description>promoter_start</sbol:description>
+      <sbol:name>pTetR_start</sbol:name>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:type rdf:resource="https://identifiers.org/SBO:0000251"/>
-      <sbol:displayId>BBa_R0040</sbol:displayId>
+      <sbol:displayId>BBa_R0040_start</sbol:displayId>
    </sbol:Component>
+   <sbol:Sequence rdf:about="BBa_R0040_start_Sequence1">
+      <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
+      <sbol:elements>tccctat</sbol:elements>
+      <sbol:description>BBa_R0040_start sequence</sbol:description>
+      <sbol:name>Sequence1</sbol:name>
+      <sbol:hasNamespace rdf:resource="../igem"/>
+      <sbol:displayId>BBa_R0040_start_Sequence1</sbol:displayId>
+   </sbol:Sequence>
    <sbol:Sequence rdf:about="BBa_R0040_Sequence1">
       <sbol:encoding rdf:resource="https://identifiers.org/edam:format_1207"/>
       <sbol:elements>tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac</sbol:elements>
-      <sbol:description>pTetR sequence</sbol:description>
+      <sbol:description>BBa_R0040 sequence</sbol:description>
       <sbol:name>Sequence1</sbol:name>
       <sbol:hasNamespace rdf:resource="../igem"/>
       <sbol:displayId>BBa_R0040_Sequence1</sbol:displayId>
