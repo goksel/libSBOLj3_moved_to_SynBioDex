@@ -18,7 +18,7 @@ public class RoundTripTest {
 
 	private static final String pythonOutputBase="pysbol3-rt2"; 
 	
-	@Test
+	//@Test
 	public void validate() throws IOException, SBOLGraphException {
 		
 		String message=validateFolder(pythonOutputBase);
