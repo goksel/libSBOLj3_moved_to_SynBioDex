@@ -27,6 +27,11 @@ import org.sbolstandard.core3.vocabulary.Encoding;
 import org.sbolstandard.core3.vocabulary.Orientation;
 import org.sbolstandard.core3.vocabulary.RestrictionType;
 
+/**
+ * 
+ * @author gokselmisirli
+ *
+ */
 public class SBOLAPI {
 
 	  public static List<Interaction> createInteraction(List<URI> interactionTypes, Component parent, Component participant1, List<URI> participant1Roles, Component participant2, List<URI> participant2Roles) throws SBOLGraphException
@@ -45,47 +50,6 @@ public class SBOLAPI {
 	    	return interactions;
 	    }
 	
-	  /*public static List<Interaction> createInteraction(List<URI> interactionTypes, Component parent, SubComponent participantContainer, Component participant1, List<URI> participant1Roles, Component participant2, List<URI> participant2Roles) throws SBOLGraphException
-	    {
-	    	List<Interaction> interactions=new ArrayList<Interaction>();
-	    	List<ComponentReference> features1=createComponentReference(parent, participantContainer, child)
-	    			createSubComponents(parent, participant1);
-	    	List<SubComponent> features2=createSubComponents(parent, participant2);
-	    	if (features1!=null && features2!=null)
-	    	{
-		    	for (Feature feature1: features1)
-		    	{
-		    		for (Feature feature2: features2)
-		    		{
-		    			Interaction interaction=createInteraction(interactionTypes, parent, feature1, participant1Roles, feature2, participant2Roles);	
-		    			interactions.add(interaction);
-		    		}
-		    	}
-	    	}
-	    	return interactions;
-	    }
-	    */
-	
-	 /* public static List<Interaction> createNonCovalentBindingInteraction(Component container, List<Component> reactants, List<Component> products)
-	  {
-		  	List<SubComponent> reactantSubComponents=new ArrayList<SubComponent>();
-		  	if (reactants!=null)
-		  	{
-		  		for (Component component:reactants)
-		  		{
-		  			
-		  		}
-		  	}
-		  	String localName=createLocalName(DataModel.Interaction.uri, container.getInteractions()); 
-	    	Interaction interaction= container.createInteraction(append(container.getUri(), localName), Arrays.asList(InteractionType.NonCovalentBinding));
-	    	
-	    	createParticipation(interaction, participant1Roles, participant1);
-	    	createParticipation(interaction, participant2Roles, participant2);
-	    	return interaction;
-		  
-	  }*/
-      
-	  
 	  	private static List<SubComponent> createSubComponents (Component parent, Component child) throws SBOLGraphException 
 	  	{
 	    	List<SubComponent> subComponents=getSubComponents(parent, child);

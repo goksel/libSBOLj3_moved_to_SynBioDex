@@ -6,7 +6,6 @@ SBOL represents data using RDF graphs, which can be serialised in different form
 * Turtle (File extension: ttl)
 * N-Triples (File extension: nt)
 * JSON-LD (File extension: jsonld)
-* RDF/JSON (File extension: rj)
 
 ## How to use libSBOLj3
 
@@ -18,7 +17,7 @@ Use this option if you are developing a Java application using [Maven](https://m
    <dependency>
       <groupId>org.sbolstandard</groupId>
       <artifactId>libSBOLj3</artifactId>
-      <version>1.4-SNAPSHOT</version>
+      <version>1.0.0-SNAPSHOT</version>
    </dependency>
    ...
 </dependencies>
@@ -36,13 +35,13 @@ Use this option if you are developing a Java application using [Maven](https://m
 ```
 
 ### As a Java dependency in a non-Maven project
-The libSBOLj3 library is available as a JAR file. Please download the file from the [releases page](https://github.com/goksel/libSBOLj3/tags). A single JAR file (with the "withDepencencies" suffix), which includes all the required libSBOLj3 related dependencies, is also available.
+The libSBOLj3 library is available as a JAR file. Please download the file from the [releases page](https://github.com/SynBioDex/libSBOLj3/tags). A single JAR file (with the "withDepencencies" suffix), which includes all the required libSBOLj3 related dependencies, is also available.
 
 ## SBOL Examples
-[Several SBOL3 examples](https://github.com/goksel/libSBOLj3/tree/master/libSBOLj3/output) are available as part of the libSBOLj3 library. These examples have also been made available as part of the [SBOL Test Suite](https://github.com/SynBioDex/SBOLTestSuite/tree/master/SBOL3). Some of these examples have beeen explained in the recent SBOL3 paper, titled "[The Synthetic Biology Open Language (SBOL) Version 3: Simplified Data Exchange for Bioengineering](https://doi.org/10.3389/fbioe.2020.01009)".
+[Several SBOL3 examples](https://github.com/SynBioDex/libSBOLj3/tree/master/libSBOLj3/output) are available as part of the libSBOLj3 library. These examples have also been made available as part of the [SBOL Test Suite](https://github.com/SynBioDex/SBOLTestSuite/tree/master/SBOL3). Some of these examples have beeen explained in the recent SBOL3 paper, titled "[The Synthetic Biology Open Language (SBOL) Version 3: Simplified Data Exchange for Bioengineering](https://doi.org/10.3389/fbioe.2020.01009)".
 
 ## Getting Started
-Please see the [tutorial code](https://github.com/goksel/libSBOLj3/tree/feature/combine2020/libSBOLj3/output/combine2020) and the [COMBINE 2020 slides](https://github.com/SynBioDex/Community-Media/blob/master/2020/COMBINE20/pySBOL3-COMBINE-2020.pptx) for more details. The tutorial code includes additional examples to crete interactions, constraints, component references and so on.
+Please see the [tutorial code](https://github.com/SynBioDex/libSBOLj3/tree/feature/combine2020/libSBOLj3/output/combine2020) and the [COMBINE 2020 slides](https://github.com/SynBioDex/Community-Media/blob/master/2020/COMBINE20/pySBOL3-COMBINE-2020.pptx) for more details. The tutorial code includes additional examples to crete interactions, constraints, component references and so on.
 
 ### Creating a new SBOL document
 The SBOLDocument class is used to create SBOL documents which act as containers to create and access other SBOL entities. Although not required, the base URI can be used as prefix for all new SBOL entities. 
